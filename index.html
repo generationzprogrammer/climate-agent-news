@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071f1d">
+  <meta name="description" content="面向中国气候政策与谈判工作者的全球气候情报网站。">
+  <title>气候谈判情报台｜今日全球气候动态</title>
+  <link rel="stylesheet" href="./styles.css?v=20260717-4">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span><b>气候谈判情报台</b><small>CLIMATE BRIEFING ROOM</small></span>
+    </a>
+    <nav aria-label="页面导航">
+      <a href="#map">全球现场</a>
+      <a href="#briefing">今日情报</a>
+      <a href="#signals">今日短语</a>
+    </nav>
+    <a class="brief-link" href="./data/daily_brief.md" download>下载简报</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow" id="briefDate">今日全球气候动态</p>
+        <h1>今天，全球气候议程<br><em>发生了什么？</em></h1>
+        <p class="lede">只呈现值得中国气候政策与谈判工作者注意的具体事件。中文编译保留事实边界，点击地图或情报卡可回到原始来源。</p>
+      </div>
+      <aside class="cop-context">
+        <span>COP31 · ANTALYA</span>
+        <div><strong id="countdown">—</strong><small>天后开幕</small></div>
+        <p>地图与情报按滚动 72 小时更新</p>
+      </aside>
+    </section>
+
+    <section class="map-section" id="map">
+      <div class="section-head light">
+        <div><p class="eyebrow">GLOBAL SITUATION</p><h2>全球气候现场</h2></div>
+        <p>中国位于地图中央 · 悬停预览 · 点击锁定</p>
+      </div>
+      <div class="map-layout">
+        <div class="map-canvas" id="mapCanvas">
+          <svg id="worldMap" viewBox="0 0 1000 500" role="img" aria-label="中国居中的全球气候事件地图"></svg>
+          <div class="map-tooltip" id="mapTooltip" role="status"></div>
+          <div class="map-loading" id="mapLoading">正在绘制全球事件…</div>
+        </div>
+        <aside class="map-detail" id="mapDetail">
+          <span class="theme">选择一个红点</span>
+          <h3>查看当地最新气候情报</h3>
+          <p>地图只标记新闻事件实际涉及的国家或地区，不以媒体所在地代替事件地点。</p>
+        </aside>
+      </div>
+      <div class="map-place-list" id="mapPlaceList" aria-label="地图事件地点"></div>
+      <p class="map-source">底图：Natural Earth 1:110m 公共领域边界数据；点位为情报文本中的明确地理实体。</p>
+    </section>
+
+    <section class="briefing-section" id="briefing">
+      <div class="section-head">
+        <div><p class="eyebrow">TODAY'S BRIEFING</p><h2>今日具体情报</h2></div>
+        <p id="dataNote">中文标题与摘要优先显示；模型编译内容需人工复核。</p>
+      </div>
+      <div class="intelligence-grid" id="eventList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="signal-section" id="signals">
+      <div class="section-head">
+        <div><p class="eyebrow">CLIMATE SIGNALS</p><h2>今天值得记住的短语</h2></div>
+        <p>字号越大，越接近今日情报队列前列。</p>
+      </div>
+      <div class="signal-poster" id="signalPoster" aria-label="今日气候信息短语海报">
+        <div class="poster-shade"></div>
+        <div class="phrase-cloud" id="phraseCloud"></div>
+        <span class="poster-stamp" id="posterDate">DAILY SIGNALS</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>气候谈判情报台</span>
+    <span>来源可追溯 · 中文编译有边界 · 信息不是结论</span>
+  </footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js?v=20260717-4" defer></script>
+</body>
+</html>
