@@ -4,32 +4,49 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="每日更新、来源可追溯的高质量气候新闻文本数据库与智能信息分子平台。">
-  <title>ClimateText Lab｜高质量气候新闻文本数据与智能分子平台</title>
-  <link rel="stylesheet" href="./styles.css?v=20260721">
+  <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
+  <title>ClimateText Lab｜国际气候情报与文本数据库</title>
+  <link rel="stylesheet" href="./styles.css?v=20260721-2">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="返回顶部">
       <span class="brand-symbol" aria-hidden="true">CT</span>
-      <span><b>ClimateText Lab</b><small>气候文本数据与智能分子平台</small></span>
+      <span><b>ClimateText Lab</b><small>国际气候情报与文本数据库</small></span>
     </a>
     <nav aria-label="页面导航">
-      <a href="#today">今日</a>
-      <a href="#database">文本数据库</a>
-      <a href="#molecule">信息分子</a>
       <a href="#map">全球现场</a>
-      <a href="#method">质量方法</a>
+      <a href="#today">今日情报</a>
+      <a href="#database">文本数据库</a>
     </nav>
     <a class="data-download" href="./data/news_archive.json" download>下载数据 JSON</a>
   </header>
 
   <main id="top">
-    <section class="hero">
+    <section class="section map-section map-section-lead" id="map">
+      <div class="section-heading">
+        <div><p class="overline">GLOBAL CLIMATE SITUATION</p><h1>全球气候现场</h1></div>
+        <p>中国位于地图中央。红点表示今日情报明确涉及的国家或地区；点击即可查看中文摘要与原文。</p>
+      </div>
+      <div class="map-layout">
+        <div class="map-canvas" id="mapCanvas">
+          <svg id="worldMap" viewBox="0 0 1000 500" role="img" aria-label="中国居中的全球气候事件地图">
+            <rect width="1000" height="500" class="map-base"></rect>
+            <text x="500" y="250" text-anchor="middle" class="map-initial-text">正在绘制全球气候事件地图…</text>
+          </svg>
+          <div class="map-tooltip" id="mapTooltip" role="status"></div>
+          <div class="map-loading" id="mapLoading">正在读取地图与今日地点…</div>
+        </div>
+        <aside class="map-detail" id="mapDetail"><span>选择红点或地点</span><h2>查看对应气候情报</h2><p>这里将显示中文标题、概要、来源、日期和原文入口。</p></aside>
+      </div>
+      <div class="map-place-list" id="mapPlaceList" aria-label="地图地点快捷入口"></div>
+    </section>
+
+    <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-copy">
         <p class="overline">DAILY CLIMATE TEXT INTELLIGENCE</p>
-        <h1>高质量气候新闻文本数据<br><span>与智能分子平台</span></h1>
-        <p class="hero-lede">把每天的国际气候报道转化为可追溯、可检索、可比较的中文文本记录。每条“信息分子”保留来源、证据状态、议题、数字、地域和决策信号。</p>
+        <h2 id="heroTitle">每天读懂全球气候变化<br><span>重点情报与文本数据库</span></h2>
+        <p class="hero-lede">从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。</p>
         <div class="update-line">
           <span class="live-dot" aria-hidden="true"></span>
           <b>每日 07:30 自动更新</b>
@@ -37,28 +54,21 @@
         </div>
       </div>
       <aside class="dataset-card" aria-label="数据集概览">
-        <p>DATASET</p>
-        <h2>ClimateText-3000</h2>
+        <p>CLIMATETEXT-3000</p>
+        <h2>每日气候文本档案</h2>
         <dl>
           <div><dt>已归档文本</dt><dd><strong id="archiveTotal">—</strong><small>/ 3000</small></dd></div>
-          <div><dt>今日合格情报</dt><dd><strong id="todayTotal">—</strong><small>条</small></dd></div>
-          <div><dt>核心入口健康</dt><dd><strong id="sourceHealth">—</strong><small>/ 8</small></dd></div>
+          <div><dt>今日重点情报</dt><dd><strong id="todayTotal">—</strong><small>条</small></dd></div>
+          <div><dt>今日涉及地点</dt><dd><strong id="mapPlaceTotal">—</strong><small>个</small></dd></div>
         </dl>
-        <p class="dataset-version">数据版本 <span id="datasetVersion">—</span></p>
+        <p class="dataset-version">最近数据版本 <span id="datasetVersion">—</span></p>
       </aside>
-    </section>
-
-    <section class="status-strip" aria-label="运行状态">
-      <div><span>更新策略</span><b>增量采集 · 去重归档</b></div>
-      <div><span>发布门禁</span><b>中文完整 · HTTPS · 来源可追溯</b></div>
-      <div><span>失败策略</span><b>保留上一版，不以空数据覆盖</b></div>
-      <div><span>质量层级</span><b>A 人工校编 / B AI 编译待复核</b></div>
     </section>
 
     <section class="section" id="today">
       <div class="section-heading">
-        <div><p class="overline">DAILY SIGNALS</p><h2>今日高质量气候情报</h2></div>
-        <p id="dataNote">只显示通过公开发布门禁的中文文本。</p>
+        <div><p class="overline">DAILY SIGNALS</p><h2>今日重要气候情报</h2></div>
+        <p id="dataNote">按发布时间和政策相关性整理；涉及重要数字时请点击原文核验。</p>
       </div>
       <div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
     </section>
@@ -66,7 +76,7 @@
     <section class="section database-section" id="database">
       <div class="section-heading">
         <div><p class="overline">TEXT DATABASE</p><h2>气候新闻文本数据库</h2></div>
-        <p>滚动保留最多 3000 条；按规范链接去重，保留内容哈希与数据版本。</p>
+        <p>滚动保存最多 3000 条中文气候新闻记录，可按关键词、议题或地域检索并回到原始来源。</p>
       </div>
       <div class="search-panel">
         <label class="search-box">
@@ -74,72 +84,21 @@
           <input id="archiveSearch" type="search" placeholder="搜索中文标题、原文、来源、议题或地域" autocomplete="off">
         </label>
         <label><span>议题</span><select id="topicFilter"><option value="">全部议题</option></select></label>
-        <label><span>质量</span><select id="qualityFilter"><option value="">A + B</option><option value="A">A · 人工校编</option><option value="B">B · AI 编译待复核</option></select></label>
         <div class="result-count"><span>当前结果</span><b id="resultCount">—</b></div>
       </div>
       <div class="archive-table" role="region" aria-label="气候新闻文本记录">
-        <div class="archive-head"><span>日期 / 质量</span><span>文本记录</span><span>来源 / 议题</span><span>结构化原子</span></div>
+        <div class="archive-head"><span>日期</span><span>文本记录</span><span>来源 / 议题</span><span>关键数字 / 地域</span></div>
         <div id="archiveList"></div>
       </div>
       <button class="load-more" id="loadMore" type="button">显示更多记录</button>
     </section>
-
-    <section class="section molecule-section" id="molecule">
-      <div class="section-heading inverted">
-        <div><p class="overline">INTELLIGENCE MOLECULE</p><h2>智能信息分子</h2></div>
-        <p>不是生成一个“结论”，而是把文本拆解成可核验、可组合的结构化原子。</p>
-      </div>
-      <div class="molecule-layout">
-        <div class="molecule-visual" id="moleculeVisual" aria-label="信息分子结构图">
-          <div class="atom atom-source" data-atom="来源">来源</div>
-          <div class="atom atom-evidence" data-atom="证据">证据</div>
-          <div class="atom atom-topic" data-atom="议题">议题</div>
-          <div class="atom atom-number" data-atom="数字">数字</div>
-          <div class="atom atom-geo" data-atom="地域">地域</div>
-          <div class="molecule-core"><small>SELECTED RECORD</small><b id="moleculeTheme">请选择记录</b><span id="moleculeScore">Q—</span></div>
-        </div>
-        <article class="molecule-detail" id="moleculeDetail">
-          <p class="record-id">从文本数据库选择一条记录</p>
-          <h3>查看它如何被拆解为来源、证据、议题、数字与地域原子</h3>
-          <p>数据库中的每一行都可以进入这一结构化视图，并通过原文链接回溯。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section map-section" id="map">
-      <div class="section-heading">
-        <div><p class="overline">GLOBAL SITUATION</p><h2>全球气候现场</h2></div>
-        <p>中国位于地图中央；红点只代表文本明确涉及的国家或地区。</p>
-      </div>
-      <div class="map-layout">
-        <div class="map-canvas" id="mapCanvas">
-          <svg id="worldMap" viewBox="0 0 1000 500" role="img" aria-label="中国居中的全球气候事件地图"></svg>
-          <div class="map-tooltip" id="mapTooltip" role="status"></div>
-          <div class="map-loading" id="mapLoading">正在绘制事件位置…</div>
-        </div>
-        <aside class="map-detail" id="mapDetail"><span>选择红点</span><h3>查看对应文本记录</h3><p>点击后显示中文概要、来源和原文入口。</p></aside>
-      </div>
-      <div class="map-place-list" id="mapPlaceList"></div>
-    </section>
-
-    <section class="section method-section" id="method">
-      <div class="section-heading">
-        <div><p class="overline">QUALITY &amp; PROVENANCE</p><h2>质量方法与数据边界</h2></div>
-      </div>
-      <div class="method-grid">
-        <article><b>01</b><h3>来源优先</h3><p>8 个核心 RSS/API 与官方档案优先；聚合器只用于发现，不替代原发布者。</p></article>
-        <article><b>02</b><h3>确定性去重</h3><p>规范 URL、内容哈希和发布时间共同识别重复记录，档案总量硬限制为 3000 条。</p></article>
-        <article><b>03</b><h3>中文质量门禁</h3><p>标题、概要、来源、时间或 HTTPS 原文任一缺失，记录不进入公开数据集。</p></article>
-        <article><b>04</b><h3>证据有边界</h3><p>新闻事实、来源观点与 AI 编译状态分别保存；重要数字须回到原文复核。</p></article>
-      </div>
-    </section>
   </main>
 
   <footer>
-    <div><b>ClimateText Lab</b><span>高质量气候新闻文本数据与智能分子平台</span></div>
+    <div><b>ClimateText Lab</b><span>国际气候情报与高质量中文文本数据库</span></div>
     <div><a href="./data/news_archive.json">数据集</a><a href="./data/daily_brief.md">每日简报</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
   </footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260721" defer></script>
+  <script src="./app.js?v=20260721-2" defer></script>
 </body>
 </html>

@@ -144,14 +144,19 @@ class CoreTests(unittest.TestCase):
         self.assertIn("https://example.org/", message)
         self.assertNotIn("P0", message)
 
-    def test_public_homepage_exposes_database_and_molecule_sections(self) -> None:
+    def test_public_homepage_prioritizes_map_and_information(self) -> None:
         html = (ROOT / "static" / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("十年政策脉络", html)
         self.assertNotIn("版本，而不是文件堆积", html)
+        self.assertNotIn("智能信息分子", html)
+        self.assertNotIn("质量方法", html)
+        self.assertNotIn('id="qualityFilter"', html)
+        self.assertNotIn("A · 人工校编", html)
+        self.assertNotIn("B · AI 编译待复核", html)
         self.assertIn('id="mapPlaceList"', html)
         self.assertIn('id="database"', html)
-        self.assertIn('id="molecule"', html)
-        self.assertIn("ClimateText-3000", html)
+        self.assertIn("CLIMATETEXT-3000", html)
+        self.assertLess(html.index('id="map"'), html.index('class="hero"'))
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
         self.seed_publishable_article()
