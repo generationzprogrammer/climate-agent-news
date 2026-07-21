@@ -1,19 +1,81 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-3000",
-  "updated_at": "2026-07-21T02:53:52.535402+00:00",
+  "updated_at": "2026-07-21T03:34:14.710433+00:00",
   "limit": 3000,
-  "total": 22,
+  "total": 23,
   "statistics": {
-    "previous_total": 22,
+    "previous_total": 23,
     "added": 0,
     "updated": 0,
-    "rejected": 2,
+    "rejected": 1,
     "pruned": 0,
     "tier_a": 6,
-    "tier_b": 16
+    "tier_b": 17
   },
   "records": [
+    {
+      "record_id": "article_894d7fc711a88f07",
+      "article_id": "article_894d7fc711a88f07",
+      "canonical_url": "https://usa.chinadaily.com.cn/a/202607/21/WS6a5ec8f3a310986e2b466594.html",
+      "source_url": "https://usa.chinadaily.com.cn/a/202607/21/WS6a5ec8f3a310986e2b466594.html",
+      "source_id": "API001",
+      "source_name": "GDELT 2.0 DOC API",
+      "source_type": "全球新闻聚合API",
+      "authority": 4,
+      "title_original": "Kenya targets bigger tea exports to Chinese market",
+      "title_zh": "肯尼亚扩大对华茶叶出口",
+      "summary_source": null,
+      "summary_zh": "肯尼亚计划扩大茶叶出口至中国市场，推动农业贸易增长。此举有助于提升肯尼亚经济收入，并加强中肯贸易合作。",
+      "theme_zh": "农业贸易与合作",
+      "why_zh": "扩大茶叶出口有助于肯尼亚经济发展和中非合作。观点基于贸易政策动向。",
+      "language": "English",
+      "published_at": "2026-07-21T02:45:00+00:00",
+      "fetched_at": "2026-07-21T03:33:28.121276+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "59abaa39601316d12482a7a61f0bd29e020b2dff63740d737bbc34ef0cd237d6",
+      "poster_phrase": "肯尼亚茶叶进军中国",
+      "quality": {
+        "passed": true,
+        "score": 62,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_894d7fc711a88f07",
+        "source_atom": {
+          "name": "GDELT 2.0 DOC API",
+          "authority": 4,
+          "type": "全球新闻聚合API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "扩大茶叶出口有助于肯尼亚经济发展和中非合作。观点基于贸易政策动向。"
+      },
+      "first_archived_at": "2026-07-21T03:34:14.563178+00:00",
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+    },
     {
       "record_id": "article_5e99f15eb2492e07",
       "article_id": "article_5e99f15eb2492e07",
@@ -26,12 +88,12 @@
       "title_original": "Slowdown in Arctic ice melt ends after largest winter decline on record",
       "title_zh": "北极冬季海冰创最大年度减少纪录",
       "summary_source": "Scientists recorded slower reduction over past 20 years, but study finds this was ‘temporary rather than sustained’ A previously recorded slowdown in Arctic sea ice decline has ended, according to a new study, with the largest year-to-year wintertime reduction ever recorded. In a study published last summer, researchers found that melting sea ice in the Arctic had slowed down over the past 20 years, with no statistically significant decline in its extent recorded between 2005 and 2024. Continue reading...",
-      "summary_zh": "最新研究显示，过去20年北极海冰融化速度曾有所放缓，但这一趋势被证实为暂时现象。2024年冬季，北极海冰出现有记录以来最大年度减少，表明海冰退化加剧。",
+      "summary_zh": "最新研究显示，过去20年北极海冰减少速度曾放缓，但这一趋势已结束。2024年冬季海冰面积出现有记录以来最大年度下降，表明减缓仅为暂时现象。",
       "theme_zh": "北极海冰变化",
-      "why_zh": "海冰加速减少对全球气候系统影响重大，需关注极地变化对政策和谈判的科学依据。事实基于最新研究，观点边界清晰。",
+      "why_zh": "海冰变化反映气候变暖趋势，对极地生态和全球气候政策有重要参考价值。结论基于最新科学研究。",
       "language": "en",
       "published_at": "2026-07-20T19:00:48+00:00",
-      "fetched_at": "2026-07-21T02:52:31.610414+00:00",
+      "fetched_at": "2026-07-21T03:32:46.759628+00:00",
       "topics": [
         "气候动态"
       ],
@@ -79,10 +141,10 @@
           "2024"
         ],
         "geo_atoms": [],
-        "decision_atom": "海冰加速减少对全球气候系统影响重大，需关注极地变化对政策和谈判的科学依据。事实基于最新研究，观点边界清晰。"
+        "decision_atom": "海冰变化反映气候变暖趋势，对极地生态和全球气候政策有重要参考价值。结论基于最新科学研究。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_3d1626429736c205",
@@ -94,14 +156,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "Afghanistan floods kill at least 20 people, with more than 100 missing",
-      "title_zh": "阿富汗洪灾致20人死亡逾百人失踪",
+      "title_zh": "阿富汗努里斯坦洪灾致20人死亡逾百人失踪",
       "summary_source": "National disaster agency confirms ‘severe financial and human losses’ in remote province of Nuristan At least 20 people have been killed and more than 80 injured in flooding that hit Afghanistan’s Nuristan province, the country’s disaster management agency said on Monday. In Parun, the provincial capital, a further 105 people including the mayor were missing, said Feraidon Samim, a spokesperson for the Nuristan governor. Continue reading...",
-      "summary_zh": "阿富汗努里斯坦省遭遇洪灾，已造成至少20人死亡、80余人受伤，另有105人包括市长失踪。国家灾害管理机构确认灾区面临严重人员和财产损失。",
+      "summary_zh": "阿富汗努里斯坦省遭遇洪灾，已造成至少20人死亡、80余人受伤，另有105人包括市长失踪。国家灾害管理机构确认灾区遭受严重人员和财产损失。",
       "theme_zh": "极端洪灾事件",
-      "why_zh": "极端天气频发加剧人道和经济风险，需加强灾害应对与气候适应政策。事实基于官方通报，观点边界明确。",
+      "why_zh": "极端天气事件加剧人道和经济危机，凸显气候适应政策的重要性。数据为官方通报，原因未详细说明。",
       "language": "en",
       "published_at": "2026-07-20T17:31:06+00:00",
-      "fetched_at": "2026-07-21T02:52:31.610414+00:00",
+      "fetched_at": "2026-07-21T03:32:46.759628+00:00",
       "topics": [
         "气候动态"
       ],
@@ -151,10 +213,10 @@
           "105"
         ],
         "geo_atoms": [],
-        "decision_atom": "极端天气频发加剧人道和经济风险，需加强灾害应对与气候适应政策。事实基于官方通报，观点边界明确。"
+        "decision_atom": "极端天气事件加剧人道和经济危机，凸显气候适应政策的重要性。数据为官方通报，原因未详细说明。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_c1837101ace2e091",
@@ -168,12 +230,12 @@
       "title_original": "Q&A: What the EU’s carbon market review means for climate action",
       "title_zh": "欧盟碳市场审查对气候行动的影响",
       "summary_source": "The European Commission has put forward new plans to cut emissions under the EU carbon... The post Q&A: What the EU’s carbon market review means for climate action appeared first on Carbon Brief .",
-      "summary_zh": "欧盟委员会提出新计划，通过碳市场机制进一步削减排放。此次审查旨在加强碳交易体系，推动成员国实现2030年减排目标，并提升整体气候政策的执行力。",
+      "summary_zh": "欧盟委员会提出新计划，通过碳市场机制进一步削减排放。此次审查旨在加强碳交易系统，推动成员国实现2030年减排目标，并提升碳定价以促进绿色转型。",
       "theme_zh": "碳市场机制改革",
-      "why_zh": "欧盟碳市场审查将影响全球碳定价和减排进程，对国际气候谈判具有示范意义。观点基于欧盟政策调整事实。",
+      "why_zh": "欧盟碳市场审查将影响全球碳定价与减排进程，对国际气候政策协调具有重要参考意义。观点基于欧盟官方计划。",
       "language": "en",
       "published_at": "2026-07-20T16:11:23+00:00",
-      "fetched_at": "2026-07-21T02:52:29.411832+00:00",
+      "fetched_at": "2026-07-21T03:32:44.828540+00:00",
       "topics": [
         "能源与排放",
         "国际碳市场"
@@ -189,7 +251,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "fb6b338a4557b9d3cdc810d5b565bf475f57f71620f6cc6ff937a04a0b5b8b1b",
-      "poster_phrase": "欧盟碳市场新举措",
+      "poster_phrase": "欧盟碳市场新动向",
       "quality": {
         "passed": true,
         "score": 74,
@@ -223,10 +285,10 @@
         "geo_atoms": [
           "欧洲"
         ],
-        "decision_atom": "欧盟碳市场审查将影响全球碳定价和减排进程，对国际气候谈判具有示范意义。观点基于欧盟政策调整事实。"
+        "decision_atom": "欧盟碳市场审查将影响全球碳定价与减排进程，对国际气候政策协调具有重要参考意义。观点基于欧盟官方计划。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_463deb0addd1eb74",
@@ -240,12 +302,12 @@
       "title_original": "‘A public health emergency waiting to occur’: how US industry groups spent years fighting who gets to measure toxic air",
       "title_zh": "美国工业团体限制有毒空气监测，居民健康受威胁",
       "summary_source": "Air polluters try to ensure toxic emissions happen far from monitors – but the people who live nearby still feel it Kimbrelle Kyereh lives just a few hundred feet from the massive chemical storage tanks in St Rose, in south-eastern Louisiana . Oily fumes sometimes drift into her home, bringing headaches, nausea and insomnia. On one such night, she grabbed her son at 3am and fled to an all-night Ihop. In 2023, after years of coping with the noxious odors, Kyereh began collecting air samples in her yard for a local environmental justice group. But soon after, Louisiana passed an industry-backed law that sharply restricted how that kind of data could be used. Ten of Louisiana’s heaviest air-polluting facilities, based on self-reported data shared with the EPA, operate without a single public air monitor within five miles. This list includes Dow Chemical’s plastics factory in Plaquemine, which is about eight miles from the nearest air monitoring station. The station measures only ozone even though the plant releases an array of toxic pollutants including ethylene oxide, a known carcinogen. No public monitors measure ammonia – despite the fact that CF Industries’ Donaldsonville plant em",
-      "summary_zh": "路易斯安那州通过行业支持法律，限制公众空气监测数据用途。多家重污染企业附近无公共监测站，居民长期暴露于有毒排放，健康风险加剧。",
-      "theme_zh": "有毒空气污染与健康",
-      "why_zh": "监测限制削弱环境监管，影响公众健康保护，对政策制定和环境正义具有警示意义。观点基于法律和监测事实。",
+      "summary_zh": "路易斯安那州通过新法限制公众空气监测数据用途，导致重污染企业附近缺乏有效监测。居民长期暴露于有毒排放，健康风险增加，监管透明度下降。",
+      "theme_zh": "有毒空气与健康风险",
+      "why_zh": "监测限制削弱环境治理，影响公众健康与政策透明度。事实基于地方立法与居民实际情况。",
       "language": "en",
       "published_at": "2026-07-20T14:00:43+00:00",
-      "fetched_at": "2026-07-21T02:52:31.610414+00:00",
+      "fetched_at": "2026-07-21T03:32:46.759628+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -257,7 +319,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "4c292375fe16b181dad600bde135d0ce4c73db4b2b37bd4e383fa4d3247f92c1",
-      "poster_phrase": "监测受限健康受威胁",
+      "poster_phrase": "空气监测受限",
       "quality": {
         "passed": true,
         "score": 73,
@@ -291,10 +353,10 @@
           "2023"
         ],
         "geo_atoms": [],
-        "decision_atom": "监测限制削弱环境监管，影响公众健康保护，对政策制定和环境正义具有警示意义。观点基于法律和监测事实。"
+        "decision_atom": "监测限制削弱环境治理，影响公众健康与政策透明度。事实基于地方立法与居民实际情况。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_383a15830bac4018",
@@ -308,12 +370,12 @@
       "title_original": "‘My shirt was wringing’: National Express bus drivers speak out on 40C conditions",
       "title_zh": "英国巴士司机高温下工作条件恶劣",
       "summary_source": "Drivers in West Midlands say buses ‘unbearable’ during heatwaves, raising employee and passenger safety fears Bus drivers in the West Midlands have spoken out about the “horrendous” working conditions they have experienced during heatwaves, which led to 40C temperatures in their cabs. The UK was hit by high temperatures and dry weather in three successive heatwaves, with temperatures topping 37C last month when the country recorded its hottest ever June day . Last week, the Met Office warned climate extremes were becoming the “new ‘normal’ for the UK”. Continue reading...",
-      "summary_zh": "英国西米德兰兹地区巴士司机反映，近期热浪期间车厢温度高达40℃，工作环境“难以忍受”，引发员工和乘客安全担忧。英国连续三次热浪，6月创下37℃历史高温，气候极端已成新常态。",
-      "theme_zh": "极端高温",
-      "why_zh": "极端高温对公共交通安全和劳动条件造成影响，凸显气候变化带来的现实挑战。事实表明英国需加强应对高温政策。",
+      "summary_zh": "英国西米德兰兹地区巴士司机反映在热浪期间驾驶舱温度高达40℃，工作环境“难以忍受”，引发员工和乘客安全担忧。英国连续三次热浪，最高气温达37℃，气象局警告极端天气将成为新常态。",
+      "theme_zh": "极端高温与公共安全",
+      "why_zh": "极端高温对公共交通安全和员工健康构成挑战，政策需加强应对措施。观点基于报道事实。",
       "language": "en",
       "published_at": "2026-07-20T13:51:42+00:00",
-      "fetched_at": "2026-07-21T02:52:31.610414+00:00",
+      "fetched_at": "2026-07-21T03:32:46.759628+00:00",
       "topics": [
         "气候动态"
       ],
@@ -331,7 +393,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "74cdbfde11f33efcdc616ef9ef6c984199fa970b7ad794b5c035c4a7d3f01171",
-      "poster_phrase": "高温影响公共安全",
+      "poster_phrase": "高温影响巴士安全",
       "quality": {
         "passed": true,
         "score": 69,
@@ -367,10 +429,10 @@
         "geo_atoms": [
           "英国"
         ],
-        "decision_atom": "极端高温对公共交通安全和劳动条件造成影响，凸显气候变化带来的现实挑战。事实表明英国需加强应对高温政策。"
+        "decision_atom": "极端高温对公共交通安全和员工健康构成挑战，政策需加强应对措施。观点基于报道事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_4844468b2c39c58c",
@@ -384,12 +446,12 @@
       "title_original": "Moon Day focuses growing concerns around space junk",
       "title_zh": "联合国呼吁关注月球探索带来的空间垃圾",
       "summary_source": "Amid surging lunar exploration, the UN on Monday urged governments to ensure that humanity's return to the Moon does not come at the expense of planet Earth – or the long-term sustainability of space.",
-      "summary_zh": "在月球探索活动激增背景下，联合国呼吁各国确保人类重返月球不会损害地球环境及空间可持续性。空间垃圾问题日益突出，需制定国际合作与治理措施。",
-      "theme_zh": "空间垃圾治理",
-      "why_zh": "空间垃圾已成为全球环境治理新议题，联合国推动政策协调，强调可持续探索的重要性。观点基于联合国官方呼吁。",
+      "summary_zh": "随着月球探索活动增加，联合国在“月球日”呼吁各国确保人类重返月球不会损害地球或空间可持续性。空间垃圾问题日益突出，需制定国际合作机制保障长期空间环境安全。",
+      "theme_zh": "空间垃圾与可持续探索",
+      "why_zh": "空间垃圾威胁地球和空间环境，政策需加强国际合作与监管。观点基于报道事实。",
       "language": "en",
       "published_at": "2026-07-20T12:00:00+00:00",
-      "fetched_at": "2026-07-21T02:52:31.781065+00:00",
+      "fetched_at": "2026-07-21T03:32:47.403796+00:00",
       "topics": [
         "气候动态"
       ],
@@ -429,10 +491,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "空间垃圾已成为全球环境治理新议题，联合国推动政策协调，强调可持续探索的重要性。观点基于联合国官方呼吁。"
+        "decision_atom": "空间垃圾威胁地球和空间环境，政策需加强国际合作与监管。观点基于报道事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_223ef64be48b56a9",
@@ -444,14 +506,14 @@
       "source_type": "非营利清洁能源媒体",
       "authority": 4,
       "title_original": "States join fight against Trump administration’s wind farm blockade",
-      "title_zh": "18州联合挑战风电项目冻结令",
+      "title_zh": "18州联合挑战特朗普政府风电项目冻结",
       "summary_source": "A coalition of 18 states and Washington, D.C., has moved to join an industry lawsuit challenging the Department of Defense’s freeze on onshore wind projects in America. It’s the latest in a nearly yearlong saga during which the Trump administration has obstructed more than 155 land-based wind projects across the…",
-      "summary_zh": "美国18个州及华盛顿特区加入行业诉讼，反对国防部对陆上风电项目的冻结。过去一年，特朗普政府阻碍了超过155个陆上风电项目的推进，引发多方关注。",
+      "summary_zh": "美国18个州及华盛顿特区加入行业诉讼，反对国防部冻结陆上风电项目许可。过去一年，特朗普政府阻碍超过155个风电项目，诉讼旨在推动项目恢复。",
       "theme_zh": "风电项目政策争议",
-      "why_zh": "州政府联合行动反映风电发展受政策阻碍，或影响美国可再生能源布局。事实基于诉讼进展，观点边界清晰。",
+      "why_zh": "州政府联合行动反映风电发展政策分歧，对美国可再生能源布局和气候目标有直接影响。事实基于诉讼进展。",
       "language": "en",
       "published_at": "2026-07-20T09:30:00+00:00",
-      "fetched_at": "2026-07-21T02:52:31.540263+00:00",
+      "fetched_at": "2026-07-21T03:32:46.547731+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -497,10 +559,10 @@
           "155"
         ],
         "geo_atoms": [],
-        "decision_atom": "州政府联合行动反映风电发展受政策阻碍，或影响美国可再生能源布局。事实基于诉讼进展，观点边界清晰。"
+        "decision_atom": "州政府联合行动反映风电发展政策分歧，对美国可再生能源布局和气候目标有直接影响。事实基于诉讼进展。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_04cb3eb51c529deb",
@@ -512,14 +574,14 @@
       "source_type": "公共媒体",
       "authority": 5,
       "title_original": "Going with the flow: Renewable energy battery breakthrough",
-      "title_zh": "3D打印电池助力可再生能源储存",
+      "title_zh": "3D打印电池助力可再生能源储存突破",
       "summary_source": "A 3D-printed battery designed at Queen's University Belfast could speed up energy storage research.",
-      "summary_zh": "贝尔法斯特女王大学设计了一款3D打印电池，有望加速能源储存领域的研究进展。该技术或为可再生能源的高效储存提供新思路，提升能源系统的灵活性和稳定性。",
+      "summary_zh": "贝尔法斯特女王大学设计的一款3D打印电池有望加速能源储存领域的研究进展。该技术或将提升可再生能源的存储效率，为能源系统转型提供新的解决方案。",
       "theme_zh": "能源储存创新",
-      "why_zh": "新型电池技术有助于提升可再生能源利用率，对能源转型政策具有积极意义。观点仅限于技术潜力，实际应用效果尚待验证。",
+      "why_zh": "新型电池技术有助于提升可再生能源利用率，对能源转型政策具有积极意义。观点基于技术潜力，实际影响待验证。",
       "language": "en",
       "published_at": "2026-07-20T08:20:07+00:00",
-      "fetched_at": "2026-07-21T02:52:31.689012+00:00",
+      "fetched_at": "2026-07-21T03:32:46.877132+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -563,10 +625,10 @@
           "3"
         ],
         "geo_atoms": [],
-        "decision_atom": "新型电池技术有助于提升可再生能源利用率，对能源转型政策具有积极意义。观点仅限于技术潜力，实际应用效果尚待验证。"
+        "decision_atom": "新型电池技术有助于提升可再生能源利用率，对能源转型政策具有积极意义。观点基于技术潜力，实际影响待验证。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_59b04050233c17aa",
@@ -578,14 +640,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Shoot for the Moon: Can space exploration be sustainable?",
-      "title_zh": "月球探索可持续性引发关注",
+      "title_zh": "可持续空间探索成为关注焦点",
       "summary_source": "As lunar exploration is regaining momentum, the sustainability of space launches has come into the spotlight.",
-      "summary_zh": "随着月球探索活动重新升温，空间发射的可持续性成为焦点。相关讨论强调减少空间垃圾和环境影响，推动制定更绿色的航天政策。",
-      "theme_zh": "空间探索可持续性",
-      "why_zh": "空间探索可持续性关系到地球与太空环境保护，政策制定需兼顾科技发展与生态安全。观点基于当前国际讨论。",
+      "summary_zh": "随着月球探索重新升温，空间发射的可持续性问题受到关注。如何减少空间垃圾、降低环境影响成为国际讨论重点，推动制定相关政策和技术标准。",
+      "theme_zh": "空间探索与环境影响",
+      "why_zh": "空间探索需兼顾环境可持续性，政策层面需制定标准以减少负面影响。观点基于报道事实。",
       "language": "en",
       "published_at": "2026-07-20T07:22:08+00:00",
-      "fetched_at": "2026-07-21T02:52:33.086998+00:00",
+      "fetched_at": "2026-07-21T03:32:47.795684+00:00",
       "topics": [
         "气候动态"
       ],
@@ -594,7 +656,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "d531442a16dda1928109bbaa08d9924b01d0bd08e3e1e8f518c9fcf26e96c4b0",
-      "poster_phrase": "探索月球需绿色政策",
+      "poster_phrase": "空间探索需可持续",
       "quality": {
         "passed": true,
         "score": 73,
@@ -625,10 +687,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "空间探索可持续性关系到地球与太空环境保护，政策制定需兼顾科技发展与生态安全。观点基于当前国际讨论。"
+        "decision_atom": "空间探索需兼顾环境可持续性，政策层面需制定标准以减少负面影响。观点基于报道事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_9d90e28655d0f62e",
@@ -642,12 +704,12 @@
       "title_original": "Canefields to ocean to rolling hills: vision splendid of 135km northern NSW rail trail short-changed",
       "title_zh": "澳大利亚北部铁路步道资金申请遭拒",
       "summary_source": "Despite the backing of councils in a region in dire need of support, the federal government has rejected a $42m grant request to complete the trail’s 54km missing link Get our breaking news email , free app or daily news podcast There are glow-worms in the old train tunnel if you look hard enough into the deepest, darkest black, Paul Hixon says. The visitor from Brisbane is cycling the Murwillumbah to Crabbes Creek section of the northern rivers rail trail with his two daughters, but today he only plans to make it as far as the Burringbar tunnel. Continue reading...",
-      "summary_zh": "尽管地方政府支持，澳大利亚联邦政府拒绝了价值4200万澳元的资金申请，导致新南威尔士州北部135公里铁路步道仍有54公里未完工。该地区急需基础设施投资，步道有望促进旅游和经济发展。",
-      "theme_zh": "绿色基础设施建设",
-      "why_zh": "该项目被视为促进区域经济和生态旅游的关键，但资金缺口将影响其整体效益。政策层面显示地方与中央政府在绿色基础设施投资上的分歧。",
+      "summary_zh": "尽管地方政府支持，澳大利亚联邦政府拒绝了价值4200万美元的资金申请，导致新南威尔士北部135公里铁路步道仍有54公里未完工。该项目被认为对区域经济和生态旅游有重要意义，但资金缺口阻碍了整体推进。",
+      "theme_zh": "生态旅游与区域发展",
+      "why_zh": "资金支持不足将影响区域生态旅游发展和经济复苏，政策层面需关注地方项目的可持续性。观点基于报道事实。",
       "language": "en",
       "published_at": "2026-07-19T04:25:12+00:00",
-      "fetched_at": "2026-07-21T02:52:31.610414+00:00",
+      "fetched_at": "2026-07-21T03:32:46.759628+00:00",
       "topics": [
         "气候动态"
       ],
@@ -660,7 +722,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "64b48f8a3ae85b3c1813048d859a89e753c496d615fb6a52d47826d718b4f466",
-      "poster_phrase": "步道资金申请遭拒",
+      "poster_phrase": "步道资金申请被拒",
       "quality": {
         "passed": true,
         "score": 74,
@@ -695,10 +757,10 @@
           "54"
         ],
         "geo_atoms": [],
-        "decision_atom": "该项目被视为促进区域经济和生态旅游的关键，但资金缺口将影响其整体效益。政策层面显示地方与中央政府在绿色基础设施投资上的分歧。"
+        "decision_atom": "资金支持不足将影响区域生态旅游发展和经济复苏，政策层面需关注地方项目的可持续性。观点基于报道事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_67f63e27aed35259",
@@ -712,12 +774,12 @@
       "title_original": "EU proposes slowing down cuts to carbon emissions for businesses",
       "title_zh": "欧盟拟放缓企业碳减排步伐",
       "summary_source": "Under the proposals, the EU plans to relax its emissions trading system to give companies more time to reduce their carbon output.",
-      "summary_zh": "欧盟提出放宽排放交易体系，允许企业有更多时间减少碳排放。此举旨在缓解企业压力，但可能影响欧盟整体减排进度和2030年目标实现。",
-      "theme_zh": "碳排放政策调整",
-      "why_zh": "政策放缓减排节奏，可能削弱欧盟气候承诺，对国际减排合作产生影响。观点基于政策调整事实。",
+      "summary_zh": "欧盟提出放宽排放交易体系，给予企业更多时间降低碳排放。此举旨在缓解企业压力，但可能影响欧盟整体减排进度和2030年目标实现。",
+      "theme_zh": "碳减排政策调整",
+      "why_zh": "政策调整反映欧盟在经济与气候目标间的权衡，对全球碳市场和企业减排策略有示范效应。事实基于欧盟提案。",
       "language": "en",
       "published_at": "2026-07-17T18:34:04+00:00",
-      "fetched_at": "2026-07-21T02:52:31.689012+00:00",
+      "fetched_at": "2026-07-21T03:32:46.877132+00:00",
       "topics": [
         "能源与排放",
         "国际碳市场"
@@ -727,7 +789,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "8806c25ceb8e47bbc5097935e53ca56a3e293484986d464a6d379d4e614b8f7b",
-      "poster_phrase": "减排步伐或放缓",
+      "poster_phrase": "减排节奏调整",
       "quality": {
         "passed": true,
         "score": 74,
@@ -759,10 +821,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "政策放缓减排节奏，可能削弱欧盟气候承诺，对国际减排合作产生影响。观点基于政策调整事实。"
+        "decision_atom": "政策调整反映欧盟在经济与气候目标间的权衡，对全球碳市场和企业减排策略有示范效应。事实基于欧盟提案。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_8be9c424a6d566e4",
@@ -776,12 +838,12 @@
       "title_original": "Most “zombie credits” locked out of new UN carbon market after China and India snub",
       "title_zh": "中国印度拒绝“僵尸碳信用”，新联合国碳市场屏蔽旧项目",
       "summary_source": "Fears of a flood of environmentally-dubious carbon credits have faded, with most old projects not able to transition to new UN market The post Most “zombie credits” locked out of new UN carbon market after China and India snub appeared first on Climate Home News .",
-      "summary_zh": "多数环境存疑的旧碳信用项目无法进入新联合国碳市场，中国和印度拒绝转移旧项目，有效减少低质量碳信用流入，提升市场环境完整性。",
-      "theme_zh": "碳信用市场改革",
-      "why_zh": "新机制提升碳市场质量，减少虚假减排，增强国际碳交易公信力。观点基于市场改革事实。",
+      "summary_zh": "多数环境存疑的旧碳信用项目未能进入新联合国碳市场，中国和印度拒绝转移旧项目，有效减少低质量碳信用流入，提升市场环境完整性。",
+      "theme_zh": "碳信用质量提升",
+      "why_zh": "新机制有助于防止碳市场虚假减排，提升国际碳交易公信力。观点基于中国、印度实际政策选择。",
       "language": "en",
       "published_at": "2026-07-17T16:38:23+00:00",
-      "fetched_at": "2026-07-21T02:52:31.424840+00:00",
+      "fetched_at": "2026-07-21T03:32:46.415230+00:00",
       "topics": [
         "国际碳市场"
       ],
@@ -801,7 +863,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "9b312c8499e3c2ddd5de7f03dbe00431c2ac4fc9fb75ac42b89f4ab3647b379e",
-      "poster_phrase": "僵尸碳信用被屏蔽",
+      "poster_phrase": "碳信用质量升级",
       "quality": {
         "passed": true,
         "score": 74,
@@ -835,10 +897,10 @@
           "中国",
           "印度"
         ],
-        "decision_atom": "新机制提升碳市场质量，减少虚假减排，增强国际碳交易公信力。观点基于市场改革事实。"
+        "decision_atom": "新机制有助于防止碳市场虚假减排，提升国际碳交易公信力。观点基于中国、印度实际政策选择。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_a60c21b371b3d313",
@@ -850,14 +912,14 @@
       "source_type": "气候专业媒体",
       "authority": 5,
       "title_original": "Debriefed 17 July 2026: UK ‘firewave’ | Fossil-fuelled heat deaths | London’s Natural History Museum spotlights climate",
-      "title_zh": "英国遭遇“火浪”与化石燃料致热死亡",
+      "title_zh": "英国遭遇“火浪”极端高温",
       "summary_source": "Welcome to Carbon Brief’s DeBriefed. An essential guide to the week’s key developments relating to climate... The post Debriefed 17 July 2026: UK ‘firewave’ | Fossil-fuelled heat deaths | London’s Natural History Museum spotlights climate appeared first on Carbon Brief .",
-      "summary_zh": "英国近期出现极端高温“火浪”，与化石燃料相关的热致死亡人数上升。伦敦自然历史博物馆也将气候变化作为重点展览主题，反映社会对气候问题关注度提升。",
+      "summary_zh": "英国近期出现极端高温“火浪”，与化石燃料相关的热致死亡人数上升。伦敦自然历史博物馆加强气候主题展示，提升公众对气候变化影响的认知。该事件凸显气候变化对公共健康和社会的直接影响。",
       "theme_zh": "极端高温",
-      "why_zh": "英国极端高温事件凸显气候变化影响，推动政策关注热致死亡与能源结构调整。观点基于事实报道。",
+      "why_zh": "极端高温事件加剧，推动英国社会关注气候变化与健康风险，政策层面需加强应对措施。观点基于事实报道。",
       "language": "en",
       "published_at": "2026-07-17T12:38:43+00:00",
-      "fetched_at": "2026-07-21T02:52:29.411832+00:00",
+      "fetched_at": "2026-07-21T03:32:44.828540+00:00",
       "topics": [
         "气候动态"
       ],
@@ -875,7 +937,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "4e7bca7091cfefe112d6c1ab33cd388dc34ba981de7beda243dd80d6fef6a60d",
-      "poster_phrase": "英国高温引发关注",
+      "poster_phrase": "英国高温致健康风险",
       "quality": {
         "passed": true,
         "score": 69,
@@ -911,10 +973,10 @@
         "geo_atoms": [
           "英国"
         ],
-        "decision_atom": "英国极端高温事件凸显气候变化影响，推动政策关注热致死亡与能源结构调整。观点基于事实报道。"
+        "decision_atom": "极端高温事件加剧，推动英国社会关注气候变化与健康风险，政策层面需加强应对措施。观点基于事实报道。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_00f5a9615b555890",
@@ -926,14 +988,14 @@
       "source_type": "非营利清洁能源媒体",
       "authority": 4,
       "title_original": "Nuclear energy could be in for a big decade",
-      "title_zh": "全球核能或迎来十年增长",
+      "title_zh": "全球核能或迎来增长十年",
       "summary_source": "This article is part of our ​“Chart of the Week” series . The global nuclear energy industry has been muted since 2011, when the Fukushima Daiichi disaster unfolded in Japan. Some new reactors have been built — especially in China — but a lot of old nuclear power plants have been retired as well. That means…",
-      "summary_zh": "自2011年福岛核事故后，全球核能发展趋于缓慢。中国等地新建核电站，但许多老旧核电站也陆续退役。未来十年，核能有望重新成为能源结构的重要组成部分。",
+      "summary_zh": "自2011年福岛核事故后，全球核能发展趋于缓慢。中国等国家新建核电站，但许多老旧核电站也陆续退役。未来十年，核能有望重新成为全球能源结构的重要组成部分。",
       "theme_zh": "核能发展",
-      "why_zh": "核能增长可能影响全球能源转型与减排政策，需关注安全与退役问题。观点基于行业趋势分析。",
+      "why_zh": "核能增长有助于全球低碳转型，但需关注安全与退役问题。观点基于行业趋势分析。",
       "language": "en",
       "published_at": "2026-07-17T07:30:00+00:00",
-      "fetched_at": "2026-07-21T02:52:31.540263+00:00",
+      "fetched_at": "2026-07-21T03:32:46.547731+00:00",
       "topics": [
         "气候动态"
       ],
@@ -950,7 +1012,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "590ae080b6abf3effe1160379d4308164f0f8b826e72f8e5686edd8b317d5615",
-      "poster_phrase": "核能增长新机遇",
+      "poster_phrase": "核能重回能源舞台",
       "quality": {
         "passed": true,
         "score": 60,
@@ -985,10 +1047,10 @@
         "geo_atoms": [
           "中国"
         ],
-        "decision_atom": "核能增长可能影响全球能源转型与减排政策，需关注安全与退役问题。观点基于行业趋势分析。"
+        "decision_atom": "核能增长有助于全球低碳转型，但需关注安全与退役问题。观点基于行业趋势分析。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_7c68d785f132c311",
@@ -1064,7 +1126,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -1083,7 +1145,7 @@
       "why_zh": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。",
       "language": "en",
       "published_at": "2026-07-16T12:00:00+00:00",
-      "fetched_at": "2026-07-21T02:52:31.781065+00:00",
+      "fetched_at": "2026-07-21T03:32:47.403796+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1134,7 +1196,7 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -1148,12 +1210,12 @@
       "title_original": "Can nature win the next World Cup? Lessons from 2026 host cities",
       "title_zh": "2026世界杯主办城市推动绿色转型",
       "summary_source": "As billions of fans around the globe follow the FIFA World Cup 2026, several host cities are using the tournament as an opportunity to accelerate the green transition and protect nature.",
-      "summary_zh": "2026年世界杯期间，多个主办城市借赛事契机加速绿色转型，采取措施保护自然环境。全球数十亿球迷关注赛事，主办城市通过绿色政策提升生态保护意识，推动可持续发展。",
-      "theme_zh": "体育赛事与绿色转型",
-      "why_zh": "大型国际赛事成为推动城市绿色政策和生态保护的窗口，展示绿色转型经验，有助于提升全球气候行动影响力。观点基于主办城市实际举措。",
+      "summary_zh": "2026年FIFA世界杯期间，多个主办城市借赛事契机加速绿色转型，采取措施保护自然环境。全球数十亿球迷关注赛事，主办城市通过绿色政策和实践提升生态保护意识，推动可持续发展。",
+      "theme_zh": "绿色赛事与生态保护",
+      "why_zh": "大型体育赛事可成为推动城市绿色转型和生态保护的窗口，政策层面需关注赛事带来的环境影响。观点基于报道事实。",
       "language": "en",
       "published_at": "2026-07-16T01:26:47+00:00",
-      "fetched_at": "2026-07-21T02:52:33.086998+00:00",
+      "fetched_at": "2026-07-21T03:32:47.795684+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1197,10 +1259,10 @@
           "2026"
         ],
         "geo_atoms": [],
-        "decision_atom": "大型国际赛事成为推动城市绿色政策和生态保护的窗口，展示绿色转型经验，有助于提升全球气候行动影响力。观点基于主办城市实际举措。"
+        "decision_atom": "大型体育赛事可成为推动城市绿色转型和生态保护的窗口，政策层面需关注赛事带来的环境影响。观点基于报道事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_5b8f40780203e19e",
@@ -1272,7 +1334,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -1291,7 +1353,7 @@
       "why_zh": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。",
       "language": "en",
       "published_at": "2026-07-15T14:49:04+00:00",
-      "fetched_at": "2026-07-21T02:52:29.411832+00:00",
+      "fetched_at": "2026-07-21T03:32:44.828540+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1360,7 +1422,7 @@
         "decision_atom": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_564ab2b4e2f26c1f",
@@ -1379,7 +1441,7 @@
       "why_zh": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。",
       "language": "en",
       "published_at": "2026-07-15T10:51:19+00:00",
-      "fetched_at": "2026-07-21T02:52:31.424840+00:00",
+      "fetched_at": "2026-07-21T03:32:46.415230+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -1434,7 +1496,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -1453,7 +1515,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-07-21T02:52:33.086998+00:00",
+      "fetched_at": "2026-07-21T03:32:47.795684+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -1508,7 +1570,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
@@ -1520,11 +1582,11 @@
       "source_type": "公共媒体",
       "authority": 5,
       "title_original": "'I looked into the river and saw all these dead fish'",
-      "title_zh": "北爱尔兰水污染致5万鱼类死亡",
+      "title_zh": "北爱尔兰水污染致五万鱼死亡",
       "summary_source": "There have been 50,000 fish killed in Northern Ireland because of water pollution since 2020.",
-      "summary_zh": "自2020年以来，北爱尔兰因水污染导致约50,000条鱼死亡，反映当地水环境治理存在严重问题，对生态系统造成显著影响。",
+      "summary_zh": "自2020年以来，北爱尔兰因水污染导致约50,000条鱼死亡。该事件反映水体污染对生态系统的严重影响，亟需加强水环境治理与监管。",
       "theme_zh": "水污染与生态损害",
-      "why_zh": "水污染事件凸显生态保护与治理政策的重要性，需加强监管与修复措施。事实基于官方数据。",
+      "why_zh": "水污染事件凸显生态保护的重要性，政策需加强监管与修复措施。事实基于官方数据。",
       "language": "en",
       "published_at": "2026-07-14T23:01:40+00:00",
       "fetched_at": "2026-07-17T04:24:06.391334+00:00",
@@ -1539,7 +1601,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "a0f349fb590ba1238b98985a1a8e67274fe32e4706cc3347501a34927592962a",
-      "poster_phrase": "水污染危害生态",
+      "poster_phrase": "水污染危及生态安全",
       "quality": {
         "passed": true,
         "score": 69,
@@ -1573,10 +1635,10 @@
           "2020"
         ],
         "geo_atoms": [],
-        "decision_atom": "水污染事件凸显生态保护与治理政策的重要性，需加强监管与修复措施。事实基于官方数据。"
+        "decision_atom": "水污染事件凸显生态保护的重要性，政策需加强监管与修复措施。事实基于官方数据。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T02:53:52.535402+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
     }
   ]
 }
