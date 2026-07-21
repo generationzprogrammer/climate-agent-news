@@ -1,33 +1,115 @@
-name: Deploy climate intelligence site
+name: 每日更新气候文本数据平台
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "data/news_archive.json"
   workflow_dispatch:
+    inputs:
+      send_notification:
+        description: "部署成功后发送企业微信或邮件提醒"
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    # GitHub Actions cron 使用 UTC；23:30 UTC = 北京时间次日 07:30。
+    - cron: "30 23 * * *"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  models: read
 
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: climate-text-pages
+  cancel-in-progress: false
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 获取代码与上一版档案
+        uses: actions/checkout@v4
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 增量采集、中文编译与质量门禁
+        env:
+          PYTHONPATH: src
+          CLIMATE_ARCHIVE_LIMIT: "3000"
+          CLIMATE_MODEL_BASE_URL: ${{ secrets.CLIMATE_MODEL_BASE_URL || 'https://models.github.ai/inference' }}
+          CLIMATE_MODEL_API_KEY: ${{ secrets.CLIMATE_MODEL_API_KEY || github.token }}
+          CLIMATE_MODEL_NAME: ${{ secrets.CLIMATE_MODEL_NAME || 'openai/gpt-4.1' }}
+        shell: bash
+        run: |
+          python -m climate_agent.cli init
+          python -m climate_agent.cli sync --skip-ndc
+          python -m climate_agent.cli export-web --output site --archive-limit 3000
+          python -m climate_agent.cli validate-publish --site site
+          cp site/data/news_archive.json data/news_archive.json
+      - name: 保存 3000 条滚动档案
+        shell: bash
+        run: |
+          git config user.name "climate-text-bot"
+          git config user.email "climate-text-bot@users.noreply.github.com"
+          git add data/news_archive.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: daily climate text archive [skip ci]"
+            git push
+          fi
+      - name: 保存本次合格发布快照
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-publish-snapshot
+          path: site/data
+          retention-days: 14
+      - name: 配置 GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: 上传静态网站
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
   deploy:
+    runs-on: ubuntu-latest
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - name: Deploy to GitHub Pages
+      - name: 发布网站
         id: deployment
         uses: actions/deploy-pages@v4
+
+  notify:
+    if: ${{ github.event_name == 'schedule' || inputs.send_notification == true }}
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 读取本次合格快照
+        uses: actions/download-artifact@v4
+        with:
+          name: daily-publish-snapshot
+          path: site/data
+      - name: 发送三条重点提醒
+        env:
+          PYTHONPATH: src
+          CLIMATE_PUBLIC_URL: ${{ needs.deploy.outputs.page_url }}
+          CLIMATE_WECOM_WEBHOOK_URL: ${{ secrets.CLIMATE_WECOM_WEBHOOK_URL }}
+          CLIMATE_MAIL_TO: ${{ secrets.CLIMATE_MAIL_TO }}
+          CLIMATE_SMTP_HOST: ${{ secrets.CLIMATE_SMTP_HOST }}
+          CLIMATE_SMTP_PORT: ${{ secrets.CLIMATE_SMTP_PORT }}
+          CLIMATE_SMTP_SECURITY: ${{ secrets.CLIMATE_SMTP_SECURITY }}
+          CLIMATE_SMTP_USERNAME: ${{ secrets.CLIMATE_SMTP_USERNAME }}
+          CLIMATE_SMTP_PASSWORD: ${{ secrets.CLIMATE_SMTP_PASSWORD }}
+          CLIMATE_SMTP_SENDER: ${{ secrets.CLIMATE_SMTP_SENDER }}
+        run: python -m climate_agent.cli deliver --snapshot site/data/dashboard.json --channel auto --public-url "$CLIMATE_PUBLIC_URL" --max-items 3

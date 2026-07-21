@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "climate-text-lab"
+version = "0.2.0"
+description = "每日更新、来源可追溯的高质量气候新闻文本数据与智能信息分子平台"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+climate-brief = "climate_agent.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
