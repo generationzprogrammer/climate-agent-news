@@ -1,19 +1,329 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-3000",
-  "updated_at": "2026-07-23T01:04:39.133974+00:00",
+  "updated_at": "2026-07-24T00:58:35.890125+00:00",
   "limit": 3000,
-  "total": 36,
+  "total": 40,
   "statistics": {
-    "previous_total": 36,
+    "previous_total": 40,
     "added": 0,
     "updated": 0,
-    "rejected": 0,
+    "rejected": 2,
     "pruned": 0,
     "tier_a": 6,
-    "tier_b": 30
+    "tier_b": 34
   },
   "records": [
+    {
+      "record_id": "article_b17c6d5f2c1462ee",
+      "article_id": "article_b17c6d5f2c1462ee",
+      "canonical_url": "https://www.theguardian.com/world/2026/jul/23/people-evacuated-intense-wildfire-saumos-france",
+      "source_url": "https://www.theguardian.com/world/2026/jul/23/people-evacuated-intense-wildfire-saumos-france",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "Thousands flee wildfires in France and Spain as temperatures reach extreme levels in southern Europe",
+      "title_zh": "法国西南与西班牙野火致3万人撤离",
+      "summary_source": "Spain declares national emergency around Madrid, as marine heatwave sees some parts of Mediterranean Sea 5C hotter than normal Brutal heat torching southern Europe has forced about 30,000 people to flee wildfires in France and Spain as a marine heatwave scalds the Mediterranean and researchers warn that “Dantesque” scenarios cannot be ruled out as infernos worsen. A “particularly intense” wildfire on France’s southwestern Atlantic coast prompted the evacuation of more than 18,800 people, including thousands of tourists from campsites and holiday homes, as firefighters struggled to control the blaze. Continue reading...",
+      "summary_zh": "南欧极端高温导致法国和西班牙约3万人因野火撤离，部分地中海海域比常年高5℃。法国西南海岸一场“特别猛烈”的野火已迫使1.88万人疏散，消防员仍在努力控制火势。",
+      "theme_zh": "极端高温与野火",
+      "why_zh": "事实显示极端高温加剧野火风险，对应急管理和气候适应政策提出新挑战，需关注跨国合作与防灾能力。",
+      "language": "en",
+      "published_at": "2026-07-24T00:16:02+00:00",
+      "fetched_at": "2026-07-24T00:56:48.959260+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "5c",
+        "30,000",
+        "18,800"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        },
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "aa73104664aa17110e80d6a6a138100d577bafd1e8b87b4b121060bad9a2ac9c",
+      "poster_phrase": "高温引发大规模撤离",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_b17c6d5f2c1462ee",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "5c",
+          "30,000",
+          "18,800"
+        ],
+        "geo_atoms": [
+          "欧洲",
+          "法国"
+        ],
+        "decision_atom": "事实显示极端高温加剧野火风险，对应急管理和气候适应政策提出新挑战，需关注跨国合作与防灾能力。"
+      },
+      "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+    },
+    {
+      "record_id": "article_6c67b4eafaf74973",
+      "article_id": "article_6c67b4eafaf74973",
+      "canonical_url": "https://www.theguardian.com/world/video/2026/jul/23/thousands-evacuated-in-south-of-france-as-wildfire-rages-across-pine-forest-video",
+      "source_url": "https://www.theguardian.com/world/video/2026/jul/23/thousands-evacuated-in-south-of-france-as-wildfire-rages-across-pine-forest-video",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "Thousands evacuated in south of France as wildfire rages across pine forest – video",
+      "title_zh": "法国南部松林野火致数千人撤离",
+      "summary_source": "Local people and tourists were evacuated from the Arcachon Bay area overnight into Thursday after a huge fire engulfed more than 3,400 hectares (8,400 acres) of forest. Pushed by the wind, with flames reaching 10 metres high, the fire is still spreading towards the Cap Ferret peninsula. On Tuesday, two firefighters died battling another nearby fire close to Bordeaux airport Thousands flee wildfires in France as temperatures reach extreme levels in southern Europe Continue reading...",
+      "summary_zh": "法国阿卡雄湾地区夜间疏散当地居民和游客，因野火已烧毁3400公顷森林，火势受风推动，火焰高达10米。两名消防员在波尔多机场附近灭火时牺牲，火灾仍在蔓延。",
+      "theme_zh": "极端高温与野火",
+      "why_zh": "事实表明极端天气导致严重野火，影响民众安全和生态环境，需加强气候适应与灾害应急政策。",
+      "language": "en",
+      "published_at": "2026-07-23T18:34:36+00:00",
+      "fetched_at": "2026-07-24T00:56:48.959260+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "3,400",
+        "8,400",
+        "10"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        },
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "caacdfe634ef851e6947d924c98d0772eb589357a3b903c1219436af27709b1b",
+      "poster_phrase": "松林野火持续蔓延",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_6c67b4eafaf74973",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "3,400",
+          "8,400",
+          "10"
+        ],
+        "geo_atoms": [
+          "欧洲",
+          "法国"
+        ],
+        "decision_atom": "事实表明极端天气导致严重野火，影响民众安全和生态环境，需加强气候适应与灾害应急政策。"
+      },
+      "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+    },
+    {
+      "record_id": "article_cf247bc27885adc7",
+      "article_id": "article_cf247bc27885adc7",
+      "canonical_url": "https://www.theguardian.com/commentisfree/2026/jul/23/the-guardian-view-on-britains-uninhabitable-homes-as-temperatures-rise-a-new-approach-is-needed",
+      "source_url": "https://www.theguardian.com/commentisfree/2026/jul/23/the-guardian-view-on-britains-uninhabitable-homes-as-temperatures-rise-a-new-approach-is-needed",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "The Guardian view on Britain’s uninhabitable homes: as temperatures rise, a new approach is needed | Editorial",
+      "title_zh": "英国住宅难应高温，亟需新适应策略",
+      "summary_source": "Sadiq Khan’s heat-ready plan for London is a sensible strategy for adaptation that should provide a roadmap for other cities “Our ability to trust that our homes will keep us safe from the outside is under threat,” the geographer Sam Johnson-Schlee writes in Hot House , his recent book on how heat has transformed domestic life. This summer, high temperatures have become inescapable. People have coped with makeshift solutions: keeping curtains drawn, placing foil over windows or – for those who can afford one – plugging in an air-conditioning unit. Planning experts warn that, with only about half of councils requiring new buildings to include cooling strategies, many homes will become “ death traps ” as temperatures rise. Britain’s homes weren’t built to cope with this. The country’s historically mild climate allowed developers to build houses without insulation, while industrialisation supplied plentiful coal to burn when temperatures dropped. Many homes are consequently drafty in winter and sweltering in summer. Unlike those in Mediterranean climates, British homes lack shutters and shaded communal spaces. While Ildefons Cerdà , Barcelona’s masterplanner, was designing housing blo",
+      "summary_zh": "伦敦市长萨迪克·汗提出“热适应”计划，旨在提升城市应对高温能力。英国住宅普遍缺乏隔热和降温措施，专家警告若无新策略，未来高温将使许多住宅变为“危险地带”。",
+      "theme_zh": "极端高温",
+      "why_zh": "英国住宅适应高温能力不足，政策需加强城市气候适应规划。观点基于专家警告和现有政策措施。",
+      "language": "en",
+      "published_at": "2026-07-23T17:21:30+00:00",
+      "fetched_at": "2026-07-24T00:56:48.959260+00:00",
+      "topics": [
+        "能源与排放",
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "opinion_or_context",
+      "content_hash": "9aa4ffec4c726c774d267e99ca4903d17f2199cecef63d43bb4791ab19c7e0c4",
+      "poster_phrase": "高温下的住宅挑战",
+      "quality": {
+        "passed": true,
+        "score": 60,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_cf247bc27885adc7",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "opinion_or_context",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放",
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "英国住宅适应高温能力不足，政策需加强城市气候适应规划。观点基于专家警告和现有政策措施。"
+      },
+      "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+    },
+    {
+      "record_id": "article_f4cb3a7e7f333e28",
+      "article_id": "article_f4cb3a7e7f333e28",
+      "canonical_url": "https://www.theguardian.com/environment/2026/jul/23/climate-crisis-heat-sucking-soils-dry-extreme-drought-europe-analysis",
+      "source_url": "https://www.theguardian.com/environment/2026/jul/23/climate-crisis-heat-sucking-soils-dry-extreme-drought-europe-analysis",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "Climate crisis-driven heat ‘sucking soils dry’ as extreme drought hits Europe",
+      "title_zh": "极端高温加剧欧洲干旱，土壤水分流失",
+      "summary_source": "Analysis shows how heatwaves are making atmosphere thirstier, damaging water supplies, food production and power generation Extreme heat supercharged by the climate crisis is sucking Europe dry in summer and intensifying the drought hitting the continent, a scientific analysis has found. Record-breaking heatwaves meant the hot atmosphere strongly evaporated water from rivers, lakes, soils and plants – conditions made 80 times more likely by global heating in western Europe and 40 times more likely in eastern Europe, the study showed. The level of soil dryness in the west was made five times more likely by the pollution from fossil fuels in the west, and 11 times more likely in the east. Continue reading...",
+      "summary_zh": "科学分析显示，气候危机导致的极端高温使欧洲大气“吸水”能力增强，严重影响水资源、粮食生产和能源供应。西欧土壤干旱概率因化石燃料污染增加5倍，东欧则增加11倍。",
+      "theme_zh": "极端高温与干旱",
+      "why_zh": "极端高温加剧干旱，影响欧洲水资源与粮食安全，需加强气候适应与减排政策。事实基于科学分析。",
+      "language": "en",
+      "published_at": "2026-07-23T04:00:34+00:00",
+      "fetched_at": "2026-07-24T00:56:48.959260+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "80",
+        "40",
+        "11"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "fe9f2d7df65ffc048c5d9038238beaa8d0acb23463971b9784d115b8d6b1b992",
+      "poster_phrase": "高温加剧干旱危机",
+      "quality": {
+        "passed": true,
+        "score": 74,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_f4cb3a7e7f333e28",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "80",
+          "40",
+          "11"
+        ],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "decision_atom": "极端高温加剧干旱，影响欧洲水资源与粮食安全，需加强气候适应与减排政策。事实基于科学分析。"
+      },
+      "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+    },
     {
       "record_id": "article_e0247ad0502dc99c",
       "article_id": "article_e0247ad0502dc99c",
@@ -24,14 +334,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "France records more than 5,700 excess deaths during June heatwave",
-      "title_zh": "法国6月热浪致超5700例超额死亡",
+      "title_zh": "法国六月热浪致5700余人超额死亡",
       "summary_source": "Figures come as large parts of southern Europe endure another record-breaking period of extreme temperatures France recorded more than 5,700 excess deaths during its June heatwave, authorities have said, as swathes of southern Europe continue to endure another record-breaking period of extreme temperatures. The French national health agency said on Wednesday that it had recorded 5,764 excess deaths ⁠between ​17 June and 2 July, an excess mortality rate of 36%. Continue reading...",
-      "summary_zh": "法国国家卫生机构公布，2026年6月17日至7月2日期间，法国因热浪导致5764例超额死亡，超额死亡率达36%。南欧多地同期也经历极端高温，创下新纪录。",
-      "theme_zh": "极端高温",
-      "why_zh": "极端高温事件造成显著健康风险，凸显加强气候适应和公共卫生应对措施的政策紧迫性。数据为事实描述。",
+      "summary_zh": "法国国家卫生机构公布，6月17日至7月2日期间，法国因热浪出现5764例超额死亡，超额死亡率达36%。南欧多地正经历新一轮极端高温，创下历史纪录。",
+      "theme_zh": "极端高温与健康风险",
+      "why_zh": "事实显示极端高温对公共健康造成显著影响，需加强气候适应和健康防护政策，关注高温致死风险。",
       "language": "en",
       "published_at": "2026-07-22T15:34:27+00:00",
-      "fetched_at": "2026-07-23T01:03:13.507636+00:00",
+      "fetched_at": "2026-07-24T00:56:48.959260+00:00",
       "topics": [
         "气候动态"
       ],
@@ -57,7 +367,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "748d77c832c332b36a8f4616470e5f164f0ad6e552182ee927ec3aa86158b38b",
-      "poster_phrase": "热浪致死亡激增",
+      "poster_phrase": "热浪致超额死亡",
       "quality": {
         "passed": true,
         "score": 70,
@@ -97,10 +407,10 @@
           "欧洲",
           "法国"
         ],
-        "decision_atom": "极端高温事件造成显著健康风险，凸显加强气候适应和公共卫生应对措施的政策紧迫性。数据为事实描述。"
+        "decision_atom": "事实显示极端高温对公共健康造成显著影响，需加强气候适应和健康防护政策，关注高温致死风险。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_9fac755b5a8d9502",
@@ -112,14 +422,14 @@
       "source_type": "气候专业媒体",
       "authority": 5,
       "title_original": "Will new UK PM’s green measures at home cause climate finance pain overseas?",
-      "title_zh": "英国新首相绿色举措或影响海外气候资金",
+      "title_zh": "英国新首相绿色政策或影响海外气候资金",
       "summary_source": "Andy Burnham will cut bus fares and household electricity tax in a boost for UK climate action - but this will be funded partly by switching international climate finance from grants to loans The post Will new UK PM’s green measures at home cause climate finance pain overseas? appeared first on Climate Home News .",
-      "summary_zh": "英国新首相安迪·伯纳姆将通过削减公交票价和家庭电力税推动国内气候行动，但部分资金将由国际气候资金从赠款转为贷款方式提供，或影响海外受援国。",
-      "theme_zh": "气候资金",
-      "why_zh": "英国国内绿色政策调整可能减少对外气候援助的无偿支持，影响国际气候合作。观点基于政策变化，具体影响需进一步观察。",
+      "summary_zh": "英国新首相Andy Burnham将通过降低公交票价和家庭电税推动国内气候行动，但部分资金将由国际气候资金从赠款转为贷款方式提供，可能影响海外气候项目支持。",
+      "theme_zh": "气候资金与政策调整",
+      "why_zh": "事实显示英国国内绿色政策调整可能影响国际气候资金结构，需关注对全球气候合作和发展中国家支持的影响。",
       "language": "en",
       "published_at": "2026-07-22T13:21:25+00:00",
-      "fetched_at": "2026-07-23T01:03:13.197533+00:00",
+      "fetched_at": "2026-07-24T00:56:48.629253+00:00",
       "topics": [
         "气候资金"
       ],
@@ -134,7 +444,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "3d26545b04483fda7d6f945f4f13c4f5be3f3d8e6003ec4a404efced60e4438f",
-      "poster_phrase": "气候资金分配调整",
+      "poster_phrase": "绿色政策影响海外资金",
       "quality": {
         "passed": true,
         "score": 74,
@@ -167,10 +477,10 @@
         "geo_atoms": [
           "英国"
         ],
-        "decision_atom": "英国国内绿色政策调整可能减少对外气候援助的无偿支持，影响国际气候合作。观点基于政策变化，具体影响需进一步观察。"
+        "decision_atom": "事实显示英国国内绿色政策调整可能影响国际气候资金结构，需关注对全球气候合作和发展中国家支持的影响。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_e2ed6420ed89cdba",
@@ -184,12 +494,12 @@
       "title_original": "Norway’s national oil company’s profits double to $11.5bn amid war on Iran",
       "title_zh": "挪威国家石油公司利润因伊朗战争翻倍至115亿美元",
       "summary_source": "Equinor benefits from decision to increase oil and gas production during strait of Hormuz blockades Business live – latest updates Profits at Norway’s state oil company nearly doubled to $11.5bn (£8.6bn) in the three months to the end of June as the jump in oil and gas prices caused by the war against Iran boosted earnings. Equinor– which is the UK’s biggest gas supplier – benefited from a decision to increase oil and gas production at the start of the conflict, filling a gap in the market after a near-halt to shipping through the strait of Hormuz caused Gulf oil flows to slump. Continue reading...",
-      "summary_zh": "受霍尔木兹海峡封锁影响，挪威国家石油公司Equinor在2026年第二季度利润几乎翻倍，达115亿美元。公司通过增加石油和天然气产量，填补了因中东局势导致的市场空缺，成为英国最大天然气供应商。",
-      "theme_zh": "能源市场波动",
-      "why_zh": "事实：地缘冲突推动能源价格上涨，挪威石油公司通过增产获利，显示能源安全与国际局势紧密相关，对政策制定具有警示意义。",
+      "summary_zh": "挪威国家石油公司Equinor在霍尔木兹海峡封锁期间增加油气产量，第二季度利润几乎翻倍至115亿美元。受战争影响，油气价格上涨，Equinor填补市场空缺，成为英国最大天然气供应商。",
+      "theme_zh": "能源市场与地缘冲突",
+      "why_zh": "事件反映地缘冲突对能源市场和企业利润的直接影响，对能源安全政策具有现实意义。事实仅限报道内容。",
       "language": "en",
       "published_at": "2026-07-22T12:45:37+00:00",
-      "fetched_at": "2026-07-23T01:03:13.507636+00:00",
+      "fetched_at": "2026-07-24T00:56:48.959260+00:00",
       "topics": [
         "气候动态"
       ],
@@ -201,7 +511,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "debdb40e40f03831a48fcbc965c85447c98cbb3e6c998f8d486bcc0fc44189ac",
-      "poster_phrase": "能源安全新挑战",
+      "poster_phrase": "能源利润受战争影响",
       "quality": {
         "passed": true,
         "score": 69,
@@ -235,10 +545,10 @@
           "£8.6bn"
         ],
         "geo_atoms": [],
-        "decision_atom": "事实：地缘冲突推动能源价格上涨，挪威石油公司通过增产获利，显示能源安全与国际局势紧密相关，对政策制定具有警示意义。"
+        "decision_atom": "事件反映地缘冲突对能源市场和企业利润的直接影响，对能源安全政策具有现实意义。事实仅限报道内容。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_99c7dce148104824",
@@ -250,14 +560,14 @@
       "source_type": "公共媒体",
       "authority": 5,
       "title_original": "Fate of massive 20m-high space radar in ministers' hands",
-      "title_zh": "英国27座巨型雷达天线项目引发争议",
+      "title_zh": "27座巨型雷达天线项目引发强烈反对",
       "summary_source": "The MoD wants to put 27 giant radar dishes in Pembrokeshire, which campaigners have strongly opposed.",
-      "summary_zh": "英国国防部计划在彭布罗克郡建设27座高达20米的巨型雷达天线，遭到环保人士和当地居民强烈反对。该项目最终是否推进，将由政府部长决定，涉及环境保护与国家安全的权衡。",
-      "theme_zh": "基础设施与环境冲突",
-      "why_zh": "事实：大型基础设施项目引发环境与安全利益冲突，政策决策需平衡多方诉求，对相关领域有借鉴意义。",
+      "summary_zh": "英国国防部计划在彭布罗克郡建设27座高达20米的雷达天线，遭到环保人士和当地居民强烈反对。项目最终决策权在政府部长手中，争议主要集中于环境和社区影响。",
+      "theme_zh": "大型雷达设施环境争议",
+      "why_zh": "该项目涉及环境保护与社区利益平衡，对相关政策制定和公众参与具有现实意义。观点仅限报道内容。",
       "language": "en",
       "published_at": "2026-07-22T12:04:20+00:00",
-      "fetched_at": "2026-07-23T01:03:13.888956+00:00",
+      "fetched_at": "2026-07-24T00:56:49.192202+00:00",
       "topics": [
         "气候动态"
       ],
@@ -269,7 +579,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "c9bc1111130b483485ff475363c4149006d67bf4c7e4f154363697d51437a653",
-      "poster_phrase": "环境与安全博弈",
+      "poster_phrase": "雷达项目环境争议",
       "quality": {
         "passed": true,
         "score": 69,
@@ -303,10 +613,10 @@
           "27"
         ],
         "geo_atoms": [],
-        "decision_atom": "事实：大型基础设施项目引发环境与安全利益冲突，政策决策需平衡多方诉求，对相关领域有借鉴意义。"
+        "decision_atom": "该项目涉及环境保护与社区利益平衡，对相关政策制定和公众参与具有现实意义。观点仅限报道内容。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_02985767f9abfa05",
@@ -384,14 +694,14 @@
       "source_type": "非营利清洁能源媒体",
       "authority": 4,
       "title_original": "A $100M Ohio energy fund lacks transparency — and excludes renewables",
-      "title_zh": "俄亥俄州1亿美元能源基金排除可再生能源",
+      "title_zh": "俄亥俄1亿美元能源基金排除可再生能源",
       "summary_source": "Ohio has made $100 million available for new energy projects in the state, but critics are pushing back on the decision to bar renewable energy projects from accessing the funds — and on the lack of transparency around the process. The JobsOhio Energy Opportunity Initiative was announced by Republican Gov. Mike…",
-      "summary_zh": "俄亥俄州宣布1亿美元能源项目基金，但排除了可再生能源项目，且流程透明度受质疑。批评者认为此举不利于清洁能源发展，影响州内能源结构转型。",
+      "summary_zh": "俄亥俄州宣布1亿美元能源项目基金，但排除了可再生能源项目，且资金分配过程透明度不足。批评者认为此举不利于能源转型，影响州内绿色发展和政策公信力。",
       "theme_zh": "能源资金与可再生能源",
-      "why_zh": "资金分配政策将影响地方能源转型进程，排除可再生能源可能削弱气候目标实现，需关注政策调整。",
+      "why_zh": "能源基金排除可再生能源，影响地方能源结构调整与绿色转型。观点基于政策事实和批评声音。",
       "language": "en",
       "published_at": "2026-07-22T07:30:00+00:00",
-      "fetched_at": "2026-07-23T01:03:13.270385+00:00",
+      "fetched_at": "2026-07-24T00:56:48.760103+00:00",
       "topics": [
         "能源与排放",
         "履约与全球盘点"
@@ -404,7 +714,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "e8c8f9917a0dc43ab7a0964e5788ea14bb0f0e30547cc512ef79620d6e4acf04",
-      "poster_phrase": "能源基金争议",
+      "poster_phrase": "能源基金排除绿色项目",
       "quality": {
         "passed": true,
         "score": 65,
@@ -439,10 +749,10 @@
           "$100 million"
         ],
         "geo_atoms": [],
-        "decision_atom": "资金分配政策将影响地方能源转型进程，排除可再生能源可能削弱气候目标实现，需关注政策调整。"
+        "decision_atom": "能源基金排除可再生能源，影响地方能源结构调整与绿色转型。观点基于政策事实和批评声音。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_a7b9856935a1b4b8",
@@ -454,14 +764,14 @@
       "source_type": "气候专业媒体",
       "authority": 5,
       "title_original": "Allegations of harms at China-backed transition minerals projects rise",
-      "title_zh": "中资转型矿产项目相关负面指控增多",
+      "title_zh": "中国支持的转型矿产项目相关侵害指控增多",
       "summary_source": "The growing number of recorded abuses linked to Chinese mineral projects come as a new mediation mechanism between Chinese firms and affected communities gets underway The post Allegations of harms at China-backed transition minerals projects rise appeared first on Climate Home News .",
-      "summary_zh": "与中国企业投资的转型矿产项目相关的负面事件记录数量上升。与此同时，中企与受影响社区间的新调解机制已启动，旨在缓解相关矛盾。",
-      "theme_zh": "矿产项目社会责任",
-      "why_zh": "负面指控增加反映中资矿产项目社会责任压力，调解机制有助于完善企业与社区关系。事实描述，成效有待评估。",
+      "summary_zh": "中国矿产项目相关侵害记录数量持续增加，正值中国企业与受影响社区之间的新调解机制启动之际。该机制旨在缓解矿产开发过程中出现的社会和环境争议，提升项目透明度和责任感。",
+      "theme_zh": "转型矿产项目社会责任",
+      "why_zh": "该事件反映中国海外矿产投资需加强社会责任与社区沟通，对政策制定和国际形象有现实影响。观点仅限于报道内容。",
       "language": "en",
       "published_at": "2026-07-22T00:01:00+00:00",
-      "fetched_at": "2026-07-23T01:03:13.197533+00:00",
+      "fetched_at": "2026-07-24T00:56:48.629253+00:00",
       "topics": [
         "气候动态"
       ],
@@ -509,10 +819,10 @@
         "geo_atoms": [
           "中国"
         ],
-        "decision_atom": "负面指控增加反映中资矿产项目社会责任压力，调解机制有助于完善企业与社区关系。事实描述，成效有待评估。"
+        "decision_atom": "该事件反映中国海外矿产投资需加强社会责任与社区沟通，对政策制定和国际形象有现实影响。观点仅限于报道内容。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_c0218ad74cf1934f",
@@ -682,14 +992,14 @@
       "source_type": "气候专业媒体",
       "authority": 5,
       "title_original": "Energy transition policymaking must evolve to fit an age of rupture",
-      "title_zh": "能源转型政策需适应动荡时代",
+      "title_zh": "能源转型政策需适应新时代挑战",
       "summary_source": "Economic competitiveness, energy security and green industrialisation are driving real-world change - but will this damage our collective mission for a fair green shift? The post Energy transition policymaking must evolve to fit an age of rupture appeared first on Climate Home News .",
-      "summary_zh": "经济竞争力、能源安全和绿色产业化正推动现实变革，但这些因素可能影响全球实现公平绿色转型的共同目标。文章探讨政策制定如何应对当前不确定性和挑战。",
-      "theme_zh": "绿色转型政策调整",
-      "why_zh": "文章指出，能源转型政策需兼顾经济、能源安全与公平性，强调政策制定者需在多重压力下平衡利益。观点分析为主，未给出具体政策建议。",
+      "summary_zh": "经济竞争力、能源安全和绿色产业化正推动实际变革，但这些因素可能影响公平绿色转型的共同目标。政策制定需与时代变化相适应，平衡多重利益诉求。",
+      "theme_zh": "能源转型政策调整",
+      "why_zh": "文章强调政策需兼顾公平与现实挑战，对未来能源转型政策方向具有参考意义。观点基于报道分析。",
       "language": "en",
       "published_at": "2026-07-21T14:50:51+00:00",
-      "fetched_at": "2026-07-23T01:03:13.197533+00:00",
+      "fetched_at": "2026-07-24T00:56:48.629253+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -698,7 +1008,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "6d5368a8312afe70047d7c9c3894a842064869b7aad0be1f453889d38e7dfaec",
-      "poster_phrase": "转型政策需与时俱进",
+      "poster_phrase": "转型政策需创新",
       "quality": {
         "passed": true,
         "score": 70,
@@ -729,10 +1039,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "文章指出，能源转型政策需兼顾经济、能源安全与公平性，强调政策制定者需在多重压力下平衡利益。观点分析为主，未给出具体政策建议。"
+        "decision_atom": "文章强调政策需兼顾公平与现实挑战，对未来能源转型政策方向具有参考意义。观点基于报道分析。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_03855e419b82d204",
@@ -890,12 +1200,12 @@
       "title_original": "Extreme heat costing India’s poorest workers 2% of GDP, survey finds",
       "title_zh": "极端高温致印度最贫困工人损失2% GDP",
       "summary_source": "India's informal workers are estimated to be losing $78 billion in wages per year because of productivity declines and illness caused by intensifying heat The post Extreme heat costing India’s poorest workers 2% of GDP, survey finds appeared first on Climate Home News .",
-      "summary_zh": "调查显示，印度非正规工人因极端高温导致生产力下降和健康问题，每年工资损失达780亿美元，相当于国内生产总值的2%。气候变化对弱势群体经济影响日益突出。",
+      "summary_zh": "调查显示，印度非正规工人因高温导致的生产力下降和疾病，每年工资损失约780亿美元，相当于国内生产总值的2%。极端高温对弱势群体经济影响显著。",
       "theme_zh": "极端高温",
-      "why_zh": "事实：极端高温对印度低收入群体造成显著经济损失，强调气候适应政策和社会保障体系的重要性。",
+      "why_zh": "事实：极端高温对印度非正规工人造成重大经济损失，凸显气候变化对社会公平和经济稳定的挑战，需引起政策关注。",
       "language": "en",
       "published_at": "2026-07-21T08:30:03+00:00",
-      "fetched_at": "2026-07-23T01:03:13.197533+00:00",
+      "fetched_at": "2026-07-24T00:56:48.629253+00:00",
       "topics": [
         "气候动态"
       ],
@@ -913,7 +1223,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "5f5a4f24c27aa12199039ca3168330d53e0e0763bba31a3c0042ccfe155df2ce",
-      "poster_phrase": "高温冲击弱势群体",
+      "poster_phrase": "高温冲击印度劳工",
       "quality": {
         "passed": true,
         "score": 69,
@@ -949,10 +1259,10 @@
         "geo_atoms": [
           "印度"
         ],
-        "decision_atom": "事实：极端高温对印度低收入群体造成显著经济损失，强调气候适应政策和社会保障体系的重要性。"
+        "decision_atom": "事实：极端高温对印度非正规工人造成重大经济损失，凸显气候变化对社会公平和经济稳定的挑战，需引起政策关注。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_9892283984dccf46",
@@ -964,14 +1274,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Big ideas: How to make the global energy system more sustainable",
-      "title_zh": "全球能源系统可持续发展新思路",
+      "title_zh": "全球能源系统可持续发展的新思路",
       "summary_source": "Climate change scientist Debora Ley discusses how the world can break its addiction to fossil fuels and give more people access to clean, reliable electricity.",
-      "summary_zh": "气候科学家Debora Ley探讨如何摆脱对化石燃料的依赖，并让更多人获得清洁、可靠的电力。她提出创新措施以推动全球能源系统向可持续方向转型。",
-      "theme_zh": "能源系统可持续转型",
-      "why_zh": "推动全球能源系统转型是实现气候目标的关键，相关建议为政策制定提供参考，观点基于专家访谈。",
+      "summary_zh": "气候科学家Debora Ley探讨全球如何摆脱对化石燃料的依赖，并推动更多人获得清洁、可靠的电力。她强调能源转型对减缓气候变化和提升能源公平的重要性。",
+      "theme_zh": "能源转型与可持续发展",
+      "why_zh": "该观点强调全球能源系统转型对实现气候目标和能源公平的政策意义，属于专家建议，尚需政策落地。",
       "language": "en",
       "published_at": "2026-07-21T07:18:23+00:00",
-      "fetched_at": "2026-07-23T01:03:14.208772+00:00",
+      "fetched_at": "2026-07-24T00:56:49.615579+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -1011,10 +1321,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "推动全球能源系统转型是实现气候目标的关键，相关建议为政策制定提供参考，观点基于专家访谈。"
+        "decision_atom": "该观点强调全球能源系统转型对实现气候目标和能源公平的政策意义，属于专家建议，尚需政策落地。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_894d7fc711a88f07",
@@ -1160,12 +1470,12 @@
       "title_original": "Q&A: What the EU’s carbon market review means for climate action",
       "title_zh": "欧盟碳市场审查对气候行动的影响",
       "summary_source": "The European Commission has put forward new plans to cut emissions under the EU carbon market more slowly, from 2031… The post Q&A: What the EU’s carbon market review means for climate action appeared first on Carbon Brief .",
-      "summary_zh": "欧盟委员会提出新计划，将从2031年起放缓碳市场减排速度。此举可能影响欧盟实现长期气候目标的进程，相关政策调整引发各方关注减排力度与经济影响的平衡。",
-      "theme_zh": "碳市场政策调整",
-      "why_zh": "欧盟碳市场减排节奏调整将影响全球碳定价与国际气候合作，具体影响需进一步观察政策落实情况。",
+      "summary_zh": "欧盟委员会提出新计划，将从2031年起放缓碳市场减排速度。这一调整意味着欧盟碳市场的减排目标将延后，可能影响欧盟整体气候行动进程和政策实施节奏。",
+      "theme_zh": "碳市场改革",
+      "why_zh": "欧盟碳市场减排节奏调整，可能影响全球碳市场政策协同与欧盟气候目标实现。观点仅限于政策调整事实。",
       "language": "en",
       "published_at": "2026-07-20T16:22:59+00:00",
-      "fetched_at": "2026-07-23T01:03:11.460530+00:00",
+      "fetched_at": "2026-07-24T00:56:47.129478+00:00",
       "topics": [
         "能源与排放",
         "国际碳市场"
@@ -1183,7 +1493,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "93d45c4d246c3ca0982f9774cab28e2c0f90562fea4318d494693d7107ea63d2",
-      "poster_phrase": "欧盟碳市场新动向",
+      "poster_phrase": "欧盟碳市场新调整",
       "quality": {
         "passed": true,
         "score": 76,
@@ -1219,10 +1529,10 @@
         "geo_atoms": [
           "欧洲"
         ],
-        "decision_atom": "欧盟碳市场减排节奏调整将影响全球碳定价与国际气候合作，具体影响需进一步观察政策落实情况。"
+        "decision_atom": "欧盟碳市场减排节奏调整，可能影响全球碳市场政策协同与欧盟气候目标实现。观点仅限于政策调整事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_463deb0addd1eb74",
@@ -1440,14 +1750,14 @@
       "source_type": "非营利清洁能源媒体",
       "authority": 4,
       "title_original": "States join fight against Trump administration’s wind farm blockade",
-      "title_zh": "18州联合起诉美防长阻碍风电项目",
+      "title_zh": "18州联合挑战特朗普政府风电项目冻结",
       "summary_source": "A coalition of 18 states and Washington, D.C., has moved to join an industry lawsuit challenging the Department of Defense’s freeze on onshore wind projects in America. It’s the latest in a nearly yearlong saga during which the Trump administration has obstructed more than 155 land-based wind projects across the…",
-      "summary_zh": "美国18个州及华盛顿特区加入诉讼，挑战国防部冻结陆上风电项目的决定。过去一年，特朗普政府已阻碍155个以上风电项目，案件反映各州对可再生能源发展的支持。",
-      "theme_zh": "风能发展与政策阻力",
-      "why_zh": "案件显示地方政府与联邦政策在可再生能源发展上的分歧，或影响美国风能产业布局。事实报道。",
+      "summary_zh": "美国18个州及华盛顿特区联合加入行业诉讼，反对国防部对陆上风电项目的冻结。近一年内，特朗普政府阻碍超过155个风电项目，诉讼旨在恢复可再生能源发展。",
+      "theme_zh": "风电项目政策阻碍",
+      "why_zh": "此举显示地方政府对可再生能源政策的积极干预，对美国风电发展和能源转型具有重要影响。事实基于报道内容。",
       "language": "en",
       "published_at": "2026-07-20T09:30:00+00:00",
-      "fetched_at": "2026-07-23T01:03:13.270385+00:00",
+      "fetched_at": "2026-07-24T00:56:48.760103+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -1493,10 +1803,10 @@
           "155"
         ],
         "geo_atoms": [],
-        "decision_atom": "案件显示地方政府与联邦政策在可再生能源发展上的分歧，或影响美国风能产业布局。事实报道。"
+        "decision_atom": "此举显示地方政府对可再生能源政策的积极干预，对美国风电发展和能源转型具有重要影响。事实基于报道内容。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_04cb3eb51c529deb",
@@ -1574,14 +1884,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Shoot for the Moon: Can space exploration be sustainable?",
-      "title_zh": "月球探索热潮引发太空可持续性关注",
+      "title_zh": "月球探索可持续性引发关注",
       "summary_source": "As lunar exploration is regaining momentum, the sustainability of space launches has come into the spotlight.",
-      "summary_zh": "随着月球探索活动重新升温，太空发射的可持续性问题受到关注。专家呼吁在推动科技进步的同时，重视对太空环境的保护，防止资源浪费和环境污染。",
-      "theme_zh": "太空探索可持续性",
-      "why_zh": "文章反映了国际社会对太空活动环境影响的担忧，强调政策制定需兼顾发展与保护，观点基于专家分析。",
+      "summary_zh": "随着月球探索热潮再起，太空发射活动的可持续性问题受到关注。相关讨论聚焦于如何在推动航天进步的同时减少环境影响。",
+      "theme_zh": "航天活动可持续性",
+      "why_zh": "事实：航天探索带来的环境影响成为国际讨论议题，涉及未来技术发展与环境保护的平衡，政策制定需关注。",
       "language": "en",
       "published_at": "2026-07-20T07:22:08+00:00",
-      "fetched_at": "2026-07-22T00:56:27.385200+00:00",
+      "fetched_at": "2026-07-24T00:56:49.615579+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1590,7 +1900,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "d531442a16dda1928109bbaa08d9924b01d0bd08e3e1e8f518c9fcf26e96c4b0",
-      "poster_phrase": "可持续太空探索",
+      "poster_phrase": "太空探索新议题",
       "quality": {
         "passed": true,
         "score": 73,
@@ -1621,10 +1931,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "文章反映了国际社会对太空活动环境影响的担忧，强调政策制定需兼顾发展与保护，观点基于专家分析。"
+        "decision_atom": "事实：航天探索带来的环境影响成为国际讨论议题，涉及未来技术发展与环境保护的平衡，政策制定需关注。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-22T00:57:42.961350+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_9d90e28655d0f62e",
@@ -1770,14 +2080,14 @@
       "source_type": "气候专业媒体",
       "authority": 5,
       "title_original": "Most “zombie credits” locked out of new UN carbon market after China and India snub",
-      "title_zh": "大部分“僵尸碳信用”被新联合国碳市场拒绝",
+      "title_zh": "中国印度拒绝“僵尸碳信用”，新UN市场更严",
       "summary_source": "Fears of a flood of environmentally-dubious carbon credits have faded, with most old projects not able to transition to new UN market The post Most “zombie credits” locked out of new UN carbon market after China and India snub appeared first on Climate Home News .",
-      "summary_zh": "由于中国和印度拒绝，大多数环境存疑的旧碳信用项目无法转入新联合国碳市场。担忧大量低质量碳信用涌入市场的风险已缓解，新机制更注重环境完整性。",
-      "theme_zh": "碳信用机制改革",
-      "why_zh": "新碳市场机制提升碳信用质量，有助于国际碳交易规范化，减少环境风险，观点基于现有政策动态。",
+      "summary_zh": "中国和印度拒绝让旧碳项目转入新联合国碳市场，导致大部分“僵尸碳信用”无法进入。此举缓解了环境质量担忧，有助于提升新市场碳信用的环境可信度。",
+      "theme_zh": "碳信用市场改革",
+      "why_zh": "中国印度拒绝旧碳信用转入新市场，有助于提升碳市场环境标准。事实基于政策决定和市场反应。",
       "language": "en",
       "published_at": "2026-07-17T16:38:23+00:00",
-      "fetched_at": "2026-07-23T01:03:13.197533+00:00",
+      "fetched_at": "2026-07-24T00:56:48.629253+00:00",
       "topics": [
         "国际碳市场"
       ],
@@ -1797,7 +2107,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "9b312c8499e3c2ddd5de7f03dbe00431c2ac4fc9fb75ac42b89f4ab3647b379e",
-      "poster_phrase": "碳信用机制升级",
+      "poster_phrase": "碳信用市场更严标准",
       "quality": {
         "passed": true,
         "score": 74,
@@ -1831,10 +2141,10 @@
           "中国",
           "印度"
         ],
-        "decision_atom": "新碳市场机制提升碳信用质量，有助于国际碳交易规范化，减少环境风险，观点基于现有政策动态。"
+        "decision_atom": "中国印度拒绝旧碳信用转入新市场，有助于提升碳市场环境标准。事实基于政策决定和市场反应。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_a60c21b371b3d313",
@@ -1922,14 +2232,14 @@
       "source_type": "非营利清洁能源媒体",
       "authority": 4,
       "title_original": "Nuclear energy could be in for a big decade",
-      "title_zh": "全球核能产业或迎来十年增长期",
+      "title_zh": "核能产业或迎来增长十年",
       "summary_source": "This article is part of our ​“Chart of the Week” series . The global nuclear energy industry has been muted since 2011, when the Fukushima Daiichi disaster unfolded in Japan. Some new reactors have been built — especially in China — but a lot of old nuclear power plants have been retired as well. That means…",
-      "summary_zh": "自2011年福岛核事故后，全球核能产业发展放缓，但中国等国新建反应堆推动行业复苏。尽管部分老旧核电站关闭，未来十年核能有望实现较大增长。",
+      "summary_zh": "自2011年福岛核事故后，全球核能发展放缓，但中国等国新建反应堆推动行业复苏。未来十年核能有望实现较大增长，部分老旧电站仍将退役。",
       "theme_zh": "核能发展趋势",
-      "why_zh": "核能增长有助于能源结构转型和减排目标实现，政策制定需权衡安全与发展，观点基于行业数据分析。",
+      "why_zh": "事实：核能作为低碳能源在全球能源转型中地位提升，未来发展需兼顾安全与减排目标，政策关注度上升。",
       "language": "en",
       "published_at": "2026-07-17T07:30:00+00:00",
-      "fetched_at": "2026-07-22T00:56:26.676086+00:00",
+      "fetched_at": "2026-07-24T00:56:48.760103+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1946,7 +2256,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "590ae080b6abf3effe1160379d4308164f0f8b826e72f8e5686edd8b317d5615",
-      "poster_phrase": "核能产业新机遇",
+      "poster_phrase": "核能或将复兴",
       "quality": {
         "passed": true,
         "score": 60,
@@ -1981,10 +2291,10 @@
         "geo_atoms": [
           "中国"
         ],
-        "decision_atom": "核能增长有助于能源结构转型和减排目标实现，政策制定需权衡安全与发展，观点基于行业数据分析。"
+        "decision_atom": "事实：核能作为低碳能源在全球能源转型中地位提升，未来发展需兼顾安全与减排目标，政策关注度上升。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-22T00:57:42.961350+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_7c68d785f132c311",
@@ -2060,7 +2370,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-22T00:57:42.961350+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -2268,7 +2578,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -2375,7 +2685,7 @@
       "why_zh": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。",
       "language": "en",
       "published_at": "2026-07-15T10:51:19+00:00",
-      "fetched_at": "2026-07-23T01:03:13.197533+00:00",
+      "fetched_at": "2026-07-24T00:56:48.629253+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -2430,7 +2740,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -2449,7 +2759,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-07-23T01:03:14.208772+00:00",
+      "fetched_at": "2026-07-24T00:56:49.615579+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -2504,7 +2814,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
