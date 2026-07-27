@@ -1,19 +1,175 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-3000",
-  "updated_at": "2026-07-26T01:09:10.399601+00:00",
+  "updated_at": "2026-07-27T01:10:44.183169+00:00",
   "limit": 3000,
-  "total": 52,
+  "total": 54,
   "statistics": {
-    "previous_total": 52,
+    "previous_total": 54,
     "added": 0,
     "updated": 0,
-    "rejected": 2,
+    "rejected": 3,
     "pruned": 0,
     "tier_a": 6,
-    "tier_b": 46
+    "tier_b": 48
   },
   "records": [
+    {
+      "record_id": "article_86e454408d495cb8",
+      "article_id": "article_86e454408d495cb8",
+      "canonical_url": "https://www.theguardian.com/world/live/2026/jul/26/europe-wildfires-spain-france-bordeaux-madrid-evacuations",
+      "source_url": "https://www.theguardian.com/world/live/2026/jul/26/europe-wildfires-spain-france-bordeaux-madrid-evacuations",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "Europe wildfires: ‘Difficult hours lie ahead’ in battle to contain fires, says Pedro Sánchez as more than 300,000 flee homes in France and Spain – as it happened",
+      "title_zh": "欧洲野火致30万人撤离，极端天气频发",
+      "summary_source": "Fires displace people on massive scale and trigger one of the largest peacetime civilian evacuation operations ever carried out in France More than 250,000 people flee wildfires in France and Spain As my colleagues note in this story , scientists say climate breakdown is triggering more frequent and more extreme weather events, evaporating soils and waterways, fuelling wildfires and leading to thousands of excess deaths . Europe is heating at about twice the global average rate. Spain’s environment ministry has said that 32 major forest fires have been recorded so far this year, compared with seven over the same period in 2025. Continue reading...",
+      "summary_zh": "法国和西班牙野火导致超过30万人撤离，创下和平时期最大规模民众疏散。科学家指出，气候变化加剧极端天气，欧洲升温速度约为全球平均的两倍。",
+      "theme_zh": "极端高温与野火",
+      "why_zh": "极端天气事件频发凸显气候变化影响，政策需加强应急与适应措施。事实基于科学分析与官方数据。",
+      "language": "en",
+      "published_at": "2026-07-26T14:52:13+00:00",
+      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "300,000",
+        "250,000",
+        "32",
+        "2025"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        },
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "d70e2e24ea78f72dd929ea923ad142b67045b4ce81cc0efc3d42dc7d5c4c1ef7",
+      "poster_phrase": "野火疏散规模空前",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_86e454408d495cb8",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "300,000",
+          "250,000",
+          "32",
+          "2025"
+        ],
+        "geo_atoms": [
+          "欧洲",
+          "法国"
+        ],
+        "decision_atom": "极端天气事件频发凸显气候变化影响，政策需加强应急与适应措施。事实基于科学分析与官方数据。"
+      },
+      "first_archived_at": "2026-07-27T01:10:44.029305+00:00",
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+    },
+    {
+      "record_id": "article_ff00d2189b81efca",
+      "article_id": "article_ff00d2189b81efca",
+      "canonical_url": "https://www.theguardian.com/environment/2026/jul/26/how-to-keep-cool-in-a-heatwave-from-people-who-know-best",
+      "source_url": "https://www.theguardian.com/environment/2026/jul/26/how-to-keep-cool-in-a-heatwave-from-people-who-know-best",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "How to keep cool in a heatwave: 25 tips from the people who know best, from a Rio lifeguard to an Egyptian archaeologist",
+      "title_zh": "热浪下如何保持凉爽：全球经验分享",
+      "summary_source": "For some, scorching days and humid nights are just the norm. So how do they stay chilled and comfortable? Luis Pacherrez Antón is president of Agroperu Cooperative, a democratic collective of 102 small-scale farmers in the Chira River valley, Peru. He is based in Piura, known as “the city of eternal heat” because it stays hot and dry all year round. “The sun rays start to shine very early – from 9am,” he says. “So as people who work in cultivation, under a burning sun, we stay comfortable by starting much earlier and consuming the healthy foods that we produce, like bananas, oranges, lemons, grapes, papayas and avocados.” Continue reading...",
+      "summary_zh": "秘鲁皮乌拉被称为“永恒高温之城”，当地农民通过早起工作和食用自产香蕉、橙子、柠檬、葡萄、木瓜和鳄梨等健康食品来应对酷热。类似经验在全球高温地区普遍存在，强调生活习惯和饮食调整。",
+      "theme_zh": "极端高温",
+      "why_zh": "该报道展示了高温地区居民的适应策略，为政策制定者提供社区层面应对极端高温的参考，但未涉及系统性政策建议。",
+      "language": "en",
+      "published_at": "2026-07-26T05:00:02+00:00",
+      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "25",
+        "102",
+        "9"
+      ],
+      "places": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "37db1914ca81827b1a13e3ab1c19417d0f617300227b7ff9be40754ac70b3112",
+      "poster_phrase": "高温应对全球经验",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_ff00d2189b81efca",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "25",
+          "102",
+          "9"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "该报道展示了高温地区居民的适应策略，为政策制定者提供社区层面应对极端高温的参考，但未涉及系统性政策建议。"
+      },
+      "first_archived_at": "2026-07-27T01:10:44.029305+00:00",
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+    },
     {
       "record_id": "article_32a028df4d103aba",
       "article_id": "article_32a028df4d103aba",
@@ -26,12 +182,12 @@
       "title_original": "Evacuated villagers in Cairngorms allowed home after wildfire threat lifts",
       "title_zh": "凯恩戈姆斯野火威胁解除，村民获准返家",
       "summary_source": "Scottish first minister thanks Nethy Bridge residents and aid workers after earlier requesting UK military aid to fight 10-day fire Residents of Nethy Bridge have been told they can return to their homes after a large fire broke out in the Cairngorms national park. Supt Judy Hill of Police Scotland said: “Thanks to the efforts of fire crews, gamekeepers, contractors, partners and many others over the past 24 hours, there is no longer the immediate threat which prompted the evacuation of properties in Nethy Bridge. Continue reading...",
-      "summary_zh": "苏格兰凯恩戈姆斯国家公园发生大规模野火，Nethy Bridge村民此前被疏散。经消防队、护林员等多方努力，24小时内火势受控，警方宣布村民可安全返回。苏格兰首席部长感谢居民与救援人员。",
-      "theme_zh": "极端高温与野火",
-      "why_zh": "该事件显示极端高温下野火风险上升，地方政府与救援力量协作对保护居民安全至关重要。观点仅限于事件本身。",
+      "summary_zh": "苏格兰凯恩戈姆斯国家公园内的Nethy Bridge村因持续10天的野火曾请求英国军援，现已解除紧急威胁。消防、护林员和志愿者共同努力使村民安全返家，地方政府表达感谢。",
+      "theme_zh": "野火与社区应急",
+      "why_zh": "该事件体现极端天气下社区应急与协作机制，对提升地方防灾能力具有参考意义，事实基于官方通报。",
       "language": "en",
       "published_at": "2026-07-25T22:08:37+00:00",
-      "fetched_at": "2026-07-26T01:07:52.523241+00:00",
+      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
       "topics": [
         "气候动态"
       ],
@@ -49,7 +205,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "8618a328befa1692e3fa5ad34c9072e53be2adee42ae8ea991afcf155a716737",
-      "poster_phrase": "野火解除，村民返家",
+      "poster_phrase": "野火解除村民返家",
       "quality": {
         "passed": true,
         "score": 69,
@@ -85,10 +241,10 @@
         "geo_atoms": [
           "英国"
         ],
-        "decision_atom": "该事件显示极端高温下野火风险上升，地方政府与救援力量协作对保护居民安全至关重要。观点仅限于事件本身。"
+        "decision_atom": "该事件体现极端天气下社区应急与协作机制，对提升地方防灾能力具有参考意义，事实基于官方通报。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_a94fbcd182af6124",
@@ -396,14 +552,14 @@
       "source_type": "公共媒体",
       "authority": 5,
       "title_original": "North-east of England receives fewest Green Flag awards",
-      "title_zh": "英格兰东北地区绿旗奖数量最低",
+      "title_zh": "英格兰东北部获绿色旗帜奖数量最少",
       "summary_source": "The North East received just 57 awards, much lower than most regions of England, which had over 100.",
-      "summary_zh": "英格兰东北地区仅获57项绿旗奖，远低于其他地区多数超过100项。绿旗奖用于表彰优质公园和绿地，反映区域生态环境管理水平存在差距。",
-      "theme_zh": "城市生态与绿地管理",
-      "why_zh": "该数据揭示区域生态管理不均衡，政策需关注资源分配与生态公平。观点仅限于奖项数量对比。",
+      "summary_zh": "英格兰东北部仅获得57个绿色旗帜奖，远低于其他大多数地区的100个以上。这一数据反映出该地区在公园和绿地管理方面与全国水平存在明显差距。",
+      "theme_zh": "城市绿色空间",
+      "why_zh": "事实：绿色旗帜奖数量反映地区绿色空间管理水平，可能影响地方环境政策制定和资源分配。",
       "language": "en",
       "published_at": "2026-07-25T10:05:32+00:00",
-      "fetched_at": "2026-07-26T01:07:53.099292+00:00",
+      "fetched_at": "2026-07-27T01:09:18.647100+00:00",
       "topics": [
         "气候动态"
       ],
@@ -415,7 +571,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "6e94c8c92f65022d973ac646d1a056f99fcd6c2dd000b166da702e804721270c",
-      "poster_phrase": "东北绿旗奖数量最低",
+      "poster_phrase": "绿色空间管理待提升",
       "quality": {
         "passed": true,
         "score": 69,
@@ -449,10 +605,10 @@
           "100"
         ],
         "geo_atoms": [],
-        "decision_atom": "该数据揭示区域生态管理不均衡，政策需关注资源分配与生态公平。观点仅限于奖项数量对比。"
+        "decision_atom": "事实：绿色旗帜奖数量反映地区绿色空间管理水平，可能影响地方环境政策制定和资源分配。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_dfa62e892abdd771",
@@ -464,14 +620,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "‘Without us, they are doomed’: volunteers save fish from French rivers drying up in heatwaves",
-      "title_zh": "志愿者救援法国河流鱼类应对热浪干涸",
+      "title_zh": "志愿者在法国高温中转移鱼类以应对河流干涸",
       "summary_source": "Fish being moved to oxygenated flowing water further downstream as water levels drop across country Along the Odet River in Brittany, fisher Mathieu Le Bouter and a dozen volunteers are catching hundreds of trout and young salmon – not for sport but to save them. They are only a few miles from the source of the river, which springs from the Black Mountains in Finistère and runs for about 40 miles (65km) into the Atlantic Ocean, but the water is barely up to their knees. Continue reading...",
-      "summary_zh": "法国布列塔尼Odet河水位骤降，志愿者将数百条鳟鱼和幼鲑迁移至下游含氧水域。河流源头水深仅及膝，热浪导致全国多地水位下降，鱼类生存受威胁。",
-      "theme_zh": "极端高温与水生态",
-      "why_zh": "事件凸显极端高温对水生态系统影响，社区参与救援对缓解生态危机有积极作用。观点基于报道事实。",
+      "summary_zh": "在法国布列塔尼，志愿者和渔民将数百条鳟鱼和幼鲑转移至下游含氧水域，以应对高温导致的河流水位下降。奥代河等地水位已降至膝盖深，鱼类生存受到威胁。",
+      "theme_zh": "极端高温",
+      "why_zh": "事实：极端高温加剧河流干涸，影响生态系统，志愿者行动显示民间应对气候变化的积极性。",
       "language": "en",
       "published_at": "2026-07-25T06:00:35+00:00",
-      "fetched_at": "2026-07-26T01:07:52.523241+00:00",
+      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
       "topics": [
         "气候动态"
       ],
@@ -483,7 +639,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "bec46ebf80fd1b5f4ceb72a7c62d6a6893d7cf19ffcc04a9fe90b5404077505d",
-      "poster_phrase": "志愿者救鱼应对干涸",
+      "poster_phrase": "高温下的生态救援",
       "quality": {
         "passed": true,
         "score": 69,
@@ -517,10 +673,10 @@
           "65"
         ],
         "geo_atoms": [],
-        "decision_atom": "事件凸显极端高温对水生态系统影响，社区参与救援对缓解生态危机有积极作用。观点基于报道事实。"
+        "decision_atom": "事实：极端高温加剧河流干涸，影响生态系统，志愿者行动显示民间应对气候变化的积极性。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_0e1af6057fd1d49a",
@@ -610,14 +766,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "Nutrients in our food are declining. Can regenerative agriculture save it?",
-      "title_zh": "农作物营养下降，恢复性农业能否挽救？",
+      "title_zh": "农作物营养下降，能否靠再生农业挽救？",
       "summary_source": "Approach focuses on rebuilding soil health, increasing biodiversity and restoring natural ecosystems For the last few decades, the nutrient content of our crops has been declining. In the late 90s, the US Department of Agriculture found the vitamin C content of lemons had decreased by almost a third over the previous 22 years. Calcium in carrots, an important source especially for non-meat eaters, had reduced , on average, by more than a quarter. Vitamin A in bananas was down by 57%. The mineral content of wheat has declined by between 20-30% since the 1960s. A number of reasons have been suggested for this worrying decline, ranging from new varieties of crop that are bred to grow quicker and bigger to the higher carbon dioxide levels in the air causing plants to produce more sugars and starches (they grow faster but they produce fewer nutrients). A wide range of fixes have been suggested, from GM crops to synthetic soil amendments, or underground farms. Continue reading...",
-      "summary_zh": "过去几十年，农作物营养含量持续下降。美国农业部数据显示，柠檬维生素C含量22年间下降近三分之一，胡萝卜钙减少逾四分之一，香蕉维生素A下降57%，小麦矿物质自1960年代减少20-30%。恢复性农业通过改善土壤健康和生物多样性被认为有潜力缓解这一趋势。",
+      "summary_zh": "过去几十年，农作物营养含量持续下降：柠檬维生素C减少近三分之一，胡萝卜钙减少逾四分之一，香蕉维生素A下降57%，小麦矿物质含量自1960年代减少20-30%。再生农业通过恢复土壤健康和生态系统被认为有潜力改善这一趋势。",
       "theme_zh": "农业可持续与营养安全",
-      "why_zh": "农作物营养下降影响食品安全，恢复性农业被视为潜在解决方案。观点边界：仅限于营养下降现象及恢复性农业的理论作用。",
+      "why_zh": "文章指出再生农业可能缓解农作物营养下降，为农业政策和食品安全提供新方向，但相关效果仍需进一步验证。",
       "language": "en",
       "published_at": "2026-07-24T12:34:46+00:00",
-      "fetched_at": "2026-07-25T01:02:47.668651+00:00",
+      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
       "topics": [
         "气候动态"
       ],
@@ -633,7 +789,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "1a04391191579246441c2ddc46f9caa68182dd05df8f624703e60135c93cbc86",
-      "poster_phrase": "恢复性农业新希望",
+      "poster_phrase": "再生农业改善营养",
       "quality": {
         "passed": true,
         "score": 70,
@@ -671,10 +827,10 @@
           "1960"
         ],
         "geo_atoms": [],
-        "decision_atom": "农作物营养下降影响食品安全，恢复性农业被视为潜在解决方案。观点边界：仅限于营养下降现象及恢复性农业的理论作用。"
+        "decision_atom": "文章指出再生农业可能缓解农作物营养下降，为农业政策和食品安全提供新方向，但相关效果仍需进一步验证。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-25T01:04:13.897548+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_bf58cab196b37f8c",
@@ -688,12 +844,12 @@
       "title_original": "Access to finance ‘strengthens climate resilience’ among sub-Saharan women",
       "title_zh": "金融赋权提升撒哈拉以南女性气候韧性",
       "summary_source": "Empowering women through greater access to finance could “strengthen” households’ resilience to “climate shocks”, according to a new study. Published… The post Access to finance ‘strengthens climate resilience’ among sub-Saharan women appeared first on Carbon Brief .",
-      "summary_zh": "最新研究显示，增强撒哈拉以南非洲女性金融获取能力，有助于提升家庭应对气候冲击的韧性。金融赋权可加强社区抗灾能力，改善气候适应状况。",
-      "theme_zh": "气候资金与适应",
-      "why_zh": "金融赋权对提升气候适应能力具有政策意义，建议关注性别视角和基层金融支持。观点基于研究结论。",
+      "summary_zh": "最新研究显示，撒哈拉以南非洲女性通过获得更多金融资源，能增强家庭应对气候冲击的能力。金融赋权被认为是提升社区气候韧性的有效途径，尤其对弱势群体影响显著。",
+      "theme_zh": "气候资金与性别平等",
+      "why_zh": "该研究为气候政策提供事实依据，强调金融工具在提升女性气候韧性中的作用，建议关注性别视角，但具体政策效果需进一步评估。",
       "language": "en",
       "published_at": "2026-07-24T11:29:45+00:00",
-      "fetched_at": "2026-07-26T01:07:52.079218+00:00",
+      "fetched_at": "2026-07-27T01:09:16.791139+00:00",
       "topics": [
         "气候适应"
       ],
@@ -702,7 +858,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "2b84e208c5a287873edf2132061b4fb26d6e49ee2d5c03e71a9122f15dbef7a7",
-      "poster_phrase": "金融赋权提升韧性",
+      "poster_phrase": "金融赋权增强韧性",
       "quality": {
         "passed": true,
         "score": 70,
@@ -733,10 +889,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "金融赋权对提升气候适应能力具有政策意义，建议关注性别视角和基层金融支持。观点基于研究结论。"
+        "decision_atom": "该研究为气候政策提供事实依据，强调金融工具在提升女性气候韧性中的作用，建议关注性别视角，但具体政策效果需进一步评估。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_94768740acc95d1c",
@@ -748,14 +904,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Mangroves are making a comeback. Here’s what’s working",
-      "title_zh": "全球红树林恢复进展显著",
+      "title_zh": "红树林恢复进展显著，科学与社区协作成效突出",
       "summary_source": "Global mangrove loss is slowing as science-led restoration and community conservation help coastal forests recover from Kenya to Viet Nam.",
-      "summary_zh": "全球红树林损失速度正在减缓，科学主导的修复和社区保护推动肯尼亚、越南等地沿海森林恢复。红树林生态系统对气候和海岸保护具有重要作用。",
-      "theme_zh": "生态修复与红树林保护",
-      "why_zh": "红树林恢复显示科学与社区合作可提升生态修复成效，对气候适应和生物多样性保护具有政策参考意义。观点基于报道事实。",
+      "summary_zh": "全球红树林损失速度正在放缓，科学主导的修复和社区保护措施帮助肯尼亚、越南等地沿海森林逐步恢复。这一趋势有助于提升海岸生态系统的韧性。",
+      "theme_zh": "生态系统修复",
+      "why_zh": "事实：红树林恢复有助于提升气候适应力和碳汇功能，相关经验对全球生态保护政策具有借鉴意义。",
       "language": "en",
       "published_at": "2026-07-24T09:43:03+00:00",
-      "fetched_at": "2026-07-26T01:07:53.449302+00:00",
+      "fetched_at": "2026-07-27T01:09:19.199827+00:00",
       "topics": [
         "气候动态"
       ],
@@ -764,7 +920,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "31c995e151cc75ee213e2c810e32266d8e9e30007393b57c5f69d12184b6fa6d",
-      "poster_phrase": "红树林恢复成效显著",
+      "poster_phrase": "红树林重现生机",
       "quality": {
         "passed": true,
         "score": 73,
@@ -795,10 +951,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "红树林恢复显示科学与社区合作可提升生态修复成效，对气候适应和生物多样性保护具有政策参考意义。观点基于报道事实。"
+        "decision_atom": "事实：红树林恢复有助于提升气候适应力和碳汇功能，相关经验对全球生态保护政策具有借鉴意义。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_919d08fc454d9138",
@@ -810,14 +966,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "What can the Galápagos Islands’ animals teach us about the threats of El Niño?",
-      "title_zh": "加拉帕戈斯动物揭示厄尔尼诺威胁",
+      "title_zh": "加拉帕戈斯动物为厄尔尼诺影响提供科学启示",
       "summary_source": "In this week’s newsletter: the archipelago at the centre of the extreme weather phenomenon could help scientists predict how other marine ecosystems will adapt to our warming climate • Don’t get Down to Earth delivered to your inbox? Sign up here The ocean waters around the Galápagos Islands are hot. Very hot. Observed for centuries in the Pacific by fishers, the El Niño weather phenomenon begins when the prevailing trade winds slow, allowing warm water to spread east along the coast of South America. Right now, the pattern is in full flow and will build from this year into next, likely bringing record temperatures to an already overheating world. If 2026 is not the hottest year on record, 2027 surely will be – and the Galápagos archipelago is in the centre of this climate crisis. ‘It’s only going to get worse’: wildfires forcing firefighters to make impossible choices Millions face long-term coastal flooding risk in UK without climate action, scientists warn Slowdown in Arctic ice melt ends after largest winter decline on record Continue reading...",
-      "summary_zh": "加拉帕戈斯群岛处于厄尔尼诺极端天气现象中心，科学家通过观察该地动物和海洋生态，预测其他海洋系统对气候变暖的适应方式。预计2026或2027年将创全球高温纪录，气候危机加剧。",
+      "summary_zh": "加拉帕戈斯群岛处于厄尔尼诺现象中心，海水温度异常升高。科学家通过研究当地动物，探索海洋生态系统如何适应气候变暖，为预测全球变化提供参考。",
       "theme_zh": "厄尔尼诺影响",
-      "why_zh": "该研究有助于理解极端气候对海洋生态系统的影响，为政策制定和气候适应提供科学依据。观点基于科学预测。",
+      "why_zh": "事实：加拉帕戈斯的研究有助于理解极端气候事件对生态系统的影响，为相关政策和适应措施提供科学依据。",
       "language": "en",
       "published_at": "2026-07-24T06:00:07+00:00",
-      "fetched_at": "2026-07-26T01:07:52.523241+00:00",
+      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
       "topics": [
         "气候动态"
       ],
@@ -835,7 +991,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "a74d37550e32ad5f4d28464c506c6ba95135881239c297e0ad0e0d9c729bf6b9",
-      "poster_phrase": "动物教我们应对气候",
+      "poster_phrase": "动物适应气候变暖",
       "quality": {
         "passed": true,
         "score": 69,
@@ -871,10 +1027,10 @@
         "geo_atoms": [
           "英国"
         ],
-        "decision_atom": "该研究有助于理解极端气候对海洋生态系统的影响，为政策制定和气候适应提供科学依据。观点基于科学预测。"
+        "decision_atom": "事实：加拉帕戈斯的研究有助于理解极端气候事件对生态系统的影响，为相关政策和适应措施提供科学依据。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_b17c6d5f2c1462ee",
@@ -1052,14 +1208,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "The Guardian view on Britain’s uninhabitable homes: as temperatures rise, a new approach is needed | Editorial",
-      "title_zh": "英国住宅难应对高温，需新适应策略",
+      "title_zh": "英国住宅难适应高温，需新策略",
       "summary_source": "Sadiq Khan’s heat-ready plan for London is a sensible strategy for adaptation that should provide a roadmap for other cities “Our ability to trust that our homes will keep us safe from the outside is under threat,” the geographer Sam Johnson-Schlee writes in Hot House , his recent book on how heat has transformed domestic life. This summer, high temperatures have become inescapable. People have coped with makeshift solutions: keeping curtains drawn, placing foil over windows or – for those who can afford one – plugging in an air-conditioning unit. Planning experts warn that, with only about half of councils requiring new buildings to include cooling strategies, many homes will become “ death traps ” as temperatures rise. Britain’s homes weren’t built to cope with this. The country’s historically mild climate allowed developers to build houses without insulation, while industrialisation supplied plentiful coal to burn when temperatures dropped. Many homes are consequently draughty in winter and sweltering in summer. Unlike those in Mediterranean climates, British homes lack shutters and shaded communal spaces. While Ildefons Cerdà , Barcelona’s masterplanner, was designing housing b",
-      "summary_zh": "伦敦市长萨迪克·汗提出的“热适应”计划为城市应对高温提供了参考。英国住宅因历史气候温和，缺乏隔热和降温设计，随着高温频发，部分住宅将面临安全风险，专家呼吁加强新建筑降温要求。",
+      "summary_zh": "伦敦市长萨迪克·汗提出“适应高温”计划，强调英国住宅缺乏应对极端高温的设计。专家警告，若无冷却措施，未来高温将使许多住宅变为“致命陷阱”，需全国性适应政策。",
       "theme_zh": "极端高温",
-      "why_zh": "英国住宅结构难以应对极端高温，政策需加强适应性建设，对城市气候适应政策具有参考意义。事实基于专家和政策建议。",
+      "why_zh": "英国住宅结构与历史气候条件不符，极端高温下居民安全受威胁。政策层面需加强适应性建设，观点基于专家警告与现有政策不足。",
       "language": "en",
       "published_at": "2026-07-23T17:21:30+00:00",
-      "fetched_at": "2026-07-26T01:07:52.523241+00:00",
+      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -1069,7 +1225,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "opinion_or_context",
       "content_hash": "b4bc5a7b17e45a9b6c87968a9c996225924a54f73a54e6faf3cc1c28f92b8147",
-      "poster_phrase": "高温下的住宅挑战",
+      "poster_phrase": "高温下住宅安全隐忧",
       "quality": {
         "passed": true,
         "score": 60,
@@ -1101,10 +1257,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "英国住宅结构难以应对极端高温，政策需加强适应性建设，对城市气候适应政策具有参考意义。事实基于专家和政策建议。"
+        "decision_atom": "英国住宅结构与历史气候条件不符，极端高温下居民安全受威胁。政策层面需加强适应性建设，观点基于专家警告与现有政策不足。"
       },
       "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_f4cb3a7e7f333e28",
@@ -1420,14 +1576,14 @@
       "source_type": "公共媒体",
       "authority": 5,
       "title_original": "Fate of massive 20m-high space radar in ministers' hands",
-      "title_zh": "英国拟建巨型空间雷达引争议",
+      "title_zh": "英国巨型太空雷达项目引发争议，决策待定",
       "summary_source": "The MoD wants to put 27 giant radar dishes in Pembrokeshire, which campaigners have strongly opposed.",
-      "summary_zh": "英国国防部计划在彭布罗克郡建设27座高达20米的巨型雷达天线，遭到环保人士和当地居民强烈反对。该项目是否推进将由政府部长决定。",
-      "theme_zh": "空间基础设施争议",
-      "why_zh": "项目涉及环境影响与政策决策，反映空间技术发展与社会利益冲突。事实边界为项目尚未最终批准。",
+      "summary_zh": "英国国防部计划在彭布罗克郡建设27个高达20米的巨型雷达天线，遭到环保人士强烈反对。该项目目前正等待政府最终决定。",
+      "theme_zh": "基础设施与环境",
+      "why_zh": "事实：大型基础设施项目与环境保护之间的矛盾凸显，相关决策将影响地方生态和政策取向。",
       "language": "en",
       "published_at": "2026-07-22T12:04:20+00:00",
-      "fetched_at": "2026-07-26T01:07:53.099292+00:00",
+      "fetched_at": "2026-07-27T01:09:18.647100+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1439,7 +1595,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "c9bc1111130b483485ff475363c4149006d67bf4c7e4f154363697d51437a653",
-      "poster_phrase": "雷达建设引发争议",
+      "poster_phrase": "雷达项目引发争议",
       "quality": {
         "passed": true,
         "score": 69,
@@ -1473,10 +1629,10 @@
           "27"
         ],
         "geo_atoms": [],
-        "decision_atom": "项目涉及环境影响与政策决策，反映空间技术发展与社会利益冲突。事实边界为项目尚未最终批准。"
+        "decision_atom": "事实：大型基础设施项目与环境保护之间的矛盾凸显，相关决策将影响地方生态和政策取向。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_02985767f9abfa05",
@@ -1556,12 +1712,12 @@
       "title_original": "A $100M Ohio energy fund lacks transparency — and excludes renewables",
       "title_zh": "俄亥俄州1亿美元能源基金排除可再生能源",
       "summary_source": "Ohio has made $100 million available for new energy projects in the state, but critics are pushing back on the decision to bar renewable energy projects from accessing the funds — and on the lack of transparency around the process. The JobsOhio Energy Opportunity Initiative was announced by Republican Gov. Mike…",
-      "summary_zh": "俄亥俄州宣布1亿美元能源项目基金，但排除可再生能源项目，且资金分配过程缺乏透明度。批评者认为此举不利于清洁能源发展，影响州内能源结构转型。",
-      "theme_zh": "能源资金分配",
-      "why_zh": "能源基金排除可再生能源将影响俄亥俄州能源转型进程，政策透明度问题需关注。观点基于批评者意见。",
+      "summary_zh": "俄亥俄州宣布1亿美元能源项目基金，但禁止可再生能源项目申请，且流程透明度受质疑。批评者认为此举限制清洁能源发展，影响州内能源结构转型。",
+      "theme_zh": "能源资金与可再生能源",
+      "why_zh": "资金分配政策直接影响能源结构调整，排除可再生能源将阻碍气候目标实现。事实仅限于基金政策与批评意见。",
       "language": "en",
       "published_at": "2026-07-22T07:30:00+00:00",
-      "fetched_at": "2026-07-26T01:07:52.356839+00:00",
+      "fetched_at": "2026-07-27T01:09:16.941972+00:00",
       "topics": [
         "能源与排放",
         "履约与全球盘点"
@@ -1574,7 +1730,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "e8c8f9917a0dc43ab7a0964e5788ea14bb0f0e30547cc512ef79620d6e4acf04",
-      "poster_phrase": "能源基金争议",
+      "poster_phrase": "能源基金排除清洁项目",
       "quality": {
         "passed": true,
         "score": 65,
@@ -1609,10 +1765,10 @@
           "$100 million"
         ],
         "geo_atoms": [],
-        "decision_atom": "能源基金排除可再生能源将影响俄亥俄州能源转型进程，政策透明度问题需关注。观点基于批评者意见。"
+        "decision_atom": "资金分配政策直接影响能源结构调整，排除可再生能源将阻碍气候目标实现。事实仅限于基金政策与批评意见。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_a7b9856935a1b4b8",
@@ -2134,14 +2290,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Big ideas: How to make the global energy system more sustainable",
-      "title_zh": "全球能源系统可持续发展路径探讨",
+      "title_zh": "全球能源系统可持续转型的思路",
       "summary_source": "Climate change scientist Debora Ley discusses how the world can break its addiction to fossil fuels and give more people access to clean, reliable electricity.",
-      "summary_zh": "气候科学家Debora Ley探讨全球摆脱化石燃料依赖、扩大清洁电力覆盖的途径。她强调需推动政策创新和技术进步，以实现更多人获得可靠、清洁能源。",
+      "summary_zh": "气候科学家Debora Ley探讨全球摆脱化石燃料依赖、扩大清洁电力覆盖的路径。强调政策创新与技术进步对实现可持续能源系统的重要性。",
       "theme_zh": "能源系统转型",
-      "why_zh": "推动全球能源系统可持续发展对实现气候目标至关重要，需关注政策和技术创新。观点基于专家访谈。",
+      "why_zh": "能源系统转型是实现气候目标的核心，观点基于专家建议，强调政策与技术协同作用。",
       "language": "en",
       "published_at": "2026-07-21T07:18:23+00:00",
-      "fetched_at": "2026-07-26T01:07:53.449302+00:00",
+      "fetched_at": "2026-07-27T01:09:19.199827+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -2150,7 +2306,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "45416e33c37b881562cdcaf5e4e7f6ac4a52a357e8705d0c522ccfeef6900366",
-      "poster_phrase": "能源系统转型",
+      "poster_phrase": "能源转型新思路",
       "quality": {
         "passed": true,
         "score": 77,
@@ -2181,10 +2337,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "推动全球能源系统可持续发展对实现气候目标至关重要，需关注政策和技术创新。观点基于专家访谈。"
+        "decision_atom": "能源系统转型是实现气候目标的核心，观点基于专家建议，强调政策与技术协同作用。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_894d7fc711a88f07",
@@ -2330,12 +2486,12 @@
       "title_original": "Q&A: What the EU’s carbon market review means for climate action",
       "title_zh": "欧盟碳市场审查对气候行动的影响",
       "summary_source": "The European Commission has put forward new plans to cut emissions under the EU carbon market more slowly, from 2031… The post Q&A: What the EU’s carbon market review means for climate action appeared first on Carbon Brief .",
-      "summary_zh": "欧盟委员会提出新计划，将从2031年起放缓碳市场减排速度。这一调整意味着欧盟碳市场未来减排进程将变得更加缓慢，可能影响欧盟实现长期气候目标的进度。",
-      "theme_zh": "碳市场改革",
-      "why_zh": "欧盟碳市场减排速度调整将影响其气候目标实现进程，政策变化需关注对全球碳市场和国际谈判的影响。观点基于官方计划。",
+      "summary_zh": "欧盟委员会提出新计划，将从2031年起放缓碳市场减排速度。此举可能影响欧盟实现长期气候目标的进程，相关政策调整需关注减排力度与经济影响的平衡。",
+      "theme_zh": "碳市场政策调整",
+      "why_zh": "欧盟碳市场是全球最大碳交易体系之一，减排速度调整将影响欧盟及国际气候谈判进程。观点仅限于政策调整可能带来的影响。",
       "language": "en",
       "published_at": "2026-07-20T16:22:59+00:00",
-      "fetched_at": "2026-07-26T01:07:52.079218+00:00",
+      "fetched_at": "2026-07-27T01:09:16.791139+00:00",
       "topics": [
         "能源与排放",
         "国际碳市场"
@@ -2353,7 +2509,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "93d45c4d246c3ca0982f9774cab28e2c0f90562fea4318d494693d7107ea63d2",
-      "poster_phrase": "欧盟碳市场调整",
+      "poster_phrase": "欧盟碳市场新动向",
       "quality": {
         "passed": true,
         "score": 76,
@@ -2389,10 +2545,10 @@
         "geo_atoms": [
           "欧洲"
         ],
-        "decision_atom": "欧盟碳市场减排速度调整将影响其气候目标实现进程，政策变化需关注对全球碳市场和国际谈判的影响。观点基于官方计划。"
+        "decision_atom": "欧盟碳市场是全球最大碳交易体系之一，减排速度调整将影响欧盟及国际气候谈判进程。观点仅限于政策调整可能带来的影响。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_463deb0addd1eb74",
@@ -2610,14 +2766,14 @@
       "source_type": "非营利清洁能源媒体",
       "authority": 4,
       "title_original": "States join fight against Trump administration’s wind farm blockade",
-      "title_zh": "18州联合反对风电项目冻结",
+      "title_zh": "18州联合挑战特朗普政府风电项目冻结",
       "summary_source": "A coalition of 18 states and Washington, D.C., has moved to join an industry lawsuit challenging the Department of Defense’s freeze on onshore wind projects in America. It’s the latest in a nearly yearlong saga during which the Trump administration has obstructed more than 155 land-based wind projects across the…",
-      "summary_zh": "美国18个州及华盛顿特区联合加入行业诉讼，挑战国防部对陆上风电项目的冻结。过去一年，特朗普政府阻碍超过155个陆上风电项目，诉讼旨在推动项目审批恢复。",
-      "theme_zh": "风电政策争议",
-      "why_zh": "州政府联合行动反映风电发展政策分歧，对美国可再生能源布局和气候目标具有重要影响。事实基于诉讼进展。",
+      "summary_zh": "美国18个州及华盛顿特区加入行业诉讼，反对国防部冻结陆上风电项目。过去一年，特朗普政府阻碍超过155个风电项目，州政府联合行动旨在推动风电发展并解除政策障碍。",
+      "theme_zh": "风电政策与行政阻碍",
+      "why_zh": "该事件反映州政府与联邦政策冲突，对美国风电产业发展具有重要影响，政策走向将影响清洁能源部署，观点基于诉讼事实。",
       "language": "en",
       "published_at": "2026-07-20T09:30:00+00:00",
-      "fetched_at": "2026-07-26T01:07:52.356839+00:00",
+      "fetched_at": "2026-07-27T01:09:16.941972+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -2629,7 +2785,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "0b56c0271ee3fae4efa72785d1107cc05b0c08122e633c9999a1ecf45bfe7717",
-      "poster_phrase": "18州反对风电冻结",
+      "poster_phrase": "州政府力挺风电",
       "quality": {
         "passed": true,
         "score": 65,
@@ -2663,10 +2819,10 @@
           "155"
         ],
         "geo_atoms": [],
-        "decision_atom": "州政府联合行动反映风电发展政策分歧，对美国可再生能源布局和气候目标具有重要影响。事实基于诉讼进展。"
+        "decision_atom": "该事件反映州政府与联邦政策冲突，对美国风电产业发展具有重要影响，政策走向将影响清洁能源部署，观点基于诉讼事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_04cb3eb51c529deb",
@@ -2744,14 +2900,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Shoot for the Moon: Can space exploration be sustainable?",
-      "title_zh": "月球探索可持续性受关注",
+      "title_zh": "月球探索可持续性引发关注",
       "summary_source": "As lunar exploration is regaining momentum, the sustainability of space launches has come into the spotlight.",
-      "summary_zh": "随着月球探索活动重新升温，空间发射的可持续性成为焦点。相关讨论聚焦如何减少空间探索对环境的影响，推动绿色技术应用。",
-      "theme_zh": "空间探索可持续性",
-      "why_zh": "推动空间探索绿色转型，有助于制定国际可持续发展政策。观点基于当前讨论。",
+      "summary_zh": "随着月球探索活动重新升温，太空发射的可持续性成为讨论焦点。相关部门和专家关注如何在推进航天事业的同时减少环境影响，推动绿色技术应用。",
+      "theme_zh": "航天活动可持续性",
+      "why_zh": "该议题涉及航天政策与环境保护的平衡，推动绿色航天技术有助于国际合作与长期发展。观点仅限于现有报道。",
       "language": "en",
       "published_at": "2026-07-20T07:22:08+00:00",
-      "fetched_at": "2026-07-26T01:07:53.449302+00:00",
+      "fetched_at": "2026-07-27T01:09:19.199827+00:00",
       "topics": [
         "气候动态"
       ],
@@ -2760,7 +2916,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "d531442a16dda1928109bbaa08d9924b01d0bd08e3e1e8f518c9fcf26e96c4b0",
-      "poster_phrase": "探索太空绿色未来",
+      "poster_phrase": "绿色航天新挑战",
       "quality": {
         "passed": true,
         "score": 73,
@@ -2791,10 +2947,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "推动空间探索绿色转型，有助于制定国际可持续发展政策。观点基于当前讨论。"
+        "decision_atom": "该议题涉及航天政策与环境保护的平衡，推动绿色航天技术有助于国际合作与长期发展。观点仅限于现有报道。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_9d90e28655d0f62e",
@@ -3230,7 +3386,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -3249,7 +3405,7 @@
       "why_zh": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。",
       "language": "en",
       "published_at": "2026-07-16T12:00:00+00:00",
-      "fetched_at": "2026-07-22T00:56:26.992042+00:00",
+      "fetched_at": "2026-07-17T04:24:08.756256+00:00",
       "topics": [
         "气候动态"
       ],
@@ -3300,7 +3456,7 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-22T00:57:42.961350+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -3438,7 +3594,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -3600,7 +3756,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -3619,7 +3775,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-07-26T01:07:53.449302+00:00",
+      "fetched_at": "2026-07-27T01:09:19.199827+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -3674,7 +3830,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
