@@ -1,19 +1,397 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-3000",
-  "updated_at": "2026-07-27T01:10:44.183169+00:00",
+  "updated_at": "2026-07-28T00:58:22.326028+00:00",
   "limit": 3000,
-  "total": 54,
+  "total": 59,
   "statistics": {
-    "previous_total": 54,
+    "previous_total": 59,
     "added": 0,
     "updated": 0,
-    "rejected": 3,
+    "rejected": 6,
     "pruned": 0,
     "tier_a": 6,
-    "tier_b": 48
+    "tier_b": 53
   },
   "records": [
+    {
+      "record_id": "article_33ef5a2a01079ca4",
+      "article_id": "article_33ef5a2a01079ca4",
+      "canonical_url": "https://www.theguardian.com/world/live/2026/jul/27/europe-wildfires-france-spain-emmanuel-macron-crisis-meeting-pedro-sanchez-castillon-latest-news-updates",
+      "source_url": "https://www.theguardian.com/world/live/2026/jul/27/europe-wildfires-france-spain-emmanuel-macron-crisis-meeting-pedro-sanchez-castillon-latest-news-updates",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "Europe wildfires: Officials warn that wildfires could still be burning in November – as it happened",
+      "title_zh": "欧洲野火持续，受灾面积同比大幅增加",
+      "summary_source": "Firefighters in France and Spain face another day battling wildfires, as another heatwave set to hit this week ‘It felt like being in a disaster movie’: inside the evacuation from France’s Bordeaux wildfires Provisional data on wildfires in Spain shows that more than 170,000 hectares of forest land have been affected since the beginning of the year – a nearly sixfold increase on the almost 29,000 recorded in the same period in 2025. 35 major fires have been recorded so far, up from just 11 last year. Continue reading...",
+      "summary_zh": "法国和西班牙消防员持续扑救野火，预计今年野火将持续至11月。西班牙临时数据显示，2026年已有17万公顷森林受灾，是2025年同期的近6倍，重大火灾数量也从去年11起增至今年35起。",
+      "theme_zh": "极端高温与野火",
+      "why_zh": "野火频发凸显气候变化影响，需加强防灾和适应政策。数据基于官方统计和现场报道。",
+      "language": "en",
+      "published_at": "2026-07-27T16:42:23+00:00",
+      "fetched_at": "2026-07-28T00:57:02.558136+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "170,000",
+        "29,000",
+        "2025",
+        "35",
+        "11"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        },
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "50a4a25f1cf91026b6bb96e5df3668669804116a9ca41c2fe954a1c9a61a475c",
+      "poster_phrase": "野火灾害持续升级",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_33ef5a2a01079ca4",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "170,000",
+          "29,000",
+          "2025",
+          "35",
+          "11"
+        ],
+        "geo_atoms": [
+          "欧洲",
+          "法国"
+        ],
+        "decision_atom": "野火频发凸显气候变化影响，需加强防灾和适应政策。数据基于官方统计和现场报道。"
+      },
+      "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+    },
+    {
+      "record_id": "article_be2d7f67b6b1bbc3",
+      "article_id": "article_be2d7f67b6b1bbc3",
+      "canonical_url": "https://www.bbc.co.uk/news/articles/cj638jx0l53o?at_medium=RSS&at_campaign=rss",
+      "source_url": "https://www.bbc.co.uk/news/articles/cj638jx0l53o?at_medium=RSS&at_campaign=rss",
+      "source_id": "INT014",
+      "source_name": "BBC Science & Environment",
+      "source_type": "公共媒体",
+      "authority": 5,
+      "title_original": "Devastating European wildfires in maps - and how they're being tackled",
+      "title_zh": "欧洲野火肆虐：地图与应对措施",
+      "summary_source": "A blaze near Bordeaux has torn through more than 162 sq miles (420 sq km) in less than four days, while the Madrid region is seeing its worst fires ever.",
+      "summary_zh": "波尔多附近野火在不到四天内烧毁超过420平方公里，马德里地区也遭遇有史以来最严重的火灾。各地正在采取多种措施应对火情。",
+      "theme_zh": "极端高温",
+      "why_zh": "欧洲野火反映极端高温对生态和社会的影响，强调加强防灾和应急管理的重要性，报道为事实描述。",
+      "language": "en",
+      "published_at": "2026-07-27T15:59:27+00:00",
+      "fetched_at": "2026-07-28T00:57:02.931774+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "162",
+        "420"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "42d13fbf0f02ddb11b62dd9fd0d7aa2c3822876fec4bd6193e48bb264c6a8d37",
+      "poster_phrase": "欧洲野火应急现状",
+      "quality": {
+        "passed": true,
+        "score": 69,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_be2d7f67b6b1bbc3",
+        "source_atom": {
+          "name": "BBC Science & Environment",
+          "authority": 5,
+          "type": "公共媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "162",
+          "420"
+        ],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "decision_atom": "欧洲野火反映极端高温对生态和社会的影响，强调加强防灾和应急管理的重要性，报道为事实描述。"
+      },
+      "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+    },
+    {
+      "record_id": "article_0b06ebf803952c71",
+      "article_id": "article_0b06ebf803952c71",
+      "canonical_url": "https://www.theguardian.com/us-news/2026/jul/27/fires-in-the-night-earth-liberation-front-environment",
+      "source_url": "https://www.theguardian.com/us-news/2026/jul/27/fires-in-the-night-earth-liberation-front-environment",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "‘It came out of real frustration’: the 90s activist network that set fires to save a burning planet",
+      "title_zh": "90年代激进环保运动：地球解放阵线回顾",
+      "summary_source": "Matthew Wolfe’s Fires in the Night examines Earth Liberation Front, a US eco-anarchist movement, and its legacy of radical environmentalism Are echoes of 1990s radical environmentalism returning louder or fading away? It’s a question posed by Fires in the Night, a new book on the history of the Earth Liberation Front (ELF), a loosely grouped band of US Pacific north-west activists that used economic sabotage and arson to protest against environmental destruction. The members called themselves “the Family” and were known to the outside world as Elves, after the acronym for the group: ELF. Unlike rightwing extremists of the era, they practiced non-violence toward life, though not property. They were labelled domestic terrorists and practiced “leaderless resistance”. Continue reading...",
+      "summary_zh": "新书《夜间之火》回顾美国地球解放阵线（ELF）通过经济破坏和纵火抗议环境破坏的历史。该组织强调对生命非暴力，但对财产采取激进行动，被外界称为“国内恐怖分子”。",
+      "theme_zh": "环保行动与社会运动",
+      "why_zh": "该书为理解激进环保运动提供历史视角，对当前环境政策和社会运动有启发意义，观点基于作者分析。",
+      "language": "en",
+      "published_at": "2026-07-27T12:00:09+00:00",
+      "fetched_at": "2026-07-28T00:57:02.558136+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "90",
+        "1990"
+      ],
+      "places": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "c03e06c3aa6d24aa986a84dfc6863ac20a1b05fbb74f5a5b6d7f786b000ebde1",
+      "poster_phrase": "激进环保运动回顾",
+      "quality": {
+        "passed": true,
+        "score": 69,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_0b06ebf803952c71",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "90",
+          "1990"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "该书为理解激进环保运动提供历史视角，对当前环境政策和社会运动有启发意义，观点基于作者分析。"
+      },
+      "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+    },
+    {
+      "record_id": "article_c5a16f87020ab303",
+      "article_id": "article_c5a16f87020ab303",
+      "canonical_url": "https://www.theguardian.com/global-development/2026/jul/27/uganda-begins-emergency-food-handouts-after-19-die-from-hunger",
+      "source_url": "https://www.theguardian.com/global-development/2026/jul/27/uganda-begins-emergency-food-handouts-after-19-die-from-hunger",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "title_original": "Uganda begins emergency food handouts after 19 die from hunger",
+      "title_zh": "乌干达干旱致饥荒，政府启动紧急粮食发放",
+      "summary_source": "Government move follows months of drought and crop failures in Karamoja, with 1.5m people facing malnutrition Uganda has launched emergency food relief distribution after at least 19 deaths from hunger were reported in an area of prolonged drought in the east of the country. A crisis has been building in the Karamoja region of Uganda as crops have failed without the season’s expected rains, leaving the region’s 1.5 million people facing acute food shortages and rising malnutrition. Continue reading...",
+      "summary_zh": "乌干达卡拉莫贾地区因持续干旱和作物减产，已有19人因饥饿死亡，150万人面临营养不良。政府已启动紧急粮食救助，以缓解当地严重的食品短缺和健康危机。",
+      "theme_zh": "气候灾害与粮食安全",
+      "why_zh": "该事件显示气候灾害对粮食安全和公共健康的直接影响，政策需加强应急和长期适应措施。事实基于官方救助行动和灾情数据。",
+      "language": "en",
+      "published_at": "2026-07-27T07:00:34+00:00",
+      "fetched_at": "2026-07-28T00:57:02.558136+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "19",
+        "1.5",
+        "1.5 million"
+      ],
+      "places": [
+        {
+          "name_zh": "乌干达",
+          "lon": 32.0,
+          "lat": 1.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "08171af2bbb823bd9e45212612c1b08363faeff702fafe58779c5ebba93423f7",
+      "poster_phrase": "干旱引发粮食危机",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_c5a16f87020ab303",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "19",
+          "1.5",
+          "1.5 million"
+        ],
+        "geo_atoms": [
+          "乌干达"
+        ],
+        "decision_atom": "该事件显示气候灾害对粮食安全和公共健康的直接影响，政策需加强应急和长期适应措施。事实基于官方救助行动和灾情数据。"
+      },
+      "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+    },
+    {
+      "record_id": "article_51abc729c9c1f573",
+      "article_id": "article_51abc729c9c1f573",
+      "canonical_url": "https://www.bbc.co.uk/news/articles/cwyjeew63n0o?at_medium=RSS&at_campaign=rss",
+      "source_url": "https://www.bbc.co.uk/news/articles/cwyjeew63n0o?at_medium=RSS&at_campaign=rss",
+      "source_id": "INT014",
+      "source_name": "BBC Science & Environment",
+      "source_type": "公共媒体",
+      "authority": 5,
+      "title_original": "'Off the scale' haul of nitrous oxide cans found",
+      "title_zh": "一日捡到82罐一氧化二氮：远超常规",
+      "summary_source": "Litterpickers say they found 82 in a day, and normally find between three and 12.",
+      "summary_zh": "垃圾清理人员一天内发现82罐一氧化二氮，远高于通常的3至12罐。该现象反映一氧化二氮使用量激增，引发环境和管理关注。",
+      "theme_zh": "一氧化二氮排放",
+      "why_zh": "该事件提示一氧化二氮使用及废弃物管理问题，需关注其对环境和气候的潜在影响，报道为事实描述。",
+      "language": "en",
+      "published_at": "2026-07-27T05:23:59+00:00",
+      "fetched_at": "2026-07-28T00:57:02.931774+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "82",
+        "12"
+      ],
+      "places": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "d2007f927986631858cb2e3be43c29d847a3b7fc973169aae0fc0733617a6677",
+      "poster_phrase": "一氧化二氮垃圾激增",
+      "quality": {
+        "passed": true,
+        "score": 69,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_51abc729c9c1f573",
+        "source_atom": {
+          "name": "BBC Science & Environment",
+          "authority": 5,
+          "type": "公共媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "82",
+          "12"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "该事件提示一氧化二氮使用及废弃物管理问题，需关注其对环境和气候的潜在影响，报道为事实描述。"
+      },
+      "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+    },
     {
       "record_id": "article_86e454408d495cb8",
       "article_id": "article_86e454408d495cb8",
@@ -112,12 +490,12 @@
       "title_original": "How to keep cool in a heatwave: 25 tips from the people who know best, from a Rio lifeguard to an Egyptian archaeologist",
       "title_zh": "热浪下如何保持凉爽：全球经验分享",
       "summary_source": "For some, scorching days and humid nights are just the norm. So how do they stay chilled and comfortable? Luis Pacherrez Antón is president of Agroperu Cooperative, a democratic collective of 102 small-scale farmers in the Chira River valley, Peru. He is based in Piura, known as “the city of eternal heat” because it stays hot and dry all year round. “The sun rays start to shine very early – from 9am,” he says. “So as people who work in cultivation, under a burning sun, we stay comfortable by starting much earlier and consuming the healthy foods that we produce, like bananas, oranges, lemons, grapes, papayas and avocados.” Continue reading...",
-      "summary_zh": "秘鲁皮乌拉被称为“永恒高温之城”，当地农民通过早起工作和食用自产香蕉、橙子、柠檬、葡萄、木瓜和鳄梨等健康食品来应对酷热。类似经验在全球高温地区普遍存在，强调生活习惯和饮食调整。",
+      "summary_zh": "秘鲁皮乌拉“永恒高温之城”的农民通过早起工作和食用自产香蕉、橙子、柠檬、葡萄、木瓜和鳄梨等健康食品来应对酷热。当地阳光从上午9点开始强烈，农民调整作息以适应高温环境。",
       "theme_zh": "极端高温",
-      "why_zh": "该报道展示了高温地区居民的适应策略，为政策制定者提供社区层面应对极端高温的参考，但未涉及系统性政策建议。",
+      "why_zh": "该报道展示了高温地区居民的适应策略，为政策制定者提供了基层经验参考，但未涉及政策层面分析。",
       "language": "en",
       "published_at": "2026-07-26T05:00:02+00:00",
-      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
+      "fetched_at": "2026-07-28T00:57:02.558136+00:00",
       "topics": [
         "气候动态"
       ],
@@ -130,7 +508,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "37db1914ca81827b1a13e3ab1c19417d0f617300227b7ff9be40754ac70b3112",
-      "poster_phrase": "高温应对全球经验",
+      "poster_phrase": "高温下的生活智慧",
       "quality": {
         "passed": true,
         "score": 70,
@@ -165,10 +543,10 @@
           "9"
         ],
         "geo_atoms": [],
-        "decision_atom": "该报道展示了高温地区居民的适应策略，为政策制定者提供社区层面应对极端高温的参考，但未涉及系统性政策建议。"
+        "decision_atom": "该报道展示了高温地区居民的适应策略，为政策制定者提供了基层经验参考，但未涉及政策层面分析。"
       },
       "first_archived_at": "2026-07-27T01:10:44.029305+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_32a028df4d103aba",
@@ -620,14 +998,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "‘Without us, they are doomed’: volunteers save fish from French rivers drying up in heatwaves",
-      "title_zh": "志愿者在法国高温中转移鱼类以应对河流干涸",
+      "title_zh": "法国志愿者救援因热浪干涸河流中的鱼类",
       "summary_source": "Fish being moved to oxygenated flowing water further downstream as water levels drop across country Along the Odet River in Brittany, fisher Mathieu Le Bouter and a dozen volunteers are catching hundreds of trout and young salmon – not for sport but to save them. They are only a few miles from the source of the river, which springs from the Black Mountains in Finistère and runs for about 40 miles (65km) into the Atlantic Ocean, but the water is barely up to their knees. Continue reading...",
-      "summary_zh": "在法国布列塔尼，志愿者和渔民将数百条鳟鱼和幼鲑转移至下游含氧水域，以应对高温导致的河流水位下降。奥代河等地水位已降至膝盖深，鱼类生存受到威胁。",
+      "summary_zh": "法国布列塔尼奥代河，志愿者将数百条鳟鱼和幼鲑鱼转移至下游含氧流动水域，以应对全国水位下降。河流源头距离仅数英里，水深已不足膝盖，反映极端高温对生态的影响。",
       "theme_zh": "极端高温",
-      "why_zh": "事实：极端高温加剧河流干涸，影响生态系统，志愿者行动显示民间应对气候变化的积极性。",
+      "why_zh": "该事件显示极端高温对淡水生态系统的直接威胁，强调社区参与对缓解气候影响的重要性。观点仅限于报道内容。",
       "language": "en",
       "published_at": "2026-07-25T06:00:35+00:00",
-      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
+      "fetched_at": "2026-07-28T00:57:02.558136+00:00",
       "topics": [
         "气候动态"
       ],
@@ -639,7 +1017,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "bec46ebf80fd1b5f4ceb72a7c62d6a6893d7cf19ffcc04a9fe90b5404077505d",
-      "poster_phrase": "高温下的生态救援",
+      "poster_phrase": "热浪下的生态救援",
       "quality": {
         "passed": true,
         "score": 69,
@@ -673,10 +1051,10 @@
           "65"
         ],
         "geo_atoms": [],
-        "decision_atom": "事实：极端高温加剧河流干涸，影响生态系统，志愿者行动显示民间应对气候变化的积极性。"
+        "decision_atom": "该事件显示极端高温对淡水生态系统的直接威胁，强调社区参与对缓解气候影响的重要性。观点仅限于报道内容。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_0e1af6057fd1d49a",
@@ -844,12 +1222,12 @@
       "title_original": "Access to finance ‘strengthens climate resilience’ among sub-Saharan women",
       "title_zh": "金融赋权提升撒哈拉以南女性气候韧性",
       "summary_source": "Empowering women through greater access to finance could “strengthen” households’ resilience to “climate shocks”, according to a new study. Published… The post Access to finance ‘strengthens climate resilience’ among sub-Saharan women appeared first on Carbon Brief .",
-      "summary_zh": "最新研究显示，撒哈拉以南非洲女性通过获得更多金融资源，能增强家庭应对气候冲击的能力。金融赋权被认为是提升社区气候韧性的有效途径，尤其对弱势群体影响显著。",
-      "theme_zh": "气候资金与性别平等",
-      "why_zh": "该研究为气候政策提供事实依据，强调金融工具在提升女性气候韧性中的作用，建议关注性别视角，但具体政策效果需进一步评估。",
+      "summary_zh": "最新研究指出，增强撒哈拉以南非洲女性的金融获取能力，有助于提升家庭应对气候冲击的韧性。金融赋权可加强女性在气候变化背景下的经济和社会适应能力。",
+      "theme_zh": "气候资金",
+      "why_zh": "该研究为气候资金政策提供了性别视角，强调金融工具在提升弱势群体气候适应力方面的重要作用，观点基于研究结论。",
       "language": "en",
       "published_at": "2026-07-24T11:29:45+00:00",
-      "fetched_at": "2026-07-27T01:09:16.791139+00:00",
+      "fetched_at": "2026-07-28T00:57:02.109340+00:00",
       "topics": [
         "气候适应"
       ],
@@ -858,7 +1236,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "2b84e208c5a287873edf2132061b4fb26d6e49ee2d5c03e71a9122f15dbef7a7",
-      "poster_phrase": "金融赋权增强韧性",
+      "poster_phrase": "女性金融助力气候韧性",
       "quality": {
         "passed": true,
         "score": 70,
@@ -889,10 +1267,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "该研究为气候政策提供事实依据，强调金融工具在提升女性气候韧性中的作用，建议关注性别视角，但具体政策效果需进一步评估。"
+        "decision_atom": "该研究为气候资金政策提供了性别视角，强调金融工具在提升弱势群体气候适应力方面的重要作用，观点基于研究结论。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_94768740acc95d1c",
@@ -904,14 +1282,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Mangroves are making a comeback. Here’s what’s working",
-      "title_zh": "红树林恢复进展显著，科学与社区协作成效突出",
+      "title_zh": "全球红树林恢复进展显著",
       "summary_source": "Global mangrove loss is slowing as science-led restoration and community conservation help coastal forests recover from Kenya to Viet Nam.",
-      "summary_zh": "全球红树林损失速度正在放缓，科学主导的修复和社区保护措施帮助肯尼亚、越南等地沿海森林逐步恢复。这一趋势有助于提升海岸生态系统的韧性。",
-      "theme_zh": "生态系统修复",
-      "why_zh": "事实：红树林恢复有助于提升气候适应力和碳汇功能，相关经验对全球生态保护政策具有借鉴意义。",
+      "summary_zh": "全球红树林损失速度正在减缓，科学主导的修复和社区保护措施推动肯尼亚、越南等地沿海森林恢复。红树林作为碳汇和防灾屏障，其恢复对气候和生态具有积极意义。",
+      "theme_zh": "生态修复",
+      "why_zh": "红树林恢复有助于提升碳汇能力和沿海防灾，体现科学与社区合作的有效性。事实基于报道内容。",
       "language": "en",
       "published_at": "2026-07-24T09:43:03+00:00",
-      "fetched_at": "2026-07-27T01:09:19.199827+00:00",
+      "fetched_at": "2026-07-28T00:57:03.129092+00:00",
       "topics": [
         "气候动态"
       ],
@@ -951,10 +1329,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "事实：红树林恢复有助于提升气候适应力和碳汇功能，相关经验对全球生态保护政策具有借鉴意义。"
+        "decision_atom": "红树林恢复有助于提升碳汇能力和沿海防灾，体现科学与社区合作的有效性。事实基于报道内容。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_919d08fc454d9138",
@@ -1208,14 +1586,14 @@
       "source_type": "综合媒体",
       "authority": 5,
       "title_original": "The Guardian view on Britain’s uninhabitable homes: as temperatures rise, a new approach is needed | Editorial",
-      "title_zh": "英国住宅难适应高温，需新策略",
+      "title_zh": "英国住宅难以应对高温，亟需新适应策略",
       "summary_source": "Sadiq Khan’s heat-ready plan for London is a sensible strategy for adaptation that should provide a roadmap for other cities “Our ability to trust that our homes will keep us safe from the outside is under threat,” the geographer Sam Johnson-Schlee writes in Hot House , his recent book on how heat has transformed domestic life. This summer, high temperatures have become inescapable. People have coped with makeshift solutions: keeping curtains drawn, placing foil over windows or – for those who can afford one – plugging in an air-conditioning unit. Planning experts warn that, with only about half of councils requiring new buildings to include cooling strategies, many homes will become “ death traps ” as temperatures rise. Britain’s homes weren’t built to cope with this. The country’s historically mild climate allowed developers to build houses without insulation, while industrialisation supplied plentiful coal to burn when temperatures dropped. Many homes are consequently draughty in winter and sweltering in summer. Unlike those in Mediterranean climates, British homes lack shutters and shaded communal spaces. While Ildefons Cerdà , Barcelona’s masterplanner, was designing housing b",
-      "summary_zh": "伦敦市长萨迪克·汗提出“适应高温”计划，强调英国住宅缺乏应对极端高温的设计。专家警告，若无冷却措施，未来高温将使许多住宅变为“致命陷阱”，需全国性适应政策。",
+      "summary_zh": "伦敦市长萨迪克·汗提出的“热适应”计划为城市应对高温提供了合理路径。英国住宅因历史气候温和，缺乏隔热和降温设计，随着高温频发，部分房屋被专家警告为“死亡陷阱”。目前仅约半数地方政府要求新建房屋配备降温措施，居民多依赖临时应对方法。",
       "theme_zh": "极端高温",
-      "why_zh": "英国住宅结构与历史气候条件不符，极端高温下居民安全受威胁。政策层面需加强适应性建设，观点基于专家警告与现有政策不足。",
+      "why_zh": "该议题凸显城市住房适应气候变化的紧迫性，政策需转向系统性降温措施。观点基于专家警告和现有政策现状。",
       "language": "en",
       "published_at": "2026-07-23T17:21:30+00:00",
-      "fetched_at": "2026-07-27T01:09:18.470494+00:00",
+      "fetched_at": "2026-07-28T00:57:02.558136+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -1225,7 +1603,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "opinion_or_context",
       "content_hash": "b4bc5a7b17e45a9b6c87968a9c996225924a54f73a54e6faf3cc1c28f92b8147",
-      "poster_phrase": "高温下住宅安全隐忧",
+      "poster_phrase": "高温下的住房危机",
       "quality": {
         "passed": true,
         "score": 60,
@@ -1257,10 +1635,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "英国住宅结构与历史气候条件不符，极端高温下居民安全受威胁。政策层面需加强适应性建设，观点基于专家警告与现有政策不足。"
+        "decision_atom": "该议题凸显城市住房适应气候变化的紧迫性，政策需转向系统性降温措施。观点基于专家警告和现有政策现状。"
       },
       "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_f4cb3a7e7f333e28",
@@ -1712,12 +2090,12 @@
       "title_original": "A $100M Ohio energy fund lacks transparency — and excludes renewables",
       "title_zh": "俄亥俄州1亿美元能源基金排除可再生能源",
       "summary_source": "Ohio has made $100 million available for new energy projects in the state, but critics are pushing back on the decision to bar renewable energy projects from accessing the funds — and on the lack of transparency around the process. The JobsOhio Energy Opportunity Initiative was announced by Republican Gov. Mike…",
-      "summary_zh": "俄亥俄州宣布1亿美元能源项目基金，但禁止可再生能源项目申请，且流程透明度受质疑。批评者认为此举限制清洁能源发展，影响州内能源结构转型。",
-      "theme_zh": "能源资金与可再生能源",
-      "why_zh": "资金分配政策直接影响能源结构调整，排除可再生能源将阻碍气候目标实现。事实仅限于基金政策与批评意见。",
+      "summary_zh": "俄亥俄州宣布1亿美元能源项目基金，但禁止可再生能源项目申请，引发批评。该基金透明度不足，决策过程未公开，令环保人士和部分政策专家质疑其公平性和对清洁能源发展的支持。",
+      "theme_zh": "能源资金分配",
+      "why_zh": "该事件反映部分地区能源政策对可再生能源的排斥，影响能源转型进程。事实基于基金政策和批评声音。",
       "language": "en",
       "published_at": "2026-07-22T07:30:00+00:00",
-      "fetched_at": "2026-07-27T01:09:16.941972+00:00",
+      "fetched_at": "2026-07-28T00:57:02.304707+00:00",
       "topics": [
         "能源与排放",
         "履约与全球盘点"
@@ -1730,7 +2108,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "e8c8f9917a0dc43ab7a0964e5788ea14bb0f0e30547cc512ef79620d6e4acf04",
-      "poster_phrase": "能源基金排除清洁项目",
+      "poster_phrase": "能源基金排除绿色项目",
       "quality": {
         "passed": true,
         "score": 65,
@@ -1765,10 +2143,10 @@
           "$100 million"
         ],
         "geo_atoms": [],
-        "decision_atom": "资金分配政策直接影响能源结构调整，排除可再生能源将阻碍气候目标实现。事实仅限于基金政策与批评意见。"
+        "decision_atom": "该事件反映部分地区能源政策对可再生能源的排斥，影响能源转型进程。事实基于基金政策和批评声音。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_a7b9856935a1b4b8",
@@ -2290,14 +2668,14 @@
       "source_type": "联合国官方信息",
       "authority": 5,
       "title_original": "Big ideas: How to make the global energy system more sustainable",
-      "title_zh": "全球能源系统可持续转型的思路",
+      "title_zh": "全球能源系统可持续转型的关键思路",
       "summary_source": "Climate change scientist Debora Ley discusses how the world can break its addiction to fossil fuels and give more people access to clean, reliable electricity.",
-      "summary_zh": "气候科学家Debora Ley探讨全球摆脱化石燃料依赖、扩大清洁电力覆盖的路径。强调政策创新与技术进步对实现可持续能源系统的重要性。",
+      "summary_zh": "气候科学家Debora Ley探讨全球摆脱化石燃料依赖、扩大清洁电力覆盖的路径。她强调政策创新、技术进步和公平能源获取对实现可持续能源系统的重要性，呼吁国际合作加速转型。",
       "theme_zh": "能源系统转型",
-      "why_zh": "能源系统转型是实现气候目标的核心，观点基于专家建议，强调政策与技术协同作用。",
+      "why_zh": "该观点为全球能源政策提供参考，强调多元措施和公平性。内容基于专家访谈和政策建议。",
       "language": "en",
       "published_at": "2026-07-21T07:18:23+00:00",
-      "fetched_at": "2026-07-27T01:09:19.199827+00:00",
+      "fetched_at": "2026-07-28T00:57:03.129092+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -2337,10 +2715,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "能源系统转型是实现气候目标的核心，观点基于专家建议，强调政策与技术协同作用。"
+        "decision_atom": "该观点为全球能源政策提供参考，强调多元措施和公平性。内容基于专家访谈和政策建议。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_894d7fc711a88f07",
@@ -3386,7 +3764,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -3456,7 +3834,7 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -3594,7 +3972,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -3613,7 +3991,7 @@
       "why_zh": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。",
       "language": "en",
       "published_at": "2026-07-15T14:49:04+00:00",
-      "fetched_at": "2026-07-21T03:32:44.828540+00:00",
+      "fetched_at": "2026-07-17T04:23:50.516065+00:00",
       "topics": [
         "气候动态"
       ],
@@ -3682,7 +4060,7 @@
         "decision_atom": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_564ab2b4e2f26c1f",
@@ -3756,7 +4134,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -3775,7 +4153,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-07-27T01:09:19.199827+00:00",
+      "fetched_at": "2026-07-28T00:57:03.129092+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -3830,7 +4208,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
