@@ -290,6 +290,18 @@ class CoreTests(unittest.TestCase):
         selected = source_balanced_rows(rows, 3)
         self.assertEqual([row["source_id"] for row in selected], ["A", "B", "C"])
 
+    def test_translation_queue_round_robins_regions_before_sources(self) -> None:
+        rows = [
+            {"article_id": "a1", "source_id": "A", "source_region": "Europe"},
+            {"article_id": "a2", "source_id": "A", "source_region": "Europe"},
+            {"article_id": "b1", "source_id": "B", "source_region": "Europe"},
+            {"article_id": "c1", "source_id": "C", "source_region": "Africa"},
+            {"article_id": "d1", "source_id": "D", "source_region": "Asia"},
+        ]
+        selected = source_balanced_rows(rows, 5)
+        self.assertEqual([row["source_id"] for row in selected[:3]], ["A", "C", "D"])
+        self.assertEqual({row["source_id"] for row in selected}, {"A", "B", "C", "D"})
+
     def test_source_health_quarantines_only_after_repeated_failures(self) -> None:
         state = {"sources": {}}
         for _ in range(6):

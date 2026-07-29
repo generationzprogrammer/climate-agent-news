@@ -69,31 +69,50 @@ def detect_places(text: str) -> list[dict]:
 
 
 def source_balanced_rows(rows: list[dict], limit: int) -> list[dict]:
-    """Preserve quality order while preventing one publisher from filling the queue."""
-    buckets: dict[str, list[dict]] = {}
-    order: list[str] = []
+    """Round-robin source regions first and publishers second, preserving quality order."""
+    buckets: dict[str, dict[str, list[dict]]] = {}
+    region_order: list[str] = []
+    source_order: dict[str, list[str]] = {}
     for row in rows:
+        region = row.get("source_region") or row.get("region") or "unknown"
         source_id = row.get("source_id") or "unknown"
-        if source_id not in buckets:
-            buckets[source_id] = []
-            order.append(source_id)
-        buckets[source_id].append(row)
+        if region not in buckets:
+            buckets[region] = {}
+            source_order[region] = []
+            region_order.append(region)
+        if source_id not in buckets[region]:
+            buckets[region][source_id] = []
+            source_order[region].append(source_id)
+        buckets[region][source_id].append(row)
     selected: list[dict] = []
-    while len(selected) < limit and any(buckets.values()):
-        for source_id in order:
-            if buckets[source_id] and len(selected) < limit:
-                selected.append(buckets[source_id].pop(0))
+    cursors = {region: 0 for region in region_order}
+    while len(selected) < limit:
+        made_progress = False
+        for region in region_order:
+            sources = source_order[region]
+            for _ in range(len(sources)):
+                source_id = sources[cursors[region] % len(sources)]
+                cursors[region] += 1
+                if buckets[region][source_id]:
+                    selected.append(buckets[region][source_id].pop(0))
+                    made_progress = True
+                    break
+            if len(selected) >= limit:
+                break
+        if not made_progress:
+            break
     return selected
 
 
 def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int = 20) -> dict:
     rows = db.rows("""
-        SELECT article_id,source_id,title_original,summary_source,canonical_url,metadata_json
-        FROM articles
-        WHERE (title_zh IS NULL OR trim(title_zh)='')
-          AND datetime(published_at_utc) >= datetime('now','-7 days')
-        ORDER BY relevance_score DESC,published_at_utc DESC LIMIT ?
-    """, (max(limit * 4, limit),))
+        SELECT a.article_id,a.source_id,a.title_original,a.summary_source,a.canonical_url,
+               a.metadata_json,s.region AS source_region
+        FROM articles a JOIN sources s ON s.source_id=a.source_id
+        WHERE (a.title_zh IS NULL OR trim(a.title_zh)='')
+          AND datetime(a.published_at_utc) >= datetime('now','-7 days')
+        ORDER BY a.relevance_score DESC,a.published_at_utc DESC LIMIT ?
+    """, (max(limit * 8, limit),))
     rows = source_balanced_rows(rows, limit)
     translated = 0
     failed = []
