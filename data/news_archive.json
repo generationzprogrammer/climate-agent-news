@@ -1,19 +1,82 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-3000",
-  "updated_at": "2026-07-29T00:59:43.163041+00:00",
+  "updated_at": "2026-07-29T03:10:23.823168+00:00",
   "limit": 3000,
-  "total": 66,
+  "total": 72,
   "statistics": {
-    "previous_total": 66,
+    "previous_total": 72,
     "added": 0,
     "updated": 0,
-    "rejected": 6,
+    "rejected": 8,
     "pruned": 0,
-    "tier_a": 6,
-    "tier_b": 60
+    "tier_a": 10,
+    "tier_b": 62
   },
   "records": [
+    {
+      "record_id": "article_a9c1635f842d03a7",
+      "article_id": "article_a9c1635f842d03a7",
+      "canonical_url": "https://news.un.org/feed/view/en/story/2026/07/1168042",
+      "source_url": "https://news.un.org/feed/view/en/story/2026/07/1168042",
+      "source_id": "OFF001",
+      "source_name": "UN News - Climate Change",
+      "source_type": "联合国官方新闻",
+      "authority": 5,
+      "relevance_score": 72,
+      "title_original": "Climate alarm ‘blaring from every direction’",
+      "title_zh": "联合国官员警告气候灾害加剧",
+      "summary_source": "Climate-driven disasters are reaching “nightmare proportions” due to humanity’s “addiction” to fossil fuels, a top UN official warned on Tuesday.",
+      "summary_zh": "联合国高级官员警告，受化石燃料依赖影响，全球气候灾害已达“噩梦级”程度。多地极端天气频发，气候警报“从各个方向响起”，呼吁加快能源转型。",
+      "theme_zh": "气候灾害与能源转型",
+      "why_zh": "强调减少化石能源依赖对缓解气候风险的重要性。观点：需全球协作应对气候危机，推动政策变革。",
+      "language": "en",
+      "published_at": "2026-07-28T12:00:00+00:00",
+      "fetched_at": "2026-07-29T03:09:05.073530+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "87941c6a53e1c3bc042b07c876f01010866329a26b92ad3a482bbf2dc53fb522",
+      "poster_phrase": "气候警报再升级",
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_a9c1635f842d03a7",
+        "source_atom": {
+          "name": "UN News - Climate Change",
+          "authority": 5,
+          "type": "联合国官方新闻"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "强调减少化石能源依赖对缓解气候风险的重要性。观点：需全球协作应对气候危机，推动政策变革。"
+      },
+      "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
+    },
     {
       "record_id": "article_175ed8e916a48677",
       "article_id": "article_175ed8e916a48677",
@@ -23,15 +86,16 @@
       "source_name": "Carbon Brief",
       "source_type": "气候专业媒体",
       "authority": 5,
+      "relevance_score": 56,
       "title_original": "Analysis: Wind and solar power overtake fossil fuels in Germany for first time ever",
       "title_zh": "德国风能与太阳能首次超越化石能源发电",
       "summary_source": "More of Germany’s electricity came from wind and solar power than fossil fuels for the first time ever in 2025.… The post Analysis: Wind and solar power overtake fossil fuels in Germany for first time ever appeared first on Carbon Brief .",
-      "summary_zh": "2025年德国风能和太阳能发电量首次超过化石能源，标志着能源结构重大转变。可再生能源占比提升，有助于实现减排目标和能源安全。",
-      "theme_zh": "可再生能源转型",
-      "why_zh": "德国能源结构变化为欧洲减排提供参考，政策推动可再生能源发展取得实质进展。事实基于发电量数据。",
+      "summary_zh": "2025年，德国风能和太阳能发电量首次超过化石能源，标志着能源结构转型取得里程碑进展。可再生能源占比提升，有助于实现碳中和目标。",
+      "theme_zh": "能源结构转型",
+      "why_zh": "德国实现可再生能源发电占比首次领先，事实显示欧洲能源转型步伐加快，对全球气候政策具有示范意义。",
       "language": "en",
       "published_at": "2026-07-28T11:49:20+00:00",
-      "fetched_at": "2026-07-29T00:58:49.009447+00:00",
+      "fetched_at": "2026-07-29T03:09:03.635456+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -48,7 +112,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "dd8c4550412136c68cc03821cf76e1bf5cea1d46832c7b80f9d8cb576171696e",
-      "poster_phrase": "德国绿色能源占主导",
+      "poster_phrase": "德国能源转型突破",
       "quality": {
         "passed": true,
         "score": 72,
@@ -83,10 +147,10 @@
         "geo_atoms": [
           "德国"
         ],
-        "decision_atom": "德国能源结构变化为欧洲减排提供参考，政策推动可再生能源发展取得实质进展。事实基于发电量数据。"
+        "decision_atom": "德国实现可再生能源发电占比首次领先，事实显示欧洲能源转型步伐加快，对全球气候政策具有示范意义。"
       },
       "first_archived_at": "2026-07-29T00:59:43.010008+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_1b6ba05394b484b6",
@@ -154,7 +218,8 @@
         "decision_atom": "补贴识别滞后阻碍生物多样性保护，需加强政策落实和国际监督。数据为事实，具体原因和影响需进一步分析。"
       },
       "first_archived_at": "2026-07-29T00:59:43.010008+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T00:59:43.163041+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_0344368a93242ffc",
@@ -222,7 +287,8 @@
         "decision_atom": "强厄尔尼诺加剧全球气候风险，对粮食安全和经济稳定构成挑战。科学预测为事实，具体影响需持续跟踪。"
       },
       "first_archived_at": "2026-07-29T00:59:43.010008+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T00:59:43.163041+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_96203b188b806807",
@@ -233,15 +299,16 @@
       "source_name": "The Guardian Climate Crisis",
       "source_type": "综合媒体",
       "authority": 5,
+      "relevance_score": 52,
       "title_original": "‘Ash fell from the sky’: Tourists describe fleeing ‘apocalyptic’ wildfires in France",
-      "title_zh": "法国西班牙野火致37.5万人撤离",
+      "title_zh": "法国与西班牙野火致37.5万人撤离",
       "summary_source": "Hundreds of thousands of residents and holidaymakers in France and Spain have been forced to evacuate Wildfires have forced about 375,000 people to leave their homes in France and Spain . In France, nearly 260,000 have had to flee, while in neighbouring Spain 116,000 have been evacuated as the wildfires continue to wreak havoc across southern Europe. Continue reading...",
-      "summary_zh": "法国和西班牙南部野火持续蔓延，已导致约37.5万人被迫撤离，其中法国26万人、西班牙11.6万人。极端天气加剧灾害，影响居民安全和旅游业。",
+      "summary_zh": "法国和西班牙南部野火持续蔓延，已导致约37.5万人被迫撤离，其中法国约26万人，西班牙约11.6万人。极端天气加剧火灾风险，影响居民安全与旅游业。",
       "theme_zh": "极端高温与野火",
-      "why_zh": "野火频发反映气候变化影响加剧，需加强防灾政策与国际协作。事实基于撤离人数和灾害现状。",
+      "why_zh": "大规模撤离凸显极端气候事件对社会和经济的影响。事实表明，气候变化加剧野火频发，需加强防灾与适应政策。",
       "language": "en",
       "published_at": "2026-07-28T08:00:33+00:00",
-      "fetched_at": "2026-07-29T00:58:49.447849+00:00",
+      "fetched_at": "2026-07-29T03:09:03.984807+00:00",
       "topics": [
         "气候动态"
       ],
@@ -265,7 +332,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "c035c40899753879ebb5fc39adab278998a6511eac8e9414f50da07b0011c220",
-      "poster_phrase": "野火致大规模撤离",
+      "poster_phrase": "野火影响大规模撤离",
       "quality": {
         "passed": true,
         "score": 70,
@@ -303,10 +370,10 @@
           "欧洲",
           "法国"
         ],
-        "decision_atom": "野火频发反映气候变化影响加剧，需加强防灾政策与国际协作。事实基于撤离人数和灾害现状。"
+        "decision_atom": "大规模撤离凸显极端气候事件对社会和经济的影响。事实表明，气候变化加剧野火频发，需加强防灾与适应政策。"
       },
       "first_archived_at": "2026-07-29T00:59:43.010008+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_e875990535c814a6",
@@ -317,15 +384,16 @@
       "source_name": "UN Environment Programme",
       "source_type": "联合国官方信息",
       "authority": 5,
+      "relevance_score": 70,
       "title_original": "From courts to legislatures, countries are embedding just transition in law and policy",
-      "title_zh": "各国将公平转型纳入法律与政策",
+      "title_zh": "各国将公正转型纳入法律与政策",
       "summary_source": "Countries around the world are increasingly turning Just Transition pledges into laws, policies, institutions, and court decisions. This is the key finding of a report published today by the UN Environment Programme (UNEP), released ahead of the first anniversary of the International Court of Justice advisory opinion on the Obligations of States in respect of climate change.",
-      "summary_zh": "联合国环境规划署发布报告指出，全球越来越多国家将公平转型承诺转化为法律、政策、机构建设和法院判决。该报告在国际法院关于气候变化国家义务咨询意见一周年前夕发布，强调公平转型已成为气候治理的重要内容。",
-      "theme_zh": "公平转型政策",
-      "why_zh": "报告显示公平转型正逐步成为各国气候政策和法律体系的一部分，推动全球气候治理向更具包容性和可持续性发展。观点基于报告内容。",
+      "summary_zh": "联合国环境规划署发布报告指出，全球越来越多国家正将公正转型承诺转化为法律、政策、机构建设和法院判决。该报告在国际法院关于气候变化国家义务咨询意见一周年前夕发布，强调公正转型在全球气候治理中的制度化进程。",
+      "theme_zh": "公正转型",
+      "why_zh": "报告显示公正转型已成为全球气候政策的重要组成部分，推动各国将相关承诺落地为法律和制度，具有政策和谈判参考价值。观点基于报告内容。",
       "language": "en",
       "published_at": "2026-07-28T05:59:05+00:00",
-      "fetched_at": "2026-07-29T00:58:50.845864+00:00",
+      "fetched_at": "2026-07-29T03:09:05.893340+00:00",
       "topics": [
         "气候动态"
       ],
@@ -334,7 +402,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "0d7fb87e270d47db1219aa3e8f5b7e46197984c8dd6a8b0e4aeee9738bb61e62",
-      "poster_phrase": "公平转型纳入法律",
+      "poster_phrase": "公正转型制度化",
       "quality": {
         "passed": true,
         "score": 77,
@@ -365,10 +433,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "报告显示公平转型正逐步成为各国气候政策和法律体系的一部分，推动全球气候治理向更具包容性和可持续性发展。观点基于报告内容。"
+        "decision_atom": "报告显示公正转型已成为全球气候政策的重要组成部分，推动各国将相关承诺落地为法律和制度，具有政策和谈判参考价值。观点基于报告内容。"
       },
       "first_archived_at": "2026-07-29T00:59:43.010008+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_33ef5a2a01079ca4",
@@ -379,15 +447,16 @@
       "source_name": "The Guardian Climate Crisis",
       "source_type": "综合媒体",
       "authority": 5,
+      "relevance_score": 52,
       "title_original": "Europe wildfires: Officials warn that wildfires could still be burning in November – as it happened",
-      "title_zh": "欧洲野火持续，官员警告或延烧至十一月",
+      "title_zh": "欧洲野火持续，官员警告或延烧至11月",
       "summary_source": "Firefighters in France and Spain face another day battling wildfires, as another heatwave set to hit this week ‘It felt like being in a disaster movie’: inside the evacuation from France’s Bordeaux wildfires Provisional data on wildfires in Spain shows that more than 170,000 hectares of forest land have been affected since the beginning of the year – a nearly sixfold increase on the almost 29,000 recorded in the same period in 2025. 35 major fires have been recorded so far, up from just 11 last year. Continue reading...",
-      "summary_zh": "法国和西班牙消防员正持续扑救野火，本周又将迎来新一轮热浪。西班牙今年受野火影响的森林面积已超17万公顷，几乎是去年同期2.9万公顷的六倍。目前已记录35起重大火灾，去年仅为11起。",
-      "theme_zh": "极端高温与森林火灾",
-      "why_zh": "野火频发与高温加剧欧洲气候风险，凸显应对极端天气和加强森林管理的政策需求。数据反映气候变化影响，但具体成因需进一步分析。",
+      "summary_zh": "法国和西班牙消防员正持续扑救野火，本周又将迎来新一轮热浪。西班牙今年已受影响森林面积超17万公顷，较去年同期增长近六倍，重大火灾数量也大幅增加。野火或持续至11月，影响广泛。",
+      "theme_zh": "极端高温与野火",
+      "why_zh": "欧洲野火频发反映极端高温影响，需加强防灾与气候适应政策。数据为事实，持续性风险需关注。",
       "language": "en",
       "published_at": "2026-07-27T16:42:23+00:00",
-      "fetched_at": "2026-07-29T00:58:49.447849+00:00",
+      "fetched_at": "2026-07-29T03:09:03.984807+00:00",
       "topics": [
         "气候动态"
       ],
@@ -413,7 +482,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "50a4a25f1cf91026b6bb96e5df3668669804116a9ca41c2fe954a1c9a61a475c",
-      "poster_phrase": "野火或延烧至十一月",
+      "poster_phrase": "欧洲野火风险加剧",
       "quality": {
         "passed": true,
         "score": 70,
@@ -453,10 +522,10 @@
           "欧洲",
           "法国"
         ],
-        "decision_atom": "野火频发与高温加剧欧洲气候风险，凸显应对极端天气和加强森林管理的政策需求。数据反映气候变化影响，但具体成因需进一步分析。"
+        "decision_atom": "欧洲野火频发反映极端高温影响，需加强防灾与气候适应政策。数据为事实，持续性风险需关注。"
       },
       "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_be2d7f67b6b1bbc3",
@@ -467,15 +536,16 @@
       "source_name": "BBC Science & Environment",
       "source_type": "公共媒体",
       "authority": 5,
+      "relevance_score": 48,
       "title_original": "Devastating European wildfires in maps - and how they're being tackled",
       "title_zh": "欧洲野火肆虐，救援措施升级",
       "summary_source": "A blaze near Bordeaux has torn through more than 162 sq miles (420 sq km) in less than four days, while the Madrid region is seeing its worst fires ever.",
-      "summary_zh": "法国波尔多附近的野火在不到四天内烧毁超过420平方公里，西班牙马德里地区也遭遇有史以来最严重的火灾。各国正采取多种措施应对火情，力图控制灾害蔓延。",
+      "summary_zh": "法国波尔多附近的野火在不到四天内烧毁超过420平方公里（162平方英里），西班牙马德里地区也遭遇有史以来最严重的火灾。各国正采取多种措施应对持续蔓延的极端火情。",
       "theme_zh": "极端高温与野火",
-      "why_zh": "欧洲多地野火反映极端高温对生态和社会的影响，促使相关国家加强应急管理和气候适应政策。事实基于报道内容。",
+      "why_zh": "欧洲多地野火反映极端气候影响加剧，促使相关国家加强应急和防灾政策。事实基于报道内容。",
       "language": "en",
       "published_at": "2026-07-27T15:59:27+00:00",
-      "fetched_at": "2026-07-29T00:58:49.713204+00:00",
+      "fetched_at": "2026-07-29T03:09:04.207840+00:00",
       "topics": [
         "气候动态"
       ],
@@ -493,7 +563,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "42d13fbf0f02ddb11b62dd9fd0d7aa2c3822876fec4bd6193e48bb264c6a8d37",
-      "poster_phrase": "欧洲野火应急升级",
+      "poster_phrase": "欧洲野火持续蔓延",
       "quality": {
         "passed": true,
         "score": 69,
@@ -529,10 +599,10 @@
         "geo_atoms": [
           "欧洲"
         ],
-        "decision_atom": "欧洲多地野火反映极端高温对生态和社会的影响，促使相关国家加强应急管理和气候适应政策。事实基于报道内容。"
+        "decision_atom": "欧洲多地野火反映极端气候影响加剧，促使相关国家加强应急和防灾政策。事实基于报道内容。"
       },
       "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_0b06ebf803952c71",
@@ -600,7 +670,8 @@
         "decision_atom": "该书回顾激进环保运动的历史和影响，为理解环保行动的多样性提供参考。观点基于书籍内容。"
       },
       "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T00:59:43.163041+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_c5a16f87020ab303",
@@ -678,7 +749,8 @@
         "decision_atom": "该事件显示气候灾害对粮食安全和公共健康的直接影响，政策需加强应急和长期适应措施。事实基于官方救助行动和灾情数据。"
       },
       "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_51abc729c9c1f573",
@@ -746,7 +818,8 @@
         "decision_atom": "该事件提示一氧化二氮使用及废弃物管理问题，需关注其对环境和气候的潜在影响，报道为事实描述。"
       },
       "first_archived_at": "2026-07-28T00:58:22.173079+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_86e454408d495cb8",
@@ -832,7 +905,8 @@
         "decision_atom": "极端天气事件频发凸显气候变化影响，政策需加强应急与适应措施。事实基于科学分析与官方数据。"
       },
       "first_archived_at": "2026-07-27T01:10:44.029305+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_ff00d2189b81efca",
@@ -902,7 +976,8 @@
         "decision_atom": "该报道展示了高温地区居民的适应策略，为政策制定者提供了基层经验参考，但未涉及政策层面分析。"
       },
       "first_archived_at": "2026-07-27T01:10:44.029305+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_32a028df4d103aba",
@@ -978,7 +1053,8 @@
         "decision_atom": "该事件体现极端天气下社区应急与协作机制，对提升地方防灾能力具有参考意义，事实基于官方通报。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_a94fbcd182af6124",
@@ -1052,7 +1128,8 @@
         "decision_atom": "极端高温事件频发，显示气候变化对美国南中部地区影响加剧，需关注政策应对和公众健康风险。观点基于事实报道。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-26T01:09:10.399601+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_6cc557c022f0d7d1",
@@ -1134,7 +1211,8 @@
         "decision_atom": "事件反映气候危机加剧极端高温和水资源短缺，政策需加强应急与生态保护。观点基于报道事实。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-26T01:09:10.399601+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_6296ea1cffbbcf98",
@@ -1212,7 +1290,8 @@
         "decision_atom": "大规模野火加剧欧洲气候风险，影响居民安全和公共健康，凸显加强防灾和气候适应政策的必要性。事实来源于官方数据。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-26T01:09:10.399601+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_e6d6adeb246c0c60",
@@ -1274,7 +1353,8 @@
         "decision_atom": "油田开发延误影响英国能源政策与气候承诺，政策决策需权衡经济与气候目标。观点基于事实报道。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-26T01:09:10.399601+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_d1cad0257d4aeae3",
@@ -1342,7 +1422,8 @@
         "decision_atom": "事实：绿色旗帜奖数量反映地区绿色空间管理水平，可能影响地方环境政策制定和资源分配。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_dfa62e892abdd771",
@@ -1410,7 +1491,8 @@
         "decision_atom": "该事件显示极端高温对淡水生态系统的直接威胁，强调社区参与对缓解气候影响的重要性。观点仅限于报道内容。"
       },
       "first_archived_at": "2026-07-26T01:09:10.247649+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_0e1af6057fd1d49a",
@@ -1488,7 +1570,8 @@
         "decision_atom": "极端天气事件加剧区域安全风险，凸显气候变化对欧洲政策应急体系的挑战。事实边界：仅限于已报道的撤离与火灾规模。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-25T01:04:13.897548+00:00"
+      "last_archived_at": "2026-07-25T01:04:13.897548+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_a170350d48e2935e",
@@ -1564,7 +1647,8 @@
         "decision_atom": "文章指出再生农业可能缓解农作物营养下降，为农业政策和食品安全提供新方向，但相关效果仍需进一步验证。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_1379d99ac0aa85fb",
@@ -1644,7 +1728,8 @@
         "decision_atom": "野火面积大幅增加反映气候变化对欧洲生态和安全的影响，需加强防火政策和国际合作。数据为事实，具体政策效果待观察。"
       },
       "first_archived_at": "2026-07-29T00:59:43.010008+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T00:59:43.163041+00:00",
+      "relevance_score": 74
     },
     {
       "record_id": "article_bf58cab196b37f8c",
@@ -1655,15 +1740,16 @@
       "source_name": "Carbon Brief",
       "source_type": "气候专业媒体",
       "authority": 5,
+      "relevance_score": 52,
       "title_original": "Access to finance ‘strengthens climate resilience’ among sub-Saharan women",
       "title_zh": "金融赋权提升撒哈拉以南女性气候韧性",
       "summary_source": "Empowering women through greater access to finance could “strengthen” households’ resilience to “climate shocks”, according to a new study. Published… The post Access to finance ‘strengthens climate resilience’ among sub-Saharan women appeared first on Carbon Brief .",
-      "summary_zh": "最新研究指出，通过增强女性获得金融资源的能力，可有效提升撒哈拉以南非洲家庭应对气候冲击的韧性。金融赋权有助于改善气候适应能力。",
-      "theme_zh": "气候资金与社会韧性",
-      "why_zh": "金融赋权对提升弱势群体气候适应能力具有政策意义，支持性措施可增强社会整体韧性。研究为事实，具体政策效果需进一步评估。",
+      "summary_zh": "最新研究显示，增强撒哈拉以南非洲女性金融获取能力可提升家庭应对气候冲击的韧性。金融支持有助于女性更好管理资源，缓解气候变化带来的风险，推动社区整体适应能力提升。",
+      "theme_zh": "气候资金与性别",
+      "why_zh": "金融赋权对提升弱势群体气候适应能力具有政策意义。事实基于研究结果，强调资金渠道对气候韧性的作用。",
       "language": "en",
       "published_at": "2026-07-24T11:29:45+00:00",
-      "fetched_at": "2026-07-29T00:58:49.009447+00:00",
+      "fetched_at": "2026-07-29T03:09:03.635456+00:00",
       "topics": [
         "气候适应"
       ],
@@ -1672,7 +1758,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "2b84e208c5a287873edf2132061b4fb26d6e49ee2d5c03e71a9122f15dbef7a7",
-      "poster_phrase": "金融赋权提升韧性",
+      "poster_phrase": "女性金融助力气候适应",
       "quality": {
         "passed": true,
         "score": 70,
@@ -1703,10 +1789,10 @@
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "金融赋权对提升弱势群体气候适应能力具有政策意义，支持性措施可增强社会整体韧性。研究为事实，具体政策效果需进一步评估。"
+        "decision_atom": "金融赋权对提升弱势群体气候适应能力具有政策意义。事实基于研究结果，强调资金渠道对气候韧性的作用。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_94768740acc95d1c",
@@ -1717,24 +1803,31 @@
       "source_name": "UN Environment Programme",
       "source_type": "联合国官方信息",
       "authority": 5,
+      "relevance_score": 60,
       "title_original": "Mangroves are making a comeback. Here’s what’s working",
-      "title_zh": "全球红树林恢复取得进展",
+      "title_zh": "全球红树林恢复进展显著",
       "summary_source": "Global mangrove loss is slowing as science-led restoration and community conservation help coastal forests recover from Kenya to Viet Nam.",
-      "summary_zh": "全球红树林损失速度正在减缓，科学主导的修复和社区保护措施帮助肯尼亚、越南等地沿海森林逐步恢复。红树林生态系统的恢复对气候适应和生物多样性具有重要意义。",
+      "summary_zh": "全球红树林损失速度正在放缓，科学主导的修复与社区保护措施推动肯尼亚至越南等地沿海森林恢复。红树林生态系统保护取得积极成效，提升海岸气候韧性。",
       "theme_zh": "生态修复与红树林",
-      "why_zh": "红树林恢复显示科学与社区合作在生态保护中的有效性，对气候适应和碳汇建设具有积极政策意义。事实基于报道内容。",
+      "why_zh": "红树林恢复对提升沿海生态与气候适应能力具有政策意义。事实基于全球修复进展。",
       "language": "en",
       "published_at": "2026-07-24T09:43:03+00:00",
-      "fetched_at": "2026-07-29T00:58:50.845864+00:00",
+      "fetched_at": "2026-07-29T03:09:05.893340+00:00",
       "topics": [
         "气候动态"
       ],
       "numbers": [],
-      "places": [],
+      "places": [
+        {
+          "name_zh": "肯尼亚",
+          "lon": 37.0,
+          "lat": 0.0
+        }
+      ],
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "31c995e151cc75ee213e2c810e32266d8e9e30007393b57c5f69d12184b6fa6d",
-      "poster_phrase": "红树林恢复进展",
+      "poster_phrase": "红树林修复成效显现",
       "quality": {
         "passed": true,
         "score": 73,
@@ -1764,11 +1857,13 @@
           "气候动态"
         ],
         "number_atoms": [],
-        "geo_atoms": [],
-        "decision_atom": "红树林恢复显示科学与社区合作在生态保护中的有效性，对气候适应和碳汇建设具有积极政策意义。事实基于报道内容。"
+        "geo_atoms": [
+          "肯尼亚"
+        ],
+        "decision_atom": "红树林恢复对提升沿海生态与气候适应能力具有政策意义。事实基于全球修复进展。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_919d08fc454d9138",
@@ -1844,7 +1939,8 @@
         "decision_atom": "事实：加拉帕戈斯的研究有助于理解极端气候事件对生态系统的影响，为相关政策和适应措施提供科学依据。"
       },
       "first_archived_at": "2026-07-25T01:04:13.747949+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_b17c6d5f2c1462ee",
@@ -1926,7 +2022,8 @@
         "decision_atom": "极端高温加剧野火风险，对区域安全和气候政策提出挑战。事实为大规模撤离和紧急响应，观点为形势严峻。"
       },
       "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
-      "last_archived_at": "2026-07-25T01:04:13.897548+00:00"
+      "last_archived_at": "2026-07-25T01:04:13.897548+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_6c67b4eafaf74973",
@@ -2010,7 +2107,8 @@
         "decision_atom": "事实表明极端天气导致严重野火，影响民众安全和生态环境，需加强气候适应与灾害应急政策。"
       },
       "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
-      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_cf247bc27885adc7",
@@ -2074,7 +2172,8 @@
         "decision_atom": "该议题凸显城市住房适应气候变化的紧迫性，政策需转向系统性降温措施。观点基于专家警告和现有政策现状。"
       },
       "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00",
+      "relevance_score": 60
     },
     {
       "record_id": "article_823e9c200f42c736",
@@ -2085,15 +2184,16 @@
       "source_name": "UN News - Climate Change",
       "source_type": "联合国官方新闻",
       "authority": 5,
+      "relevance_score": 86,
       "title_original": "Satellites can now spot methane leaks in real time – but most go unfixed",
       "title_zh": "卫星实时监测甲烷泄漏，但多数未获修复",
       "summary_source": "Satellites can now spot major methane leaks from space within days. Yet only 13 per cent of those alerts lead to any response from the governments or companies responsible.",
-      "summary_zh": "卫星技术已能在数天内发现重大甲烷泄漏，但仅有13%的泄漏警报得到相关政府或企业响应。甲烷作为强效温室气体，其泄漏治理进展缓慢，影响全球减排目标。",
+      "summary_zh": "卫星技术已能在数天内发现重大甲烷泄漏，但仅有13%的泄漏警报得到相关政府或企业的响应。甲烷作为强效温室气体，其泄漏治理进展缓慢，影响全球减排目标。",
       "theme_zh": "甲烷减排",
-      "why_zh": "卫星监测提升了甲烷泄漏发现效率，但响应率低，显示政策执行和企业责任存在明显不足。事实表明技术进步需配合监管与治理。",
+      "why_zh": "卫星监测提升了甲烷泄漏发现效率，但响应率低，显示政策执行和企业责任存在明显不足。事实表明，技术进步需配合监管和治理措施。",
       "language": "en",
       "published_at": "2026-07-23T12:00:00+00:00",
-      "fetched_at": "2026-07-29T00:58:49.809659+00:00",
+      "fetched_at": "2026-07-29T03:09:05.073530+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -2137,10 +2237,10 @@
           "13"
         ],
         "geo_atoms": [],
-        "decision_atom": "卫星监测提升了甲烷泄漏发现效率，但响应率低，显示政策执行和企业责任存在明显不足。事实表明技术进步需配合监管与治理。"
+        "decision_atom": "卫星监测提升了甲烷泄漏发现效率，但响应率低，显示政策执行和企业责任存在明显不足。事实表明，技术进步需配合监管和治理措施。"
       },
       "first_archived_at": "2026-07-29T00:59:43.010008+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_f4cb3a7e7f333e28",
@@ -2218,7 +2318,8 @@
         "decision_atom": "极端高温和干旱加剧欧洲水资源和粮食安全风险，需加强气候适应和减排措施。事实基于科学分析。"
       },
       "first_archived_at": "2026-07-24T00:58:35.734474+00:00",
-      "last_archived_at": "2026-07-26T01:09:10.399601+00:00"
+      "last_archived_at": "2026-07-26T01:09:10.399601+00:00",
+      "relevance_score": 74
     },
     {
       "record_id": "article_e0247ad0502dc99c",
@@ -2306,7 +2407,85 @@
         "decision_atom": "事实显示极端高温对公共健康造成显著影响，需加强气候适应和健康防护政策，关注高温致死风险。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00",
+      "relevance_score": 70
+    },
+    {
+      "record_id": "article_6de7be809cd90ec8",
+      "article_id": "article_6de7be809cd90ec8",
+      "canonical_url": "https://news.mongabay.com/2026/07/an-indigenous-take-on-colombias-new-govt-interview-with-a-putumayo-indigenous-leader",
+      "source_url": "https://news.mongabay.com/2026/07/an-indigenous-take-on-colombias-new-govt-interview-with-a-putumayo-indigenous-leader/",
+      "source_id": "INT019",
+      "source_name": "Mongabay Latin America",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 52,
+      "title_original": "An Indigenous take on Colombia’s new gov’t: Interview with a Putumayo Indigenous leader",
+      "title_zh": "哥伦比亚新政府政策引发土著社区担忧",
+      "summary_source": "- Mongabay interviewed Marino Peña, a prominent Indigenous leader from Colombia’s Putumayo region, to hear his take on the incoming government’s plans and how it might affect Indigenous communities and forests in Colombia. - Abelardo de la Espriella, from the far-right Defenders of the Homeland party, won Colombia’s runoff election on June 11 and will be inaugurated on Aug. 7. - De la Espriella says he will expand fossil fuel production and mining across the country and has promised to tackle violence using greater force and militarization. - In this interview with Mongabay, Peña explains that the atmosphere on the ground is tense, in part because de la Espriella’s policies might exacerbate existing conflicts linked to a controversial copper mine in the region.",
+      "summary_zh": "哥伦比亚新总统承诺扩大化石能源和矿业生产，并加强武力应对暴力。土著领袖表示，相关政策可能加剧地区冲突，尤其是铜矿争议，影响森林和社区安全。",
+      "theme_zh": "能源开发与社区影响",
+      "why_zh": "新政府能源扩张政策引发土著社区担忧，事实显示政策可能加剧环境与社会矛盾，需关注利益相关方诉求。",
+      "language": "en",
+      "published_at": "2026-07-22T14:12:51+00:00",
+      "fetched_at": "2026-07-29T03:09:04.366269+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "11",
+        "7"
+      ],
+      "places": [
+        {
+          "name_zh": "哥伦比亚",
+          "lon": -74.0,
+          "lat": 4.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "7bb003532ca3001139e3b9dffc623d35493279eb0ddb8e6f29ba2ea31ba1cd1d",
+      "poster_phrase": "土著社区面临挑战",
+      "quality": {
+        "passed": true,
+        "score": 61,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_6de7be809cd90ec8",
+        "source_atom": {
+          "name": "Mongabay Latin America",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "11",
+          "7"
+        ],
+        "geo_atoms": [
+          "哥伦比亚"
+        ],
+        "decision_atom": "新政府能源扩张政策引发土著社区担忧，事实显示政策可能加剧环境与社会矛盾，需关注利益相关方诉求。"
+      },
+      "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_9fac755b5a8d9502",
@@ -2376,7 +2555,8 @@
         "decision_atom": "国内绿色政策与国际气候资金分配存在关联，政策调整需兼顾全球责任。观点边界：仅限于资金转贷对海外支持的潜在影响。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-25T01:04:13.897548+00:00"
+      "last_archived_at": "2026-07-25T01:04:13.897548+00:00",
+      "relevance_score": 74
     },
     {
       "record_id": "article_e2ed6420ed89cdba",
@@ -2444,7 +2624,8 @@
         "decision_atom": "事件反映地缘冲突对能源市场和企业利润的直接影响，对能源安全政策具有现实意义。事实仅限报道内容。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_99c7dce148104824",
@@ -2512,7 +2693,8 @@
         "decision_atom": "事实：大型基础设施项目与环境保护之间的矛盾凸显，相关决策将影响地方生态和政策取向。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_02985767f9abfa05",
@@ -2523,15 +2705,16 @@
       "source_name": "UN News - Climate Change",
       "source_type": "联合国官方新闻",
       "authority": 5,
+      "relevance_score": 76,
       "title_original": "Security Council LIVE: Can critical minerals fuel peace and prosperity instead of conflict?",
-      "title_zh": "安理会讨论关键矿产能否促进和平与繁荣",
+      "title_zh": "安理会讨论关键矿产与和平发展",
       "summary_source": "The Security Council met Wednesday in New York to debate critical minerals — the lithium, cobalt and copper powering the clean energy transition. Demand is set to triple by 2030. The question: will this mineral wealth build peace and prosperity, or fund conflict and corruption? Follow live updates throughout the day below and go here for full coverage from across the UN.",
-      "summary_zh": "联合国安理会在纽约就锂、钴、铜等关键矿产展开辩论，这些矿产是清洁能源转型的核心。预计到2030年需求将增长三倍，矿产财富能否带来和平与繁荣，或加剧冲突与腐败成为关注焦点。",
+      "summary_zh": "联合国安理会在纽约就锂、钴、铜等关键矿产展开辩论，这些矿产对清洁能源转型至关重要。预计到2030年需求将增长三倍，会议关注矿产财富能否促进和平与繁荣，而非加剧冲突与腐败。",
       "theme_zh": "关键矿产与能源转型",
-      "why_zh": "关键矿产供应关系全球能源转型与地缘政治稳定，政策需防范资源争夺引发冲突。观点基于安理会讨论内容。",
+      "why_zh": "安理会讨论矿产资源治理，关系能源转型与全球安全，具有政策和国际合作参考价值。事实基于报道内容。",
       "language": "en",
       "published_at": "2026-07-22T12:00:00+00:00",
-      "fetched_at": "2026-07-29T00:58:49.809659+00:00",
+      "fetched_at": "2026-07-29T03:09:05.073530+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -2542,7 +2725,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "248bfecf4079a9ad7003a8a9887fdeabde5938560fb970a115bb3ec0920d3781",
-      "poster_phrase": "矿产转型影响和平",
+      "poster_phrase": "矿产资源与和平",
       "quality": {
         "passed": true,
         "score": 79,
@@ -2575,10 +2758,10 @@
           "2030"
         ],
         "geo_atoms": [],
-        "decision_atom": "关键矿产供应关系全球能源转型与地缘政治稳定，政策需防范资源争夺引发冲突。观点基于安理会讨论内容。"
+        "decision_atom": "安理会讨论矿产资源治理，关系能源转型与全球安全，具有政策和国际合作参考价值。事实基于报道内容。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_c00417842379b718",
@@ -2589,15 +2772,16 @@
       "source_name": "Canary Media",
       "source_type": "非营利清洁能源媒体",
       "authority": 4,
+      "relevance_score": 64,
       "title_original": "A $100M Ohio energy fund lacks transparency — and excludes renewables",
-      "title_zh": "俄亥俄1亿美元能源基金透明度受质疑，排除可再生能源",
+      "title_zh": "俄亥俄州1亿美元能源基金透明度受质疑，排除可再生能源",
       "summary_source": "Ohio has made $100 million available for new energy projects in the state, but critics are pushing back on the decision to bar renewable energy projects from accessing the funds — and on the lack of transparency around the process. The JobsOhio Energy Opportunity Initiative was announced by Republican Gov. Mike…",
-      "summary_zh": "俄亥俄州设立1亿美元能源项目基金，但禁止可再生能源项目申请，且流程透明度不足。批评者认为此举不利于能源结构优化和公平竞争，影响州内绿色发展。",
-      "theme_zh": "能源资金与可再生能源",
-      "why_zh": "政策排除可再生能源，可能阻碍绿色转型，透明度不足影响公信力。事实基于基金设立与批评意见。",
+      "summary_zh": "俄亥俄州设立1亿美元能源项目基金，但禁止可再生能源项目申请，且流程缺乏透明度。批评者认为此举不利于能源转型，影响公平竞争和政策公信力。",
+      "theme_zh": "能源资金分配",
+      "why_zh": "该基金排除可再生能源，反映部分地区能源政策仍偏向传统能源。观点认为透明度不足和排除政策可能阻碍绿色转型。",
       "language": "en",
       "published_at": "2026-07-22T07:30:00+00:00",
-      "fetched_at": "2026-07-29T00:58:49.244349+00:00",
+      "fetched_at": "2026-07-29T03:09:03.847476+00:00",
       "topics": [
         "能源与排放",
         "履约与全球盘点"
@@ -2610,7 +2794,7 @@
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "e8c8f9917a0dc43ab7a0964e5788ea14bb0f0e30547cc512ef79620d6e4acf04",
-      "poster_phrase": "能源基金排除绿色项目",
+      "poster_phrase": "可再生能源被排除",
       "quality": {
         "passed": true,
         "score": 65,
@@ -2645,10 +2829,10 @@
           "$100 million"
         ],
         "geo_atoms": [],
-        "decision_atom": "政策排除可再生能源，可能阻碍绿色转型，透明度不足影响公信力。事实基于基金设立与批评意见。"
+        "decision_atom": "该基金排除可再生能源，反映部分地区能源政策仍偏向传统能源。观点认为透明度不足和排除政策可能阻碍绿色转型。"
       },
       "first_archived_at": "2026-07-23T01:04:38.967766+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_a7b9856935a1b4b8",
@@ -2718,7 +2902,8 @@
         "decision_atom": "矿产项目社会责任与调解机制对中国海外投资政策具有现实意义。事实边界：仅限于已报道的指控与调解机制进展。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-25T01:04:13.897548+00:00"
+      "last_archived_at": "2026-07-25T01:04:13.897548+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_c0218ad74cf1934f",
@@ -2800,7 +2985,8 @@
         "decision_atom": "长期沿海洪水风险凸显气候适应政策和人口迁移规划的必要性。数据为事实，政策应对需持续关注。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-23T01:04:39.133974+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_2ef95e6de3826d0d",
@@ -2876,7 +3062,8 @@
         "decision_atom": "事实：亚马逊火灾面积创新低，反映巴西加强森林保护措施成效，对全球气候目标具有积极影响。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-23T01:04:39.133974+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_0cbe23a5a0425cec",
@@ -2938,7 +3125,8 @@
         "decision_atom": "文章强调政策需兼顾经济与绿色目标，对全球公平转型有现实影响。观点为政策调整必要性，未涉及具体措施。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-25T01:04:13.897548+00:00"
+      "last_archived_at": "2026-07-25T01:04:13.897548+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_03855e419b82d204",
@@ -3012,7 +3200,8 @@
         "decision_atom": "该宣言为全球道路安全合作提供政策框架，有助于实现可持续发展目标。美国反对显示国际共识仍存分歧，事实报道。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-23T01:04:39.133974+00:00",
+      "relevance_score": 74
     },
     {
       "record_id": "article_3d1626429736c205",
@@ -3082,7 +3271,8 @@
         "decision_atom": "事件反映极端气候对脆弱地区的影响，突显加强灾害管理和气候适应政策的重要性。事实报道。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-23T01:04:39.133974+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_5b22858ea13685c0",
@@ -3158,7 +3348,8 @@
         "decision_atom": "该调查揭示气候变化对经济和社会公平的直接影响，为政策制定提供事实依据，强调保护弱势群体的重要性。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-25T01:04:13.897548+00:00"
+      "last_archived_at": "2026-07-25T01:04:13.897548+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_9892283984dccf46",
@@ -3220,7 +3411,8 @@
         "decision_atom": "该观点为全球能源政策提供参考，强调多元措施和公平性。内容基于专家访谈和政策建议。"
       },
       "first_archived_at": "2026-07-22T00:57:42.804626+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-28T00:58:22.326028+00:00",
+      "relevance_score": 77
     },
     {
       "record_id": "article_894d7fc711a88f07",
@@ -3282,7 +3474,8 @@
         "decision_atom": "扩大茶叶出口有助于肯尼亚经济发展和中非合作。观点基于贸易政策动向。"
       },
       "first_archived_at": "2026-07-21T03:34:14.563178+00:00",
-      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00",
+      "relevance_score": 62
     },
     {
       "record_id": "article_5e99f15eb2492e07",
@@ -3352,7 +3545,8 @@
         "decision_atom": "研究揭示北极海冰变化的新趋势，对全球气候政策和科学监测具有重要参考价值。观点基于最新科学数据。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-22T00:57:42.961350+00:00"
+      "last_archived_at": "2026-07-22T00:57:42.961350+00:00",
+      "relevance_score": 70
     },
     {
       "record_id": "article_c1837101ace2e091",
@@ -3428,7 +3622,8 @@
         "decision_atom": "欧盟碳市场是全球最大碳交易体系之一，减排速度调整将影响欧盟及国际气候谈判进程。观点仅限于政策调整可能带来的影响。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 76
     },
     {
       "record_id": "article_463deb0addd1eb74",
@@ -3496,7 +3691,8 @@
         "decision_atom": "监测限制削弱环境治理，影响公众健康与政策透明度。事实基于地方立法与居民实际情况。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00",
+      "relevance_score": 73
     },
     {
       "record_id": "article_383a15830bac4018",
@@ -3572,7 +3768,8 @@
         "decision_atom": "极端高温对公共交通安全和员工健康构成挑战，政策需加强应对措施。观点基于报道事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_4844468b2c39c58c",
@@ -3634,7 +3831,8 @@
         "decision_atom": "事实：太空垃圾问题因月球探索升温而受关注，联合国呼吁各国加强治理，涉及全球环境与未来太空政策。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-23T01:04:39.133974+00:00",
+      "relevance_score": 73
     },
     {
       "record_id": "article_223ef64be48b56a9",
@@ -3702,7 +3900,8 @@
         "decision_atom": "该事件反映州政府与联邦政策冲突，对美国风电产业发展具有重要影响，政策走向将影响清洁能源部署，观点基于诉讼事实。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 65
     },
     {
       "record_id": "article_04cb3eb51c529deb",
@@ -3768,7 +3967,8 @@
         "decision_atom": "新型3D打印电池技术有助于提升可再生能源储能能力，为能源转型政策提供技术支撑。观点基于技术进展，实际应用效果待观察。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-23T01:04:39.133974+00:00",
+      "relevance_score": 72
     },
     {
       "record_id": "article_59b04050233c17aa",
@@ -3830,7 +4030,8 @@
         "decision_atom": "该议题涉及航天政策与环境保护的平衡，推动绿色航天技术有助于国际合作与长期发展。观点仅限于现有报道。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-27T01:10:44.183169+00:00"
+      "last_archived_at": "2026-07-27T01:10:44.183169+00:00",
+      "relevance_score": 73
     },
     {
       "record_id": "article_9d90e28655d0f62e",
@@ -3900,7 +4101,8 @@
         "decision_atom": "资金决策影响区域绿色交通发展，反映政府对生态旅游与地方经济支持态度。事实仅限于资金申请与项目进展。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-22T00:57:42.961350+00:00"
+      "last_archived_at": "2026-07-22T00:57:42.961350+00:00",
+      "relevance_score": 74
     },
     {
       "record_id": "article_67f63e27aed35259",
@@ -3964,7 +4166,8 @@
         "decision_atom": "政策调整反映欧盟在经济与气候目标间的权衡，对全球碳市场和企业减排策略有示范效应。事实基于欧盟提案。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00",
+      "relevance_score": 74
     },
     {
       "record_id": "article_8be9c424a6d566e4",
@@ -4040,7 +4243,8 @@
         "decision_atom": "中国印度拒绝旧碳信用转入新市场，有助于提升碳市场环境标准。事实基于政策决定和市场反应。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00",
+      "relevance_score": 74
     },
     {
       "record_id": "article_a60c21b371b3d313",
@@ -4116,7 +4320,8 @@
         "decision_atom": "极端高温事件加剧，推动英国社会关注气候变化与健康风险，政策层面需加强应对措施。观点基于事实报道。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00",
+      "relevance_score": 69
     },
     {
       "record_id": "article_00f5a9615b555890",
@@ -4190,7 +4395,8 @@
         "decision_atom": "事实：核能作为低碳能源在全球能源转型中地位提升，未来发展需兼顾安全与减排目标，政策关注度上升。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-24T00:58:35.890125+00:00"
+      "last_archived_at": "2026-07-24T00:58:35.890125+00:00",
+      "relevance_score": 60
     },
     {
       "record_id": "article_7c68d785f132c311",
@@ -4201,6 +4407,7 @@
       "source_name": "BBC Science & Environment",
       "source_type": "公共媒体",
       "authority": 5,
+      "relevance_score": 48,
       "title_original": "Watch: Flood waters surge in Texas after huge rainstorms",
       "title_zh": "强降雨再度引发美国得州洪水与人员转移",
       "summary_source": "The deluge prompted evacuations and water rescues in the same region where 25 children and two counsellors at Camp Mystic died in flooding in 2025.",
@@ -4266,7 +4473,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -4277,6 +4484,7 @@
       "source_name": "UN News - Climate Change",
       "source_type": "联合国官方新闻",
       "authority": 5,
+      "relevance_score": 60,
       "title_original": "‘Heat deaths are not inevitable’: WHO pushes Europe to heat‑proof its hospitals",
       "title_zh": "世卫组织敦促欧洲医院为极端高温做好准备",
       "summary_source": "As Europe battles a deadly record-breaking heatwave, the World Health Organization (WHO) issued new guidance on Thursday to help countries face scorching temperatures now and in the future.",
@@ -4285,7 +4493,7 @@
       "why_zh": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。",
       "language": "en",
       "published_at": "2026-07-16T12:00:00+00:00",
-      "fetched_at": "2026-07-17T04:24:08.756256+00:00",
+      "fetched_at": "2026-07-29T03:09:05.073530+00:00",
       "topics": [
         "气候动态"
       ],
@@ -4336,7 +4544,78 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
+    },
+    {
+      "record_id": "article_29e088b267592809",
+      "article_id": "article_29e088b267592809",
+      "canonical_url": "https://www.climatechangenews.com/2026/07/16/africa-can-lead-the-age-of-electrification",
+      "source_url": "https://www.climatechangenews.com/2026/07/16/africa-can-lead-the-age-of-electrification/",
+      "source_id": "INT002",
+      "source_name": "Climate Home News",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 50,
+      "title_original": "Africa can lead the Age of Electrification",
+      "title_zh": "非洲能否在全球电气化浪潮中掌握主动权",
+      "summary_source": "The electrification agenda presents both an extraordinary opportunity for Africa and an immense challenge for the continent The post Africa can lead the Age of Electrification appeared first on Climate Home News .",
+      "summary_zh": "文章认为，交通、工业和家庭用能电气化为非洲带来发展机遇，但电网、融资、能源可及性和本地产业能力仍是巨大挑战。",
+      "theme_zh": "非洲电气化",
+      "why_zh": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。",
+      "language": "en",
+      "published_at": "2026-07-16T09:52:53+00:00",
+      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "非洲",
+          "lon": 22.0,
+          "lat": 2.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "cc0edbab44fdac235a06cd72bd0090e1e02208c00bf192b56b2cdc03bae036e6",
+      "poster_phrase": "非洲竞逐电气化时代",
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_29e088b267592809",
+        "source_atom": {
+          "name": "Climate Home News",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "human_reviewed",
+          "quality_tier": "A"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "非洲"
+        ],
+        "decision_atom": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。"
+      },
+      "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -4402,7 +4681,8 @@
         "decision_atom": "文章展示体育赛事促进城市绿色转型的案例，为其他城市提供借鉴。观点分析为主，强调绿色发展机遇。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-23T01:04:39.133974+00:00"
+      "last_archived_at": "2026-07-23T01:04:39.133974+00:00",
+      "relevance_score": 60
     },
     {
       "record_id": "article_5b8f40780203e19e",
@@ -4413,6 +4693,7 @@
       "source_name": "The Guardian Climate Crisis",
       "source_type": "综合媒体",
       "authority": 5,
+      "relevance_score": 64,
       "title_original": "How global heating supercharged floods in West Africa, displacing thousands",
       "title_zh": "气候变暖放大西非洪灾，数千人流离失所",
       "summary_source": "Adaptation to frightening new normal and reducing emissions further and faster is critical, scientists warn Dozens of people drowned, hundreds had to be rescued and thousands were displaced when floods struck the coasts of west Africa last month. Now scientists have concluded that the rains that caused the floods were supercharged by climate breakdown. Global heating, they say, turned what should have been a routine weather event into a climate catastrophe. Continue reading...",
@@ -4474,7 +4755,84 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
+    },
+    {
+      "record_id": "article_1349a508fd370638",
+      "article_id": "article_1349a508fd370638",
+      "canonical_url": "https://www.carbonbrief.org/uk-withdraws-millions-in-funding-from-worlds-second-largest-rainforest-in-congo",
+      "source_url": "https://www.carbonbrief.org/uk-withdraws-millions-in-funding-from-worlds-second-largest-rainforest-in-congo",
+      "source_id": "INT001",
+      "source_name": "Carbon Brief",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 50,
+      "title_original": "UK withdraws millions in funding from world’s second-largest rainforest in Congo",
+      "title_zh": "英国撤回对刚果盆地雨林项目的数千万英镑资助",
+      "summary_source": "The UK has abandoned projects worth tens of millions of pounds that were meant to help protect Congo rainforests and… The post UK withdraws millions in funding from world’s second-largest rainforest in Congo appeared first on Carbon Brief .",
+      "summary_zh": "Carbon Brief 报道称，英国取消了原计划用于刚果盆地雨林保护的多个项目，涉及资金规模达数千万英镑。",
+      "theme_zh": "森林资金",
+      "why_zh": "资金撤回可能影响森林保护、当地社区生计和发达国家资金承诺的可信度，需继续核对项目清单与官方解释。",
+      "language": "en",
+      "published_at": "2026-07-15T16:04:22+00:00",
+      "fetched_at": "2026-07-29T03:09:03.635456+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "刚果盆地",
+          "lon": 18.0,
+          "lat": -1.0
+        },
+        {
+          "name_zh": "英国",
+          "lon": -2.0,
+          "lat": 54.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "ca9c576092b32040f8bd88a372950c3c91c9df1a08dfdcc67912356ad7a812ef",
+      "poster_phrase": "刚果雨林资金出现缺口",
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_1349a508fd370638",
+        "source_atom": {
+          "name": "Carbon Brief",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "human_reviewed",
+          "quality_tier": "A"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "刚果盆地",
+          "英国"
+        ],
+        "decision_atom": "资金撤回可能影响森林保护、当地社区生计和发达国家资金承诺的可信度，需继续核对项目清单与官方解释。"
+      },
+      "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -4485,6 +4843,7 @@
       "source_name": "Carbon Brief",
       "source_type": "气候专业媒体",
       "authority": 5,
+      "relevance_score": 48,
       "title_original": "Cropped 15 July 2026: Uganda starves | Trump opens endangered habitats | UK cuts rainforest aid",
       "title_zh": "土地与粮食观察：乌干达饥饿、美国放松栖息地保护、英国削减雨林资金",
       "summary_source": "We handpick and explain the most important stories at the intersection of climate, land, food... The post Cropped 15 July 2026: Uganda starves | Trump opens endangered habitats | UK cuts rainforest aid appeared first on Carbon Brief .",
@@ -4562,7 +4921,7 @@
         "decision_atom": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-28T00:58:22.326028+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_564ab2b4e2f26c1f",
@@ -4573,6 +4932,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
+      "relevance_score": 66,
       "title_original": "Major emitting countries knew of climate risks decades earlier than claimed",
       "title_zh": "主要排放国被指早在数十年前已知化石燃料的气候风险",
       "summary_source": "Governments have known since at least the 1960s that fossil fuel use was warming the planet. They kept quiet to avoid responsibility. The post Major emitting countries knew of climate risks decades earlier than claimed appeared first on Climate Home News .",
@@ -4636,7 +4996,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -4647,6 +5007,7 @@
       "source_name": "UN Environment Programme",
       "source_type": "联合国官方信息",
       "authority": 5,
+      "relevance_score": 86,
       "title_original": "AI helping UN detect methane emissions and spark real reductions in climate-warming gas",
       "title_zh": "AI 正把卫星发现的甲烷泄漏转化为真实减排",
       "summary_source": "Artificial Intelligence (AI) is helping turn satellite observations into methane mitigation action in the oil and gas sector. These mitigation efforts have delivered a climate benefit comparable to removing the annual emissions of almost 24 million gasoline-powered passenger cars, according to a new report by the UN Environment Programme (UNEP).",
@@ -4655,7 +5016,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-07-29T00:58:50.845864+00:00",
+      "fetched_at": "2026-07-29T03:09:05.893340+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -4710,7 +5071,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-07-29T00:59:43.163041+00:00"
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
@@ -4778,7 +5139,150 @@
         "decision_atom": "水污染事件凸显生态保护的重要性，政策需加强监管与修复措施。事实基于官方数据。"
       },
       "first_archived_at": "2026-07-21T02:53:52.382829+00:00",
-      "last_archived_at": "2026-07-21T03:34:14.710433+00:00"
+      "last_archived_at": "2026-07-21T03:34:14.710433+00:00",
+      "relevance_score": 69
+    },
+    {
+      "record_id": "article_91aee864c19f7f97",
+      "article_id": "article_91aee864c19f7f97",
+      "canonical_url": "https://www.climatechangenews.com/2026/07/14/deep-sea-mining-firms-sue-un-seabed-body-inquiry-isa-itlos-metals-company",
+      "source_url": "https://www.climatechangenews.com/2026/07/14/deep-sea-mining-firms-sue-un-seabed-body-inquiry-isa-itlos-metals-company/",
+      "source_id": "INT002",
+      "source_name": "Climate Home News",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 50,
+      "title_original": "UN seabed regulator defends authority as mining firms seek to halt inquiry",
+      "title_zh": "深海采矿企业试图阻止联合国海底监管机构调查",
+      "summary_source": "Campaigners accused deep-sea mining frontrunner The Metals Company of obstructing an inquiry into its subsidiaries. The firm says it is being targeted without procedural basis The post UN seabed regulator defends authority as mining firms seek to halt inquiry appeared first on Climate Home News .",
+      "summary_zh": "环保组织指责深海采矿企业阻挠对其子公司的调查；涉事企业则称调查程序缺乏依据，联合国海底管理局为其监管权限辩护。",
+      "theme_zh": "深海治理",
+      "why_zh": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。",
+      "language": "en",
+      "published_at": "2026-07-14T18:02:01+00:00",
+      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "国际海底区域",
+          "lon": -130.0,
+          "lat": 8.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "e19339dba17f4b5435e6e854ab6f542dc92f5fde38ba45d7691dacff9c1d785d",
+      "poster_phrase": "深海采矿规则受到挑战",
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_91aee864c19f7f97",
+        "source_atom": {
+          "name": "Climate Home News",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "human_reviewed",
+          "quality_tier": "A"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "国际海底区域"
+        ],
+        "decision_atom": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。"
+      },
+      "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
+    },
+    {
+      "record_id": "article_a02797620e6f6e19",
+      "article_id": "article_a02797620e6f6e19",
+      "canonical_url": "https://www.theguardian.com/politics/2026/jul/14/kemi-badenoch-zeros-in-on-tory-mps-who-believe-in-climate-crisis-and-those-who-dont",
+      "source_url": "https://www.theguardian.com/politics/2026/jul/14/kemi-badenoch-zeros-in-on-tory-mps-who-believe-in-climate-crisis-and-those-who-dont",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 50,
+      "title_original": "Kemi declares war on net zero – and what remains of her party",
+      "title_zh": "英国保守党内部围绕净零政策的分裂加深",
+      "summary_source": "Badenoch’s ideological purge gathers pace as moderates are cast out and the Tories edge ever closer to political extinction You have to hand it to Kemi Badenoch. She doesn’t take any prisoners. While the rest of us have been trying to survive a heatwave and are wondering if air-con may be needed for future summers, the Tory leader has taken a more hardline approach to climate change. Call it Schrödinger’s climate change. It’s both happening and not happening at the same time. Kemi is just about sane enough not to be an out-and-out denier. She leaves that to Reform. Mind you, no one would put it past her to suggest the scientists have got it wrong if the temperature drops for a few days. But her view is that while climate change may be real, there’s no point in trying to do anything about it. Continue reading...",
+      "summary_zh": "《卫报》评论文章认为，英国保守党领导层正进一步采取反净零立场，并排挤党内支持气候行动的温和派。",
+      "theme_zh": "英国气候政治",
+      "why_zh": "这是观点性内容，主要用于观察英国国内气候政策的政治阻力，不应作为事实报道直接引用。",
+      "language": "en",
+      "published_at": "2026-07-14T16:37:19+00:00",
+      "fetched_at": "2026-07-17T04:24:03.042043+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "英国",
+          "lon": -2.0,
+          "lat": 54.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "c6459ea704a6fd823086d4353b4f06d19d0c7d03cff35959cab8accf7d43fcb4",
+      "poster_phrase": "英国净零政治继续右转",
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_a02797620e6f6e19",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "human_reviewed",
+          "quality_tier": "A"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "英国"
+        ],
+        "decision_atom": "这是观点性内容，主要用于观察英国国内气候政策的政治阻力，不应作为事实报道直接引用。"
+      },
+      "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
+      "last_archived_at": "2026-07-29T03:10:23.823168+00:00"
     }
   ]
 }
