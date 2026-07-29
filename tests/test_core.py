@@ -9,13 +9,14 @@ from pathlib import Path
 from climate_agent.archive import quality_result, update_archive, validate_public_payload
 from climate_agent.briefing import dashboard_payload, render_markdown, save_brief, select_latest_day, select_latest_week
 from climate_agent.cli import ROOT, bootstrap
-from climate_agent.collector import parse_feed, parse_gdelt
+from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
 from climate_agent.db import Database
 from climate_agent.delivery import build_push_message
 from climate_agent.exporter import export_static_site
 from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
+from climate_agent.sync import P0_SOURCE_IDS, _source_scope_match
 from climate_agent.translation import detect_places, source_balanced_rows
 
 
@@ -47,13 +48,13 @@ class CoreTests(unittest.TestCase):
 
     def test_bootstrap_is_idempotent(self) -> None:
         bootstrap(self.db)
-        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], 48)
+        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], 51)
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM events")[0]["n"], 3)
 
     def test_dashboard_reconciles_source_counts(self) -> None:
         payload = dashboard_payload(self.db)
-        self.assertEqual(payload["metrics"]["source_total"], 48)
-        self.assertEqual(payload["metrics"]["source_enabled"], 27)
+        self.assertEqual(payload["metrics"]["source_total"], 51)
+        self.assertEqual(payload["metrics"]["source_enabled"], 32)
         self.assertEqual(len(payload["events"]), 3)
         self.assertGreaterEqual(payload["events"][0]["priority"], payload["events"][-1]["priority"])
 
@@ -94,6 +95,30 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(article.canonical_url, "https://example.org/a")
         self.assertEqual(article.extraction_method, "gdelt_doc_api")
 
+    def test_regional_sources_have_strict_scope_gates(self) -> None:
+        china = NormalizedArticle(
+            article_id="c", source_id="API005", source_url="https://www.news.cn/a",
+            canonical_url="https://www.news.cn/a", title="China unveils renewable energy plan",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="en", content_hash="c",
+        )
+        off_domain = NormalizedArticle(
+            article_id="x", source_id="API005", source_url="https://example.org/a",
+            canonical_url="https://example.org/a", title="China climate plan",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="en", content_hash="x",
+        )
+        mars = NormalizedArticle(
+            article_id="m", source_id="OFF014", source_url="https://science.nasa.gov/mars",
+            canonical_url="https://science.nasa.gov/mars", title="NASA observes the surface of Mars",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="en", content_hash="m",
+        )
+        self.assertTrue(_source_scope_match(china, "API005"))
+        self.assertFalse(_source_scope_match(off_domain, "API005"))
+        self.assertFalse(_source_scope_match(mars, "OFF014"))
+        self.assertTrue({"INT008", "INT009", "INT020", "OFF014", "API005"}.issubset(P0_SOURCE_IDS))
+
     def test_ndc_import_rejects_non_unfccc_and_is_version_aware(self) -> None:
         payload = b"code,party,title,fileType,language,version,status,submissionDate,encodedAbsUrl,originalFilename\nAAA,Alpha,Alpha NDC,NDC,English,1,Active,2025-01-02,https://unfccc.int/a.pdf,a.pdf\nBBB,Beta,Beta NDC,NDC,English,2,Active,2025-01-02,https://example.org/b.pdf,b.pdf\n"
         rows, quality = parse_ndc_csv(payload, cutoff_year=2016)
@@ -116,6 +141,8 @@ class CoreTests(unittest.TestCase):
     def test_place_detection_supports_map_markers(self) -> None:
         places = detect_places("Hospitals in Europe face heat while Texas recovers from floods")
         self.assertEqual({place["name_zh"] for place in places}, {"欧洲", "美国得州"})
+        chinese_places = detect_places("中国和美国发布新的气候政策")
+        self.assertEqual({place["name_zh"] for place in chinese_places}, {"中国", "美国"})
 
     def test_static_export_is_self_contained(self) -> None:
         self.seed_publishable_article()
@@ -128,7 +155,10 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / ".nojekyll").exists())
         self.assertTrue((output_dir / "assets" / "countries-110m.json").exists())
         self.assertTrue((output_dir / "data" / "news_archive.json").exists())
-        self.assertTrue((output_dir / "data" / "daily_brief.pdf").read_bytes().startswith(b"%PDF-1.4"))
+        pdf = (output_dir / "data" / "daily_brief.pdf").read_bytes()
+        self.assertTrue(pdf.startswith(b"%PDF-1.4"))
+        self.assertIn(b"/BaseFont /Times-Roman", pdf)
+        self.assertIn(b"/F1", pdf)
         self.assertIn("map_events_week", payload)
         self.assertEqual(result["quality_gate"], "passed")
         self.assertEqual(result["articles"], len(payload["intelligence"]))
@@ -160,6 +190,10 @@ class CoreTests(unittest.TestCase):
         self.assertIn('data-map-period="today"', html)
         self.assertIn('data-map-period="week"', html)
         self.assertIn('id="assistant"', html)
+        app = (ROOT / "static" / "app.js").read_text(encoding="utf-8")
+        self.assertIn("function planQuestion", app)
+        self.assertIn("function comparisonHtml", app)
+        self.assertNotIn("function answerRecords", app)
         self.assertIn("下载今日简报", html)
         self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
@@ -185,6 +219,7 @@ class CoreTests(unittest.TestCase):
         self.assertIn("contents: write", workflow)
         self.assertIn("data/news_archive.json", workflow)
         self.assertIn("data/source_health.json", workflow)
+        self.assertIn("CLIMATE_TRANSLATION_LIMIT", workflow)
 
     def test_latest_day_and_week_use_beijing_calendar(self) -> None:
         rows = [

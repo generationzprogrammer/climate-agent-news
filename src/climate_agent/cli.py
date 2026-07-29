@@ -115,7 +115,11 @@ def main(argv: list[str] | None = None) -> int:
         result["editorial"] = apply_editorial_overrides(db, ROOT / "config" / "editorial_overrides.json")
         if all(os.getenv(name) for name in ("CLIMATE_MODEL_BASE_URL", "CLIMATE_MODEL_API_KEY", "CLIMATE_MODEL_NAME")):
             try:
-                result["translation"] = translate_pending(db, OpenAICompatibleModel.from_env(), limit=20)
+                result["translation"] = translate_pending(
+                    db,
+                    OpenAICompatibleModel.from_env(),
+                    limit=int(os.getenv("CLIMATE_TRANSLATION_LIMIT", "20")),
+                )
             except Exception as exc:
                 result["translation"] = {"status": "failed", "error": str(exc)}
         result["web_export"] = export_static_site(

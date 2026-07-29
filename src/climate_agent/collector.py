@@ -189,7 +189,18 @@ def fetch_resource(
                 try:
                     payload = response.read(max_bytes + 1)
                 except http.client.IncompleteRead as exc:
-                    raise http.client.IncompleteRead(exc.partial, exc.expected)
+                    content_type = response.headers.get_content_type()
+                    partial = exc.partial or b""
+                    # Some WordPress/Drupal RSS servers close keep-alive responses
+                    # early even though they already sent complete <item> blocks.
+                    # XML can be safely handed to the recovery parser; truncated
+                    # JSON must still fail because accepting it could corrupt data.
+                    if len(partial) >= 1024 and b"<item" in partial and (
+                        "xml" in content_type or content_type.startswith("text/")
+                    ):
+                        payload = partial
+                    else:
+                        raise http.client.IncompleteRead(partial, exc.expected)
                 if len(payload) > max_bytes:
                     raise ValueError(f"response exceeded {max_bytes} bytes")
                 return FetchResponse(

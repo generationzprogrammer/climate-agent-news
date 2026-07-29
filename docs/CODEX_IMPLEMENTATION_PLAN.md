@@ -20,7 +20,7 @@
 
 - 定义 `NormalizedArticle` Pydantic 模型和 SourceAdapter 协议。
 - 实现通用 RSS 适配器、GDELT DOC 2.0 适配器。
-- 首批源：Carbon Brief、Climate Home、Canary Media、UNEP、Guardian、BBC、UN News、GDELT。
+- 首批源：Carbon Brief、Climate Home、Canary Media、UNEP、Guardian、BBC、UN News、GDELT；扩展源包括 Mongabay、Yale Climate Connections、Dialogue Earth、Grist、NASA Earth Observatory、British Antarctic Survey 与中国官方气候定向发现。
 - 实现 ETag/Last-Modified、超时、限速、指数退避、最大重试和响应大小上限。
 - URL 规范化、UTC 时间转换、语言检测、内容 hash、幂等 upsert。
 - 生成不含 LLM 的 Markdown 日报：新文章数、来源、标题、链接、主题词命中。
@@ -62,6 +62,8 @@
 
 验收：不存在无 article/event ID 的事实断言；随机抽样的数字与单位能回到原文；冲突来源不会被强行合并成单一结论。
 
+公开静态站的 Grounded Q&A 不调用远程 LLM：按时间、地区、议题与任务类型规划检索，支持样本比较、时间线、政策含义和连续追问。验收要求是每条回答均有可点击原文，证据不足时明确拒绝补写，并把来源陈述与系统归纳分开。
+
 ## Phase 5：每日简报与推送
 
 目标：每日固定时间形成可重发、不可重复的简报。
@@ -89,4 +91,3 @@
 - 自动对外发布未经人工复核的高风险政策建议。
 - 在没有标注集的情况下宣称分类或聚类“准确”。
 - 为每个来源单独复制一套调度、重试和入库逻辑。
-

@@ -6,9 +6,9 @@
 
 - 置顶的全球气候现场：中国位于地图中央，可切换“当天 / 本周”；红点仅标记文本明确涉及的国家或地区，并通过自动错位避免密集点遮挡。
 - 今日重要气候情报：只展示最近一个有合格记录的北京时间自然日，包含中文标题、完整中文概要、议题、来源、发布时间和原文链接。
-- 气候情报问答：浏览器内检索站内档案并附原文，不需要 API 密钥，也不会用档案外知识补写当日事实。
+- 气候情报问答：浏览器内执行“问题规划—证据检索—比较/时间线—引用”流程，支持中美等国家比较、政策含义和连续追问；不需要 API 密钥，也不会用档案外知识补写当日事实。
 - ClimateText-3000 文本数据库：支持关键词与议题检索；按规范 URL 去重后最多保留 3000 条。
-- 今日 PDF 简报：与页面和问答中的“今日简报”使用同一批最新日记录，可直接下载阅读。
+- 今日 PDF 简报：与页面和问答中的“今日简报”使用同一批最新日记录；中文使用宋体兼容字体，英文与数字使用 Times Roman（Times New Roman 兼容度量），避免拉宽。
 
 网页不展示 Agent 流水线、P0 接入状态、新闻元数据、相关度分数、A/B 审核等级、内部质量方法等后台信息；这些字段仍保留在数据库中，供审计和编辑使用。
 
@@ -71,6 +71,9 @@ CLIMATE_MODEL_NAME
 6. 质量门禁通过后才部署 Pages；失败时网站保持上一成功版本。
 7. 合格档案和 `data/source_health.json` 由工作流机器人提交回仓库，使下一次定时运行能够增量合并并判断来源健康状态。
 8. 公开首页和 PDF 仅取档案中最新一个发布日；地图“本周”取该日及向前 6 日，因此不会把旧闻混入今日情报。
+9. 2026-07-29 的来源扩展在代码推送时把中文编译上限临时提高到 40 条，完成一次美国、中国及其他地区的七日补录；后续定时任务恢复每日 20 条，canonical URL 去重保证不会重复灌库。
+
+站内问答不会调用远程模型，因此每次提问不消耗 GitHub Models 额度。它借鉴 `reference_code` 的 Planner、Event/Trend 与 Decision 分工，把问题拆成时间、地区、议题和任务类型，再从当前归档中选择证据；比较和政策含义均标为“当前样本归纳”。
 
 ## 每日推送：可落地方案
 
@@ -107,9 +110,10 @@ Webhook 和邮箱密码属于密钥，不应写进 `.env.example` 的真实值�
 
 ## 数据质量与边界
 
-- 动态 P0 入口包括 Carbon Brief、Climate Home News、Mongabay 气候专题与拉美专题、Canary Media、Guardian Climate Crisis、BBC Science & Environment、UN News Climate、UNEP、British Antarctic Survey 和 GDELT DOC 2.0。
+- 动态 P0 入口包括 Carbon Brief、Climate Home News、Mongabay 气候专题与拉美专题、Yale Climate Connections、Dialogue Earth、Canary Media、Grist、Guardian Climate Crisis、BBC Science & Environment、UN News Climate、UNEP、British Antarctic Survey、NASA Earth Observatory、GDELT DOC 2.0，以及限定 `news.cn`、`gov.cn`、`mee.gov.cn`、`cma.gov.cn` 和 `dialogue.earth` 的中国气候定向发现入口。
 - 内容排序首先看来源权威性、气候相关性和时效性；地域与来源均衡只作为二级排序，不设降低质量的洲际硬配额。
 - 来源清单可动态调整；长期失败者自动隔离，新入口必须先核验官方 Feed、内容范围和使用边界。
+- 宽泛入口执行二次门禁：NASA Feed 排除行星科学等非地球气候条目；中国定向发现同时通过域名白名单和标题气候关键词，GDELT 返回但未通过门禁的项目不会入库。
 - NDC 档案只接受可解析日期且文件 URL 属于 `unfccc.int` 的记录，并按缔约方、版本和提交日期去重。
 - 新闻只保存标题、来源短摘录、链接和结构化分析；不绕过登录、付费墙、验证码、robots.txt 或技术限制。
 - 中文概要、事实、观点、模型推断和编辑建议分开存储；高风险结论必须回到官方或原始来源。

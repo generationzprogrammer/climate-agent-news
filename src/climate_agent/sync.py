@@ -2,17 +2,58 @@ from __future__ import annotations
 
 import json
 import re
+import time
 import uuid
 from datetime import UTC, datetime, timedelta
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 
 from .collector import NormalizedArticle, fetch_resource, parse_feed, parse_gdelt
 from .db import Database
 
 
 P0_SOURCE_IDS = (
-    "INT001", "INT002", "INT007", "INT010", "INT013", "INT014", "INT019",
-    "OFF001", "OFF006", "OFF013", "API001",
+    "INT001", "INT002", "INT007", "INT008", "INT009", "INT010", "INT013",
+    "INT014", "INT019", "INT020", "OFF001", "OFF006", "OFF013", "OFF014",
+    "API005", "API001",
+)
+
+GDELT_SOURCE_IDS = {"API001", "API005"}
+
+GDELT_PROFILES = {
+    "API001": {
+        "query": '("climate change" OR UNFCCC OR "climate finance" OR NDC)',
+        "maxrecords": "25",
+        "timespan": "24h",
+    },
+    # The seven-day window is deliberate: this profile supplies a high-quality,
+    # one-time regional catch-up on first deployment and remains idempotent on
+    # later daily runs because canonical URLs are unique in the database/archive.
+    "API005": {
+        "query": (
+            '("climate change" OR "carbon neutrality" OR "carbon market" OR '
+            'emissions OR renewable OR "zero-carbon") '
+            '(domain:news.cn OR domain:gov.cn OR domain:mee.gov.cn OR '
+            'domain:cma.gov.cn OR domain:dialogue.earth)'
+        ),
+        "maxrecords": "50",
+        "timespan": "7d",
+    },
+}
+
+NASA_EARTH_TERMS = (
+    "climate", "wildfire", "smoke", "heat", "drought", "flood", "storm",
+    "hurricane", "ice", "glacier", "antarctic", "ocean", "earth observatory",
+)
+
+CHINA_CLIMATE_TERMS = (
+    "china", "chinese", "beijing", "climate", "carbon", "emission", "renewable",
+    "zero-carbon", "low-carbon", "green transition", "energy transition",
+    "中国", "气候", "碳", "排放", "可再生能源", "零碳", "低碳", "绿色转型",
+    "能源转型", "节能降碳", "极端天气", "防洪", "红树林",
+)
+
+CHINA_DISCOVERY_DOMAINS = (
+    "news.cn", "gov.cn", "mee.gov.cn", "cma.gov.cn", "dialogue.earth",
 )
 
 TOPIC_RULES = {
@@ -51,12 +92,27 @@ def _analyse(article: NormalizedArticle, authority: int) -> dict:
     return {"topics": topics or ["气候综合"], "numbers": numbers, "score": score, "why_zh": why_zh}
 
 
+def _source_scope_match(article: NormalizedArticle, source_id: str) -> bool:
+    """Apply narrow source-specific gates where a feed/API is broader than climate."""
+    title = article.title.lower()
+    if source_id == "OFF014":
+        return any(term in title for term in NASA_EARTH_TERMS)
+    if source_id == "API005":
+        host = (urlparse(article.canonical_url).hostname or "").lower()
+        allowed_domain = any(host == domain or host.endswith(f".{domain}") for domain in CHINA_DISCOVERY_DOMAINS)
+        return allowed_domain and any(term in title for term in CHINA_CLIMATE_TERMS)
+    return True
+
+
 def _article_rows(articles: list[NormalizedArticle], source: dict) -> tuple[list[dict], dict]:
     now = datetime.now(UTC)
     rows = []
-    rejected = {"future_date": 0, "duplicate_url": 0}
+    rejected = {"future_date": 0, "duplicate_url": 0, "out_of_scope": 0}
     seen: set[str] = set()
     for article in articles[:150]:
+        if not _source_scope_match(article, article.source_id):
+            rejected["out_of_scope"] += 1
+            continue
         if article.canonical_url in seen:
             rejected["duplicate_url"] += 1
             continue
@@ -98,20 +154,22 @@ def _article_rows(articles: list[NormalizedArticle], source: dict) -> tuple[list
     }
 
 
-def _gdelt_url(endpoint: str) -> str:
+def _gdelt_url(endpoint: str, source_id: str) -> str:
+    profile = GDELT_PROFILES[source_id]
     params = {
-        "query": '("climate change" OR UNFCCC OR "climate finance" OR NDC)',
+        "query": profile["query"],
         "mode": "ArtList",
-        "maxrecords": "25",
+        "maxrecords": profile["maxrecords"],
         "format": "json",
         "sort": "DateDesc",
-        "timespan": "24h",
+        "timespan": profile["timespan"],
     }
     return f"{endpoint}?{urlencode(params)}"
 
 
 def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
     results = []
+    last_gdelt_request = 0.0
     for source_id in source_ids:
         source_rows = db.rows("SELECT * FROM sources WHERE source_id=?", (source_id,))
         if not source_rows:
@@ -131,14 +189,21 @@ def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
         try:
             if not endpoint or "{" in endpoint:
                 raise ValueError("source has no directly callable endpoint")
-            request_url = _gdelt_url(endpoint) if source_id == "API001" else endpoint
+            if source_id in GDELT_SOURCE_IDS:
+                wait_seconds = max(0.0, 6.0 - (time.monotonic() - last_gdelt_request))
+                if wait_seconds:
+                    time.sleep(wait_seconds)
+                request_url = _gdelt_url(endpoint, source_id)
+                last_gdelt_request = time.monotonic()
+            else:
+                request_url = endpoint
             response = fetch_resource(
                 request_url,
                 max_bytes=3_000_000,
-                accept="application/json" if source_id == "API001" else "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9",
+                accept="application/json" if source_id in GDELT_SOURCE_IDS else "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9",
             )
             languages = json.loads(source["languages_json"])
-            articles = parse_gdelt(response.payload) if source_id == "API001" else parse_feed(
+            articles = parse_gdelt(response.payload, source_id) if source_id in GDELT_SOURCE_IDS else parse_feed(
                 response.payload, source_id, languages[0] if languages else None,
             )
             rows, quality = _article_rows(articles, source)

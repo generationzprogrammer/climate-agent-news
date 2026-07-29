@@ -41,6 +41,10 @@ jobs:
         env:
           PYTHONPATH: src
           CLIMATE_ARCHIVE_LIMIT: "3000"
+          # Code pushes run a one-time wider translation pass so newly added
+          # regional sources can repair the current seven-day balance. The
+          # scheduled daily job returns to the normal 20-record budget.
+          CLIMATE_TRANSLATION_LIMIT: ${{ github.event_name == 'push' && '40' || '20' }}
           CLIMATE_MODEL_BASE_URL: ${{ secrets.CLIMATE_MODEL_BASE_URL || 'https://models.github.ai/inference' }}
           CLIMATE_MODEL_API_KEY: ${{ secrets.CLIMATE_MODEL_API_KEY || github.token }}
           CLIMATE_MODEL_NAME: ${{ secrets.CLIMATE_MODEL_NAME || 'openai/gpt-4.1' }}

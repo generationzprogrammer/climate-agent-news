@@ -8,8 +8,32 @@ PAGE_WIDTH = 595
 PAGE_HEIGHT = 842
 
 
-def _pdf_text(value: str) -> str:
+def _pdf_cjk_text(value: str) -> str:
     return "<" + value.encode("utf-16-be").hex().upper() + ">"
+
+
+def _pdf_latin_text(value: str) -> str:
+    return "<" + value.encode("cp1252", errors="replace").hex().upper() + ">"
+
+
+def _font_for_character(character: str) -> str:
+    try:
+        character.encode("cp1252")
+    except UnicodeEncodeError:
+        return "F0"
+    return "F1"
+
+
+def _font_runs(value: str) -> list[tuple[str, str]]:
+    """Split mixed Chinese/Latin text so English and digits are not CJK-width."""
+    runs: list[tuple[str, str]] = []
+    for character in value:
+        font = _font_for_character(character)
+        if runs and runs[-1][0] == font:
+            runs[-1] = (font, runs[-1][1] + character)
+        else:
+            runs.append((font, character))
+    return runs
 
 
 def _wrap_text(value: str, width: int) -> list[str]:
@@ -50,14 +74,17 @@ def _brief_lines(payload: dict) -> list[tuple[str, int, int]]:
 
 def _page_stream(lines: list[tuple[str, int, int]]) -> bytes:
     commands = ["BT", "/F0 10 Tf", "1 0 0 1 48 796 Tm"]
+    current_font = "F0"
     current_size = 10
     for text, size, leading in lines:
-        if size != current_size:
-            commands.append(f"/F0 {size} Tf")
-            current_size = size
         commands.append(f"0 -{leading} Td")
-        if text:
-            commands.append(f"{_pdf_text(text)} Tj")
+        for font, run in _font_runs(text):
+            if font != current_font or size != current_size:
+                commands.append(f"/{font} {size} Tf")
+                current_font = font
+                current_size = size
+            encoded = _pdf_latin_text(run) if font == "F1" else _pdf_cjk_text(run)
+            commands.append(f"{encoded} Tj")
     commands.append("ET")
     return "\n".join(commands).encode("ascii")
 
@@ -87,6 +114,7 @@ def write_daily_brief_pdf(payload: dict, path: Path) -> Path:
     catalog_id = add_object(b"")
     pages_id = add_object(b"")
     font_id = add_object(b"")
+    latin_font_id = add_object(b"")
     cid_font_id = add_object(b"")
     descriptor_id = add_object(
         b"<< /Type /FontDescriptor /FontName /STSong-Light /Flags 6 "
@@ -101,7 +129,8 @@ def write_daily_brief_pdf(payload: dict, path: Path) -> Path:
         )
         page_id = add_object(
             f"<< /Type /Page /Parent {pages_id} 0 R /MediaBox [0 0 {PAGE_WIDTH} {PAGE_HEIGHT}] "
-            f"/Resources << /Font << /F0 {font_id} 0 R >> >> /Contents {stream_id} 0 R >>".encode("ascii")
+            f"/Resources << /Font << /F0 {font_id} 0 R /F1 {latin_font_id} 0 R >> >> "
+            f"/Contents {stream_id} 0 R >>".encode("ascii")
         )
         page_ids.append(page_id)
 
@@ -112,6 +141,11 @@ def write_daily_brief_pdf(payload: dict, path: Path) -> Path:
         f"<< /Type /Font /Subtype /Type0 /BaseFont /STSong-Light /Encoding /UniGB-UCS2-H "
         f"/DescendantFonts [{cid_font_id} 0 R] >>"
     ).encode("ascii")
+    # Times-Roman is the portable PDF Base-14 Times face. It has conventional
+    # Latin/digit metrics and is reader-compatible with Times New Roman.
+    objects[latin_font_id - 1] = (
+        b"<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding /WinAnsiEncoding >>"
+    )
     objects[cid_font_id - 1] = (
         f"<< /Type /Font /Subtype /CIDFontType0 /BaseFont /STSong-Light "
         f"/CIDSystemInfo << /Registry (Adobe) /Ordering (GB1) /Supplement 4 >> "

@@ -263,12 +263,20 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 .chat-message.user > span { text-align: right; }
 .chat-message.user > div { border-color: var(--blue); background: var(--blue); color: #fff; }
 .chat-message p { margin: 0; }
+.chat-plan { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
+.chat-plan span { padding: 6px 9px; border: 1px solid #cbd4e1; background: #eef3fa; color: #2d4d7d; font: 700 12px var(--sans); }
+.chat-analysis { margin: 13px 0; padding: 15px 17px; border-left: 3px solid var(--blue); background: #eef3f9; }
+.chat-analysis h4 { margin: 0 0 8px; color: #1c3458; font-size: 15px; }
+.chat-analysis p + p { margin-top: 8px; }
 .chat-message ol { margin: 16px 0 0; padding-left: 22px; }
 .chat-message li { margin: 0 0 18px; padding-left: 5px; }
 .chat-message li b { color: #17253a; font-size: 16px; }
 .chat-message li p { margin: 6px 0; color: #495568; }
 .chat-message li small { color: #697486; }
 .chat-message li a { margin-left: 7px; color: var(--blue); font-weight: 700; text-decoration: none; }
+.evidence-list li { padding-bottom: 17px; border-bottom: 1px solid #e0e5ec; }
+.evidence-list li:last-child { border-bottom: 0; }
+.evidence-implication { padding: 9px 11px; background: #f5f1e8; color: #4e4636 !important; }
 .chat-boundary { padding-top: 12px; border-top: 1px solid var(--line); color: #6a7482; font-size: 13px; }
 .chat-form { padding: 20px 24px; border-top: 1px solid var(--line); background: #fff; }
 .chat-form > label { display: block; margin-bottom: 8px; color: #5b6676; font: 700 11px var(--mono); }

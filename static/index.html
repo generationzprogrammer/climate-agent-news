@@ -81,23 +81,23 @@
     <section class="section assistant-section" id="assistant">
       <div class="section-heading">
         <div><p class="overline">GROUNDED CLIMATE Q&amp;A</p><h2>气候情报问答</h2></div>
-        <p>回答仅检索站内已归档的中文气候情报，并附上来源链接；不会把模型常识冒充为当日事实。</p>
+        <p>先拆解时间、地区和议题，再生成简报、样本比较、时间线或政策含义；每项结论都回到站内证据。</p>
       </div>
       <div class="assistant-shell">
         <aside class="assistant-intro">
-          <span class="assistant-status"><i></i> 站内档案已连接</span>
-          <h3>从今天的简报开始</h3>
-          <p>可询问某个国家、地区、议题或时间范围。若档案中没有证据，系统会明确说明。</p>
+          <span class="assistant-status"><i></i> 零费用站内证据检索</span>
+          <h3>从问题到证据，而不只是列标题</h3>
+          <p>可要求比较国家、梳理时间线、提取政策含义，也可继续追问上一轮证据。若档案不足，系统会明确说明。</p>
           <div class="quick-prompts" aria-label="常用问题">
             <button type="button" data-prompt="请给出今日简报">今日简报</button>
             <button type="button" data-prompt="本周有哪些值得关注的气候情报？">本周重点</button>
-            <button type="button" data-prompt="美国近期有哪些气候情报？">美国</button>
+            <button type="button" data-prompt="比较本周中国与美国的重点气候情报">本周中美比较</button>
             <button type="button" data-prompt="近期有哪些气候资金信息？">气候资金</button>
           </div>
         </aside>
         <div class="chat-panel">
           <div class="chat-log" id="chatLog" aria-live="polite">
-            <article class="chat-message assistant"><span>情报助手</span><p>您好。我可以基于本站最多 3000 条中文气候情报，为您整理今日简报或检索具体议题。</p></article>
+            <article class="chat-message assistant"><span>情报助手</span><p>您好。我可以基于本站最多 3000 条中文气候情报，规划检索并生成简报、国家比较、时间线和政策含义；回答均附原文证据。</p></article>
           </div>
           <form class="chat-form" id="chatForm">
             <label for="chatInput">向气候情报库提问</label>

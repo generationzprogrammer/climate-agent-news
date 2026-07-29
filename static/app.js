@@ -1,6 +1,7 @@
 const state = {
   dashboard: null, archive: null, filtered: [], visible: 18,
   mapPeriod: "today", mapTopology: null,
+  assistant: { lastRecords: [], lastPlan: null },
 };
 const $ = id => document.getElementById(id);
 const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
@@ -327,52 +328,192 @@ function setupMapPeriods() {
   });
 }
 
+const COUNTRY_CONCEPTS = [
+  { name: "中国", terms: ["中国", "北京", "china", "chinese", "beijing"] },
+  { name: "美国", terms: ["美国", "美方", "united states", "u.s.", "usa", "american", "north america", "texas", "california", "oregon", "new york", "michigan", "new england"] },
+  { name: "欧盟", terms: ["欧盟", "欧洲", "europe", "european union", "eu"] },
+  { name: "拉丁美洲", terms: ["拉丁美洲", "南美", "巴西", "亚马孙", "latin america", "brazil", "amazon"] },
+  { name: "非洲", terms: ["非洲", "南非", "肯尼亚", "乌干达", "africa", "south africa", "kenya", "uganda"] },
+  { name: "澳大利亚及太平洋", terms: ["澳大利亚", "太平洋", "大洋洲", "australia", "pacific", "oceania"] },
+  { name: "南极洲", terms: ["南极", "南极洲", "antarctic", "antarctica"] },
+];
+
+const TOPIC_CONCEPTS = [
+  { name: "气候资金", terms: ["气候资金", "资金", "融资", "finance", "fund", "loss and damage"] },
+  { name: "能源与排放", terms: ["能源", "减排", "排放", "化石燃料", "可再生能源", "emission", "energy", "renewable", "fossil"] },
+  { name: "气候适应", terms: ["适应", "韧性", "损失损害", "adaptation", "resilience"] },
+  { name: "碳市场", terms: ["碳市场", "碳交易", "article 6", "carbon market", "carbon credit"] },
+  { name: "极端天气", terms: ["极端天气", "高温", "洪水", "干旱", "野火", "飓风", "heat", "flood", "drought", "wildfire", "hurricane"] },
+  { name: "国际谈判", terms: ["谈判", "cop31", "unfccc", "ndc", "全球盘点", "climate talks"] },
+];
+
 function recordText(record) {
   return [
-    record.title_zh, record.title_original, record.summary_zh, record.source_name,
+    record.title_zh, record.title_original, record.summary_zh, record.why_zh, record.source_name,
     ...(record.topics || []), ...(record.places || []).map(place => place.name_zh),
-  ].join(" ").toLowerCase();
+  ].filter(Boolean).join(" ").toLowerCase();
 }
 
-function queryTerms(query) {
-  const normalized = query.toLowerCase().replace(/[？?，。；：、]/g, " ");
-  const expansions = {
-    "美国": ["美国", "united states", "u.s.", "texas"],
-    "拉丁美洲": ["拉丁美洲", "南美", "巴西", "亚马孙", "latin america", "brazil", "amazon"],
-    "南极": ["南极", "antarctic", "antarctica"],
-    "资金": ["资金", "气候资金", "finance", "fund"],
-    "减排": ["减排", "排放", "emission", "mitigation"],
-  };
-  const known = Object.keys(expansions).filter(term => normalized.includes(term));
-  const ascii = normalized.match(/[a-z0-9.]+/g) || [];
-  const remaining = normalized
-    .replace(/请|给出|告诉我|哪些|有什么|值得关注|气候|情报|近期|最近|今日|今天|当天|简报|本周|一周|近七天|最近7天|信息|动态|的/g, " ");
-  const chinese = remaining.match(/[\u4e00-\u9fff]{2,}/g) || [];
-  return [...new Set([...known, ...ascii, ...chinese].flatMap(term => expansions[term] || [term]))];
+function recordsInLatestWeek(items) {
+  const latest = latestDayItems(items)[0];
+  if (!latest) return [];
+  const latestTime = new Date(`${beijingDay(latest.published_at)}T00:00:00+08:00`).getTime();
+  return items.filter(record => {
+    const value = new Date(record.published_at).getTime();
+    return Number.isFinite(value) && value >= latestTime - 6 * 86400000 && value < latestTime + 86400000;
+  });
 }
 
-function answerRecords(query) {
-  const all = state.archive.records || [];
-  const wantsToday = /今日|今天|当天|简报/.test(query);
-  const wantsWeek = /本周|一周|近七天|最近7天/.test(query);
-  let candidates = wantsToday ? latestDayItems(all) : all;
-  if (wantsWeek) {
-    const latest = latestDayItems(all)[0];
-    const latestTime = latest ? new Date(`${beijingDay(latest.published_at)}T00:00:00+08:00`).getTime() : 0;
-    candidates = all.filter(record => {
-      const value = new Date(record.published_at).getTime();
-      return Number.isFinite(value) && value >= latestTime - 6 * 86400000 && value < latestTime + 86400000;
-    });
+function termMatches(text, term) {
+  const normalized = text.toLowerCase();
+  if (/[a-z]/.test(term) && !/[\u4e00-\u9fff]/.test(term)) {
+    const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`).test(normalized);
   }
-  const terms = queryTerms(query).filter(term => !/^(请|给出|哪些|气候|情报|近期|最近|今日|今天|简报|本周)$/.test(term));
-  const ranked = candidates.map(record => {
-    const text = recordText(record);
-    const score = terms.reduce((sum, term) => sum + (text.includes(term) ? 12 : 0), 0)
-      + Number(record.relevance_score || 0) / 10;
-    return { record, score };
-  }).filter(item => !terms.length || item.score > Number(item.record.relevance_score || 0) / 10)
-    .sort((a, b) => b.score - a.score || String(b.record.published_at).localeCompare(String(a.record.published_at)));
-  return ranked.slice(0, wantsToday ? 12 : 5).map(item => item.record);
+  return normalized.includes(term);
+}
+
+function detectConcepts(text, concepts) {
+  return concepts.filter(concept => concept.terms.some(term => termMatches(text, term)));
+}
+
+function planQuestion(query) {
+  const normalized = query.toLowerCase().replace(/[？?！，。；：、]/g, " ");
+  let entities = detectConcepts(normalized, COUNTRY_CONCEPTS);
+  if (/中美|美中/.test(normalized)) {
+    entities = COUNTRY_CONCEPTS.filter(concept => ["中国", "美国"].includes(concept.name));
+  }
+  const topics = detectConcepts(normalized, TOPIC_CONCEPTS);
+  const isFollowUp = /这些|上述|其中|前述|继续|它们|前者|后者|第[一二三四五六七八12345678]条/.test(normalized);
+  let scope = /今日|今天|当天/.test(normalized) ? "today"
+    : (/本周|一周|近七天|最近7天/.test(normalized) ? "week" : "archive");
+  if (isFollowUp && state.assistant.lastPlan && !/今日|今天|当天|本周|一周|近七天|最近7天|历史|档案/.test(normalized)) {
+    scope = state.assistant.lastPlan.scope;
+  }
+  const intent = /比较|对比|差异|异同|中美|美中/.test(normalized) ? "compare"
+    : (/趋势|演变|变化|进展|时间线/.test(normalized) ? "trend"
+      : (/意味着|影响|含义|谈判|政策|风险|启示/.test(normalized) ? "implication"
+        : (/简报|重点|概览|综述/.test(normalized) ? "brief" : "search")));
+  const countMatch = normalized.match(/(\d+)\s*(?:条|项|个)/);
+  const limit = Math.max(1, Math.min(8, countMatch ? Number(countMatch[1]) : (intent === "brief" ? 6 : 5)));
+  const generic = /请|给出|告诉我|哪些|有什么|值得关注|气候|情报|近期|最近|今日|今天|当天|简报|本周|一周|近七天|最近7天|信息|动态|比较|对比|趋势|政策|影响|的|和|与|中/g;
+  const residue = normalized.replace(generic, " ");
+  const rawTerms = [
+    ...(residue.match(/[a-z][a-z0-9.-]{2,}/g) || []),
+    ...(residue.match(/[\u4e00-\u9fff]{2,8}/g) || []),
+  ];
+  const terms = [...new Set([
+    ...entities.flatMap(concept => concept.terms),
+    ...topics.flatMap(concept => concept.terms),
+    ...rawTerms,
+  ])].filter(term => term.length > 1);
+  return { query, normalized, entities, topics, scope, intent, limit, terms, isFollowUp };
+}
+
+function recordMatchesConcept(record, concept) {
+  const text = recordText(record);
+  return concept.terms.some(term => termMatches(text, term));
+}
+
+function scopedRecords(plan) {
+  const all = state.archive.records || [];
+  if (plan.isFollowUp && state.assistant.lastRecords.length) return state.assistant.lastRecords;
+  if (plan.scope === "today") return latestDayItems(all);
+  if (plan.scope === "week") return recordsInLatestWeek(all);
+  return all;
+}
+
+function scoreRecord(record, plan) {
+  const titleZh = String(record.title_zh || "").toLowerCase();
+  const titleOriginal = String(record.title_original || "").toLowerCase();
+  const summary = String(record.summary_zh || "").toLowerCase();
+  const source = String(record.source_name || "").toLowerCase();
+  const topicText = (record.topics || []).join(" ").toLowerCase();
+  const placeText = (record.places || []).map(place => place.name_zh).join(" ").toLowerCase();
+  const entityHits = plan.entities.filter(concept => recordMatchesConcept(record, concept)).length;
+  const topicHits = plan.topics.filter(concept => recordMatchesConcept(record, concept)).length;
+  // A follow-up already operates on the previous evidence set. New words such
+  // as “谈判含义” describe the requested analysis and must not discard those
+  // records merely because their taxonomy lacks the same literal label.
+  if (!plan.isFollowUp && plan.entities.length && !entityHits) return -1;
+  if (!plan.isFollowUp && plan.topics.length && !topicHits) return -1;
+  let score = Number(record.relevance_score || 0) / 4 + entityHits * 34 + topicHits * 26;
+  plan.terms.forEach(term => {
+    if (termMatches(titleZh, term)) score += 14;
+    if (termMatches(titleOriginal, term)) score += 10;
+    if (termMatches(topicText, term) || termMatches(placeText, term)) score += 12;
+    if (termMatches(summary, term)) score += 5;
+    if (termMatches(source, term)) score += 2;
+  });
+  return score;
+}
+
+function selectEvidence(plan) {
+  const candidates = scopedRecords(plan);
+  const ranked = candidates.map(record => ({ record, score: scoreRecord(record, plan) }))
+    .filter(item => item.score >= 0)
+    .sort((left, right) => right.score - left.score
+      || String(right.record.published_at).localeCompare(String(left.record.published_at)));
+  const selected = [];
+  const sourceCounts = new Map();
+  const add = record => {
+    if (selected.some(item => item.record_id === record.record_id || item.canonical_url === record.canonical_url)) return;
+    const source = record.source_name || record.source_id;
+    if ((sourceCounts.get(source) || 0) >= 2) return;
+    selected.push(record);
+    sourceCounts.set(source, (sourceCounts.get(source) || 0) + 1);
+  };
+  if (plan.intent === "compare" && plan.entities.length > 1) {
+    plan.entities.forEach(concept => ranked
+      .filter(item => recordMatchesConcept(item.record, concept))
+      .slice(0, Math.max(2, Math.ceil(plan.limit / plan.entities.length)))
+      .forEach(item => add(item.record)));
+  }
+  ranked.forEach(item => { if (selected.length < plan.limit) add(item.record); });
+  return { records: selected.slice(0, plan.limit), candidateCount: candidates.length };
+}
+
+function scopeLabel(scope) {
+  return scope === "today" ? `最新发布日 ${state.dashboard.meta?.date || "待核"}`
+    : (scope === "week" ? "最近七个自然日" : "站内滚动档案");
+}
+
+function intentLabel(intent) {
+  return ({ brief: "简报归纳", compare: "样本比较", trend: "时间线", implication: "政策含义", search: "证据检索" })[intent];
+}
+
+function planHtml(plan, records) {
+  const region = plan.entities.length ? plan.entities.map(item => item.name).join(" / ") : "不限地区";
+  const topic = plan.topics.length ? plan.topics.map(item => item.name).join(" / ") : "综合议题";
+  return `<div class="chat-plan"><span>${esc(scopeLabel(plan.scope))}</span><span>${esc(region)}</span><span>${esc(topic)}</span><span>${esc(intentLabel(plan.intent))} · ${records.length} 条证据</span></div>`;
+}
+
+function evidenceList(records, { showWhy = false, chronological = false } = {}) {
+  const ordered = chronological
+    ? [...records].sort((a, b) => String(a.published_at).localeCompare(String(b.published_at)))
+    : records;
+  return `<ol class="evidence-list">${ordered.map((record, index) => `<li>
+    <b>${chronological ? esc(formatDate(record.published_at)) + " · " : ""}${esc(record.title_zh || record.title_original)}</b>
+    <p>${esc(record.summary_zh || "该条目尚无合格中文摘要。")}</p>
+    ${showWhy && record.why_zh ? `<p class="evidence-implication"><strong>关注含义：</strong>${esc(record.why_zh)}</p>` : ""}
+    <small>[${index + 1}] ${esc(record.source_name)} · ${esc(formatDate(record.published_at))}</small>
+    <a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">核验原文 ↗</a>
+  </li>`).join("")}</ol>`;
+}
+
+function topTopics(records) {
+  const counts = new Map();
+  records.flatMap(record => record.topics || []).forEach(topic => counts.set(topic, (counts.get(topic) || 0) + 1));
+  return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(item => item[0]).join("、") || "综合气候议题";
+}
+
+function comparisonHtml(plan, records) {
+  return `<div class="chat-analysis"><h4>样本对比</h4>${plan.entities.map(concept => {
+    const group = records.filter(record => recordMatchesConcept(record, concept));
+    return `<p><strong>${esc(concept.name)}：</strong>${group.length
+      ? `检索到 ${group.length} 条，主要涉及 ${esc(topTopics(group))}。`
+      : "当前时间范围内没有足够的站内证据。"}</p>`;
+  }).join("")}<p>这是对本站当前样本的比较，不代表两国全部气候行动的强弱排序。</p></div>`;
 }
 
 function addChatMessage(role, html) {
@@ -385,14 +526,23 @@ function addChatMessage(role, html) {
 
 function answerQuestion(query) {
   addChatMessage("user", `<p>${esc(query)}</p>`);
-  const records = answerRecords(query);
+  const plan = planQuestion(query);
+  const { records, candidateCount } = selectEvidence(plan);
   if (!records.length) {
-    addChatMessage("assistant", "<p>站内档案中没有找到足以回答该问题的记录。建议更换国家、议题或时间范围；系统不会用档案外信息补写答案。</p>");
+    addChatMessage("assistant", `${planHtml(plan, records)}<p>在${esc(scopeLabel(plan.scope))}的 ${candidateCount} 条候选记录中，没有找到同时满足地区和议题条件的证据。您可以放宽时间范围或去掉一个限定词；系统不会用档案外常识补写答案。</p>`);
     return;
   }
-  const scope = /今日|今天|当天|简报/.test(query) ? `最新发布日（${esc(state.dashboard.meta?.date || "时间待核")}）` : (/本周|一周|近七天|最近7天/.test(query) ? "最近七个发布日" : "站内档案");
-  const cards = records.map((record, index) => `<li><b>${index + 1}. ${esc(record.title_zh)}</b><p>${esc(record.summary_zh)}</p><small>${esc(record.source_name)} · ${esc(formatDate(record.published_at))}</small> <a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">原文 ↗</a></li>`).join("");
-  addChatMessage("assistant", `<p>根据${scope}，检索到以下高相关记录：</p><ol>${cards}</ol><p class="chat-boundary">以上为来源陈述的中文编译，请通过原文核验数字和立场。</p>`);
+  let analysis = `<p>在${esc(scopeLabel(plan.scope))}中，筛出 ${records.length} 条高相关证据，主要涉及 ${esc(topTopics(records))}。</p>`;
+  if (plan.intent === "compare" && plan.entities.length > 1) analysis += comparisonHtml(plan, records);
+  if (plan.intent === "trend") analysis += "<div class=\"chat-analysis\"><h4>时间线读法</h4><p>以下按发布时间排列，可用于观察议题推进顺序；记录数量不足时，不据此声称长期趋势已经形成。</p></div>";
+  if (plan.intent === "implication") analysis += "<div class=\"chat-analysis\"><h4>政策含义</h4><p>先列来源陈述，再列系统归纳的关注含义；后者是辅助判断，不是原文事实。</p></div>";
+  const evidence = evidenceList(records, {
+    showWhy: plan.intent === "implication",
+    chronological: plan.intent === "trend",
+  });
+  addChatMessage("assistant", `${planHtml(plan, records)}${analysis}${evidence}<p class="chat-boundary">证据边界：标题与摘要是来源内容的中文编译；比较、趋势和政策含义是基于当前站内样本的归纳。数字、承诺与立场请点击原文复核。</p>`);
+  state.assistant.lastRecords = records;
+  state.assistant.lastPlan = plan;
 }
 
 function setupAssistant() {
