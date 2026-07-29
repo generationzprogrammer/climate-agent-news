@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import math
+import re
 import uuid
 from collections import Counter
 from datetime import UTC, date, datetime, timedelta, timezone
@@ -78,29 +80,96 @@ def _continent(item: dict) -> str:
     return "全球/其他"
 
 
-def balanced_select(items: list[dict], limit: int) -> list[dict]:
-    """Keep evidence quality primary while softly reducing source/region dominance."""
-    pool = list(items)
-    if len(pool) <= limit:
-        return sorted(pool, key=lambda item: (item.get("relevance_score", 0), item.get("published_at") or ""), reverse=True)
+def _source_key(item: dict) -> str:
+    return item.get("source_name") or item.get("source_id") or "未知来源"
+
+
+def _title_units(item: dict) -> set[str]:
+    text = str(item.get("title_original") or item.get("title_zh") or "").lower()
+    latin = re.findall(r"[a-z0-9]+", text)
+    chinese = "".join(re.findall(r"[\u4e00-\u9fff]", text))
+    return set(latin) | {chinese[index:index + 2] for index in range(max(0, len(chinese) - 1))}
+
+
+def _near_duplicate(left: dict, right: dict) -> bool:
+    left_units, right_units = _title_units(left), _title_units(right)
+    if not left_units or not right_units:
+        return False
+    overlap = len(left_units & right_units) / len(left_units | right_units)
+    shorter = min(len(left_units), len(right_units))
+    containment = len(left_units & right_units) / shorter
+    return overlap >= 0.72 or (shorter >= 6 and containment >= 0.88)
+
+
+def _deduplicate_items(items: list[dict], existing: list[dict] | None = None) -> list[dict]:
+    kept = list(existing or [])
+    result: list[dict] = []
+    canonical_urls = {item.get("canonical_url") for item in kept if item.get("canonical_url")}
+    for item in sorted(
+        items,
+        key=lambda row: (row.get("relevance_score", 0), row.get("published_at") or ""),
+        reverse=True,
+    ):
+        canonical_url = item.get("canonical_url")
+        if canonical_url and canonical_url in canonical_urls:
+            continue
+        if any(_near_duplicate(item, previous) for previous in kept):
+            continue
+        result.append(item)
+        kept.append(item)
+        if canonical_url:
+            canonical_urls.add(canonical_url)
+    return result
+
+
+def balanced_select(
+    items: list[dict],
+    limit: int,
+    *,
+    already_selected: list[dict] | None = None,
+) -> list[dict]:
+    """Keep quality primary while limiting avoidable source/continent dominance."""
+    context = list(already_selected or [])
+    pool = _deduplicate_items(items, context)
     selected: list[dict] = []
-    source_counts: Counter[str] = Counter()
-    continent_counts: Counter[str] = Counter()
+    source_counts: Counter[str] = Counter(_source_key(item) for item in context)
+    continent_counts: Counter[str] = Counter(_continent(item) for item in context)
+    total_target = max(1, limit + len(context))
+    source_cap = max(2, math.ceil(total_target * 0.20))
+    continent_cap = max(3, math.ceil(total_target * 0.30))
+    unlabelled_cap = max(2, math.ceil(total_target * 0.20))
+    dated_days = [_published_day(item.get("published_at")) for item in pool + context]
+    latest_day = max((day for day in dated_days if day), default=None)
     while pool and len(selected) < limit:
+        strict = [
+            item for item in pool
+            if source_counts[_source_key(item)] < source_cap
+            and continent_counts[_continent(item)] < (
+                unlabelled_cap if _continent(item) == "未标注" else continent_cap
+            )
+        ]
+        candidates = strict or [item for item in pool if source_counts[_source_key(item)] < source_cap] or pool
+
         def adjusted(item: dict) -> tuple[float, str]:
-            source = item.get("source_name") or item.get("source_id") or "未知来源"
+            source = _source_key(item)
             continent = _continent(item)
             score = float(item.get("relevance_score") or 0)
-            score -= source_counts[source] * 9
-            score -= continent_counts[continent] * (2 if continent == "未标注" else 4)
+            score += min(8, float(item.get("authority") or 0))
+            score -= source_counts[source] * 18
+            score -= continent_counts[continent] * (6 if continent == "未标注" else 8)
             if continent not in continent_counts and continent != "未标注":
-                score += 8
+                score += 16
+            if source not in source_counts:
+                score += 7
+            published_day = _published_day(item.get("published_at"))
+            if latest_day and published_day:
+                score += max(0, 6 - (latest_day - published_day).days) * 3
             return score, item.get("published_at") or ""
 
-        choice = max(pool, key=adjusted)
+        choice = max(candidates, key=adjusted)
         pool.remove(choice)
         selected.append(choice)
-        source_counts[choice.get("source_name") or choice.get("source_id") or "未知来源"] += 1
+        source_counts[_source_key(choice)] += 1
         continent_counts[_continent(choice)] += 1
     return selected
 
@@ -111,6 +180,42 @@ def select_latest_day(items: list[dict], *, limit: int = 12) -> list[dict]:
     if not latest:
         return []
     return balanced_select([item for item, day in dated if day == latest], limit)
+
+
+def select_daily_window(
+    items: list[dict],
+    *,
+    limit: int = 10,
+    lookback_days: int = 7,
+    min_items: int = 8,
+    min_sources: int = 3,
+) -> list[dict]:
+    """Select one latest publication-ready Beijing day without mixing dates."""
+    dated = [(item, _published_day(item.get("published_at"))) for item in items]
+    latest = max((day for _, day in dated if day), default=None)
+    if not latest:
+        return []
+    first_day = latest - timedelta(days=max(0, lookback_days - 1))
+    candidates: list[tuple[date, list[dict], int, int]] = []
+    for publication_day in sorted(
+        {day for _, day in dated if day and first_day <= day <= latest},
+        reverse=True,
+    ):
+        day_items = _deduplicate_items([item for item, day in dated if day == publication_day])
+        selected = balanced_select(day_items, limit)
+        source_total = len({_source_key(item) for item in selected})
+        mapped_total = sum(bool(item.get("places")) for item in selected)
+        candidates.append((publication_day, selected, source_total, mapped_total))
+        if len(selected) >= min_items and source_total >= min_sources and mapped_total:
+            return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
+
+    if not candidates:
+        return []
+    _, selected, _, _ = max(
+        candidates,
+        key=lambda row: (min(len(row[1]), limit), row[2], row[3], row[0]),
+    )
+    return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
 
 
 def select_latest_week(items: list[dict], *, limit: int = 48) -> list[dict]:
@@ -174,7 +279,7 @@ def _publishable_candidates(db: Database) -> list[dict]:
 
 
 def _live_intelligence(db: Database) -> list[dict]:
-    return select_latest_day(_publishable_candidates(db))
+    return select_daily_window(_publishable_candidates(db))
 
 
 def publishable_intelligence(db: Database) -> list[dict]:
@@ -236,7 +341,7 @@ def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
 def apply_archive_windows(payload: dict, archive: dict) -> dict:
     """Make the public windows derive from the cumulative, quality-gated archive."""
     records = archive.get("records") or []
-    today_items = select_latest_day(records, limit=12)
+    today_items = select_daily_window(records, limit=10)
     week_items = select_latest_week(records, limit=60)
     if not today_items:
         return payload
@@ -250,6 +355,11 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
     payload["map_events"] = payload["map_events_today"]
     payload["meta"]["date"] = latest_day.isoformat() if latest_day else payload["meta"]["date"]
     payload["meta"]["latest_news_date"] = payload["meta"]["date"]
+    payload["meta"]["daily_target"] = 10
+    payload["meta"]["daily_backfilled"] = 0
+    payload["meta"]["daily_complete_day"] = True
+    payload["meta"]["daily_sources"] = len({_source_key(item) for item in today_items})
+    payload["meta"]["daily_continents"] = len({_continent(item) for item in today_items if _continent(item) != "未标注"})
     payload["metrics"]["high_priority"] = sum(item.get("relevance_score", 0) >= 70 for item in today_items)
     topics = Counter(topic for item in today_items for topic in item.get("topics", []))
     payload["topics"] = [{"name": name, "weight": count} for name, count in topics.most_common()]
@@ -267,7 +377,7 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
 def dashboard_payload(db: Database) -> dict:
     source_rows = db.rows("SELECT * FROM sources ORDER BY enabled DESC, authority DESC, name")
     candidates = _publishable_candidates(db)
-    intelligence = select_latest_day(candidates)
+    intelligence = select_daily_window(candidates)
     weekly_intelligence = select_latest_week(candidates)
     demo_rows = db.rows("SELECT * FROM events ORDER BY urgency DESC, published_at DESC")
     demo_events = sorted((decode_event(row) for row in demo_rows), key=lambda x: x["priority"], reverse=True)
@@ -312,7 +422,7 @@ def dashboard_payload(db: Database) -> dict:
             "timezone": "Asia/Shanghai",
             "demo_mode": not live,
             "notice": (
-                f"页面仅展示最近一个有有效记录的自然日；动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
+                f"今日队列展示最近一个达到质量门槛的完整自然日，约 10 条且不跨日期拼接；动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
                 if live else "尚未执行在线同步，以下事件仅用于界面演示；UNFCCC 本地档案可独立浏览。"
             ),
         },

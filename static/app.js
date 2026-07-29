@@ -39,12 +39,6 @@ function beijingDay(value) {
   return `${get("year")}-${get("month")}-${get("day")}`;
 }
 
-function latestDayItems(items) {
-  const dated = items.filter(item => beijingDay(item.published_at));
-  const latest = dated.map(item => beijingDay(item.published_at)).sort().at(-1);
-  return latest ? dated.filter(item => beijingDay(item.published_at) === latest) : [];
-}
-
 function toast(message) {
   const element = $("toast");
   if (!element) return;
@@ -80,9 +74,9 @@ function findArchiveRecord(item) {
 }
 
 function renderToday() {
-  const items = latestDayItems(state.dashboard.intelligence || [])
+  const items = (state.dashboard.intelligence || [])
     .filter(item => item.title_zh && item.summary_zh);
-  $("todayGrid").innerHTML = items.length ? items.slice(0, 8).map((item, index) => {
+  $("todayGrid").innerHTML = items.length ? items.slice(0, 10).map((item, index) => {
     const record = findArchiveRecord(item);
     return `<article class="signal-card">
       <div class="signal-index">${String(index + 1).padStart(2, "0")}</div>
@@ -310,7 +304,7 @@ async function switchMapPeriod(period) {
     button.setAttribute("aria-pressed", String(active));
   });
   const events = mapEventsFor(period);
-  $("mapRangeNote").textContent = `中国位于地图中央。红点表示${period === "today" ? "当天" : "本周"}情报明确涉及的国家或地区；点击即可查看中文摘要与原文。`;
+  $("mapRangeNote").textContent = `中国位于地图中央。红点表示${period === "today" ? "最新完整日" : "本周"}情报明确涉及的国家或地区；点击即可查看中文摘要与原文。`;
   renderMapPlaces(events);
   await renderMap(events);
 }
@@ -355,9 +349,9 @@ function recordText(record) {
 }
 
 function recordsInLatestWeek(items) {
-  const latest = latestDayItems(items)[0];
-  if (!latest) return [];
-  const latestTime = new Date(`${beijingDay(latest.published_at)}T00:00:00+08:00`).getTime();
+  const latestDay = items.map(item => beijingDay(item.published_at)).filter(Boolean).sort().at(-1);
+  if (!latestDay) return [];
+  const latestTime = new Date(`${latestDay}T00:00:00+08:00`).getTime();
   return items.filter(record => {
     const value = new Date(record.published_at).getTime();
     return Number.isFinite(value) && value >= latestTime - 6 * 86400000 && value < latestTime + 86400000;
@@ -418,7 +412,7 @@ function recordMatchesConcept(record, concept) {
 function scopedRecords(plan) {
   const all = state.archive.records || [];
   if (plan.isFollowUp && state.assistant.lastRecords.length) return state.assistant.lastRecords;
-  if (plan.scope === "today") return latestDayItems(all);
+  if (plan.scope === "today") return state.dashboard.intelligence || [];
   if (plan.scope === "week") return recordsInLatestWeek(all);
   return all;
 }
@@ -474,7 +468,7 @@ function selectEvidence(plan) {
 }
 
 function scopeLabel(scope) {
-  return scope === "today" ? `最新发布日 ${state.dashboard.meta?.date || "待核"}`
+  return scope === "today" ? `最新完整日（${state.dashboard.meta?.date || "待核"}，单日约10条）`
     : (scope === "week" ? "最近七个自然日" : "站内滚动档案");
 }
 
@@ -570,10 +564,8 @@ async function init() {
   applyFilters();
   setupAssistant();
   setupMapPeriods();
-  const events = mapEventsFor("today");
-  renderMapPlaces(events);
   try {
-    await renderMap(events);
+    await switchMapPeriod("today");
   } catch (error) {
     console.error("Map rendering failed", error);
     $("mapLoading").innerHTML = '<b>地图底图暂未载入</b><span>仍可点击下方地点查看今日气候情报。</span>';
