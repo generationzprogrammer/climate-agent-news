@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 from climate_agent.archive import quality_result, update_archive, validate_public_payload
-from climate_agent.briefing import dashboard_payload, render_markdown, save_brief
+from climate_agent.briefing import dashboard_payload, render_markdown, save_brief, select_latest_day, select_latest_week
 from climate_agent.cli import ROOT, bootstrap
 from climate_agent.collector import parse_feed, parse_gdelt
 from climate_agent.db import Database
@@ -15,7 +15,8 @@ from climate_agent.delivery import build_push_message
 from climate_agent.exporter import export_static_site
 from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
-from climate_agent.translation import detect_places
+from climate_agent.source_health import source_is_due, update_source_health
+from climate_agent.translation import detect_places, source_balanced_rows
 
 
 class CoreTests(unittest.TestCase):
@@ -46,13 +47,13 @@ class CoreTests(unittest.TestCase):
 
     def test_bootstrap_is_idempotent(self) -> None:
         bootstrap(self.db)
-        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], 46)
+        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], 48)
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM events")[0]["n"], 3)
 
     def test_dashboard_reconciles_source_counts(self) -> None:
         payload = dashboard_payload(self.db)
-        self.assertEqual(payload["metrics"]["source_total"], 46)
-        self.assertEqual(payload["metrics"]["source_enabled"], 25)
+        self.assertEqual(payload["metrics"]["source_total"], 48)
+        self.assertEqual(payload["metrics"]["source_enabled"], 27)
         self.assertEqual(len(payload["events"]), 3)
         self.assertGreaterEqual(payload["events"][0]["priority"], payload["events"][-1]["priority"])
 
@@ -127,6 +128,8 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / ".nojekyll").exists())
         self.assertTrue((output_dir / "assets" / "countries-110m.json").exists())
         self.assertTrue((output_dir / "data" / "news_archive.json").exists())
+        self.assertTrue((output_dir / "data" / "daily_brief.pdf").read_bytes().startswith(b"%PDF-1.4"))
+        self.assertIn("map_events_week", payload)
         self.assertEqual(result["quality_gate"], "passed")
         self.assertEqual(result["articles"], len(payload["intelligence"]))
 
@@ -154,6 +157,11 @@ class CoreTests(unittest.TestCase):
         self.assertNotIn("A · 人工校编", html)
         self.assertNotIn("B · AI 编译待复核", html)
         self.assertIn('id="mapPlaceList"', html)
+        self.assertIn('data-map-period="today"', html)
+        self.assertIn('data-map-period="week"', html)
+        self.assertIn('id="assistant"', html)
+        self.assertIn("下载今日简报", html)
+        self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
         self.assertIn("CLIMATETEXT-3000", html)
         self.assertLess(html.index('id="map"'), html.index('class="hero"'))
@@ -176,6 +184,36 @@ class CoreTests(unittest.TestCase):
         self.assertIn("models: read", workflow)
         self.assertIn("contents: write", workflow)
         self.assertIn("data/news_archive.json", workflow)
+        self.assertIn("data/source_health.json", workflow)
+
+    def test_latest_day_and_week_use_beijing_calendar(self) -> None:
+        rows = [
+            {"published_at": "2026-07-20T15:59:00+00:00", "source_id": "A", "relevance_score": 90},
+            {"published_at": "2026-07-20T16:01:00+00:00", "source_id": "B", "relevance_score": 80},
+            {"published_at": "2026-07-13T16:01:00+00:00", "source_id": "C", "relevance_score": 70},
+        ]
+        self.assertEqual(select_latest_day(rows), [rows[1]])
+        self.assertEqual({row["source_id"] for row in select_latest_week(rows)}, {"A", "B"})
+
+    def test_translation_queue_round_robins_sources(self) -> None:
+        rows = [
+            {"article_id": "a1", "source_id": "A"},
+            {"article_id": "a2", "source_id": "A"},
+            {"article_id": "b1", "source_id": "B"},
+            {"article_id": "c1", "source_id": "C"},
+        ]
+        selected = source_balanced_rows(rows, 3)
+        self.assertEqual([row["source_id"] for row in selected], ["A", "B", "C"])
+
+    def test_source_health_quarantines_only_after_repeated_failures(self) -> None:
+        state = {"sources": {}}
+        for _ in range(6):
+            update_source_health(state, [{"source_id": "X", "status": "failed", "error": "403"}])
+        self.assertTrue(source_is_due(state, "X"))
+        update_source_health(state, [{"source_id": "X", "status": "failed", "error": "403"}])
+        self.assertFalse(source_is_due(state, "X"))
+        update_source_health(state, [{"source_id": "X", "status": "success", "error": None}])
+        self.assertTrue(source_is_due(state, "X"))
 
 
 if __name__ == "__main__":

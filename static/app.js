@@ -1,4 +1,7 @@
-const state = { dashboard: null, archive: null, filtered: [], visible: 18 };
+const state = {
+  dashboard: null, archive: null, filtered: [], visible: 18,
+  mapPeriod: "today", mapTopology: null,
+};
 const $ = id => document.getElementById(id);
 const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;",
@@ -24,6 +27,23 @@ function formatDate(value, withTime = false) {
     : { year: "numeric", month: "2-digit", day: "2-digit" });
 }
 
+function beijingDay(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(date);
+  const get = type => parts.find(part => part.type === type)?.value || "";
+  return `${get("year")}-${get("month")}-${get("day")}`;
+}
+
+function latestDayItems(items) {
+  const dated = items.filter(item => beijingDay(item.published_at));
+  const latest = dated.map(item => beijingDay(item.published_at)).sort().at(-1);
+  return latest ? dated.filter(item => beijingDay(item.published_at) === latest) : [];
+}
+
 function toast(message) {
   const element = $("toast");
   if (!element) return;
@@ -41,13 +61,15 @@ async function fetchJson(url) {
 function renderMeta() {
   const dashboard = state.dashboard;
   const archive = state.archive;
-  const events = dashboard.map_events || [];
+  const events = dashboard.map_events_today || dashboard.map_events || [];
   const uniquePlaces = new Set(events.map(item => item.place).filter(Boolean));
   $("archiveTotal").textContent = archive.total ?? 0;
   $("todayTotal").textContent = (dashboard.intelligence || []).length;
   $("mapPlaceTotal").textContent = uniquePlaces.size;
   $("datasetVersion").textContent = formatDate(archive.updated_at, true);
   $("generatedAt").textContent = `最近生成：${formatDate(dashboard.meta?.generated_at, true)}`;
+  const briefLink = $("briefDownload");
+  if (briefLink) briefLink.download = `国际气候情报今日简报-${dashboard.meta?.date || "latest"}.pdf`;
 }
 
 function findArchiveRecord(item) {
@@ -57,7 +79,8 @@ function findArchiveRecord(item) {
 }
 
 function renderToday() {
-  const items = (state.dashboard.intelligence || []).filter(item => item.title_zh && item.summary_zh);
+  const items = latestDayItems(state.dashboard.intelligence || [])
+    .filter(item => item.title_zh && item.summary_zh);
   $("todayGrid").innerHTML = items.length ? items.slice(0, 8).map((item, index) => {
     const record = findArchiveRecord(item);
     return `<article class="signal-card">
@@ -177,8 +200,27 @@ function geometryPath(topology, geometry) {
   return "";
 }
 
+function spreadMarkerPositions(events) {
+  const placed = [];
+  return events.map((item, index) => {
+    const origin = centeredPoint(Number(item.lon), Number(item.lat));
+    let [x, y] = origin;
+    let attempt = 0;
+    while (placed.some(point => Math.hypot(point.x - x, point.y - y) < 19) && attempt < 40) {
+      attempt += 1;
+      const angle = index * 2.39996 + attempt * 1.618;
+      const radius = 9 * Math.sqrt(attempt);
+      x = Math.max(12, Math.min(988, origin[0] + Math.cos(angle) * radius));
+      y = Math.max(12, Math.min(488, origin[1] + Math.sin(angle) * radius));
+    }
+    placed.push({ x, y });
+    return { item, x, y, originX: origin[0], originY: origin[1] };
+  });
+}
+
 async function renderMap(events) {
-  const topology = await fetchJson(new URL("./assets/countries-110m.json", document.baseURI).href);
+  const topology = state.mapTopology || await fetchJson(new URL("./assets/countries-110m.json", document.baseURI).href);
+  state.mapTopology = topology;
   if (!topology?.objects?.countries?.geometries?.length) throw new Error("invalid map topology");
   const svg = $("worldMap");
   svg.replaceChildren();
@@ -203,11 +245,13 @@ async function renderMap(events) {
   chinaLabel.textContent = "中国";
   svg.appendChild(chinaLabel);
 
-  events.forEach((item, index) => {
+  spreadMarkerPositions(events).forEach(({ item, x, y, originX, originY }, index) => {
     const longitude = Number(item.lon);
     const latitude = Number(item.lat);
     if (!Number.isFinite(longitude) || !Number.isFinite(latitude)) return;
-    const [x, y] = centeredPoint(longitude, latitude);
+    if (Math.hypot(x - originX, y - originY) > 4) {
+      svg.appendChild(svgEl("line", { x1: originX, y1: originY, x2: x, y2: y, class: "event-stem" }));
+    }
     const pin = svgEl("g", {
       class: "event-pin", tabindex: "0", role: "button", "data-marker": item.marker_id,
       "aria-label": `${item.place}：${item.title_zh}`,
@@ -245,11 +289,122 @@ function selectMapEvent(item) {
 function renderMapPlaces(events) {
   $("mapPlaceList").innerHTML = events.length
     ? events.map(item => `<button type="button" data-map-id="${esc(item.marker_id)}"><i></i>${esc(item.place)}<span>${esc(item.theme)}</span></button>`).join("")
-    : "<span>今日暂无带有明确地理位置的新记录。</span>";
+    : `<span>${state.mapPeriod === "today" ? "当天" : "本周"}暂无带有明确地理位置的新记录。</span>`;
   document.querySelectorAll("[data-map-id]").forEach(button => button.addEventListener("click", () => {
     const item = events.find(event => event.marker_id === button.dataset.mapId);
     if (item) selectMapEvent(item);
   }));
+}
+
+function mapEventsFor(period) {
+  if (period === "week") return state.dashboard.map_events_week || [];
+  return state.dashboard.map_events_today || state.dashboard.map_events || [];
+}
+
+async function switchMapPeriod(period) {
+  state.mapPeriod = period;
+  document.querySelectorAll("[data-map-period]").forEach(button => {
+    const active = button.dataset.mapPeriod === period;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  const events = mapEventsFor(period);
+  $("mapRangeNote").textContent = `中国位于地图中央。红点表示${period === "today" ? "当天" : "本周"}情报明确涉及的国家或地区；点击即可查看中文摘要与原文。`;
+  renderMapPlaces(events);
+  await renderMap(events);
+}
+
+function setupMapPeriods() {
+  const todayEvents = mapEventsFor("today");
+  const weekEvents = mapEventsFor("week");
+  $("todayMapCount").textContent = todayEvents.length;
+  $("weekMapCount").textContent = weekEvents.length;
+  document.querySelectorAll("[data-map-period]").forEach(button => {
+    button.addEventListener("click", () => switchMapPeriod(button.dataset.mapPeriod).catch(error => {
+      console.error("Map period switch failed", error);
+      toast("地图切换失败，请刷新页面重试。");
+    }));
+  });
+}
+
+function recordText(record) {
+  return [
+    record.title_zh, record.title_original, record.summary_zh, record.source_name,
+    ...(record.topics || []), ...(record.places || []).map(place => place.name_zh),
+  ].join(" ").toLowerCase();
+}
+
+function queryTerms(query) {
+  const normalized = query.toLowerCase().replace(/[？?，。；：、]/g, " ");
+  const expansions = {
+    "美国": ["美国", "united states", "u.s.", "texas"],
+    "拉丁美洲": ["拉丁美洲", "南美", "巴西", "亚马孙", "latin america", "brazil", "amazon"],
+    "南极": ["南极", "antarctic", "antarctica"],
+    "资金": ["资金", "气候资金", "finance", "fund"],
+    "减排": ["减排", "排放", "emission", "mitigation"],
+  };
+  const known = Object.keys(expansions).filter(term => normalized.includes(term));
+  const ascii = normalized.match(/[a-z0-9.]+/g) || [];
+  const remaining = normalized
+    .replace(/请|给出|告诉我|哪些|有什么|值得关注|气候|情报|近期|最近|今日|今天|当天|简报|本周|一周|近七天|最近7天|信息|动态|的/g, " ");
+  const chinese = remaining.match(/[\u4e00-\u9fff]{2,}/g) || [];
+  return [...new Set([...known, ...ascii, ...chinese].flatMap(term => expansions[term] || [term]))];
+}
+
+function answerRecords(query) {
+  const all = state.archive.records || [];
+  const wantsToday = /今日|今天|当天|简报/.test(query);
+  const wantsWeek = /本周|一周|近七天|最近7天/.test(query);
+  let candidates = wantsToday ? latestDayItems(all) : all;
+  if (wantsWeek) {
+    const latest = latestDayItems(all)[0];
+    const latestTime = latest ? new Date(`${beijingDay(latest.published_at)}T00:00:00+08:00`).getTime() : 0;
+    candidates = all.filter(record => {
+      const value = new Date(record.published_at).getTime();
+      return Number.isFinite(value) && value >= latestTime - 6 * 86400000 && value < latestTime + 86400000;
+    });
+  }
+  const terms = queryTerms(query).filter(term => !/^(请|给出|哪些|气候|情报|近期|最近|今日|今天|简报|本周)$/.test(term));
+  const ranked = candidates.map(record => {
+    const text = recordText(record);
+    const score = terms.reduce((sum, term) => sum + (text.includes(term) ? 12 : 0), 0)
+      + Number(record.relevance_score || 0) / 10;
+    return { record, score };
+  }).filter(item => !terms.length || item.score > Number(item.record.relevance_score || 0) / 10)
+    .sort((a, b) => b.score - a.score || String(b.record.published_at).localeCompare(String(a.record.published_at)));
+  return ranked.slice(0, wantsToday ? 12 : 5).map(item => item.record);
+}
+
+function addChatMessage(role, html) {
+  const article = document.createElement("article");
+  article.className = `chat-message ${role}`;
+  article.innerHTML = `<span>${role === "user" ? "您" : "情报助手"}</span><div>${html}</div>`;
+  $("chatLog").appendChild(article);
+  $("chatLog").scrollTop = $("chatLog").scrollHeight;
+}
+
+function answerQuestion(query) {
+  addChatMessage("user", `<p>${esc(query)}</p>`);
+  const records = answerRecords(query);
+  if (!records.length) {
+    addChatMessage("assistant", "<p>站内档案中没有找到足以回答该问题的记录。建议更换国家、议题或时间范围；系统不会用档案外信息补写答案。</p>");
+    return;
+  }
+  const scope = /今日|今天|当天|简报/.test(query) ? `最新发布日（${esc(state.dashboard.meta?.date || "时间待核")}）` : (/本周|一周|近七天|最近7天/.test(query) ? "最近七个发布日" : "站内档案");
+  const cards = records.map((record, index) => `<li><b>${index + 1}. ${esc(record.title_zh)}</b><p>${esc(record.summary_zh)}</p><small>${esc(record.source_name)} · ${esc(formatDate(record.published_at))}</small> <a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">原文 ↗</a></li>`).join("");
+  addChatMessage("assistant", `<p>根据${scope}，检索到以下高相关记录：</p><ol>${cards}</ol><p class="chat-boundary">以上为来源陈述的中文编译，请通过原文核验数字和立场。</p>`);
+}
+
+function setupAssistant() {
+  $("chatForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const input = $("chatInput");
+    const query = input.value.trim();
+    if (!query) return;
+    input.value = "";
+    answerQuestion(query);
+  });
+  document.querySelectorAll("[data-prompt]").forEach(button => button.addEventListener("click", () => answerQuestion(button.dataset.prompt)));
 }
 
 async function init() {
@@ -263,7 +418,9 @@ async function init() {
   renderToday();
   setupFilters();
   applyFilters();
-  const events = dashboard.map_events || [];
+  setupAssistant();
+  setupMapPeriods();
+  const events = mapEventsFor("today");
   renderMapPlaces(events);
   try {
     await renderMap(events);

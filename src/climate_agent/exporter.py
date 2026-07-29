@@ -5,8 +5,9 @@ import shutil
 from pathlib import Path
 
 from .archive import DEFAULT_ARCHIVE_LIMIT, update_archive, validate_public_payload
-from .briefing import dashboard_payload, publishable_intelligence, render_markdown
+from .briefing import apply_archive_windows, dashboard_payload, publishable_intelligence, render_markdown
 from .db import Database
+from .pdf_brief import write_daily_brief_pdf
 
 
 def export_static_site(
@@ -21,6 +22,7 @@ def export_static_site(
     payload = dashboard_payload(db)
     archive_path = archive_path or db.path.parent / "news_archive.json"
     archive = update_archive(archive_path, publishable_intelligence(db), limit=archive_limit)
+    payload = apply_archive_windows(payload, archive)
     payload["archive"] = {
         "dataset_name": archive["dataset_name"],
         "updated_at": archive["updated_at"],
@@ -41,6 +43,7 @@ def export_static_site(
         json.dumps(archive, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     (data_dir / "daily_brief.md").write_text(render_markdown(payload), encoding="utf-8")
+    pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief.pdf")
     output_dir.mkdir(parents=True, exist_ok=True)
     shutil.copytree(static_dir, output_dir, dirs_exist_ok=True)
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
@@ -49,7 +52,9 @@ def export_static_site(
         "dashboard": str(dashboard_path),
         "articles": len(payload.get("intelligence", [])),
         "map_markers": len(payload.get("map_events", [])),
+        "week_map_markers": len(payload.get("map_events_week", [])),
         "phrases": len(payload.get("phrases", [])),
+        "pdf": str(pdf_path),
         "archive_total": archive["total"],
         "archive_added": archive["statistics"]["added"],
         "quality_gate": "passed",

@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths-ignore:
       - "data/news_archive.json"
+      - "data/source_health.json"
   workflow_dispatch:
     inputs:
       send_notification:
@@ -50,12 +51,12 @@ jobs:
           python -m climate_agent.cli export-web --output site --archive-limit 3000
           python -m climate_agent.cli validate-publish --site site
           cp site/data/news_archive.json data/news_archive.json
-      - name: 保存 3000 条滚动档案
+      - name: 保存滚动档案与来源健康状态
         shell: bash
         run: |
           git config user.name "climate-text-bot"
           git config user.email "climate-text-bot@users.noreply.github.com"
-          git add data/news_archive.json
+          git add data/news_archive.json data/source_health.json
           if ! git diff --cached --quiet; then
             git commit -m "data: daily climate text archive [skip ci]"
             git push

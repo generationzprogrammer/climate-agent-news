@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>ClimateText Lab｜国际气候情报与文本数据库</title>
-  <link rel="stylesheet" href="./styles.css?v=20260721-2">
+  <link rel="stylesheet" href="./styles.css?v=20260729-1">
 </head>
 <body>
   <header class="topbar">
@@ -17,19 +17,24 @@
     <nav aria-label="页面导航">
       <a href="#map">全球现场</a>
       <a href="#today">今日情报</a>
+      <a href="#assistant">情报问答</a>
       <a href="#database">文本数据库</a>
     </nav>
-    <a class="data-download" href="./data/news_archive.json" download>下载数据 JSON</a>
+    <a class="data-download" id="briefDownload" href="./data/daily_brief.pdf" download>下载今日简报</a>
   </header>
 
   <main id="top">
     <section class="section map-section map-section-lead" id="map">
       <div class="section-heading">
         <div><p class="overline">GLOBAL CLIMATE SITUATION</p><h1>全球气候现场</h1></div>
-        <p>中国位于地图中央。红点表示今日情报明确涉及的国家或地区；点击即可查看中文摘要与原文。</p>
+        <p id="mapRangeNote">中国位于地图中央。红点表示所选时段内情报明确涉及的国家或地区；点击即可查看中文摘要与原文。</p>
       </div>
       <div class="map-layout">
         <div class="map-canvas" id="mapCanvas">
+          <div class="map-period-toggle" role="group" aria-label="地图情报时段">
+            <button class="active" type="button" data-map-period="today">当天 <span id="todayMapCount">0</span></button>
+            <button type="button" data-map-period="week">本周 <span id="weekMapCount">0</span></button>
+          </div>
           <svg id="worldMap" viewBox="0 0 1000 500" role="img" aria-label="中国居中的全球气候事件地图">
             <rect width="1000" height="500" class="map-base"></rect>
             <text x="500" y="250" text-anchor="middle" class="map-initial-text">正在绘制全球气候事件地图…</text>
@@ -73,6 +78,35 @@
       <div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
     </section>
 
+    <section class="section assistant-section" id="assistant">
+      <div class="section-heading">
+        <div><p class="overline">GROUNDED CLIMATE Q&amp;A</p><h2>气候情报问答</h2></div>
+        <p>回答仅检索站内已归档的中文气候情报，并附上来源链接；不会把模型常识冒充为当日事实。</p>
+      </div>
+      <div class="assistant-shell">
+        <aside class="assistant-intro">
+          <span class="assistant-status"><i></i> 站内档案已连接</span>
+          <h3>从今天的简报开始</h3>
+          <p>可询问某个国家、地区、议题或时间范围。若档案中没有证据，系统会明确说明。</p>
+          <div class="quick-prompts" aria-label="常用问题">
+            <button type="button" data-prompt="请给出今日简报">今日简报</button>
+            <button type="button" data-prompt="本周有哪些值得关注的气候情报？">本周重点</button>
+            <button type="button" data-prompt="美国近期有哪些气候情报？">美国</button>
+            <button type="button" data-prompt="近期有哪些气候资金信息？">气候资金</button>
+          </div>
+        </aside>
+        <div class="chat-panel">
+          <div class="chat-log" id="chatLog" aria-live="polite">
+            <article class="chat-message assistant"><span>情报助手</span><p>您好。我可以基于本站最多 3000 条中文气候情报，为您整理今日简报或检索具体议题。</p></article>
+          </div>
+          <form class="chat-form" id="chatForm">
+            <label for="chatInput">向气候情报库提问</label>
+            <div><input id="chatInput" autocomplete="off" maxlength="120" placeholder="例如：本周拉丁美洲有哪些重要动态？"><button type="submit">发送</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <section class="section database-section" id="database">
       <div class="section-heading">
         <div><p class="overline">TEXT DATABASE</p><h2>气候新闻文本数据库</h2></div>
@@ -96,9 +130,9 @@
 
   <footer>
     <div><b>ClimateText Lab</b><span>国际气候情报与高质量中文文本数据库</span></div>
-    <div><a href="./data/news_archive.json">数据集</a><a href="./data/daily_brief.md">每日简报</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
+    <div><a href="./data/daily_brief.pdf">下载今日简报</a><a href="./data/news_archive.json">开放数据</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
   </footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260721-2" defer></script>
+  <script src="./app.js?v=20260729-1" defer></script>
 </body>
 </html>

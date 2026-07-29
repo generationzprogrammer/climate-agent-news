@@ -30,6 +30,23 @@ GEO_TERMS = {
     "france": ("法国", 2.0, 46.0),
     "philippines": ("菲律宾", 122.0, 13.0),
     "uganda": ("乌干达", 32.0, 1.0),
+    "mexico": ("墨西哥", -102.0, 23.0),
+    "latin america": ("拉丁美洲", -66.0, -15.0),
+    "amazon": ("亚马孙地区", -62.0, -4.0),
+    "argentina": ("阿根廷", -64.0, -34.0),
+    "chile": ("智利", -71.0, -33.0),
+    "peru": ("秘鲁", -76.0, -10.0),
+    "colombia": ("哥伦比亚", -74.0, 4.0),
+    "antarctica": ("南极洲", 0.0, -78.0),
+    "antarctic": ("南极洲", 0.0, -78.0),
+    "greenland": ("格陵兰", -42.0, 72.0),
+    "new zealand": ("新西兰", 174.0, -41.0),
+    "pacific islands": ("太平洋岛国", 165.0, -10.0),
+    "south africa": ("南非", 24.0, -29.0),
+    "kenya": ("肯尼亚", 37.0, 0.0),
+    "nigeria": ("尼日利亚", 8.0, 9.0),
+    "japan": ("日本", 138.0, 37.0),
+    "south korea": ("韩国", 128.0, 36.0),
 }
 
 
@@ -44,14 +61,33 @@ def detect_places(text: str) -> list[dict]:
     return places[:3]
 
 
+def source_balanced_rows(rows: list[dict], limit: int) -> list[dict]:
+    """Preserve quality order while preventing one publisher from filling the queue."""
+    buckets: dict[str, list[dict]] = {}
+    order: list[str] = []
+    for row in rows:
+        source_id = row.get("source_id") or "unknown"
+        if source_id not in buckets:
+            buckets[source_id] = []
+            order.append(source_id)
+        buckets[source_id].append(row)
+    selected: list[dict] = []
+    while len(selected) < limit and any(buckets.values()):
+        for source_id in order:
+            if buckets[source_id] and len(selected) < limit:
+                selected.append(buckets[source_id].pop(0))
+    return selected
+
+
 def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int = 20) -> dict:
     rows = db.rows("""
-        SELECT article_id,title_original,summary_source,canonical_url,metadata_json
+        SELECT article_id,source_id,title_original,summary_source,canonical_url,metadata_json
         FROM articles
         WHERE (title_zh IS NULL OR trim(title_zh)='')
           AND datetime(published_at_utc) >= datetime('now','-7 days')
         ORDER BY relevance_score DESC,published_at_utc DESC LIMIT ?
-    """, (limit,))
+    """, (max(limit * 4, limit),))
+    rows = source_balanced_rows(rows, limit)
     translated = 0
     failed = []
     system = """你是面向中国资深气候政策与外交工作者的中文编译编辑。把输入新闻准确、克制地编译为中文。

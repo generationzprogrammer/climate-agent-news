@@ -69,6 +69,7 @@ def _record(item: dict, now: str, previous: dict | None = None) -> dict:
         "source_name": item.get("source_name"),
         "source_type": item.get("source_type"),
         "authority": int(item.get("authority") or 0),
+        "relevance_score": int(item.get("relevance_score") or 0),
         "title_original": item.get("title_original"),
         "title_zh": item.get("title_zh"),
         "summary_source": item.get("summary_source"),
@@ -130,6 +131,11 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
         for record in existing.get("records", [])
         if record.get("canonical_url")
     }
+    for record in by_url.values():
+        # Schema 1.0 archives created before 2026-07-29 did not persist this
+        # public ranking field. The stored quality score is the safest
+        # deterministic migration value and remains above the public gate.
+        record.setdefault("relevance_score", int(record.get("quality", {}).get("score") or 45))
     before = len(by_url)
     added = updated = rejected = 0
     now = datetime.now(UTC).isoformat()

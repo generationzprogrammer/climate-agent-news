@@ -15,6 +15,7 @@ from .exporter import export_static_site
 from .official_data import import_curated_unfccc, import_ndcs
 from .providers import OpenAICompatibleModel, publish_email, publish_file, publish_wecom
 from .sync import P0_SOURCE_IDS, sync_p0
+from .source_health import load_source_health, save_source_health, source_is_due, update_source_health
 from .translation import translate_pending
 from .web import serve
 
@@ -44,8 +45,8 @@ def parser() -> argparse.ArgumentParser:
     collect = sub.add_parser("collect", help="试运行一个已配置的 RSS/Atom 来源")
     collect.add_argument("source_id")
     collect.add_argument("--limit", type=int, default=10)
-    sync = sub.add_parser("sync", help="同步 8 个 P0 RSS/API，并导入 UNFCCC/NDC 档案")
-    sync.add_argument("--skip-news", action="store_true", help="不抓取 8 个 P0 新闻入口")
+    sync = sub.add_parser("sync", help="同步动态 P0 RSS/API，并导入 UNFCCC/NDC 档案")
+    sync.add_argument("--skip-news", action="store_true", help="不抓取 P0 新闻入口")
     sync.add_argument("--skip-ndc", action="store_true", help="不更新 NDC 版本档案")
     sync.add_argument("--cutoff-year", type=int, help="NDC 最早提交年份，默认当前年份减 10")
     sync.add_argument("--source", action="append", choices=P0_SOURCE_IDS, help="只重试指定 P0 来源，可重复使用")
@@ -92,7 +93,17 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "sync":
         result = {"status": "ok", "official": import_curated_unfccc(db, ROOT / "config")}
         if not args.skip_news:
-            result["p0"] = sync_p0(db, tuple(args.source) if args.source else P0_SOURCE_IDS)
+            health_path = ROOT / "data" / "source_health.json"
+            health = load_source_health(health_path)
+            requested = tuple(args.source) if args.source else tuple(
+                source_id for source_id in P0_SOURCE_IDS if source_is_due(health, source_id)
+            )
+            result["p0"] = sync_p0(db, requested)
+            update_source_health(health, result["p0"]["results"])
+            save_source_health(health_path, health)
+            result["p0"]["quarantined"] = [
+                source_id for source_id in P0_SOURCE_IDS if not source_is_due(health, source_id)
+            ]
             if result["p0"]["status"] != "ok":
                 result["status"] = "partial"
         if not args.skip_ndc:

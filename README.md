@@ -4,9 +4,11 @@
 
 ## 网站现在呈现什么
 
-- 置顶的全球气候现场：中国位于地图中央，红点仅标记文本明确涉及的国家或地区，点击显示中文概要和原文入口。
-- 今日重要气候情报：中文标题、完整中文概要、议题、来源、发布时间和原文链接。
+- 置顶的全球气候现场：中国位于地图中央，可切换“当天 / 本周”；红点仅标记文本明确涉及的国家或地区，并通过自动错位避免密集点遮挡。
+- 今日重要气候情报：只展示最近一个有合格记录的北京时间自然日，包含中文标题、完整中文概要、议题、来源、发布时间和原文链接。
+- 气候情报问答：浏览器内检索站内档案并附原文，不需要 API 密钥，也不会用档案外知识补写当日事实。
 - ClimateText-3000 文本数据库：支持关键词与议题检索；按规范 URL 去重后最多保留 3000 条。
+- 今日 PDF 简报：与页面和问答中的“今日简报”使用同一批最新日记录，可直接下载阅读。
 
 网页不展示 Agent 流水线、P0 接入状态、新闻元数据、相关度分数、A/B 审核等级、内部质量方法等后台信息；这些字段仍保留在数据库中，供审计和编辑使用。
 
@@ -20,7 +22,7 @@
 
 打开 <http://127.0.0.1:8765>。
 
-同步 8 个 P0 RSS/API，并更新新闻快照：
+同步动态 P0 RSS/API，并更新新闻快照：
 
 ```powershell
 .\run.ps1 sync --skip-ndc
@@ -36,7 +38,7 @@
 .\run.ps1 export-web --output dist
 ```
 
-`dist/` 可直接上传到 GitHub Pages、Cloudflare Pages、Netlify 或任意静态文件服务器。静态数据位于 `static/data/dashboard.json`，简报位于 `static/data/daily_brief.md`。
+`dist/` 可直接上传到 GitHub Pages、Cloudflare Pages、Netlify 或任意静态文件服务器。静态数据位于 `static/data/dashboard.json`，PDF 简报位于 `static/data/daily_brief.pdf`。
 
 ## 发布到 GitHub Pages
 
@@ -61,13 +63,14 @@ CLIMATE_MODEL_NAME
 
 ## 每日更新与 3000 条档案
 
-1. 8 个 P0 RSS/API 各自限时、有限重试；单源失败不阻塞其他来源。
+1. P0 RSS/API 各自限时、有限重试；单源失败不阻塞其他来源。连续失败 3 次进入观察，7 次进入隔离；隔离来源每 7 天自动复测，恢复后自动启用。
 2. 新文章执行 URL 规范化、未来时间剔除、主题与相关性评分。
 3. GitHub Models 将最近新记录编译为中文结构化字段；失败记录不会公开。
 4. 只有中文标题、中文概要、来源、发布时间和 HTTPS 原文全部存在，且权威度与相关性达标的记录才进入公开数据集。
 5. `data/news_archive.json` 按 canonical URL 合并，保留内容哈希与首次/最近归档时间，按发布时间排序并裁剪为最多 3000 条。
 6. 质量门禁通过后才部署 Pages；失败时网站保持上一成功版本。
-7. 合格档案由工作流机器人提交回仓库，使下一次定时运行继续增量合并。
+7. 合格档案和 `data/source_health.json` 由工作流机器人提交回仓库，使下一次定时运行能够增量合并并判断来源健康状态。
+8. 公开首页和 PDF 仅取档案中最新一个发布日；地图“本周”取该日及向前 6 日，因此不会把旧闻混入今日情报。
 
 ## 每日推送：可落地方案
 
@@ -104,8 +107,9 @@ Webhook 和邮箱密码属于密钥，不应写进 `.env.example` 的真实值�
 
 ## 数据质量与边界
 
-- 8 个 P0 适配器：Carbon Brief、Climate Home News、Canary Media、Guardian Climate Crisis、BBC Science & Environment、UN News Climate、UNEP、GDELT DOC 2.0。
-- 当前人工校编快照含 10 条中文重点情报、13 个地图点位和 8 条短语。
+- 动态 P0 入口包括 Carbon Brief、Climate Home News、Mongabay 气候专题与拉美专题、Canary Media、Guardian Climate Crisis、BBC Science & Environment、UN News Climate、UNEP、British Antarctic Survey 和 GDELT DOC 2.0。
+- 内容排序首先看来源权威性、气候相关性和时效性；地域与来源均衡只作为二级排序，不设降低质量的洲际硬配额。
+- 来源清单可动态调整；长期失败者自动隔离，新入口必须先核验官方 Feed、内容范围和使用边界。
 - NDC 档案只接受可解析日期且文件 URL 属于 `unfccc.int` 的记录，并按缔约方、版本和提交日期去重。
 - 新闻只保存标题、来源短摘录、链接和结构化分析；不绕过登录、付费墙、验证码、robots.txt 或技术限制。
 - 中文概要、事实、观点、模型推断和编辑建议分开存储；高风险结论必须回到官方或原始来源。

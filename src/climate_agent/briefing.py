@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import uuid
 from collections import Counter
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta, timezone
 
 from .db import Database
 from .pipeline import decode_event, module_manifest
@@ -19,6 +19,8 @@ TOPIC_ZH_ALIASES = {
     "气候综合": "气候动态",
 }
 
+BEIJING_TZ = timezone(timedelta(hours=8))
+
 
 def _decode_json(value: str | None, fallback):
     try:
@@ -27,7 +29,100 @@ def _decode_json(value: str | None, fallback):
         return fallback
 
 
-def _live_intelligence(db: Database) -> list[dict]:
+def _published_day(value: str | None) -> date | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(BEIJING_TZ).date()
+
+
+def _continent(item: dict) -> str:
+    places = item.get("places") or []
+    if not places:
+        return "未标注"
+    place = places[0]
+    name = str(place.get("name_zh") or "")
+    lat = float(place.get("lat") or 0)
+    lon = float(place.get("lon") or 0)
+    if "南极" in name or lat <= -60:
+        return "南极洲"
+    if any(term in name for term in ("澳大利亚", "新西兰", "太平洋", "大洋洲")):
+        return "大洋洲"
+    if any(term in name for term in ("巴西", "南美", "拉丁美洲", "亚马孙", "阿根廷", "智利", "秘鲁", "哥伦比亚")):
+        return "南美洲"
+    if any(term in name for term in ("美国", "加拿大", "墨西哥", "北美", "加勒比")):
+        return "北美洲"
+    if any(term in name for term in ("非洲", "刚果", "乌干达", "西非", "南非", "肯尼亚", "尼日利亚")):
+        return "非洲"
+    if any(term in name for term in ("欧洲", "英国", "法国", "德国", "西班牙", "意大利")):
+        return "欧洲"
+    if any(term in name for term in ("中国", "印度", "日本", "韩国", "东南亚", "印度尼西亚", "菲律宾")):
+        return "亚洲"
+    if -170 <= lon <= -30 and lat >= 12:
+        return "北美洲"
+    if -90 <= lon <= -30 and lat < 12:
+        return "南美洲"
+    if -25 <= lon <= 60 and -38 <= lat <= 37:
+        return "非洲"
+    if -25 <= lon <= 60 and lat > 37:
+        return "欧洲"
+    if 110 <= lon <= 180 and lat < -8:
+        return "大洋洲"
+    if 25 <= lon <= 180:
+        return "亚洲"
+    return "全球/其他"
+
+
+def balanced_select(items: list[dict], limit: int) -> list[dict]:
+    """Keep evidence quality primary while softly reducing source/region dominance."""
+    pool = list(items)
+    if len(pool) <= limit:
+        return sorted(pool, key=lambda item: (item.get("relevance_score", 0), item.get("published_at") or ""), reverse=True)
+    selected: list[dict] = []
+    source_counts: Counter[str] = Counter()
+    continent_counts: Counter[str] = Counter()
+    while pool and len(selected) < limit:
+        def adjusted(item: dict) -> tuple[float, str]:
+            source = item.get("source_name") or item.get("source_id") or "未知来源"
+            continent = _continent(item)
+            score = float(item.get("relevance_score") or 0)
+            score -= source_counts[source] * 9
+            score -= continent_counts[continent] * (2 if continent == "未标注" else 4)
+            if continent not in continent_counts and continent != "未标注":
+                score += 8
+            return score, item.get("published_at") or ""
+
+        choice = max(pool, key=adjusted)
+        pool.remove(choice)
+        selected.append(choice)
+        source_counts[choice.get("source_name") or choice.get("source_id") or "未知来源"] += 1
+        continent_counts[_continent(choice)] += 1
+    return selected
+
+
+def select_latest_day(items: list[dict], *, limit: int = 12) -> list[dict]:
+    dated = [(item, _published_day(item.get("published_at"))) for item in items]
+    latest = max((day for _, day in dated if day), default=None)
+    if not latest:
+        return []
+    return balanced_select([item for item, day in dated if day == latest], limit)
+
+
+def select_latest_week(items: list[dict], *, limit: int = 48) -> list[dict]:
+    dated = [(item, _published_day(item.get("published_at"))) for item in items]
+    latest = max((day for _, day in dated if day), default=None)
+    if not latest:
+        return []
+    first_day = latest - timedelta(days=6)
+    return balanced_select([item for item, day in dated if day and first_day <= day <= latest], limit)
+
+
+def _publishable_candidates(db: Database) -> list[dict]:
     base_query = """
         SELECT a.*, s.name AS source_name, s.source_type, s.authority
         FROM articles a JOIN sources s ON s.source_id=a.source_id
@@ -35,14 +130,9 @@ def _live_intelligence(db: Database) -> list[dict]:
         ORDER BY a.relevance_score DESC,
                  CASE WHEN a.published_at_utc IS NULL THEN 1 ELSE 0 END,
                  a.published_at_utc DESC
-        LIMIT 80
+        LIMIT 600
     """
-    rows = db.rows(base_query.format(
-        where_clause="WHERE datetime(a.published_at_utc) >= datetime('now','-72 hours')"
-    ))
-    archived_rows = db.rows(base_query.format(where_clause=""))
-    seen_ids = {row["article_id"] for row in rows}
-    rows.extend(row for row in archived_rows if row["article_id"] not in seen_ids)
+    rows = db.rows(base_query.format(where_clause=""))
     items = []
     for row in rows:
         metadata = _decode_json(row.pop("metadata_json"), {})
@@ -68,7 +158,7 @@ def _live_intelligence(db: Database) -> list[dict]:
             "regulator", "target", "net zero", "electrification",
         )):
             decision_score += 10
-        if any(term in signal for term in ("commentisfree", "opinion", " quotes from ", "world cup")):
+        if any(term in signal for term in ("commentisfree", "commentary", "op-ed", "opinion", " quotes from ", "world cup")):
             decision_score -= 18
             if row["translation_status"] == "pending":
                 row["why_zh"] = "该条以观点、引语汇编或非谈判叙事为主，仅作舆情背景，不作为事实结论。"
@@ -80,12 +170,16 @@ def _live_intelligence(db: Database) -> list[dict]:
     # latest crawl is still awaiting translation, retain the latest publishable
     # Chinese snapshot instead of rendering empty or low-quality cards.
     publishable = [item for item in items if item.get("title_zh") and item.get("summary_zh")]
-    return publishable[:24]
+    return publishable[:120]
+
+
+def _live_intelligence(db: Database) -> list[dict]:
+    return select_latest_day(_publishable_candidates(db))
 
 
 def publishable_intelligence(db: Database) -> list[dict]:
     """Public, quality-gated candidates used by both the briefing and archive."""
-    return _live_intelligence(db)
+    return _publishable_candidates(db)
 
 
 def _official_data(db: Database) -> dict:
@@ -115,9 +209,66 @@ def _official_data(db: Database) -> dict:
     }
 
 
+def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
+    events: list[dict] = []
+    for item in items:
+        for index, place in enumerate(item.get("places", [])):
+            if not all(key in place for key in ("name_zh", "lon", "lat")):
+                continue
+            events.append({
+                "marker_id": f"{item['article_id']}_{index}",
+                "article_id": item["article_id"],
+                "place": place["name_zh"],
+                "lon": place["lon"],
+                "lat": place["lat"],
+                "theme": item.get("theme_zh") or "气候动态",
+                "title_zh": item.get("title_zh") or item["title_original"],
+                "summary_zh": item.get("summary_zh") or "中文编译待完成。",
+                "source_name": item["source_name"],
+                "published_at": item["published_at"],
+                "url": item["canonical_url"],
+            })
+            if len(events) >= max_events:
+                return events
+    return events
+
+
+def apply_archive_windows(payload: dict, archive: dict) -> dict:
+    """Make the public windows derive from the cumulative, quality-gated archive."""
+    records = archive.get("records") or []
+    today_items = select_latest_day(records, limit=12)
+    week_items = select_latest_week(records, limit=60)
+    if not today_items:
+        return payload
+    latest_day = max(
+        (_published_day(item.get("published_at")) for item in today_items),
+        default=None,
+    )
+    payload["intelligence"] = today_items
+    payload["map_events_today"] = _map_events(today_items)
+    payload["map_events_week"] = _map_events(week_items)
+    payload["map_events"] = payload["map_events_today"]
+    payload["meta"]["date"] = latest_day.isoformat() if latest_day else payload["meta"]["date"]
+    payload["meta"]["latest_news_date"] = payload["meta"]["date"]
+    payload["metrics"]["high_priority"] = sum(item.get("relevance_score", 0) >= 70 for item in today_items)
+    topics = Counter(topic for item in today_items for topic in item.get("topics", []))
+    payload["topics"] = [{"name": name, "weight": count} for name, count in topics.most_common()]
+    payload["phrases"] = [
+        {
+            "text": item.get("poster_phrase") or item.get("title_zh") or item.get("title_original"),
+            "theme": item.get("theme_zh") or "气候动态",
+            "weight": max(1, 10 - index),
+        }
+        for index, item in enumerate(today_items[:8])
+    ]
+    return payload
+
+
 def dashboard_payload(db: Database) -> dict:
     source_rows = db.rows("SELECT * FROM sources ORDER BY enabled DESC, authority DESC, name")
-    intelligence = _live_intelligence(db)
+    candidates = _publishable_candidates(db)
+    intelligence = select_latest_day(candidates)
+    weekly_intelligence = select_latest_week(candidates)
     demo_rows = db.rows("SELECT * FROM events ORDER BY urgency DESC, published_at DESC")
     demo_events = sorted((decode_event(row) for row in demo_rows), key=lambda x: x["priority"], reverse=True)
     enabled = [row for row in source_rows if row["enabled"]]
@@ -126,7 +277,7 @@ def dashboard_payload(db: Database) -> dict:
     topics = Counter(topic for item in intelligence for topic in item["topics"])
     if not topics:
         topics.update(tag for event in demo_events for tag in event["tags"])
-    today = date.today()
+    today = datetime.now(BEIJING_TZ).date()
     cop31 = date(2026, 11, 9)
     latest_runs = db.rows("""
         SELECT f.source_id,f.status,f.finished_at,f.items_seen,f.error_message
@@ -143,22 +294,8 @@ def dashboard_payload(db: Database) -> dict:
     """)}
     official = _official_data(db)
     live = bool(intelligence)
-    map_events = []
-    for item in intelligence[:10]:
-        for index, place in enumerate(item.get("places", [])):
-            map_events.append({
-                "marker_id": f"{item['article_id']}_{index}",
-                "article_id": item["article_id"],
-                "place": place["name_zh"],
-                "lon": place["lon"],
-                "lat": place["lat"],
-                "theme": item["theme_zh"],
-                "title_zh": item.get("title_zh") or item["title_original"],
-                "summary_zh": item.get("summary_zh") or "中文编译待完成。",
-                "source_name": item["source_name"],
-                "published_at": item["published_at"],
-                "url": item["canonical_url"],
-            })
+    map_events_today = _map_events(intelligence)
+    map_events_week = _map_events(weekly_intelligence)
     phrases = [
         {
             "text": item.get("poster_phrase") or item["title_zh"],
@@ -169,13 +306,13 @@ def dashboard_payload(db: Database) -> dict:
     ]
     return {
         "meta": {
-            "product": "高质量气候新闻文本数据与智能分子平台",
-            "date": today.isoformat(),
+            "product": "国际气候情报与高质量中文文本数据库",
+            "date": max((_published_day(item.get("published_at")) for item in intelligence), default=today).isoformat(),
             "generated_at": datetime.now(UTC).isoformat(),
             "timezone": "Asia/Shanghai",
             "demo_mode": not live,
             "notice": (
-                f"滚动 72 小时元数据已接入；8 个 P0 入口最近成功 {run_ok} 个。标题和短摘录是来源陈述，尚需人工核验。"
+                f"页面仅展示最近一个有有效记录的自然日；动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
                 if live else "尚未执行在线同步，以下事件仅用于界面演示；UNFCCC 本地档案可独立浏览。"
             ),
         },
@@ -183,7 +320,7 @@ def dashboard_payload(db: Database) -> dict:
             "source_total": len(source_rows),
             "source_enabled": len(enabled),
             "p0_connected": run_ok,
-            "p0_total": 8,
+            "p0_total": sum(row["phase"] == "P0" and row["enabled"] for row in source_rows),
             "official_enabled": sum("官方" in row["source_type"] or "政府" in row["source_type"] for row in enabled),
             "languages": len({lang for row in source_rows for lang in json.loads(row["languages_json"])}),
             "article_total": db.rows("SELECT COUNT(*) AS n FROM articles")[0]["n"],
@@ -191,8 +328,10 @@ def dashboard_payload(db: Database) -> dict:
             "official_documents": sum(official["counts"].values()),
             "cop31_countdown": (cop31 - today).days,
         },
-        "intelligence": intelligence[:10],
-        "map_events": map_events,
+        "intelligence": intelligence,
+        "map_events": map_events_today,
+        "map_events_today": map_events_today,
+        "map_events_week": map_events_week,
         "phrases": phrases,
         "events": [] if live else demo_events,
         "topics": [{"name": name, "weight": count} for name, count in topics.most_common()],
@@ -211,8 +350,8 @@ def dashboard_payload(db: Database) -> dict:
 def render_markdown(payload: dict) -> str:
     meta = payload["meta"]
     lines = [
-        f"# 国际气候谈判情报简报｜{meta['date']}", "", f"> {meta['notice']}", "",
-        "## 今日具体情报", "",
+        f"# 国际气候情报今日简报｜{meta['date']}", "", f"> {meta['notice']}", "",
+        "## 今日重要情报", "",
     ]
     for index, item in enumerate(payload.get("intelligence", []), 1):
         title = item.get("title_zh") or item["title_original"]
@@ -244,6 +383,6 @@ def save_brief(db: Database, payload: dict) -> dict:
     markdown = render_markdown(payload)
     db.execute(
         "INSERT INTO briefs (brief_id,brief_date,version,title,markdown,created_at) VALUES (?,?,?,?,?,?)",
-        (brief_id, brief_date, version, f"国际气候谈判情报简报｜{brief_date}", markdown, datetime.now(UTC).isoformat()),
+        (brief_id, brief_date, version, f"国际气候情报今日简报｜{brief_date}", markdown, datetime.now(UTC).isoformat()),
     )
     return {"brief_id": brief_id, "version": version, "markdown": markdown}

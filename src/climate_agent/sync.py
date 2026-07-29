@@ -10,7 +10,10 @@ from .collector import NormalizedArticle, fetch_resource, parse_feed, parse_gdel
 from .db import Database
 
 
-P0_SOURCE_IDS = ("INT001", "INT002", "INT010", "INT013", "INT014", "OFF001", "OFF006", "API001")
+P0_SOURCE_IDS = (
+    "INT001", "INT002", "INT007", "INT010", "INT013", "INT014", "INT019",
+    "OFF001", "OFF006", "OFF013", "API001",
+)
 
 TOPIC_RULES = {
     "国际气候谈判": ("unfccc", "cop30", "cop31", "climate talks", "climate summit", "negotiat"),
