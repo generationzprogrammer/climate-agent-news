@@ -96,7 +96,8 @@ def _source_scope_match(article: NormalizedArticle, source_id: str) -> bool:
     """Apply narrow source-specific gates where a feed/API is broader than climate."""
     title = article.title.lower()
     if source_id == "OFF014":
-        return any(term in title for term in NASA_EARTH_TERMS)
+        path = urlparse(article.canonical_url).path.lower()
+        return path.startswith("/earth/") and any(term in title for term in NASA_EARTH_TERMS)
     if source_id == "API005":
         host = (urlparse(article.canonical_url).hostname or "").lower()
         allowed_domain = any(host == domain or host.endswith(f".{domain}") for domain in CHINA_DISCOVERY_DOMAINS)

@@ -73,6 +73,8 @@ CLIMATE_MODEL_NAME
 8. 公开首页和 PDF 仅取档案中最新一个发布日；地图“本周”取该日及向前 6 日，因此不会把旧闻混入今日情报。
 9. 2026-07-29 的来源扩展在代码推送时把中文编译上限临时提高到 40 条，完成一次美国、中国及其他地区的七日补录；后续定时任务恢复每日 20 条，canonical URL 去重保证不会重复灌库。
 
+本次地域修复另含 8 条人工逐页核验的中美基准记录（中美各 4 条），文件为 `data/one_time_regional_intelligence.json`。其中本周样本覆盖中国可再生能源规划、零碳工厂，以及美国野火、光储项目、海上风电和车网互动；导入器校验来源域名、发布日期和 HTTPS 链接，并以 `human_reviewed` 标记。它只用于这次补录，之后的常规 RSS/API 日更与 3000 条去重上限不变。
+
 站内问答不会调用远程模型，因此每次提问不消耗 GitHub Models 额度。它借鉴 `reference_code` 的 Planner、Event/Trend 与 Decision 分工，把问题拆成时间、地区、议题和任务类型，再从当前归档中选择证据；比较和政策含义均标为“当前样本归纳”。
 
 ## 每日推送：可落地方案
@@ -113,7 +115,7 @@ Webhook 和邮箱密码属于密钥，不应写进 `.env.example` 的真实值�
 - 动态 P0 入口包括 Carbon Brief、Climate Home News、Mongabay 气候专题与拉美专题、Yale Climate Connections、Dialogue Earth、Canary Media、Grist、Guardian Climate Crisis、BBC Science & Environment、UN News Climate、UNEP、British Antarctic Survey、NASA Earth Observatory、GDELT DOC 2.0，以及限定 `news.cn`、`gov.cn`、`mee.gov.cn`、`cma.gov.cn` 和 `dialogue.earth` 的中国气候定向发现入口。
 - 内容排序首先看来源权威性、气候相关性和时效性；地域与来源均衡只作为二级排序，不设降低质量的洲际硬配额。
 - 来源清单可动态调整；长期失败者自动隔离，新入口必须先核验官方 Feed、内容范围和使用边界。
-- 宽泛入口执行二次门禁：NASA Feed 排除行星科学等非地球气候条目；中国定向发现同时通过域名白名单和标题气候关键词，GDELT 返回但未通过门禁的项目不会入库。
+- 宽泛入口执行二次门禁：NASA Image of the Day Feed 同时要求 `/earth/` 路径和气候主题词，并会从既有档案剔除误收的行星科学条目；中国定向发现同时通过域名白名单和标题气候关键词，GDELT 返回但未通过门禁的项目不会入库。
 - NDC 档案只接受可解析日期且文件 URL 属于 `unfccc.int` 的记录，并按缔约方、版本和提交日期去重。
 - 新闻只保存标题、来源短摘录、链接和结构化分析；不绕过登录、付费墙、验证码、robots.txt 或技术限制。
 - 中文概要、事实、观点、模型推断和编辑建议分开存储；高风险结论必须回到官方或原始来源。

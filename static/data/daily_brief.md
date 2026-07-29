@@ -1,62 +1,35 @@
-# 国际气候谈判情报简报｜2026-07-21
+# 国际气候情报今日简报｜2026-07-29
 
-> 滚动 72 小时元数据已接入；8 个 P0 入口最近成功 7 个。标题和短摘录是来源陈述，尚需人工核验。
+> 页面仅展示最近一个有有效记录的自然日；动态 P0 入口最近成功 0 个。标题和摘要是来源陈述，尚需人工核验。
 
-## 今日具体情报
+## 今日重要情报
 
-### 1. [甲烷减排] AI 正把卫星发现的甲烷泄漏转化为真实减排
+### 1. [水泥行业碳减排] TCMA发布五大引擎推动水泥行业净零转型
 
-联合国环境署称，人工智能正在帮助油气行业把卫星观测转化为甲烷减排行动；相关措施带来的气候效益，相当于减少近 2400 万辆汽油乘用车一年的排放。
+TCMA启动“下一篇章”计划，提出五项举措加速水泥行业向2050年净零排放目标迈进。该举措旨在提升行业减碳能力，推动绿色转型。
 
-- 来源：UN Environment Programme｜2026-07-15T06:05:51+00:00
-- 为什么值得关注：甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。
+- 来源：GDELT 2.0 DOC API｜2026-07-29T03:30:00+00:00
+- 为什么值得关注：水泥行业净零转型对实现国家碳目标具有关键意义，政策需支持技术创新与行业协作。观点基于事实报道。
 - 状态：来源陈述，未作独立事实核验
-- 原文：http://www.unep.org/news-and-stories/press-release/ai-helping-un-detect-methane-emissions-and-spark-real-reductions
+- 原文：https://www.itnewsonline.com/news/TCMA-Launches-The-NEXT-Chapter-with-5-Engines-to-Accelerate-Cement-Industry-Toward-Net-Zero-2050/37991
 
-### 2. [气候责任] 主要排放国被指早在数十年前已知化石燃料的气候风险
+### 2. [水泥行业减碳转型] TCMA启动水泥业净零2050新篇章
 
-Climate Home News 报道称，多国政府至少从 20 世纪 60 年代起已了解化石燃料使用会导致全球变暖，但相关信息并未充分公开。
+TCMA宣布“下一篇章”计划，提出五大动力推动水泥行业加速迈向2050年净零排放目标。该举措旨在提升行业减碳进程，促进绿色转型，响应全球气候行动需求。
 
-- 来源：Climate Home News｜2026-07-15T10:51:19+00:00
-- 为什么值得关注：如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。
+- 来源：GDELT 2.0 DOC API｜2026-07-29T03:00:00+00:00
+- 为什么值得关注：水泥行业作为高排放领域，相关举措对实现碳中和目标具有政策示范意义。观点基于行业声明。
 - 状态：来源陈述，未作独立事实核验
-- 原文：https://www.climatechangenews.com/2026/07/15/major-emitting-countries-knew-of-climate-risks-decades-earlier-than-claimed
+- 原文：https://www.manilatimes.net/2026/07/29/tmt-newswire/media-outreach-newswire/tcma-launches-the-next-chapter-with-5-engines-to-accelerate-cement-industry-toward-net-zero-2050/2393644
 
-### 3. [西非洪灾] 气候变暖放大西非洪灾，数千人流离失所
+### 3. [水泥行业碳减排] TCMA启动五大引擎推动水泥业净零转型
 
-科学家认为，全球变暖增强了近期西非沿海地区的强降雨。洪灾造成数十人死亡、数百人获救，数千人被迫转移。
+TCMA宣布“下一篇章”计划，推出五项关键举措加速水泥行业向2050年净零排放目标迈进。该计划旨在推动技术创新、产业协作和碳减排，助力行业绿色转型。
 
-- 来源：The Guardian Climate Crisis｜2026-07-16T00:01:08+00:00
-- 为什么值得关注：事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。
+- 来源：GDELT 2.0 DOC API｜2026-07-29T03:00:00+00:00
+- 为什么值得关注：水泥行业净零转型对全球碳减排目标具有重要意义。事实为行业行动，观点涉及政策推动。
 - 状态：来源陈述，未作独立事实核验
-- 原文：https://www.theguardian.com/world/2026/jul/16/how-global-heating-supercharged-floods-west-africa-displacing-thousands
-
-### 4. [高温与健康] 世卫组织敦促欧洲医院为极端高温做好准备
-
-欧洲遭遇破纪录热浪之际，世界卫生组织发布新指南，要求各国提高医院和卫生系统抵御当前及未来高温风险的能力。
-
-- 来源：UN News - Climate Change｜2026-07-16T12:00:00+00:00
-- 为什么值得关注：高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://news.un.org/feed/view/en/story/2026/07/1167955
-
-### 5. [极端降雨] 强降雨再度引发美国得州洪水与人员转移
-
-强降雨导致美国得州部分地区洪水暴涨并触发疏散和水上救援；同一地区在 2025 年洪灾中曾有儿童和辅导员遇难。
-
-- 来源：BBC Science & Environment｜2026-07-16T16:45:55+00:00
-- 为什么值得关注：连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://www.bbc.co.uk/news/videos/cyvlp93r2dyo?at_medium=RSS&at_campaign=rss
-
-### 6. [土地与粮食] 土地与粮食观察：乌干达饥饿、美国放松栖息地保护、英国削减雨林资金
-
-Carbon Brief 汇总了三条土地与粮食领域的重要动态：乌干达粮食危机、美国濒危物种栖息地政策变化，以及英国削减刚果雨林项目资助。
-
-- 来源：Carbon Brief｜2026-07-15T14:49:04+00:00
-- 为什么值得关注：三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://www.carbonbrief.org/cropped-15-july-2026-uganda-starves-trump-opens-endangered-habitats-uk-cuts-rainforest-aid
+- 原文：https://portal.sina.com.hk/finance/finance-mediaoutreachnewswire/media-outreach/2026/07/29/1869268/tcma-launches-the-next-chapter-with-5-engines-to-accelerate-cement-industry-toward-net-zero-2050
 
 ## 数据边界
 

@@ -51,6 +51,7 @@ flowchart TD
 - 美国由 Yale Climate Connections、Canary Media、Grist 与 NASA Earth Observatory 等不同类型来源交叉覆盖。
 - 中国由官方/专业域名的 GDELT 定向发现补充；候选必须同时通过域名白名单、标题气候相关性、发布日期和 canonical URL 门禁。
 - 新来源首次上线可回看最近 7 天；滚动档案按 canonical URL 幂等合并，后续仍执行常规每日更新。
+- 单次补录采用小规模人工核验种子：每条记录校验来源域名、发布日期、中文摘要、关键数字和地图坐标；种子幂等导入，不改变后续每日采集预算。
 
 ## 4. 建议技术栈
 

@@ -28,6 +28,12 @@ def _https_url(value: str | None) -> str | None:
     return parsed._replace(scheme="https").geturl()
 
 
+def _record_scope_passes(item: dict) -> bool:
+    if item.get("source_id") == "OFF014":
+        return urlparse(item.get("canonical_url") or "").path.lower().startswith("/earth/")
+    return True
+
+
 def quality_result(item: dict) -> dict:
     """Return a deterministic public-data gate and an explainable score."""
     checks = {
@@ -129,7 +135,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
     by_url = {
         record.get("canonical_url"): record
         for record in existing.get("records", [])
-        if record.get("canonical_url")
+        if record.get("canonical_url") and _record_scope_passes(record)
     }
     for record in by_url.values():
         # Schema 1.0 archives created before 2026-07-29 did not persist this
@@ -142,7 +148,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
     for item in candidates:
         gate = quality_result(item)
         url = _https_url(item.get("canonical_url"))
-        if not gate["passed"] or not url:
+        if not gate["passed"] or not url or not _record_scope_passes(item):
             rejected += 1
             continue
         previous = by_url.get(url)

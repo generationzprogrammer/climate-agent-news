@@ -48,22 +48,24 @@ class CoreTests(unittest.TestCase):
 
     def test_bootstrap_is_idempotent(self) -> None:
         bootstrap(self.db)
-        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], 51)
+        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], 53)
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM events")[0]["n"], 3)
+        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM articles WHERE article_id LIKE 'curated_%'")[0]["n"], 8)
 
     def test_dashboard_reconciles_source_counts(self) -> None:
         payload = dashboard_payload(self.db)
-        self.assertEqual(payload["metrics"]["source_total"], 51)
+        self.assertEqual(payload["metrics"]["source_total"], 53)
         self.assertEqual(payload["metrics"]["source_enabled"], 32)
-        self.assertEqual(len(payload["events"]), 3)
-        self.assertGreaterEqual(payload["events"][0]["priority"], payload["events"][-1]["priority"])
+        self.assertGreaterEqual(len(payload["intelligence"]), 1)
+        self.assertEqual(payload["intelligence"][0]["source_id"], "OFF014")
 
     def test_brief_is_versioned(self) -> None:
         payload = dashboard_payload(self.db)
         first, second = save_brief(self.db, payload), save_brief(self.db, payload)
         self.assertEqual((first["version"], second["version"]), (1, 2))
-        self.assertIn("事实：", render_markdown(payload))
-        self.assertIn("系统研判：", render_markdown(payload))
+        markdown = render_markdown(payload)
+        self.assertIn("卫星监测显示美国俄勒冈州野火烟霾扩散", markdown)
+        self.assertIn("数据边界", markdown)
 
     def test_url_normalization(self) -> None:
         self.assertEqual(
@@ -117,6 +119,13 @@ class CoreTests(unittest.TestCase):
         self.assertTrue(_source_scope_match(china, "API005"))
         self.assertFalse(_source_scope_match(off_domain, "API005"))
         self.assertFalse(_source_scope_match(mars, "OFF014"))
+        earth = NormalizedArticle(
+            article_id="e", source_id="OFF014", source_url="https://science.nasa.gov/earth/wildfires/a",
+            canonical_url="https://science.nasa.gov/earth/wildfires/a", title="Wildfire smoke blankets Oregon",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="en", content_hash="e",
+        )
+        self.assertTrue(_source_scope_match(earth, "OFF014"))
         self.assertTrue({"INT008", "INT009", "INT020", "OFF014", "API005"}.issubset(P0_SOURCE_IDS))
 
     def test_ndc_import_rejects_non_unfccc_and_is_version_aware(self) -> None:

@@ -14,6 +14,7 @@ from .editorial import apply_editorial_overrides
 from .exporter import export_static_site
 from .official_data import import_curated_unfccc, import_ndcs
 from .providers import OpenAICompatibleModel, publish_email, publish_file, publish_wecom
+from .regional_seed import import_regional_seed
 from .sync import P0_SOURCE_IDS, sync_p0
 from .source_health import load_source_health, save_source_health, source_is_due, update_source_health
 from .translation import translate_pending
@@ -26,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def bootstrap(db: Database) -> tuple[int, int]:
     db.initialize()
     source_count = db.import_sources(ROOT / "config" / "sources.master.json")
+    import_regional_seed(db, ROOT / "data" / "one_time_regional_intelligence.json")
     event_count = db.seed_events(ROOT / "data" / "demo_events.json")
     import_curated_unfccc(db, ROOT / "config")
     apply_editorial_overrides(db, ROOT / "config" / "editorial_overrides.json")
