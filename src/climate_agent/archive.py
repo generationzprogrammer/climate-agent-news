@@ -11,6 +11,7 @@ ARCHIVE_VERSION = "1.0"
 DEFAULT_ARCHIVE_LIMIT = 3000
 CHINESE_RE = re.compile(r"[\u4e00-\u9fff]")
 MOJIBAKE_MARKERS = ("锟", "�", "Ã", "Â", "娴嬭瘯", "待翻译")
+CARIBBEAN_PLACE = {"name_zh": "加勒比地区", "lon": -75.0, "lat": 18.0}
 
 
 def _text_is_publishable(value: str | None, *, minimum_chinese: int = 2) -> bool:
@@ -32,6 +33,21 @@ def _record_scope_passes(item: dict) -> bool:
     if item.get("source_id") == "OFF014":
         return urlparse(item.get("canonical_url") or "").path.lower().startswith("/earth/")
     return True
+
+
+def _geo_text(item: dict) -> str:
+    return " ".join(str(item.get(key) or "") for key in (
+        "title_original", "title_zh", "summary_source", "summary_zh", "canonical_url"
+    )).lower()
+
+
+def _repair_places(item: dict) -> list[dict]:
+    """Migrate obvious old keyword-geocoding mistakes in public archives."""
+    text = _geo_text(item)
+    places = list(item.get("places") or [])[:4]
+    if "caribbean" in text or "加勒比" in text:
+        return [CARIBBEAN_PLACE]
+    return places
 
 
 def quality_result(item: dict) -> dict:
@@ -65,7 +81,7 @@ def _record(item: dict, now: str, previous: dict | None = None) -> dict:
     url = _https_url(item.get("canonical_url")) or item.get("canonical_url")
     topics = list(dict.fromkeys(item.get("topics") or []))[:6]
     numbers = list(dict.fromkeys(item.get("numbers") or []))[:6]
-    places = (item.get("places") or [])[:4]
+    places = _repair_places(item)
     return {
         "record_id": item.get("article_id"),
         "article_id": item.get("article_id"),
@@ -142,6 +158,11 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
         # public ranking field. The stored quality score is the safest
         # deterministic migration value and remains above the public gate.
         record.setdefault("relevance_score", int(record.get("quality", {}).get("score") or 45))
+        record["places"] = _repair_places(record)
+        if record.get("molecule"):
+            record["molecule"]["geo_atoms"] = [
+                place.get("name_zh") for place in record["places"] if place.get("name_zh")
+            ]
     before = len(by_url)
     added = updated = rejected = 0
     now = datetime.now(UTC).isoformat()

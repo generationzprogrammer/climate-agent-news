@@ -315,6 +315,32 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(places[0]["name_zh"], "加勒比地区")
         self.assertNotIn("中国", {place["name_zh"] for place in detect_places("China-backed transition minerals projects")})
 
+    def test_archive_repairs_existing_caribbean_geocoding(self) -> None:
+        path = Path(self.temp.name) / "archive.json"
+        path.write_text(json.dumps({
+            "schema_version": "1.0",
+            "records": [{
+                "record_id": "r1",
+                "article_id": "r1",
+                "canonical_url": "https://example.org/caribbean-climate-losses",
+                "title_original": "Caribbean bears brunt of climate-fuelled damage",
+                "title_zh": "加勒比地区遭受气候灾害损失",
+                "summary_zh": "研究显示加勒比国家遭受严重气候灾害损失。",
+                "source_name": "Example",
+                "source_id": "S",
+                "authority": 5,
+                "relevance_score": 80,
+                "published_at": "2026-07-29T11:00:00+00:00",
+                "places": [{"name_zh": "中国", "lon": 105, "lat": 35}],
+                "quality": {"passed": True, "tier": "B", "score": 80},
+                "molecule": {"geo_atoms": ["中国"]},
+            }],
+            "total": 1,
+        }), encoding="utf-8")
+        archive = update_archive(path, [], limit=3000)
+        self.assertEqual(archive["records"][0]["places"][0]["name_zh"], "加勒比地区")
+        self.assertEqual(archive["records"][0]["molecule"]["geo_atoms"], ["加勒比地区"])
+
     def test_translation_queue_round_robins_sources(self) -> None:
         rows = [
             {"article_id": "a1", "source_id": "A"},
