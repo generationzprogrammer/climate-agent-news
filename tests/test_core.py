@@ -18,7 +18,7 @@ from climate_agent.exporter import export_static_site
 from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
-from climate_agent.sync import P0_SOURCE_IDS, _source_scope_match
+from climate_agent.sync import P0_SOURCE_IDS, _analyse, _source_scope_match
 from climate_agent.translation import detect_places, source_balanced_rows
 
 
@@ -129,6 +129,25 @@ class CoreTests(unittest.TestCase):
         )
         self.assertTrue(_source_scope_match(earth, "OFF014"))
         self.assertTrue({"INT008", "INT009", "INT020", "OFF014", "API005"}.issubset(P0_SOURCE_IDS))
+
+    def test_daily_gdelt_climate_signals_pass_without_admitting_moon_news(self) -> None:
+        heat = NormalizedArticle(
+            article_id="h", source_id="API001", source_url="https://example.org/heat",
+            canonical_url="https://example.org/heat",
+            title="Heat wave brings record-breaking temps and heightened wildfire risk to Western US",
+            published_at_raw="20260802T040000Z", published_at_utc="2026-08-02T04:00:00+00:00",
+            summary_from_source=None, language="English", content_hash="h",
+        )
+        moon = NormalizedArticle(
+            article_id="m", source_id="INT014", source_url="https://example.org/moon",
+            canonical_url="https://example.org/moon",
+            title="Buck Moon lights up Devon and Cornwall skies",
+            published_at_raw="20260802T040000Z", published_at_utc="2026-08-02T04:00:00+00:00",
+            summary_from_source="The July full moon is expected to peak at 15:36 BST.",
+            language="English", content_hash="m",
+        )
+        self.assertGreaterEqual(_analyse(heat, 4)["score"], 45)
+        self.assertLess(_analyse(moon, 5)["score"], 45)
 
     def test_ndc_import_rejects_non_unfccc_and_is_version_aware(self) -> None:
         payload = b"code,party,title,fileType,language,version,status,submissionDate,encodedAbsUrl,originalFilename\nAAA,Alpha,Alpha NDC,NDC,English,1,Active,2025-01-02,https://unfccc.int/a.pdf,a.pdf\nBBB,Beta,Beta NDC,NDC,English,2,Active,2025-01-02,https://example.org/b.pdf,b.pdf\n"

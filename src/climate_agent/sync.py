@@ -61,10 +61,23 @@ TOPIC_RULES = {
     "国家气候承诺": ("ndc", "nationally determined", "climate target", "2035 target"),
     "气候资金": ("climate finance", "green climate fund", "loss and damage", "adaptation fund", "finance goal"),
     "能源与排放": ("emission", "renewable", "fossil fuel", "coal", "methane", "energy transition"),
-    "气候适应": ("adaptation", "loss and damage", "resilience", "climate disaster"),
+    "气候适应": (
+        "adaptation", "loss and damage", "resilience", "climate disaster",
+        "extreme weather", "heat wave", "wildfire", "drought", "flood", "storm", "hurricane",
+    ),
     "国际碳市场": ("article 6", "carbon market", "carbon credit", "emissions trading"),
     "履约与全球盘点": ("global stocktake", "transparency", "biennial transparency", "btr"),
 }
+
+CLIMATE_SIGNAL_TERMS = (
+    "climate", "unfccc", "cop30", "cop31", "ndc", "emission", "carbon",
+    "net zero", "renewable", "fossil fuel", "methane", "energy transition",
+    "climate finance", "loss and damage", "adaptation", "resilience",
+    "heat wave", "wildfire", "drought", "flood", "storm", "hurricane",
+    "green cooperation", "green transition", "clean energy", "global warming",
+    "气候", "碳", "排放", "可再生能源", "净零", "低碳", "绿色转型",
+    "高温", "热浪", "野火", "干旱", "洪水", "风暴", "飓风",
+)
 
 NUMBER_PATTERN = re.compile(
     r"(?<!\w)(?:US\$|\$|€|£)?\d+(?:[,.]\d+)*(?:\s?(?:%|bn|billion|million|trillion|GW|MW|Gt|Mt|°C|C))?",
@@ -76,7 +89,12 @@ def _analyse(article: NormalizedArticle, authority: int) -> dict:
     haystack = f"{article.title} {article.summary_from_source or ''}".lower()
     topics = [name for name, terms in TOPIC_RULES.items() if any(term in haystack for term in terms)]
     numbers = list(dict.fromkeys(NUMBER_PATTERN.findall(haystack)))[:6]
+    has_climate_signal = any(term in haystack for term in CLIMATE_SIGNAL_TERMS)
     score = min(100, authority * 8 + len(topics) * 12 + min(len(numbers), 3) * 4)
+    if has_climate_signal:
+        score = min(100, score + 18)
+    elif not topics:
+        score = min(score, 38)
     if any(term in haystack for term in ("china", "chinese", "beijing")):
         score = min(100, score + 12)
     if article.source_id in {"OFF001", "OFF006"}:
