@@ -252,16 +252,35 @@ class Database:
         if not rows:
             return {"seen": 0, "new": 0, "updated": 0}
         urls = [row["canonical_url"] for row in rows]
-        existing: dict[str, str] = {}
+        existing: dict[str, dict] = {}
         with self.connect() as conn:
             for start in range(0, len(urls), 500):
                 batch = urls[start:start + 500]
                 placeholders = ",".join("?" for _ in batch)
                 for item in conn.execute(
-                    f"SELECT canonical_url, content_hash FROM articles WHERE canonical_url IN ({placeholders})",
+                    f"SELECT canonical_url, content_hash, metadata_json FROM articles WHERE canonical_url IN ({placeholders})",
                     tuple(batch),
                 ):
-                    existing[item["canonical_url"]] = item["content_hash"]
+                    existing_metadata = {}
+                    try:
+                        existing_metadata = json.loads(item["metadata_json"] or "{}")
+                    except json.JSONDecodeError:
+                        existing_metadata = {}
+                    existing[item["canonical_url"]] = {
+                        "content_hash": item["content_hash"],
+                        "metadata": existing_metadata,
+                    }
+            preserve_metadata_keys = {
+                "summary_zh", "theme_zh", "importance_zh", "poster_phrase",
+                "places", "translation_status", "translated_at", "fact_status",
+            }
+            for row in rows:
+                current_metadata = dict(row.get("metadata") or {})
+                previous_metadata = existing.get(row["canonical_url"], {}).get("metadata", {})
+                for key in preserve_metadata_keys:
+                    if key in previous_metadata and key not in current_metadata:
+                        current_metadata[key] = previous_metadata[key]
+                row["metadata"] = current_metadata
             sql = """
             INSERT INTO articles (
               article_id,source_id,source_url,canonical_url,title_original,title_zh,
@@ -289,7 +308,7 @@ class Database:
             ) for row in rows])
         new = sum(row["canonical_url"] not in existing for row in rows)
         updated = sum(
-            row["canonical_url"] in existing and existing[row["canonical_url"]] != row["content_hash"]
+            row["canonical_url"] in existing and existing[row["canonical_url"]]["content_hash"] != row["content_hash"]
             for row in rows
         )
         return {"seen": len(rows), "new": new, "updated": updated}

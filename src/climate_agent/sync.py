@@ -14,10 +14,11 @@ from .db import Database
 P0_SOURCE_IDS = (
     "INT001", "INT002", "INT007", "INT008", "INT009", "INT010", "INT013",
     "INT014", "INT019", "INT020", "OFF001", "OFF006", "OFF013", "OFF014",
-    "API005", "API001",
+    "API005", "API001", "API004",
 )
 
 GDELT_SOURCE_IDS = {"API001", "API005"}
+GOOGLE_NEWS_SOURCE_IDS = {"API004"}
 
 GDELT_PROFILES = {
     "API001": {
@@ -120,6 +121,8 @@ def _source_scope_match(article: NormalizedArticle, source_id: str) -> bool:
         host = (urlparse(article.canonical_url).hostname or "").lower()
         allowed_domain = any(host == domain or host.endswith(f".{domain}") for domain in CHINA_DISCOVERY_DOMAINS)
         return allowed_domain and any(term in title for term in CHINA_CLIMATE_TERMS)
+    if source_id == "API004":
+        return any(term in title for term in CLIMATE_SIGNAL_TERMS)
     return True
 
 
@@ -186,6 +189,22 @@ def _gdelt_url(endpoint: str, source_id: str) -> str:
     return f"{endpoint}?{urlencode(params)}"
 
 
+def _google_news_url(endpoint: str) -> str:
+    query = '("climate change" OR "carbon emissions" OR "renewable energy" OR "net zero" OR "climate finance" OR "extreme weather") when:1d'
+    params = {
+        "q": query,
+        "hl": "en-US",
+        "gl": "US",
+        "ceid": "US:en",
+    }
+    return endpoint.format(
+        query=urlencode({"q": query})[2:],
+        hl=params["hl"],
+        gl=params["gl"],
+        ceid=params["ceid"],
+    )
+
+
 def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
     results = []
     last_gdelt_request = 0.0
@@ -206,7 +225,7 @@ def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
             "status": "failed",
         }
         try:
-            if not endpoint or "{" in endpoint:
+            if not endpoint or ("{" in endpoint and source_id not in GOOGLE_NEWS_SOURCE_IDS):
                 raise ValueError("source has no directly callable endpoint")
             if source_id in GDELT_SOURCE_IDS:
                 wait_seconds = max(0.0, 6.0 - (time.monotonic() - last_gdelt_request))
@@ -214,6 +233,8 @@ def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
                     time.sleep(wait_seconds)
                 request_url = _gdelt_url(endpoint, source_id)
                 last_gdelt_request = time.monotonic()
+            elif source_id in GOOGLE_NEWS_SOURCE_IDS:
+                request_url = _google_news_url(endpoint)
             else:
                 request_url = endpoint
             response = fetch_resource(

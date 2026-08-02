@@ -18,7 +18,7 @@ from climate_agent.exporter import export_static_site
 from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
-from climate_agent.sync import P0_SOURCE_IDS, _analyse, _source_scope_match
+from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _source_scope_match
 from climate_agent.translation import detect_places, source_balanced_rows
 
 
@@ -57,7 +57,7 @@ class CoreTests(unittest.TestCase):
     def test_dashboard_reconciles_source_counts(self) -> None:
         payload = dashboard_payload(self.db)
         self.assertEqual(payload["metrics"]["source_total"], 53)
-        self.assertEqual(payload["metrics"]["source_enabled"], 32)
+        self.assertEqual(payload["metrics"]["source_enabled"], 33)
         self.assertGreaterEqual(len(payload["intelligence"]), 1)
         self.assertGreaterEqual(len({item["source_id"] for item in payload["intelligence"]}), 3)
 
@@ -128,7 +128,7 @@ class CoreTests(unittest.TestCase):
             language="en", content_hash="e",
         )
         self.assertTrue(_source_scope_match(earth, "OFF014"))
-        self.assertTrue({"INT008", "INT009", "INT020", "OFF014", "API005"}.issubset(P0_SOURCE_IDS))
+        self.assertTrue({"INT008", "INT009", "INT020", "OFF014", "API005", "API004"}.issubset(P0_SOURCE_IDS))
 
     def test_daily_gdelt_climate_signals_pass_without_admitting_moon_news(self) -> None:
         heat = NormalizedArticle(
@@ -149,6 +149,25 @@ class CoreTests(unittest.TestCase):
         self.assertGreaterEqual(_analyse(heat, 4)["score"], 45)
         self.assertLess(_analyse(moon, 5)["score"], 45)
 
+    def test_google_news_fallback_is_climate_scoped(self) -> None:
+        url = _google_news_url("https://news.google.com/rss/search?q={query}&hl={hl}&gl={gl}&ceid={ceid}")
+        self.assertIn("news.google.com/rss/search", url)
+        self.assertNotIn("{query}", url)
+        climate = NormalizedArticle(
+            article_id="g", source_id="API004", source_url="https://news.google.com/rss",
+            canonical_url="https://example.org/climate", title="Climate summit calls for faster clean energy finance",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="en", content_hash="g",
+        )
+        moon = NormalizedArticle(
+            article_id="m", source_id="API004", source_url="https://news.google.com/rss",
+            canonical_url="https://example.org/moon", title="Buck Moon lights up Devon and Cornwall skies",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="en", content_hash="m",
+        )
+        self.assertTrue(_source_scope_match(climate, "API004"))
+        self.assertFalse(_source_scope_match(moon, "API004"))
+
     def test_ndc_import_rejects_non_unfccc_and_is_version_aware(self) -> None:
         payload = b"code,party,title,fileType,language,version,status,submissionDate,encodedAbsUrl,originalFilename\nAAA,Alpha,Alpha NDC,NDC,English,1,Active,2025-01-02,https://unfccc.int/a.pdf,a.pdf\nBBB,Beta,Beta NDC,NDC,English,2,Active,2025-01-02,https://example.org/b.pdf,b.pdf\n"
         rows, quality = parse_ndc_csv(payload, cutoff_year=2016)
@@ -167,6 +186,29 @@ class CoreTests(unittest.TestCase):
         first, second = self.db.upsert_articles([row]), self.db.upsert_articles([row])
         self.assertEqual(first["new"], 1)
         self.assertEqual(second, {"seen": 1, "new": 0, "updated": 0})
+
+    def test_article_upsert_preserves_translation_metadata(self) -> None:
+        original = {
+            "article_id": "article_a", "source_id": "INT001", "source_url": "https://example.org/a",
+            "canonical_url": "https://example.org/a", "title_original": "Climate update", "title_zh": None,
+            "summary_source": None, "published_at_utc": "2026-07-16T00:00:00+00:00", "language": "en",
+            "rights_status": "metadata_only", "content_hash": "abc", "fetched_at": "2026-07-16T01:00:00+00:00",
+            "relevance_score": 80, "topics": ["UNFCCC杩涚▼"], "numbers": [],
+            "metadata": {
+                "summary_zh": "这是一条已经翻译完成的中文气候摘要，重复同步时不能被清空。",
+                "places": [{"name_zh": "美国", "lon": -100, "lat": 39}],
+                "translation_status": "model_generated_needs_review",
+            },
+        }
+        refreshed = dict(original)
+        refreshed["content_hash"] = "def"
+        refreshed["metadata"] = {"why_zh": "fresh fetch"}
+        self.db.upsert_articles([original])
+        self.db.upsert_articles([refreshed])
+        metadata = json.loads(self.db.rows("SELECT metadata_json FROM articles WHERE canonical_url=?", ("https://example.org/a",))[0]["metadata_json"])
+        self.assertEqual(metadata["summary_zh"], original["metadata"]["summary_zh"])
+        self.assertEqual(metadata["places"][0]["name_zh"], "美国")
+        self.assertEqual(metadata["why_zh"], "fresh fetch")
 
     def test_place_detection_supports_map_markers(self) -> None:
         places = detect_places("Hospitals in Europe face heat while Texas recovers from floods")
