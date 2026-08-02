@@ -383,12 +383,13 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
         (_published_day(item.get("published_at")) for item in today_items),
         default=None,
     )
+    publication_day = datetime.now(BEIJING_TZ).date()
     payload["intelligence"] = today_items
     payload["map_events_today"] = _map_events(today_items)
     payload["map_events_week"] = _map_events(week_items)
     payload["map_events"] = payload["map_events_today"]
-    payload["meta"]["date"] = latest_day.isoformat() if latest_day else payload["meta"]["date"]
-    payload["meta"]["latest_news_date"] = payload["meta"]["date"]
+    payload["meta"]["date"] = publication_day.isoformat()
+    payload["meta"]["latest_news_date"] = latest_day.isoformat() if latest_day else payload["meta"]["date"]
     selected_days = [_published_day(item.get("published_at")) for item in today_items]
     selected_days = [day for day in selected_days if day]
     payload["meta"]["daily_window_start"] = min(selected_days).isoformat() if selected_days else payload["meta"]["date"]
@@ -457,12 +458,12 @@ def dashboard_payload(db: Database) -> dict:
     return {
         "meta": {
             "product": "国际气候情报与高质量中文文本数据库",
-            "date": max(intelligence_days, default=today).isoformat(),
+            "date": today.isoformat(),
             "generated_at": datetime.now(UTC).isoformat(),
             "timezone": "Asia/Shanghai",
             "demo_mode": not live,
             "notice": (
-                f"今日队列优先展示最新北京时间自然日；若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
+                f"今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
                 if live else "尚未执行在线同步，以下事件仅用于界面演示；UNFCCC 本地档案可独立浏览。"
             ),
             "latest_news_date": max(intelligence_days, default=today).isoformat(),
