@@ -410,6 +410,30 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(archive["records"][0]["places"][0]["name_zh"], "加勒比地区")
         self.assertEqual(archive["records"][0]["molecule"]["geo_atoms"], ["加勒比地区"])
 
+    def test_archive_prunes_low_value_news_misfires(self) -> None:
+        path = Path(self.temp.name) / "archive.json"
+        path.write_text(json.dumps({
+            "schema_version": "1.0",
+            "records": [{
+                "record_id": "r1",
+                "article_id": "r1",
+                "canonical_url": "https://example.org/sesame",
+                "title_original": "Sesame Workshop launches extreme weather special",
+                "title_zh": "极端天气风险出现新动态",
+                "summary_zh": "来源标题显示该信息涉及极端天气，但更像娱乐宣传，不应进入外交情报。",
+                "source_name": "Google News RSS Search",
+                "source_id": "API004",
+                "authority": 3,
+                "relevance_score": 54,
+                "published_at": "2026-08-02T02:29:00+00:00",
+                "places": [],
+                "quality": {"passed": True, "tier": "B", "score": 46},
+            }],
+            "total": 1,
+        }), encoding="utf-8")
+        archive = update_archive(path, [], limit=3000)
+        self.assertEqual(archive["total"], 0)
+
     def test_translation_queue_round_robins_sources(self) -> None:
         rows = [
             {"article_id": "a1", "source_id": "A"},
