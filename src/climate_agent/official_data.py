@@ -174,7 +174,7 @@ def import_curated_unfccc(db: Database, config_dir: Path) -> dict:
     for metric in summary["metrics"]:
         metric_id = stable_id("metric", f"{document_id}:{metric['label_zh']}")
         db.execute(
-            "INSERT INTO official_metrics (metric_id,document_id,label_zh,value_text,scope_text,source_url,sort_order) VALUES (?,?,?,?,?,?,?)",
+            "INSERT OR REPLACE INTO official_metrics (metric_id,document_id,label_zh,value_text,scope_text,source_url,sort_order) VALUES (?,?,?,?,?,?,?)",
             (metric_id, document_id, metric["label_zh"], metric["value_text"], metric["scope_text"], item["detail_url"], metric["sort_order"]),
         )
     return {"decisions": decisions, "summaries": summaries, "metrics": len(summary["metrics"])}

@@ -46,7 +46,7 @@ def _brief_lines(payload: dict) -> list[tuple[str, int, int]]:
     lines: list[tuple[str, int, int]] = [
         ("国际气候情报今日简报", 22, 30),
         (f"发布日期：{meta.get('date', '时间待核')}（北京时间）", 11, 20),
-        ("仅收录最近一个有有效记录的自然日；重要数字与立场请回到原文复核。", 10, 28),
+        ("优先采用最新北京时间自然日；当天不足时以近 7 天高质量记录补足约 10 条。重要数字与立场请回到原文复核。", 10, 28),
     ]
     for index, item in enumerate(payload.get("intelligence", []), 1):
         theme = item.get("theme_zh") or "气候动态"

@@ -8,6 +8,7 @@ const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;",
 }[character]));
 const SVG_NS = "http://www.w3.org/2000/svg";
+const MAP_CENTER_LON = 55;
 
 function safeUrl(value) {
   try {
@@ -166,9 +167,9 @@ function worldPoint([longitude, latitude]) {
 }
 
 function centeredPoint(longitude, latitude) {
-  const chinaX = (105 + 180) / 360 * 1000;
+  const centerX = (MAP_CENTER_LON + 180) / 360 * 1000;
   const baseX = (longitude + 180) / 360 * 1000;
-  return [((baseX - chinaX + 500) % 1000 + 1000) % 1000, (90 - latitude) / 180 * 500];
+  return [((baseX - centerX + 500) % 1000 + 1000) % 1000, (90 - latitude) / 180 * 500];
 }
 
 function ringCoordinates(topology, refs) {
@@ -224,7 +225,7 @@ async function renderMap(events) {
     const path = geometryPath(topology, geometry);
     if (path) countries.appendChild(svgEl("path", { d: path, class: "map-country", "fill-rule": "evenodd" }));
   });
-  const shift = 500 - (105 + 180) / 360 * 1000;
+  const shift = 500 - (MAP_CENTER_LON + 180) / 360 * 1000;
   const westernCopy = countries.cloneNode(true);
   const easternCopy = countries.cloneNode(true);
   westernCopy.setAttribute("transform", `translate(${shift},0)`);
@@ -284,7 +285,7 @@ function selectMapEvent(item) {
 function renderMapPlaces(events) {
   $("mapPlaceList").innerHTML = events.length
     ? events.map(item => `<button type="button" data-map-id="${esc(item.marker_id)}"><i></i>${esc(item.place)}<span>${esc(item.theme)}</span></button>`).join("")
-    : `<span>${state.mapPeriod === "today" ? "当天" : "本周"}暂无带有明确地理位置的新记录。</span>`;
+    : `<span>${state.mapPeriod === "today" ? "今日队列" : "本周"}暂无带有明确地理位置的新记录。</span>`;
   document.querySelectorAll("[data-map-id]").forEach(button => button.addEventListener("click", () => {
     const item = events.find(event => event.marker_id === button.dataset.mapId);
     if (item) selectMapEvent(item);
@@ -304,7 +305,7 @@ async function switchMapPeriod(period) {
     button.setAttribute("aria-pressed", String(active));
   });
   const events = mapEventsFor(period);
-  $("mapRangeNote").textContent = `中国位于地图中央。红点表示${period === "today" ? "最新完整日" : "本周"}情报明确涉及的国家或地区；点击即可查看中文摘要与原文。`;
+  $("mapRangeNote").textContent = `中国位于地图中部偏右。红点表示${period === "today" ? "今日队列" : "本周"}情报明确涉及的国家或地区；点击即可查看中文摘要与原文。`;
   renderMapPlaces(events);
   await renderMap(events);
 }

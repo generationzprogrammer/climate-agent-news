@@ -243,20 +243,20 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(select_latest_day(rows), [rows[1]])
         self.assertEqual({row["source_id"] for row in select_latest_week(rows)}, {"A", "B"})
 
-    def test_daily_window_skips_partial_day_and_balances_complete_day(self) -> None:
+    def test_daily_window_skips_partial_day_and_never_mixes_dates(self) -> None:
         rows = [
             {
-                "article_id": "partial-a", "source_id": "API", "source_name": "GDELT",
+                "article_id": "latest-a", "source_id": "API", "source_name": "GDELT",
                 "title_original": "TCMA launches five engines toward net zero 2050",
                 "published_at": "2026-07-29T03:30:00+00:00", "relevance_score": 50, "places": [],
             },
             {
-                "article_id": "partial-b", "source_id": "API", "source_name": "GDELT",
+                "article_id": "latest-b", "source_id": "API", "source_name": "GDELT",
                 "title_original": "Wire service - TCMA launches five engines toward net zero 2050",
                 "published_at": "2026-07-29T03:00:00+00:00", "relevance_score": 50, "places": [],
             },
         ]
-        places = [
+        place_cycle = [
             {"name_zh": "欧洲", "lon": 10, "lat": 51},
             {"name_zh": "中国", "lon": 105, "lat": 35},
             {"name_zh": "非洲", "lon": 22, "lat": 2},
@@ -265,20 +265,55 @@ class CoreTests(unittest.TestCase):
         ]
         for index in range(10):
             rows.append({
-                "article_id": f"complete-{index}",
+                "article_id": f"older-{index}",
                 "source_id": f"S{index % 5}",
                 "source_name": f"Source {index % 5}",
                 "title_original": f"Distinct climate policy event number {index}",
                 "published_at": "2026-07-28T02:00:00+00:00",
                 "relevance_score": 90 - index,
-                "places": [places[index % len(places)]],
+                "places": [place_cycle[index % len(place_cycle)]],
             })
         selected = select_daily_window(rows, limit=10)
         source_counts = Counter(row["source_name"] for row in selected)
         self.assertEqual(len(selected), 10)
+        self.assertNotIn("latest-a", {row["article_id"] for row in selected})
+        self.assertNotIn("latest-b", {row["article_id"] for row in selected})
         self.assertEqual({date.fromisoformat(row["published_at"][:10]) for row in selected}, {date(2026, 7, 28)})
         self.assertLessEqual(max(source_counts.values()), 2)
         self.assertEqual(sum(bool(row["places"]) for row in selected), 10)
+
+    def test_daily_window_uses_fresh_day_and_backfills_when_quality_is_enough(self) -> None:
+        rows = []
+        for index in range(4):
+            rows.append({
+                "article_id": f"fresh-{index}",
+                "source_id": f"F{index % 2}",
+                "source_name": f"Fresh {index % 2}",
+                "title_original": f"Fresh climate policy signal {index}",
+                "published_at": "2026-08-02T02:00:00+00:00",
+                "relevance_score": 88 - index,
+                "places": [{"name_zh": "加勒比地区" if index == 0 else "美国", "lon": -75, "lat": 18}],
+            })
+        for index in range(10):
+            rows.append({
+                "article_id": f"recent-{index}",
+                "source_id": f"S{index % 5}",
+                "source_name": f"Source {index % 5}",
+                "title_original": f"Recent climate policy event {index}",
+                "published_at": "2026-08-01T02:00:00+00:00",
+                "relevance_score": 82 - index,
+                "places": [{"name_zh": "欧洲", "lon": 10, "lat": 51}],
+            })
+        selected = select_daily_window(rows, limit=10)
+        selected_ids = {row["article_id"] for row in selected}
+        self.assertTrue({"fresh-0", "fresh-1", "fresh-2", "fresh-3"}.issubset(selected_ids))
+        self.assertEqual(len(selected), 10)
+        self.assertEqual(max(date.fromisoformat(row["published_at"][:10]) for row in selected), date(2026, 8, 2))
+
+    def test_place_detection_uses_boundaries_and_caribbean(self) -> None:
+        places = detect_places("Caribbean countries face £43 billion in climate disaster losses")
+        self.assertEqual(places[0]["name_zh"], "加勒比地区")
+        self.assertNotIn("中国", {place["name_zh"] for place in detect_places("China-backed transition minerals projects")})
 
     def test_translation_queue_round_robins_sources(self) -> None:
         rows = [

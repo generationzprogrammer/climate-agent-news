@@ -54,6 +54,12 @@ GEO_TERMS = {
     "nigeria": ("尼日利亚", 8.0, 9.0),
     "japan": ("日本", 138.0, 37.0),
     "south korea": ("韩国", 128.0, 36.0),
+    "caribbean": ("加勒比地区", -75.0, 18.0),
+    "加勒比": ("加勒比地区", -75.0, 18.0),
+    "haiti": ("海地", -72.3, 19.0),
+    "jamaica": ("牙买加", -77.3, 18.1),
+    "bahamas": ("巴哈马", -77.4, 25.0),
+    "dominican republic": ("多米尼加", -70.2, 18.8),
 }
 
 
@@ -61,8 +67,8 @@ def detect_places(text: str) -> list[dict]:
     haystack = f" {text.lower()} "
     places = []
     seen = set()
-    for term, (name, lon, lat) in GEO_TERMS.items():
-        if term in haystack and name not in seen:
+    for term, (name, lon, lat) in sorted(GEO_TERMS.items(), key=lambda item: len(item[0]), reverse=True):
+        if re.search(rf"(?<![a-z0-9]){re.escape(term.lower())}(?![a-z0-9-])", haystack) and name not in seen:
             places.append({"name_zh": name, "lon": lon, "lat": lat})
             seen.add(name)
     return places[:3]

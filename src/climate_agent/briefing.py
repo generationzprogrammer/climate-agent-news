@@ -189,14 +189,25 @@ def select_daily_window(
     lookback_days: int = 7,
     min_items: int = 8,
     min_sources: int = 3,
+    min_fresh_items: int = 3,
+    min_fresh_sources: int = 2,
 ) -> list[dict]:
-    """Select one latest publication-ready Beijing day without mixing dates."""
+    """Select the freshest publication-ready Beijing window.
+
+    Early-morning crawls can contain only a few wire-service duplicates from the
+    new calendar day. Publishing those records alone makes the map empty and
+    replaces a complete edition with a partial one. The public edition therefore
+    prefers a complete single day, but when the latest day has several genuine
+    sources it is allowed to lead the edition and borrow high-quality records
+    from the recent archive to keep the briefing useful and visibly current.
+    """
     dated = [(item, _published_day(item.get("published_at"))) for item in items]
     latest = max((day for _, day in dated if day), default=None)
     if not latest:
         return []
     first_day = latest - timedelta(days=max(0, lookback_days - 1))
     candidates: list[tuple[date, list[dict], int, int]] = []
+    recent_items = [item for item, day in dated if day and first_day <= day <= latest]
     for publication_day in sorted(
         {day for _, day in dated if day and first_day <= day <= latest},
         reverse=True,
@@ -208,6 +219,20 @@ def select_daily_window(
         candidates.append((publication_day, selected, source_total, mapped_total))
         if len(selected) >= min_items and source_total >= min_sources and mapped_total:
             return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
+        if (
+            publication_day == latest
+            and len(selected) >= min_fresh_items
+            and source_total >= min_fresh_sources
+            and mapped_total
+        ):
+            fillers = balanced_select(
+                [item for item in recent_items if _published_day(item.get("published_at")) != latest],
+                max(0, limit - len(selected)),
+                already_selected=selected,
+            )
+            blended = selected + fillers
+            if len(blended) >= min_items and len({_source_key(item) for item in blended}) >= min_sources:
+                return sorted(blended, key=lambda item: item.get("published_at") or "", reverse=True)
 
     if not candidates:
         return []
@@ -216,6 +241,15 @@ def select_daily_window(
         key=lambda row: (min(len(row[1]), limit), row[2], row[3], row[0]),
     )
     return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
+
+
+def count_backfilled_items(items: list[dict]) -> int:
+    days = [_published_day(item.get("published_at")) for item in items]
+    days = [day for day in days if day]
+    latest_day = max(days, default=None)
+    if not latest_day:
+        return 0
+    return sum(_published_day(item.get("published_at")) != latest_day for item in items)
 
 
 def select_latest_week(items: list[dict], *, limit: int = 48) -> list[dict]:
@@ -355,9 +389,12 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
     payload["map_events"] = payload["map_events_today"]
     payload["meta"]["date"] = latest_day.isoformat() if latest_day else payload["meta"]["date"]
     payload["meta"]["latest_news_date"] = payload["meta"]["date"]
+    selected_days = [_published_day(item.get("published_at")) for item in today_items]
+    selected_days = [day for day in selected_days if day]
+    payload["meta"]["daily_window_start"] = min(selected_days).isoformat() if selected_days else payload["meta"]["date"]
     payload["meta"]["daily_target"] = 10
-    payload["meta"]["daily_backfilled"] = 0
-    payload["meta"]["daily_complete_day"] = True
+    payload["meta"]["daily_backfilled"] = count_backfilled_items(today_items)
+    payload["meta"]["daily_complete_day"] = payload["meta"]["daily_backfilled"] == 0
     payload["meta"]["daily_sources"] = len({_source_key(item) for item in today_items})
     payload["meta"]["daily_continents"] = len({_continent(item) for item in today_items if _continent(item) != "未标注"})
     payload["metrics"]["high_priority"] = sum(item.get("relevance_score", 0) >= 70 for item in today_items)
@@ -377,7 +414,7 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
 def dashboard_payload(db: Database) -> dict:
     source_rows = db.rows("SELECT * FROM sources ORDER BY enabled DESC, authority DESC, name")
     candidates = _publishable_candidates(db)
-    intelligence = select_daily_window(candidates)
+    intelligence = select_daily_window(candidates, limit=10)
     weekly_intelligence = select_latest_week(candidates)
     demo_rows = db.rows("SELECT * FROM events ORDER BY urgency DESC, published_at DESC")
     demo_events = sorted((decode_event(row) for row in demo_rows), key=lambda x: x["priority"], reverse=True)
@@ -406,6 +443,9 @@ def dashboard_payload(db: Database) -> dict:
     live = bool(intelligence)
     map_events_today = _map_events(intelligence)
     map_events_week = _map_events(weekly_intelligence)
+    intelligence_days = [_published_day(item.get("published_at")) for item in intelligence]
+    intelligence_days = [day for day in intelligence_days if day]
+    backfilled = count_backfilled_items(intelligence)
     phrases = [
         {
             "text": item.get("poster_phrase") or item["title_zh"],
@@ -417,14 +457,21 @@ def dashboard_payload(db: Database) -> dict:
     return {
         "meta": {
             "product": "国际气候情报与高质量中文文本数据库",
-            "date": max((_published_day(item.get("published_at")) for item in intelligence), default=today).isoformat(),
+            "date": max(intelligence_days, default=today).isoformat(),
             "generated_at": datetime.now(UTC).isoformat(),
             "timezone": "Asia/Shanghai",
             "demo_mode": not live,
             "notice": (
-                f"今日队列展示最近一个达到质量门槛的完整自然日，约 10 条且不跨日期拼接；动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
+                f"今日队列优先展示最新北京时间自然日；若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
                 if live else "尚未执行在线同步，以下事件仅用于界面演示；UNFCCC 本地档案可独立浏览。"
             ),
+            "latest_news_date": max(intelligence_days, default=today).isoformat(),
+            "daily_window_start": min(intelligence_days, default=today).isoformat(),
+            "daily_target": 10,
+            "daily_backfilled": backfilled,
+            "daily_complete_day": backfilled == 0,
+            "daily_sources": len({_source_key(item) for item in intelligence}),
+            "daily_continents": len({_continent(item) for item in intelligence if _continent(item) != "未标注"}),
         },
         "metrics": {
             "source_total": len(source_rows),
