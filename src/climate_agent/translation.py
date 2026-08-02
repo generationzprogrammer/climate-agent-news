@@ -110,17 +110,102 @@ def source_balanced_rows(rows: list[dict], limit: int) -> list[dict]:
     return selected
 
 
+def _fallback_translation(row: dict) -> dict:
+    """Create a conservative Chinese review stub when model translation is unavailable.
+
+    The fallback is intentionally modest: it marks the item as a lead that still
+    needs source verification instead of pretending to be a polished translation.
+    This keeps the daily dashboard fresh during model/API incidents while
+    preserving an explicit quality boundary for users.
+    """
+    text = f"{row.get('title_original') or ''} {row.get('summary_source') or ''}".lower()
+    if any(term in text for term in ("heat wave", "wildfire", "flood", "drought", "hurricane", "storm", "extreme weather")):
+        title_zh = "极端天气风险出现新动态"
+        theme_zh = "极端天气与气候风险"
+        poster = "极端天气预警"
+    elif "climate finance" in text or "loss and damage" in text:
+        title_zh = "气候资金议题出现新进展"
+        theme_zh = "气候资金"
+        poster = "资金议题升温"
+    elif any(term in text for term in ("renewable", "clean energy", "energy transition", "net zero")):
+        title_zh = "清洁能源转型出现新进展"
+        theme_zh = "能源转型"
+        poster = "能源转型提速"
+    elif any(term in text for term in ("summit", "unfccc", "cop30", "cop31", "ndc", "negotiat")):
+        title_zh = "国际气候谈判出现新动向"
+        theme_zh = "气候谈判"
+        poster = "谈判信号更新"
+    elif any(term in text for term in ("emission", "carbon", "methane")):
+        title_zh = "碳排放治理出现新动向"
+        theme_zh = "减排政策"
+        poster = "减排信号更新"
+    else:
+        title_zh = "全球气候议题出现新动态"
+        theme_zh = "气候动态"
+        poster = "气候线索更新"
+    original = (row.get("title_original") or "").strip()
+    if original:
+        summary_zh = (
+            f"来源标题显示：“{original}”。该信息涉及{theme_zh}，适合作为当日气候情报线索；"
+            "具体数字、责任主体和政策含义仍需回到原文核验。"
+        )
+    else:
+        summary_zh = (
+            f"来源摘要显示该信息涉及{theme_zh}，适合作为当日气候情报线索；"
+            "具体数字、责任主体和政策含义仍需回到原文核验。"
+        )
+    return {
+        "title_zh": title_zh,
+        "summary_zh": summary_zh[:220],
+        "theme_zh": theme_zh,
+        "importance_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+        "poster_phrase": poster,
+        "translation_status": "fallback_needs_review",
+    }
+
+
+def _write_translation(db: Database, row: dict, item: dict, *, fallback: bool = False) -> bool:
+    title = item.get("title_zh", "")
+    if not re.search(r"[\u4e00-\u9fff]", title):
+        return False
+    try:
+        metadata = json.loads(row.get("metadata_json") or "{}")
+    except json.JSONDecodeError:
+        metadata = {}
+    metadata.update({
+        "summary_zh": item["summary_zh"],
+        "theme_zh": item["theme_zh"],
+        "importance_zh": item["importance_zh"],
+        "poster_phrase": item["poster_phrase"],
+        "places": detect_places(f"{row['title_original']} {row.get('summary_source') or ''}"),
+        "translation_status": item.get(
+            "translation_status",
+            "fallback_needs_review" if fallback else "model_generated_needs_review",
+        ),
+        "translated_at": datetime.now(UTC).isoformat(),
+    })
+    db.execute(
+        "UPDATE articles SET title_zh=?,metadata_json=? WHERE article_id=?",
+        (item["title_zh"], json.dumps(metadata, ensure_ascii=False), row["article_id"]),
+    )
+    return True
+
+
 def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int = 20) -> dict:
     rows = db.rows("""
         SELECT a.article_id,a.source_id,a.title_original,a.summary_source,a.canonical_url,
                a.metadata_json,s.region AS source_region
         FROM articles a JOIN sources s ON s.source_id=a.source_id
-        WHERE (a.title_zh IS NULL OR trim(a.title_zh)='')
+        WHERE (a.title_zh IS NULL OR trim(a.title_zh)='' OR a.metadata_json NOT LIKE '%"summary_zh"%')
           AND datetime(a.published_at_utc) >= datetime('now','-7 days')
-        ORDER BY a.relevance_score DESC,a.published_at_utc DESC LIMIT ?
+        ORDER BY date(a.published_at_utc, '+8 hours') DESC,
+                 a.relevance_score DESC,
+                 a.published_at_utc DESC
+        LIMIT ?
     """, (max(limit * 8, limit),))
     rows = source_balanced_rows(rows, limit)
     translated = 0
+    fallback_translated = 0
     failed = []
     system = """你是面向中国资深气候政策与外交工作者的中文编译编辑。把输入新闻准确、克制地编译为中文。
 只输出 JSON 对象，键为 translations，值为数组。每项必须包含 article_id、title_zh、summary_zh、theme_zh、importance_zh、poster_phrase。
@@ -137,30 +222,19 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
             result = model.complete_json(system, payload)
             outputs = {item["article_id"]: item for item in result.get("translations", [])}
         except Exception as exc:
-            failed.extend({"article_id": row["article_id"], "error": str(exc)[:200]} for row in batch)
-            continue
-        with db.connect() as conn:
             for row in batch:
-                item = outputs.get(row["article_id"])
-                if not item or not re.search(r"[\u4e00-\u9fff]", item.get("title_zh", "")):
-                    failed.append({"article_id": row["article_id"], "error": "invalid_translation"})
-                    continue
-                try:
-                    metadata = json.loads(row.get("metadata_json") or "{}")
-                except json.JSONDecodeError:
-                    metadata = {}
-                metadata.update({
-                    "summary_zh": item["summary_zh"],
-                    "theme_zh": item["theme_zh"],
-                    "importance_zh": item["importance_zh"],
-                    "poster_phrase": item["poster_phrase"],
-                    "places": detect_places(f"{row['title_original']} {row.get('summary_source') or ''}"),
-                    "translation_status": "model_generated_needs_review",
-                    "translated_at": datetime.now(UTC).isoformat(),
-                })
-                conn.execute(
-                    "UPDATE articles SET title_zh=?,metadata_json=? WHERE article_id=?",
-                    (item["title_zh"], json.dumps(metadata, ensure_ascii=False), row["article_id"]),
-                )
-                translated += 1
-    return {"pending": len(rows), "translated": translated, "failed": failed}
+                if _write_translation(db, row, _fallback_translation(row), fallback=True):
+                    translated += 1
+                    fallback_translated += 1
+                failed.append({"article_id": row["article_id"], "error": f"model_failed_fallback_used: {str(exc)[:160]}"})
+            continue
+        for row in batch:
+            item = outputs.get(row["article_id"])
+            if not item or not _write_translation(db, row, item):
+                if _write_translation(db, row, _fallback_translation(row), fallback=True):
+                    translated += 1
+                    fallback_translated += 1
+                failed.append({"article_id": row["article_id"], "error": "invalid_translation_fallback_used"})
+                continue
+            translated += 1
+    return {"pending": len(rows), "translated": translated, "fallback_translated": fallback_translated, "failed": failed}

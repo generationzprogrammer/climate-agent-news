@@ -19,7 +19,7 @@ from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _source_scope_match
-from climate_agent.translation import detect_places, source_balanced_rows
+from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows
 
 
 class CoreTests(unittest.TestCase):
@@ -423,6 +423,15 @@ class CoreTests(unittest.TestCase):
         selected = source_balanced_rows(rows, 5)
         self.assertEqual([row["source_id"] for row in selected[:3]], ["A", "C", "D"])
         self.assertEqual({row["source_id"] for row in selected}, {"A", "B", "C", "D"})
+
+    def test_translation_fallback_keeps_daily_items_publishable_but_review_marked(self) -> None:
+        item = _fallback_translation({
+            "title_original": "Heat wave brings heightened wildfire risk to Western US",
+            "summary_source": "",
+        })
+        self.assertIn("极端天气", item["title_zh"])
+        self.assertIn("回到原文核验", item["summary_zh"])
+        self.assertEqual(item["translation_status"], "fallback_needs_review")
 
     def test_source_health_quarantines_only_after_repeated_failures(self) -> None:
         state = {"sources": {}}
