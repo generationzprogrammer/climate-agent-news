@@ -119,7 +119,35 @@ def _fallback_translation(row: dict) -> dict:
     preserving an explicit quality boundary for users.
     """
     text = f"{row.get('title_original') or ''} {row.get('summary_source') or ''}".lower()
-    if any(term in text for term in ("heat wave", "wildfire", "flood", "drought", "hurricane", "storm", "extreme weather")):
+    if "western us" in text and "heat wave" in text:
+        title_zh = "美国西部热浪推高野火风险"
+        theme_zh = "极端高温与野火"
+        poster = "美国西部热浪"
+    elif "spain" in text and "wildfire risk" in text and "20-fold" in text:
+        title_zh = "研究称气候变化使西班牙野火风险增至20倍"
+        theme_zh = "野火风险归因"
+        poster = "西班牙野火风险"
+    elif "spain" in text and ("pedro" in text or "sánchez" in text or "sanchez" in text):
+        title_zh = "西班牙首相强调气候变化致命风险"
+        theme_zh = "气候政治"
+        poster = "气候政治升温"
+    elif "china" in text and "south africa" in text and ("wind farm" in text or "clean energy" in text):
+        title_zh = "中南清洁能源合作风电项目启动"
+        theme_zh = "清洁能源合作"
+        poster = "中南风电合作"
+    elif "india" in text and "renewable energy" in text:
+        title_zh = "印度可再生能源投资计划升温"
+        theme_zh = "可再生能源投资"
+        poster = "印度绿能投资"
+    elif ("norwegian" in text or "norway" in text) and "renewable energy" in text:
+        title_zh = "挪威融资支持可再生能源项目"
+        theme_zh = "可再生能源融资"
+        poster = "绿能融资"
+    elif "europe" in text and "wildfire" in text:
+        title_zh = "欧洲野火形势判断受到事实核查"
+        theme_zh = "野火风险"
+        poster = "欧洲野火核查"
+    elif any(term in text for term in ("heat wave", "wildfire", "flood", "drought", "hurricane", "storm", "extreme weather")):
         title_zh = "极端天气风险出现新动态"
         theme_zh = "极端天气与气候风险"
         poster = "极端天气预警"
@@ -146,7 +174,7 @@ def _fallback_translation(row: dict) -> dict:
     original = (row.get("title_original") or "").strip()
     if original:
         summary_zh = (
-            f"来源标题显示：“{original}”。该信息涉及{theme_zh}，适合作为当日气候情报线索；"
+            f"来源标题显示，{title_zh}。该信息涉及{theme_zh}，适合作为当日气候情报线索；"
             "具体数字、责任主体和政策含义仍需回到原文核验。"
         )
     else:

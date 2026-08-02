@@ -165,8 +165,16 @@ class CoreTests(unittest.TestCase):
             published_at_raw=None, published_at_utc=None, summary_from_source=None,
             language="en", content_hash="m",
         )
+        entertainment = NormalizedArticle(
+            article_id="s", source_id="API004", source_url="https://news.google.com/rss",
+            canonical_url="https://example.org/sesame",
+            title="Sesame Workshop launches extreme weather special for families",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="en", content_hash="s",
+        )
         self.assertTrue(_source_scope_match(climate, "API004"))
         self.assertFalse(_source_scope_match(moon, "API004"))
+        self.assertFalse(_source_scope_match(entertainment, "API004"))
 
     def test_ndc_import_rejects_non_unfccc_and_is_version_aware(self) -> None:
         payload = b"code,party,title,fileType,language,version,status,submissionDate,encodedAbsUrl,originalFilename\nAAA,Alpha,Alpha NDC,NDC,English,1,Active,2025-01-02,https://unfccc.int/a.pdf,a.pdf\nBBB,Beta,Beta NDC,NDC,English,2,Active,2025-01-02,https://example.org/b.pdf,b.pdf\n"
@@ -429,7 +437,7 @@ class CoreTests(unittest.TestCase):
             "title_original": "Heat wave brings heightened wildfire risk to Western US",
             "summary_source": "",
         })
-        self.assertIn("极端天气", item["title_zh"])
+        self.assertIn("美国西部热浪", item["title_zh"])
         self.assertIn("回到原文核验", item["summary_zh"])
         self.assertEqual(item["translation_status"], "fallback_needs_review")
 

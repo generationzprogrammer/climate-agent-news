@@ -19,6 +19,10 @@ P0_SOURCE_IDS = (
 
 GDELT_SOURCE_IDS = {"API001", "API005"}
 GOOGLE_NEWS_SOURCE_IDS = {"API004"}
+GOOGLE_NEWS_EXCLUDE_TERMS = (
+    "sesame", "nickalive", "movie", "celebrity", "sports", "football",
+    "basketball", "baseball", "horoscope", "recipe",
+)
 
 GDELT_PROFILES = {
     "API001": {
@@ -122,6 +126,8 @@ def _source_scope_match(article: NormalizedArticle, source_id: str) -> bool:
         allowed_domain = any(host == domain or host.endswith(f".{domain}") for domain in CHINA_DISCOVERY_DOMAINS)
         return allowed_domain and any(term in title for term in CHINA_CLIMATE_TERMS)
     if source_id == "API004":
+        if any(term in title for term in GOOGLE_NEWS_EXCLUDE_TERMS):
+            return False
         return any(term in title for term in CLIMATE_SIGNAL_TERMS)
     return True
 
@@ -190,7 +196,7 @@ def _gdelt_url(endpoint: str, source_id: str) -> str:
 
 
 def _google_news_url(endpoint: str) -> str:
-    query = '("climate change" OR "carbon emissions" OR "renewable energy" OR "net zero" OR "climate finance" OR "extreme weather") when:1d'
+    query = '("climate change" OR "carbon emissions" OR "renewable energy" OR "net zero" OR "climate finance" OR "wildfire climate" OR "heat wave climate") when:1d'
     params = {
         "q": query,
         "hl": "en-US",
