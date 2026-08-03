@@ -2,18 +2,18 @@
   "meta": {
     "product": "国际气候情报与高质量中文文本数据库",
     "date": "2026-08-03",
-    "generated_at": "2026-08-03T07:39:29.306736+00:00",
+    "generated_at": "2026-08-03T07:46:16.849070+00:00",
     "timezone": "Asia/Shanghai",
     "demo_mode": false,
     "notice": "今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 7 个。标题和摘要是来源陈述，尚需人工核验。",
     "latest_news_date": "2026-08-03",
     "daily_window_start": "2026-07-28",
     "daily_target": 10,
-    "daily_backfilled": 7,
+    "daily_backfilled": 3,
     "daily_complete_day": false,
-    "daily_sources": 9,
+    "daily_sources": 6,
     "daily_continents": 5,
-    "dataset_version": "2026-08-03T07:39:29.336943+00:00"
+    "dataset_version": "2026-08-03T07:46:16.898082+00:00"
   },
   "metrics": {
     "source_total": 53,
@@ -26,9 +26,285 @@
     "high_priority": 6,
     "official_documents": 576,
     "cop31_countdown": 98,
-    "archive_total": 125
+    "archive_total": 131
   },
   "intelligence": [
+    {
+      "record_id": "article_fc2f09990897dff3",
+      "article_id": "article_fc2f09990897dff3",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPbFEwVzd5Vmw2dWd5WHY0RGxUWGVSWjdYbFAzUnA3LXFYNzh0NnAzWnU4UmdMaHc5dUNMNl9jR1hPZlNWVkVLX2JqeU8tWEF4cWRTbWRhS2tqWHlENmQwcno5TWw0YkJsX1JyRW5RekNkQzVwZE9mMVB6SzlGRlpWVXRqYUJpX0VtYktRRXZFdFRZamZ5MHU2TjRqNVZIT0tncTFUN3I0NUJzNkpkLXlhMFR0X3U3S1Y4a1NBRVhlRF9EdVBSWjdkMXpSTF8yZEZ6ZnVYTHU1UlFrLVVjaE5aaw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPbFEwVzd5Vmw2dWd5WHY0RGxUWGVSWjdYbFAzUnA3LXFYNzh0NnAzWnU4UmdMaHc5dUNMNl9jR1hPZlNWVkVLX2JqeU8tWEF4cWRTbWRhS2tqWHlENmQwcno5TWw0YkJsX1JyRW5RekNkQzVwZE9mMVB6SzlGRlpWVXRqYUJpX0VtYktRRXZFdFRZamZ5MHU2TjRqNVZIT0tncTFUN3I0NUJzNkpkLXlhMFR0X3U3S1Y4a1NBRVhlRF9EdVBSWjdkMXpSTF8yZEZ6ZnVYTHU1UlFrLVVjaE5aaw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "LOF International Dairy Factory Launches 5 MWp Rooftop Solar Project to Advance ESG and Renewable Energy Goals - SolarQuarter",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_source": "LOF International Dairy Factory Launches 5 MWp Rooftop Solar Project to Advance ESG and Renewable Energy Goals SolarQuarter",
+      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "能源转型",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-03T07:09:50+00:00",
+      "fetched_at": "2026-08-03T07:44:11.915067+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "5 mw"
+      ],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "bd202535b35cd84c75bea5739b41606b183972b69934f6c200e525a2468de755",
+      "poster_phrase": "能源转型提速",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_fc2f09990897dff3",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "5 mw"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T07:44:12.761251+00:00",
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
+    },
+    {
+      "record_id": "article_3f553aa2f454ab58",
+      "article_id": "article_3f553aa2f454ab58",
+      "canonical_url": "https://www.bbc.co.uk/news/articles/c4gwr53qrw7o?at_medium=RSS&at_campaign=rss",
+      "source_url": "https://www.bbc.co.uk/news/articles/c4gwr53qrw7o?at_medium=RSS&at_campaign=rss",
+      "source_id": "INT014",
+      "source_name": "BBC Science & Environment",
+      "source_type": "公共媒体",
+      "authority": 5,
+      "relevance_score": 70,
+      "title_original": "Volunteers clear brook to reduce flood risk",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": "With a hot summer drying out Syston Brook, volunteers have prepared the waterway ready for rain.",
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-03T05:09:06+00:00",
+      "fetched_at": "2026-08-03T07:43:01.252685+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "9f61c316056e54f8745812f7231328d2c986d39392e817af88e174b45f222c86",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_3f553aa2f454ab58",
+        "source_atom": {
+          "name": "BBC Science & Environment",
+          "authority": 5,
+          "type": "公共媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T07:44:12.761251+00:00",
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
+    },
+    {
+      "record_id": "article_7b719e94046e6dce",
+      "article_id": "article_7b719e94046e6dce",
+      "canonical_url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOb2NwVU43UEIyTEdaY2VlbjRkbW12LXgyTnZJZkZTYWNDaUdwdU9IdHVOcEczR3VMOUpuU2hWdmlQQ0lqeHhpZWJUZkNmZzFnaVdjRnhDaFpfNVFyZU9Bd213QWZya1FMLVE4cmRIRHNWVjV0M0M3UjhJWjJqa1JfZkNOQ0NBTC1UZnNkOTg5amRGV1NOUFJrNW5PUQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOb2NwVU43UEIyTEdaY2VlbjRkbW12LXgyTnZJZkZTYWNDaUdwdU9IdHVOcEczR3VMOUpuU2hWdmlQQ0lqeHhpZWJUZkNmZzFnaVdjRnhDaFpfNVFyZU9Bd213QWZya1FMLVE4cmRIRHNWVjV0M0M3UjhJWjJqa1JfZkNOQ0NBTC1UZnNkOTg5amRGV1NOUFJrNW5PUQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 72,
+      "title_original": "PH targets 35% renewable energy mix by 2030 driven by expanded auctions - Philippine Information Agency",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_source": "PH targets 35% renewable energy mix by 2030 driven by expanded auctions Philippine Information Agency",
+      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "能源转型",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-03T03:32:44+00:00",
+      "fetched_at": "2026-08-03T07:44:11.915067+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "35%",
+        "2030"
+      ],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "8d6912475687624468547816e27d9c64c0e1062fa5da39518cd7305e211d9aae",
+      "poster_phrase": "能源转型提速",
+      "quality": {
+        "passed": true,
+        "score": 52,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_7b719e94046e6dce",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "35%",
+          "2030"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T07:44:12.761251+00:00",
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
+    },
+    {
+      "record_id": "article_7f104db5dc2e1e93",
+      "article_id": "article_7f104db5dc2e1e93",
+      "canonical_url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 62,
+      "title_original": "India’s Avaada secures $1.3b financing for 2,150 MW renewable energy portfolio - Asian Power",
+      "title_zh": "印度可再生能源投资计划升温",
+      "summary_source": "India’s Avaada secures $1.3b financing for 2,150 MW renewable energy portfolio Asian Power",
+      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "可再生能源投资",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-03T02:45:21+00:00",
+      "fetched_at": "2026-08-03T07:44:11.915067+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "$1.3",
+        "2,150 mw"
+      ],
+      "places": [
+        {
+          "name_zh": "印度",
+          "lon": 78.0,
+          "lat": 22.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "a230b331c6c3934d70f69ac26fb7efb99343a371fbe8ce899116701edbd9412d",
+      "poster_phrase": "印度绿能投资",
+      "quality": {
+        "passed": true,
+        "score": 49,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_7f104db5dc2e1e93",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "$1.3",
+          "2,150 mw"
+        ],
+        "geo_atoms": [
+          "印度"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T07:44:12.761251+00:00",
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
+    },
     {
       "record_id": "article_52a314290fbb9a0e",
       "article_id": "article_52a314290fbb9a0e",
@@ -47,7 +323,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-02T22:36:00+00:00",
-      "fetched_at": "2026-08-03T01:08:16.638880+00:00",
+      "fetched_at": "2026-08-03T07:44:11.915067+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -104,7 +380,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
-      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
     },
     {
       "record_id": "article_c51a150ef2c99849",
@@ -124,7 +400,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-02T18:21:18+00:00",
-      "fetched_at": "2026-08-03T01:08:16.638880+00:00",
+      "fetched_at": "2026-08-03T07:44:11.915067+00:00",
       "topics": [
         "履约与全球盘点"
       ],
@@ -181,7 +457,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
-      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
     },
     {
       "record_id": "article_1372ef6906c2e6fc",
@@ -201,7 +477,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-02T16:54:07+00:00",
-      "fetched_at": "2026-08-03T01:07:19.447495+00:00",
+      "fetched_at": "2026-08-03T07:43:01.067211+00:00",
       "topics": [
         "气候适应"
       ],
@@ -248,226 +524,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
-      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
-    },
-    {
-      "record_id": "article_fc5da889c959eea6",
-      "article_id": "article_fc5da889c959eea6",
-      "canonical_url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation",
-      "source_url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation",
-      "source_id": "API001",
-      "source_name": "GDELT 2.0 DOC API",
-      "source_type": "全球新闻聚合API",
-      "authority": 4,
-      "relevance_score": 62,
-      "title_original": "Climate summit in Indonesia calls for faster action , deeper green cooperation",
-      "title_zh": "国际气候谈判出现新动向",
-      "summary_source": null,
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "气候谈判",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "English",
-      "published_at": "2026-08-02T04:00:00+00:00",
-      "fetched_at": "2026-08-02T04:49:31.959178+00:00",
-      "topics": [
-        "国际气候谈判"
-      ],
-      "numbers": [],
-      "places": [
-        {
-          "name_zh": "印度尼西亚",
-          "lon": 118.0,
-          "lat": -2.0
-        }
-      ],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "14a2245ffa1251b6247276493c33754f803e96c40a25c2f9cccbf36114cd3020",
-      "poster_phrase": "谈判信号更新",
-      "quality": {
-        "passed": true,
-        "score": 58,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_fc5da889c959eea6",
-        "source_atom": {
-          "name": "GDELT 2.0 DOC API",
-          "authority": 4,
-          "type": "全球新闻聚合API"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "国际气候谈判"
-        ],
-        "number_atoms": [],
-        "geo_atoms": [
-          "印度尼西亚"
-        ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-02T04:49:34.569254+00:00",
-      "last_archived_at": "2026-08-02T04:49:34.838442+00:00"
-    },
-    {
-      "record_id": "article_01b6a3fea5209786",
-      "article_id": "article_01b6a3fea5209786",
-      "canonical_url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html",
-      "source_url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html",
-      "source_id": "API005",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "source_type": "中国官方与专业来源定向发现API",
-      "authority": 4,
-      "relevance_score": 62,
-      "title_original": "China - South Africa clean energy cooperation highlighted as flagship wind farm launches - Xinhua",
-      "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_source": null,
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "清洁能源合作",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "English",
-      "published_at": "2026-08-01T10:15:00+00:00",
-      "fetched_at": "2026-08-03T01:07:40.952397+00:00",
-      "topics": [
-        "气候动态"
-      ],
-      "numbers": [],
-      "places": [
-        {
-          "name_zh": "南非",
-          "lon": 24.0,
-          "lat": -29.0
-        },
-        {
-          "name_zh": "非洲",
-          "lon": 22.0,
-          "lat": 2.0
-        },
-        {
-          "name_zh": "中国",
-          "lon": 105.0,
-          "lat": 35.0
-        }
-      ],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "66e35b9b608fe83401df3f3e5b64ecfc49945670b4a5c162103b00f4aa51edfc",
-      "poster_phrase": "中南风电合作",
-      "quality": {
-        "passed": true,
-        "score": 58,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_01b6a3fea5209786",
-        "source_atom": {
-          "name": "中国官方气候来源（GDELT定向发现）",
-          "authority": 4,
-          "type": "中国官方与专业来源定向发现API"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候动态"
-        ],
-        "number_atoms": [],
-        "geo_atoms": [
-          "南非",
-          "非洲",
-          "中国"
-        ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
-    },
-    {
-      "record_id": "article_567716b1fee60318",
-      "article_id": "article_567716b1fee60318",
-      "canonical_url": "https://www.climatechangenews.com/2026/07/31/un-chief-warns-climate-crisis-in-overdrive-as-el-nino-threatens-to-fuel-the-fire",
-      "source_url": "https://www.climatechangenews.com/2026/07/31/un-chief-warns-climate-crisis-in-overdrive-as-el-nino-threatens-to-fuel-the-fire/",
-      "source_id": "INT002",
-      "source_name": "Climate Home News",
-      "source_type": "气候专业媒体",
-      "authority": 5,
-      "relevance_score": 82,
-      "title_original": "UN chief warns climate crisis “in overdrive” as El Niño threatens to fuel the fire",
-      "title_zh": "碳排放治理出现新动向",
-      "summary_source": "Top politicians and scientists blamed the deadly fires on the climate crisis and said it should inspire more emissions reductions and adaptation measures The post UN chief warns climate crisis “in overdrive” as El Niño threatens to fuel the fire appeared first on Climate Home News .",
-      "summary_zh": "来源标题显示，碳排放治理出现新动向。该信息涉及减排政策，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "减排政策",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "en",
-      "published_at": "2026-07-31T16:51:00+00:00",
-      "fetched_at": "2026-08-03T01:07:17.607454+00:00",
-      "topics": [
-        "能源与排放",
-        "气候适应"
-      ],
-      "numbers": [],
-      "places": [],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "c292f785f938355716adcaa9be511a707991943cf4c040cce4a3dbac8ad995a7",
-      "poster_phrase": "减排信号更新",
-      "quality": {
-        "passed": true,
-        "score": 74,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_567716b1fee60318",
-        "source_atom": {
-          "name": "Climate Home News",
-          "authority": 5,
-          "type": "气候专业媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放",
-          "气候适应"
-        ],
-        "number_atoms": [],
-        "geo_atoms": [],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
     },
     {
       "record_id": "article_d06390e6b6173bbd",
@@ -487,7 +544,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-07-31T05:33:22+00:00",
-      "fetched_at": "2026-08-03T01:07:19.080604+00:00",
+      "fetched_at": "2026-08-03T07:43:00.005409+00:00",
       "topics": [
         "气候适应"
       ],
@@ -546,78 +603,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
-    },
-    {
-      "record_id": "article_2fc21c2ac0bf82c6",
-      "article_id": "article_2fc21c2ac0bf82c6",
-      "canonical_url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires",
-      "source_url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires",
-      "source_id": "INT001",
-      "source_name": "Carbon Brief",
-      "source_type": "气候专业媒体",
-      "authority": 5,
-      "relevance_score": 70,
-      "title_original": "Factcheck: No, Europe is not having its ‘quietest’ year for wildfires",
-      "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_source": "In recent days, prominent climate sceptics and rightwing commentators have shared charts on social media incorrectly implying that Europe is… The post Factcheck: No, Europe is not having its ‘quietest’ year for wildfires appeared first on Carbon Brief .",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "野火风险",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "en",
-      "published_at": "2026-07-30T14:51:00+00:00",
-      "fetched_at": "2026-08-02T04:56:23.801334+00:00",
-      "topics": [
-        "气候适应"
-      ],
-      "numbers": [],
-      "places": [
-        {
-          "name_zh": "欧洲",
-          "lon": 10.0,
-          "lat": 51.0
-        }
-      ],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "90f3e54726fd0094bc2fccdca64120f8c13a83d48a7ac62f699cd89461d0e0c2",
-      "poster_phrase": "欧洲野火核查",
-      "quality": {
-        "passed": true,
-        "score": 70,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_2fc21c2ac0bf82c6",
-        "source_atom": {
-          "name": "Carbon Brief",
-          "authority": 5,
-          "type": "气候专业媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候适应"
-        ],
-        "number_atoms": [],
-        "geo_atoms": [
-          "欧洲"
-        ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-02T04:57:29.203967+00:00"
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
     },
     {
       "record_id": "article_2b498ff60d1dfc18",
@@ -637,7 +623,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-07-28T19:34:59+00:00",
-      "fetched_at": "2026-08-02T04:56:28.464214+00:00",
+      "fetched_at": "2026-08-03T07:43:01.483422+00:00",
       "topics": [
         "气候动态"
       ],
@@ -700,7 +686,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-02T04:57:29.203967+00:00"
+      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
     },
     {
       "record_id": "curated_3c8d41ebd8c88e3b",
@@ -720,7 +706,7 @@
       "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
       "language": "en",
       "published_at": "2026-07-28T00:00:00+00:00",
-      "fetched_at": "2026-08-03T07:39:29.185061+00:00",
+      "fetched_at": "2026-08-03T07:46:16.668289+00:00",
       "topics": [
         "极端天气",
         "气候适应"
@@ -783,10 +769,23 @@
         "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-03T07:39:29.336943+00:00"
+      "last_archived_at": "2026-08-03T07:46:16.898082+00:00"
     }
   ],
   "map_events": [
+    {
+      "marker_id": "article_7f104db5dc2e1e93_0",
+      "article_id": "article_7f104db5dc2e1e93",
+      "place": "印度",
+      "lon": 78.0,
+      "lat": 22.0,
+      "theme": "可再生能源投资",
+      "title_zh": "印度可再生能源投资计划升温",
+      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-03T02:45:21+00:00",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5"
+    },
     {
       "marker_id": "article_52a314290fbb9a0e_0",
       "article_id": "article_52a314290fbb9a0e",
@@ -827,58 +826,6 @@
       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
     },
     {
-      "marker_id": "article_fc5da889c959eea6_0",
-      "article_id": "article_fc5da889c959eea6",
-      "place": "印度尼西亚",
-      "lon": 118.0,
-      "lat": -2.0,
-      "theme": "气候谈判",
-      "title_zh": "国际气候谈判出现新动向",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "GDELT 2.0 DOC API",
-      "published_at": "2026-08-02T04:00:00+00:00",
-      "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
-    },
-    {
-      "marker_id": "article_01b6a3fea5209786_0",
-      "article_id": "article_01b6a3fea5209786",
-      "place": "南非",
-      "lon": 24.0,
-      "lat": -29.0,
-      "theme": "清洁能源合作",
-      "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "published_at": "2026-08-01T10:15:00+00:00",
-      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
-    },
-    {
-      "marker_id": "article_01b6a3fea5209786_1",
-      "article_id": "article_01b6a3fea5209786",
-      "place": "非洲",
-      "lon": 22.0,
-      "lat": 2.0,
-      "theme": "清洁能源合作",
-      "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "published_at": "2026-08-01T10:15:00+00:00",
-      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
-    },
-    {
-      "marker_id": "article_01b6a3fea5209786_2",
-      "article_id": "article_01b6a3fea5209786",
-      "place": "中国",
-      "lon": 105.0,
-      "lat": 35.0,
-      "theme": "清洁能源合作",
-      "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "published_at": "2026-08-01T10:15:00+00:00",
-      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
-    },
-    {
       "marker_id": "article_d06390e6b6173bbd_0",
       "article_id": "article_d06390e6b6173bbd",
       "place": "法国",
@@ -890,19 +837,6 @@
       "source_name": "Mongabay Climate Change",
       "published_at": "2026-07-31T05:33:22+00:00",
       "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
-    },
-    {
-      "marker_id": "article_2fc21c2ac0bf82c6_0",
-      "article_id": "article_2fc21c2ac0bf82c6",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "野火风险",
-      "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Carbon Brief",
-      "published_at": "2026-07-30T14:51:00+00:00",
-      "url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires"
     },
     {
       "marker_id": "article_2b498ff60d1dfc18_0",
@@ -946,6 +880,19 @@
   ],
   "map_events_today": [
     {
+      "marker_id": "article_7f104db5dc2e1e93_0",
+      "article_id": "article_7f104db5dc2e1e93",
+      "place": "印度",
+      "lon": 78.0,
+      "lat": 22.0,
+      "theme": "可再生能源投资",
+      "title_zh": "印度可再生能源投资计划升温",
+      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-03T02:45:21+00:00",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5"
+    },
+    {
       "marker_id": "article_52a314290fbb9a0e_0",
       "article_id": "article_52a314290fbb9a0e",
       "place": "中国",
@@ -985,58 +932,6 @@
       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
     },
     {
-      "marker_id": "article_fc5da889c959eea6_0",
-      "article_id": "article_fc5da889c959eea6",
-      "place": "印度尼西亚",
-      "lon": 118.0,
-      "lat": -2.0,
-      "theme": "气候谈判",
-      "title_zh": "国际气候谈判出现新动向",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "GDELT 2.0 DOC API",
-      "published_at": "2026-08-02T04:00:00+00:00",
-      "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
-    },
-    {
-      "marker_id": "article_01b6a3fea5209786_0",
-      "article_id": "article_01b6a3fea5209786",
-      "place": "南非",
-      "lon": 24.0,
-      "lat": -29.0,
-      "theme": "清洁能源合作",
-      "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "published_at": "2026-08-01T10:15:00+00:00",
-      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
-    },
-    {
-      "marker_id": "article_01b6a3fea5209786_1",
-      "article_id": "article_01b6a3fea5209786",
-      "place": "非洲",
-      "lon": 22.0,
-      "lat": 2.0,
-      "theme": "清洁能源合作",
-      "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "published_at": "2026-08-01T10:15:00+00:00",
-      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
-    },
-    {
-      "marker_id": "article_01b6a3fea5209786_2",
-      "article_id": "article_01b6a3fea5209786",
-      "place": "中国",
-      "lon": 105.0,
-      "lat": 35.0,
-      "theme": "清洁能源合作",
-      "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "published_at": "2026-08-01T10:15:00+00:00",
-      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
-    },
-    {
       "marker_id": "article_d06390e6b6173bbd_0",
       "article_id": "article_d06390e6b6173bbd",
       "place": "法国",
@@ -1048,19 +943,6 @@
       "source_name": "Mongabay Climate Change",
       "published_at": "2026-07-31T05:33:22+00:00",
       "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
-    },
-    {
-      "marker_id": "article_2fc21c2ac0bf82c6_0",
-      "article_id": "article_2fc21c2ac0bf82c6",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "野火风险",
-      "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Carbon Brief",
-      "published_at": "2026-07-30T14:51:00+00:00",
-      "url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires"
     },
     {
       "marker_id": "article_2b498ff60d1dfc18_0",
@@ -1338,6 +1220,19 @@
       "url": "https://www.carbonbrief.org/qa-what-does-chinas-15th-five-year-plan-for-renewables-mean-for-climate-change"
     },
     {
+      "marker_id": "article_b77918746acf16ae_0",
+      "article_id": "article_b77918746acf16ae",
+      "place": "美国得州",
+      "lon": -99.0,
+      "lat": 31.0,
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Yale Climate Connections",
+      "published_at": "2026-07-30T11:00:00+00:00",
+      "url": "https://yaleclimateconnections.org/2026/07/flood-mapping-tool-helps-south-texas-communities-better-understand-flooding-risks"
+    },
+    {
       "marker_id": "article_40dcb227c1fcbe93_0",
       "article_id": "article_40dcb227c1fcbe93",
       "place": "美国得州",
@@ -1364,6 +1259,19 @@
       "url": "https://www.news.cn/world/20260801/6f0649b260864821873cd86aca640824/c.html"
     },
     {
+      "marker_id": "article_7f104db5dc2e1e93_0",
+      "article_id": "article_7f104db5dc2e1e93",
+      "place": "印度",
+      "lon": 78.0,
+      "lat": 22.0,
+      "theme": "可再生能源投资",
+      "title_zh": "印度可再生能源投资计划升温",
+      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-03T02:45:21+00:00",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5"
+    },
+    {
       "marker_id": "article_807d7fbdc9bd5377_0",
       "article_id": "article_807d7fbdc9bd5377",
       "place": "欧洲",
@@ -1388,19 +1296,6 @@
       "source_name": "The Guardian Climate Crisis",
       "published_at": "2026-07-29T11:00:30+00:00",
       "url": "https://www.theguardian.com/world/2026/jul/29/caribbean-climate-related-economic-damage-developing-islands"
-    },
-    {
-      "marker_id": "article_9c81750ebefab743_0",
-      "article_id": "article_9c81750ebefab743",
-      "place": "印度",
-      "lon": 78.0,
-      "lat": 22.0,
-      "theme": "可再生能源投资",
-      "title_zh": "印度可再生能源投资计划升温",
-      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-01T17:12:05+00:00",
-      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxNNF9MamstaFg1UVRHS0R2TmxKUGl6U2RBeXlxYTBlUzRBc3hhcVBuS2JwU3BjWDc1bHdzWEZIeDJ4dmFOZ2lQMFdsdFp3dXQzSl9BQV9GWkVwUU5kcEZkbThRbk1NTTlKTGFqTGZTcVU2TnZJdm5QV2lWQ2ZsMG9SNThRVEJSNU5mMWdRdTY1c052UjdnOVRIcXgwcENteWJkOVA2dDgwWDlPTFRVa1VCSldnajJ3QjU3ZE40VWxtdU53S1BNNFNfY1FLMk5tYnNONG1WSWJ4Q0N0NW00LUEtbGl6R0htMl9SY1JwQ3Z4UnLSAfYBQVVfeXFMT0E3TTVzYkFOQTVXTm5rWnlCdUx3NlF5NGtrZXFJc3V5SjFYenZSX1psOG5JQ0NIekw1MnBJZGRLU3I5QUlJbGpVbFZJaEdyMVliV3pSTzkzSDJSMjBtbXVvazNTOFppanRYOXpmTUdBS1pIdDBCUEk0YkJOU3NLclRJY0VYRmFDUVllRlFSSVRGdGMyclNuNDVUdEpuak1NYXNnWGR6SlVpcmZvUmxHaWpnSGlrbkJkaWxacHo3cU8xVHZ5eUpWeXVhdk9PNFhYaml4bzNQUGVxRmNieVo2LWRwa1dKUWItTjN6ZEgxUW5OTzJRZXB3?oc=5"
     },
     {
       "marker_id": "article_175ed8e916a48677_0",
@@ -1455,6 +1350,19 @@
       "url": "https://grist.org/energy/chinas-solar-industry-is-losing-money-the-country-is-doubling-down-anyway"
     },
     {
+      "marker_id": "article_9c81750ebefab743_0",
+      "article_id": "article_9c81750ebefab743",
+      "place": "印度",
+      "lon": 78.0,
+      "lat": 22.0,
+      "theme": "可再生能源投资",
+      "title_zh": "印度可再生能源投资计划升温",
+      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-01T17:12:05+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxNNF9MamstaFg1UVRHS0R2TmxKUGl6U2RBeXlxYTBlUzRBc3hhcVBuS2JwU3BjWDc1bHdzWEZIeDJ4dmFOZ2lQMFdsdFp3dXQzSl9BQV9GWkVwUU5kcEZkbThRbk1NTTlKTGFqTGZTcVU2TnZJdm5QV2lWQ2ZsMG9SNThRVEJSNU5mMWdRdTY1c052UjdnOVRIcXgwcENteWJkOVA2dDgwWDlPTFRVa1VCSldnajJ3QjU3ZE40VWxtdU53S1BNNFNfY1FLMk5tYnNONG1WSWJ4Q0N0NW00LUEtbGl6R0htMl9SY1JwQ3Z4UnLSAfYBQVVfeXFMT0E3TTVzYkFOQTVXTm5rWnlCdUx3NlF5NGtrZXFJc3V5SjFYenZSX1psOG5JQ0NIekw1MnBJZGRLU3I5QUlJbGpVbFZJaEdyMVliV3pSTzkzSDJSMjBtbXVvazNTOFppanRYOXpmTUdBS1pIdDBCUEk0YkJOU3NLclRJY0VYRmFDUVllRlFSSVRGdGMyclNuNDVUdEpuak1NYXNnWGR6SlVpcmZvUmxHaWpnSGlrbkJkaWxacHo3cU8xVHZ5eUpWeXVhdk9PNFhYaml4bzNQUGVxRmNieVo2LWRwa1dKUWItTjN6ZEgxUW5OTzJRZXB3?oc=5"
+    },
+    {
       "marker_id": "article_1a885c5c1b29037d_0",
       "article_id": "article_1a885c5c1b29037d",
       "place": "肯尼亚",
@@ -1501,61 +1409,57 @@
       "weight": 10
     },
     {
+      "text": "极端天气预警",
+      "theme": "极端天气与气候风险",
+      "weight": 9
+    },
+    {
+      "text": "能源转型提速",
+      "theme": "能源转型",
+      "weight": 8
+    },
+    {
+      "text": "印度绿能投资",
+      "theme": "可再生能源投资",
+      "weight": 7
+    },
+    {
+      "text": "能源转型提速",
+      "theme": "能源转型",
+      "weight": 6
+    },
+    {
       "text": "气候线索更新",
       "theme": "气候动态",
-      "weight": 9
+      "weight": 5
     },
     {
       "text": "极端天气预警",
       "theme": "极端天气与气候风险",
-      "weight": 8
-    },
-    {
-      "text": "谈判信号更新",
-      "theme": "气候谈判",
-      "weight": 7
-    },
-    {
-      "text": "中南风电合作",
-      "theme": "清洁能源合作",
-      "weight": 6
-    },
-    {
-      "text": "减排信号更新",
-      "theme": "减排政策",
-      "weight": 5
+      "weight": 4
     },
     {
       "text": "西班牙野火风险",
       "theme": "野火风险归因",
-      "weight": 4
-    },
-    {
-      "text": "欧洲野火核查",
-      "theme": "野火风险",
       "weight": 3
     }
   ],
   "events": [],
   "topics": [
     {
-      "name": "气候适应",
-      "weight": 5
-    },
-    {
       "name": "能源与排放",
-      "weight": 2
+      "weight": 4
     },
     {
-      "name": "气候动态",
-      "weight": 2
+      "name": "气候适应",
+      "weight": 4
     },
     {
       "name": "履约与全球盘点",
       "weight": 1
     },
     {
-      "name": "国际气候谈判",
+      "name": "气候动态",
       "weight": 1
     },
     {
@@ -2064,17 +1968,17 @@
   ],
   "archive": {
     "dataset_name": "ClimateText-8760",
-    "updated_at": "2026-08-03T07:39:29.336943+00:00",
-    "total": 125,
+    "updated_at": "2026-08-03T07:46:16.898082+00:00",
+    "total": 131,
     "limit": 8760,
     "statistics": {
-      "previous_total": 125,
+      "previous_total": 131,
       "added": 0,
       "updated": 0,
       "rejected": 0,
       "pruned": 0,
       "tier_a": 18,
-      "tier_b": 107
+      "tier_b": 113
     }
   }
 }

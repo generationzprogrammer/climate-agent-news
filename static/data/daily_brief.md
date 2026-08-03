@@ -8,12 +8,48 @@
 
 来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
+- 来源：Google News RSS Search｜2026-08-03T07:09:50+00:00
+- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
+- 状态：来源陈述，未作独立事实核验
+- 原文：https://news.google.com/rss/articles/CBMi4AFBVV95cUxPbFEwVzd5Vmw2dWd5WHY0RGxUWGVSWjdYbFAzUnA3LXFYNzh0NnAzWnU4UmdMaHc5dUNMNl9jR1hPZlNWVkVLX2JqeU8tWEF4cWRTbWRhS2tqWHlENmQwcno5TWw0YkJsX1JyRW5RekNkQzVwZE9mMVB6SzlGRlpWVXRqYUJpX0VtYktRRXZFdFRZamZ5MHU2TjRqNVZIT0tncTFUN3I0NUJzNkpkLXlhMFR0X3U3S1Y4a1NBRVhlRF9EdVBSWjdkMXpSTF8yZEZ6ZnVYTHU1UlFrLVVjaE5aaw?oc=5
+
+### 2. [极端天气与气候风险] 极端天气风险出现新动态
+
+来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
+
+- 来源：BBC Science & Environment｜2026-08-03T05:09:06+00:00
+- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
+- 状态：来源陈述，未作独立事实核验
+- 原文：https://www.bbc.co.uk/news/articles/c4gwr53qrw7o?at_medium=RSS&at_campaign=rss
+
+### 3. [能源转型] 清洁能源转型出现新进展
+
+来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
+
+- 来源：Google News RSS Search｜2026-08-03T03:32:44+00:00
+- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
+- 状态：来源陈述，未作独立事实核验
+- 原文：https://news.google.com/rss/articles/CBMimwFBVV95cUxOb2NwVU43UEIyTEdaY2VlbjRkbW12LXgyTnZJZkZTYWNDaUdwdU9IdHVOcEczR3VMOUpuU2hWdmlQQ0lqeHhpZWJUZkNmZzFnaVdjRnhDaFpfNVFyZU9Bd213QWZya1FMLVE4cmRIRHNWVjV0M0M3UjhJWjJqa1JfZkNOQ0NBTC1UZnNkOTg5amRGV1NOUFJrNW5PUQ?oc=5
+
+### 4. [可再生能源投资] 印度可再生能源投资计划升温
+
+来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
+
+- 来源：Google News RSS Search｜2026-08-03T02:45:21+00:00
+- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
+- 状态：来源陈述，未作独立事实核验
+- 原文：https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5
+
+### 5. [能源转型] 清洁能源转型出现新进展
+
+来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
+
 - 来源：Google News RSS Search｜2026-08-02T22:36:00+00:00
 - 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
 - 状态：来源陈述，未作独立事实核验
 - 原文：https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5
 
-### 2. [气候动态] 全球气候议题出现新动态
+### 6. [气候动态] 全球气候议题出现新动态
 
 来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
@@ -22,7 +58,7 @@
 - 状态：来源陈述，未作独立事实核验
 - 原文：https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5
 
-### 3. [极端天气与气候风险] 极端天气风险出现新动态
+### 7. [极端天气与气候风险] 极端天气风险出现新动态
 
 来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
@@ -31,34 +67,7 @@
 - 状态：来源陈述，未作独立事实核验
 - 原文：https://www.theguardian.com/environment/2026/aug/02/britain-food-shortages-drought-continues-farmers
 
-### 4. [气候谈判] 国际气候谈判出现新动向
-
-来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
-
-- 来源：GDELT 2.0 DOC API｜2026-08-02T04:00:00+00:00
-- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation
-
-### 5. [清洁能源合作] 中南清洁能源合作风电项目启动
-
-来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
-
-- 来源：中国官方气候来源（GDELT定向发现）｜2026-08-01T10:15:00+00:00
-- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html
-
-### 6. [减排政策] 碳排放治理出现新动向
-
-来源标题显示，碳排放治理出现新动向。该信息涉及减排政策，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
-
-- 来源：Climate Home News｜2026-07-31T16:51:00+00:00
-- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://www.climatechangenews.com/2026/07/31/un-chief-warns-climate-crisis-in-overdrive-as-el-nino-threatens-to-fuel-the-fire
-
-### 7. [野火风险归因] 研究称气候变化使西班牙野火风险增至20倍
+### 8. [野火风险归因] 研究称气候变化使西班牙野火风险增至20倍
 
 来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
@@ -66,15 +75,6 @@
 - 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
 - 状态：来源陈述，未作独立事实核验
 - 原文：https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows
-
-### 8. [野火风险] 欧洲野火形势判断受到事实核查
-
-来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
-
-- 来源：Carbon Brief｜2026-07-30T14:51:00+00:00
-- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires
 
 ### 9. [气候动态] 全球气候议题出现新动态
 
