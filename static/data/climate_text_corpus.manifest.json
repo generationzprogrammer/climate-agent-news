@@ -1,0 +1,226 @@
+{
+  "dataset": "Global Climate Change Key Intelligence Text Database",
+  "grain": "one canonical URL per news record",
+  "start": "2023-08-04",
+  "end": "2026-08-03",
+  "target_per_day": 8,
+  "limit": 8760,
+  "generated_at": "2026-08-03T07:27:02.616038+00:00",
+  "totals": {
+    "seen": 56884,
+    "accepted": 8440,
+    "new": 337,
+    "updated": 8103,
+    "failed_windows": 0
+  },
+  "archive_seed": {
+    "status": "ok",
+    "path": "C:\\Users\\10906\\Desktop\\博一下学习\\人工智能实践\\基于AI agent的国际气候新闻智能分析与决策支持系统\\climate-agent-news-starter\\data\\news_archive.json",
+    "seen": 120,
+    "new": 66,
+    "updated": 54
+  },
+  "jsonl": {
+    "output": "C:\\Users\\10906\\Desktop\\博一下学习\\人工智能实践\\基于AI agent的国际气候新闻智能分析与决策支持系统\\climate-agent-news-starter\\data\\climate_text_corpus.jsonl",
+    "records": 8683,
+    "days": 1096,
+    "target_per_day": 8
+  },
+  "provider_windows": {
+    "google_news_rss": 740
+  },
+  "errors": [],
+  "tags": [
+    "published_date",
+    "year",
+    "month",
+    "quarter",
+    "topics",
+    "country_tags",
+    "continent_tags",
+    "source_domain",
+    "numbers"
+  ],
+  "tag_refresh": {
+    "records": 8683,
+    "tagged": 3496,
+    "untagged": 5187
+  },
+  "quality_profile": {
+    "records": 8683,
+    "date_min": "2023-08-04",
+    "date_max": "2026-08-03",
+    "days_covered": 1096,
+    "avg_per_day": 7.92,
+    "days_with_8_or_more": 876,
+    "top_topics": [
+      [
+        "能源与排放",
+        3498
+      ],
+      [
+        "气候适应",
+        3239
+      ],
+      [
+        "气候资金",
+        1089
+      ],
+      [
+        "气候综合",
+        689
+      ],
+      [
+        "国际气候谈判",
+        582
+      ],
+      [
+        "国际碳市场",
+        520
+      ],
+      [
+        "国家气候承诺",
+        312
+      ],
+      [
+        "履约与全球盘点",
+        71
+      ],
+      [
+        "气候动态",
+        62
+      ],
+      [
+        "极端天气",
+        1
+      ]
+    ],
+    "top_countries": [
+      [
+        "未标注",
+        5187
+      ],
+      [
+        "美国",
+        802
+      ],
+      [
+        "中国",
+        710
+      ],
+      [
+        "印度",
+        281
+      ],
+      [
+        "非洲",
+        271
+      ],
+      [
+        "欧盟",
+        193
+      ],
+      [
+        "英国",
+        187
+      ],
+      [
+        "欧洲",
+        165
+      ],
+      [
+        "巴西",
+        151
+      ],
+      [
+        "法国",
+        119
+      ],
+      [
+        "加拿大",
+        113
+      ],
+      [
+        "澳大利亚",
+        95
+      ]
+    ],
+    "top_continents": [
+      [
+        "Global/Unspecified",
+        5188
+      ],
+      [
+        "Asia",
+        1283
+      ],
+      [
+        "North America",
+        927
+      ],
+      [
+        "Europe",
+        687
+      ],
+      [
+        "Africa",
+        382
+      ],
+      [
+        "South America",
+        195
+      ],
+      [
+        "Oceania",
+        120
+      ],
+      [
+        "Antarctica",
+        7
+      ]
+    ],
+    "top_sources": [
+      [
+        "google:nature",
+        590
+      ],
+      [
+        "google:the guardian",
+        196
+      ],
+      [
+        "google:reuters",
+        149
+      ],
+      [
+        "google:carbon brief",
+        118
+      ],
+      [
+        "google:the new york times",
+        111
+      ],
+      [
+        "google:the conversation",
+        83
+      ],
+      [
+        "google:inside climate news",
+        83
+      ],
+      [
+        "google:the world economic forum",
+        78
+      ],
+      [
+        "google:down to earth",
+        77
+      ],
+      [
+        "google:climate home news",
+        71
+      ]
+    ],
+    "untagged_country_records": 5187
+  }
+}

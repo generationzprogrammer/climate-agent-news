@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+from datetime import date, timedelta
 from pathlib import Path
 
 from .archive import DEFAULT_ARCHIVE_LIMIT, load_archive, validate_public_payload
@@ -12,6 +13,7 @@ from .db import Database
 from .delivery import build_push_message
 from .editorial import apply_editorial_overrides
 from .exporter import export_static_site
+from .historical_backfill import DEFAULT_ARCHIVE_LIMIT as HISTORY_LIMIT, backfill_history, export_historical_jsonl, refresh_historical_tags
 from .official_data import import_curated_unfccc, import_ndcs
 from .providers import OpenAICompatibleModel, publish_email, publish_file, publish_wecom
 from .regional_seed import import_regional_seed
@@ -54,6 +56,22 @@ def parser() -> argparse.ArgumentParser:
     sync.add_argument("--source", action="append", choices=P0_SOURCE_IDS, help="只重试指定 P0 来源，可重复使用")
     translate = sub.add_parser("translate", help="使用已配置模型编译最近新闻的中文标题与摘要")
     translate.add_argument("--limit", type=int, default=20)
+    history = sub.add_parser("backfill-history", help="回填过去三年气候新闻统计文本库")
+    history.add_argument("--start", type=str, help="YYYY-MM-DD；默认 end 前 3*365 天")
+    history.add_argument("--end", type=str, default=date.today().isoformat())
+    history.add_argument("--target-per-day", type=int, default=8)
+    history.add_argument("--limit", type=int, default=HISTORY_LIMIT)
+    history.add_argument("--maxrecords-per-month", type=int, default=250)
+    history.add_argument("--max-months", type=int, help="试运行时只回填最近 N 个月")
+    history.add_argument("--sleep-seconds", type=float, default=1.0)
+    history.add_argument("--provider", choices=("auto", "gdelt", "google"), default="auto")
+    history.add_argument("--output-jsonl", type=Path, default=ROOT / "data" / "climate_text_corpus.jsonl")
+    history.add_argument("--no-include-archive", action="store_true", help="不把现有质量档案作为历史库种子")
+    history.add_argument("--reset-history", action="store_true", help="回填前清空 historical_articles 表")
+    refresh_tags = sub.add_parser("refresh-history-tags", help="重新生成三年气候文本库的国家、洲别标签")
+    refresh_tags.add_argument("--output-jsonl", type=Path, default=ROOT / "data" / "climate_text_corpus.jsonl")
+    refresh_tags.add_argument("--limit", type=int, default=HISTORY_LIMIT)
+    refresh_tags.add_argument("--target-per-day", type=int, default=8)
     export = sub.add_parser("export-web", help="导出无需 Python 服务的静态网站")
     export.add_argument("--output", type=Path, default=ROOT / "dist")
     export.add_argument("--archive-limit", type=int, default=int(os.getenv("CLIMATE_ARCHIVE_LIMIT", str(DEFAULT_ARCHIVE_LIMIT))))
@@ -134,6 +152,40 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "translate":
         result = translate_pending(db, OpenAICompatibleModel.from_env(), limit=args.limit)
         print(json.dumps(result, ensure_ascii=False, indent=2))
+    elif args.command == "backfill-history":
+        end_day = date.fromisoformat(args.end)
+        start_day = date.fromisoformat(args.start) if args.start else end_day - timedelta(days=365 * 3)
+        result = backfill_history(
+            db,
+            start=start_day,
+            end=end_day,
+            target_per_day=args.target_per_day,
+            maxrecords_per_month=args.maxrecords_per_month,
+            limit=args.limit,
+            max_months=args.max_months,
+            sleep_seconds=args.sleep_seconds,
+            output_jsonl=args.output_jsonl,
+            seed_archive_path=None if args.no_include_archive else ROOT / "data" / "news_archive.json",
+            provider=args.provider,
+            reset=args.reset_history,
+        )
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    elif args.command == "refresh-history-tags":
+        tagging = refresh_historical_tags(db)
+        export = export_historical_jsonl(
+            db,
+            args.output_jsonl,
+            limit=args.limit,
+            target_per_day=args.target_per_day,
+        )
+        manifest_path = args.output_jsonl.with_suffix(".manifest.json")
+        manifest = {}
+        if manifest_path.exists():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["tag_refresh"] = tagging
+        manifest["jsonl"] = export
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(json.dumps({"status": "ok", "tagging": tagging, "jsonl": export}, ensure_ascii=False, indent=2))
     elif args.command == "export-web":
         result = export_static_site(db, ROOT / "static", args.output, archive_limit=args.archive_limit)
         print(json.dumps({"status": "ok", **result}, ensure_ascii=False, indent=2))

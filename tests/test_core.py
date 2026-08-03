@@ -15,6 +15,7 @@ from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
 from climate_agent.db import Database
 from climate_agent.delivery import build_push_message
 from climate_agent.exporter import export_static_site
+from climate_agent.historical_backfill import article_to_historical_record, upsert_historical_records
 from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
@@ -229,12 +230,16 @@ class CoreTests(unittest.TestCase):
         static_dir = Path(self.temp.name) / "static"
         output_dir = Path(self.temp.name) / "dist"
         shutil.copytree(ROOT / "static", static_dir)
+        (Path(self.temp.name) / "climate_text_corpus.jsonl").write_text('{"record_id":"hist_1"}\n', encoding="utf-8")
+        (Path(self.temp.name) / "climate_text_corpus.manifest.json").write_text('{"records":1}', encoding="utf-8")
         result = export_static_site(self.db, static_dir, output_dir)
         payload = json.loads((output_dir / "data" / "dashboard.json").read_text(encoding="utf-8"))
         self.assertTrue((output_dir / "index.html").exists())
         self.assertTrue((output_dir / ".nojekyll").exists())
         self.assertTrue((output_dir / "assets" / "countries-110m.json").exists())
         self.assertTrue((output_dir / "data" / "news_archive.json").exists())
+        self.assertTrue((output_dir / "data" / "climate_text_corpus.jsonl").exists())
+        self.assertTrue((output_dir / "data" / "climate_text_corpus.manifest.json").exists())
         pdf = (output_dir / "data" / "daily_brief.pdf").read_bytes()
         self.assertTrue(pdf.startswith(b"%PDF-1.4"))
         self.assertIn(b"/BaseFont /Times-Roman", pdf)
@@ -279,7 +284,7 @@ class CoreTests(unittest.TestCase):
         self.assertIn("下载今日简报", html)
         self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
-        self.assertIn("CLIMATETEXT-3000", html)
+        self.assertIn("CLIMATETEXT-8760", html)
         self.assertLess(html.index('id="map"'), html.index('class="hero"'))
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
@@ -406,7 +411,7 @@ class CoreTests(unittest.TestCase):
             }],
             "total": 1,
         }), encoding="utf-8")
-        archive = update_archive(path, [], limit=3000)
+        archive = update_archive(path, [], limit=8760)
         self.assertEqual(archive["records"][0]["places"][0]["name_zh"], "加勒比地区")
         self.assertEqual(archive["records"][0]["molecule"]["geo_atoms"], ["加勒比地区"])
 
@@ -431,7 +436,7 @@ class CoreTests(unittest.TestCase):
             }],
             "total": 1,
         }), encoding="utf-8")
-        archive = update_archive(path, [], limit=3000)
+        archive = update_archive(path, [], limit=8760)
         self.assertEqual(archive["total"], 0)
 
     def test_translation_queue_round_robins_sources(self) -> None:
@@ -474,6 +479,39 @@ class CoreTests(unittest.TestCase):
         self.assertFalse(source_is_due(state, "X"))
         update_source_health(state, [{"source_id": "X", "status": "success", "error": None}])
         self.assertTrue(source_is_due(state, "X"))
+
+    def test_historical_record_has_analysis_tags(self) -> None:
+        article = NormalizedArticle(
+            article_id="h1", source_id="API001", source_url="https://example.org/a",
+            canonical_url="https://example.org/a",
+            title="China and the United States discuss climate finance and renewable energy",
+            published_at_raw="20260801T000000Z", published_at_utc="2026-08-01T00:00:00+00:00",
+            summary_from_source=None, language="English", content_hash="h",
+        )
+        record = article_to_historical_record(article, fetched_at="2026-08-03T00:00:00+00:00")
+        self.assertIsNotNone(record)
+        assert record is not None
+        self.assertEqual(record["published_date"], "2026-08-01")
+        self.assertIn("country_tags", record)
+        self.assertIn("continent_tags", record)
+        self.assertIn("topics", record)
+
+    def test_historical_records_upsert_to_sqlite(self) -> None:
+        record = {
+            "record_id": "h1", "canonical_url": "https://example.org/a",
+            "source_id": "HIST_GDELT", "source_name": "GDELT historical climate backfill",
+            "source_domain": "example.org", "title_original": "Climate finance update",
+            "summary_source": None, "language": "English",
+            "published_at_utc": "2026-08-01T00:00:00+00:00", "published_date": "2026-08-01",
+            "year": 2026, "month": 8, "quarter": "2026Q3", "relevance_score": 70,
+            "topics": ["气候资金"], "numbers": [], "places": [],
+            "country_tags": ["未标注"], "continent_tags": ["Global/Unspecified"],
+            "quality_flags": {"metadata_only": True}, "metadata": {"backfill_method": "test"},
+            "fetched_at": "2026-08-03T00:00:00+00:00",
+        }
+        counts = upsert_historical_records(self.db, [record])
+        self.assertEqual(counts["new"], 1)
+        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM historical_articles")[0]["n"], 1)
 
 
 if __name__ == "__main__":

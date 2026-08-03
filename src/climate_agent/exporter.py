@@ -44,6 +44,10 @@ def export_static_site(
     )
     (data_dir / "daily_brief.md").write_text(render_markdown(payload), encoding="utf-8")
     pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief.pdf")
+    for history_name in ("climate_text_corpus.jsonl", "climate_text_corpus.manifest.json"):
+        history_path = db.path.parent / history_name
+        if history_path.exists():
+            shutil.copy2(history_path, data_dir / history_name)
     output_dir.mkdir(parents=True, exist_ok=True)
     shutil.copytree(static_dir, output_dir, dirs_exist_ok=True)
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")

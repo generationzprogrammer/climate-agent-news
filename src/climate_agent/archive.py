@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 
 
 ARCHIVE_VERSION = "1.0"
-DEFAULT_ARCHIVE_LIMIT = 3000
+DEFAULT_ARCHIVE_LIMIT = 8760
 CHINESE_RE = re.compile(r"[\u4e00-\u9fff]")
 LOW_VALUE_NEWS_TERMS = (
     "buck moon", "sesame workshop", "sesame street", "nickalive",
@@ -197,7 +197,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
     tier_counts = {tier: sum(r.get("quality", {}).get("tier") == tier for r in records) for tier in ("A", "B")}
     payload = {
         "schema_version": ARCHIVE_VERSION,
-        "dataset_name": "ClimateText-3000",
+        "dataset_name": "ClimateText-8760",
         "updated_at": now,
         "limit": limit,
         "total": len(records),
@@ -223,7 +223,7 @@ def validate_public_payload(dashboard: dict, archive: dict) -> list[str]:
     if not intelligence:
         errors.append("dashboard_has_no_publishable_intelligence")
     if archive.get("total", 0) > DEFAULT_ARCHIVE_LIMIT:
-        errors.append("archive_exceeds_3000")
+        errors.append("archive_exceeds_8760")
     if archive.get("total") != len(archive.get("records", [])):
         errors.append("archive_total_mismatch")
     for item in intelligence:

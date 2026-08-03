@@ -1,62 +1,74 @@
 {
   "meta": {
     "product": "国际气候情报与高质量中文文本数据库",
-    "date": "2026-07-29",
-    "generated_at": "2026-07-29T04:31:09.609593+00:00",
+    "date": "2026-08-03",
+    "generated_at": "2026-08-03T07:39:29.306736+00:00",
     "timezone": "Asia/Shanghai",
     "demo_mode": false,
-    "notice": "页面仅展示最近一个有有效记录的自然日；动态 P0 入口最近成功 0 个。标题和摘要是来源陈述，尚需人工核验。",
-    "latest_news_date": "2026-07-29",
-    "dataset_version": "2026-07-29T04:31:09.620106+00:00"
+    "notice": "今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 7 个。标题和摘要是来源陈述，尚需人工核验。",
+    "latest_news_date": "2026-08-03",
+    "daily_window_start": "2026-07-28",
+    "daily_target": 10,
+    "daily_backfilled": 7,
+    "daily_complete_day": false,
+    "daily_sources": 9,
+    "daily_continents": 5,
+    "dataset_version": "2026-08-03T07:39:29.336943+00:00"
   },
   "metrics": {
     "source_total": 53,
-    "source_enabled": 32,
-    "p0_connected": 0,
-    "p0_total": 25,
+    "source_enabled": 33,
+    "p0_connected": 7,
+    "p0_total": 26,
     "official_enabled": 12,
     "languages": 15,
-    "article_total": 8,
-    "high_priority": 0,
-    "official_documents": 12,
-    "cop31_countdown": 103,
-    "archive_total": 86
+    "article_total": 255,
+    "high_priority": 6,
+    "official_documents": 576,
+    "cop31_countdown": 98,
+    "archive_total": 125
   },
   "intelligence": [
     {
-      "record_id": "article_3c546f14768b457a",
-      "article_id": "article_3c546f14768b457a",
-      "canonical_url": "https://www.itnewsonline.com/news/TCMA-Launches-The-NEXT-Chapter-with-5-Engines-to-Accelerate-Cement-Industry-Toward-Net-Zero-2050/37991",
-      "source_url": "https://www.itnewsonline.com/news/TCMA-Launches-The-NEXT-Chapter-with-5-Engines-to-Accelerate-Cement-Industry-Toward-Net-Zero-2050/37991",
-      "source_id": "API001",
-      "source_name": "GDELT 2.0 DOC API",
-      "source_type": "全球新闻聚合API",
-      "authority": 4,
-      "relevance_score": 50,
-      "title_original": "IT News Online - TCMA Launches  The NEXT Chapter  with 5 Engines to Accelerate Cement Industry Toward Net Zero 2050",
-      "title_zh": "TCMA发布五大引擎推动水泥行业净零转型",
-      "summary_source": null,
-      "summary_zh": "TCMA启动“下一篇章”计划，提出五项举措加速水泥行业向2050年净零排放目标迈进。该举措旨在提升行业减碳能力，推动绿色转型。",
-      "theme_zh": "水泥行业碳减排",
-      "why_zh": "水泥行业净零转型对实现国家碳目标具有关键意义，政策需支持技术创新与行业协作。观点基于事实报道。",
-      "language": "English",
-      "published_at": "2026-07-29T03:30:00+00:00",
-      "fetched_at": "2026-07-29T04:16:38.781372+00:00",
+      "record_id": "article_52a314290fbb9a0e",
+      "article_id": "article_52a314290fbb9a0e",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 84,
+      "title_original": "China Targets 1.8 Billion Tonnes Of Renewable Energy Capacity By 2030 Even As Coal Expansion Continues - foreignpolicyjournal.com",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_source": "China Targets 1.8 Billion Tonnes Of Renewable Energy Capacity By 2030 Even As Coal Expansion Continues foreignpolicyjournal.com",
+      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "能源转型",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-02T22:36:00+00:00",
+      "fetched_at": "2026-08-03T01:08:16.638880+00:00",
       "topics": [
-        "气候动态"
+        "能源与排放"
       ],
       "numbers": [
-        "5",
-        "2050"
+        "1.8 billion",
+        "2030"
       ],
-      "places": [],
-      "translation_status": "model_generated_needs_review",
+      "places": [
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "f692a80aa5f60be1dae7eea02fd99bd0a717c9103b9f61edb57f8c20bbb27fc6",
-      "poster_phrase": "水泥行业迈向净零",
+      "content_hash": "4b7a0648e34d3cffd8dce5ae06c4881fb798b5be772ac662e234466ca89d057f",
+      "poster_phrase": "能源转型提速",
       "quality": {
         "passed": true,
-        "score": 61,
+        "score": 56,
         "tier": "B",
         "checks": {
           "canonical_https": true,
@@ -68,64 +80,74 @@
         }
       },
       "molecule": {
-        "identity": "article_3c546f14768b457a",
+        "identity": "article_52a314290fbb9a0e",
         "source_atom": {
-          "name": "GDELT 2.0 DOC API",
-          "authority": 4,
-          "type": "全球新闻聚合API"
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "model_generated_needs_review",
+          "translation_status": "fallback_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "气候动态"
+          "能源与排放"
         ],
         "number_atoms": [
-          "5",
-          "2050"
+          "1.8 billion",
+          "2030"
         ],
-        "geo_atoms": [],
-        "decision_atom": "水泥行业净零转型对实现国家碳目标具有关键意义，政策需支持技术创新与行业协作。观点基于事实报道。"
+        "geo_atoms": [
+          "中国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
-      "first_archived_at": "2026-07-29T04:18:16.525473+00:00",
-      "last_archived_at": "2026-07-29T04:18:16.703694+00:00"
+      "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
+      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
     },
     {
-      "record_id": "article_4725451ab39a3f2b",
-      "article_id": "article_4725451ab39a3f2b",
-      "canonical_url": "https://www.manilatimes.net/2026/07/29/tmt-newswire/media-outreach-newswire/tcma-launches-the-next-chapter-with-5-engines-to-accelerate-cement-industry-toward-net-zero-2050/2393644",
-      "source_url": "https://www.manilatimes.net/2026/07/29/tmt-newswire/media-outreach-newswire/tcma-launches-the-next-chapter-with-5-engines-to-accelerate-cement-industry-toward-net-zero-2050/2393644",
-      "source_id": "API001",
-      "source_name": "GDELT 2.0 DOC API",
-      "source_type": "全球新闻聚合API",
-      "authority": 4,
-      "relevance_score": 50,
-      "title_original": "TCMA Launches  The NEXT Chapter  with 5 Engines to Accelerate Cement Industry Toward Net Zero 2050",
-      "title_zh": "TCMA启动水泥业净零2050新篇章",
-      "summary_source": null,
-      "summary_zh": "TCMA宣布“下一篇章”计划，提出五大动力推动水泥行业加速迈向2050年净零排放目标。该举措旨在提升行业减碳进程，促进绿色转型，响应全球气候行动需求。",
-      "theme_zh": "水泥行业减碳转型",
-      "why_zh": "水泥行业作为高排放领域，相关举措对实现碳中和目标具有政策示范意义。观点基于行业声明。",
-      "language": "English",
-      "published_at": "2026-07-29T03:00:00+00:00",
-      "fetched_at": "2026-07-29T04:16:38.781372+00:00",
+      "record_id": "article_c51a150ef2c99849",
+      "article_id": "article_c51a150ef2c99849",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 66,
+      "title_original": "UN Climate Change, China hold first joint workshop on transparency capacity-building under new partnership - EnviroNews Nigeria",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_source": "UN Climate Change, China hold first joint workshop on transparency capacity-building under new partnership EnviroNews Nigeria",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "气候动态",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-02T18:21:18+00:00",
+      "fetched_at": "2026-08-03T01:08:16.638880+00:00",
       "topics": [
-        "气候动态"
+        "履约与全球盘点"
       ],
-      "numbers": [
-        "5",
-        "2050"
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "尼日利亚",
+          "lon": 8.0,
+          "lat": 9.0
+        },
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
       ],
-      "places": [],
-      "translation_status": "model_generated_needs_review",
+      "translation_status": "fallback_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "fe763e9458924e0fdc281ef84ccabe3ed928376308fc707e868daf7198691c07",
-      "poster_phrase": "水泥业净零加速",
+      "content_hash": "ac70b26ae6536d0f9cac5f59f1fedf10905fb55eec2eed7f489c716e7ab9e9a0",
+      "poster_phrase": "气候线索更新",
       "quality": {
         "passed": true,
-        "score": 61,
+        "score": 50,
         "tier": "B",
         "checks": {
           "canonical_https": true,
@@ -137,64 +159,63 @@
         }
       },
       "molecule": {
-        "identity": "article_4725451ab39a3f2b",
+        "identity": "article_c51a150ef2c99849",
         "source_atom": {
-          "name": "GDELT 2.0 DOC API",
-          "authority": 4,
-          "type": "全球新闻聚合API"
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "model_generated_needs_review",
+          "translation_status": "fallback_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "气候动态"
+          "履约与全球盘点"
         ],
-        "number_atoms": [
-          "5",
-          "2050"
+        "number_atoms": [],
+        "geo_atoms": [
+          "尼日利亚",
+          "中国"
         ],
-        "geo_atoms": [],
-        "decision_atom": "水泥行业作为高排放领域，相关举措对实现碳中和目标具有政策示范意义。观点基于行业声明。"
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
-      "first_archived_at": "2026-07-29T04:18:16.525473+00:00",
-      "last_archived_at": "2026-07-29T04:18:16.703694+00:00"
+      "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
+      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
     },
     {
-      "record_id": "article_39a1851b0baac602",
-      "article_id": "article_39a1851b0baac602",
-      "canonical_url": "https://portal.sina.com.hk/finance/finance-mediaoutreachnewswire/media-outreach/2026/07/29/1869268/tcma-launches-the-next-chapter-with-5-engines-to-accelerate-cement-industry-toward-net-zero-2050",
-      "source_url": "https://portal.sina.com.hk/finance/finance-mediaoutreachnewswire/media-outreach/2026/07/29/1869268/tcma-launches-the-next-chapter-with-5-engines-to-accelerate-cement-industry-toward-net-zero-2050/",
-      "source_id": "API001",
-      "source_name": "GDELT 2.0 DOC API",
-      "source_type": "全球新闻聚合API",
-      "authority": 4,
-      "relevance_score": 50,
-      "title_original": "TCMA Launches  The NEXT Chapter  with 5 Engines to Accelerate Cement Industry Toward Net Zero 2050",
-      "title_zh": "TCMA启动五大引擎推动水泥业净零转型",
-      "summary_source": null,
-      "summary_zh": "TCMA宣布“下一篇章”计划，推出五项关键举措加速水泥行业向2050年净零排放目标迈进。该计划旨在推动技术创新、产业协作和碳减排，助力行业绿色转型。",
-      "theme_zh": "水泥行业碳减排",
-      "why_zh": "水泥行业净零转型对全球碳减排目标具有重要意义。事实为行业行动，观点涉及政策推动。",
-      "language": "English",
-      "published_at": "2026-07-29T03:00:00+00:00",
-      "fetched_at": "2026-07-29T04:16:38.781372+00:00",
+      "record_id": "article_1372ef6906c2e6fc",
+      "article_id": "article_1372ef6906c2e6fc",
+      "canonical_url": "https://www.theguardian.com/environment/2026/aug/02/britain-food-shortages-drought-continues-farmers",
+      "source_url": "https://www.theguardian.com/environment/2026/aug/02/britain-food-shortages-drought-continues-farmers",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 74,
+      "title_original": "Britain could face food shortages as drought continues, farmers warn",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": "Farmers battle to salvage what they can of their crops as heatwave set to continue Britain could face shortages of certain foods after punishing drought in parts of England, the National Farmers’ Union (NFU) has warned as a heatwave was forecast to continue into next week. The UK’s Health Security Agency (UKHSA) has issued heat health alerts for eight regions of England, with temperatures set to rise above 30C in parts of the country. UKHSA said rising temperatures may increase health risks, particularly for vulnerable groups. Continue reading...",
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-02T16:54:07+00:00",
+      "fetched_at": "2026-08-03T01:07:19.447495+00:00",
       "topics": [
-        "气候动态"
+        "气候适应"
       ],
       "numbers": [
-        "5",
-        "2050"
+        "30c"
       ],
       "places": [],
-      "translation_status": "model_generated_needs_review",
+      "translation_status": "fallback_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "eac9ccad8fedcf15d4debc8d8dc2b4741ba0fc997592988d7481f56365e7e350",
-      "poster_phrase": "水泥业迈向净零",
+      "content_hash": "079cd63ae91c998000e251c5eb516eb0881dca6e3ca77ac8f826214428246bd2",
+      "poster_phrase": "极端天气预警",
       "quality": {
         "passed": true,
-        "score": 61,
+        "score": 71,
         "tier": "B",
         "checks": {
           "canonical_https": true,
@@ -206,7 +227,78 @@
         }
       },
       "molecule": {
-        "identity": "article_39a1851b0baac602",
+        "identity": "article_1372ef6906c2e6fc",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "30c"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
+      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
+    },
+    {
+      "record_id": "article_fc5da889c959eea6",
+      "article_id": "article_fc5da889c959eea6",
+      "canonical_url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation",
+      "source_url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation",
+      "source_id": "API001",
+      "source_name": "GDELT 2.0 DOC API",
+      "source_type": "全球新闻聚合API",
+      "authority": 4,
+      "relevance_score": 62,
+      "title_original": "Climate summit in Indonesia calls for faster action , deeper green cooperation",
+      "title_zh": "国际气候谈判出现新动向",
+      "summary_source": null,
+      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "气候谈判",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-02T04:00:00+00:00",
+      "fetched_at": "2026-08-02T04:49:31.959178+00:00",
+      "topics": [
+        "国际气候谈判"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "印度尼西亚",
+          "lon": 118.0,
+          "lat": -2.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "14a2245ffa1251b6247276493c33754f803e96c40a25c2f9cccbf36114cd3020",
+      "poster_phrase": "谈判信号更新",
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_fc5da889c959eea6",
         "source_atom": {
           "name": "GDELT 2.0 DOC API",
           "authority": 4,
@@ -214,38 +306,815 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "model_generated_needs_review",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "印度尼西亚"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-02T04:49:34.569254+00:00",
+      "last_archived_at": "2026-08-02T04:49:34.838442+00:00"
+    },
+    {
+      "record_id": "article_01b6a3fea5209786",
+      "article_id": "article_01b6a3fea5209786",
+      "canonical_url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html",
+      "source_url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html",
+      "source_id": "API005",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "source_type": "中国官方与专业来源定向发现API",
+      "authority": 4,
+      "relevance_score": 62,
+      "title_original": "China - South Africa clean energy cooperation highlighted as flagship wind farm launches - Xinhua",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_source": null,
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "清洁能源合作",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "fetched_at": "2026-08-03T01:07:40.952397+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "南非",
+          "lon": 24.0,
+          "lat": -29.0
+        },
+        {
+          "name_zh": "非洲",
+          "lon": 22.0,
+          "lat": 2.0
+        },
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "66e35b9b608fe83401df3f3e5b64ecfc49945670b4a5c162103b00f4aa51edfc",
+      "poster_phrase": "中南风电合作",
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_01b6a3fea5209786",
+        "source_atom": {
+          "name": "中国官方气候来源（GDELT定向发现）",
+          "authority": 4,
+          "type": "中国官方与专业来源定向发现API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "南非",
+          "非洲",
+          "中国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
+      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
+    },
+    {
+      "record_id": "article_567716b1fee60318",
+      "article_id": "article_567716b1fee60318",
+      "canonical_url": "https://www.climatechangenews.com/2026/07/31/un-chief-warns-climate-crisis-in-overdrive-as-el-nino-threatens-to-fuel-the-fire",
+      "source_url": "https://www.climatechangenews.com/2026/07/31/un-chief-warns-climate-crisis-in-overdrive-as-el-nino-threatens-to-fuel-the-fire/",
+      "source_id": "INT002",
+      "source_name": "Climate Home News",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 82,
+      "title_original": "UN chief warns climate crisis “in overdrive” as El Niño threatens to fuel the fire",
+      "title_zh": "碳排放治理出现新动向",
+      "summary_source": "Top politicians and scientists blamed the deadly fires on the climate crisis and said it should inspire more emissions reductions and adaptation measures The post UN chief warns climate crisis “in overdrive” as El Niño threatens to fuel the fire appeared first on Climate Home News .",
+      "summary_zh": "来源标题显示，碳排放治理出现新动向。该信息涉及减排政策，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "减排政策",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-07-31T16:51:00+00:00",
+      "fetched_at": "2026-08-03T01:07:17.607454+00:00",
+      "topics": [
+        "能源与排放",
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "c292f785f938355716adcaa9be511a707991943cf4c040cce4a3dbac8ad995a7",
+      "poster_phrase": "减排信号更新",
+      "quality": {
+        "passed": true,
+        "score": 74,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_567716b1fee60318",
+        "source_atom": {
+          "name": "Climate Home News",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放",
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
+      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
+    },
+    {
+      "record_id": "article_d06390e6b6173bbd",
+      "article_id": "article_d06390e6b6173bbd",
+      "canonical_url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows",
+      "source_url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows/",
+      "source_id": "INT007",
+      "source_name": "Mongabay Climate Change",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 74,
+      "title_original": "Climate change boosted Spain wildfire risk 20-fold, research shows",
+      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
+      "summary_source": "Human-induced climate change drastically fueled the weather behind recent devastating wildfires in France and Spain, according to a new rapid analysis by researchers studying the role of climate change on today’s extreme weather. In its report, the World Weather Attribution (WWA), a global network of researchers, noted that severe blazes scorched 140,000 hectares (346,000 acres) […]",
+      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "野火风险归因",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-07-31T05:33:22+00:00",
+      "fetched_at": "2026-08-03T01:07:19.080604+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "20",
+        "140,000",
+        "346,000"
+      ],
+      "places": [
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "dce08d1505fa8107b6faaf088e074e86516c133e14c9171aee45d349f6d907e2",
+      "poster_phrase": "西班牙野火风险",
+      "quality": {
+        "passed": true,
+        "score": 62,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_d06390e6b6173bbd",
+        "source_atom": {
+          "name": "Mongabay Climate Change",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "20",
+          "140,000",
+          "346,000"
+        ],
+        "geo_atoms": [
+          "法国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
+      "last_archived_at": "2026-08-03T01:08:17.357699+00:00"
+    },
+    {
+      "record_id": "article_2fc21c2ac0bf82c6",
+      "article_id": "article_2fc21c2ac0bf82c6",
+      "canonical_url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires",
+      "source_url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires",
+      "source_id": "INT001",
+      "source_name": "Carbon Brief",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 70,
+      "title_original": "Factcheck: No, Europe is not having its ‘quietest’ year for wildfires",
+      "title_zh": "欧洲野火形势判断受到事实核查",
+      "summary_source": "In recent days, prominent climate sceptics and rightwing commentators have shared charts on social media incorrectly implying that Europe is… The post Factcheck: No, Europe is not having its ‘quietest’ year for wildfires appeared first on Carbon Brief .",
+      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "野火风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-07-30T14:51:00+00:00",
+      "fetched_at": "2026-08-02T04:56:23.801334+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "90f3e54726fd0094bc2fccdca64120f8c13a83d48a7ac62f699cd89461d0e0c2",
+      "poster_phrase": "欧洲野火核查",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_2fc21c2ac0bf82c6",
+        "source_atom": {
+          "name": "Carbon Brief",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
+      "last_archived_at": "2026-08-02T04:57:29.203967+00:00"
+    },
+    {
+      "record_id": "article_2b498ff60d1dfc18",
+      "article_id": "article_2b498ff60d1dfc18",
+      "canonical_url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened",
+      "source_url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened/",
+      "source_id": "INT019",
+      "source_name": "Mongabay Latin America",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 58,
+      "title_original": "Fishers fight for solutions as Brazil lists tambaqui as threatened",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_source": "- One of the most cooked fish in the Brazilian Amazon, the tambaqui was included in the official national list of threatened species, triggering fear of losses from Amazon small-scale fishers who depend on the species for their livelihood. - The tambaqui was classified as vulnerable due to projections of a 43.4% overall population decline over three generations as it’s targeted by intense fishing. - Starting at the end of October, its fishing could be prohibited in Brazil if a recovery plan isn’t implemented, according to the Ministry of Environment and Climate Change. - The gray triggerfish was also included in the list of 490 fish and invertebrate threatened fauna, triggering reactions from artisanal fishers and the fishing industry.",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "气候动态",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-07-28T19:34:59+00:00",
+      "fetched_at": "2026-08-02T04:56:28.464214+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "43.4%",
+        "490"
+      ],
+      "places": [
+        {
+          "name_zh": "巴西",
+          "lon": -52.0,
+          "lat": -10.0
+        },
+        {
+          "name_zh": "亚马孙地区",
+          "lon": -62.0,
+          "lat": -4.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "d681ee3434cb71d84bc6a21619d1d6130f8e55c06ab1a03f49136f087b25f841",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 56,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_2b498ff60d1dfc18",
+        "source_atom": {
+          "name": "Mongabay Latin America",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
           "气候动态"
         ],
         "number_atoms": [
-          "5",
-          "2050"
+          "43.4%",
+          "490"
         ],
-        "geo_atoms": [],
-        "decision_atom": "水泥行业净零转型对全球碳减排目标具有重要意义。事实为行业行动，观点涉及政策推动。"
+        "geo_atoms": [
+          "巴西",
+          "亚马孙地区"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
-      "first_archived_at": "2026-07-29T04:18:16.525473+00:00",
-      "last_archived_at": "2026-07-29T04:18:16.703694+00:00"
+      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
+      "last_archived_at": "2026-08-02T04:57:29.203967+00:00"
+    },
+    {
+      "record_id": "curated_3c8d41ebd8c88e3b",
+      "article_id": "curated_3c8d41ebd8c88e3b",
+      "canonical_url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/",
+      "source_url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/",
+      "source_id": "OFF014",
+      "source_name": "NASA Earth Observatory Image of the Day",
+      "source_type": "美国官方地球科学机构",
+      "authority": 5,
+      "relevance_score": 92,
+      "title_original": "Smoke Blankets Oregon",
+      "title_zh": "卫星监测显示美国俄勒冈州野火烟霾扩散",
+      "summary_source": null,
+      "summary_zh": "NASA地球观测站发布7月26日卫星图像，显示俄勒冈州中东部数十场野火产生大范围烟霾。NASA援引公开数据称，截至7月27日俄勒冈州过火面积超过100万英亩，全美超过400万英亩，高于2016—2025年同期340万英亩的十年平均值。",
+      "theme_zh": "野火与极端天气",
+      "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
+      "language": "en",
+      "published_at": "2026-07-28T00:00:00+00:00",
+      "fetched_at": "2026-08-03T07:39:29.185061+00:00",
+      "topics": [
+        "极端天气",
+        "气候适应"
+      ],
+      "numbers": [
+        "100万英亩",
+        "400万英亩",
+        "340万英亩",
+        "2016—2025"
+      ],
+      "places": [
+        {
+          "name_zh": "美国俄勒冈州",
+          "lon": -120.5,
+          "lat": 44.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "official_source_claim",
+      "content_hash": "6189c5a640d8f84deb9922cae8b6ec9af8700cfd4d2569d06617e979b1b628a3",
+      "poster_phrase": "美国野火季过火面积高于十年同期均值",
+      "quality": {
+        "passed": true,
+        "score": 92,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "curated_3c8d41ebd8c88e3b",
+        "source_atom": {
+          "name": "NASA Earth Observatory Image of the Day",
+          "authority": 5,
+          "type": "美国官方地球科学机构"
+        },
+        "evidence_atom": {
+          "fact_status": "official_source_claim",
+          "translation_status": "human_reviewed",
+          "quality_tier": "A"
+        },
+        "topic_atoms": [
+          "极端天气",
+          "气候适应"
+        ],
+        "number_atoms": [
+          "100万英亩",
+          "400万英亩",
+          "340万英亩",
+          "2016—2025"
+        ],
+        "geo_atoms": [
+          "美国俄勒冈州"
+        ],
+        "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
+      },
+      "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
+      "last_archived_at": "2026-08-03T07:39:29.336943+00:00"
     }
   ],
-  "map_events": [],
-  "map_events_today": [],
-  "map_events_week": [
+  "map_events": [
     {
-      "marker_id": "curated_a15b22b6014750b9_0",
-      "article_id": "curated_a15b22b6014750b9",
+      "marker_id": "article_52a314290fbb9a0e_0",
+      "article_id": "article_52a314290fbb9a0e",
       "place": "中国",
       "lon": 105.0,
       "lat": 35.0,
-      "theme": "中国可再生能源规划",
-      "title_zh": "中国发布“十五五”可再生能源发展规划",
-      "summary_zh": "国家发展改革委、国家能源局印发“十五五”可再生能源发展规划。官方解读提出，到2030年可再生能源发电总装机达到约35亿千瓦，年发电量约6万亿千瓦时；风电和太阳能总装机达到28亿千瓦以上，年发电量达到4万亿千瓦时以上。",
-      "source_name": "国家能源局",
-      "published_at": "2026-07-23T00:00:00+00:00",
-      "url": "https://www.nea.gov.cn/20260723/cab1eb6727674bcf9a0efea45ed525e0/c.html"
+      "theme": "能源转型",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T22:36:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5"
+    },
+    {
+      "marker_id": "article_c51a150ef2c99849_0",
+      "article_id": "article_c51a150ef2c99849",
+      "place": "尼日利亚",
+      "lon": 8.0,
+      "lat": 9.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T18:21:18+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
+    },
+    {
+      "marker_id": "article_c51a150ef2c99849_1",
+      "article_id": "article_c51a150ef2c99849",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T18:21:18+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
+    },
+    {
+      "marker_id": "article_fc5da889c959eea6_0",
+      "article_id": "article_fc5da889c959eea6",
+      "place": "印度尼西亚",
+      "lon": 118.0,
+      "lat": -2.0,
+      "theme": "气候谈判",
+      "title_zh": "国际气候谈判出现新动向",
+      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-02T04:00:00+00:00",
+      "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_0",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "南非",
+      "lon": 24.0,
+      "lat": -29.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_1",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_2",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_d06390e6b6173bbd_0",
+      "article_id": "article_d06390e6b6173bbd",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "野火风险归因",
+      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
+      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T05:33:22+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
+    },
+    {
+      "marker_id": "article_2fc21c2ac0bf82c6_0",
+      "article_id": "article_2fc21c2ac0bf82c6",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "野火风险",
+      "title_zh": "欧洲野火形势判断受到事实核查",
+      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-07-30T14:51:00+00:00",
+      "url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires"
+    },
+    {
+      "marker_id": "article_2b498ff60d1dfc18_0",
+      "article_id": "article_2b498ff60d1dfc18",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-07-28T19:34:59+00:00",
+      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
+    },
+    {
+      "marker_id": "article_2b498ff60d1dfc18_1",
+      "article_id": "article_2b498ff60d1dfc18",
+      "place": "亚马孙地区",
+      "lon": -62.0,
+      "lat": -4.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-07-28T19:34:59+00:00",
+      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
+    },
+    {
+      "marker_id": "curated_3c8d41ebd8c88e3b_0",
+      "article_id": "curated_3c8d41ebd8c88e3b",
+      "place": "美国俄勒冈州",
+      "lon": -120.5,
+      "lat": 44.0,
+      "theme": "野火与极端天气",
+      "title_zh": "卫星监测显示美国俄勒冈州野火烟霾扩散",
+      "summary_zh": "NASA地球观测站发布7月26日卫星图像，显示俄勒冈州中东部数十场野火产生大范围烟霾。NASA援引公开数据称，截至7月27日俄勒冈州过火面积超过100万英亩，全美超过400万英亩，高于2016—2025年同期340万英亩的十年平均值。",
+      "source_name": "NASA Earth Observatory Image of the Day",
+      "published_at": "2026-07-28T00:00:00+00:00",
+      "url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/"
+    }
+  ],
+  "map_events_today": [
+    {
+      "marker_id": "article_52a314290fbb9a0e_0",
+      "article_id": "article_52a314290fbb9a0e",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "能源转型",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T22:36:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5"
+    },
+    {
+      "marker_id": "article_c51a150ef2c99849_0",
+      "article_id": "article_c51a150ef2c99849",
+      "place": "尼日利亚",
+      "lon": 8.0,
+      "lat": 9.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T18:21:18+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
+    },
+    {
+      "marker_id": "article_c51a150ef2c99849_1",
+      "article_id": "article_c51a150ef2c99849",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T18:21:18+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
+    },
+    {
+      "marker_id": "article_fc5da889c959eea6_0",
+      "article_id": "article_fc5da889c959eea6",
+      "place": "印度尼西亚",
+      "lon": 118.0,
+      "lat": -2.0,
+      "theme": "气候谈判",
+      "title_zh": "国际气候谈判出现新动向",
+      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-02T04:00:00+00:00",
+      "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_0",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "南非",
+      "lon": 24.0,
+      "lat": -29.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_1",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_2",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_d06390e6b6173bbd_0",
+      "article_id": "article_d06390e6b6173bbd",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "野火风险归因",
+      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
+      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T05:33:22+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
+    },
+    {
+      "marker_id": "article_2fc21c2ac0bf82c6_0",
+      "article_id": "article_2fc21c2ac0bf82c6",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "野火风险",
+      "title_zh": "欧洲野火形势判断受到事实核查",
+      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-07-30T14:51:00+00:00",
+      "url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires"
+    },
+    {
+      "marker_id": "article_2b498ff60d1dfc18_0",
+      "article_id": "article_2b498ff60d1dfc18",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-07-28T19:34:59+00:00",
+      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
+    },
+    {
+      "marker_id": "article_2b498ff60d1dfc18_1",
+      "article_id": "article_2b498ff60d1dfc18",
+      "place": "亚马孙地区",
+      "lon": -62.0,
+      "lat": -4.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-07-28T19:34:59+00:00",
+      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
+    },
+    {
+      "marker_id": "curated_3c8d41ebd8c88e3b_0",
+      "article_id": "curated_3c8d41ebd8c88e3b",
+      "place": "美国俄勒冈州",
+      "lon": -120.5,
+      "lat": 44.0,
+      "theme": "野火与极端天气",
+      "title_zh": "卫星监测显示美国俄勒冈州野火烟霾扩散",
+      "summary_zh": "NASA地球观测站发布7月26日卫星图像，显示俄勒冈州中东部数十场野火产生大范围烟霾。NASA援引公开数据称，截至7月27日俄勒冈州过火面积超过100万英亩，全美超过400万英亩，高于2016—2025年同期340万英亩的十年平均值。",
+      "source_name": "NASA Earth Observatory Image of the Day",
+      "published_at": "2026-07-28T00:00:00+00:00",
+      "url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/"
+    }
+  ],
+  "map_events_week": [
+    {
+      "marker_id": "article_52a314290fbb9a0e_0",
+      "article_id": "article_52a314290fbb9a0e",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "能源转型",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T22:36:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5"
     },
     {
       "marker_id": "curated_3c8d41ebd8c88e3b_0",
@@ -261,277 +1130,277 @@
       "url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/"
     },
     {
-      "marker_id": "curated_4550f4e28217628b_0",
-      "article_id": "curated_4550f4e28217628b",
+      "marker_id": "article_d06390e6b6173bbd_0",
+      "article_id": "article_d06390e6b6173bbd",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "野火风险归因",
+      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
+      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T05:33:22+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_0",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "南非",
+      "lon": 24.0,
+      "lat": -29.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_1",
+      "article_id": "article_01b6a3fea5209786",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_01b6a3fea5209786_2",
+      "article_id": "article_01b6a3fea5209786",
       "place": "中国",
       "lon": 105.0,
       "lat": 35.0,
-      "theme": "零碳制造",
-      "title_zh": "中国启动国家级零碳工厂建设",
-      "summary_zh": "国务院新闻办公室英文网站转引消息称，工业和信息化部已启动国家级零碳工厂建设，覆盖制造企业和算力设施。试点将通过技术创新、结构调整、智能碳管理、碳抵销和信息披露等方式持续降低厂界内二氧化碳排放，并设置抽查和验收机制。",
-      "source_name": "国务院新闻办公室英文网",
-      "published_at": "2026-07-23T00:00:00+00:00",
-      "url": "https://english.scio.gov.cn/pressroom/2026-07/23/content_118614236.html"
+      "theme": "清洁能源合作",
+      "title_zh": "中南清洁能源合作风电项目启动",
+      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T10:15:00+00:00",
+      "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
     },
     {
-      "marker_id": "curated_08e37736a88f954d_0",
-      "article_id": "curated_08e37736a88f954d",
-      "place": "美国犹他州",
-      "lon": -111.7,
-      "lat": 39.3,
-      "theme": "清洁能源基础设施",
-      "title_zh": "美国犹他州百万光伏组件与储能项目投运",
-      "summary_zh": "NASA地球观测站利用Landsat 8影像记录犹他州Green River能源中心建设变化。项目包含近100万块光伏组件、400兆瓦光伏发电和400兆瓦电池储能，项目方估计可为超过10万户家庭供电，并利用原煤电设施的既有输电线路。",
-      "source_name": "NASA Earth Observatory Image of the Day",
-      "published_at": "2026-07-24T00:00:00+00:00",
-      "url": "https://science.nasa.gov/earth/earth-observatory/a-million-panel-project/"
+      "marker_id": "article_2b498ff60d1dfc18_0",
+      "article_id": "article_2b498ff60d1dfc18",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-07-28T19:34:59+00:00",
+      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
     },
     {
-      "marker_id": "curated_d5293d84a3a1ff16_0",
-      "article_id": "curated_d5293d84a3a1ff16",
-      "place": "美国新英格兰",
-      "lon": -71.5,
-      "lat": 43.0,
-      "theme": "海上风电与电网韧性",
-      "title_zh": "美国新英格兰海上风电在热浪期间降低燃油发电需求",
-      "summary_zh": "Grist转引Canary Media分析称，2026年7月热浪期间，新英格兰两座海上风电项目持续向电网送电。区域运营商在7月1日至4日生产42.2吉瓦时燃油电力，较2025年6月对比时段下降37%；报道同时列出806兆瓦Vineyard Wind和704兆瓦Revolution Wind的装机进展。",
+      "marker_id": "article_2b498ff60d1dfc18_1",
+      "article_id": "article_2b498ff60d1dfc18",
+      "place": "亚马孙地区",
+      "lon": -62.0,
+      "lat": -4.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-07-28T19:34:59+00:00",
+      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
+    },
+    {
+      "marker_id": "article_fc5da889c959eea6_0",
+      "article_id": "article_fc5da889c959eea6",
+      "place": "印度尼西亚",
+      "lon": 118.0,
+      "lat": -2.0,
+      "theme": "气候谈判",
+      "title_zh": "国际气候谈判出现新动向",
+      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-02T04:00:00+00:00",
+      "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
+    },
+    {
+      "marker_id": "article_2fc21c2ac0bf82c6_0",
+      "article_id": "article_2fc21c2ac0bf82c6",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "野火风险",
+      "title_zh": "欧洲野火形势判断受到事实核查",
+      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-07-30T14:51:00+00:00",
+      "url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires"
+    },
+    {
+      "marker_id": "article_4d6b6c51d56e9a87_0",
+      "article_id": "article_4d6b6c51d56e9a87",
+      "place": "新西兰",
+      "lon": 174.0,
+      "lat": -41.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T18:34:42+00:00",
+      "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
+    },
+    {
+      "marker_id": "article_4d6b6c51d56e9a87_1",
+      "article_id": "article_4d6b6c51d56e9a87",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T18:34:42+00:00",
+      "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
+    },
+    {
+      "marker_id": "article_6807db1e98ad4c31_0",
+      "article_id": "article_6807db1e98ad4c31",
+      "place": "墨西哥",
+      "lon": -102.0,
+      "lat": 23.0,
+      "theme": "能源转型",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Yale Climate Connections",
+      "published_at": "2026-07-31T11:00:00+00:00",
+      "url": "https://yaleclimateconnections.org/2026/07/new-mexicos-clean-energy-success-story"
+    },
+    {
+      "marker_id": "article_3013e56728c021b8_0",
+      "article_id": "article_3013e56728c021b8",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "野火风险",
+      "title_zh": "欧洲野火形势判断受到事实核查",
+      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
       "source_name": "Grist",
-      "published_at": "2026-07-26T00:00:00+00:00",
-      "url": "https://grist.org/energy/heres-how-offshore-wind-helped-new-england-beat-record-heat/"
+      "published_at": "2026-07-31T08:45:00+00:00",
+      "url": "https://grist.org/wildfires/study-monster-wildfires-spain-france-attribution"
     },
     {
-      "marker_id": "curated_7c6b8d0a74561df8_0",
-      "article_id": "curated_7c6b8d0a74561df8",
-      "place": "美国马萨诸塞州",
-      "lon": -71.8,
-      "lat": 42.3,
-      "theme": "电动汽车与电网",
-      "title_zh": "美国马萨诸塞州测试电动汽车向电网反向送电",
-      "summary_zh": "马萨诸塞州多家公用事业和能源企业启动电动汽车到电网技术试点，允许参与者在高峰负荷期间由车辆电池向电网送电并获得补偿。报道指出，典型电动汽车电池容量约为住宅备用电池的6倍，但规模化仍取决于双向充电硬件、标准和调度机制。",
+      "marker_id": "article_3013e56728c021b8_1",
+      "article_id": "article_3013e56728c021b8",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "野火风险",
+      "title_zh": "欧洲野火形势判断受到事实核查",
+      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
       "source_name": "Grist",
-      "published_at": "2026-07-23T00:00:00+00:00",
-      "url": "https://grist.org/transportation/the-secret-to-a-better-grid-electric-vehicles/"
+      "published_at": "2026-07-31T08:45:00+00:00",
+      "url": "https://grist.org/wildfires/study-monster-wildfires-spain-france-attribution"
     },
     {
-      "marker_id": "article_1379d99ac0aa85fb_0",
-      "article_id": "article_1379d99ac0aa85fb",
+      "marker_id": "article_c51a150ef2c99849_0",
+      "article_id": "article_c51a150ef2c99849",
+      "place": "尼日利亚",
+      "lon": 8.0,
+      "lat": 9.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T18:21:18+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
+    },
+    {
+      "marker_id": "article_c51a150ef2c99849_1",
+      "article_id": "article_c51a150ef2c99849",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-02T18:21:18+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
+    },
+    {
+      "marker_id": "article_10c1a591d0f25813_0",
+      "article_id": "article_10c1a591d0f25813",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "可再生能源政策",
+      "title_zh": "中国第十五个可再生能源五年规划对气候变化的影响",
+      "summary_zh": "中国发布了第十五个可再生能源五年规划，明确了未来五年可再生能源发展的主要目标和政策。该规划将推动风能、太阳能等清洁能源增长，对中国实现碳中和目标具有重要意义，并将影响全球气候治理进程。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-07-29T12:08:55+00:00",
+      "url": "https://www.carbonbrief.org/qa-what-does-chinas-15th-five-year-plan-for-renewables-mean-for-climate-change"
+    },
+    {
+      "marker_id": "article_40dcb227c1fcbe93_0",
+      "article_id": "article_40dcb227c1fcbe93",
+      "place": "美国得州",
+      "lon": -99.0,
+      "lat": 31.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Grist",
+      "published_at": "2026-08-02T13:00:00+00:00",
+      "url": "https://grist.org/energy/this-texas-coal-mine-will-soon-be-home-to-a-1-2gw-solar-farm"
+    },
+    {
+      "marker_id": "article_b8776402559b16e0_0",
+      "article_id": "article_b8776402559b16e0",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T04:30:00+00:00",
+      "url": "https://www.news.cn/world/20260801/6f0649b260864821873cd86aca640824/c.html"
+    },
+    {
+      "marker_id": "article_807d7fbdc9bd5377_0",
+      "article_id": "article_807d7fbdc9bd5377",
       "place": "欧洲",
       "lon": 10.0,
       "lat": 51.0,
-      "theme": "极端高温与森林火灾",
-      "title_zh": "欧洲野火面积四年增长57%",
-      "summary_zh": "世界卫生组织欧洲区最新数据显示，过去四年欧洲因野火烧毁的土地面积增长了57%。西班牙和法国正面临多起重大火灾，野火风险持续上升。",
-      "source_name": "UN News - Climate Change",
-      "published_at": "2026-07-24T12:00:00+00:00",
-      "url": "https://news.un.org/feed/view/en/story/2026/07/1168013"
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-30T12:27:18+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/07/prague-zoo-keeps-polar-bears-cool-with-ice-cubes-as-european-summer-heatwave-hits"
     },
     {
-      "marker_id": "article_1379d99ac0aa85fb_1",
-      "article_id": "article_1379d99ac0aa85fb",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端高温与森林火灾",
-      "title_zh": "欧洲野火面积四年增长57%",
-      "summary_zh": "世界卫生组织欧洲区最新数据显示，过去四年欧洲因野火烧毁的土地面积增长了57%。西班牙和法国正面临多起重大火灾，野火风险持续上升。",
-      "source_name": "UN News - Climate Change",
-      "published_at": "2026-07-24T12:00:00+00:00",
-      "url": "https://news.un.org/feed/view/en/story/2026/07/1168013"
-    },
-    {
-      "marker_id": "article_f4cb3a7e7f333e28_0",
-      "article_id": "article_f4cb3a7e7f333e28",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "极端干旱",
-      "title_zh": "气候危机加剧欧洲极端干旱",
-      "summary_zh": "科学分析显示，气候危机导致极端高温，使欧洲大气“吸干”土壤水分，严重影响水资源、粮食生产和能源供应。西欧土壤干旱概率因化石燃料污染增加5倍，东欧则增加11倍。",
+      "marker_id": "article_e567b1fae508d991_0",
+      "article_id": "article_e567b1fae508d991",
+      "place": "加勒比地区",
+      "lon": -75.0,
+      "lat": 18.0,
+      "theme": "气候资金与损失赔偿",
+      "title_zh": "加勒比地区遭受430亿英镑气候灾害损失",
+      "summary_zh": "研究显示，2000至2024年加勒比国家因气候灾害损失532亿美元（约430亿英镑），占39个发展中岛屿总损失的90%以上。洪水、风暴和干旱是主要原因。该数据有助于全球气候赔偿和减缓资金讨论。",
       "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-23T04:00:34+00:00",
-      "url": "https://www.theguardian.com/environment/2026/jul/23/climate-crisis-heat-sucking-soils-dry-extreme-drought-europe-analysis"
+      "published_at": "2026-07-29T11:00:30+00:00",
+      "url": "https://www.theguardian.com/world/2026/jul/29/caribbean-climate-related-economic-damage-developing-islands"
     },
     {
-      "marker_id": "article_c5a16f87020ab303_0",
-      "article_id": "article_c5a16f87020ab303",
-      "place": "乌干达",
-      "lon": 32.0,
-      "lat": 1.0,
-      "theme": "气候灾害与粮食安全",
-      "title_zh": "乌干达干旱致饥荒，政府启动紧急粮食发放",
-      "summary_zh": "乌干达卡拉莫贾地区因持续干旱和作物减产，已有19人因饥饿死亡，150万人面临营养不良。政府已启动紧急粮食救助，以缓解当地严重的食品短缺和健康危机。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-27T07:00:34+00:00",
-      "url": "https://www.theguardian.com/global-development/2026/jul/27/uganda-begins-emergency-food-handouts-after-19-die-from-hunger"
-    },
-    {
-      "marker_id": "article_86e454408d495cb8_0",
-      "article_id": "article_86e454408d495cb8",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "极端高温与野火",
-      "title_zh": "欧洲野火致30万人撤离，极端天气频发",
-      "summary_zh": "法国和西班牙野火导致超过30万人撤离，创下和平时期最大规模民众疏散。科学家指出，气候变化加剧极端天气，欧洲升温速度约为全球平均的两倍。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-26T14:52:13+00:00",
-      "url": "https://www.theguardian.com/world/live/2026/jul/26/europe-wildfires-spain-france-bordeaux-madrid-evacuations"
-    },
-    {
-      "marker_id": "article_86e454408d495cb8_1",
-      "article_id": "article_86e454408d495cb8",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端高温与野火",
-      "title_zh": "欧洲野火致30万人撤离，极端天气频发",
-      "summary_zh": "法国和西班牙野火导致超过30万人撤离，创下和平时期最大规模民众疏散。科学家指出，气候变化加剧极端天气，欧洲升温速度约为全球平均的两倍。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-26T14:52:13+00:00",
-      "url": "https://www.theguardian.com/world/live/2026/jul/26/europe-wildfires-spain-france-bordeaux-madrid-evacuations"
-    },
-    {
-      "marker_id": "article_6296ea1cffbbcf98_0",
-      "article_id": "article_6296ea1cffbbcf98",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端野火",
-      "title_zh": "法国西班牙野火致25万人撤离",
-      "summary_zh": "法国和西班牙野火肆虐，已导致超过25万人被迫撤离。其中法国撤离19.7万人，西班牙撤离7万人，受影响区域包括波尔多等葡萄酒产区。强风助推火势，马德里因烟雾发布健康警告。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-25T16:23:17+00:00",
-      "url": "https://www.theguardian.com/world/2026/jul/25/wildfires-force-250000-people-to-evacuate-in-france-and-spain"
-    },
-    {
-      "marker_id": "article_0e1af6057fd1d49a_0",
-      "article_id": "article_0e1af6057fd1d49a",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端高温与森林火灾",
-      "title_zh": "法国西班牙野火致20万人撤离或封锁",
-      "summary_zh": "法国西南部和西班牙发生大规模野火，已导致超过20万人撤离或被要求封锁。法国大西洋沿岸Cap Ferret半岛“村庄逐步”疏散，火势已烧毁逾19,000公顷森林。西班牙宣布国家紧急状态，法国采取陆海全域撤离措施。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-24T22:18:51+00:00",
-      "url": "https://www.theguardian.com/world/2026/jul/24/france-evacuation-cap-ferret-peninsula-wildfire"
-    },
-    {
-      "marker_id": "article_6c67b4eafaf74973_0",
-      "article_id": "article_6c67b4eafaf74973",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "极端高温与野火",
-      "title_zh": "法国南部松林野火致数千人撤离",
-      "summary_zh": "法国阿卡雄湾地区夜间疏散当地居民和游客，因野火已烧毁3400公顷森林，火势受风推动，火焰高达10米。两名消防员在波尔多机场附近灭火时牺牲，火灾仍在蔓延。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-23T18:34:36+00:00",
-      "url": "https://www.theguardian.com/world/video/2026/jul/23/thousands-evacuated-in-south-of-france-as-wildfire-rages-across-pine-forest-video"
-    },
-    {
-      "marker_id": "article_6c67b4eafaf74973_1",
-      "article_id": "article_6c67b4eafaf74973",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端高温与野火",
-      "title_zh": "法国南部松林野火致数千人撤离",
-      "summary_zh": "法国阿卡雄湾地区夜间疏散当地居民和游客，因野火已烧毁3400公顷森林，火势受风推动，火焰高达10米。两名消防员在波尔多机场附近灭火时牺牲，火灾仍在蔓延。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-23T18:34:36+00:00",
-      "url": "https://www.theguardian.com/world/video/2026/jul/23/thousands-evacuated-in-south-of-france-as-wildfire-rages-across-pine-forest-video"
-    },
-    {
-      "marker_id": "article_32a028df4d103aba_0",
-      "article_id": "article_32a028df4d103aba",
-      "place": "英国",
-      "lon": -2.0,
-      "lat": 54.0,
-      "theme": "野火与社区应急",
-      "title_zh": "凯恩戈姆斯野火威胁解除，村民获准返家",
-      "summary_zh": "苏格兰凯恩戈姆斯国家公园内的Nethy Bridge村因持续10天的野火曾请求英国军援，现已解除紧急威胁。消防、护林员和志愿者共同努力使村民安全返家，地方政府表达感谢。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-25T22:08:37+00:00",
-      "url": "https://www.theguardian.com/world/2026/jul/25/entire-cairngorms-village-evacuated-as-raging-wildfire-nears"
-    },
-    {
-      "marker_id": "article_6cc557c022f0d7d1_0",
-      "article_id": "article_6cc557c022f0d7d1",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "极端高温与野火",
-      "title_zh": "法西两国紧急应对野火，25万人被疏散",
-      "summary_zh": "法国和西班牙正努力控制森林野火，法国总理请求军队提前部署A400M运输机支援。法国连续三次热浪导致河流干涸，Loire河流量创历史新低，16%河流已干涸，四分之一小溪停滞或消失。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-25T17:07:36+00:00",
-      "url": "https://www.theguardian.com/world/live/2026/jul/25/france-spain-wildfires-latest-news-updates-madrid-cap-ferret-bordeaux-gironde"
-    },
-    {
-      "marker_id": "article_6cc557c022f0d7d1_1",
-      "article_id": "article_6cc557c022f0d7d1",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端高温与野火",
-      "title_zh": "法西两国紧急应对野火，25万人被疏散",
-      "summary_zh": "法国和西班牙正努力控制森林野火，法国总理请求军队提前部署A400M运输机支援。法国连续三次热浪导致河流干涸，Loire河流量创历史新低，16%河流已干涸，四分之一小溪停滞或消失。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-25T17:07:36+00:00",
-      "url": "https://www.theguardian.com/world/live/2026/jul/25/france-spain-wildfires-latest-news-updates-madrid-cap-ferret-bordeaux-gironde"
-    },
-    {
-      "marker_id": "article_919d08fc454d9138_0",
-      "article_id": "article_919d08fc454d9138",
-      "place": "英国",
-      "lon": -2.0,
-      "lat": 54.0,
-      "theme": "厄尔尼诺影响",
-      "title_zh": "加拉帕戈斯动物为厄尔尼诺影响提供科学启示",
-      "summary_zh": "加拉帕戈斯群岛处于厄尔尼诺现象中心，海水温度异常升高。科学家通过研究当地动物，探索海洋生态系统如何适应气候变暖，为预测全球变化提供参考。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-24T06:00:07+00:00",
-      "url": "https://www.theguardian.com/environment/2026/jul/23/what-can-the-galapagos-islands-animals-teach-us-about-the-threats-of-el-nino"
-    },
-    {
-      "marker_id": "article_b17c6d5f2c1462ee_0",
-      "article_id": "article_b17c6d5f2c1462ee",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "极端高温与野火",
-      "title_zh": "南欧极端高温致万人逃离野火",
-      "summary_zh": "南欧高温导致法国和西班牙约3万人因野火撤离。地中海部分海域比常年高5℃，法国请求欧盟援助，西班牙在马德里等地宣布国家紧急状态，火灾形势严峻。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-24T00:16:02+00:00",
-      "url": "https://www.theguardian.com/world/2026/jul/23/people-evacuated-intense-wildfire-saumos-france"
-    },
-    {
-      "marker_id": "article_b17c6d5f2c1462ee_1",
-      "article_id": "article_b17c6d5f2c1462ee",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端高温与野火",
-      "title_zh": "南欧极端高温致万人逃离野火",
-      "summary_zh": "南欧高温导致法国和西班牙约3万人因野火撤离。地中海部分海域比常年高5℃，法国请求欧盟援助，西班牙在马德里等地宣布国家紧急状态，火灾形势严峻。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-24T00:16:02+00:00",
-      "url": "https://www.theguardian.com/world/2026/jul/23/people-evacuated-intense-wildfire-saumos-france"
-    },
-    {
-      "marker_id": "article_94768740acc95d1c_0",
-      "article_id": "article_94768740acc95d1c",
-      "place": "肯尼亚",
-      "lon": 37.0,
-      "lat": 0.0,
-      "theme": "红树林生态修复",
-      "title_zh": "全球红树林恢复进展显著",
-      "summary_zh": "全球红树林损失速度正在放缓，科学主导的修复和社区保护措施推动肯尼亚至越南等地沿海森林恢复。红树林生态系统对防灾和碳汇具有重要作用。",
-      "source_name": "UN Environment Programme",
-      "published_at": "2026-07-24T09:43:03+00:00",
-      "url": "https://www.unep.org/news-and-stories/story/mangroves-are-making-comeback-heres-whats-working"
+      "marker_id": "article_9c81750ebefab743_0",
+      "article_id": "article_9c81750ebefab743",
+      "place": "印度",
+      "lon": 78.0,
+      "lat": 22.0,
+      "theme": "可再生能源投资",
+      "title_zh": "印度可再生能源投资计划升温",
+      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-01T17:12:05+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxNNF9MamstaFg1UVRHS0R2TmxKUGl6U2RBeXlxYTBlUzRBc3hhcVBuS2JwU3BjWDc1bHdzWEZIeDJ4dmFOZ2lQMFdsdFp3dXQzSl9BQV9GWkVwUU5kcEZkbThRbk1NTTlKTGFqTGZTcVU2TnZJdm5QV2lWQ2ZsMG9SNThRVEJSNU5mMWdRdTY1c052UjdnOVRIcXgwcENteWJkOVA2dDgwWDlPTFRVa1VCSldnajJ3QjU3ZE40VWxtdU53S1BNNFNfY1FLMk5tYnNONG1WSWJ4Q0N0NW00LUEtbGl6R0htMl9SY1JwQ3Z4UnLSAfYBQVVfeXFMT0E3TTVzYkFOQTVXTm5rWnlCdUx3NlF5NGtrZXFJc3V5SjFYenZSX1psOG5JQ0NIekw1MnBJZGRLU3I5QUlJbGpVbFZJaEdyMVliV3pSTzkzSDJSMjBtbXVvazNTOFppanRYOXpmTUdBS1pIdDBCUEk0YkJOU3NLclRJY0VYRmFDUVllRlFSSVRGdGMyclNuNDVUdEpuak1NYXNnWGR6SlVpcmZvUmxHaWpnSGlrbkJkaWxacHo3cU8xVHZ5eUpWeXVhdk9PNFhYaml4bzNQUGVxRmNieVo2LWRwa1dKUWItTjN6ZEgxUW5OTzJRZXB3?oc=5"
     },
     {
       "marker_id": "article_175ed8e916a48677_0",
@@ -541,10 +1410,62 @@
       "lat": 51.0,
       "theme": "能源结构转型",
       "title_zh": "德国风能与太阳能首次超越化石能源",
-      "summary_zh": "2025年，德国风能和太阳能发电量首次超过化石燃料发电，标志着能源结构重大转变。分析显示，清洁能源占比提升，推动德国实现碳减排目标。该趋势反映政策和市场双重驱动下的能源转型进展。",
+      "summary_zh": "2025年，德国风能和太阳能发电量首次超过化石能源，成为全国主要电力来源。这一转变标志着德国能源结构向清洁能源迈出重要一步，推动碳减排目标实现。",
       "source_name": "Carbon Brief",
       "published_at": "2026-07-28T11:49:20+00:00",
       "url": "https://www.carbonbrief.org/analysis-wind-and-solar-power-overtake-fossil-fuels-in-germany-for-first-time-ever"
+    },
+    {
+      "marker_id": "article_730c3c57e5f5550d_0",
+      "article_id": "article_730c3c57e5f5550d",
+      "place": "尼日利亚",
+      "lon": 8.0,
+      "lat": 9.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T00:17:17+00:00",
+      "url": "https://news.mongabay.com/2026/07/before-giant-meat-producer-jbs-expands-to-nigeria-people-deserve-answers-commentary"
+    },
+    {
+      "marker_id": "article_730c3c57e5f5550d_1",
+      "article_id": "article_730c3c57e5f5550d",
+      "place": "亚马孙地区",
+      "lon": -62.0,
+      "lat": -4.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T00:17:17+00:00",
+      "url": "https://news.mongabay.com/2026/07/before-giant-meat-producer-jbs-expands-to-nigeria-people-deserve-answers-commentary"
+    },
+    {
+      "marker_id": "article_4854ab175a1e71d9_0",
+      "article_id": "article_4854ab175a1e71d9",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "光伏产业竞争",
+      "title_zh": "中国光伏产业亏损但持续扩张",
+      "summary_zh": "中国光伏制造商之间激烈的价格战导致太阳能板价格大幅下降，使可再生能源成本创历史新低。尽管行业整体亏损，中国仍加大投资力度，推动光伏产业持续扩张，进一步降低全球清洁能源门槛。",
+      "source_name": "Grist",
+      "published_at": "2026-07-29T08:00:00+00:00",
+      "url": "https://grist.org/energy/chinas-solar-industry-is-losing-money-the-country-is-doubling-down-anyway"
+    },
+    {
+      "marker_id": "article_1a885c5c1b29037d_0",
+      "article_id": "article_1a885c5c1b29037d",
+      "place": "肯尼亚",
+      "lon": 37.0,
+      "lat": 0.0,
+      "theme": "青年气候行动",
+      "title_zh": "肯尼亚青年推动植树与气候意识",
+      "summary_zh": "肯尼亚青年巴拉卡·莫鲁里四年内带领家人和朋友种植超过7600棵树，倡导儿童参与气候行动和政策。气候资金专家指出，国际气候资金中不到1%流向青年和儿童主导项目，尽管气候变化影响其健康、教育和粮食安全。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-29T09:03:11+00:00",
+      "url": "https://news.mongabay.com/2026/07/kenyan-teen-leads-charge-on-tree-planting-and-climate-awareness"
     },
     {
       "marker_id": "article_96203b188b806807_0",
@@ -552,9 +1473,9 @@
       "place": "欧洲",
       "lon": 10.0,
       "lat": 51.0,
-      "theme": "极端高温与野火",
+      "theme": "极端野火与人员疏散",
       "title_zh": "法国西班牙野火致37.5万人撤离",
-      "summary_zh": "法国和西班牙南部野火持续蔓延，已导致约37.5万人被迫撤离，其中法国26万人、西班牙11.6万人。游客描述火灾场景如“末日”，灰烬飘落，影响当地居民和旅游业。极端天气加剧火灾风险。",
+      "summary_zh": "法国和西班牙南部野火持续肆虐，已迫使约375,000人撤离，其中法国约260,000人、西班牙116,000人。游客描述“灰烬从天而降”，野火对居民和度假者造成严重影响。",
       "source_name": "The Guardian Climate Crisis",
       "published_at": "2026-07-28T08:00:33+00:00",
       "url": "https://www.theguardian.com/world/2026/jul/28/ash-fell-from-the-sky-tourists-describe-fleeing-apocalyptic-wildfires-in-france"
@@ -565,107 +1486,87 @@
       "place": "法国",
       "lon": 2.0,
       "lat": 46.0,
-      "theme": "极端高温与野火",
+      "theme": "极端野火与人员疏散",
       "title_zh": "法国西班牙野火致37.5万人撤离",
-      "summary_zh": "法国和西班牙南部野火持续蔓延，已导致约37.5万人被迫撤离，其中法国26万人、西班牙11.6万人。游客描述火灾场景如“末日”，灰烬飘落，影响当地居民和旅游业。极端天气加剧火灾风险。",
+      "summary_zh": "法国和西班牙南部野火持续肆虐，已迫使约375,000人撤离，其中法国约260,000人、西班牙116,000人。游客描述“灰烬从天而降”，野火对居民和度假者造成严重影响。",
       "source_name": "The Guardian Climate Crisis",
       "published_at": "2026-07-28T08:00:33+00:00",
       "url": "https://www.theguardian.com/world/2026/jul/28/ash-fell-from-the-sky-tourists-describe-fleeing-apocalyptic-wildfires-in-france"
-    },
-    {
-      "marker_id": "article_33ef5a2a01079ca4_0",
-      "article_id": "article_33ef5a2a01079ca4",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "极端高温与森林火灾",
-      "title_zh": "欧洲野火持续，烧毁面积大幅增加",
-      "summary_zh": "法国和西班牙消防员正应对新一轮野火，预计火情或持续至11月。西班牙今年已受影响森林面积超17万公顷，较2025年同期增长近六倍，重大火灾数量也显著上升。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-27T16:42:23+00:00",
-      "url": "https://www.theguardian.com/world/live/2026/jul/27/europe-wildfires-france-spain-emmanuel-macron-crisis-meeting-pedro-sanchez-castillon-latest-news-updates"
-    },
-    {
-      "marker_id": "article_33ef5a2a01079ca4_1",
-      "article_id": "article_33ef5a2a01079ca4",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "极端高温与森林火灾",
-      "title_zh": "欧洲野火持续，烧毁面积大幅增加",
-      "summary_zh": "法国和西班牙消防员正应对新一轮野火，预计火情或持续至11月。西班牙今年已受影响森林面积超17万公顷，较2025年同期增长近六倍，重大火灾数量也显著上升。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-27T16:42:23+00:00",
-      "url": "https://www.theguardian.com/world/live/2026/jul/27/europe-wildfires-france-spain-emmanuel-macron-crisis-meeting-pedro-sanchez-castillon-latest-news-updates"
-    },
-    {
-      "marker_id": "article_69109b54d7a5b803_0",
-      "article_id": "article_69109b54d7a5b803",
-      "place": "巴西",
-      "lon": -52.0,
-      "lat": -10.0,
-      "theme": "森林保护与政策",
-      "title_zh": "巴西亚马孙低毁林率难以持续",
-      "summary_zh": "研究指出，若无更强有力的政府行动，亚马孙雨林未来10年可能损失相当于约200万个足球场的森林面积，当前低毁林率难以长期维持，生态风险加剧。",
-      "source_name": "Grist",
-      "published_at": "2026-07-23T08:00:00+00:00",
-      "url": "https://grist.org/international/without-stronger-government-action-brazils-low-deforestation-in-the-amazon-is-unlikely-to-last"
-    },
-    {
-      "marker_id": "article_69109b54d7a5b803_1",
-      "article_id": "article_69109b54d7a5b803",
-      "place": "亚马孙地区",
-      "lon": -62.0,
-      "lat": -4.0,
-      "theme": "森林保护与政策",
-      "title_zh": "巴西亚马孙低毁林率难以持续",
-      "summary_zh": "研究指出，若无更强有力的政府行动，亚马孙雨林未来10年可能损失相当于约200万个足球场的森林面积，当前低毁林率难以长期维持，生态风险加剧。",
-      "source_name": "Grist",
-      "published_at": "2026-07-23T08:00:00+00:00",
-      "url": "https://grist.org/international/without-stronger-government-action-brazils-low-deforestation-in-the-amazon-is-unlikely-to-last"
-    },
-    {
-      "marker_id": "article_be2d7f67b6b1bbc3_0",
-      "article_id": "article_be2d7f67b6b1bbc3",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "极端高温与野火",
-      "title_zh": "欧洲野火肆虐，波尔多和马德里受灾严重",
-      "summary_zh": "波尔多附近的野火在不到四天内烧毁超过420平方公里（162平方英里），马德里地区也遭遇有史以来最严重的火灾。各地正采取措施应对火情，防止进一步蔓延。",
-      "source_name": "BBC Science & Environment",
-      "published_at": "2026-07-27T15:59:27+00:00",
-      "url": "https://www.bbc.co.uk/news/articles/cj638jx0l53o?at_medium=RSS&at_campaign=rss"
     }
   ],
   "phrases": [
     {
-      "text": "水泥行业迈向净零",
-      "theme": "水泥行业碳减排",
+      "text": "能源转型提速",
+      "theme": "能源转型",
       "weight": 10
     },
     {
-      "text": "水泥业净零加速",
-      "theme": "水泥行业减碳转型",
+      "text": "气候线索更新",
+      "theme": "气候动态",
       "weight": 9
     },
     {
-      "text": "水泥业迈向净零",
-      "theme": "水泥行业碳减排",
+      "text": "极端天气预警",
+      "theme": "极端天气与气候风险",
       "weight": 8
+    },
+    {
+      "text": "谈判信号更新",
+      "theme": "气候谈判",
+      "weight": 7
+    },
+    {
+      "text": "中南风电合作",
+      "theme": "清洁能源合作",
+      "weight": 6
+    },
+    {
+      "text": "减排信号更新",
+      "theme": "减排政策",
+      "weight": 5
+    },
+    {
+      "text": "西班牙野火风险",
+      "theme": "野火风险归因",
+      "weight": 4
+    },
+    {
+      "text": "欧洲野火核查",
+      "theme": "野火风险",
+      "weight": 3
     }
   ],
   "events": [],
   "topics": [
     {
+      "name": "气候适应",
+      "weight": 5
+    },
+    {
+      "name": "能源与排放",
+      "weight": 2
+    },
+    {
       "name": "气候动态",
-      "weight": 3
+      "weight": 2
+    },
+    {
+      "name": "履约与全球盘点",
+      "weight": 1
+    },
+    {
+      "name": "国际气候谈判",
+      "weight": 1
+    },
+    {
+      "name": "极端天气",
+      "weight": 1
     }
   ],
   "coverage": [
     {
       "name": "全球",
-      "count": 9
+      "count": 10
     },
     {
       "name": "全球/英国",
@@ -699,7 +1600,7 @@
   "phases": [
     {
       "name": "P0",
-      "count": 25
+      "count": 26
     },
     {
       "name": "P1",
@@ -711,16 +1612,185 @@
     },
     {
       "name": "Discovery",
-      "count": 5
+      "count": 4
     }
   ],
-  "source_health": [],
+  "source_health": [
+    {
+      "source_id": "API001",
+      "status": "failed",
+      "finished_at": "2026-07-17T04:24:50.984788+00:00",
+      "items_seen": 0,
+      "error_message": "resource fetch failed after 3 attempts: HTTP Error 429: Too Many Requests"
+    },
+    {
+      "source_id": "INT001",
+      "status": "success",
+      "finished_at": "2026-07-17T04:23:50.530488+00:00",
+      "items_seen": 10,
+      "error_message": null
+    },
+    {
+      "source_id": "INT002",
+      "status": "success",
+      "finished_at": "2026-07-17T04:23:55.456517+00:00",
+      "items_seen": 40,
+      "error_message": null
+    },
+    {
+      "source_id": "INT010",
+      "status": "success",
+      "finished_at": "2026-07-17T04:24:00.325283+00:00",
+      "items_seen": 100,
+      "error_message": null
+    },
+    {
+      "source_id": "INT013",
+      "status": "success",
+      "finished_at": "2026-07-17T04:24:03.062387+00:00",
+      "items_seen": 13,
+      "error_message": null
+    },
+    {
+      "source_id": "INT014",
+      "status": "success",
+      "finished_at": "2026-07-17T04:24:06.425911+00:00",
+      "items_seen": 39,
+      "error_message": null
+    },
+    {
+      "source_id": "OFF001",
+      "status": "success",
+      "finished_at": "2026-07-17T04:24:08.795216+00:00",
+      "items_seen": 30,
+      "error_message": null
+    },
+    {
+      "source_id": "OFF006",
+      "status": "success",
+      "finished_at": "2026-07-17T04:24:12.122156+00:00",
+      "items_seen": 14,
+      "error_message": null
+    }
+  ],
   "official": {
     "counts": {
       "decision": 11,
+      "ndc": 564,
       "summary": 1
     },
-    "recent_ndcs": [],
+    "recent_ndcs": [
+      {
+        "document_id": "ndc_340e54aad740459f",
+        "party": "Guyana",
+        "title": "Guyana NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-07-01",
+        "language": "English",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-07/Guyanas%20NDC%202025-2035%20V2.pdf"
+      },
+      {
+        "document_id": "ndc_3dc30ec68e4ced09",
+        "party": "Malawi",
+        "title": "Malawi NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-07-01",
+        "language": "English",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-07/NDC3.0%20Malawi_17June2026_Final%20Version.pdf"
+      },
+      {
+        "document_id": "ndc_3706fe6a4f82652d",
+        "party": "Algeria",
+        "title": "Algeria NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-06-24",
+        "language": "French",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://www.unfccc.int/sites/default/files/2026-06/CDN%20Algeria.pdf"
+      },
+      {
+        "document_id": "ndc_d4233f2a72a33408",
+        "party": "Cameroon",
+        "title": "Cameroon NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-06-17",
+        "language": "French",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-06/CDN%203.0%20CMR%20FINAL.pdf"
+      },
+      {
+        "document_id": "ndc_8d2284820414e74f",
+        "party": "Dominican Republic",
+        "title": "Dominican Republic NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-06-09",
+        "language": "Spanish",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-06/NDC_3.0_Versio%CC%81n%20Final_1303_conAnexos_REV_2.pdf"
+      },
+      {
+        "document_id": "ndc_a0a52cb36bf3360d",
+        "party": "Timor-Leste",
+        "title": "Timor-Leste 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-06-09",
+        "language": "English",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-06/Timor-Leste%20Updated%20NDC%203.0.pdf"
+      },
+      {
+        "document_id": "ndc_2b2e3f8ae89e9b35",
+        "party": "Benin",
+        "title": "Benin NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-06-01",
+        "language": "French",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-06/CDN%203.0_BENIN.pdf"
+      },
+      {
+        "document_id": "ndc_dc659a5a027a1f44",
+        "party": "India",
+        "title": "India NDC (2031 - 2035)",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-04-24",
+        "language": "English",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-04/INDIA%20NDC%202031-35.pdf"
+      },
+      {
+        "document_id": "ndc_1fb9cfde8f75fdd4",
+        "party": "Comoros",
+        "title": "Comoros NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-03-30",
+        "language": "French",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-03/CDN3.0%20Comores..pdf"
+      },
+      {
+        "document_id": "ndc_3c026203a7a9098d",
+        "party": "Georgia",
+        "title": "Georgia NDC 3.0",
+        "version": "",
+        "status": "Active",
+        "publication_date": "2026-03-25",
+        "language": "English",
+        "detail_url": "https://unfccc.int/NDCREG",
+        "file_url": "https://unfccc.int/sites/default/files/2026-03/NDC_3.0_Georgia_EN.pdf"
+      }
+    ],
     "key_decisions": [
       {
         "document_id": "decision_40b37bf7526033e1",
@@ -939,72 +2009,72 @@
     {
       "year": 2016,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 114
     },
     {
       "year": 2017,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 49
     },
     {
       "year": 2018,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 17
     },
     {
       "year": 2019,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 6
     },
     {
       "year": 2020,
-      "status": "待补齐",
-      "coverage": 0
+      "status": "已导入",
+      "coverage": 71
     },
     {
       "year": 2021,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 91
     },
     {
       "year": 2022,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 30
     },
     {
       "year": 2023,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 39
     },
     {
       "year": 2024,
       "status": "已导入",
-      "coverage": 1
+      "coverage": 8
     },
     {
       "year": 2025,
       "status": "已导入",
-      "coverage": 3
+      "coverage": 132
     },
     {
       "year": 2026,
-      "status": "待补齐",
-      "coverage": 0
+      "status": "已导入",
+      "coverage": 18
     }
   ],
   "archive": {
-    "dataset_name": "ClimateText-3000",
-    "updated_at": "2026-07-29T04:31:09.620106+00:00",
-    "total": 86,
-    "limit": 3000,
+    "dataset_name": "ClimateText-8760",
+    "updated_at": "2026-08-03T07:39:29.336943+00:00",
+    "total": 125,
+    "limit": 8760,
     "statistics": {
-      "previous_total": 78,
-      "added": 8,
+      "previous_total": 125,
+      "added": 0,
       "updated": 0,
       "rejected": 0,
       "pruned": 0,
       "tier_a": 18,
-      "tier_b": 68
+      "tier_b": 107
     }
   }
 }
