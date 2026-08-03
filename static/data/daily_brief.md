@@ -4,16 +4,34 @@
 
 ## 今日重要情报
 
-### 1. [能源转型] 清洁能源转型出现新进展
+### 1. [气候动态] 全球气候议题出现新动态
+
+来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
+
+- 来源：Yale Climate Connections｜2026-08-03T11:00:00+00:00
+- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
+- 状态：来源陈述，未作独立事实核验
+- 原文：https://yaleclimateconnections.org/2026/08/boston-homes-were-built-for-winter-thats-becoming-a-problem
+
+### 2. [能源转型] 清洁能源转型出现新进展
 
 来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
-- 来源：Google News RSS Search｜2026-08-03T07:09:50+00:00
+- 来源：Climate Home News｜2026-08-03T10:14:16+00:00
 - 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
 - 状态：来源陈述，未作独立事实核验
-- 原文：https://news.google.com/rss/articles/CBMi4AFBVV95cUxPbFEwVzd5Vmw2dWd5WHY0RGxUWGVSWjdYbFAzUnA3LXFYNzh0NnAzWnU4UmdMaHc5dUNMNl9jR1hPZlNWVkVLX2JqeU8tWEF4cWRTbWRhS2tqWHlENmQwcno5TWw0YkJsX1JyRW5RekNkQzVwZE9mMVB6SzlGRlpWVXRqYUJpX0VtYktRRXZFdFRZamZ5MHU2TjRqNVZIT0tncTFUN3I0NUJzNkpkLXlhMFR0X3U3S1Y4a1NBRVhlRF9EdVBSWjdkMXpSTF8yZEZ6ZnVYTHU1UlFrLVVjaE5aaw?oc=5
+- 原文：https://www.climatechangenews.com/2026/08/03/egypt-seeks-to-unlock-renewable-riches-to-power-regional-clean-energy-hub
 
-### 2. [气候动态] 全球气候议题出现新动态
+### 3. [气候动态] 全球气候议题出现新动态
+
+来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
+
+- 来源：Canary Media｜2026-08-03T07:30:00+00:00
+- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
+- 状态：来源陈述，未作独立事实核验
+- 原文：https://www.canarymedia.com/articles/food-and-farms/virginia-solar-with-farming
+
+### 4. [气候动态] 全球气候议题出现新动态
 
 来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
@@ -22,7 +40,7 @@
 - 状态：来源陈述，未作独立事实核验
 - 原文：https://www.ttgasia.com/2026/08/03/sentosa-breaks-ground-on-asias-first-climate-adaptation-hub
 
-### 3. [极端天气与气候风险] 极端天气风险出现新动态
+### 5. [极端天气与气候风险] 极端天气风险出现新动态
 
 来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
@@ -31,7 +49,7 @@
 - 状态：来源陈述，未作独立事实核验
 - 原文：https://timesofindia.indiatimes.com/world/us/researchers-tracked-wildfires-from-1984-to-2022-a-pacific-trend-added-22-to-us-southwest-drying-related-burned-area-but-reduced-eastern-australias-by-about-19/articleshow/132765507.cms
 
-### 4. [极端天气与气候风险] 极端天气风险出现新动态
+### 6. [极端天气与气候风险] 极端天气风险出现新动态
 
 来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
 
@@ -39,24 +57,6 @@
 - 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
 - 状态：来源陈述，未作独立事实核验
 - 原文：https://www.bbc.co.uk/news/articles/c4gwr53qrw7o?at_medium=RSS&at_campaign=rss
-
-### 5. [能源转型] 清洁能源转型出现新进展
-
-来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
-
-- 来源：Google News RSS Search｜2026-08-03T03:32:44+00:00
-- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://news.google.com/rss/articles/CBMimwFBVV95cUxOb2NwVU43UEIyTEdaY2VlbjRkbW12LXgyTnZJZkZTYWNDaUdwdU9IdHVOcEczR3VMOUpuU2hWdmlQQ0lqeHhpZWJUZkNmZzFnaVdjRnhDaFpfNVFyZU9Bd213QWZya1FMLVE4cmRIRHNWVjV0M0M3UjhJWjJqa1JfZkNOQ0NBTC1UZnNkOTg5amRGV1NOUFJrNW5PUQ?oc=5
-
-### 6. [可再生能源投资] 印度可再生能源投资计划升温
-
-来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。
-
-- 来源：Google News RSS Search｜2026-08-03T02:45:21+00:00
-- 为什么值得关注：这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。
-- 状态：来源陈述，未作独立事实核验
-- 原文：https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5
 
 ### 7. [气候动态] 全球气候议题出现新动态
 
