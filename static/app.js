@@ -1,5 +1,5 @@
 const state = {
-  dashboard: null, archive: null, filtered: [], visible: 18,
+  dashboard: null, archive: null, analytics: null, filtered: [], visible: 18,
   mapPeriod: "today", mapTopology: null,
   assistant: { lastRecords: [], lastPlan: null },
 };
@@ -552,15 +552,130 @@ function setupAssistant() {
   document.querySelectorAll("[data-prompt]").forEach(button => button.addEventListener("click", () => answerQuestion(button.dataset.prompt)));
 }
 
+function formatCount(value) {
+  return new Intl.NumberFormat("zh-CN").format(Number(value || 0));
+}
+
+function renderAnalytics() {
+  const analytics = state.analytics;
+  const container = $("analyticsKpis");
+  if (!analytics || !analytics.records) {
+    container.innerHTML = '<div class="empty compact"><b>语料库统计暂未生成</b><p>下一次静态导出会自动写入 corpus_analytics.json。</p></div>';
+    $("analyticsNote").textContent = "未读取到可用统计文件。";
+    return;
+  }
+  const taggedRate = `${Math.round((analytics.country_tagged_rate || 0) * 100)}%`;
+  container.innerHTML = [
+    ["记录总量", formatCount(analytics.records), `${analytics.date_start || "?"} 至 ${analytics.date_end || "?"}`],
+    ["覆盖天数", formatCount(analytics.days_covered), `日均 ${analytics.avg_per_day || 0} 条`],
+    ["主题标签", formatCount(analytics.topic_count), "支持主题频率与热度分析"],
+    ["国家/地区", formatCount(analytics.country_count), `明确地理标签覆盖 ${taggedRate}`],
+    ["来源数量", formatCount(analytics.source_count), "用于评估来源集中度"],
+  ].map(([label, value, note]) => `<article class="analytics-kpi"><span>${esc(label)}</span><b>${esc(value)}</b><small>${esc(note)}</small></article>`).join("");
+  renderLineChart("monthlyTrendChart", analytics.monthly_records || [], { x: "month", y: "count" });
+  renderBarChart("topicBarChart", analytics.top_topics || [], { limit: 8, colorClass: "bar-fill" });
+  renderBarChart("countryBarChart", analytics.top_countries || [], { limit: 10, colorClass: "bar-fill" });
+  renderBarChart("continentBarChart", analytics.continents || [], { limit: 8, colorClass: "bar-fill alt" });
+  renderBarChart("sourceBarChart", analytics.top_sources || [], { limit: 8, colorClass: "bar-fill alt" });
+  renderHeatmap("countryTopicHeatmap", analytics.country_topic_matrix || {});
+  $("analyticsNote").textContent = (analytics.notes || []).join(" ");
+}
+
+function renderLineChart(id, rows, { x, y }) {
+  const element = $(id);
+  if (!element) return;
+  if (!rows.length) {
+    element.innerHTML = '<div class="empty compact"><b>暂无趋势数据</b></div>';
+    return;
+  }
+  const width = 920, height = 300, left = 54, right = 24, top = 20, bottom = 44;
+  const values = rows.map(row => Number(row[y] || 0));
+  const maxValue = Math.max(1, ...values);
+  const span = Math.max(1, rows.length - 1);
+  const px = index => left + index / span * (width - left - right);
+  const py = value => top + (1 - value / maxValue) * (height - top - bottom);
+  const points = rows.map((row, index) => [px(index), py(Number(row[y] || 0))]);
+  const path = points.map((point, index) => `${index ? "L" : "M"}${point[0].toFixed(1)},${point[1].toFixed(1)}`).join(" ");
+  const area = `${path} L${points.at(-1)[0].toFixed(1)},${height - bottom} L${points[0][0].toFixed(1)},${height - bottom} Z`;
+  const tickIndexes = [...new Set([0, Math.floor(span / 3), Math.floor(span * 2 / 3), span])];
+  const grid = [0, .25, .5, .75, 1].map(ratio => {
+    const yy = top + ratio * (height - top - bottom);
+    const label = Math.round(maxValue * (1 - ratio));
+    return `<line class="chart-gridline" x1="${left}" y1="${yy}" x2="${width - right}" y2="${yy}"></line><text class="chart-muted" x="${left - 8}" y="${yy + 4}" text-anchor="end">${label}</text>`;
+  }).join("");
+  element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="月度文本频率趋势图">
+    ${grid}
+    <path class="chart-area" d="${area}"></path>
+    <path class="chart-line" d="${path}"></path>
+    ${points.map((point, index) => index % Math.ceil(rows.length / 10) === 0 || index === rows.length - 1
+      ? `<circle class="chart-dot" cx="${point[0]}" cy="${point[1]}" r="3.2"><title>${esc(rows[index][x])}: ${values[index]}</title></circle>`
+      : "").join("")}
+    <line class="chart-axis" x1="${left}" y1="${height - bottom}" x2="${width - right}" y2="${height - bottom}"></line>
+    ${tickIndexes.map(index => `<text class="chart-muted" x="${px(index)}" y="${height - 15}" text-anchor="middle">${esc(rows[index][x])}</text>`).join("")}
+  </svg>`;
+}
+
+function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill" } = {}) {
+  const element = $(id);
+  if (!element) return;
+  const shown = rows.slice(0, limit);
+  if (!shown.length) {
+    element.innerHTML = '<div class="empty compact"><b>暂无分布数据</b></div>';
+    return;
+  }
+  const width = 520, rowHeight = 34, left = 120, right = 54, top = 12;
+  const height = top * 2 + shown.length * rowHeight;
+  const maxValue = Math.max(1, ...shown.map(row => Number(row.count || 0)));
+  element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="分类频率条形图">
+    ${shown.map((row, index) => {
+      const y = top + index * rowHeight + 7;
+      const barWidth = (width - left - right) * Number(row.count || 0) / maxValue;
+      return `<text class="chart-label" x="${left - 10}" y="${y + 13}" text-anchor="end">${esc(row.name)}</text>
+        <rect class="bar-track" x="${left}" y="${y}" width="${width - left - right}" height="16"></rect>
+        <rect class="${colorClass}" x="${left}" y="${y}" width="${barWidth}" height="16"></rect>
+        <text class="chart-value" x="${left + barWidth + 7}" y="${y + 12}">${formatCount(row.count)}</text>`;
+    }).join("")}
+  </svg>`;
+}
+
+function renderHeatmap(id, matrix) {
+  const element = $(id);
+  if (!element) return;
+  const countries = matrix.countries || [];
+  const topics = matrix.topics || [];
+  const cells = matrix.cells || [];
+  if (!countries.length || !topics.length) {
+    element.innerHTML = '<div class="empty compact"><b>暂无交叉矩阵</b></div>';
+    return;
+  }
+  const maxValue = Math.max(1, ...cells.map(cell => Number(cell.count || 0)));
+  const cellMap = new Map(cells.map(cell => [`${cell.country}||${cell.topic}`, Number(cell.count || 0)]));
+  element.innerHTML = `<div class="heatmap" style="--heatmap-columns:${topics.length}">
+    <div class="heatmap-row header"><span></span>${topics.map(topic => `<span>${esc(topic)}</span>`).join("")}</div>
+    ${countries.map(country => `<div class="heatmap-row">
+      <span class="heatmap-country">${esc(country)}</span>
+      ${topics.map(topic => {
+        const value = cellMap.get(`${country}||${topic}`) || 0;
+        const alpha = 0.08 + 0.82 * value / maxValue;
+        const ink = alpha > 0.46 ? "#fff" : "#12223a";
+        return `<span class="heat-cell" style="background:rgba(23,78,166,${alpha.toFixed(3)});color:${ink}" title="${esc(country)} / ${esc(topic)}：${value}">${value || ""}</span>`;
+      }).join("")}
+    </div>`).join("")}
+  </div>`;
+}
+
 async function init() {
-  const [dashboard, archive] = await Promise.all([
+  const [dashboard, archive, analytics] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
+    fetchJson("./data/corpus_analytics.json").catch(() => null),
   ]);
   state.dashboard = dashboard;
   state.archive = archive;
+  state.analytics = analytics;
   renderMeta();
   renderToday();
+  renderAnalytics();
   setupFilters();
   applyFilters();
   setupAssistant();

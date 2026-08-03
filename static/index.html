@@ -17,6 +17,7 @@
     <nav aria-label="页面导航">
       <a href="#map">全球现场</a>
       <a href="#today">今日情报</a>
+      <a href="#analytics">语料分析</a>
       <a href="#assistant">情报问答</a>
       <a href="#database">文本数据库</a>
     </nav>
@@ -76,6 +77,43 @@
         <p id="dataNote">按发布时间和政策相关性整理；涉及重要数字时请点击原文核验。</p>
       </div>
       <div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section analytics-section" id="analytics">
+      <div class="section-heading">
+        <div><p class="overline">CORPUS ANALYTICS</p><h2>语料库统计分析</h2></div>
+        <p>基于三年历史语料库生成的统计图表，展示时间频率、议题结构、国家/地区分布和国家—议题交叉关系；图表反映语料库样本分布，不等同于全球事件真实发生频率。</p>
+      </div>
+      <div class="analytics-kpis" id="analyticsKpis">
+        <div class="skeleton"></div>
+      </div>
+      <div class="analytics-grid">
+        <article class="chart-card wide">
+          <div class="chart-heading"><span>MONTHLY FREQUENCY</span><h3>月度文本频率</h3><p>按发布时间聚合；用于观察议题热度和采集覆盖的时间变化。</p></div>
+          <div class="chart-box" id="monthlyTrendChart"></div>
+        </article>
+        <article class="chart-card">
+          <div class="chart-heading"><span>TOPIC MIX</span><h3>高频主题</h3><p>按记录主题标签计数，一条文本可对应多个主题。</p></div>
+          <div class="chart-box" id="topicBarChart"></div>
+        </article>
+        <article class="chart-card">
+          <div class="chart-heading"><span>COUNTRY TAGS</span><h3>国家/地区分布</h3><p>仅统计文本或地点字段明确出现的国家/地区。</p></div>
+          <div class="chart-box" id="countryBarChart"></div>
+        </article>
+        <article class="chart-card">
+          <div class="chart-heading"><span>REGIONAL STRUCTURE</span><h3>洲别结构</h3><p>按国家/地区标签映射到洲别；全球性文本保留未标注。</p></div>
+          <div class="chart-box" id="continentBarChart"></div>
+        </article>
+        <article class="chart-card">
+          <div class="chart-heading"><span>SOURCE MIX</span><h3>主要来源</h3><p>用于识别语料来源集中度和后续补源方向。</p></div>
+          <div class="chart-box" id="sourceBarChart"></div>
+        </article>
+        <article class="chart-card wide">
+          <div class="chart-heading"><span>COUNTRY × TOPIC</span><h3>国家—主题热力矩阵</h3><p>显示主要国家/地区与高频主题的共现关系，便于后续分类和趋势建模。</p></div>
+          <div class="chart-box heatmap-box" id="countryTopicHeatmap"></div>
+        </article>
+      </div>
+      <p class="analytics-note" id="analyticsNote">正在读取语料库统计文件…</p>
     </section>
 
     <section class="section assistant-section" id="assistant">

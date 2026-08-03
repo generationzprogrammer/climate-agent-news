@@ -2,18 +2,18 @@
   "meta": {
     "product": "国际气候情报与高质量中文文本数据库",
     "date": "2026-08-03",
-    "generated_at": "2026-08-03T07:46:16.849070+00:00",
+    "generated_at": "2026-08-03T12:32:21.795491+00:00",
     "timezone": "Asia/Shanghai",
     "demo_mode": false,
     "notice": "今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 7 个。标题和摘要是来源陈述，尚需人工核验。",
     "latest_news_date": "2026-08-03",
-    "daily_window_start": "2026-07-28",
+    "daily_window_start": "2026-08-03",
     "daily_target": 10,
-    "daily_backfilled": 3,
-    "daily_complete_day": false,
-    "daily_sources": 6,
-    "daily_continents": 5,
-    "dataset_version": "2026-08-03T07:46:16.898082+00:00"
+    "daily_backfilled": 0,
+    "daily_complete_day": true,
+    "daily_sources": 5,
+    "daily_continents": 3,
+    "dataset_version": "2026-08-03T12:32:21.839832+00:00"
   },
   "metrics": {
     "source_total": 53,
@@ -23,10 +23,10 @@
     "official_enabled": 12,
     "languages": 15,
     "article_total": 255,
-    "high_priority": 6,
+    "high_priority": 5,
     "official_documents": 576,
     "cop31_countdown": 98,
-    "archive_total": 131
+    "archive_total": 134
   },
   "intelligence": [
     {
@@ -97,6 +97,150 @@
       "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
     },
     {
+      "record_id": "article_c5a5b836de05430b",
+      "article_id": "article_c5a5b836de05430b",
+      "canonical_url": "https://www.ttgasia.com/2026/08/03/sentosa-breaks-ground-on-asias-first-climate-adaptation-hub",
+      "source_url": "https://www.ttgasia.com/2026/08/03/sentosa-breaks-ground-on-asias-first-climate-adaptation-hub/",
+      "source_id": "API001",
+      "source_name": "GDELT 2.0 DOC API",
+      "source_type": "全球新闻聚合API",
+      "authority": 4,
+      "relevance_score": 62,
+      "title_original": "Sentosa breaks ground on Asia first climate adaptation hub",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_source": null,
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "气候动态",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-03T07:00:00+00:00",
+      "fetched_at": "2026-08-03T07:48:12.679426+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "69b37a392d738248f271bdda341716c5647c8d81ceedb5021827065fbbcab221",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_c5a5b836de05430b",
+        "source_atom": {
+          "name": "GDELT 2.0 DOC API",
+          "authority": 4,
+          "type": "全球新闻聚合API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T07:48:13.702487+00:00",
+      "last_archived_at": "2026-08-03T07:48:13.986216+00:00"
+    },
+    {
+      "record_id": "article_cef8909c0d4e80bf",
+      "article_id": "article_cef8909c0d4e80bf",
+      "canonical_url": "https://timesofindia.indiatimes.com/world/us/researchers-tracked-wildfires-from-1984-to-2022-a-pacific-trend-added-22-to-us-southwest-drying-related-burned-area-but-reduced-eastern-australias-by-about-19/articleshow/132765507.cms",
+      "source_url": "https://timesofindia.indiatimes.com/world/us/researchers-tracked-wildfires-from-1984-to-2022-a-pacific-trend-added-22-to-us-southwest-drying-related-burned-area-but-reduced-eastern-australias-by-about-19/articleshow/132765507.cms",
+      "source_id": "API001",
+      "source_name": "GDELT 2.0 DOC API",
+      "source_type": "全球新闻聚合API",
+      "authority": 4,
+      "relevance_score": 74,
+      "title_original": "Researchers tracked wildfires from 1984 to 2022 ; a Pacific trend added 22 % to US Southwest drying - related burned area but reduced eastern Australia by about 19 % ",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": null,
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-03T06:45:00+00:00",
+      "fetched_at": "2026-08-03T07:48:12.679426+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "1984",
+        "2022",
+        "22 %",
+        "19 %"
+      ],
+      "places": [
+        {
+          "name_zh": "澳大利亚",
+          "lon": 134.0,
+          "lat": -25.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "489a72d5d08c1393149e8cc03d2634045e0e45759845b2ccd09167c7d3ca5879",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 62,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_cef8909c0d4e80bf",
+        "source_atom": {
+          "name": "GDELT 2.0 DOC API",
+          "authority": 4,
+          "type": "全球新闻聚合API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "1984",
+          "2022",
+          "22 %",
+          "19 %"
+        ],
+        "geo_atoms": [
+          "澳大利亚"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T07:48:13.702487+00:00",
+      "last_archived_at": "2026-08-03T07:48:13.986216+00:00"
+    },
+    {
       "record_id": "article_3f553aa2f454ab58",
       "article_id": "article_3f553aa2f454ab58",
       "canonical_url": "https://www.bbc.co.uk/news/articles/c4gwr53qrw7o?at_medium=RSS&at_campaign=rss",
@@ -114,7 +258,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T05:09:06+00:00",
-      "fetched_at": "2026-08-03T07:43:01.252685+00:00",
+      "fetched_at": "2026-08-03T07:47:39.294082+00:00",
       "topics": [
         "气候适应"
       ],
@@ -157,7 +301,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T07:44:12.761251+00:00",
-      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
+      "last_archived_at": "2026-08-03T07:48:13.986216+00:00"
     },
     {
       "record_id": "article_7b719e94046e6dce",
@@ -306,6 +450,77 @@
       "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
     },
     {
+      "record_id": "article_feb711c5f4b78c59",
+      "article_id": "article_feb711c5f4b78c59",
+      "canonical_url": "https://www.news.cn/politics/20260803/dcce4d886c494c02998f41806cf84a63/c.html",
+      "source_url": "https://www.news.cn/politics/20260803/dcce4d886c494c02998f41806cf84a63/c.html",
+      "source_id": "API005",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "source_type": "中国官方与专业来源定向发现API",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "  妈祖  为全球应对气候变化贡献中国智慧 - 新华网",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_source": null,
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "theme_zh": "气候动态",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "Chinese",
+      "published_at": "2026-08-03T01:45:00+00:00",
+      "fetched_at": "2026-08-03T07:47:57.128996+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "858771585ce2815f31d9111417bcafb329cec1533096de3c46d00397463627ef",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_feb711c5f4b78c59",
+        "source_atom": {
+          "name": "中国官方气候来源（GDELT定向发现）",
+          "authority": 4,
+          "type": "中国官方与专业来源定向发现API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "中国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-03T07:48:13.702487+00:00",
+      "last_archived_at": "2026-08-03T07:48:13.986216+00:00"
+    },
+    {
       "record_id": "article_52a314290fbb9a0e",
       "article_id": "article_52a314290fbb9a0e",
       "canonical_url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5",
@@ -323,7 +538,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-02T22:36:00+00:00",
-      "fetched_at": "2026-08-03T07:44:11.915067+00:00",
+      "fetched_at": "2026-08-03T07:48:13.171862+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -380,7 +595,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
-      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
+      "last_archived_at": "2026-08-03T07:48:13.986216+00:00"
     },
     {
       "record_id": "article_c51a150ef2c99849",
@@ -400,7 +615,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-02T18:21:18+00:00",
-      "fetched_at": "2026-08-03T07:44:11.915067+00:00",
+      "fetched_at": "2026-08-03T07:48:13.171862+00:00",
       "topics": [
         "履约与全球盘点"
       ],
@@ -457,7 +672,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
-      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
+      "last_archived_at": "2026-08-03T07:48:13.986216+00:00"
     },
     {
       "record_id": "article_1372ef6906c2e6fc",
@@ -477,7 +692,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-02T16:54:07+00:00",
-      "fetched_at": "2026-08-03T07:43:01.067211+00:00",
+      "fetched_at": "2026-08-03T07:47:39.144932+00:00",
       "topics": [
         "气候适应"
       ],
@@ -524,256 +739,24 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T01:08:17.093586+00:00",
-      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
-    },
-    {
-      "record_id": "article_d06390e6b6173bbd",
-      "article_id": "article_d06390e6b6173bbd",
-      "canonical_url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows",
-      "source_url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows/",
-      "source_id": "INT007",
-      "source_name": "Mongabay Climate Change",
-      "source_type": "非营利环境媒体",
-      "authority": 4,
-      "relevance_score": 74,
-      "title_original": "Climate change boosted Spain wildfire risk 20-fold, research shows",
-      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
-      "summary_source": "Human-induced climate change drastically fueled the weather behind recent devastating wildfires in France and Spain, according to a new rapid analysis by researchers studying the role of climate change on today’s extreme weather. In its report, the World Weather Attribution (WWA), a global network of researchers, noted that severe blazes scorched 140,000 hectares (346,000 acres) […]",
-      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "野火风险归因",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "en",
-      "published_at": "2026-07-31T05:33:22+00:00",
-      "fetched_at": "2026-08-03T07:43:00.005409+00:00",
-      "topics": [
-        "气候适应"
-      ],
-      "numbers": [
-        "20",
-        "140,000",
-        "346,000"
-      ],
-      "places": [
-        {
-          "name_zh": "法国",
-          "lon": 2.0,
-          "lat": 46.0
-        }
-      ],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "dce08d1505fa8107b6faaf088e074e86516c133e14c9171aee45d349f6d907e2",
-      "poster_phrase": "西班牙野火风险",
-      "quality": {
-        "passed": true,
-        "score": 62,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_d06390e6b6173bbd",
-        "source_atom": {
-          "name": "Mongabay Climate Change",
-          "authority": 4,
-          "type": "非营利环境媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候适应"
-        ],
-        "number_atoms": [
-          "20",
-          "140,000",
-          "346,000"
-        ],
-        "geo_atoms": [
-          "法国"
-        ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
-    },
-    {
-      "record_id": "article_2b498ff60d1dfc18",
-      "article_id": "article_2b498ff60d1dfc18",
-      "canonical_url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened",
-      "source_url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened/",
-      "source_id": "INT019",
-      "source_name": "Mongabay Latin America",
-      "source_type": "非营利环境媒体",
-      "authority": 4,
-      "relevance_score": 58,
-      "title_original": "Fishers fight for solutions as Brazil lists tambaqui as threatened",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_source": "- One of the most cooked fish in the Brazilian Amazon, the tambaqui was included in the official national list of threatened species, triggering fear of losses from Amazon small-scale fishers who depend on the species for their livelihood. - The tambaqui was classified as vulnerable due to projections of a 43.4% overall population decline over three generations as it’s targeted by intense fishing. - Starting at the end of October, its fishing could be prohibited in Brazil if a recovery plan isn’t implemented, according to the Ministry of Environment and Climate Change. - The gray triggerfish was also included in the list of 490 fish and invertebrate threatened fauna, triggering reactions from artisanal fishers and the fishing industry.",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "气候动态",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "en",
-      "published_at": "2026-07-28T19:34:59+00:00",
-      "fetched_at": "2026-08-03T07:43:01.483422+00:00",
-      "topics": [
-        "气候动态"
-      ],
-      "numbers": [
-        "43.4%",
-        "490"
-      ],
-      "places": [
-        {
-          "name_zh": "巴西",
-          "lon": -52.0,
-          "lat": -10.0
-        },
-        {
-          "name_zh": "亚马孙地区",
-          "lon": -62.0,
-          "lat": -4.0
-        }
-      ],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "d681ee3434cb71d84bc6a21619d1d6130f8e55c06ab1a03f49136f087b25f841",
-      "poster_phrase": "气候线索更新",
-      "quality": {
-        "passed": true,
-        "score": 56,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_2b498ff60d1dfc18",
-        "source_atom": {
-          "name": "Mongabay Latin America",
-          "authority": 4,
-          "type": "非营利环境媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候动态"
-        ],
-        "number_atoms": [
-          "43.4%",
-          "490"
-        ],
-        "geo_atoms": [
-          "巴西",
-          "亚马孙地区"
-        ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-03T07:44:13.059556+00:00"
-    },
-    {
-      "record_id": "curated_3c8d41ebd8c88e3b",
-      "article_id": "curated_3c8d41ebd8c88e3b",
-      "canonical_url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/",
-      "source_url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/",
-      "source_id": "OFF014",
-      "source_name": "NASA Earth Observatory Image of the Day",
-      "source_type": "美国官方地球科学机构",
-      "authority": 5,
-      "relevance_score": 92,
-      "title_original": "Smoke Blankets Oregon",
-      "title_zh": "卫星监测显示美国俄勒冈州野火烟霾扩散",
-      "summary_source": null,
-      "summary_zh": "NASA地球观测站发布7月26日卫星图像，显示俄勒冈州中东部数十场野火产生大范围烟霾。NASA援引公开数据称，截至7月27日俄勒冈州过火面积超过100万英亩，全美超过400万英亩，高于2016—2025年同期340万英亩的十年平均值。",
-      "theme_zh": "野火与极端天气",
-      "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
-      "language": "en",
-      "published_at": "2026-07-28T00:00:00+00:00",
-      "fetched_at": "2026-08-03T07:46:16.668289+00:00",
-      "topics": [
-        "极端天气",
-        "气候适应"
-      ],
-      "numbers": [
-        "100万英亩",
-        "400万英亩",
-        "340万英亩",
-        "2016—2025"
-      ],
-      "places": [
-        {
-          "name_zh": "美国俄勒冈州",
-          "lon": -120.5,
-          "lat": 44.0
-        }
-      ],
-      "translation_status": "human_reviewed",
-      "fact_status": "official_source_claim",
-      "content_hash": "6189c5a640d8f84deb9922cae8b6ec9af8700cfd4d2569d06617e979b1b628a3",
-      "poster_phrase": "美国野火季过火面积高于十年同期均值",
-      "quality": {
-        "passed": true,
-        "score": 92,
-        "tier": "A",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "curated_3c8d41ebd8c88e3b",
-        "source_atom": {
-          "name": "NASA Earth Observatory Image of the Day",
-          "authority": 5,
-          "type": "美国官方地球科学机构"
-        },
-        "evidence_atom": {
-          "fact_status": "official_source_claim",
-          "translation_status": "human_reviewed",
-          "quality_tier": "A"
-        },
-        "topic_atoms": [
-          "极端天气",
-          "气候适应"
-        ],
-        "number_atoms": [
-          "100万英亩",
-          "400万英亩",
-          "340万英亩",
-          "2016—2025"
-        ],
-        "geo_atoms": [
-          "美国俄勒冈州"
-        ],
-        "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
-      },
-      "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-03T07:46:16.898082+00:00"
+      "last_archived_at": "2026-08-03T07:48:13.986216+00:00"
     }
   ],
   "map_events": [
     {
+      "marker_id": "article_cef8909c0d4e80bf_0",
+      "article_id": "article_cef8909c0d4e80bf",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-03T06:45:00+00:00",
+      "url": "https://timesofindia.indiatimes.com/world/us/researchers-tracked-wildfires-from-1984-to-2022-a-pacific-trend-added-22-to-us-southwest-drying-related-burned-area-but-reduced-eastern-australias-by-about-19/articleshow/132765507.cms"
+    },
+    {
       "marker_id": "article_7f104db5dc2e1e93_0",
       "article_id": "article_7f104db5dc2e1e93",
       "place": "印度",
@@ -785,6 +768,19 @@
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-03T02:45:21+00:00",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5"
+    },
+    {
+      "marker_id": "article_feb711c5f4b78c59_0",
+      "article_id": "article_feb711c5f4b78c59",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-03T01:45:00+00:00",
+      "url": "https://www.news.cn/politics/20260803/dcce4d886c494c02998f41806cf84a63/c.html"
     },
     {
       "marker_id": "article_52a314290fbb9a0e_0",
@@ -824,62 +820,23 @@
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-02T18:21:18+00:00",
       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
-    },
-    {
-      "marker_id": "article_d06390e6b6173bbd_0",
-      "article_id": "article_d06390e6b6173bbd",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "野火风险归因",
-      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
-      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-07-31T05:33:22+00:00",
-      "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
-    },
-    {
-      "marker_id": "article_2b498ff60d1dfc18_0",
-      "article_id": "article_2b498ff60d1dfc18",
-      "place": "巴西",
-      "lon": -52.0,
-      "lat": -10.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-07-28T19:34:59+00:00",
-      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
-    },
-    {
-      "marker_id": "article_2b498ff60d1dfc18_1",
-      "article_id": "article_2b498ff60d1dfc18",
-      "place": "亚马孙地区",
-      "lon": -62.0,
-      "lat": -4.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-07-28T19:34:59+00:00",
-      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
-    },
-    {
-      "marker_id": "curated_3c8d41ebd8c88e3b_0",
-      "article_id": "curated_3c8d41ebd8c88e3b",
-      "place": "美国俄勒冈州",
-      "lon": -120.5,
-      "lat": 44.0,
-      "theme": "野火与极端天气",
-      "title_zh": "卫星监测显示美国俄勒冈州野火烟霾扩散",
-      "summary_zh": "NASA地球观测站发布7月26日卫星图像，显示俄勒冈州中东部数十场野火产生大范围烟霾。NASA援引公开数据称，截至7月27日俄勒冈州过火面积超过100万英亩，全美超过400万英亩，高于2016—2025年同期340万英亩的十年平均值。",
-      "source_name": "NASA Earth Observatory Image of the Day",
-      "published_at": "2026-07-28T00:00:00+00:00",
-      "url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/"
     }
   ],
   "map_events_today": [
     {
+      "marker_id": "article_cef8909c0d4e80bf_0",
+      "article_id": "article_cef8909c0d4e80bf",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-03T06:45:00+00:00",
+      "url": "https://timesofindia.indiatimes.com/world/us/researchers-tracked-wildfires-from-1984-to-2022-a-pacific-trend-added-22-to-us-southwest-drying-related-burned-area-but-reduced-eastern-australias-by-about-19/articleshow/132765507.cms"
+    },
+    {
       "marker_id": "article_7f104db5dc2e1e93_0",
       "article_id": "article_7f104db5dc2e1e93",
       "place": "印度",
@@ -891,6 +848,19 @@
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-03T02:45:21+00:00",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5"
+    },
+    {
+      "marker_id": "article_feb711c5f4b78c59_0",
+      "article_id": "article_feb711c5f4b78c59",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-03T01:45:00+00:00",
+      "url": "https://www.news.cn/politics/20260803/dcce4d886c494c02998f41806cf84a63/c.html"
     },
     {
       "marker_id": "article_52a314290fbb9a0e_0",
@@ -930,58 +900,6 @@
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-02T18:21:18+00:00",
       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
-    },
-    {
-      "marker_id": "article_d06390e6b6173bbd_0",
-      "article_id": "article_d06390e6b6173bbd",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "野火风险归因",
-      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
-      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-07-31T05:33:22+00:00",
-      "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
-    },
-    {
-      "marker_id": "article_2b498ff60d1dfc18_0",
-      "article_id": "article_2b498ff60d1dfc18",
-      "place": "巴西",
-      "lon": -52.0,
-      "lat": -10.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-07-28T19:34:59+00:00",
-      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
-    },
-    {
-      "marker_id": "article_2b498ff60d1dfc18_1",
-      "article_id": "article_2b498ff60d1dfc18",
-      "place": "亚马孙地区",
-      "lon": -62.0,
-      "lat": -4.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-07-28T19:34:59+00:00",
-      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
-    },
-    {
-      "marker_id": "curated_3c8d41ebd8c88e3b_0",
-      "article_id": "curated_3c8d41ebd8c88e3b",
-      "place": "美国俄勒冈州",
-      "lon": -120.5,
-      "lat": 44.0,
-      "theme": "野火与极端天气",
-      "title_zh": "卫星监测显示美国俄勒冈州野火烟霾扩散",
-      "summary_zh": "NASA地球观测站发布7月26日卫星图像，显示俄勒冈州中东部数十场野火产生大范围烟霾。NASA援引公开数据称，截至7月27日俄勒冈州过火面积超过100万英亩，全美超过400万英亩，高于2016—2025年同期340万英亩的十年平均值。",
-      "source_name": "NASA Earth Observatory Image of the Day",
-      "published_at": "2026-07-28T00:00:00+00:00",
-      "url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/"
     }
   ],
   "map_events_week": [
@@ -1010,6 +928,19 @@
       "source_name": "NASA Earth Observatory Image of the Day",
       "published_at": "2026-07-28T00:00:00+00:00",
       "url": "https://science.nasa.gov/earth/natural-disasters/wildfires/smoke-blankets-oregon/"
+    },
+    {
+      "marker_id": "article_cef8909c0d4e80bf_0",
+      "article_id": "article_cef8909c0d4e80bf",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-03T06:45:00+00:00",
+      "url": "https://timesofindia.indiatimes.com/world/us/researchers-tracked-wildfires-from-1984-to-2022-a-pacific-trend-added-22-to-us-southwest-drying-related-burned-area-but-reduced-eastern-australias-by-about-19/articleshow/132765507.cms"
     },
     {
       "marker_id": "article_d06390e6b6173bbd_0",
@@ -1090,19 +1021,6 @@
       "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
     },
     {
-      "marker_id": "article_fc5da889c959eea6_0",
-      "article_id": "article_fc5da889c959eea6",
-      "place": "印度尼西亚",
-      "lon": 118.0,
-      "lat": -2.0,
-      "theme": "气候谈判",
-      "title_zh": "国际气候谈判出现新动向",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "GDELT 2.0 DOC API",
-      "published_at": "2026-08-02T04:00:00+00:00",
-      "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
-    },
-    {
       "marker_id": "article_2fc21c2ac0bf82c6_0",
       "article_id": "article_2fc21c2ac0bf82c6",
       "place": "欧洲",
@@ -1114,32 +1032,6 @@
       "source_name": "Carbon Brief",
       "published_at": "2026-07-30T14:51:00+00:00",
       "url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires"
-    },
-    {
-      "marker_id": "article_4d6b6c51d56e9a87_0",
-      "article_id": "article_4d6b6c51d56e9a87",
-      "place": "新西兰",
-      "lon": 174.0,
-      "lat": -41.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-07-31T18:34:42+00:00",
-      "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
-    },
-    {
-      "marker_id": "article_4d6b6c51d56e9a87_1",
-      "article_id": "article_4d6b6c51d56e9a87",
-      "place": "巴西",
-      "lon": -52.0,
-      "lat": -10.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-07-31T18:34:42+00:00",
-      "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
     },
     {
       "marker_id": "article_6807db1e98ad4c31_0",
@@ -1207,6 +1099,45 @@
       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
     },
     {
+      "marker_id": "article_fc5da889c959eea6_0",
+      "article_id": "article_fc5da889c959eea6",
+      "place": "印度尼西亚",
+      "lon": 118.0,
+      "lat": -2.0,
+      "theme": "气候谈判",
+      "title_zh": "国际气候谈判出现新动向",
+      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-02T04:00:00+00:00",
+      "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
+    },
+    {
+      "marker_id": "article_4d6b6c51d56e9a87_0",
+      "article_id": "article_4d6b6c51d56e9a87",
+      "place": "新西兰",
+      "lon": 174.0,
+      "lat": -41.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T18:34:42+00:00",
+      "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
+    },
+    {
+      "marker_id": "article_4d6b6c51d56e9a87_1",
+      "article_id": "article_4d6b6c51d56e9a87",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T18:34:42+00:00",
+      "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
+    },
+    {
       "marker_id": "article_10c1a591d0f25813_0",
       "article_id": "article_10c1a591d0f25813",
       "place": "中国",
@@ -1233,6 +1164,19 @@
       "url": "https://yaleclimateconnections.org/2026/07/flood-mapping-tool-helps-south-texas-communities-better-understand-flooding-risks"
     },
     {
+      "marker_id": "article_feb711c5f4b78c59_0",
+      "article_id": "article_feb711c5f4b78c59",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-03T01:45:00+00:00",
+      "url": "https://www.news.cn/politics/20260803/dcce4d886c494c02998f41806cf84a63/c.html"
+    },
+    {
       "marker_id": "article_40dcb227c1fcbe93_0",
       "article_id": "article_40dcb227c1fcbe93",
       "place": "美国得州",
@@ -1244,19 +1188,6 @@
       "source_name": "Grist",
       "published_at": "2026-08-02T13:00:00+00:00",
       "url": "https://grist.org/energy/this-texas-coal-mine-will-soon-be-home-to-a-1-2gw-solar-farm"
-    },
-    {
-      "marker_id": "article_b8776402559b16e0_0",
-      "article_id": "article_b8776402559b16e0",
-      "place": "中国",
-      "lon": 105.0,
-      "lat": 35.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "中国官方气候来源（GDELT定向发现）",
-      "published_at": "2026-08-01T04:30:00+00:00",
-      "url": "https://www.news.cn/world/20260801/6f0649b260864821873cd86aca640824/c.html"
     },
     {
       "marker_id": "article_7f104db5dc2e1e93_0",
@@ -1337,17 +1268,17 @@
       "url": "https://news.mongabay.com/2026/07/before-giant-meat-producer-jbs-expands-to-nigeria-people-deserve-answers-commentary"
     },
     {
-      "marker_id": "article_4854ab175a1e71d9_0",
-      "article_id": "article_4854ab175a1e71d9",
+      "marker_id": "article_b8776402559b16e0_0",
+      "article_id": "article_b8776402559b16e0",
       "place": "中国",
       "lon": 105.0,
       "lat": 35.0,
-      "theme": "光伏产业竞争",
-      "title_zh": "中国光伏产业亏损但持续扩张",
-      "summary_zh": "中国光伏制造商之间激烈的价格战导致太阳能板价格大幅下降，使可再生能源成本创历史新低。尽管行业整体亏损，中国仍加大投资力度，推动光伏产业持续扩张，进一步降低全球清洁能源门槛。",
-      "source_name": "Grist",
-      "published_at": "2026-07-29T08:00:00+00:00",
-      "url": "https://grist.org/energy/chinas-solar-industry-is-losing-money-the-country-is-doubling-down-anyway"
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-01T04:30:00+00:00",
+      "url": "https://www.news.cn/world/20260801/6f0649b260864821873cd86aca640824/c.html"
     },
     {
       "marker_id": "article_9c81750ebefab743_0",
@@ -1400,6 +1331,19 @@
       "source_name": "The Guardian Climate Crisis",
       "published_at": "2026-07-28T08:00:33+00:00",
       "url": "https://www.theguardian.com/world/2026/jul/28/ash-fell-from-the-sky-tourists-describe-fleeing-apocalyptic-wildfires-in-france"
+    },
+    {
+      "marker_id": "article_4854ab175a1e71d9_0",
+      "article_id": "article_4854ab175a1e71d9",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "光伏产业竞争",
+      "title_zh": "中国光伏产业亏损但持续扩张",
+      "summary_zh": "中国光伏制造商之间激烈的价格战导致太阳能板价格大幅下降，使可再生能源成本创历史新低。尽管行业整体亏损，中国仍加大投资力度，推动光伏产业持续扩张，进一步降低全球清洁能源门槛。",
+      "source_name": "Grist",
+      "published_at": "2026-07-29T08:00:00+00:00",
+      "url": "https://grist.org/energy/chinas-solar-industry-is-losing-money-the-country-is-doubling-down-anyway"
     }
   ],
   "phrases": [
@@ -1409,18 +1353,18 @@
       "weight": 10
     },
     {
-      "text": "极端天气预警",
-      "theme": "极端天气与气候风险",
+      "text": "气候线索更新",
+      "theme": "气候动态",
       "weight": 9
     },
     {
-      "text": "能源转型提速",
-      "theme": "能源转型",
+      "text": "极端天气预警",
+      "theme": "极端天气与气候风险",
       "weight": 8
     },
     {
-      "text": "印度绿能投资",
-      "theme": "可再生能源投资",
+      "text": "极端天气预警",
+      "theme": "极端天气与气候风险",
       "weight": 7
     },
     {
@@ -1429,18 +1373,18 @@
       "weight": 6
     },
     {
-      "text": "气候线索更新",
-      "theme": "气候动态",
+      "text": "印度绿能投资",
+      "theme": "可再生能源投资",
       "weight": 5
     },
     {
-      "text": "极端天气预警",
-      "theme": "极端天气与气候风险",
+      "text": "气候线索更新",
+      "theme": "气候动态",
       "weight": 4
     },
     {
-      "text": "西班牙野火风险",
-      "theme": "野火风险归因",
+      "text": "能源转型提速",
+      "theme": "能源转型",
       "weight": 3
     }
   ],
@@ -1455,15 +1399,11 @@
       "weight": 4
     },
     {
-      "name": "履约与全球盘点",
-      "weight": 1
-    },
-    {
       "name": "气候动态",
       "weight": 1
     },
     {
-      "name": "极端天气",
+      "name": "履约与全球盘点",
       "weight": 1
     }
   ],
@@ -1968,17 +1908,17 @@
   ],
   "archive": {
     "dataset_name": "ClimateText-8760",
-    "updated_at": "2026-08-03T07:46:16.898082+00:00",
-    "total": 131,
+    "updated_at": "2026-08-03T12:32:21.839832+00:00",
+    "total": 134,
     "limit": 8760,
     "statistics": {
-      "previous_total": 131,
+      "previous_total": 134,
       "added": 0,
       "updated": 0,
       "rejected": 0,
       "pruned": 0,
       "tier_a": 18,
-      "tier_b": 113
+      "tier_b": 116
     }
   }
 }

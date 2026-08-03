@@ -12,6 +12,7 @@ from climate_agent.archive import quality_result, update_archive, validate_publi
 from climate_agent.briefing import dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week
 from climate_agent.cli import ROOT, bootstrap
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
+from climate_agent.corpus_analytics import build_corpus_analytics
 from climate_agent.db import Database
 from climate_agent.delivery import build_push_message
 from climate_agent.exporter import export_static_site
@@ -230,7 +231,10 @@ class CoreTests(unittest.TestCase):
         static_dir = Path(self.temp.name) / "static"
         output_dir = Path(self.temp.name) / "dist"
         shutil.copytree(ROOT / "static", static_dir)
-        (Path(self.temp.name) / "climate_text_corpus.jsonl").write_text('{"record_id":"hist_1"}\n', encoding="utf-8")
+        (Path(self.temp.name) / "climate_text_corpus.jsonl").write_text(
+            '{"record_id":"hist_1","published_date":"2026-01-01","topics":["能源与排放"],"country_tags":["中国"],"continent_tags":["Asia"],"source_domain":"example.org"}\n',
+            encoding="utf-8",
+        )
         (Path(self.temp.name) / "climate_text_corpus.manifest.json").write_text('{"records":1}', encoding="utf-8")
         result = export_static_site(self.db, static_dir, output_dir)
         payload = json.loads((output_dir / "data" / "dashboard.json").read_text(encoding="utf-8"))
@@ -240,6 +244,10 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / "data" / "news_archive.json").exists())
         self.assertTrue((output_dir / "data" / "climate_text_corpus.jsonl").exists())
         self.assertTrue((output_dir / "data" / "climate_text_corpus.manifest.json").exists())
+        analytics = json.loads((output_dir / "data" / "corpus_analytics.json").read_text(encoding="utf-8"))
+        self.assertEqual(analytics["records"], 1)
+        self.assertEqual(analytics["top_topics"][0]["name"], "能源与排放")
+        self.assertEqual(result["corpus_analytics_records"], 1)
         pdf = (output_dir / "data" / "daily_brief.pdf").read_bytes()
         self.assertTrue(pdf.startswith(b"%PDF-1.4"))
         self.assertIn(b"/BaseFont /Times-Roman", pdf)
@@ -274,8 +282,13 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="mapPlaceList"', html)
         self.assertIn('data-map-period="today"', html)
         self.assertIn('data-map-period="week"', html)
+        self.assertIn('id="analytics"', html)
+        self.assertIn('id="monthlyTrendChart"', html)
+        self.assertIn('id="countryTopicHeatmap"', html)
         self.assertIn('id="assistant"', html)
         app = (ROOT / "static" / "app.js").read_text(encoding="utf-8")
+        self.assertIn("function renderAnalytics", app)
+        self.assertIn("corpus_analytics.json", app)
         self.assertIn("function planQuestion", app)
         self.assertIn("function comparisonHtml", app)
         self.assertNotIn("function answerRecords", app)
@@ -512,6 +525,31 @@ class CoreTests(unittest.TestCase):
         counts = upsert_historical_records(self.db, [record])
         self.assertEqual(counts["new"], 1)
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM historical_articles")[0]["n"], 1)
+
+    def test_corpus_analytics_profiles_country_topic_and_time(self) -> None:
+        corpus = Path(self.temp.name) / "corpus.jsonl"
+        corpus.write_text(
+            "\n".join([
+                json.dumps({
+                    "record_id": "h1", "published_date": "2026-01-01",
+                    "topics": ["能源与排放"], "country_tags": ["中国"],
+                    "continent_tags": ["Asia"], "source_domain": "example.org",
+                    "quality_flags": {"has_country_tag": True},
+                }, ensure_ascii=False),
+                json.dumps({
+                    "record_id": "h2", "published_date": "2026-01-02",
+                    "topics": ["气候资金"], "country_tags": ["美国"],
+                    "continent_tags": ["North America"], "source_domain": "google:reuters",
+                    "quality_flags": {"has_country_tag": True},
+                }, ensure_ascii=False),
+            ]),
+            encoding="utf-8",
+        )
+        analytics = build_corpus_analytics(corpus)
+        self.assertEqual(analytics["records"], 2)
+        self.assertEqual(analytics["monthly_records"][0]["month"], "2026-01")
+        self.assertEqual(analytics["top_countries"][0]["name"], "中国")
+        self.assertIn("亚洲", {item["name"] for item in analytics["continents"]})
 
 
 if __name__ == "__main__":

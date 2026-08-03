@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .archive import DEFAULT_ARCHIVE_LIMIT, update_archive, validate_public_payload
 from .briefing import apply_archive_windows, dashboard_payload, publishable_intelligence, render_markdown
+from .corpus_analytics import write_corpus_analytics
 from .db import Database
 from .pdf_brief import write_daily_brief_pdf
 
@@ -44,6 +45,11 @@ def export_static_site(
     )
     (data_dir / "daily_brief.md").write_text(render_markdown(payload), encoding="utf-8")
     pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief.pdf")
+    corpus_path = db.path.parent / "climate_text_corpus.jsonl"
+    manifest_path = db.path.parent / "climate_text_corpus.manifest.json"
+    analytics = None
+    if corpus_path.exists():
+        analytics = write_corpus_analytics(corpus_path, data_dir / "corpus_analytics.json", manifest_path)
     for history_name in ("climate_text_corpus.jsonl", "climate_text_corpus.manifest.json"):
         history_path = db.path.parent / history_name
         if history_path.exists():
@@ -61,6 +67,7 @@ def export_static_site(
         "pdf": str(pdf_path),
         "archive_total": archive["total"],
         "archive_added": archive["statistics"]["added"],
+        "corpus_analytics_records": (analytics or {}).get("records", 0),
         "quality_gate": "passed",
         "generated_at": payload["meta"]["generated_at"],
     }
