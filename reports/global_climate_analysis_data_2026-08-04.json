@@ -114,11 +114,53 @@
     [
       "加拿大",
       113
+    ],
+    [
+      "澳大利亚",
+      95
+    ],
+    [
+      "亚马孙地区",
+      77
+    ]
+  ],
+  "top_sources": [
+    [
+      "google:nature",
+      590
+    ],
+    [
+      "google:the guardian",
+      196
+    ],
+    [
+      "google:reuters",
+      149
+    ],
+    [
+      "google:carbon brief",
+      118
+    ],
+    [
+      "google:the new york times",
+      111
+    ],
+    [
+      "google:the conversation",
+      83
+    ],
+    [
+      "google:inside climate news",
+      83
+    ],
+    [
+      "google:the world economic forum",
+      78
     ]
   ],
   "continent_counts": [
     [
-      "全球/未标注",
+      "全球未标注",
       5188
     ],
     [
@@ -153,14 +195,14 @@
   "keyword_totals": [
     [
       "综合气候政策",
-      1802
+      1806
     ],
     [
-      "数能/AI/数据中心",
+      "数字能源、AI与数据中心",
       1484
     ],
     [
-      "新能源/清洁能源",
+      "新能源与清洁能源",
       1449
     ],
     [
@@ -168,1031 +210,749 @@
       1367
     ],
     [
-      "NDC/COP/谈判",
-      1048
-    ],
-    [
-      "石油/天然气/化石能源",
+      "石油、天然气与化石能源",
       863
     ],
     [
-      "洪水/强降雨",
+      "洪水与强降雨",
       862
     ],
     [
-      "干旱/水风险",
+      "干旱与水风险",
       703
     ],
     [
-      "野火/森林火灾",
-      618
+      "国际谈判",
+      641
     ],
     [
-      "碳市场/碳价",
+      "野火与森林火灾",
+      622
+    ],
+    [
+      "联合国气候大会",
+      530
+    ],
+    [
+      "碳市场与碳价",
       521
     ],
     [
-      "高温/热浪",
+      "国家气候承诺",
+      231
+    ],
+    [
+      "高温与热浪",
       148
     ],
     [
-      "储能/电池/电网",
+      "储能、电池与电网",
       85
     ],
     [
-      "氢能/低碳燃料",
+      "氢能与低碳燃料",
       14
     ]
   ],
   "correlations": [
     [
-      "气候资金",
-      "NDC/COP/谈判",
-      0.7377822713169313
-    ],
-    [
       "综合气候政策",
-      "干旱/水风险",
-      0.6690711611607274
+      "干旱与水风险",
+      0.6743626412096319
     ],
     [
-      "NDC/COP/谈判",
-      "石油/天然气/化石能源",
-      0.571207020648833
+      "石油、天然气与化石能源",
+      "国际谈判",
+      0.5553904887952913
     ],
     [
-      "数能/AI/数据中心",
-      "石油/天然气/化石能源",
+      "气候资金",
+      "国际谈判",
+      0.5510026722402143
+    ],
+    [
+      "数字能源、AI与数据中心",
+      "石油、天然气与化石能源",
       0.4180651076016425
     ],
     [
-      "数能/AI/数据中心",
-      "新能源/清洁能源",
+      "数字能源、AI与数据中心",
+      "新能源与清洁能源",
       0.3744409787184831
     ],
     [
-      "石油/天然气/化石能源",
-      "洪水/强降雨",
+      "石油、天然气与化石能源",
+      "洪水与强降雨",
       0.3298385464599482
     ],
     [
-      "气候资金",
-      "石油/天然气/化石能源",
-      0.2747999247946484
+      "综合气候政策",
+      "新能源与清洁能源",
+      0.29672160828146776
     ],
     [
-      "综合气候政策",
-      "新能源/清洁能源",
-      0.2730252464356273
+      "气候资金",
+      "石油、天然气与化石能源",
+      0.2747999247946484
     ]
+  ],
+  "momentum": [
+    {
+      "group": "国际谈判",
+      "recent_share": 13.074204946996467,
+      "delta_pp": 7.3599192327107525,
+      "total": 641
+    },
+    {
+      "group": "数字能源、AI与数据中心",
+      "recent_share": 18.84570082449941,
+      "delta_pp": 3.1490517945170478,
+      "total": 1484
+    },
+    {
+      "group": "石油、天然气与化石能源",
+      "recent_share": 11.464468001570475,
+      "delta_pp": 1.9406584777609517,
+      "total": 863
+    },
+    {
+      "group": "新能源与清洁能源",
+      "recent_share": 16.607773851590103,
+      "delta_pp": 1.7576856681685857,
+      "total": 1449
+    },
+    {
+      "group": "气候资金",
+      "recent_share": 16.29367883784845,
+      "delta_pp": 1.4435906544269326,
+      "total": 1367
+    },
+    {
+      "group": "洪水与强降雨",
+      "recent_share": 10.05104043973302,
+      "delta_pp": -0.21350982481724579,
+      "total": 862
+    },
+    {
+      "group": "干旱与水风险",
+      "recent_share": 6.792304672163329,
+      "delta_pp": -1.214750001558011,
+      "total": 703
+    },
+    {
+      "group": "综合气候政策",
+      "recent_share": 17.23596387907342,
+      "delta_pp": -4.633524657081782,
+      "total": 1806
+    }
   ],
   "global_quarter_keywords": [
     {
-      "quarter": "2021Q3",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "records": 0,
-      "top_keywords": "无语料覆盖"
-    },
-    {
       "quarter": "2023Q3",
       "records": 461,
-      "top_keywords": "综合气候政策(108)；新能源/清洁能源(85)；数能/AI/数据中心(80)；气候资金(55)；石油/天然气/化石能源(49)"
+      "top_keywords": "综合气候政策（109）；新能源与清洁能源（85）；数字能源、AI与数据中心（80）；气候资金（55）；石油、天然气与化石能源（49）"
     },
     {
       "quarter": "2023Q4",
       "records": 713,
-      "top_keywords": "气候资金(159)；综合气候政策(151)；NDC/COP/谈判(133)；新能源/清洁能源(109)；数能/AI/数据中心(101)"
+      "top_keywords": "气候资金（159）；综合气候政策（152）；新能源与清洁能源（109）；数字能源、AI与数据中心（101）；联合国气候大会（93）"
     },
     {
       "quarter": "2024Q1",
       "records": 705,
-      "top_keywords": "综合气候政策(180)；新能源/清洁能源(156)；数能/AI/数据中心(107)；气候资金(86)；干旱/水风险(67)"
+      "top_keywords": "综合气候政策（179）；新能源与清洁能源（156）；数字能源、AI与数据中心（107）；气候资金（86）；干旱与水风险（67）"
     },
     {
       "quarter": "2024Q2",
       "records": 709,
-      "top_keywords": "综合气候政策(158)；新能源/清洁能源(135)；数能/AI/数据中心(134)；气候资金(112)；干旱/水风险(70)"
+      "top_keywords": "综合气候政策（160）；新能源与清洁能源（135）；数字能源、AI与数据中心（134）；气候资金（112）；干旱与水风险（70）"
     },
     {
       "quarter": "2024Q3",
       "records": 713,
-      "top_keywords": "综合气候政策(146)；数能/AI/数据中心(137)；新能源/清洁能源(120)；气候资金(119)；干旱/水风险(71)"
+      "top_keywords": "综合气候政策（147）；数字能源、AI与数据中心（137）；新能源与清洁能源（120）；气候资金（119）；干旱与水风险（71）"
     },
     {
       "quarter": "2024Q4",
       "records": 721,
-      "top_keywords": "综合气候政策(167)；气候资金(133)；数能/AI/数据中心(119)；新能源/清洁能源(116)；NDC/COP/谈判(110)"
+      "top_keywords": "综合气候政策（166）；气候资金（133）；数字能源、AI与数据中心（119）；新能源与清洁能源（116）；石油、天然气与化石能源（75）"
     },
     {
       "quarter": "2025Q1",
       "records": 703,
-      "top_keywords": "综合气候政策(154)；新能源/清洁能源(116)；数能/AI/数据中心(113)；气候资金(91)；洪水/强降雨(73)"
+      "top_keywords": "综合气候政策（153）；新能源与清洁能源（116）；数字能源、AI与数据中心（113）；气候资金（91）；洪水与强降雨（73）"
     },
     {
       "quarter": "2025Q2",
       "records": 698,
-      "top_keywords": "综合气候政策(147)；新能源/清洁能源(105)；数能/AI/数据中心(99)；气候资金(98)；洪水/强降雨(80)"
+      "top_keywords": "综合气候政策（148）；新能源与清洁能源（105）；数字能源、AI与数据中心（99）；气候资金（98）；洪水与强降雨（80）"
     },
     {
       "quarter": "2025Q3",
       "records": 713,
-      "top_keywords": "综合气候政策(158)；数能/AI/数据中心(114)；气候资金(99)；NDC/COP/谈判(87)；新能源/清洁能源(84)"
+      "top_keywords": "综合气候政策（153）；数字能源、AI与数据中心（114）；气候资金（99）；新能源与清洁能源（84）；野火与森林火灾（77）"
     },
     {
       "quarter": "2025Q4",
       "records": 721,
-      "top_keywords": "NDC/COP/谈判(239)；气候资金(149)；数能/AI/数据中心(134)；综合气候政策(108)；石油/天然气/化石能源(86)"
+      "top_keywords": "国际谈判（193）；联合国气候大会（170）；气候资金（149）；数字能源、AI与数据中心（134）；综合气候政策（110）"
     },
     {
       "quarter": "2026Q1",
       "records": 730,
-      "top_keywords": "综合气候政策(169)；新能源/清洁能源(142)；数能/AI/数据中心(112)；气候资金(96)；洪水/强降雨(76)"
+      "top_keywords": "综合气候政策（171）；新能源与清洁能源（142）；数字能源、AI与数据中心（112）；气候资金（96）；洪水与强降雨（76）"
     },
     {
       "quarter": "2026Q2",
       "records": 719,
-      "top_keywords": "气候资金(127)；数能/AI/数据中心(126)；新能源/清洁能源(114)；NDC/COP/谈判(110)；综合气候政策(98)"
+      "top_keywords": "气候资金（127）；数字能源、AI与数据中心（126）；新能源与清洁能源（114）；综合气候政策（100）；石油、天然气与化石能源（89）"
     },
     {
       "quarter": "2026Q3",
       "records": 377,
-      "top_keywords": "数能/AI/数据中心(108)；新能源/清洁能源(82)；综合气候政策(58)；石油/天然气/化石能源(48)；洪水/强降雨(45)"
+      "top_keywords": "数字能源、AI与数据中心（108）；新能源与清洁能源（82）；综合气候政策（58）；石油、天然气与化石能源（48）；洪水与强降雨（45）"
+    }
+  ],
+  "continent_summary": [
+    {
+      "continent": "亚洲",
+      "records": 1283,
+      "share": "14.6%",
+      "top_keywords": "综合气候政策（353）；数字能源、AI与数据中心（215）；新能源与清洁能源（212）"
+    },
+    {
+      "continent": "北美洲",
+      "records": 927,
+      "share": "10.5%",
+      "top_keywords": "野火与森林火灾（189）；新能源与清洁能源（175）；综合气候政策（172）"
+    },
+    {
+      "continent": "欧洲",
+      "records": 687,
+      "share": "7.8%",
+      "top_keywords": "数字能源、AI与数据中心（142）；新能源与清洁能源（119）；综合气候政策（110）"
+    },
+    {
+      "continent": "非洲",
+      "records": 382,
+      "share": "4.3%",
+      "top_keywords": "气候资金（111）；数字能源、AI与数据中心（78）；国际谈判（64）"
+    },
+    {
+      "continent": "南美洲",
+      "records": 195,
+      "share": "2.2%",
+      "top_keywords": "干旱与水风险（48）；数字能源、AI与数据中心（40）；国际谈判（34）"
+    },
+    {
+      "continent": "大洋洲",
+      "records": 120,
+      "share": "1.4%",
+      "top_keywords": "气候资金（26）；综合气候政策（23）；新能源与清洁能源（18）"
+    },
+    {
+      "continent": "南极洲",
+      "records": 7,
+      "share": "0.1%",
+      "top_keywords": "综合气候政策（5）；数字能源、AI与数据中心（1）；新能源与清洁能源（1）"
+    },
+    {
+      "continent": "全球未标注",
+      "records": 5188,
+      "share": "59.0%",
+      "top_keywords": "综合气候政策（1086）；气候资金（891）；数字能源、AI与数据中心（882）"
     }
   ],
   "continent_quarter_keywords": [
     {
-      "quarter": "2021Q3",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q3",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q3",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q3",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q3",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q3",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q3",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q3",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2021Q4",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q1",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q2",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q3",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2022Q4",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q1",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "亚洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "北美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "欧洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "非洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "南美洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "大洋洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "南极洲",
-      "top_keywords": "无语料覆盖"
-    },
-    {
-      "quarter": "2023Q2",
-      "continent": "全球/未标注",
-      "top_keywords": "无语料覆盖"
-    },
-    {
       "quarter": "2023Q3",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(24)；新能源/清洁能源(10)；洪水/强降雨(8)"
+      "top_keywords": "综合气候政策（23）；新能源与清洁能源（10）；洪水与强降雨（8）"
     },
     {
       "quarter": "2023Q3",
       "continent": "北美洲",
-      "top_keywords": "野火/森林火灾(15)；综合气候政策(9)；干旱/水风险(8)"
+      "top_keywords": "野火与森林火灾（15）；综合气候政策（9）；干旱与水风险（8）"
     },
     {
       "quarter": "2023Q3",
       "continent": "欧洲",
-      "top_keywords": "数能/AI/数据中心(6)；新能源/清洁能源(6)；石油/天然气/化石能源(5)"
+      "top_keywords": "数字能源、AI与数据中心（6）；新能源与清洁能源（6）；石油、天然气与化石能源（5）"
     },
     {
       "quarter": "2023Q3",
       "continent": "非洲",
-      "top_keywords": "NDC/COP/谈判(20)；数能/AI/数据中心(10)；气候资金(7)"
+      "top_keywords": "联合国气候大会（19）；国际谈判（18）；数字能源、AI与数据中心（10）"
     },
     {
       "quarter": "2023Q3",
       "continent": "南美洲",
-      "top_keywords": "新能源/清洁能源(2)；干旱/水风险(1)；气候资金(1)"
+      "top_keywords": "新能源与清洁能源（2）；干旱与水风险（1）；气候资金（1）"
     },
     {
       "quarter": "2023Q3",
       "continent": "大洋洲",
-      "top_keywords": "气候资金(3)；数能/AI/数据中心(2)"
+      "top_keywords": "气候资金（3）；数字能源、AI与数据中心（2）"
     },
     {
       "quarter": "2023Q3",
       "continent": "南极洲",
-      "top_keywords": "综合气候政策(1)"
+      "top_keywords": "综合气候政策（1）"
     },
     {
       "quarter": "2023Q3",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(67)；新能源/清洁能源(60)；数能/AI/数据中心(53)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（69）；新能源与清洁能源（60）；数字能源、AI与数据中心（53）"
     },
     {
       "quarter": "2023Q4",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(28)；数能/AI/数据中心(22)；NDC/COP/谈判(18)"
+      "top_keywords": "综合气候政策（28）；数字能源、AI与数据中心（22）；气候资金（17）"
     },
     {
       "quarter": "2023Q4",
       "continent": "北美洲",
-      "top_keywords": "野火/森林火灾(12)；综合气候政策(10)；新能源/清洁能源(9)"
+      "top_keywords": "野火与森林火灾（12）；综合气候政策（10）；新能源与清洁能源（9）"
     },
     {
       "quarter": "2023Q4",
       "continent": "欧洲",
-      "top_keywords": "气候资金(16)；NDC/COP/谈判(12)；新能源/清洁能源(11)"
+      "top_keywords": "气候资金（16）；新能源与清洁能源（11）；石油、天然气与化石能源（10）"
     },
     {
       "quarter": "2023Q4",
       "continent": "非洲",
-      "top_keywords": "气候资金(14)；NDC/COP/谈判(7)；综合气候政策(6)"
+      "top_keywords": "气候资金（14）；联合国气候大会（7）；综合气候政策（6）"
     },
     {
       "quarter": "2023Q4",
       "continent": "南美洲",
-      "top_keywords": "干旱/水风险(13)；新能源/清洁能源(5)；数能/AI/数据中心(2)"
+      "top_keywords": "干旱与水风险（13）；新能源与清洁能源（5）；数字能源、AI与数据中心（2）"
     },
     {
       "quarter": "2023Q4",
       "continent": "大洋洲",
-      "top_keywords": "气候资金(5)；新能源/清洁能源(4)；综合气候政策(3)"
+      "top_keywords": "气候资金（5）；新能源与清洁能源（4）；综合气候政策（3）"
     },
     {
       "quarter": "2023Q4",
       "continent": "南极洲",
-      "top_keywords": "数能/AI/数据中心(1)"
+      "top_keywords": "数字能源、AI与数据中心（1）"
     },
     {
       "quarter": "2023Q4",
-      "continent": "全球/未标注",
-      "top_keywords": "气候资金(103)；综合气候政策(100)；NDC/COP/谈判(94)"
+      "continent": "全球未标注",
+      "top_keywords": "气候资金（103）；综合气候政策（101）；新能源与清洁能源（74）"
     },
     {
       "quarter": "2024Q1",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(20)；新能源/清洁能源(15)；数能/AI/数据中心(11)"
+      "top_keywords": "综合气候政策（21）；新能源与清洁能源（15）；数字能源、AI与数据中心（11）"
     },
     {
       "quarter": "2024Q1",
       "continent": "北美洲",
-      "top_keywords": "新能源/清洁能源(23)；综合气候政策(18)；野火/森林火灾(11)"
+      "top_keywords": "新能源与清洁能源（23）；综合气候政策（18）；野火与森林火灾（11）"
     },
     {
       "quarter": "2024Q1",
       "continent": "欧洲",
-      "top_keywords": "新能源/清洁能源(12)；综合气候政策(11)；数能/AI/数据中心(10)"
+      "top_keywords": "新能源与清洁能源（12）；综合气候政策（11）；数字能源、AI与数据中心（10）"
     },
     {
       "quarter": "2024Q1",
       "continent": "非洲",
-      "top_keywords": "气候资金(12)；数能/AI/数据中心(5)；综合气候政策(5)"
+      "top_keywords": "气候资金（12）；数字能源、AI与数据中心（5）；综合气候政策（5）"
     },
     {
       "quarter": "2024Q1",
       "continent": "南美洲",
-      "top_keywords": "干旱/水风险(10)；野火/森林火灾(8)；数能/AI/数据中心(5)"
+      "top_keywords": "干旱与水风险（10）；野火与森林火灾（8）；数字能源、AI与数据中心（5）"
     },
     {
       "quarter": "2024Q1",
       "continent": "大洋洲",
-      "top_keywords": "新能源/清洁能源(2)；洪水/强降雨(2)；高温/热浪(1)"
+      "top_keywords": "新能源与清洁能源（2）；洪水与强降雨（2）；高温与热浪（1）"
     },
     {
       "quarter": "2024Q1",
-      "continent": "南极洲",
-      "top_keywords": "无明确样本"
-    },
-    {
-      "quarter": "2024Q1",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(125)；新能源/清洁能源(98)；数能/AI/数据中心(70)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（124）；新能源与清洁能源（98）；数字能源、AI与数据中心（70）"
     },
     {
       "quarter": "2024Q2",
       "continent": "亚洲",
-      "top_keywords": "数能/AI/数据中心(16)；综合气候政策(16)；气候资金(14)"
+      "top_keywords": "数字能源、AI与数据中心（16）；综合气候政策（16）；气候资金（14）"
     },
     {
       "quarter": "2024Q2",
       "continent": "北美洲",
-      "top_keywords": "野火/森林火灾(24)；综合气候政策(16)；新能源/清洁能源(16)"
+      "top_keywords": "野火与森林火灾（24）；综合气候政策（17）；新能源与清洁能源（16）"
     },
     {
       "quarter": "2024Q2",
       "continent": "欧洲",
-      "top_keywords": "综合气候政策(14)；数能/AI/数据中心(12)；新能源/清洁能源(11)"
+      "top_keywords": "综合气候政策（14）；数字能源、AI与数据中心（12）；新能源与清洁能源（11）"
     },
     {
       "quarter": "2024Q2",
       "continent": "非洲",
-      "top_keywords": "气候资金(6)；综合气候政策(5)；碳市场/碳价(5)"
+      "top_keywords": "气候资金（6）；综合气候政策（5）；碳市场与碳价（5）"
     },
     {
       "quarter": "2024Q2",
       "continent": "南美洲",
-      "top_keywords": "干旱/水风险(4)；新能源/清洁能源(3)；NDC/COP/谈判(3)"
+      "top_keywords": "干旱与水风险（4）；新能源与清洁能源（3）；洪水与强降雨（2）"
     },
     {
       "quarter": "2024Q2",
       "continent": "大洋洲",
-      "top_keywords": "干旱/水风险(4)；数能/AI/数据中心(2)；综合气候政策(2)"
+      "top_keywords": "干旱与水风险（4）；数字能源、AI与数据中心（2）；综合气候政策（2）"
     },
     {
       "quarter": "2024Q2",
-      "continent": "南极洲",
-      "top_keywords": "无明确样本"
-    },
-    {
-      "quarter": "2024Q2",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(108)；数能/AI/数据中心(91)；新能源/清洁能源(90)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（109）；数字能源、AI与数据中心（91）；新能源与清洁能源（90）"
     },
     {
       "quarter": "2024Q3",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(32)；新能源/清洁能源(16)；气候资金(15)"
+      "top_keywords": "综合气候政策（32）；新能源与清洁能源（16）；气候资金（15）"
     },
     {
       "quarter": "2024Q3",
       "continent": "北美洲",
-      "top_keywords": "野火/森林火灾(26)；综合气候政策(16)；数能/AI/数据中心(12)"
+      "top_keywords": "野火与森林火灾（26）；综合气候政策（16）；数字能源、AI与数据中心（12）"
     },
     {
       "quarter": "2024Q3",
       "continent": "欧洲",
-      "top_keywords": "洪水/强降雨(7)；气候资金(7)；新能源/清洁能源(7)"
+      "top_keywords": "洪水与强降雨（7）；气候资金（7）；新能源与清洁能源（7）"
     },
     {
       "quarter": "2024Q3",
       "continent": "非洲",
-      "top_keywords": "干旱/水风险(11)；数能/AI/数据中心(8)；综合气候政策(6)"
+      "top_keywords": "干旱与水风险（11）；数字能源、AI与数据中心（8）；综合气候政策（6）"
     },
     {
       "quarter": "2024Q3",
       "continent": "南美洲",
-      "top_keywords": "新能源/清洁能源(8)；数能/AI/数据中心(7)；干旱/水风险(5)"
+      "top_keywords": "新能源与清洁能源（8）；数字能源、AI与数据中心（7）；干旱与水风险（5）"
     },
     {
       "quarter": "2024Q3",
       "continent": "大洋洲",
-      "top_keywords": "石油/天然气/化石能源(6)；数能/AI/数据中心(3)；新能源/清洁能源(1)"
+      "top_keywords": "石油、天然气与化石能源（6）；数字能源、AI与数据中心（3）；新能源与清洁能源（1）"
     },
     {
       "quarter": "2024Q3",
       "continent": "南极洲",
-      "top_keywords": "综合气候政策(1)"
+      "top_keywords": "综合气候政策（1）"
     },
     {
       "quarter": "2024Q3",
-      "continent": "全球/未标注",
-      "top_keywords": "数能/AI/数据中心(89)；气候资金(86)；综合气候政策(85)"
+      "continent": "全球未标注",
+      "top_keywords": "数字能源、AI与数据中心（89）；气候资金（86）；综合气候政策（86）"
     },
     {
       "quarter": "2024Q4",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(39)；数能/AI/数据中心(13)；气候资金(12)"
+      "top_keywords": "综合气候政策（39）；数字能源、AI与数据中心（13）；气候资金（12）"
     },
     {
       "quarter": "2024Q4",
       "continent": "北美洲",
-      "top_keywords": "综合气候政策(16)；新能源/清洁能源(15)；野火/森林火灾(9)"
+      "top_keywords": "综合气候政策（17）；新能源与清洁能源（15）；野火与森林火灾（11）"
     },
     {
       "quarter": "2024Q4",
       "continent": "欧洲",
-      "top_keywords": "洪水/强降雨(18)；数能/AI/数据中心(16)；石油/天然气/化石能源(8)"
+      "top_keywords": "洪水与强降雨（18）；数字能源、AI与数据中心（16）；石油、天然气与化石能源（8）"
     },
     {
       "quarter": "2024Q4",
       "continent": "非洲",
-      "top_keywords": "气候资金(11)；数能/AI/数据中心(8)；NDC/COP/谈判(6)"
+      "top_keywords": "气候资金（11）；数字能源、AI与数据中心（8）；干旱与水风险（4）"
     },
     {
       "quarter": "2024Q4",
       "continent": "南美洲",
-      "top_keywords": "干旱/水风险(7)；数能/AI/数据中心(2)；NDC/COP/谈判(2)"
+      "top_keywords": "干旱与水风险（7）；数字能源、AI与数据中心（2）；国际谈判（2）"
     },
     {
       "quarter": "2024Q4",
       "continent": "大洋洲",
-      "top_keywords": "气候资金(6)；NDC/COP/谈判(4)；数能/AI/数据中心(2)"
+      "top_keywords": "气候资金（6）；联合国气候大会（3）；数字能源、AI与数据中心（2）"
     },
     {
       "quarter": "2024Q4",
-      "continent": "南极洲",
-      "top_keywords": "无明确样本"
-    },
-    {
-      "quarter": "2024Q4",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(99)；气候资金(93)；新能源/清洁能源(80)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（98）；气候资金（93）；新能源与清洁能源（80）"
     },
     {
       "quarter": "2025Q1",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(24)；新能源/清洁能源(22)；碳市场/碳价(21)"
+      "top_keywords": "综合气候政策（23）；新能源与清洁能源（22）；碳市场与碳价（21）"
     },
     {
       "quarter": "2025Q1",
       "continent": "北美洲",
-      "top_keywords": "石油/天然气/化石能源(17)；野火/森林火灾(16)；气候资金(15)"
+      "top_keywords": "石油、天然气与化石能源（17）；野火与森林火灾（16）；气候资金（15）"
     },
     {
       "quarter": "2025Q1",
       "continent": "欧洲",
-      "top_keywords": "新能源/清洁能源(12)；综合气候政策(11)；气候资金(10)"
+      "top_keywords": "新能源与清洁能源（12）；综合气候政策（11）；气候资金（10）"
     },
     {
       "quarter": "2025Q1",
       "continent": "非洲",
-      "top_keywords": "新能源/清洁能源(5)；气候资金(5)；干旱/水风险(4)"
+      "top_keywords": "新能源与清洁能源（5）；气候资金（5）；干旱与水风险（4）"
     },
     {
       "quarter": "2025Q1",
       "continent": "南美洲",
-      "top_keywords": "综合气候政策(4)；NDC/COP/谈判(4)；碳市场/碳价(2)"
+      "top_keywords": "综合气候政策（4）；联合国气候大会（4）；国际谈判（4）"
     },
     {
       "quarter": "2025Q1",
       "continent": "大洋洲",
-      "top_keywords": "洪水/强降雨(2)；综合气候政策(1)；野火/森林火灾(1)"
+      "top_keywords": "洪水与强降雨（2）；综合气候政策（1）；野火与森林火灾（1）"
     },
     {
       "quarter": "2025Q1",
       "continent": "南极洲",
-      "top_keywords": "综合气候政策(1)"
+      "top_keywords": "综合气候政策（1）"
     },
     {
       "quarter": "2025Q1",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(99)；数能/AI/数据中心(77)；新能源/清洁能源(67)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（100）；数字能源、AI与数据中心（77）；新能源与清洁能源（67）"
     },
     {
       "quarter": "2025Q2",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(27)；数能/AI/数据中心(25)；洪水/强降雨(17)"
+      "top_keywords": "综合气候政策（28）；数字能源、AI与数据中心（25）；洪水与强降雨（17）"
     },
     {
       "quarter": "2025Q2",
       "continent": "北美洲",
-      "top_keywords": "新能源/清洁能源(24)；综合气候政策(14)；野火/森林火灾(11)"
+      "top_keywords": "新能源与清洁能源（24）；综合气候政策（14）；野火与森林火灾（11）"
     },
     {
       "quarter": "2025Q2",
       "continent": "欧洲",
-      "top_keywords": "综合气候政策(12)；新能源/清洁能源(8)；干旱/水风险(8)"
+      "top_keywords": "综合气候政策（12）；新能源与清洁能源（8）；干旱与水风险（8）"
     },
     {
       "quarter": "2025Q2",
       "continent": "非洲",
-      "top_keywords": "NDC/COP/谈判(5)；气候资金(5)；综合气候政策(5)"
+      "top_keywords": "气候资金（5）；洪水与强降雨（4）；碳市场与碳价（4）"
     },
     {
       "quarter": "2025Q2",
       "continent": "南美洲",
-      "top_keywords": "NDC/COP/谈判(6)；石油/天然气/化石能源(2)；干旱/水风险(2)"
+      "top_keywords": "国际谈判（5）；联合国气候大会（4）；石油、天然气与化石能源（2）"
     },
     {
       "quarter": "2025Q2",
       "continent": "大洋洲",
-      "top_keywords": "洪水/强降雨(3)；综合气候政策(3)；干旱/水风险(2)"
+      "top_keywords": "洪水与强降雨（3）；综合气候政策（2）；干旱与水风险（2）"
     },
     {
       "quarter": "2025Q2",
-      "continent": "南极洲",
-      "top_keywords": "无明确样本"
-    },
-    {
-      "quarter": "2025Q2",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(85)；气候资金(74)；数能/AI/数据中心(54)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（87）；气候资金（74）；数字能源、AI与数据中心（54）"
     },
     {
       "quarter": "2025Q3",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(43)；洪水/强降雨(29)；数能/AI/数据中心(15)"
+      "top_keywords": "综合气候政策（40）；洪水与强降雨（29）；数字能源、AI与数据中心（15）"
     },
     {
       "quarter": "2025Q3",
       "continent": "北美洲",
-      "top_keywords": "野火/森林火灾(19)；石油/天然气/化石能源(15)；综合气候政策(14)"
+      "top_keywords": "野火与森林火灾（19）；石油、天然气与化石能源（15）；综合气候政策（14）"
     },
     {
       "quarter": "2025Q3",
       "continent": "欧洲",
-      "top_keywords": "野火/森林火灾(30)；数能/AI/数据中心(20)；NDC/COP/谈判(11)"
+      "top_keywords": "野火与森林火灾（30）；数字能源、AI与数据中心（20）；高温与热浪（11）"
     },
     {
       "quarter": "2025Q3",
       "continent": "非洲",
-      "top_keywords": "NDC/COP/谈判(20)；气候资金(14)；综合气候政策(8)"
+      "top_keywords": "联合国气候大会（19）；国际谈判（19）；气候资金（14）"
     },
     {
       "quarter": "2025Q3",
       "continent": "南美洲",
-      "top_keywords": "NDC/COP/谈判(5)；气候资金(5)；数能/AI/数据中心(4)"
+      "top_keywords": "气候资金（5）；联合国气候大会（4）；国际谈判（4）"
     },
     {
       "quarter": "2025Q3",
       "continent": "大洋洲",
-      "top_keywords": "综合气候政策(6)；NDC/COP/谈判(3)；气候资金(2)"
+      "top_keywords": "综合气候政策（6）；气候资金（2）；国际谈判（2）"
     },
     {
       "quarter": "2025Q3",
-      "continent": "南极洲",
-      "top_keywords": "无明确样本"
-    },
-    {
-      "quarter": "2025Q3",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(77)；数能/AI/数据中心(59)；气候资金(58)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（76）；数字能源、AI与数据中心（59）；气候资金（58）"
     },
     {
       "quarter": "2025Q4",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(27)；NDC/COP/谈判(26)；气候资金(25)"
+      "top_keywords": "综合气候政策（28）；气候资金（25）；国际谈判（21）"
     },
     {
       "quarter": "2025Q4",
       "continent": "北美洲",
-      "top_keywords": "数能/AI/数据中心(15)；气候资金(14)；新能源/清洁能源(12)"
+      "top_keywords": "数字能源、AI与数据中心（15）；气候资金（14）；新能源与清洁能源（12）"
     },
     {
       "quarter": "2025Q4",
       "continent": "欧洲",
-      "top_keywords": "NDC/COP/谈判(16)；碳市场/碳价(15)；综合气候政策(10)"
+      "top_keywords": "国际谈判（16）；碳市场与碳价（15）；联合国气候大会（14）"
     },
     {
       "quarter": "2025Q4",
       "continent": "非洲",
-      "top_keywords": "NDC/COP/谈判(11)；气候资金(9)；数能/AI/数据中心(4)"
+      "top_keywords": "气候资金（9）；联合国气候大会（6）；国际谈判（6）"
     },
     {
       "quarter": "2025Q4",
       "continent": "南美洲",
-      "top_keywords": "NDC/COP/谈判(17)；石油/天然气/化石能源(5)；数能/AI/数据中心(4)"
+      "top_keywords": "联合国气候大会（14）；国际谈判（14）；石油、天然气与化石能源（5）"
     },
     {
       "quarter": "2025Q4",
       "continent": "大洋洲",
-      "top_keywords": "NDC/COP/谈判(3)；洪水/强降雨(2)；数能/AI/数据中心(2)"
+      "top_keywords": "洪水与强降雨（2）；数字能源、AI与数据中心（2）；国际谈判（2）"
     },
     {
       "quarter": "2025Q4",
       "continent": "南极洲",
-      "top_keywords": "综合气候政策(1)"
+      "top_keywords": "综合气候政策（1）"
     },
     {
       "quarter": "2025Q4",
-      "continent": "全球/未标注",
-      "top_keywords": "NDC/COP/谈判(165)；气候资金(89)；数能/AI/数据中心(80)"
+      "continent": "全球未标注",
+      "top_keywords": "国际谈判（135）；联合国气候大会（118）；气候资金（89）"
     },
     {
       "quarter": "2026Q1",
       "continent": "亚洲",
-      "top_keywords": "综合气候政策(47)；新能源/清洁能源(30)；NDC/COP/谈判(19)"
+      "top_keywords": "综合气候政策（46）；新能源与清洁能源（30）；国家气候承诺（16）"
     },
     {
       "quarter": "2026Q1",
       "continent": "北美洲",
-      "top_keywords": "综合气候政策(24)；新能源/清洁能源(18)；干旱/水风险(11)"
+      "top_keywords": "综合气候政策（25）；新能源与清洁能源（18）；干旱与水风险（11）"
     },
     {
       "quarter": "2026Q1",
       "continent": "欧洲",
-      "top_keywords": "新能源/清洁能源(12)；综合气候政策(10)；数能/AI/数据中心(9)"
+      "top_keywords": "新能源与清洁能源（12）；综合气候政策（10）；数字能源、AI与数据中心（9）"
     },
     {
       "quarter": "2026Q1",
       "continent": "非洲",
-      "top_keywords": "气候资金(11)；数能/AI/数据中心(9)；干旱/水风险(7)"
+      "top_keywords": "气候资金（11）；数字能源、AI与数据中心（9）；干旱与水风险（7）"
     },
     {
       "quarter": "2026Q1",
       "continent": "南美洲",
-      "top_keywords": "石油/天然气/化石能源(2)；洪水/强降雨(2)；野火/森林火灾(2)"
+      "top_keywords": "石油、天然气与化石能源（2）；洪水与强降雨（2）；野火与森林火灾（2）"
     },
     {
       "quarter": "2026Q1",
       "continent": "大洋洲",
-      "top_keywords": "NDC/COP/谈判(5)；气候资金(2)；碳市场/碳价(2)"
+      "top_keywords": "国际谈判（5）；气候资金（2）；联合国气候大会（2）"
     },
     {
       "quarter": "2026Q1",
-      "continent": "南极洲",
-      "top_keywords": "无明确样本"
-    },
-    {
-      "quarter": "2026Q1",
-      "continent": "全球/未标注",
-      "top_keywords": "综合气候政策(87)；新能源/清洁能源(77)；数能/AI/数据中心(69)"
+      "continent": "全球未标注",
+      "top_keywords": "综合气候政策（89）；新能源与清洁能源（77）；数字能源、AI与数据中心（69）"
     },
     {
       "quarter": "2026Q2",
       "continent": "亚洲",
-      "top_keywords": "NDC/COP/谈判(26)；气候资金(22)；数能/AI/数据中心(20)"
+      "top_keywords": "气候资金（22）；数字能源、AI与数据中心（20）；综合气候政策（20）"
     },
     {
       "quarter": "2026Q2",
       "continent": "北美洲",
-      "top_keywords": "数能/AI/数据中心(20)；野火/森林火灾(20)；新能源/清洁能源(16)"
+      "top_keywords": "数字能源、AI与数据中心（20）；野火与森林火灾（20）；新能源与清洁能源（16）"
     },
     {
       "quarter": "2026Q2",
       "continent": "欧洲",
-      "top_keywords": "碳市场/碳价(15)；综合气候政策(11)；新能源/清洁能源(10)"
+      "top_keywords": "碳市场与碳价（15）；综合气候政策（11）；新能源与清洁能源（10）"
     },
     {
       "quarter": "2026Q2",
       "continent": "非洲",
-      "top_keywords": "气候资金(9)；数能/AI/数据中心(9)；NDC/COP/谈判(8)"
+      "top_keywords": "气候资金（9）；数字能源、AI与数据中心（9）；国际谈判（5）"
     },
     {
       "quarter": "2026Q2",
       "continent": "南美洲",
-      "top_keywords": "碳市场/碳价(4)；石油/天然气/化石能源(4)；数能/AI/数据中心(2)"
+      "top_keywords": "碳市场与碳价（4）；石油、天然气与化石能源（4）；数字能源、AI与数据中心（2）"
     },
     {
       "quarter": "2026Q2",
       "continent": "大洋洲",
-      "top_keywords": "新能源/清洁能源(4)；气候资金(2)；储能/电池/电网(1)"
+      "top_keywords": "新能源与清洁能源（4）；气候资金（2）；储能、电池与电网（1）"
     },
     {
       "quarter": "2026Q2",
       "continent": "南极洲",
-      "top_keywords": "综合气候政策(1)"
+      "top_keywords": "综合气候政策（1）"
     },
     {
       "quarter": "2026Q2",
-      "continent": "全球/未标注",
-      "top_keywords": "气候资金(81)；NDC/COP/谈判(72)；数能/AI/数据中心(68)"
+      "continent": "全球未标注",
+      "top_keywords": "气候资金（81）；数字能源、AI与数据中心（68）；新能源与清洁能源（64）"
     },
     {
       "quarter": "2026Q3",
       "continent": "亚洲",
-      "top_keywords": "新能源/清洁能源(29)；数能/AI/数据中心(18)；洪水/强降雨(14)"
+      "top_keywords": "新能源与清洁能源（29）；数字能源、AI与数据中心（18）；洪水与强降雨（14）"
     },
     {
       "quarter": "2026Q3",
       "continent": "北美洲",
-      "top_keywords": "数能/AI/数据中心(14)；新能源/清洁能源(10)；野火/森林火灾(9)"
+      "top_keywords": "数字能源、AI与数据中心（14）；新能源与清洁能源（10）；野火与森林火灾（9）"
     },
     {
       "quarter": "2026Q3",
       "continent": "欧洲",
-      "top_keywords": "数能/AI/数据中心(29)；野火/森林火灾(21)；高温/热浪(12)"
+      "top_keywords": "数字能源、AI与数据中心（29）；野火与森林火灾（21）；高温与热浪（12）"
     },
     {
       "quarter": "2026Q3",
       "continent": "非洲",
-      "top_keywords": "数能/AI/数据中心(8)；新能源/清洁能源(4)；气候资金(4)"
+      "top_keywords": "数字能源、AI与数据中心（8）；新能源与清洁能源（4）；气候资金（4）"
     },
     {
       "quarter": "2026Q3",
       "continent": "南美洲",
-      "top_keywords": "数能/AI/数据中心(6)；综合气候政策(4)；NDC/COP/谈判(2)"
+      "top_keywords": "数字能源、AI与数据中心（6）；综合气候政策（4）；石油、天然气与化石能源（2）"
     },
     {
       "quarter": "2026Q3",
       "continent": "大洋洲",
-      "top_keywords": "综合气候政策(4)；新能源/清洁能源(3)；气候资金(3)"
+      "top_keywords": "综合气候政策（4）；新能源与清洁能源（3）；气候资金（3）"
     },
     {
       "quarter": "2026Q3",
       "continent": "南极洲",
-      "top_keywords": "新能源/清洁能源(1)"
+      "top_keywords": "新能源与清洁能源（1）"
     },
     {
       "quarter": "2026Q3",
-      "continent": "全球/未标注",
-      "top_keywords": "数能/AI/数据中心(39)；综合气候政策(33)；新能源/清洁能源(31)"
+      "continent": "全球未标注",
+      "top_keywords": "数字能源、AI与数据中心（39）；综合气候政策（33）；新能源与清洁能源（31）"
     }
   ]
 }
