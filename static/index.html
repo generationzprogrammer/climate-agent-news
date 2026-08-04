@@ -21,13 +21,14 @@
       <a href="#assistant">情报问答</a>
       <a href="#database">文本数据库</a>
     </nav>
+    <button class="mode-toggle" id="modeToggle" type="button">切换到能源技术</button>
     <a class="data-download" id="briefDownload" href="./data/daily_brief.pdf" download>下载今日简报</a>
   </header>
 
   <main id="top">
     <section class="section map-section map-section-lead" id="map">
       <div class="section-heading">
-        <div><p class="overline">GLOBAL CLIMATE SITUATION</p><h1>全球气候现场</h1></div>
+        <div><p class="overline" id="mapOverline">GLOBAL CLIMATE SITUATION</p><h1 id="mapTitle">全球气候现场</h1></div>
         <p id="mapRangeNote">中国位于地图中部偏右。红点表示所选时段内情报明确涉及的国家或地区；点击即可查看中文摘要与原文。</p>
       </div>
       <div class="map-layout">
@@ -50,9 +51,9 @@
 
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-copy">
-        <p class="overline">DAILY CLIMATE TEXT INTELLIGENCE</p>
+        <p class="overline" id="heroOverline">DAILY CLIMATE TEXT INTELLIGENCE</p>
         <h2 id="heroTitle">每天读懂全球气候变化<br><span>重点情报与文本数据库</span></h2>
-        <p class="hero-lede">从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。</p>
+        <p class="hero-lede" id="heroLede">从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。</p>
         <div class="update-line">
           <span class="live-dot" aria-hidden="true"></span>
           <b>每日 07:30 自动更新</b>
@@ -60,8 +61,8 @@
         </div>
       </div>
       <aside class="dataset-card" aria-label="数据集概览">
-        <p>CLIMATETEXT-8760</p>
-        <h2>每日气候文本档案</h2>
+        <p id="datasetName">CLIMATETEXT-8760</p>
+        <h2 id="datasetTitle">每日气候文本档案</h2>
         <dl>
           <div><dt>已归档文本</dt><dd><strong id="archiveTotal">—</strong><small>/ 8760</small></dd></div>
           <div><dt>今日重点情报</dt><dd><strong id="todayTotal">—</strong><small>条</small></dd></div>
@@ -73,7 +74,7 @@
 
     <section class="section" id="today">
       <div class="section-heading">
-        <div><p class="overline">DAILY SIGNALS</p><h2>今日重要气候情报</h2></div>
+        <div><p class="overline" id="todayOverline">DAILY SIGNALS</p><h2 id="todayTitle">今日重要气候情报</h2></div>
         <p id="dataNote">按发布时间和政策相关性整理；涉及重要数字时请点击原文核验。</p>
       </div>
       <div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
@@ -81,7 +82,7 @@
 
     <section class="section analytics-section" id="analytics">
       <div class="section-heading">
-        <div><p class="overline">CORPUS ANALYTICS</p><h2>语料库统计分析</h2></div>
+        <div><p class="overline">CORPUS ANALYTICS</p><h2 id="analyticsTitle">语料库统计分析</h2></div>
         <p>基于三年历史语料库生成的统计图表，展示时间频率、议题结构、国家/地区分布和国家—议题交叉关系；图表反映语料库样本分布，不等同于全球事件真实发生频率。</p>
       </div>
       <div class="analytics-kpis" id="analyticsKpis">
@@ -118,7 +119,7 @@
 
     <section class="section assistant-section" id="assistant">
       <div class="section-heading">
-        <div><p class="overline">GROUNDED CLIMATE Q&amp;A</p><h2>气候情报问答</h2></div>
+        <div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 id="assistantTitle">气候情报问答</h2></div>
         <p>先拆解时间、地区和议题，再生成简报、样本比较、时间线或政策含义；每项结论都回到站内证据。</p>
       </div>
       <div class="assistant-shell">
@@ -147,7 +148,7 @@
 
     <section class="section database-section" id="database">
       <div class="section-heading">
-        <div><p class="overline">TEXT DATABASE</p><h2>气候新闻文本数据库</h2></div>
+        <div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 id="databaseTitle">气候新闻文本数据库</h2></div>
         <p>滚动保存最多 8760 条中文气候新闻记录，可按关键词、议题或地域检索并回到原始来源。</p>
       </div>
       <div class="search-panel">
@@ -168,7 +169,7 @@
 
   <footer>
     <div><b>ClimateText Lab</b><span>国际气候情报与高质量中文文本数据库</span></div>
-    <div><a href="./data/daily_brief.pdf">下载今日简报</a><a href="./data/news_archive.json">开放数据</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
+    <div><a href="./data/daily_brief.pdf">下载今日简报</a><a href="./data/global_climate_analysis_report_latest.html">全球气候分析报告</a><a href="./data/news_archive.json">开放数据</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
   </footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./app.js?v=20260729-1" defer></script>

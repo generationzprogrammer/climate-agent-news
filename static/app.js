@@ -1,4 +1,5 @@
 const state = {
+  mode: "climate", datasets: {},
   dashboard: null, archive: null, analytics: null, filtered: [], visible: 18,
   mapPeriod: "today", mapTopology: null,
   assistant: { lastRecords: [], lastPlan: null },
@@ -54,6 +55,102 @@ async function fetchJson(url) {
   return response.json();
 }
 
+const MODE_COPY = {
+  climate: {
+    button: "切换到能源技术",
+    mapOverline: "GLOBAL CLIMATE SITUATION",
+    mapTitle: "全球气候现场",
+    heroOverline: "DAILY CLIMATE TEXT INTELLIGENCE",
+    heroTitle: "每天读懂全球气候变化<br><span>重点情报与文本数据库</span>",
+    heroLede: "从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。",
+    datasetName: "CLIMATETEXT-8760",
+    datasetTitle: "每日气候文本档案",
+    todayOverline: "DAILY SIGNALS",
+    todayTitle: "今日重要气候情报",
+    analyticsTitle: "语料库统计分析",
+    assistantOverline: "GROUNDED CLIMATE Q&A",
+    assistantTitle: "气候情报问答",
+    databaseOverline: "TEXT DATABASE",
+    databaseTitle: "气候新闻文本数据库",
+    downloadName: "国际气候情报今日简报",
+    quickPrompts: [
+      ["今日简报", "请给出今日简报"],
+      ["本周重点", "本周有哪些值得关注的气候情报？"],
+      ["本周中美比较", "比较本周中国与美国的重点气候情报"],
+      ["气候资金", "近期有哪些气候资金信息？"],
+    ],
+  },
+  energy: {
+    button: "切换到气候情报",
+    mapOverline: "GLOBAL ENERGY TECHNOLOGY SITUATION",
+    mapTitle: "全球能源技术现场",
+    heroOverline: "DAILY ENERGY TECHNOLOGY INTELLIGENCE",
+    heroTitle: "追踪能源转型与技术趋势<br><span>动态情报与文本数据库</span>",
+    heroLede: "从现有归档中筛选能源转型、能源技术趋势、数字能源、新型电力系统、储能、风光氢网等相关信息，保留来源、时间、地域与原文入口。",
+    datasetName: "ENERGYTECH-8760",
+    datasetTitle: "能源技术文本档案",
+    todayOverline: "ENERGY TECH SIGNALS",
+    todayTitle: "今日能源技术动态",
+    analyticsTitle: "能源技术语料分析",
+    assistantOverline: "GROUNDED ENERGY TECH Q&A",
+    assistantTitle: "能源技术情报问答",
+    databaseOverline: "ENERGY TEXT DATABASE",
+    databaseTitle: "能源技术文本数据库",
+    downloadName: "能源技术趋势今日简报",
+    quickPrompts: [
+      ["今日能源动态", "请给出今日能源技术动态简报"],
+      ["本周技术趋势", "本周有哪些值得关注的能源技术趋势？"],
+      ["中美能源技术", "比较本周中国与美国的能源技术动态"],
+      ["数能与电网", "近期有哪些数字能源、储能或电网信息？"],
+    ],
+  },
+};
+
+function applyModeCopy() {
+  const copy = MODE_COPY[state.mode] || MODE_COPY.climate;
+  document.body.dataset.mode = state.mode;
+  const modeToggle = $("modeToggle");
+  if (modeToggle) modeToggle.textContent = copy.button;
+  ["mapOverline", "mapTitle", "heroOverline", "heroLede", "datasetName", "datasetTitle",
+    "todayOverline", "todayTitle", "analyticsTitle", "assistantOverline", "assistantTitle",
+    "databaseOverline", "databaseTitle"].forEach(id => {
+    const element = $(id);
+    if (element) element.textContent = copy[id];
+  });
+  if ($("heroTitle")) $("heroTitle").innerHTML = copy.heroTitle;
+  document.querySelectorAll(".quick-prompts button").forEach((button, index) => {
+    const prompt = copy.quickPrompts?.[index];
+    if (!prompt) return;
+    button.textContent = prompt[0];
+    button.dataset.prompt = prompt[1];
+  });
+}
+
+function activateMode(mode) {
+  const nextMode = mode === "energy" && state.datasets.energy ? "energy" : "climate";
+  const dataset = state.datasets[nextMode];
+  state.mode = nextMode;
+  state.dashboard = dataset.dashboard;
+  state.archive = dataset.archive;
+  state.analytics = dataset.analytics;
+  state.filtered = [];
+  state.visible = 18;
+  state.assistant = { lastRecords: [], lastPlan: null };
+  localStorage.setItem("climateTextMode", nextMode);
+  applyModeCopy();
+  renderMeta();
+  renderToday();
+  if ($("archiveSearch")) $("archiveSearch").value = "";
+  populateTopicFilter();
+  applyFilters();
+  renderAnalytics();
+  updateMapPeriodCounts();
+  switchMapPeriod("today").catch(error => {
+    console.error("Mode map rendering failed", error);
+    toast("地图刷新失败，请稍后重试。");
+  });
+}
+
 function renderMeta() {
   const dashboard = state.dashboard;
   const archive = state.archive;
@@ -65,7 +162,7 @@ function renderMeta() {
   $("datasetVersion").textContent = formatDate(archive.updated_at, true);
   $("generatedAt").textContent = `最近生成：${formatDate(dashboard.meta?.generated_at, true)}`;
   const briefLink = $("briefDownload");
-  if (briefLink) briefLink.download = `国际气候情报今日简报-${dashboard.meta?.date || "latest"}.pdf`;
+  if (briefLink) briefLink.download = `${MODE_COPY[state.mode].downloadName}-${dashboard.meta?.date || "latest"}.pdf`;
 }
 
 function findArchiveRecord(item) {
@@ -95,10 +192,7 @@ function renderToday() {
 }
 
 function setupFilters() {
-  const topics = [...new Set(state.archive.records.flatMap(record => record.topics || []))]
-    .sort((left, right) => left.localeCompare(right, "zh-CN"));
-  $("topicFilter").innerHTML = '<option value="">全部议题</option>'
-    + topics.map(topic => `<option value="${esc(topic)}">${esc(topic)}</option>`).join("");
+  populateTopicFilter();
   ["archiveSearch", "topicFilter"].forEach(id => $(id).addEventListener(id === "archiveSearch" ? "input" : "change", () => {
     state.visible = 18;
     applyFilters();
@@ -107,6 +201,13 @@ function setupFilters() {
     state.visible += 18;
     renderArchiveRows();
   });
+}
+
+function populateTopicFilter() {
+  const topics = [...new Set(state.archive.records.flatMap(record => record.topics || []))]
+    .sort((left, right) => left.localeCompare(right, "zh-CN"));
+  $("topicFilter").innerHTML = '<option value="">全部议题</option>'
+    + topics.map(topic => `<option value="${esc(topic)}">${esc(topic)}</option>`).join("");
 }
 
 function applyFilters() {
@@ -311,16 +412,20 @@ async function switchMapPeriod(period) {
 }
 
 function setupMapPeriods() {
-  const todayEvents = mapEventsFor("today");
-  const weekEvents = mapEventsFor("week");
-  $("todayMapCount").textContent = todayEvents.length;
-  $("weekMapCount").textContent = weekEvents.length;
+  updateMapPeriodCounts();
   document.querySelectorAll("[data-map-period]").forEach(button => {
     button.addEventListener("click", () => switchMapPeriod(button.dataset.mapPeriod).catch(error => {
       console.error("Map period switch failed", error);
       toast("地图切换失败，请刷新页面重试。");
     }));
   });
+}
+
+function updateMapPeriodCounts() {
+  const todayEvents = mapEventsFor("today");
+  const weekEvents = mapEventsFor("week");
+  $("todayMapCount").textContent = todayEvents.length;
+  $("weekMapCount").textContent = weekEvents.length;
 }
 
 const COUNTRY_CONCEPTS = [
@@ -665,21 +770,26 @@ function renderHeatmap(id, matrix) {
 }
 
 async function init() {
-  const [dashboard, archive, analytics] = await Promise.all([
+  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
     fetchJson("./data/corpus_analytics.json").catch(() => null),
+    fetchJson("./data/energy_dashboard.json").catch(() => null),
+    fetchJson("./data/energy_archive.json").catch(() => null),
+    fetchJson("./data/energy_corpus_analytics.json").catch(() => null),
   ]);
-  state.dashboard = dashboard;
-  state.archive = archive;
-  state.analytics = analytics;
-  renderMeta();
-  renderToday();
-  renderAnalytics();
+  state.datasets.climate = { dashboard, archive, analytics };
+  if (energyDashboard && energyArchive) {
+    state.datasets.energy = { dashboard: energyDashboard, archive: energyArchive, analytics: energyAnalytics };
+  }
+  const requestedMode = localStorage.getItem("climateTextMode") === "energy" ? "energy" : "climate";
+  activateMode(requestedMode);
   setupFilters();
-  applyFilters();
   setupAssistant();
   setupMapPeriods();
+  $("modeToggle")?.addEventListener("click", () => {
+    activateMode(state.mode === "energy" ? "climate" : "energy");
+  });
   try {
     await switchMapPeriod("today");
   } catch (error) {

@@ -6,8 +6,9 @@ from pathlib import Path
 
 from .archive import DEFAULT_ARCHIVE_LIMIT, update_archive, validate_public_payload
 from .briefing import apply_archive_windows, dashboard_payload, publishable_intelligence, render_markdown
-from .corpus_analytics import write_corpus_analytics
+from .corpus_analytics import write_corpus_analytics, write_energy_corpus_analytics
 from .db import Database
+from .energy_view import write_energy_view
 from .pdf_brief import write_daily_brief_pdf
 
 
@@ -45,15 +46,27 @@ def export_static_site(
     )
     (data_dir / "daily_brief.md").write_text(render_markdown(payload), encoding="utf-8")
     pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief.pdf")
+    energy_view = write_energy_view(payload, archive, data_dir, limit=archive_limit)
     corpus_path = db.path.parent / "climate_text_corpus.jsonl"
     manifest_path = db.path.parent / "climate_text_corpus.manifest.json"
     analytics = None
     if corpus_path.exists():
         analytics = write_corpus_analytics(corpus_path, data_dir / "corpus_analytics.json", manifest_path)
+        write_energy_corpus_analytics(corpus_path, data_dir / "energy_corpus_analytics.json", manifest_path)
     for history_name in ("climate_text_corpus.jsonl", "climate_text_corpus.manifest.json"):
         history_path = db.path.parent / history_name
         if history_path.exists():
             shutil.copy2(history_path, data_dir / history_name)
+    reports_dir = db.path.parent.parent / "reports"
+    for report_name in (
+        "global_climate_analysis_report_latest.html",
+        "global_climate_analysis_data_2026-08-04.json",
+        "quarter_global_keywords_2026-08-04.csv",
+        "quarter_continent_keywords_2026-08-04.csv",
+    ):
+        report_path = reports_dir / report_name
+        if report_path.exists():
+            shutil.copy2(report_path, data_dir / report_name)
     output_dir.mkdir(parents=True, exist_ok=True)
     shutil.copytree(static_dir, output_dir, dirs_exist_ok=True)
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
@@ -67,6 +80,7 @@ def export_static_site(
         "pdf": str(pdf_path),
         "archive_total": archive["total"],
         "archive_added": archive["statistics"]["added"],
+        "energy_archive_total": energy_view["archive"].get("total", 0),
         "corpus_analytics_records": (analytics or {}).get("records", 0),
         "quality_gate": "passed",
         "generated_at": payload["meta"]["generated_at"],

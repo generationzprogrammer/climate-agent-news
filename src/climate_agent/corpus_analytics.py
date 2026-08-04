@@ -16,6 +16,32 @@ CONTINENT_ZH = {
     "Antarctica": "南极洲",
     "Global/Unspecified": "全球/未标注",
 }
+ENERGY_TERMS = (
+    "能源转型", "能源技术", "技术趋势", "数能", "数字能源", "新型电力系统", "新能源",
+    "清洁能源", "可再生能源", "可再生", "光伏", "太阳能", "风电", "海上风电",
+    "储能", "电池", "锂", "氢能", "绿氢", "电网", "智能电网", "虚拟电厂",
+    "充电", "电动车", "电动汽车", "热泵", "碳捕集", "ccus", "energy transition",
+    "energy technology", "clean energy", "renewable", "solar", "wind power",
+    "offshore wind", "battery", "storage", "hydrogen", "green hydrogen",
+    "grid", "smart grid", "power system", "electric vehicle", "ev ", "heat pump",
+    "carbon capture", "digital energy", "data center",
+)
+
+
+def _combined_text(item: dict) -> str:
+    values = [
+        item.get("title_zh"), item.get("title_original"), item.get("summary_zh"),
+        item.get("summary_source"), item.get("theme_zh"), item.get("why_zh"),
+        item.get("source_name"), item.get("source_domain"),
+        " ".join(str(topic) for topic in item.get("topics") or []),
+        " ".join(str(number) for number in item.get("numbers") or []),
+    ]
+    return " ".join(str(value) for value in values if value).lower()
+
+
+def is_energy_record(item: dict) -> bool:
+    text = _combined_text(item)
+    return any(term.lower() in text for term in ENERGY_TERMS)
 
 
 def _read_jsonl(path: Path) -> list[dict]:
@@ -63,13 +89,21 @@ def _source_label(value: str | None) -> str:
     return value.replace("www.", "")
 
 
-def build_corpus_analytics(corpus_path: Path, manifest_path: Path | None = None) -> dict:
+def build_corpus_analytics(
+    corpus_path: Path,
+    manifest_path: Path | None = None,
+    *,
+    record_filter=None,
+    dataset_name: str | None = None,
+) -> dict:
     """Aggregate the historical JSONL corpus into compact web-chart data."""
     rows = _read_jsonl(corpus_path)
+    if record_filter:
+        rows = [row for row in rows if record_filter(row)]
     if not rows:
         return {
             "schema_version": "1.0",
-            "dataset": "Global Climate Change Key Intelligence Text Database",
+            "dataset": dataset_name or "Global Climate Change Key Intelligence Text Database",
             "records": 0,
             "status": "empty",
         }
@@ -141,7 +175,7 @@ def build_corpus_analytics(corpus_path: Path, manifest_path: Path | None = None)
 
     return {
         "schema_version": "1.0",
-        "dataset": manifest.get("dataset", "Global Climate Change Key Intelligence Text Database"),
+        "dataset": dataset_name or manifest.get("dataset", "Global Climate Change Key Intelligence Text Database"),
         "grain": manifest.get("grain", "one canonical URL per news record"),
         "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "records": len(rows),
@@ -175,6 +209,18 @@ def build_corpus_analytics(corpus_path: Path, manifest_path: Path | None = None)
 
 def write_corpus_analytics(corpus_path: Path, output_path: Path, manifest_path: Path | None = None) -> dict:
     analytics = build_corpus_analytics(corpus_path, manifest_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(analytics, ensure_ascii=False, indent=2), encoding="utf-8")
+    return analytics
+
+
+def write_energy_corpus_analytics(corpus_path: Path, output_path: Path, manifest_path: Path | None = None) -> dict:
+    analytics = build_corpus_analytics(
+        corpus_path,
+        manifest_path,
+        record_filter=is_energy_record,
+        dataset_name="Energy Technology Transition Text Database",
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(analytics, ensure_ascii=False, indent=2), encoding="utf-8")
     return analytics

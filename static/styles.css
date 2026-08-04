@@ -23,6 +23,11 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
+body[data-mode="energy"] {
+  --blue: #0f766e;
+  --blue-dark: #064e46;
+  --red: #d97706;
+}
 a { color: inherit; }
 [hidden] { display: none !important; }
 
@@ -61,6 +66,16 @@ a { color: inherit; }
 .topbar nav { display: flex; gap: 28px; margin: auto; }
 .topbar nav a { color: #414a57; font-size: 14px; text-decoration: none; }
 .topbar nav a:hover { color: var(--blue); }
+.mode-toggle {
+  padding: 10px 14px;
+  border: 1px solid #aeb8c7;
+  border-radius: 2px;
+  background: #fff;
+  color: #263242;
+  font: 750 13px var(--sans);
+  cursor: pointer;
+}
+.mode-toggle:hover { border-color: var(--blue); color: var(--blue); }
 .data-download {
   padding: 11px 15px;
   border-radius: 2px;
@@ -496,6 +511,7 @@ footer a:hover { color: var(--blue); }
   .brand-symbol { width: 34px; height: 34px; }
   .brand b { font-size: 14px; }
   .brand small { display: none; }
+  .mode-toggle { padding: 8px 9px; font-size: 12px; }
   .data-download { padding: 9px 12px; font-size: 0; }
   .data-download::after { content: "简报 PDF"; font-size: 12px; }
   main { padding: 0 16px 68px; }
