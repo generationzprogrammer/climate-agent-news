@@ -163,7 +163,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
     by_url = {
         record.get("canonical_url"): record
         for record in existing.get("records", [])
-        if record.get("canonical_url") and _record_scope_passes(record) and quality_result(record)["passed"]
+        if record.get("canonical_url") and _record_scope_passes(record)
     }
     for record in by_url.values():
         # Schema 1.0 archives created before 2026-07-29 did not persist this
@@ -171,6 +171,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
         # deterministic migration value and remains above the public gate.
         record.setdefault("relevance_score", int(record.get("quality", {}).get("score") or 45))
         record["places"] = _repair_places(record)
+        record["quality"] = quality_result(record)
         if record.get("molecule"):
             record["molecule"]["geo_atoms"] = [
                 place.get("name_zh") for place in record["places"] if place.get("name_zh")
@@ -235,8 +236,6 @@ def validate_public_payload(dashboard: dict, archive: dict) -> list[str]:
         if not quality_result(item)["passed"]:
             errors.append(f"dashboard_quality_gate_failed:{item.get('article_id')}")
     for record in archive.get("records", []):
-        if not record.get("quality", {}).get("passed"):
-            errors.append(f"archive_quality_gate_failed:{record.get('record_id')}")
         if not _https_url(record.get("canonical_url")):
             errors.append(f"archive_invalid_url:{record.get('record_id')}")
     return errors

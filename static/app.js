@@ -241,7 +241,8 @@ function applyFilters() {
       record.title_zh, record.title_original, record.summary_zh, record.source_name,
       ...(record.topics || []), ...(record.places || []).map(place => place.name_zh),
     ].join(" ").toLowerCase();
-    return (!query || haystack.includes(query))
+    return record.quality?.passed !== false
+      && (!query || haystack.includes(query))
       && (!topic || (record.topics || []).includes(topic));
   });
   renderArchiveRows();

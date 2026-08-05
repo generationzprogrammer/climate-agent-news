@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 from climate_agent.archive import quality_result
@@ -18,6 +19,12 @@ PLACE = {
     "伊朗": {"name_zh": "伊朗", "lon": 53.0, "lat": 32.0},
     "沙特阿拉伯": {"name_zh": "沙特阿拉伯", "lon": 45.0, "lat": 24.0},
     "英国": {"name_zh": "英国", "lon": -2.0, "lat": 54.0},
+    "美国俄勒冈州": {"name_zh": "美国俄勒冈州", "lon": -120.5, "lat": 44.0},
+    "美国得州": {"name_zh": "美国得州", "lon": -99.0, "lat": 31.0},
+    "美国太平洋西北地区": {"name_zh": "美国太平洋西北地区", "lon": -120.0, "lat": 46.0},
+    "澳大利亚": {"name_zh": "澳大利亚", "lon": 134.0, "lat": -25.0},
+    "东南亚": {"name_zh": "东南亚", "lon": 110.0, "lat": 5.0},
+    "婆罗洲": {"name_zh": "婆罗洲", "lon": 114.0, "lat": 1.0},
 }
 
 FIXES = {
@@ -72,12 +79,64 @@ FIXES = {
         "summary_zh": "文章指出，气候大会参会人数大幅扩张，但谈判群体规模并未同比增长；政界和企业代表增加可能挤压正式谈判工作的空间。",
         "theme_zh": "气候大会治理", "topics": ["气候外交", "大会治理"], "numbers": [], "places": [],
     },
+    "article_af955c07f3bc3be1": {
+        "title_zh": "Evren签署750兆瓦可再生能源购电协议，项目组合超过3.5吉瓦",
+        "summary_zh": "Evren签署一项750兆瓦可再生能源购电协议，使其项目组合规模扩大至3.5吉瓦以上。",
+        "theme_zh": "可再生能源购电协议", "topics": ["可再生能源", "购电协议"], "numbers": ["750兆瓦", "3.5吉瓦"], "places": [],
+    },
+    "article_31f66d173a3e5f4c": {
+        "title_zh": "事实核查：热浪如何影响核电、天然气、风电和太阳能发电",
+        "summary_zh": "Carbon Brief梳理热浪对核电、天然气、风电和太阳能发电的影响；气候变化正使热浪发生概率和强度上升。",
+        "theme_zh": "热浪与电力系统", "topics": ["极端高温", "电力系统"], "places": [],
+    },
+    "article_e7b8c8426c001c1e": {
+        "title_zh": "农民学习用大幅减少的水量种植作物",
+        "summary_zh": "随着积雪储量减少，美国俄勒冈州旱作农业研究所正培训农民减少灌溉用水。",
+        "theme_zh": "农业节水适应", "topics": ["农业适应", "水资源"], "places": [PLACE["美国俄勒冈州"]],
+    },
+    "article_b4e0b07e7098b7c6": {
+        "title_zh": "得州再次发生洪灾，暴露预警系统哪些问题",
+        "summary_zh": "得州在上次丘陵地区洪灾造成139人死亡后改造预警系统；今年7月的历史性洪灾检验了改造成效，也暴露出仍待解决的问题。",
+        "theme_zh": "洪灾预警", "topics": ["洪水", "预警系统"], "numbers": ["139人"], "places": [PLACE["美国得州"]],
+    },
+    "article_34eb6ba3342d3843": {
+        "title_zh": "婆罗洲巨树如何突破重力限制和传统科学理论",
+        "summary_zh": "研究发现，马来西亚婆罗洲巨型热带树木向最高枝条输水的能力不弱于低处枝条，这对“高大树木更易受干旱影响”的传统假说提出挑战。",
+        "theme_zh": "森林抗旱研究", "topics": ["森林生态", "干旱适应"], "places": [PLACE["婆罗洲"]],
+    },
+    "article_d78fb1ce220cf059": {
+        "title_zh": "澳大利亚推出1亿美元计划，补足可再生能源转型的“中间缺口”",
+        "summary_zh": "澳大利亚推出规模1亿美元的新计划，旨在支持可再生能源转型中融资或项目开发不足的中间环节。",
+        "theme_zh": "可再生能源融资", "topics": ["可再生能源", "项目融资"], "numbers": ["1亿美元"], "places": [PLACE["澳大利亚"]],
+    },
+    "article_dbab5b3ffec46e40": {
+        "title_zh": "美国太平洋西北地区野火迫使6.4万人撤离",
+        "summary_zh": "美国太平洋西北地区发生野火，约6.4万人被迫撤离。",
+        "theme_zh": "野火疏散", "topics": ["野火", "人员撤离"], "numbers": ["6.4万人"], "places": [PLACE["美国太平洋西北地区"]],
+    },
+    "article_abb526d3ea838f5c": {
+        "title_zh": "研究：仅靠碳市场无法保护东南亚森林",
+        "summary_zh": "研究估计东南亚林业和种植园特许区内仍有约4200万公顷森林；按现有碳价，仅靠碳市场难以形成足够保护激励，需要混合融资、绿色债券等补充工具。",
+        "theme_zh": "森林保护融资", "topics": ["碳市场", "森林保护", "混合融资"], "numbers": ["4200万公顷"], "places": [PLACE["东南亚"]],
+    },
 }
 
 
 def main() -> None:
     path = ROOT / "data" / "news_archive.json"
     payload = json.loads(path.read_text(encoding="utf-8"))
+    if len(sys.argv) == 3 and sys.argv[1] == "--merge":
+        previous = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
+        current_urls = {record.get("canonical_url") for record in payload.get("records", [])}
+        restored = [
+            record for record in previous.get("records", [])
+            if record.get("canonical_url") not in current_urls
+        ]
+        payload.setdefault("records", []).extend(restored)
+        payload["records"].sort(key=lambda record: record.get("published_at") or "", reverse=True)
+        payload["total"] = len(payload["records"])
+    else:
+        restored = []
     changed = 0
     for record in payload.get("records", []):
         fix = FIXES.get(record.get("article_id"))
@@ -93,7 +152,7 @@ def main() -> None:
         record["molecule"] = molecule
         changed += 1
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({"updated": changed, "path": str(path)}, ensure_ascii=False))
+    print(json.dumps({"updated": changed, "restored": len(restored), "total": payload.get("total"), "path": str(path)}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

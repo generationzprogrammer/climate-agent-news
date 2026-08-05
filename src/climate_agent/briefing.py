@@ -383,7 +383,15 @@ def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
 
 def apply_archive_windows(payload: dict, archive: dict) -> dict:
     """Make the public windows derive from the cumulative, quality-gated archive."""
-    records = archive.get("records") or []
+    records = [
+        record for record in (archive.get("records") or [])
+        if record.get("title_zh")
+        and not is_generic_title(record.get("title_zh"))
+        and (
+            (record.get("summary_zh") and not is_generic_summary(record.get("summary_zh")))
+            or len(intelligence_keywords(record)) >= 2
+        )
+    ]
     today_items = select_daily_window(records, limit=10)
     week_items = select_latest_week(records, limit=60)
     if not today_items:
