@@ -9,6 +9,7 @@ from datetime import UTC, date, datetime, timedelta, timezone
 
 from .db import Database
 from .pipeline import decode_event, module_manifest
+from .summary_utils import intelligence_keywords, is_generic_summary, is_generic_title
 
 
 TOPIC_ZH_ALIASES = {
@@ -308,7 +309,15 @@ def _publishable_candidates(db: Database) -> list[dict]:
     # The public dashboard never falls back to English source abstracts. If the
     # latest crawl is still awaiting translation, retain the latest publishable
     # Chinese snapshot instead of rendering empty or low-quality cards.
-    publishable = [item for item in items if item.get("title_zh") and item.get("summary_zh")]
+    publishable = [
+        item for item in items
+        if item.get("title_zh")
+        and not is_generic_title(item.get("title_zh"))
+        and (
+            (item.get("summary_zh") and not is_generic_summary(item.get("summary_zh")))
+            or len(intelligence_keywords(item)) >= 2
+        )
+    ]
     return publishable[:120]
 
 
@@ -362,7 +371,7 @@ def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
                 "lat": place["lat"],
                 "theme": item.get("theme_zh") or "气候动态",
                 "title_zh": item.get("title_zh") or item["title_original"],
-                "summary_zh": item.get("summary_zh") or "中文编译待完成。",
+                "summary_zh": item.get("summary_zh") or "",
                 "source_name": item["source_name"],
                 "published_at": item["published_at"],
                 "url": item["canonical_url"],

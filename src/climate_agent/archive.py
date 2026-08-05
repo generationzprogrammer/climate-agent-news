@@ -6,6 +6,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
+from .summary_utils import intelligence_keywords, is_generic_summary, is_generic_title
+
 
 ARCHIVE_VERSION = "1.0"
 DEFAULT_ARCHIVE_LIMIT = 8760
@@ -62,8 +64,11 @@ def quality_result(item: dict) -> dict:
     checks = {
         "canonical_https": bool(_https_url(item.get("canonical_url"))),
         "original_title": bool((item.get("title_original") or "").strip()),
-        "chinese_title": _text_is_publishable(item.get("title_zh")),
-        "chinese_summary": _text_is_publishable(item.get("summary_zh"), minimum_chinese=18),
+        "chinese_title": _text_is_publishable(item.get("title_zh")) and not is_generic_title(item.get("title_zh")),
+        "substantive_content": (
+            _text_is_publishable(item.get("summary_zh"), minimum_chinese=18)
+            and not is_generic_summary(item.get("summary_zh"))
+        ) or len(intelligence_keywords(item)) >= 2,
         "published_time": bool(item.get("published_at")),
         "source_trace": bool(item.get("source_name") and item.get("source_id")),
     }
@@ -158,7 +163,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
     by_url = {
         record.get("canonical_url"): record
         for record in existing.get("records", [])
-        if record.get("canonical_url") and _record_scope_passes(record)
+        if record.get("canonical_url") and _record_scope_passes(record) and quality_result(record)["passed"]
     }
     for record in by_url.values():
         # Schema 1.0 archives created before 2026-07-29 did not persist this

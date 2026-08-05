@@ -6,7 +6,6 @@ from datetime import UTC, datetime
 
 from .db import Database
 from .providers import OpenAICompatibleModel
-from .summary_utils import factual_fallback_summary
 
 
 GEO_TERMS = {
@@ -14,14 +13,27 @@ GEO_TERMS = {
     "beijing": ("中国", 105.0, 35.0),
     "中国": ("中国", 105.0, 35.0),
     "北京": ("中国", 105.0, 35.0),
+    "中华人民共和国": ("中国", 105.0, 35.0),
     "united states": ("美国", -100.0, 39.0),
+    "western us": ("美国", -100.0, 39.0),
     " u.s.": ("美国", -100.0, 39.0),
+    "u s": ("美国", -100.0, 39.0),
+    "u.s": ("美国", -100.0, 39.0),
+    "美国联邦": ("美国", -100.0, 39.0),
     "美国": ("美国", -100.0, 39.0),
     "texas": ("美国得州", -99.0, 31.0),
     "united kingdom": ("英国", -2.0, 54.0),
     " uk ": ("英国", -2.0, 54.0),
+    "英国": ("英国", -2.0, 54.0),
     "europe": ("欧洲", 10.0, 51.0),
+    "欧洲": ("欧洲", 10.0, 51.0),
     "africa": ("非洲", 22.0, 2.0),
+    "非洲": ("非洲", 22.0, 2.0),
+    "mediterranean": ("地中海地区", 18.0, 36.0),
+    "地中海": ("地中海地区", 18.0, 36.0),
+    "andean": ("安第斯地区", -69.0, -20.0),
+    "andes": ("安第斯地区", -69.0, -20.0),
+    "安第斯": ("安第斯地区", -69.0, -20.0),
     "west africa": ("西非", -4.0, 8.0),
     "congo": ("刚果盆地", 18.0, -1.0),
     "brazil": ("巴西", -52.0, -10.0),
@@ -34,6 +46,7 @@ GEO_TERMS = {
     "turkey": ("土耳其", 35.0, 39.0),
     "germany": ("德国", 10.0, 51.0),
     "france": ("法国", 2.0, 46.0),
+    "法国": ("法国", 2.0, 46.0),
     "philippines": ("菲律宾", 122.0, 13.0),
     "uganda": ("乌干达", 32.0, 1.0),
     "mexico": ("墨西哥", -102.0, 23.0),
@@ -61,11 +74,16 @@ GEO_TERMS = {
     "jamaica": ("牙买加", -77.3, 18.1),
     "bahamas": ("巴哈马", -77.4, 25.0),
     "dominican republic": ("多米尼加", -70.2, 18.8),
+    "saudi arabia": ("沙特阿拉伯", 45.0, 24.0),
+    "saudi aramco": ("沙特阿拉伯", 45.0, 24.0),
+    "iran": ("伊朗", 53.0, 32.0),
+    "伊朗": ("伊朗", 53.0, 32.0),
 }
 
 
 def detect_places(text: str) -> list[dict]:
     haystack = f" {text.lower()} "
+    haystack = re.sub(r"\bu\s*\.\s*s\s*\.?\b", " u s ", haystack)
     places = []
     seen = set()
     for term, (name, lon, lat) in sorted(GEO_TERMS.items(), key=lambda item: len(item[0]), reverse=True):
@@ -112,79 +130,24 @@ def source_balanced_rows(rows: list[dict], limit: int) -> list[dict]:
 
 
 def _fallback_translation(row: dict) -> dict:
-    """Create a conservative Chinese review stub when model translation is unavailable.
-
-    The fallback is intentionally modest: it marks the item as a lead that still
-    needs source verification instead of pretending to be a polished translation.
-    This keeps the daily dashboard fresh during model/API incidents while
-    preserving an explicit quality boundary for users.
-    """
-    text = f"{row.get('title_original') or ''} {row.get('summary_source') or ''}".lower()
-    if "western us" in text and "heat wave" in text:
-        title_zh = "美国西部热浪推高野火风险"
-        theme_zh = "极端高温与野火"
-        poster = "美国西部热浪"
-    elif "spain" in text and "wildfire risk" in text and "20-fold" in text:
-        title_zh = "研究称气候变化使西班牙野火风险增至20倍"
-        theme_zh = "野火风险归因"
-        poster = "西班牙野火风险"
-    elif "spain" in text and ("pedro" in text or "sánchez" in text or "sanchez" in text):
-        title_zh = "西班牙首相强调气候变化致命风险"
-        theme_zh = "气候政治"
-        poster = "气候政治升温"
-    elif "china" in text and "south africa" in text and ("wind farm" in text or "clean energy" in text):
-        title_zh = "中南清洁能源合作风电项目启动"
-        theme_zh = "清洁能源合作"
-        poster = "中南风电合作"
-    elif "india" in text and "renewable energy" in text:
-        title_zh = "印度可再生能源投资计划升温"
-        theme_zh = "可再生能源投资"
-        poster = "印度绿能投资"
-    elif ("norwegian" in text or "norway" in text) and "renewable energy" in text:
-        title_zh = "挪威融资支持可再生能源项目"
-        theme_zh = "可再生能源融资"
-        poster = "绿能融资"
-    elif "europe" in text and "wildfire" in text:
-        title_zh = "欧洲野火形势判断受到事实核查"
-        theme_zh = "野火风险"
-        poster = "欧洲野火核查"
-    elif any(term in text for term in ("heat wave", "wildfire", "flood", "drought", "hurricane", "storm", "extreme weather")):
-        title_zh = "极端天气风险出现新动态"
-        theme_zh = "极端天气与气候风险"
-        poster = "极端天气预警"
-    elif "climate finance" in text or "loss and damage" in text:
-        title_zh = "气候资金议题出现新进展"
-        theme_zh = "气候资金"
-        poster = "资金议题升温"
-    elif any(term in text for term in ("renewable", "clean energy", "energy transition", "net zero")):
-        title_zh = "清洁能源转型出现新进展"
-        theme_zh = "能源转型"
-        poster = "能源转型提速"
-    elif any(term in text for term in ("summit", "unfccc", "cop30", "cop31", "ndc", "negotiat")):
-        title_zh = "国际气候谈判出现新动向"
-        theme_zh = "气候谈判"
-        poster = "谈判信号更新"
-    elif any(term in text for term in ("emission", "carbon", "methane")):
-        title_zh = "碳排放治理出现新动向"
-        theme_zh = "减排政策"
-        poster = "减排信号更新"
-    else:
-        title_zh = "全球气候议题出现新动态"
-        theme_zh = "气候动态"
-        poster = "气候线索更新"
-    summary_zh = factual_fallback_summary({
-        **row,
-        "title_zh": title_zh,
-        "theme_zh": theme_zh,
-        "places": detect_places(f"{row.get('title_original') or ''} {row.get('summary_source') or ''}"),
-    })
+    """Keep source facts without fabricating a translated title during API outages."""
+    original = str(row.get("title_original") or "").strip()
+    places = detect_places(f"{original} {row.get('summary_source') or ''}")
+    if not re.search(r"[\u4e00-\u9fff]", original):
+        return {
+            "title_zh": "", "summary_zh": "", "theme_zh": "",
+            "importance_zh": "", "poster_phrase": "", "places": places,
+            "translation_status": "pending",
+        }
+    title_zh = re.sub(r"\s*[-–—|｜]\s*[^-–—|｜]{2,24}$", "", original).strip()
     return {
         "title_zh": title_zh,
-        "summary_zh": summary_zh[:220],
-        "theme_zh": theme_zh,
-        "importance_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-        "poster_phrase": poster,
-        "translation_status": "fallback_needs_review",
+        "summary_zh": "",
+        "theme_zh": "气候动态",
+        "importance_zh": "中文来源标题直录；原文未提供足够事实时仅展示关键词。",
+        "poster_phrase": title_zh[:14],
+        "places": places,
+        "translation_status": "source_title_only",
     }
 
 
@@ -201,7 +164,10 @@ def _write_translation(db: Database, row: dict, item: dict, *, fallback: bool = 
         "theme_zh": item["theme_zh"],
         "importance_zh": item["importance_zh"],
         "poster_phrase": item["poster_phrase"],
-        "places": detect_places(f"{row['title_original']} {row.get('summary_source') or ''}"),
+        "places": item.get("places") or detect_places(
+            f"{row['title_original']} {row.get('summary_source') or ''} "
+            f"{item.get('title_zh') or ''} {item.get('summary_zh') or ''}"
+        ),
         "translation_status": item.get(
             "translation_status",
             "fallback_needs_review" if fallback else "model_generated_needs_review",
@@ -220,7 +186,10 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
         SELECT a.article_id,a.source_id,a.title_original,a.summary_source,a.canonical_url,
                a.metadata_json,s.region AS source_region
         FROM articles a JOIN sources s ON s.source_id=a.source_id
-        WHERE (a.title_zh IS NULL OR trim(a.title_zh)='' OR a.metadata_json NOT LIKE '%"summary_zh"%')
+        WHERE (a.title_zh IS NULL OR trim(a.title_zh)='' OR a.metadata_json NOT LIKE '%"summary_zh"%'
+               OR a.metadata_json LIKE '%"translation_status": "fallback_needs_review"%'
+               OR a.title_zh IN ('全球气候议题出现新动态','国际气候谈判出现新动向','极端天气风险出现新动态',
+                                 '气候资金议题出现新进展','清洁能源转型出现新进展','碳排放治理出现新动向'))
           AND datetime(a.published_at_utc) >= datetime('now','-7 days')
         ORDER BY date(a.published_at_utc, '+8 hours') DESC,
                  a.relevance_score DESC,
@@ -233,7 +202,7 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
     failed = []
     system = """你是面向中国资深气候政策与外交工作者的中文编译编辑。把输入新闻准确、克制地编译为中文。
 只输出 JSON 对象，键为 translations，值为数组。每项必须包含 article_id、title_zh、summary_zh、theme_zh、importance_zh、poster_phrase。
-要求：标题自然简洁；摘要 60–120 个汉字并保留数字的对象、单位和比较关系；theme_zh 使用自然中文短语，如“甲烷减排”“气候资金”“极端高温”，不要使用生硬分类词；importance_zh 说明政策或谈判意义并标明观点/事实边界；poster_phrase 不超过 14 个汉字。不得补充输入中不存在的事实。"""
+要求：title_zh 必须是原新闻标题忠实、完整、自然的中文译文，不得改写成“出现新动态”“出现新进展”等分类模板；summary_zh 只写输入中可核验的主体、动作、结果与数字，60–120 个汉字，信息不足时返回空字符串，不得用“值得关注”“聚焦”“产生影响”等套话补足篇幅；theme_zh 使用自然中文短语，如“甲烷减排”“气候资金”“极端高温”，不要使用生硬分类词；importance_zh 说明政策或谈判意义并标明观点/事实边界；poster_phrase 不超过 14 个汉字。不得补充输入中不存在的事实。"""
     for start in range(0, len(rows), 5):
         batch = rows[start:start + 5]
         payload = {"articles": [{

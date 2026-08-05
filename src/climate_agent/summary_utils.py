@@ -8,6 +8,24 @@ GENERIC_SUMMARY_MARKERS = (
     "来源摘要显示",
     "适合作为当日气候情报线索",
     "具体数字、责任主体和政策含义仍需回到原文核验",
+    "这条情报聚焦",
+    "需要重点关注其对政策执行、谈判表述或风险研判的影响",
+)
+
+GENERIC_TITLE_MARKERS = (
+    "美国西部热浪推高野火风险",
+    "研究称气候变化使西班牙野火风险增至20倍",
+    "西班牙首相强调气候变化致命风险",
+    "中南清洁能源合作风电项目启动",
+    "印度可再生能源投资计划升温",
+    "挪威融资支持可再生能源项目",
+    "欧洲野火形势判断受到事实核查",
+    "全球气候议题出现新动态",
+    "国际气候谈判出现新动向",
+    "极端天气风险出现新动态",
+    "气候资金议题出现新进展",
+    "清洁能源转型出现新进展",
+    "碳排放治理出现新动向",
 )
 
 NUMBER_RE = re.compile(
@@ -20,6 +38,29 @@ NUMBER_RE = re.compile(
 def is_generic_summary(text: str | None) -> bool:
     value = str(text or "")
     return any(marker in value for marker in GENERIC_SUMMARY_MARKERS)
+
+
+def is_generic_title(text: str | None) -> bool:
+    value = str(text or "").strip()
+    return not value or value in GENERIC_TITLE_MARKERS
+
+
+def intelligence_keywords(record: dict, limit: int = 5) -> list[str]:
+    """Return compact, user-facing atoms when no factual Chinese summary exists."""
+    values: list[str] = []
+    for value in [record.get("theme_zh"), *(record.get("topics") or [])]:
+        text = str(value or "").strip()
+        if text and text not in {"气候动态", "全球气候", "综合"} and text not in values:
+            values.append(text)
+    for place in record.get("places") or []:
+        text = str(place.get("name_zh") if isinstance(place, dict) else place).strip()
+        if text and text not in values:
+            values.append(text)
+    for number in record.get("numbers") or []:
+        text = str(number or "").strip()
+        if text and text not in values:
+            values.append(text)
+    return values[:limit]
 
 
 def extract_numbers(text: str, limit: int = 3) -> list[str]:

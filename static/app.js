@@ -21,6 +21,29 @@ function safeUrl(value) {
   }
 }
 
+function substantiveSummary(value) {
+  const text = String(value || "").trim();
+  if (!text) return false;
+  return !["这条情报聚焦", "需要重点关注其对政策执行、谈判表述或风险研判的影响",
+    "来源标题显示", "适合作为当日气候情报线索"].some(marker => text.includes(marker));
+}
+
+function intelligenceAtoms(item, limit = 5) {
+  const places = (item.places || []).map(place => place.name_zh);
+  return [...new Set([item.theme_zh, ...(item.topics || []), ...places, ...(item.numbers || [])]
+    .map(value => String(value || "").trim())
+    .filter(value => value && !["气候动态", "全球气候", "综合"].includes(value)))]
+    .slice(0, limit);
+}
+
+function summaryOrAtoms(item) {
+  if (substantiveSummary(item.summary_zh)) return `<p>${esc(item.summary_zh)}</p>`;
+  const atoms = intelligenceAtoms(item);
+  return atoms.length
+    ? `<div class="signal-atoms" aria-label="核心关键词">${atoms.map(atom => `<span>${esc(atom)}</span>`).join("")}</div>`
+    : "";
+}
+
 function formatDate(value, withTime = false) {
   if (!value) return "时间待核";
   const date = new Date(value);
@@ -173,7 +196,7 @@ function findArchiveRecord(item) {
 
 function renderToday() {
   const items = (state.dashboard.intelligence || [])
-    .filter(item => item.title_zh && item.summary_zh);
+    .filter(item => item.title_zh);
   $("todayGrid").innerHTML = items.length ? items.slice(0, 10).map((item, index) => {
     const record = findArchiveRecord(item);
     return `<article class="signal-card">
@@ -181,7 +204,7 @@ function renderToday() {
       <div class="signal-content">
         <div class="signal-meta"><span class="topic">${esc(item.theme_zh || "气候动态")}</span></div>
         <h3>${esc(item.title_zh)}</h3>
-        <p>${esc(item.summary_zh)}</p>
+        ${summaryOrAtoms(item)}
         <div class="signal-foot">
           <span>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</span>
           <a href="${esc(safeUrl(record.canonical_url || item.url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>
@@ -380,7 +403,7 @@ function showMapTooltip(event, item) {
 }
 
 function selectMapEvent(item) {
-  $("mapDetail").innerHTML = `<span>${esc(item.place)} · ${esc(item.theme)}</span><h2>${esc(item.title_zh)}</h2><p>${esc(item.summary_zh)}</p><small>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>`;
+  $("mapDetail").innerHTML = `<span>${esc(item.place)} · ${esc(item.theme)}</span><h2>${esc(item.title_zh)}</h2>${summaryOrAtoms(item)}<small>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>`;
 }
 
 function renderMapPlaces(events) {
