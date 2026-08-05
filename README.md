@@ -160,6 +160,7 @@ tests/                  离线单元与集成测试
 ```
 
 更完整的定位与边界见 [产品策略](docs/PRODUCT_STRATEGY.md)、[系统设计](docs/SYSTEM_DESIGN.md) 和 [合规清单](docs/COMPLIANCE_CHECKLIST.md)。
+面向软著申请和正式交付的操作说明见 [用户说明手册](docs/USER_MANUAL.md)。
 
 ## 三年历史文本数据库回填
 

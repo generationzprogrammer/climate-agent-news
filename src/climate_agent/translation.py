@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 
 from .db import Database
 from .providers import OpenAICompatibleModel
+from .summary_utils import factual_fallback_summary
 
 
 GEO_TERMS = {
@@ -171,17 +172,12 @@ def _fallback_translation(row: dict) -> dict:
         title_zh = "全球气候议题出现新动态"
         theme_zh = "气候动态"
         poster = "气候线索更新"
-    original = (row.get("title_original") or "").strip()
-    if original:
-        summary_zh = (
-            f"来源标题显示，{title_zh}。该信息涉及{theme_zh}，适合作为当日气候情报线索；"
-            "具体数字、责任主体和政策含义仍需回到原文核验。"
-        )
-    else:
-        summary_zh = (
-            f"来源摘要显示该信息涉及{theme_zh}，适合作为当日气候情报线索；"
-            "具体数字、责任主体和政策含义仍需回到原文核验。"
-        )
+    summary_zh = factual_fallback_summary({
+        **row,
+        "title_zh": title_zh,
+        "theme_zh": theme_zh,
+        "places": detect_places(f"{row.get('title_original') or ''} {row.get('summary_source') or ''}"),
+    })
     return {
         "title_zh": title_zh,
         "summary_zh": summary_zh[:220],

@@ -1,8 +1,8 @@
 {
   "meta": {
     "product": "国际气候情报与高质量中文文本数据库",
-    "date": "2026-08-04",
-    "generated_at": "2026-08-04T03:00:13.979329+00:00",
+    "date": "2026-08-05",
+    "generated_at": "2026-08-05T07:39:58.527385+00:00",
     "timezone": "Asia/Shanghai",
     "demo_mode": false,
     "notice": "今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 7 个。标题和摘要是来源陈述，尚需人工核验。",
@@ -11,9 +11,9 @@
     "daily_target": 10,
     "daily_backfilled": 0,
     "daily_complete_day": true,
-    "daily_sources": 6,
-    "daily_continents": 2,
-    "dataset_version": "2026-08-04T03:00:14.014800+00:00"
+    "daily_sources": 7,
+    "daily_continents": 4,
+    "dataset_version": "2026-08-05T07:39:58.542431+00:00"
   },
   "metrics": {
     "source_total": 53,
@@ -25,10 +25,361 @@
     "article_total": 255,
     "high_priority": 3,
     "official_documents": 576,
-    "cop31_countdown": 97,
-    "archive_total": 154
+    "cop31_countdown": 96,
+    "archive_total": 166
   },
   "intelligence": [
+    {
+      "record_id": "article_b4e0b07e7098b7c6",
+      "article_id": "article_b4e0b07e7098b7c6",
+      "canonical_url": "https://grist.org/extreme-weather/what-another-texas-flood-revealed-about-the-states-warning-system",
+      "source_url": "https://grist.org/extreme-weather/what-another-texas-flood-revealed-about-the-states-warning-system/",
+      "source_id": "INT020",
+      "source_name": "Grist",
+      "source_type": "非营利气候与环境媒体",
+      "authority": 4,
+      "relevance_score": 66,
+      "title_original": "What another Texas flood revealed about the state’s warning system",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": "Texas revamped its early warning system after a Hill Country flood killed 139 people last year. July's historic flood revealed what it accomplished — and what’s left to do.",
+      "summary_zh": "涉及美国得州，这条情报聚焦洪水、强降雨或风暴造成的气候风险。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-04T08:45:00+00:00",
+      "fetched_at": "2026-08-05T00:55:46.259657+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "139"
+      ],
+      "places": [
+        {
+          "name_zh": "美国得州",
+          "lon": -99.0,
+          "lat": 31.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "979e0149f302a8309690c5aa83de25514d45972ee8a6154086036e5a5ef57cb9",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_b4e0b07e7098b7c6",
+        "source_atom": {
+          "name": "Grist",
+          "authority": 4,
+          "type": "非营利气候与环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "139"
+        ],
+        "geo_atoms": [
+          "美国得州"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
+      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+    },
+    {
+      "record_id": "article_34eb6ba3342d3843",
+      "article_id": "article_34eb6ba3342d3843",
+      "canonical_url": "https://news.mongabay.com/short-article/2026/08/how-borneos-giant-trees-defy-gravity-and-old-scientific-theories",
+      "source_url": "https://news.mongabay.com/short-article/2026/08/how-borneos-giant-trees-defy-gravity-and-old-scientific-theories/",
+      "source_id": "INT007",
+      "source_name": "Mongabay Climate Change",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 62,
+      "title_original": "How Borneo’s giant trees defy gravity and old scientific theories",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": "Giant tropical trees in Malaysian Borneo pump water to their highest branches just as easily as to their lower-most branches, a new study says. Researchers say this suggests tall trees are not more vulnerable to drought than shorter trees, as was previously believed. For decades, scientists have hypothesized that as trees become taller, the effects […]",
+      "summary_zh": "这条情报聚焦干旱、水资源压力及适应需求。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-04T04:24:40+00:00",
+      "fetched_at": "2026-08-05T00:55:43.479513+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "b8586fa834d68205cdbbdcb7bc9e74a72a0c8dd7a9af7a328e1d967b369c36d1",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_34eb6ba3342d3843",
+        "source_atom": {
+          "name": "Mongabay Climate Change",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
+      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+    },
+    {
+      "record_id": "article_d78fb1ce220cf059",
+      "article_id": "article_d78fb1ce220cf059",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxONnhES1VsSWU2eDZEa1RmN3M1cHV2SHpiOF9yTERqT1JRYWZfLTYzeGN1TzRCRDI4eWlVMkQ5aVFkUWoxQmFFX3lZaldzT2tJMVF2UFJtSkhCUFZZeVhXUHFYVkxfZXk3RjdCRloyXy0tOUE2YlBvaW9hMGZ6bVFiRWdZLVVMelBaU1hxU2l0REJPb2Roam5JSS0wX3ZPLTNBZ1p1SHFrbVRNLW1aaUZNanlrbU00bXdTQkFLd3FDVjRzQQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxONnhES1VsSWU2eDZEa1RmN3M1cHV2SHpiOF9yTERqT1JRYWZfLTYzeGN1TzRCRDI4eWlVMkQ5aVFkUWoxQmFFX3lZaldzT2tJMVF2UFJtSkhCUFZZeVhXUHFYVkxfZXk3RjdCRloyXy0tOUE2YlBvaW9hMGZ6bVFiRWdZLVVMelBaU1hxU2l0REJPb2Roam5JSS0wX3ZPLTNBZ1p1SHFrbVRNLW1aaUZNanlrbU00bXdTQkFLd3FDVjRzQQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "New $100 million program to unlock ‘missing middle’ of renewable energy shift - pv magazine Australia",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_source": "New $100 million program to unlock ‘missing middle’ of renewable energy shift pv magazine Australia",
+      "summary_zh": "涉及澳大利亚，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现100 million等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "能源转型",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-04T03:23:51+00:00",
+      "fetched_at": "2026-08-04T03:32:13.002639+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "$100 million"
+      ],
+      "places": [
+        {
+          "name_zh": "澳大利亚",
+          "lon": 134.0,
+          "lat": -25.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "7d32608d53d555ad5dba07ce609cd1a869fad4d6e92b1a029d106ab196ea8a15",
+      "poster_phrase": "能源转型提速",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_d78fb1ce220cf059",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "$100 million"
+        ],
+        "geo_atoms": [
+          "澳大利亚"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-04T03:32:14.940315+00:00",
+      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+    },
+    {
+      "record_id": "article_dbab5b3ffec46e40",
+      "article_id": "article_dbab5b3ffec46e40",
+      "canonical_url": "https://www.illawarramercury.com.au/story/9323313/wildfires-in-us-pacific-northwest-force-64000-to-flee",
+      "source_url": "https://www.illawarramercury.com.au/story/9323313/wildfires-in-us-pacific-northwest-force-64000-to-flee/",
+      "source_id": "API001",
+      "source_name": "GDELT 2.0 DOC API",
+      "source_type": "全球新闻聚合API",
+      "authority": 4,
+      "relevance_score": 80,
+      "title_original": "Wildfires in US Pacific Northwest force 64 , 000 to flee",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": null,
+      "summary_zh": "这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-04T02:45:00+00:00",
+      "fetched_at": "2026-08-04T03:32:12.479906+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "64",
+        "000"
+      ],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "0813943e1bc25471aaf10eeccc610df43998874478b4a144e5ade40717d1b3d8",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 64,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_dbab5b3ffec46e40",
+        "source_atom": {
+          "name": "GDELT 2.0 DOC API",
+          "authority": 4,
+          "type": "全球新闻聚合API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "64",
+          "000"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-04T03:32:14.940315+00:00",
+      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+    },
+    {
+      "record_id": "article_fbfc786ccc7df58f",
+      "article_id": "article_fbfc786ccc7df58f",
+      "canonical_url": "https://www.commondigital.commonperu.com/index.php/locales/57318-mapfre-neutraliza-el-84-de-su-huella-de-carbono-operativa-en-16-proyectos-globales-de-compensacion",
+      "source_url": "https://www.commondigital.commonperu.com/index.php/locales/57318-mapfre-neutraliza-el-84-de-su-huella-de-carbono-operativa-en-16-proyectos-globales-de-compensacion",
+      "source_id": "API001",
+      "source_name": "GDELT 2.0 DOC API",
+      "source_type": "全球新闻聚合API",
+      "authority": 4,
+      "relevance_score": 58,
+      "title_original": "Mapfre neutraliza el 84 % de su huella de carbono operativa en 16 proyectos globales de compensación",
+      "title_zh": "碳排放治理出现新动向",
+      "summary_source": null,
+      "summary_zh": "这条情报聚焦减排政策相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "减排政策",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "Spanish",
+      "published_at": "2026-08-04T02:45:00+00:00",
+      "fetched_at": "2026-08-04T03:32:12.479906+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "84 %",
+        "16"
+      ],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "57d69477d85b1d50b406e66be5268d81bace4c5919a91947a0d80d676c3e1ebd",
+      "poster_phrase": "减排信号更新",
+      "quality": {
+        "passed": true,
+        "score": 56,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_fbfc786ccc7df58f",
+        "source_atom": {
+          "name": "GDELT 2.0 DOC API",
+          "authority": 4,
+          "type": "全球新闻聚合API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "84 %",
+          "16"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-04T03:32:14.940315+00:00",
+      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+    },
     {
       "record_id": "article_abb526d3ea838f5c",
       "article_id": "article_abb526d3ea838f5c",
@@ -42,12 +393,12 @@
       "title_original": "Carbon markets alone won’t keep Southeast Asia’s forests standing, study says",
       "title_zh": "碳排放治理出现新动向",
       "summary_source": "- A new study has identified “massive and untapped” conservation potential within forestry and plantation concessions in Southeast Asia. - Roughly 42 million hectares of forests remain standing inside logging, oil palm, timber and rubber plantation concessions across the region, the study says. - The researchers examined what it would take to financially incentivize forest conservation inside these concessions, finding that using carbon markets alone would require carbon prices many times higher than current values. - They point to the need for diversified sources of conservation funding to complement carbon markets, such as blended finance, green bonds and payment for ecosystems services, as well as more supportive governance frameworks that elevate the viability of conservation over development.",
-      "summary_zh": "来源标题显示，碳排放治理出现新动向。该信息涉及减排政策，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "这条情报聚焦气候资金安排、资金缺口或融资工具。原文出现42 million等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "theme_zh": "减排政策",
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T02:00:36+00:00",
-      "fetched_at": "2026-08-04T02:56:42.697050+00:00",
+      "fetched_at": "2026-08-05T00:55:43.479513+00:00",
       "topics": [
         "国际碳市场"
       ],
@@ -94,76 +445,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T02:57:35.322175+00:00",
-      "last_archived_at": "2026-08-04T02:57:36.239778+00:00"
-    },
-    {
-      "record_id": "article_84d54f97fc760284",
-      "article_id": "article_84d54f97fc760284",
-      "canonical_url": "https://www.dailyliberal.com.au/story/9323313/wildfires-in-us-pacific-northwest-force-64000-to-flee",
-      "source_url": "https://www.dailyliberal.com.au/story/9323313/wildfires-in-us-pacific-northwest-force-64000-to-flee/",
-      "source_id": "API001",
-      "source_name": "GDELT 2.0 DOC API",
-      "source_type": "全球新闻聚合API",
-      "authority": 4,
-      "relevance_score": 70,
-      "title_original": "Wildfires in US Pacific Northwest force 64 , 000 to flee",
-      "title_zh": "极端天气风险出现新动态",
-      "summary_source": null,
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "极端天气与气候风险",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "English",
-      "published_at": "2026-08-04T00:30:00+00:00",
-      "fetched_at": "2026-08-04T01:01:50.285595+00:00",
-      "topics": [
-        "气候适应"
-      ],
-      "numbers": [
-        "64",
-        "000"
-      ],
-      "places": [],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "d5df8912e1869d157ce04edb948b2c6df685566d6cb9308c0f4f06360289ee8e",
-      "poster_phrase": "极端天气预警",
-      "quality": {
-        "passed": true,
-        "score": 60,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_84d54f97fc760284",
-        "source_atom": {
-          "name": "GDELT 2.0 DOC API",
-          "authority": 4,
-          "type": "全球新闻聚合API"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候适应"
-        ],
-        "number_atoms": [
-          "64",
-          "000"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-04T01:02:12.504053+00:00"
+      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
     },
     {
       "record_id": "article_ab99a5172e49eaeb",
@@ -178,12 +460,12 @@
       "title_original": "1552. Climate Change Is Rapidly Increasing Wildfire Risk in Southern Europe - jircas.go.jp",
       "title_zh": "欧洲野火形势判断受到事实核查",
       "summary_source": "1552. Climate Change Is Rapidly Increasing Wildfire Risk in Southern Europe jircas.go.jp",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "theme_zh": "野火风险",
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-03T23:04:05+00:00",
-      "fetched_at": "2026-08-04T02:57:34.789666+00:00",
+      "fetched_at": "2026-08-04T03:32:13.002639+00:00",
       "topics": [
         "气候适应"
       ],
@@ -238,141 +520,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T02:57:35.322175+00:00",
-      "last_archived_at": "2026-08-04T02:57:36.239778+00:00"
-    },
-    {
-      "record_id": "article_ea7e26c1168774c7",
-      "article_id": "article_ea7e26c1168774c7",
-      "canonical_url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBpTHpjNlpXdEE4Z190S0dLak4yUjBRN1ZNVlBTdWVSU1lQemdWNk9ia1hKTm9ZcFhEeXVkdVBfYjMwSjN3VTNyZnJyQWpBSVJfRHlzS2p6U1Y5RHRlRTVnSEZOdUtGY3JTRGJQeG1xMTlEaHJ4OFFXbFNmTGIxRE0?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBpTHpjNlpXdEE4Z190S0dLak4yUjBRN1ZNVlBTdWVSU1lQemdWNk9ia1hKTm9ZcFhEeXVkdVBfYjMwSjN3VTNyZnJyQWpBSVJfRHlzS2p6U1Y5RHRlRTVnSEZOdUtGY3JTRGJQeG1xMTlEaHJ4OFFXbFNmTGIxRE0?oc=5",
-      "source_id": "API004",
-      "source_name": "Google News RSS Search",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
-      "relevance_score": 58,
-      "title_original": "Renewable Energy Update 7.31.26 - JD Supra",
-      "title_zh": "清洁能源转型出现新进展",
-      "summary_source": "Renewable Energy Update 7.31.26 JD Supra",
-      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "能源转型",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "multilingual",
-      "published_at": "2026-08-03T21:06:22+00:00",
-      "fetched_at": "2026-08-04T02:57:34.789666+00:00",
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [
-        "7.31.26"
-      ],
-      "places": [],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "119e83d4a4058470a063e47e371d3f6e716488b60c5645eb4a3ebee3c07e0860",
-      "poster_phrase": "能源转型提速",
-      "quality": {
-        "passed": true,
-        "score": 47,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_ea7e26c1168774c7",
-        "source_atom": {
-          "name": "Google News RSS Search",
-          "authority": 3,
-          "type": "搜索聚合Feed"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放"
-        ],
-        "number_atoms": [
-          "7.31.26"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-04T02:57:35.322175+00:00",
-      "last_archived_at": "2026-08-04T02:57:36.239778+00:00"
-    },
-    {
-      "record_id": "article_bbe8bc05369a991f",
-      "article_id": "article_bbe8bc05369a991f",
-      "canonical_url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQRXE0RXh1T3NzbFBZaUtraWMxRF8tZEdTTTVKMVQ0aVB5aUd3SWJKLUxtRFBoeWxzZnVZVkhpT3luSllUSGZsa2wzXy1XYWZkZGx6VHM4MkVIczNINXZrQ1NHVV8zVEhJc0JtTWltU1NXMHJ3b1pjbTNWbEdsdzAwenJCOEgxMnV4UGpxRGFuR29TRkJ0cWdfMVRwanpKQQ?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQRXE0RXh1T3NzbFBZaUtraWMxRF8tZEdTTTVKMVQ0aVB5aUd3SWJKLUxtRFBoeWxzZnVZVkhpT3luSllUSGZsa2wzXy1XYWZkZGx6VHM4MkVIczNINXZrQ1NHVV8zVEhJc0JtTWltU1NXMHJ3b1pjbTNWbEdsdzAwenJCOEgxMnV4UGpxRGFuR29TRkJ0cWdfMVRwanpKQQ?oc=5",
-      "source_id": "API004",
-      "source_name": "Google News RSS Search",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
-      "relevance_score": 58,
-      "title_original": "Brookfield Launches $600 Million India-focused Renewable Energy Platform - ESG Today",
-      "title_zh": "印度可再生能源投资计划升温",
-      "summary_source": "Brookfield Launches $600 Million India-focused Renewable Energy Platform ESG Today",
-      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "theme_zh": "可再生能源投资",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
-      "language": "multilingual",
-      "published_at": "2026-08-03T18:45:07+00:00",
-      "fetched_at": "2026-08-04T02:57:34.789666+00:00",
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [
-        "$600 million"
-      ],
-      "places": [],
-      "translation_status": "fallback_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "b7a893f576627e377897ee37c87eeed4624e4b92942b288977087034602e37b2",
-      "poster_phrase": "印度绿能投资",
-      "quality": {
-        "passed": true,
-        "score": 47,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "chinese_summary": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_bbe8bc05369a991f",
-        "source_atom": {
-          "name": "Google News RSS Search",
-          "authority": 3,
-          "type": "搜索聚合Feed"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放"
-        ],
-        "number_atoms": [
-          "$600 million"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
-      },
-      "first_archived_at": "2026-08-04T02:57:35.322175+00:00",
-      "last_archived_at": "2026-08-04T02:57:36.239778+00:00"
+      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
     },
     {
       "record_id": "article_b55a457f6d9bf0c3",
@@ -387,12 +535,12 @@
       "title_original": "Urban firestorm devastates Spokane as dense smoke envelops the Northwest",
       "title_zh": "极端天气风险出现新动态",
       "summary_source": "Climate change, combined with development in high-risk areas, is making urban wildfires more likely. The post Urban firestorm devastates Spokane as dense smoke envelops the Northwest appeared first on Yale Climate Connections .",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "theme_zh": "极端天气与气候风险",
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T18:33:53+00:00",
-      "fetched_at": "2026-08-04T02:56:42.744778+00:00",
+      "fetched_at": "2026-08-05T00:55:43.788852+00:00",
       "topics": [
         "气候适应"
       ],
@@ -435,7 +583,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-04T02:57:36.239778+00:00"
+      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
     },
     {
       "record_id": "article_5139f371a3d4f826",
@@ -450,12 +598,12 @@
       "title_original": "‘COP30 is not over’: Indigenous peoples press for hard power",
       "title_zh": "国际气候谈判出现新动向",
       "summary_source": "With no seat at the negotiating table, Brazil’s Indigenous movement is pushing for change using marches and underground policy proposals The post ‘COP30 is not over’: Indigenous peoples press for hard power appeared first on Dialogue Earth .",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及巴西，这条情报聚焦国际谈判、国家承诺或大会进程。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "theme_zh": "气候谈判",
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T17:15:27+00:00",
-      "fetched_at": "2026-08-04T02:56:43.130871+00:00",
+      "fetched_at": "2026-08-05T00:55:45.065713+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -506,7 +654,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-04T02:57:36.239778+00:00"
+      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
     },
     {
       "record_id": "article_a86068009a53a8cf",
@@ -521,12 +669,12 @@
       "title_original": "Rhine falls to record low levels as drought strains Europe's rivers",
       "title_zh": "极端天气风险出现新动态",
       "summary_source": "Low water levels in the Rhine, Danube and Po have curtailed the transport of goods and reduced electricity output.",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦干旱、水资源压力及适应需求。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "theme_zh": "极端天气与气候风险",
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T16:27:43+00:00",
-      "fetched_at": "2026-08-04T02:56:43.624685+00:00",
+      "fetched_at": "2026-08-04T03:30:58.970678+00:00",
       "topics": [
         "气候适应"
       ],
@@ -577,10 +725,36 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-04T02:57:36.239778+00:00"
+      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
     }
   ],
   "map_events": [
+    {
+      "marker_id": "article_b4e0b07e7098b7c6_0",
+      "article_id": "article_b4e0b07e7098b7c6",
+      "place": "美国得州",
+      "lon": -99.0,
+      "lat": 31.0,
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "涉及美国得州，这条情报聚焦洪水、强降雨或风暴造成的气候风险。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Grist",
+      "published_at": "2026-08-04T08:45:00+00:00",
+      "url": "https://grist.org/extreme-weather/what-another-texas-flood-revealed-about-the-states-warning-system"
+    },
+    {
+      "marker_id": "article_d78fb1ce220cf059_0",
+      "article_id": "article_d78fb1ce220cf059",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "能源转型",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_zh": "涉及澳大利亚，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现100 million等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-04T03:23:51+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxONnhES1VsSWU2eDZEa1RmN3M1cHV2SHpiOF9yTERqT1JRYWZfLTYzeGN1TzRCRDI4eWlVMkQ5aVFkUWoxQmFFX3lZaldzT2tJMVF2UFJtSkhCUFZZeVhXUHFYVkxfZXk3RjdCRloyXy0tOUE2YlBvaW9hMGZ6bVFiRWdZLVVMelBaU1hxU2l0REJPb2Roam5JSS0wX3ZPLTNBZ1p1SHFrbVRNLW1aaUZNanlrbU00bXdTQkFLd3FDVjRzQQ?oc=5"
+    },
     {
       "marker_id": "article_ab99a5172e49eaeb_0",
       "article_id": "article_ab99a5172e49eaeb",
@@ -589,7 +763,7 @@
       "lat": 51.0,
       "theme": "野火风险",
       "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-03T23:04:05+00:00",
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE81SW9CenFCX0dsMEFPUFlIY2dfZkRxWFMtR1J1bVJaMXZ5LVdYcldVNVBJeDRYOF9BYlU2a2Z5ZWkyMV83TkVxblZwVHNBRWdUMm8xNVF2TEFFR2EyYmZKUXRwdXQ?oc=5"
@@ -602,7 +776,7 @@
       "lat": -10.0,
       "theme": "气候谈判",
       "title_zh": "国际气候谈判出现新动向",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及巴西，这条情报聚焦国际谈判、国家承诺或大会进程。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Dialogue Earth",
       "published_at": "2026-08-03T17:15:27+00:00",
       "url": "https://dialogue.earth/en/climate/cop30-is-not-over-indigenous-peoples-press-for-hard-power"
@@ -615,7 +789,7 @@
       "lat": 51.0,
       "theme": "极端天气与气候风险",
       "title_zh": "极端天气风险出现新动态",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦干旱、水资源压力及适应需求。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "BBC Science & Environment",
       "published_at": "2026-08-03T16:27:43+00:00",
       "url": "https://www.bbc.co.uk/news/articles/c78gn8zvrx4o?at_medium=RSS&at_campaign=rss"
@@ -623,6 +797,32 @@
   ],
   "map_events_today": [
     {
+      "marker_id": "article_b4e0b07e7098b7c6_0",
+      "article_id": "article_b4e0b07e7098b7c6",
+      "place": "美国得州",
+      "lon": -99.0,
+      "lat": 31.0,
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "涉及美国得州，这条情报聚焦洪水、强降雨或风暴造成的气候风险。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Grist",
+      "published_at": "2026-08-04T08:45:00+00:00",
+      "url": "https://grist.org/extreme-weather/what-another-texas-flood-revealed-about-the-states-warning-system"
+    },
+    {
+      "marker_id": "article_d78fb1ce220cf059_0",
+      "article_id": "article_d78fb1ce220cf059",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "能源转型",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_zh": "涉及澳大利亚，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现100 million等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-04T03:23:51+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxONnhES1VsSWU2eDZEa1RmN3M1cHV2SHpiOF9yTERqT1JRYWZfLTYzeGN1TzRCRDI4eWlVMkQ5aVFkUWoxQmFFX3lZaldzT2tJMVF2UFJtSkhCUFZZeVhXUHFYVkxfZXk3RjdCRloyXy0tOUE2YlBvaW9hMGZ6bVFiRWdZLVVMelBaU1hxU2l0REJPb2Roam5JSS0wX3ZPLTNBZ1p1SHFrbVRNLW1aaUZNanlrbU00bXdTQkFLd3FDVjRzQQ?oc=5"
+    },
+    {
       "marker_id": "article_ab99a5172e49eaeb_0",
       "article_id": "article_ab99a5172e49eaeb",
       "place": "欧洲",
@@ -630,7 +830,7 @@
       "lat": 51.0,
       "theme": "野火风险",
       "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-03T23:04:05+00:00",
       "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE81SW9CenFCX0dsMEFPUFlIY2dfZkRxWFMtR1J1bVJaMXZ5LVdYcldVNVBJeDRYOF9BYlU2a2Z5ZWkyMV83TkVxblZwVHNBRWdUMm8xNVF2TEFFR2EyYmZKUXRwdXQ?oc=5"
@@ -643,7 +843,7 @@
       "lat": -10.0,
       "theme": "气候谈判",
       "title_zh": "国际气候谈判出现新动向",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及巴西，这条情报聚焦国际谈判、国家承诺或大会进程。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Dialogue Earth",
       "published_at": "2026-08-03T17:15:27+00:00",
       "url": "https://dialogue.earth/en/climate/cop30-is-not-over-indigenous-peoples-press-for-hard-power"
@@ -656,7 +856,7 @@
       "lat": 51.0,
       "theme": "极端天气与气候风险",
       "title_zh": "极端天气风险出现新动态",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦干旱、水资源压力及适应需求。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "BBC Science & Environment",
       "published_at": "2026-08-03T16:27:43+00:00",
       "url": "https://www.bbc.co.uk/news/articles/c78gn8zvrx4o?at_medium=RSS&at_campaign=rss"
@@ -671,7 +871,7 @@
       "lat": 35.0,
       "theme": "能源转型",
       "title_zh": "清洁能源转型出现新进展",
-      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及中国，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现1.8 Billion等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-02T22:36:00+00:00",
       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNOFlaZFhxQnEzN3NfS3RuT2djckI1NHVibVZwbGVtRXBsR1NfQk83LXYtaGc4Z0wzOUlBc0pZdFYtOFhKUTFpRFZRWEl6UzdTQUp0b0ZSSDJGUzFJNkptbTRxTy1mcEpNMjR5NF8tM1BmaUhJWTE1Y1VrTDJuR3dHeXlsbkVFVl9aZjg5ZGRTNEMydkRibTliRFV0bnc3U3hjRmY0Z3BycFZteXFuRm5LTGlVdnAxVUlYclM0VGNMUTFvUnFWLTRia3ItUnpxRDBMZjkwMXhuUjZrUVNob3dMYmI2N043QQ?oc=5"
@@ -684,7 +884,7 @@
       "lat": -10.0,
       "theme": "气候谈判",
       "title_zh": "国际气候谈判出现新动向",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及巴西，这条情报聚焦国际谈判、国家承诺或大会进程。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Dialogue Earth",
       "published_at": "2026-08-03T17:15:27+00:00",
       "url": "https://dialogue.earth/en/climate/cop30-is-not-over-indigenous-peoples-press-for-hard-power"
@@ -697,7 +897,7 @@
       "lat": 51.0,
       "theme": "极端天气与气候风险",
       "title_zh": "极端天气风险出现新动态",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦干旱、水资源压力及适应需求。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "BBC Science & Environment",
       "published_at": "2026-08-03T16:27:43+00:00",
       "url": "https://www.bbc.co.uk/news/articles/c78gn8zvrx4o?at_medium=RSS&at_campaign=rss"
@@ -710,23 +910,23 @@
       "lat": -25.0,
       "theme": "极端天气与气候风险",
       "title_zh": "极端天气风险出现新动态",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及澳大利亚，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "GDELT 2.0 DOC API",
       "published_at": "2026-08-03T06:45:00+00:00",
       "url": "https://timesofindia.indiatimes.com/world/us/researchers-tracked-wildfires-from-1984-to-2022-a-pacific-trend-added-22-to-us-southwest-drying-related-burned-area-but-reduced-eastern-australias-by-about-19/articleshow/132765507.cms"
     },
     {
-      "marker_id": "article_5d2027d45a6bd74a_0",
-      "article_id": "article_5d2027d45a6bd74a",
-      "place": "美国",
-      "lon": -100.0,
-      "lat": 39.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Canary Media",
-      "published_at": "2026-08-03T07:30:00+00:00",
-      "url": "https://www.canarymedia.com/articles/food-and-farms/virginia-solar-with-farming"
+      "marker_id": "article_b4e0b07e7098b7c6_0",
+      "article_id": "article_b4e0b07e7098b7c6",
+      "place": "美国得州",
+      "lon": -99.0,
+      "lat": 31.0,
+      "theme": "极端天气与气候风险",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_zh": "涉及美国得州，这条情报聚焦洪水、强降雨或风暴造成的气候风险。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Grist",
+      "published_at": "2026-08-04T08:45:00+00:00",
+      "url": "https://grist.org/extreme-weather/what-another-texas-flood-revealed-about-the-states-warning-system"
     },
     {
       "marker_id": "article_01b6a3fea5209786_0",
@@ -736,7 +936,7 @@
       "lat": -29.0,
       "theme": "清洁能源合作",
       "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及南非、非洲，这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "中国官方气候来源（GDELT定向发现）",
       "published_at": "2026-08-01T10:15:00+00:00",
       "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
@@ -749,7 +949,7 @@
       "lat": 2.0,
       "theme": "清洁能源合作",
       "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及南非、非洲，这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "中国官方气候来源（GDELT定向发现）",
       "published_at": "2026-08-01T10:15:00+00:00",
       "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
@@ -762,10 +962,23 @@
       "lat": 35.0,
       "theme": "清洁能源合作",
       "title_zh": "中南清洁能源合作风电项目启动",
-      "summary_zh": "来源标题显示，中南清洁能源合作风电项目启动。该信息涉及清洁能源合作，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及南非、非洲，这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "中国官方气候来源（GDELT定向发现）",
       "published_at": "2026-08-01T10:15:00+00:00",
       "url": "https://english.news.cn/africa/20260801/f0e3dfd638504a599e54408e8311c3d5/c.html"
+    },
+    {
+      "marker_id": "article_5d2027d45a6bd74a_0",
+      "article_id": "article_5d2027d45a6bd74a",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "涉及美国，这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-03T07:30:00+00:00",
+      "url": "https://www.canarymedia.com/articles/food-and-farms/virginia-solar-with-farming"
     },
     {
       "marker_id": "article_2fc21c2ac0bf82c6_0",
@@ -775,49 +988,10 @@
       "lat": 51.0,
       "theme": "野火风险",
       "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Carbon Brief",
       "published_at": "2026-07-30T14:51:00+00:00",
       "url": "https://www.carbonbrief.org/factcheck-no-europe-is-not-having-its-quietest-year-for-wildfires"
-    },
-    {
-      "marker_id": "article_40dcb227c1fcbe93_0",
-      "article_id": "article_40dcb227c1fcbe93",
-      "place": "美国得州",
-      "lon": -99.0,
-      "lat": 31.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Grist",
-      "published_at": "2026-08-02T13:00:00+00:00",
-      "url": "https://grist.org/energy/this-texas-coal-mine-will-soon-be-home-to-a-1-2gw-solar-farm"
-    },
-    {
-      "marker_id": "article_2b498ff60d1dfc18_0",
-      "article_id": "article_2b498ff60d1dfc18",
-      "place": "巴西",
-      "lon": -52.0,
-      "lat": -10.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-07-28T19:34:59+00:00",
-      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
-    },
-    {
-      "marker_id": "article_2b498ff60d1dfc18_1",
-      "article_id": "article_2b498ff60d1dfc18",
-      "place": "亚马孙地区",
-      "lon": -62.0,
-      "lat": -4.0,
-      "theme": "气候动态",
-      "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-07-28T19:34:59+00:00",
-      "url": "https://news.mongabay.com/2026/07/fishers-fight-for-solutions-as-brazil-lists-tambaqui-as-threatened"
     },
     {
       "marker_id": "article_c51a150ef2c99849_0",
@@ -827,7 +1001,7 @@
       "lat": 9.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及尼日利亚、中国，这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-02T18:21:18+00:00",
       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
@@ -840,7 +1014,7 @@
       "lat": 35.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及尼日利亚、中国，这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-02T18:21:18+00:00",
       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOTEVlVEhWZmJhSWE2bUlQNkg2NW9MUzMtZWlsUUh3ekxFcEdyY25EX1RzWXNMd2pBX3ktc05VeDdoU2trYnpWUGJrcGpFWC1uRExBRUIxdjZNZlduS1czQXgteXl1VHJJU2NZVVB1NjBZSmZZR0NzNWs4U28wMWdMWXk1cDJ5cDh1N21ELW90MnFtVFpZVFNGYXFBZTFBcnVXUllKRWVtZTZQVWtkcDg4QlZaY2pUVGZ5MEZQYUVxcnQ5ckhsYlpsVkNQNGpNMzRSUXR3a25oaw?oc=5"
@@ -853,7 +1027,7 @@
       "lat": 51.0,
       "theme": "能源转型",
       "title_zh": "清洁能源转型出现新进展",
-      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Climate Home News",
       "published_at": "2026-08-03T10:14:16+00:00",
       "url": "https://www.climatechangenews.com/2026/08/03/egypt-seeks-to-unlock-renewable-riches-to-power-regional-clean-energy-hub"
@@ -866,7 +1040,7 @@
       "lat": 35.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及中国，这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "中国官方气候来源（GDELT定向发现）",
       "published_at": "2026-08-03T09:30:00+00:00",
       "url": "https://english.news.cn/20260803/36c7e8aeea2941b996c962ce8bba52c7/c.html"
@@ -879,7 +1053,7 @@
       "lat": -41.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及新西兰、巴西，这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Mongabay Climate Change",
       "published_at": "2026-07-31T18:34:42+00:00",
       "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
@@ -892,23 +1066,10 @@
       "lat": -10.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及新西兰、巴西，这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Mongabay Climate Change",
       "published_at": "2026-07-31T18:34:42+00:00",
       "url": "https://news.mongabay.com/2026/07/coral-reef-experts-press-on-with-climate-looming-over-international-conference"
-    },
-    {
-      "marker_id": "article_10c1a591d0f25813_0",
-      "article_id": "article_10c1a591d0f25813",
-      "place": "中国",
-      "lon": 105.0,
-      "lat": 35.0,
-      "theme": "可再生能源政策",
-      "title_zh": "中国第十五个可再生能源五年规划对气候变化的影响",
-      "summary_zh": "中国发布了第十五个可再生能源五年规划，明确了未来五年可再生能源发展的主要目标和政策。该规划将推动风能、太阳能等清洁能源增长，对中国实现碳中和目标具有重要意义，并将影响全球气候治理进程。",
-      "source_name": "Carbon Brief",
-      "published_at": "2026-07-29T12:08:55+00:00",
-      "url": "https://www.carbonbrief.org/qa-what-does-chinas-15th-five-year-plan-for-renewables-mean-for-climate-change"
     },
     {
       "marker_id": "article_6807db1e98ad4c31_0",
@@ -918,7 +1079,7 @@
       "lat": 23.0,
       "theme": "能源转型",
       "title_zh": "清洁能源转型出现新进展",
-      "summary_zh": "来源标题显示，清洁能源转型出现新进展。该信息涉及能源转型，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及墨西哥，这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Yale Climate Connections",
       "published_at": "2026-07-31T11:00:00+00:00",
       "url": "https://yaleclimateconnections.org/2026/07/new-mexicos-clean-energy-success-story"
@@ -931,7 +1092,7 @@
       "lat": 51.0,
       "theme": "野火风险",
       "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲、法国，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Grist",
       "published_at": "2026-07-31T08:45:00+00:00",
       "url": "https://grist.org/wildfires/study-monster-wildfires-spain-france-attribution"
@@ -944,7 +1105,7 @@
       "lat": 46.0,
       "theme": "野火风险",
       "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲、法国，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Grist",
       "published_at": "2026-07-31T08:45:00+00:00",
       "url": "https://grist.org/wildfires/study-monster-wildfires-spain-france-attribution"
@@ -957,23 +1118,10 @@
       "lat": 22.0,
       "theme": "可再生能源投资",
       "title_zh": "印度可再生能源投资计划升温",
-      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及印度，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现150 MW等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-03T02:45:21+00:00",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPbFlHcGZ6N09QVTB5bHBodS16SDBVTFpKcFNCdjhFNVFRanFDaTNlNlV2UUMySjVvQ01rR0xvWl9ncm1fVDNmcXBOcjBpUnYzckgwSDFBZjV4WjdkVFdoMlhva3RESzk2R0RCeXF4MGx1TjFYdFNZOUFtOE9DeGhEWlhQZk43enQzNEFyeGRPMjVyRkdyallKYzF2Ml9nMzdF?oc=5"
-    },
-    {
-      "marker_id": "article_d06390e6b6173bbd_0",
-      "article_id": "article_d06390e6b6173bbd",
-      "place": "法国",
-      "lon": 2.0,
-      "lat": 46.0,
-      "theme": "野火风险归因",
-      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
-      "summary_zh": "来源标题显示，研究称气候变化使西班牙野火风险增至20倍。该信息涉及野火风险归因，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-07-31T05:33:22+00:00",
-      "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
     },
     {
       "marker_id": "article_fc5da889c959eea6_0",
@@ -983,10 +1131,36 @@
       "lat": -2.0,
       "theme": "气候谈判",
       "title_zh": "国际气候谈判出现新动向",
-      "summary_zh": "来源标题显示，国际气候谈判出现新动向。该信息涉及气候谈判，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及印度尼西亚，这条情报聚焦国际谈判、国家承诺或大会进程。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "GDELT 2.0 DOC API",
       "published_at": "2026-08-02T04:00:00+00:00",
       "url": "https://www.southeastasiapost.com/news/279219011/climate-summit-in-indonesia-calls-for-faster-action-deeper-green-cooperation"
+    },
+    {
+      "marker_id": "article_d06390e6b6173bbd_0",
+      "article_id": "article_d06390e6b6173bbd",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "野火风险归因",
+      "title_zh": "研究称气候变化使西班牙野火风险增至20倍",
+      "summary_zh": "涉及法国，这条情报聚焦极端高温、野火风险及其应急压力。原文出现000 hectares、000 acres等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-07-31T05:33:22+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/07/climate-change-boosted-spain-wildfire-risk-20-fold-research-shows"
+    },
+    {
+      "marker_id": "article_d78fb1ce220cf059_0",
+      "article_id": "article_d78fb1ce220cf059",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "能源转型",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_zh": "涉及澳大利亚，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现100 million等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-04T03:23:51+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxONnhES1VsSWU2eDZEa1RmN3M1cHV2SHpiOF9yTERqT1JRYWZfLTYzeGN1TzRCRDI4eWlVMkQ5aVFkUWoxQmFFX3lZaldzT2tJMVF2UFJtSkhCUFZZeVhXUHFYVkxfZXk3RjdCRloyXy0tOUE2YlBvaW9hMGZ6bVFiRWdZLVVMelBaU1hxU2l0REJPb2Roam5JSS0wX3ZPLTNBZ1p1SHFrbVRNLW1aaUZNanlrbU00bXdTQkFLd3FDVjRzQQ?oc=5"
     },
     {
       "marker_id": "article_318944cf5e73893a_0",
@@ -996,23 +1170,10 @@
       "lat": 23.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及墨西哥，这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Yale Climate Connections",
       "published_at": "2026-08-03T13:52:46+00:00",
       "url": "https://yaleclimateconnections.org/2026/08/the-state-thats-beating-dirty-electricity"
-    },
-    {
-      "marker_id": "article_e567b1fae508d991_0",
-      "article_id": "article_e567b1fae508d991",
-      "place": "加勒比地区",
-      "lon": -75.0,
-      "lat": 18.0,
-      "theme": "气候资金与损失赔偿",
-      "title_zh": "加勒比地区遭受430亿英镑气候灾害损失",
-      "summary_zh": "研究显示，2000至2024年加勒比国家因气候灾害损失532亿美元（约430亿英镑），占39个发展中岛屿总损失的90%以上。洪水、风暴和干旱是主要原因。该数据有助于全球气候赔偿和减缓资金讨论。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-29T11:00:30+00:00",
-      "url": "https://www.theguardian.com/world/2026/jul/29/caribbean-climate-related-economic-damage-developing-islands"
     },
     {
       "marker_id": "article_feb711c5f4b78c59_0",
@@ -1022,10 +1183,23 @@
       "lat": 35.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及中国，这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "中国官方气候来源（GDELT定向发现）",
       "published_at": "2026-08-03T01:45:00+00:00",
       "url": "https://www.news.cn/politics/20260803/dcce4d886c494c02998f41806cf84a63/c.html"
+    },
+    {
+      "marker_id": "article_40dcb227c1fcbe93_0",
+      "article_id": "article_40dcb227c1fcbe93",
+      "place": "美国得州",
+      "lon": -99.0,
+      "lat": 31.0,
+      "theme": "气候动态",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_zh": "涉及美国得州，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现1.2GW、1.7 billion等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Grist",
+      "published_at": "2026-08-02T13:00:00+00:00",
+      "url": "https://grist.org/energy/this-texas-coal-mine-will-soon-be-home-to-a-1-2gw-solar-farm"
     },
     {
       "marker_id": "article_730c3c57e5f5550d_0",
@@ -1035,7 +1209,7 @@
       "lat": 9.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及尼日利亚、亚马孙地区，这条情报聚焦气候动态相关变化。原文出现2.5 billion等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Mongabay Climate Change",
       "published_at": "2026-07-31T00:17:17+00:00",
       "url": "https://news.mongabay.com/2026/07/before-giant-meat-producer-jbs-expands-to-nigeria-people-deserve-answers-commentary"
@@ -1048,36 +1222,10 @@
       "lat": -4.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及尼日利亚、亚马孙地区，这条情报聚焦气候动态相关变化。原文出现2.5 billion等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Mongabay Climate Change",
       "published_at": "2026-07-31T00:17:17+00:00",
       "url": "https://news.mongabay.com/2026/07/before-giant-meat-producer-jbs-expands-to-nigeria-people-deserve-answers-commentary"
-    },
-    {
-      "marker_id": "article_ab99a5172e49eaeb_0",
-      "article_id": "article_ab99a5172e49eaeb",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "野火风险",
-      "title_zh": "欧洲野火形势判断受到事实核查",
-      "summary_zh": "来源标题显示，欧洲野火形势判断受到事实核查。该信息涉及野火风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-03T23:04:05+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE81SW9CenFCX0dsMEFPUFlIY2dfZkRxWFMtR1J1bVJaMXZ5LVdYcldVNVBJeDRYOF9BYlU2a2Z5ZWkyMV83TkVxblZwVHNBRWdUMm8xNVF2TEFFR2EyYmZKUXRwdXQ?oc=5"
-    },
-    {
-      "marker_id": "article_4854ab175a1e71d9_0",
-      "article_id": "article_4854ab175a1e71d9",
-      "place": "中国",
-      "lon": 105.0,
-      "lat": 35.0,
-      "theme": "光伏产业竞争",
-      "title_zh": "中国光伏产业亏损但持续扩张",
-      "summary_zh": "中国光伏制造商之间激烈的价格战导致太阳能板价格大幅下降，使可再生能源成本创历史新低。尽管行业整体亏损，中国仍加大投资力度，推动光伏产业持续扩张，进一步降低全球清洁能源门槛。",
-      "source_name": "Grist",
-      "published_at": "2026-07-29T08:00:00+00:00",
-      "url": "https://grist.org/energy/chinas-solar-industry-is-losing-money-the-country-is-doubling-down-anyway"
     },
     {
       "marker_id": "article_b77918746acf16ae_0",
@@ -1087,23 +1235,10 @@
       "lat": 31.0,
       "theme": "极端天气与气候风险",
       "title_zh": "极端天气风险出现新动态",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及美国得州，这条情报聚焦洪水、强降雨或风暴造成的气候风险。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Yale Climate Connections",
       "published_at": "2026-07-30T11:00:00+00:00",
       "url": "https://yaleclimateconnections.org/2026/07/flood-mapping-tool-helps-south-texas-communities-better-understand-flooding-risks"
-    },
-    {
-      "marker_id": "article_1a885c5c1b29037d_0",
-      "article_id": "article_1a885c5c1b29037d",
-      "place": "肯尼亚",
-      "lon": 37.0,
-      "lat": 0.0,
-      "theme": "青年气候行动",
-      "title_zh": "肯尼亚青年推动植树与气候意识",
-      "summary_zh": "肯尼亚青年巴拉卡·莫鲁里四年内带领家人和朋友种植超过7600棵树，倡导儿童参与气候行动和政策。气候资金专家指出，国际气候资金中不到1%流向青年和儿童主导项目，尽管气候变化影响其健康、教育和粮食安全。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-07-29T09:03:11+00:00",
-      "url": "https://news.mongabay.com/2026/07/kenyan-teen-leads-charge-on-tree-planting-and-climate-awareness"
     },
     {
       "marker_id": "article_b8776402559b16e0_0",
@@ -1113,23 +1248,23 @@
       "lat": 35.0,
       "theme": "气候动态",
       "title_zh": "全球气候议题出现新动态",
-      "summary_zh": "来源标题显示，全球气候议题出现新动态。该信息涉及气候动态，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及中国，这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "中国官方气候来源（GDELT定向发现）",
       "published_at": "2026-08-01T04:30:00+00:00",
       "url": "https://www.news.cn/world/20260801/6f0649b260864821873cd86aca640824/c.html"
     },
     {
-      "marker_id": "article_46fb787fee28b603_0",
-      "article_id": "article_46fb787fee28b603",
-      "place": "印度",
-      "lon": 78.0,
-      "lat": 22.0,
-      "theme": "可再生能源投资",
-      "title_zh": "印度可再生能源投资计划升温",
-      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "marker_id": "article_ab99a5172e49eaeb_0",
+      "article_id": "article_ab99a5172e49eaeb",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "野火风险",
+      "title_zh": "欧洲野火形势判断受到事实核查",
+      "summary_zh": "涉及欧洲，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
-      "published_at": "2026-08-03T11:37:16+00:00",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNZUctWnVZT3ppVTYxNWV3SFpIbm9JbHpFd0l5U3IxSmo1XzVvMWtnZGEzRmdHOVIyN1loRFJCRWw0dXFQMEFFak84bldiWERIckpwaEs1LUpRZDFRVEtqbnhaMTE4WUJYU3RlUTNUVUZXMGJaUHowOGx2NXFCNGltUFBxejRDMzEyemJUaFdLdHVBeHJDc0tzaXZZWmUtb3Q1a3dwekZFaDlaYUxq0gGsAUFVX3lxTE1lRy1adVlPemlVNjE1ZXdIWkhub0lsekV3SXlTcjFKajVfNW8xa2dkYTNGZ0c5UjI3WWhEUkJFbDR1cVAwQUVqTzhuV2JYREhySnBoSzUtSlFkMVFUS2pueFoxMThZQlhTdGVRM1RVRlcwYlpQejA4bHY1cUI0aW1QUHF6NEMzMTJ6YlRoV0t0dUF4ckNzS3NpdllaZS1vdDVrd3B6RkVoOVphTGo?oc=5"
+      "published_at": "2026-08-03T23:04:05+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE81SW9CenFCX0dsMEFPUFlIY2dfZkRxWFMtR1J1bVJaMXZ5LVdYcldVNVBJeDRYOF9BYlU2a2Z5ZWkyMV83TkVxblZwVHNBRWdUMm8xNVF2TEFFR2EyYmZKUXRwdXQ?oc=5"
     },
     {
       "marker_id": "article_807d7fbdc9bd5377_0",
@@ -1139,10 +1274,23 @@
       "lat": 51.0,
       "theme": "极端天气与气候风险",
       "title_zh": "极端天气风险出现新动态",
-      "summary_zh": "来源标题显示，极端天气风险出现新动态。该信息涉及极端天气与气候风险，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及欧洲，这条情报聚焦极端高温、野火风险及其应急压力。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Mongabay Climate Change",
       "published_at": "2026-07-30T12:27:18+00:00",
       "url": "https://news.mongabay.com/short-article/2026/07/prague-zoo-keeps-polar-bears-cool-with-ice-cubes-as-european-summer-heatwave-hits"
+    },
+    {
+      "marker_id": "article_46fb787fee28b603_0",
+      "article_id": "article_46fb787fee28b603",
+      "place": "印度",
+      "lon": 78.0,
+      "lat": 22.0,
+      "theme": "可再生能源投资",
+      "title_zh": "印度可再生能源投资计划升温",
+      "summary_zh": "涉及印度，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现750 MW等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-03T11:37:16+00:00",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNZUctWnVZT3ppVTYxNWV3SFpIbm9JbHpFd0l5U3IxSmo1XzVvMWtnZGEzRmdHOVIyN1loRFJCRWw0dXFQMEFFak84bldiWERIckpwaEs1LUpRZDFRVEtqbnhaMTE4WUJYU3RlUTNUVUZXMGJaUHowOGx2NXFCNGltUFBxejRDMzEyemJUaFdLdHVBeHJDc0tzaXZZWmUtb3Q1a3dwekZFaDlaYUxq0gGsAUFVX3lxTE1lRy1adVlPemlVNjE1ZXdIWkhub0lsekV3SXlTcjFKajVfNW8xa2dkYTNGZ0c5UjI3WWhEUkJFbDR1cVAwQUVqTzhuV2JYREhySnBoSzUtSlFkMVFUS2pueFoxMThZQlhTdGVRM1RVRlcwYlpQejA4bHY1cUI0aW1QUHF6NEMzMTJ6YlRoV0t0dUF4ckNzS3NpdllaZS1vdDVrd3B6RkVoOVphTGo?oc=5"
     },
     {
       "marker_id": "article_9c81750ebefab743_0",
@@ -1152,7 +1300,7 @@
       "lat": 22.0,
       "theme": "可再生能源投资",
       "title_zh": "印度可再生能源投资计划升温",
-      "summary_zh": "来源标题显示，印度可再生能源投资计划升温。该信息涉及可再生能源投资，适合作为当日气候情报线索；具体数字、责任主体和政策含义仍需回到原文核验。",
+      "summary_zh": "涉及印度，这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现600 Million等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
       "source_name": "Google News RSS Search",
       "published_at": "2026-08-01T17:12:05+00:00",
       "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxNNF9MamstaFg1UVRHS0R2TmxKUGl6U2RBeXlxYTBlUzRBc3hhcVBuS2JwU3BjWDc1bHdzWEZIeDJ4dmFOZ2lQMFdsdFp3dXQzSl9BQV9GWkVwUU5kcEZkbThRbk1NTTlKTGFqTGZTcVU2TnZJdm5QV2lWQ2ZsMG9SNThRVEJSNU5mMWdRdTY1c052UjdnOVRIcXgwcENteWJkOVA2dDgwWDlPTFRVa1VCSldnajJ3QjU3ZE40VWxtdU53S1BNNFNfY1FLMk5tYnNONG1WSWJ4Q0N0NW00LUEtbGl6R0htMl9SY1JwQ3Z4UnLSAfYBQVVfeXFMT0E3TTVzYkFOQTVXTm5rWnlCdUx3NlF5NGtrZXFJc3V5SjFYenZSX1psOG5JQ0NIekw1MnBJZGRLU3I5QUlJbGpVbFZJaEdyMVliV3pSTzkzSDJSMjBtbXVvazNTOFppanRYOXpmTUdBS1pIdDBCUEk0YkJOU3NLclRJY0VYRmFDUVllRlFSSVRGdGMyclNuNDVUdEpuak1NYXNnWGR6SlVpcmZvUmxHaWpnSGlrbkJkaWxacHo3cU8xVHZ5eUpWeXVhdk9PNFhYaml4bzNQUGVxRmNieVo2LWRwa1dKUWItTjN6ZEgxUW5OTzJRZXB3?oc=5"
@@ -1160,8 +1308,8 @@
   ],
   "phrases": [
     {
-      "text": "减排信号更新",
-      "theme": "减排政策",
+      "text": "极端天气预警",
+      "theme": "极端天气与气候风险",
       "weight": 10
     },
     {
@@ -1170,28 +1318,28 @@
       "weight": 9
     },
     {
-      "text": "欧洲野火核查",
-      "theme": "野火风险",
-      "weight": 8
-    },
-    {
       "text": "能源转型提速",
       "theme": "能源转型",
-      "weight": 7
-    },
-    {
-      "text": "印度绿能投资",
-      "theme": "可再生能源投资",
-      "weight": 6
+      "weight": 8
     },
     {
       "text": "极端天气预警",
       "theme": "极端天气与气候风险",
+      "weight": 7
+    },
+    {
+      "text": "减排信号更新",
+      "theme": "减排政策",
+      "weight": 6
+    },
+    {
+      "text": "减排信号更新",
+      "theme": "减排政策",
       "weight": 5
     },
     {
-      "text": "谈判信号更新",
-      "theme": "气候谈判",
+      "text": "欧洲野火核查",
+      "theme": "野火风险",
       "weight": 4
     },
     {
@@ -1204,11 +1352,15 @@
   "topics": [
     {
       "name": "气候适应",
-      "weight": 4
+      "weight": 6
     },
     {
       "name": "能源与排放",
-      "weight": 2
+      "weight": 1
+    },
+    {
+      "name": "气候动态",
+      "weight": 1
     },
     {
       "name": "国际碳市场",
@@ -1720,17 +1872,17 @@
   ],
   "archive": {
     "dataset_name": "ClimateText-8760",
-    "updated_at": "2026-08-04T03:00:14.014800+00:00",
-    "total": 154,
+    "updated_at": "2026-08-05T07:39:58.542431+00:00",
+    "total": 166,
     "limit": 8760,
     "statistics": {
-      "previous_total": 154,
+      "previous_total": 166,
       "added": 0,
       "updated": 0,
       "rejected": 0,
       "pruned": 0,
       "tier_a": 18,
-      "tier_b": 136
+      "tier_b": 148
     }
   }
 }

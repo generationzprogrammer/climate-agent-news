@@ -488,7 +488,8 @@ class CoreTests(unittest.TestCase):
             "summary_source": "",
         })
         self.assertIn("美国西部热浪", item["title_zh"])
-        self.assertIn("回到原文核验", item["summary_zh"])
+        self.assertIn("极端高温", item["summary_zh"])
+        self.assertNotIn("来源标题显示", item["summary_zh"])
         self.assertEqual(item["translation_status"], "fallback_needs_review")
 
     def test_source_health_quarantines_only_after_repeated_failures(self) -> None:
