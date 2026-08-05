@@ -1,19 +1,425 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-8760",
-  "updated_at": "2026-08-05T07:39:58.542431+00:00",
+  "updated_at": "2026-08-05T08:20:11.978316+00:00",
   "limit": 8760,
-  "total": 166,
+  "total": 174,
   "statistics": {
-    "previous_total": 166,
+    "previous_total": 174,
     "added": 0,
     "updated": 0,
-    "rejected": 0,
+    "rejected": 16,
     "pruned": 0,
     "tier_a": 18,
-    "tier_b": 148
+    "tier_b": 156
   },
   "records": [
+    {
+      "record_id": "article_c9a6956b6ba6facb",
+      "article_id": "article_c9a6956b6ba6facb",
+      "canonical_url": "https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own",
+      "source_url": "https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own",
+      "source_id": "OFF006",
+      "source_name": "UN Environment Programme",
+      "source_type": "联合国官方信息",
+      "authority": 5,
+      "relevance_score": 58,
+      "title_original": "As The Odyssey brings the Mediterranean to big screens, the sea is on an epic journey of its own",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_source": "As The Odyssey returns to cinemas, discover the Mediterranean’s modern-day threats – and how UNEP/MAP is helping protect its future.",
+      "summary_zh": "这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "气候动态",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-05T07:40:58+00:00",
+      "fetched_at": "2026-08-05T08:19:18.270702+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "048a7e46280baddd287a458b42bb331cc35b8ac081bdb75ee378a340dfcacb10",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 65,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_c9a6956b6ba6facb",
+        "source_atom": {
+          "name": "UN Environment Programme",
+          "authority": 5,
+          "type": "联合国官方信息"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_ff78f0fb97528ea2",
+      "article_id": "article_ff78f0fb97528ea2",
+      "canonical_url": "https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how",
+      "source_url": "https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how/",
+      "source_id": "INT019",
+      "source_name": "Mongabay Latin America",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 62,
+      "title_original": "These mice live on volcano summits at extreme elevations. Study finds how",
+      "title_zh": "国际气候谈判出现新动向",
+      "summary_source": "The Andean leaf-eared mouse thrives at extreme elevations where most other mammals wouldn’t survive. At these altitudes, oxygen levels are low; temperatures are permanently below freezing; and humans can’t survive for long without oxygen masks and insulated clothing. Yet, the mighty mouse is right at home, and scientists have now figured out the biological adaptations […]",
+      "summary_zh": "这条情报聚焦国际谈判、国家承诺或大会进程。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "气候谈判",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-05T06:21:14+00:00",
+      "fetched_at": "2026-08-05T08:19:17.484950+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "b3ea23423d9e7b8b446d9e1bab225bbf82a88fcae6dc1d5aae86d7d41cd6ae22",
+      "poster_phrase": "谈判信号更新",
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_ff78f0fb97528ea2",
+        "source_atom": {
+          "name": "Mongabay Latin America",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_af955c07f3bc3be1",
+      "article_id": "article_af955c07f3bc3be1",
+      "canonical_url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQQnNUWlIzZUpxc2NwZjZFZWpvOG5iSkJKNklicmdGWjYzN0hIVHhHQ01SYXh6SEFaQWJFWjFtb2pZZVVfdkZHUW5zS0lFckpCd19YX1BXczhITXVqb1hnc0RqWDdWZXlzRkR3MEFrSmtueVNBNlFDaTF4ekZDa19NdzRqSTBjbmtaSkpxNFB0bFdfbzdZZXNLYXVpU1U1QjRvQzA1TFk0eUkxdUtm?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQQnNUWlIzZUpxc2NwZjZFZWpvOG5iSkJKNklicmdGWjYzN0hIVHhHQ01SYXh6SEFaQWJFWjFtb2pZZVVfdkZHUW5zS0lFckpCd19YX1BXczhITXVqb1hnc0RqWDdWZXlzRkR3MEFrSmtueVNBNlFDaTF4ekZDa19NdzRqSTBjbmtaSkpxNFB0bFdfbzdZZXNLYXVpU1U1QjRvQzA1TFk0eUkxdUtm?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 62,
+      "title_original": "Evren Signs 750 MW Renewable Energy PPA, Expands Portfolio Beyond 3.5 GW - SolarQuarter",
+      "title_zh": "清洁能源转型出现新进展",
+      "summary_source": "Evren Signs 750 MW Renewable Energy PPA, Expands Portfolio Beyond 3.5 GW SolarQuarter",
+      "summary_zh": "这条情报聚焦清洁能源项目、投资或电力系统变化。原文出现750 MW、3.5 GW等量化信息，需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "能源转型",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-05T05:55:01+00:00",
+      "fetched_at": "2026-08-05T08:20:10.209315+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "750 mw",
+        "3.5 gw"
+      ],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "2fbe568d6c251638b6683e581dda07b4303266c3d27ad7b4ec59865fa1eb8df9",
+      "poster_phrase": "能源转型提速",
+      "quality": {
+        "passed": true,
+        "score": 49,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_af955c07f3bc3be1",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "750 mw",
+          "3.5 gw"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_3d06fe0312c1d3f1",
+      "article_id": "article_3d06fe0312c1d3f1",
+      "canonical_url": "https://english.news.cn/20260805/846fcc321ba240ee8fd13c0838bd2f35/c.html",
+      "source_url": "https://english.news.cn/20260805/846fcc321ba240ee8fd13c0838bd2f35/c.html",
+      "source_id": "API005",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "source_type": "中国官方与专业来源定向发现API",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "U . S . appeals court blocks Trump administration cancellation of billions of dollars in climate grants - Xinhua",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_source": null,
+      "summary_zh": "这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "气候动态",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-05T05:15:00+00:00",
+      "fetched_at": "2026-08-05T08:19:33.058167+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "644fd3f62ede2f35994385a88629dc4e92d622edb1a6f90843272e0efbda6173",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_3d06fe0312c1d3f1",
+        "source_atom": {
+          "name": "中国官方气候来源（GDELT定向发现）",
+          "authority": 4,
+          "type": "中国官方与专业来源定向发现API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_9d36560bb109055b",
+      "article_id": "article_9d36560bb109055b",
+      "canonical_url": "https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine",
+      "source_url": "https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 64,
+      "title_original": "Europe’s rivers are running dry, and the knock-on effects are disastrous | Yiannis Baboulias",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": "Droughts that were once a century now happen every year, and the impact on wildlife, industrial output and culture itself is catastrophic Last week, 186 passengers had to be evacuated from the cruise ship Viking Ullur, after it ran aground on a sandbank in the Danube. Others have been left stranded , unable to move between Vienna and Budapest. Passengers stood on deck, the Habsburg splendour around them out of reach as the river fell to 41cm in Budapest, within 8cm of its 2018 all-time low. Elsewhere on the Hungarian stretch of the river, new record lows were recorded. Farther east in Romania , the Danube recorded its lowest water levels since 1996. A river’s flow is measured in cubic metres per second, and at Baziaș, where the river enters the country, it stood at 1,700m³/s, against a July average of 4,700m³/s. Ferry services were suspended, as were grain barges. Yiannis Baboulias is a Greek writer based in London. His work focuses on European politics, the environment and the far right Continue reading...",
+      "summary_zh": "涉及欧洲，这条情报聚焦干旱、水资源压力及适应需求。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-05T04:00:09+00:00",
+      "fetched_at": "2026-08-05T08:19:16.974784+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "186",
+        "41c",
+        "8c",
+        "2018",
+        "1996",
+        "1,700"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "opinion_or_context",
+      "content_hash": "54ac8b353477e52be95165915b2d46fe9cffc0801a70c04b3676a260525a512d",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_9d36560bb109055b",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "opinion_or_context",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "186",
+          "41c",
+          "8c",
+          "2018",
+          "1996",
+          "1,700"
+        ],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_12b76e7375a965f4",
+      "article_id": "article_12b76e7375a965f4",
+      "canonical_url": "https://www.news.cn/world/20260805/9f51728665e64710bce5ff2600b2f6b9/c.html",
+      "source_url": "https://www.news.cn/world/20260805/9f51728665e64710bce5ff2600b2f6b9/c.html",
+      "source_id": "API005",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "source_type": "中国官方与专业来源定向发现API",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "研究预测 ： 气候变化将重塑非洲疟疾流行版图 - 新华网",
+      "title_zh": "全球气候议题出现新动态",
+      "summary_source": null,
+      "summary_zh": "这条情报聚焦气候动态相关变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "气候动态",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "Chinese",
+      "published_at": "2026-08-05T03:00:00+00:00",
+      "fetched_at": "2026-08-05T08:19:33.058167+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "47490b6f8636d76b3a32e7a273ae723f629ee834a33b3712b2d20e350daf6cfd",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_12b76e7375a965f4",
+        "source_atom": {
+          "name": "中国官方气候来源（GDELT定向发现）",
+          "authority": 4,
+          "type": "中国官方与专业来源定向发现API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
     {
       "record_id": "article_c3a3a6b8624c2c87",
       "article_id": "article_c3a3a6b8624c2c87",
@@ -99,7 +505,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T23:37:00+00:00",
-      "fetched_at": "2026-08-05T00:55:45.432895+00:00",
+      "fetched_at": "2026-08-05T08:19:16.908279+00:00",
       "topics": [
         "气候动态"
       ],
@@ -146,7 +552,88 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_5da3e3fe9175f45b",
+      "article_id": "article_5da3e3fe9175f45b",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQQXhSazlGdThuWEE2RHBkZUZwTTdUUGI4cnhtcFJ4RjFGaHNZUWQtOEpqWEUtZUl5UHdLWGJHYkZ1V09tcnRFRmVpOUtrX3ZGME5DVmpvS2dQNi12Zm16ZG9OZEtiYWJFSXlXUjVlcWNVSzlMSzE2OVdGZ2VWUDYzRmJHYk1Yc0x1SVRvRDBFeVRaS2lvR1BJR0FTWk9RTXF5d3NQa1lsbmU5UTJabFVPbHN3YldabWRKY1Z2bi1EWXN5TmUxRWNJekg3UmJzQll1T0t2eXAxS3ZoTUtheEIyLTJPRdIB6AFBVV95cUxQSVM5QWl6RXAwQkRvMW9LbUd0R1YxV0gzWVJrT2VLSXZ4UGg2eW1YbmhtU3VwbE1ETFF2OVVLZjRGWkp1ck5CajEzemJaa1Q5VUJ6WURhZTl4RDZlUXBEUHR0NFZHLXVGbnFPTTAxRXlJaldUbW9FWVFXemlRX2YyWVZ0N25JQWJrdmh0enI1QVhtSEd5QVVVRmVKSUJQX2g5Tmh0M3JLdFFzZjdpU0VSMkE2QVNnNkQ4aWw5VnN6TkVmdk1RSVBFaWtld0kta1gzQWE0emoxYU9Va2RKRXdpQXJWSlRsaDgw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQQXhSazlGdThuWEE2RHBkZUZwTTdUUGI4cnhtcFJ4RjFGaHNZUWQtOEpqWEUtZUl5UHdLWGJHYkZ1V09tcnRFRmVpOUtrX3ZGME5DVmpvS2dQNi12Zm16ZG9OZEtiYWJFSXlXUjVlcWNVSzlMSzE2OVdGZ2VWUDYzRmJHYk1Yc0x1SVRvRDBFeVRaS2lvR1BJR0FTWk9RTXF5d3NQa1lsbmU5UTJabFVPbHN3YldabWRKY1Z2bi1EWXN5TmUxRWNJekg3UmJzQll1T0t2eXAxS3ZoTUtheEIyLTJPRdIB6AFBVV95cUxQSVM5QWl6RXAwQkRvMW9LbUd0R1YxV0gzWVJrT2VLSXZ4UGg2eW1YbmhtU3VwbE1ETFF2OVVLZjRGWkp1ck5CajEzemJaa1Q5VUJ6WURhZTl4RDZlUXBEUHR0NFZHLXVGbnFPTTAxRXlJaldUbW9FWVFXemlRX2YyWVZ0N25JQWJrdmh0enI1QVhtSEd5QVVVRmVKSUJQX2g5Tmh0M3JLdFFzZjdpU0VSMkE2QVNnNkQ4aWw5VnN6TkVmdk1RSVBFaWtld0kta1gzQWE0emoxYU9Va2RKRXdpQXJWSlRsaDgw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 66,
+      "title_original": "France records its hottest month since 1900: July 2026 with 24.9°C and 70% drought due to climate change - Noticias Ambientales",
+      "title_zh": "极端天气风险出现新动态",
+      "summary_source": "France records its hottest month since 1900: July 2026 with 24.9°C and 70% drought due to climate change Noticias Ambientales",
+      "summary_zh": "涉及法国，这条情报聚焦干旱、水资源压力及适应需求。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "极端天气与气候风险",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-04T23:04:13+00:00",
+      "fetched_at": "2026-08-05T08:20:10.209315+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "1900",
+        "2026",
+        "24.9°c",
+        "70%"
+      ],
+      "places": [
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "101353b2f8a6a93e9bc97fb98078963ab533f7850fec09264199c0782c25aa29",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 50,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_5da3e3fe9175f45b",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "1900",
+          "2026",
+          "24.9°c",
+          "70%"
+        ],
+        "geo_atoms": [
+          "法国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_6be6139614763fad",
@@ -166,7 +653,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-04T18:09:31+00:00",
-      "fetched_at": "2026-08-05T00:56:43.847352+00:00",
+      "fetched_at": "2026-08-05T08:20:10.209315+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -215,7 +702,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_1b9b9dbe4aa14c1d",
@@ -302,7 +789,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T17:49:16+00:00",
-      "fetched_at": "2026-08-05T00:55:45.575767+00:00",
+      "fetched_at": "2026-08-05T08:19:16.974784+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -353,7 +840,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_f276f2a85355a220",
@@ -373,7 +860,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T16:55:01+00:00",
-      "fetched_at": "2026-08-05T00:55:41.742399+00:00",
+      "fetched_at": "2026-08-05T08:19:14.997966+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -420,7 +907,70 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_31f66d173a3e5f4c",
+      "article_id": "article_31f66d173a3e5f4c",
+      "canonical_url": "https://www.carbonbrief.org/factcheck-how-nuclear-gas-wind-and-solar-power-are-affected-during-heatwaves",
+      "source_url": "https://www.carbonbrief.org/factcheck-how-nuclear-gas-wind-and-solar-power-are-affected-during-heatwaves",
+      "source_id": "INT001",
+      "source_name": "Carbon Brief",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 58,
+      "title_original": "Factcheck: How nuclear, gas, wind and solar power are affected during heatwaves",
+      "title_zh": "碳排放治理出现新动向",
+      "summary_source": "Heatwaves are becoming more likely and more intense due to climate change, impacting sources of power generation around the world… The post Factcheck: How nuclear, gas, wind and solar power are affected during heatwaves appeared first on Carbon Brief .",
+      "summary_zh": "这条情报聚焦清洁能源项目、投资或电力系统变化。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
+      "theme_zh": "减排政策",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-04T15:39:06+00:00",
+      "fetched_at": "2026-08-05T08:19:13.353838+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "fallback_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "1062834372e4dc7a624c52fd53227f8de20d6728f7b9fab854414c4fe892d96f",
+      "poster_phrase": "减排信号更新",
+      "quality": {
+        "passed": true,
+        "score": 65,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "chinese_summary": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_31f66d173a3e5f4c",
+        "source_atom": {
+          "name": "Carbon Brief",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_e7b8c8426c001c1e",
@@ -440,7 +990,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T11:00:00+00:00",
-      "fetched_at": "2026-08-05T00:55:43.788852+00:00",
+      "fetched_at": "2026-08-05T08:19:16.708924+00:00",
       "topics": [
         "气候动态"
       ],
@@ -483,7 +1033,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_b4e0b07e7098b7c6",
@@ -503,7 +1053,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T08:45:00+00:00",
-      "fetched_at": "2026-08-05T00:55:46.259657+00:00",
+      "fetched_at": "2026-08-05T08:19:17.660510+00:00",
       "topics": [
         "气候适应"
       ],
@@ -558,7 +1108,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_34eb6ba3342d3843",
@@ -578,7 +1128,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T04:24:40+00:00",
-      "fetched_at": "2026-08-05T00:55:43.479513+00:00",
+      "fetched_at": "2026-08-05T08:19:16.459004+00:00",
       "topics": [
         "气候适应"
       ],
@@ -621,7 +1171,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_d78fb1ce220cf059",
@@ -854,7 +1404,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T02:00:36+00:00",
-      "fetched_at": "2026-08-05T00:55:43.479513+00:00",
+      "fetched_at": "2026-08-05T08:19:16.459004+00:00",
       "topics": [
         "国际碳市场"
       ],
@@ -901,7 +1451,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T02:57:35.322175+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_84d54f97fc760284",
@@ -1199,7 +1749,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T18:33:53+00:00",
-      "fetched_at": "2026-08-05T00:55:43.788852+00:00",
+      "fetched_at": "2026-08-05T08:19:16.708924+00:00",
       "topics": [
         "气候适应"
       ],
@@ -1242,7 +1792,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_5139f371a3d4f826",
@@ -1262,7 +1812,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T17:15:27+00:00",
-      "fetched_at": "2026-08-05T00:55:45.065713+00:00",
+      "fetched_at": "2026-08-05T08:19:16.773336+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -1313,7 +1863,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-05T00:56:45.331593+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_a86068009a53a8cf",
@@ -1404,7 +1954,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T15:30:25+00:00",
-      "fetched_at": "2026-08-04T03:30:59.184613+00:00",
+      "fetched_at": "2026-08-05T08:19:17.484950+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1461,7 +2011,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_318944cf5e73893a",
@@ -1481,7 +2031,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T13:52:46+00:00",
-      "fetched_at": "2026-08-04T03:30:57.679213+00:00",
+      "fetched_at": "2026-08-05T08:19:16.708924+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1532,7 +2082,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_084dbaf458f0d184",
@@ -1757,7 +2307,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T11:00:00+00:00",
-      "fetched_at": "2026-08-04T03:30:57.679213+00:00",
+      "fetched_at": "2026-08-05T08:19:16.708924+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1800,7 +2350,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-03T12:34:38.385395+00:00",
-      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_000d77e7a8999c6a",
@@ -4117,7 +4667,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-07-31T18:34:42+00:00",
-      "fetched_at": "2026-08-04T03:30:57.269038+00:00",
+      "fetched_at": "2026-08-05T08:19:16.459004+00:00",
       "topics": [
         "气候动态"
       ],
@@ -4184,7 +4734,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_567716b1fee60318",
@@ -4417,7 +4967,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-07-31T05:33:22+00:00",
-      "fetched_at": "2026-08-04T03:30:57.269038+00:00",
+      "fetched_at": "2026-08-05T08:19:16.459004+00:00",
       "topics": [
         "气候适应"
       ],
@@ -4476,7 +5026,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_730c3c57e5f5550d",
@@ -4496,7 +5046,7 @@
       "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
       "published_at": "2026-07-31T00:17:17+00:00",
-      "fetched_at": "2026-08-04T03:30:57.269038+00:00",
+      "fetched_at": "2026-08-05T08:19:16.459004+00:00",
       "topics": [
         "履约与全球盘点"
       ],
@@ -4557,7 +5107,7 @@
         "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
       },
       "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-08-04T03:32:15.811754+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_fbadc2c173e6efa6",
@@ -6210,7 +6760,7 @@
       "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
       "language": "en",
       "published_at": "2026-07-28T00:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "极端天气",
         "气候适应"
@@ -6273,7 +6823,7 @@
         "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_be2d7f67b6b1bbc3",
@@ -6745,7 +7295,7 @@
       "why_zh": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。",
       "language": "en",
       "published_at": "2026-07-26T00:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -6808,7 +7358,7 @@
         "decision_atom": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_32a028df4d103aba",
@@ -7937,7 +8487,7 @@
       "why_zh": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。",
       "language": "en",
       "published_at": "2026-07-24T00:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "能源与排放",
         "清洁能源"
@@ -8000,7 +8550,7 @@
         "decision_atom": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_6c67b4eafaf74973",
@@ -8604,7 +9154,7 @@
       "why_zh": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。",
       "language": "zh",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "能源与排放",
         "国家气候承诺"
@@ -8669,7 +9219,7 @@
         "decision_atom": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "curated_4550f4e28217628b",
@@ -8689,7 +9239,7 @@
       "why_zh": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "能源与排放",
         "产业转型"
@@ -8748,7 +9298,7 @@
         "decision_atom": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "curated_7c6b8d0a74561df8",
@@ -8768,7 +9318,7 @@
       "why_zh": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "能源与排放",
         "交通转型"
@@ -8825,7 +9375,7 @@
         "decision_atom": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_e0247ad0502dc99c",
@@ -10979,7 +11529,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -11050,7 +11600,7 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_29e088b267592809",
@@ -11061,7 +11611,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 50,
+      "relevance_score": 68,
       "title_original": "Africa can lead the Age of Electrification",
       "title_zh": "非洲能否在全球电气化浪潮中掌握主动权",
       "summary_source": "The electrification agenda presents both an extraordinary opportunity for Africa and an immense challenge for the continent The post Africa can lead the Age of Electrification appeared first on Climate Home News .",
@@ -11070,7 +11620,7 @@
       "why_zh": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。",
       "language": "en",
       "published_at": "2026-07-16T09:52:53+00:00",
-      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "fetched_at": "2026-08-05T08:19:14.997966+00:00",
       "topics": [
         "气候动态"
       ],
@@ -11088,7 +11638,7 @@
       "poster_phrase": "非洲竞逐电气化时代",
       "quality": {
         "passed": true,
-        "score": 77,
+        "score": 84,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -11121,7 +11671,7 @@
         "decision_atom": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -11261,7 +11811,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_1349a508fd370638",
@@ -11338,7 +11888,7 @@
         "decision_atom": "资金撤回可能影响森林保护、当地社区生计和发达国家资金承诺的可信度，需继续核对项目清单与官方解释。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -11427,7 +11977,7 @@
         "decision_atom": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_564ab2b4e2f26c1f",
@@ -11438,7 +11988,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 66,
+      "relevance_score": 84,
       "title_original": "Major emitting countries knew of climate risks decades earlier than claimed",
       "title_zh": "主要排放国被指早在数十年前已知化石燃料的气候风险",
       "summary_source": "Governments have known since at least the 1960s that fossil fuel use was warming the planet. They kept quiet to avoid responsibility. The post Major emitting countries knew of climate risks decades earlier than claimed appeared first on Climate Home News .",
@@ -11447,7 +11997,7 @@
       "why_zh": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。",
       "language": "en",
       "published_at": "2026-07-15T10:51:19+00:00",
-      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "fetched_at": "2026-08-05T08:19:14.997966+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -11467,7 +12017,7 @@
       "poster_phrase": "气候责任追溯至 1960 年代",
       "quality": {
         "passed": true,
-        "score": 83,
+        "score": 89,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -11502,7 +12052,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -11513,7 +12063,7 @@
       "source_name": "UN Environment Programme",
       "source_type": "联合国官方信息",
       "authority": 5,
-      "relevance_score": 86,
+      "relevance_score": 100,
       "title_original": "AI helping UN detect methane emissions and spark real reductions in climate-warming gas",
       "title_zh": "AI 正把卫星发现的甲烷泄漏转化为真实减排",
       "summary_source": "Artificial Intelligence (AI) is helping turn satellite observations into methane mitigation action in the oil and gas sector. These mitigation efforts have delivered a climate benefit comparable to removing the annual emissions of almost 24 million gasoline-powered passenger cars, according to a new report by the UN Environment Programme (UNEP).",
@@ -11522,7 +12072,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-07-17T04:24:12.097703+00:00",
+      "fetched_at": "2026-08-05T08:19:18.270702+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -11542,7 +12092,7 @@
       "poster_phrase": "卫星正在看见甲烷",
       "quality": {
         "passed": true,
-        "score": 90,
+        "score": 95,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -11577,7 +12127,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
@@ -11657,7 +12207,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 50,
+      "relevance_score": 68,
       "title_original": "UN seabed regulator defends authority as mining firms seek to halt inquiry",
       "title_zh": "深海采矿企业试图阻止联合国海底监管机构调查",
       "summary_source": "Campaigners accused deep-sea mining frontrunner The Metals Company of obstructing an inquiry into its subsidiaries. The firm says it is being targeted without procedural basis The post UN seabed regulator defends authority as mining firms seek to halt inquiry appeared first on Climate Home News .",
@@ -11666,7 +12216,7 @@
       "why_zh": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。",
       "language": "en",
       "published_at": "2026-07-14T18:02:01+00:00",
-      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "fetched_at": "2026-08-05T08:19:14.997966+00:00",
       "topics": [
         "气候动态"
       ],
@@ -11684,7 +12234,7 @@
       "poster_phrase": "深海采矿规则受到挑战",
       "quality": {
         "passed": true,
-        "score": 77,
+        "score": 84,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -11717,7 +12267,7 @@
         "decision_atom": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "article_a02797620e6f6e19",
@@ -11788,7 +12338,7 @@
         "decision_atom": "这是观点性内容，主要用于观察英国国内气候政策的政治阻力，不应作为事实报道直接引用。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "curated_94ab11482ec24494",
@@ -11808,7 +12358,7 @@
       "why_zh": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。",
       "language": "zh",
       "published_at": "2026-07-13T16:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "国家气候承诺",
         "能源与排放"
@@ -11871,7 +12421,7 @@
         "decision_atom": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
       "record_id": "curated_cf238b7caf84c933",
@@ -11891,7 +12441,7 @@
       "why_zh": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。",
       "language": "zh",
       "published_at": "2026-02-08T16:00:00+00:00",
-      "fetched_at": "2026-08-05T07:39:58.397081+00:00",
+      "fetched_at": "2026-08-05T08:20:11.890798+00:00",
       "topics": [
         "碳市场",
         "履约与透明度"
@@ -11952,7 +12502,7 @@
         "decision_atom": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-05T07:39:58.542431+00:00"
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     }
   ]
 }
