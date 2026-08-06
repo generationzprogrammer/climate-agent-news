@@ -360,24 +360,27 @@ def _official_data(db: Database) -> dict:
 def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
     events: list[dict] = []
     for item in items:
-        for index, place in enumerate(item.get("places", [])):
-            if not all(key in place for key in ("name_zh", "lon", "lat")):
-                continue
-            events.append({
-                "marker_id": f"{item['article_id']}_{index}",
-                "article_id": item["article_id"],
-                "place": place["name_zh"],
-                "lon": place["lon"],
-                "lat": place["lat"],
-                "theme": item.get("theme_zh") or "气候动态",
-                "title_zh": item.get("title_zh") or item["title_original"],
-                "summary_zh": item.get("summary_zh") or "",
-                "source_name": item["source_name"],
-                "published_at": item["published_at"],
-                "url": item["canonical_url"],
-            })
-            if len(events) >= max_events:
-                return events
+        place = next(
+            (place for place in item.get("places", []) if all(key in place for key in ("name_zh", "lon", "lat"))),
+            None,
+        )
+        if not place:
+            continue
+        events.append({
+            "marker_id": f"{item['article_id']}_primary",
+            "article_id": item["article_id"],
+            "place": place["name_zh"],
+            "lon": place["lon"],
+            "lat": place["lat"],
+            "theme": item.get("theme_zh") or "气候动态",
+            "title_zh": item.get("title_zh") or item["title_original"],
+            "summary_zh": item.get("summary_zh") or "",
+            "source_name": item["source_name"],
+            "published_at": item["published_at"],
+            "url": item["canonical_url"],
+        })
+        if len(events) >= max_events:
+            return events
     return events
 
 

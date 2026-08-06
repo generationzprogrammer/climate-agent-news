@@ -9,7 +9,7 @@ from datetime import date
 from pathlib import Path
 
 from climate_agent.archive import quality_result, update_archive, validate_public_payload
-from climate_agent.briefing import dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week
+from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week
 from climate_agent.cli import ROOT, bootstrap
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
 from climate_agent.corpus_analytics import build_corpus_analytics
@@ -225,6 +225,28 @@ class CoreTests(unittest.TestCase):
         self.assertEqual({place["name_zh"] for place in places}, {"欧洲", "美国得州"})
         chinese_places = detect_places("中国和美国发布新的气候政策")
         self.assertEqual({place["name_zh"] for place in chinese_places}, {"中国", "美国"})
+        new_mexico_places = detect_places("A New Mexico solar and storage project wins approval")
+        names = {place["name_zh"] for place in new_mexico_places}
+        self.assertIn("\u7f8e\u56fd\u65b0\u58a8\u897f\u54e5\u5dde", names)
+        self.assertNotIn("\u58a8\u897f\u54e5", names)
+
+    def test_map_events_use_one_primary_marker_per_article(self) -> None:
+        events = _map_events([{
+            "article_id": "article_oil_profit",
+            "title_original": "Big oil profits during war and climate crisis",
+            "title_zh": "调查：战争与气候危机期间，主要石油公司获利930亿美元",
+            "summary_zh": "",
+            "source_name": "Example",
+            "published_at": "2026-08-05T00:00:00+00:00",
+            "canonical_url": "https://example.org/oil-profit",
+            "places": [
+                {"name_zh": "伊朗", "lon": 53.0, "lat": 32.0},
+                {"name_zh": "沙特阿拉伯", "lon": 45.0, "lat": 24.0},
+                {"name_zh": "英国", "lon": -2.0, "lat": 54.0},
+            ],
+        }])
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["place"], "伊朗")
 
     def test_static_export_is_self_contained(self) -> None:
         self.seed_publishable_article()
@@ -305,7 +327,7 @@ class CoreTests(unittest.TestCase):
         self.assertIn("下载今日简报", html)
         self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
-        self.assertIn("CLIMATETEXT-8760", html)
+        self.assertIn("CLIMATETEXT-100000", html)
         self.assertLess(html.index('id="map"'), html.index('class="hero"'))
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
@@ -432,9 +454,36 @@ class CoreTests(unittest.TestCase):
             }],
             "total": 1,
         }), encoding="utf-8")
-        archive = update_archive(path, [], limit=8760)
+        archive = update_archive(path, [], limit=100000)
         self.assertEqual(archive["records"][0]["places"][0]["name_zh"], "加勒比地区")
         self.assertEqual(archive["records"][0]["molecule"]["geo_atoms"], ["加勒比地区"])
+
+    def test_archive_repairs_existing_new_mexico_geocoding_text(self) -> None:
+        path = Path(self.temp.name) / "archive.json"
+        path.write_text(json.dumps({
+            "schema_version": "1.0",
+            "records": [{
+                "record_id": "r1",
+                "article_id": "r1",
+                "canonical_url": "https://example.org/new-mexico-clean-energy",
+                "title_original": "New Mexico clean energy success story",
+                "title_zh": "新墨西哥州清洁能源转型取得进展",
+                "summary_zh": "涉及墨西哥，这条情报聚焦清洁能源项目。",
+                "source_name": "Example",
+                "source_id": "S",
+                "authority": 5,
+                "relevance_score": 80,
+                "published_at": "2026-07-29T11:00:00+00:00",
+                "places": [{"name_zh": "墨西哥", "lon": -102, "lat": 23}],
+                "topics": ["能源与排放"],
+                "molecule": {"geo_atoms": ["墨西哥"]},
+            }],
+        }, ensure_ascii=False), encoding="utf-8")
+        archive = update_archive(path, [], limit=100000)
+        record = archive["records"][0]
+        self.assertEqual(record["places"][0]["name_zh"], "美国新墨西哥州")
+        self.assertIn("美国新墨西哥州", record["summary_zh"])
+        self.assertEqual(record["molecule"]["geo_atoms"], ["美国新墨西哥州"])
 
     def test_archive_prunes_low_value_news_misfires(self) -> None:
         path = Path(self.temp.name) / "archive.json"
@@ -457,7 +506,7 @@ class CoreTests(unittest.TestCase):
             }],
             "total": 1,
         }), encoding="utf-8")
-        archive = update_archive(path, [], limit=8760)
+        archive = update_archive(path, [], limit=100000)
         self.assertEqual(archive["total"], 0)
 
     def test_translation_queue_round_robins_sources(self) -> None:

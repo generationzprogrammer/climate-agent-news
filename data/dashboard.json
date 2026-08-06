@@ -1,160 +1,285 @@
 {
   "meta": {
-    "product": "高质量气候新闻文本数据与智能分子平台",
-    "date": "2026-07-21",
-    "generated_at": "2026-07-21T02:45:11.906038+00:00",
+    "product": "国际气候情报与高质量中文文本数据库",
+    "date": "2026-08-06",
+    "generated_at": "2026-08-06T02:05:37.316792+00:00",
     "timezone": "Asia/Shanghai",
     "demo_mode": false,
-    "notice": "滚动 72 小时元数据已接入；8 个 P0 入口最近成功 7 个。标题和短摘录是来源陈述，尚需人工核验。",
-    "dataset_version": "2026-07-21T02:45:11.962554+00:00"
+    "notice": "今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 7 个。标题和摘要是来源陈述，尚需人工核验。",
+    "latest_news_date": "2026-08-05",
+    "daily_window_start": "2026-08-05",
+    "daily_target": 10,
+    "daily_backfilled": 0,
+    "daily_complete_day": true,
+    "daily_sources": 7,
+    "daily_continents": 4,
+    "dataset_version": "2026-08-06T02:05:37.355072+00:00"
   },
   "metrics": {
-    "source_total": 46,
-    "source_enabled": 25,
+    "source_total": 53,
+    "source_enabled": 33,
     "p0_connected": 7,
-    "p0_total": 8,
-    "official_enabled": 9,
+    "p0_total": 26,
+    "official_enabled": 12,
     "languages": 15,
-    "article_total": 247,
-    "high_priority": 1,
+    "article_total": 255,
+    "high_priority": 3,
     "official_documents": 576,
-    "cop31_countdown": 111,
-    "archive_total": 6
+    "cop31_countdown": 95,
+    "archive_total": 174
   },
   "intelligence": [
     {
-      "article_id": "article_c5b5abc1795a29d9",
+      "record_id": "article_c9a6956b6ba6facb",
+      "article_id": "article_c9a6956b6ba6facb",
+      "canonical_url": "https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own",
+      "source_url": "https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own",
       "source_id": "OFF006",
-      "source_url": "http://www.unep.org/news-and-stories/press-release/ai-helping-un-detect-methane-emissions-and-spark-real-reductions",
-      "canonical_url": "http://www.unep.org/news-and-stories/press-release/ai-helping-un-detect-methane-emissions-and-spark-real-reductions",
-      "title_original": "AI helping UN detect methane emissions and spark real reductions in climate-warming gas",
-      "title_zh": "AI 正把卫星发现的甲烷泄漏转化为真实减排",
-      "summary_source": "Artificial Intelligence (AI) is helping turn satellite observations into methane mitigation action in the oil and gas sector. These mitigation efforts have delivered a climate benefit comparable to removing the annual emissions of almost 24 million gasoline-powered passenger cars, according to a new report by the UN Environment Programme (UNEP).",
-      "language": "en",
-      "rights_status": "metadata_only",
-      "content_hash": "699dc01b121e5b40fd156d1b9b438c389bc29279c33439829cf8e929f99925e3",
-      "fetched_at": "2026-07-17T04:24:12.097703+00:00",
-      "relevance_score": 86,
       "source_name": "UN Environment Programme",
       "source_type": "联合国官方信息",
       "authority": 5,
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [
-        "24 million"
-      ],
-      "summary_zh": "联合国环境署称，人工智能正在帮助油气行业把卫星观测转化为甲烷减排行动；相关措施带来的气候效益，相当于减少近 2400 万辆汽油乘用车一年的排放。",
-      "theme_zh": "甲烷减排",
-      "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
-      "places": [
-        {
-          "name_zh": "全球油气产区",
-          "lon": 25.0,
-          "lat": 20.0
-        }
-      ],
-      "poster_phrase": "卫星正在看见甲烷",
-      "translation_status": "human_reviewed",
-      "fact_status": "source_claim_unverified",
-      "published_at": "2026-07-15T06:05:51+00:00"
-    },
-    {
-      "article_id": "article_564ab2b4e2f26c1f",
-      "source_id": "INT002",
-      "source_url": "https://www.climatechangenews.com/2026/07/15/major-emitting-countries-knew-of-climate-risks-decades-earlier-than-claimed/",
-      "canonical_url": "https://www.climatechangenews.com/2026/07/15/major-emitting-countries-knew-of-climate-risks-decades-earlier-than-claimed",
-      "title_original": "Major emitting countries knew of climate risks decades earlier than claimed",
-      "title_zh": "主要排放国被指早在数十年前已知化石燃料的气候风险",
-      "summary_source": "Governments have known since at least the 1960s that fossil fuel use was warming the planet. They kept quiet to avoid responsibility. The post Major emitting countries knew of climate risks decades earlier than claimed appeared first on Climate Home News .",
+      "relevance_score": 58,
+      "title_original": "As The Odyssey brings the Mediterranean to big screens, the sea is on an epic journey of its own",
+      "title_zh": "《奥德赛》登上大银幕之际，地中海也在经历自己的史诗旅程",
+      "summary_source": "As The Odyssey returns to cinemas, discover the Mediterranean’s modern-day threats – and how UNEP/MAP is helping protect its future.",
+      "summary_zh": "联合国环境规划署借影片《奥德赛》重返影院，介绍地中海当前面临的环境威胁，以及地中海行动计划正在采取的保护措施。",
+      "theme_zh": "海洋生态保护",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
-      "rights_status": "metadata_only",
-      "content_hash": "f6d4914c7c87113cd7a22f645d252e2f098f3235a0dd7014afc19a933690cdf7",
-      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
-      "relevance_score": 66,
-      "source_name": "Climate Home News",
-      "source_type": "气候专业媒体",
-      "authority": 5,
+      "published_at": "2026-08-05T07:40:58+00:00",
+      "fetched_at": "2026-08-05T08:19:18.270702+00:00",
       "topics": [
-        "能源与排放"
+        "海洋生态保护",
+        "环境治理"
       ],
-      "numbers": [
-        "1960"
-      ],
-      "summary_zh": "Climate Home News 报道称，多国政府至少从 20 世纪 60 年代起已了解化石燃料使用会导致全球变暖，但相关信息并未充分公开。",
-      "theme_zh": "气候责任",
-      "why_zh": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。",
+      "numbers": [],
       "places": [
         {
-          "name_zh": "主要排放国",
-          "lon": 65.0,
-          "lat": 42.0
+          "name_zh": "地中海地区",
+          "lon": 18.0,
+          "lat": 36.0
         }
       ],
-      "poster_phrase": "气候责任追溯至 1960 年代",
       "translation_status": "human_reviewed",
       "fact_status": "source_claim_unverified",
-      "published_at": "2026-07-15T10:51:19+00:00"
+      "content_hash": "048a7e46280baddd287a458b42bb331cc35b8ac081bdb75ee378a340dfcacb10",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 80,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_c9a6956b6ba6facb",
+        "source_atom": {
+          "name": "UN Environment Programme",
+          "authority": 5,
+          "type": "联合国官方信息"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "海洋生态保护",
+          "环境治理"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "地中海地区"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
-      "article_id": "article_5b8f40780203e19e",
+      "record_id": "article_ff78f0fb97528ea2",
+      "article_id": "article_ff78f0fb97528ea2",
+      "canonical_url": "https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how",
+      "source_url": "https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how/",
+      "source_id": "INT019",
+      "source_name": "Mongabay Latin America",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 62,
+      "title_original": "These mice live on volcano summits at extreme elevations. Study finds how",
+      "title_zh": "生活在火山之巅的高海拔小鼠如何生存？研究揭示答案",
+      "summary_source": "The Andean leaf-eared mouse thrives at extreme elevations where most other mammals wouldn’t survive. At these altitudes, oxygen levels are low; temperatures are permanently below freezing; and humans can’t survive for long without oxygen masks and insulated clothing. Yet, the mighty mouse is right at home, and scientists have now figured out the biological adaptations […]",
+      "summary_zh": "研究发现，安第斯叶耳鼠通过生物适应机制，在低氧、常年低于冰点的火山高海拔环境中生存。",
+      "theme_zh": "极端环境适应",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-05T06:21:14+00:00",
+      "fetched_at": "2026-08-05T08:19:17.484950+00:00",
+      "topics": [
+        "极端环境适应",
+        "生物多样性"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "安第斯地区",
+          "lon": -69.0,
+          "lat": -20.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "b3ea23423d9e7b8b446d9e1bab225bbf82a88fcae6dc1d5aae86d7d41cd6ae22",
+      "poster_phrase": "谈判信号更新",
+      "quality": {
+        "passed": true,
+        "score": 73,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_ff78f0fb97528ea2",
+        "source_atom": {
+          "name": "Mongabay Latin America",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "极端环境适应",
+          "生物多样性"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "安第斯地区"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_3d06fe0312c1d3f1",
+      "article_id": "article_3d06fe0312c1d3f1",
+      "canonical_url": "https://english.news.cn/20260805/846fcc321ba240ee8fd13c0838bd2f35/c.html",
+      "source_url": "https://english.news.cn/20260805/846fcc321ba240ee8fd13c0838bd2f35/c.html",
+      "source_id": "API005",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "source_type": "中国官方与专业来源定向发现API",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "U . S . appeals court blocks Trump administration cancellation of billions of dollars in climate grants - Xinhua",
+      "title_zh": "美国上诉法院阻止特朗普政府取消数十亿美元气候赠款",
+      "summary_source": null,
+      "summary_zh": "美国联邦上诉法院叫停特朗普政府取消数十亿美元气候赠款的决定。",
+      "theme_zh": "气候资金诉讼",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-05T05:15:00+00:00",
+      "fetched_at": "2026-08-05T08:19:33.058167+00:00",
+      "topics": [
+        "气候资金",
+        "司法裁决"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "美国",
+          "lon": -100.0,
+          "lat": 39.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "644fd3f62ede2f35994385a88629dc4e92d622edb1a6f90843272e0efbda6173",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 69,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_3d06fe0312c1d3f1",
+        "source_atom": {
+          "name": "中国官方气候来源（GDELT定向发现）",
+          "authority": 4,
+          "type": "中国官方与专业来源定向发现API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候资金",
+          "司法裁决"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "美国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_9d36560bb109055b",
+      "article_id": "article_9d36560bb109055b",
+      "canonical_url": "https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine",
+      "source_url": "https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine",
       "source_id": "INT013",
-      "source_url": "https://www.theguardian.com/world/2026/jul/16/how-global-heating-supercharged-floods-west-africa-displacing-thousands",
-      "canonical_url": "https://www.theguardian.com/world/2026/jul/16/how-global-heating-supercharged-floods-west-africa-displacing-thousands",
-      "title_original": "How global heating supercharged floods in West Africa, displacing thousands",
-      "title_zh": "气候变暖放大西非洪灾，数千人流离失所",
-      "summary_source": "Adaptation to frightening new normal and reducing emissions further and faster is critical, scientists warn Dozens of people drowned, hundreds had to be rescued and thousands were displaced when floods struck the coasts of west Africa last month. Now scientists have concluded that the rains that caused the floods were supercharged by climate breakdown. Global heating, they say, turned what should have been a routine weather event into a climate catastrophe. Continue reading...",
-      "language": "en",
-      "rights_status": "metadata_only",
-      "content_hash": "ac9bcda2d4e60b3418be86db92bb8cc972b61c507a9ca5af7190ff01abc117b9",
-      "fetched_at": "2026-07-17T04:24:03.042043+00:00",
-      "relevance_score": 64,
       "source_name": "The Guardian Climate Crisis",
       "source_type": "综合媒体",
       "authority": 5,
-      "topics": [
-        "能源与排放",
-        "气候适应"
-      ],
-      "numbers": [],
-      "summary_zh": "科学家认为，全球变暖增强了近期西非沿海地区的强降雨。洪灾造成数十人死亡、数百人获救，数千人被迫转移。",
-      "theme_zh": "西非洪灾",
-      "why_zh": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。",
-      "places": [
-        {
-          "name_zh": "西非沿海",
-          "lon": -4.0,
-          "lat": 8.0
-        }
-      ],
-      "poster_phrase": "西非洪水被气候变暖放大",
-      "translation_status": "human_reviewed",
-      "fact_status": "source_claim_unverified",
-      "published_at": "2026-07-16T00:01:08+00:00"
-    },
-    {
-      "article_id": "article_76f4e61f3d6cd7a4",
-      "source_id": "OFF001",
-      "source_url": "https://news.un.org/feed/view/en/story/2026/07/1167955",
-      "canonical_url": "https://news.un.org/feed/view/en/story/2026/07/1167955",
-      "title_original": "‘Heat deaths are not inevitable’: WHO pushes Europe to heat‑proof its hospitals",
-      "title_zh": "世卫组织敦促欧洲医院为极端高温做好准备",
-      "summary_source": "As Europe battles a deadly record-breaking heatwave, the World Health Organization (WHO) issued new guidance on Thursday to help countries face scorching temperatures now and in the future.",
+      "relevance_score": 64,
+      "title_original": "Europe’s rivers are running dry, and the knock-on effects are disastrous | Yiannis Baboulias",
+      "title_zh": "欧洲河流正在干涸，连锁后果严重",
+      "summary_source": "Droughts that were once a century now happen every year, and the impact on wildlife, industrial output and culture itself is catastrophic Last week, 186 passengers had to be evacuated from the cruise ship Viking Ullur, after it ran aground on a sandbank in the Danube. Others have been left stranded , unable to move between Vienna and Budapest. Passengers stood on deck, the Habsburg splendour around them out of reach as the river fell to 41cm in Budapest, within 8cm of its 2018 all-time low. Elsewhere on the Hungarian stretch of the river, new record lows were recorded. Farther east in Romania , the Danube recorded its lowest water levels since 1996. A river’s flow is measured in cubic metres per second, and at Baziaș, where the river enters the country, it stood at 1,700m³/s, against a July average of 4,700m³/s. Ferry services were suspended, as were grain barges. Yiannis Baboulias is a Greek writer based in London. His work focuses on European politics, the environment and the far right Continue reading...",
+      "summary_zh": "多瑙河布达佩斯段水位降至41厘米，距2018年历史低点仅8厘米；罗马尼亚河段录得1996年以来最低水位，渡轮和粮食驳船运输被迫暂停。",
+      "theme_zh": "欧洲干旱",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
-      "rights_status": "metadata_only",
-      "content_hash": "5c78cf5a36b302d7a5f94dcf36fd9edbb8af2767371425b42d79dd7dcaf30823",
-      "fetched_at": "2026-07-17T04:24:08.756256+00:00",
-      "relevance_score": 60,
-      "source_name": "UN News - Climate Change",
-      "source_type": "联合国官方新闻",
-      "authority": 5,
+      "published_at": "2026-08-05T04:00:09+00:00",
+      "fetched_at": "2026-08-05T08:19:16.974784+00:00",
       "topics": [
-        "气候动态"
+        "干旱",
+        "水资源",
+        "航运"
       ],
-      "numbers": [],
-      "summary_zh": "欧洲遭遇破纪录热浪之际，世界卫生组织发布新指南，要求各国提高医院和卫生系统抵御当前及未来高温风险的能力。",
-      "theme_zh": "高温与健康",
-      "why_zh": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。",
+      "numbers": [
+        "186",
+        "41c",
+        "8c",
+        "2018",
+        "1996",
+        "1,700"
+      ],
       "places": [
         {
           "name_zh": "欧洲",
@@ -162,255 +287,1038 @@
           "lat": 51.0
         }
       ],
-      "poster_phrase": "高温正在考验医院",
       "translation_status": "human_reviewed",
-      "fact_status": "source_claim_unverified",
-      "published_at": "2026-07-16T12:00:00+00:00"
+      "fact_status": "opinion_or_context",
+      "content_hash": "54ac8b353477e52be95165915b2d46fe9cffc0801a70c04b3676a260525a512d",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 74,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_9d36560bb109055b",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "opinion_or_context",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "干旱",
+          "水资源",
+          "航运"
+        ],
+        "number_atoms": [
+          "186",
+          "41c",
+          "8c",
+          "2018",
+          "1996",
+          "1,700"
+        ],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
-      "article_id": "article_7c68d785f132c311",
-      "source_id": "INT014",
-      "source_url": "https://www.bbc.co.uk/news/videos/cyvlp93r2dyo?at_medium=RSS&at_campaign=rss",
-      "canonical_url": "https://www.bbc.co.uk/news/videos/cyvlp93r2dyo?at_medium=RSS&at_campaign=rss",
-      "title_original": "Watch: Flood waters surge in Texas after huge rainstorms",
-      "title_zh": "强降雨再度引发美国得州洪水与人员转移",
-      "summary_source": "The deluge prompted evacuations and water rescues in the same region where 25 children and two counsellors at Camp Mystic died in flooding in 2025.",
-      "language": "en",
-      "rights_status": "metadata_only",
-      "content_hash": "cd48bc92d396af15f9d66ca1db624aad909b1c8048630fa26cf9f864758c2fcd",
-      "fetched_at": "2026-07-17T04:24:06.391334+00:00",
-      "relevance_score": 48,
-      "source_name": "BBC Science & Environment",
-      "source_type": "公共媒体",
-      "authority": 5,
+      "record_id": "article_12b76e7375a965f4",
+      "article_id": "article_12b76e7375a965f4",
+      "canonical_url": "https://www.news.cn/world/20260805/9f51728665e64710bce5ff2600b2f6b9/c.html",
+      "source_url": "https://www.news.cn/world/20260805/9f51728665e64710bce5ff2600b2f6b9/c.html",
+      "source_id": "API005",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "source_type": "中国官方与专业来源定向发现API",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "研究预测 ： 气候变化将重塑非洲疟疾流行版图 - 新华网",
+      "title_zh": "研究预测：气候变化将重塑非洲疟疾流行版图",
+      "summary_source": null,
+      "summary_zh": "研究预测气候变化将改变非洲疟疾的地理分布范围。",
+      "theme_zh": "气候与健康",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "Chinese",
+      "published_at": "2026-08-05T03:00:00+00:00",
+      "fetched_at": "2026-08-05T08:19:33.058167+00:00",
       "topics": [
-        "气候动态"
+        "气候与健康",
+        "疟疾风险"
       ],
-      "numbers": [
-        "25 c",
-        "2025"
-      ],
-      "summary_zh": "强降雨导致美国得州部分地区洪水暴涨并触发疏散和水上救援；同一地区在 2025 年洪灾中曾有儿童和辅导员遇难。",
-      "theme_zh": "极端降雨",
-      "why_zh": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。",
+      "numbers": [],
       "places": [
         {
-          "name_zh": "美国得州",
-          "lon": -99.0,
-          "lat": 31.0
+          "name_zh": "非洲",
+          "lon": 22.0,
+          "lat": 2.0
         }
       ],
-      "poster_phrase": "得州再次响起洪水警报",
       "translation_status": "human_reviewed",
       "fact_status": "source_claim_unverified",
-      "published_at": "2026-07-16T16:45:55+00:00"
+      "content_hash": "47490b6f8636d76b3a32e7a273ae723f629ee834a33b3712b2d20e350daf6cfd",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 69,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_12b76e7375a965f4",
+        "source_atom": {
+          "name": "中国官方气候来源（GDELT定向发现）",
+          "authority": 4,
+          "type": "中国官方与专业来源定向发现API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候与健康",
+          "疟疾风险"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "非洲"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     },
     {
-      "article_id": "article_25dca4c9c2c8f5e0",
-      "source_id": "INT001",
-      "source_url": "https://www.carbonbrief.org/cropped-15-july-2026-uganda-starves-trump-opens-endangered-habitats-uk-cuts-rainforest-aid/",
-      "canonical_url": "https://www.carbonbrief.org/cropped-15-july-2026-uganda-starves-trump-opens-endangered-habitats-uk-cuts-rainforest-aid",
-      "title_original": "Cropped 15 July 2026: Uganda starves | Trump opens endangered habitats | UK cuts rainforest aid",
-      "title_zh": "土地与粮食观察：乌干达饥饿、美国放松栖息地保护、英国削减雨林资金",
-      "summary_source": "We handpick and explain the most important stories at the intersection of climate, land, food... The post Cropped 15 July 2026: Uganda starves | Trump opens endangered habitats | UK cuts rainforest aid appeared first on Carbon Brief .",
+      "record_id": "article_13ba664a39eb5819",
+      "article_id": "article_13ba664a39eb5819",
+      "canonical_url": "https://www.canarymedia.com/articles/climatetech-finance/court-rules-against-trump-epas-freeze-of-20b-in-green-bank-funds",
+      "source_url": "https://www.canarymedia.com/articles/climatetech-finance/court-rules-against-trump-epas-freeze-of-20b-in-green-bank-funds",
+      "source_id": "INT010",
+      "source_name": "Canary Media",
+      "source_type": "非营利清洁能源媒体",
+      "authority": 4,
+      "relevance_score": 54,
+      "title_original": "Court rules against Trump EPA’s freeze of $20B in ‘green bank’ funds",
+      "title_zh": "法院裁定特朗普政府冻结200亿美元“绿色银行”资金不当",
+      "summary_source": "A federal appeals court has ruled that the Environmental Protection Agency acted improperly in terminating billions of dollars of “green bank” financing last year, setting up a potential showdown before the U.S. Supreme Court over one of the Trump administration's earliest attacks on a key Biden-era climate program.…",
+      "summary_zh": "美国联邦上诉法院裁定，环境保护署终止200亿美元“绿色银行”融资的做法不当；案件可能继续提交联邦最高法院。",
+      "theme_zh": "绿色融资诉讼",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
       "language": "en",
-      "rights_status": "metadata_only",
-      "content_hash": "16fdf6d9519fd25572f5719d520e7284110f1d90ee25b18654a2a929cf88ba5b",
-      "fetched_at": "2026-07-17T04:23:50.516065+00:00",
-      "relevance_score": 48,
-      "source_name": "Carbon Brief",
-      "source_type": "气候专业媒体",
-      "authority": 5,
+      "published_at": "2026-08-04T23:37:00+00:00",
+      "fetched_at": "2026-08-05T08:19:16.908279+00:00",
       "topics": [
-        "气候动态"
+        "绿色融资",
+        "司法裁决"
       ],
       "numbers": [
-        "15",
-        "2026"
+        "200亿美元"
       ],
-      "summary_zh": "Carbon Brief 汇总了三条土地与粮食领域的重要动态：乌干达粮食危机、美国濒危物种栖息地政策变化，以及英国削减刚果雨林项目资助。",
-      "theme_zh": "土地与粮食",
-      "why_zh": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。",
       "places": [
-        {
-          "name_zh": "乌干达",
-          "lon": 32.0,
-          "lat": 1.0
-        },
         {
           "name_zh": "美国",
           "lon": -100.0,
           "lat": 39.0
-        },
-        {
-          "name_zh": "刚果盆地",
-          "lon": 18.0,
-          "lat": -1.0
         }
       ],
-      "poster_phrase": "土地、粮食与资金同时承压",
       "translation_status": "human_reviewed",
       "fact_status": "source_claim_unverified",
-      "published_at": "2026-07-15T14:49:04+00:00"
+      "content_hash": "534ca510f1a5b9117841bd233787c1794b6d940c85bac497a160ccb80d6736a5",
+      "poster_phrase": "气候线索更新",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_13ba664a39eb5819",
+        "source_atom": {
+          "name": "Canary Media",
+          "authority": 4,
+          "type": "非营利清洁能源媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "绿色融资",
+          "司法裁决"
+        ],
+        "number_atoms": [
+          "200亿美元"
+        ],
+        "geo_atoms": [
+          "美国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_5da3e3fe9175f45b",
+      "article_id": "article_5da3e3fe9175f45b",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQQXhSazlGdThuWEE2RHBkZUZwTTdUUGI4cnhtcFJ4RjFGaHNZUWQtOEpqWEUtZUl5UHdLWGJHYkZ1V09tcnRFRmVpOUtrX3ZGME5DVmpvS2dQNi12Zm16ZG9OZEtiYWJFSXlXUjVlcWNVSzlMSzE2OVdGZ2VWUDYzRmJHYk1Yc0x1SVRvRDBFeVRaS2lvR1BJR0FTWk9RTXF5d3NQa1lsbmU5UTJabFVPbHN3YldabWRKY1Z2bi1EWXN5TmUxRWNJekg3UmJzQll1T0t2eXAxS3ZoTUtheEIyLTJPRdIB6AFBVV95cUxQSVM5QWl6RXAwQkRvMW9LbUd0R1YxV0gzWVJrT2VLSXZ4UGg2eW1YbmhtU3VwbE1ETFF2OVVLZjRGWkp1ck5CajEzemJaa1Q5VUJ6WURhZTl4RDZlUXBEUHR0NFZHLXVGbnFPTTAxRXlJaldUbW9FWVFXemlRX2YyWVZ0N25JQWJrdmh0enI1QVhtSEd5QVVVRmVKSUJQX2g5Tmh0M3JLdFFzZjdpU0VSMkE2QVNnNkQ4aWw5VnN6TkVmdk1RSVBFaWtld0kta1gzQWE0emoxYU9Va2RKRXdpQXJWSlRsaDgw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQQXhSazlGdThuWEE2RHBkZUZwTTdUUGI4cnhtcFJ4RjFGaHNZUWQtOEpqWEUtZUl5UHdLWGJHYkZ1V09tcnRFRmVpOUtrX3ZGME5DVmpvS2dQNi12Zm16ZG9OZEtiYWJFSXlXUjVlcWNVSzlMSzE2OVdGZ2VWUDYzRmJHYk1Yc0x1SVRvRDBFeVRaS2lvR1BJR0FTWk9RTXF5d3NQa1lsbmU5UTJabFVPbHN3YldabWRKY1Z2bi1EWXN5TmUxRWNJekg3UmJzQll1T0t2eXAxS3ZoTUtheEIyLTJPRdIB6AFBVV95cUxQSVM5QWl6RXAwQkRvMW9LbUd0R1YxV0gzWVJrT2VLSXZ4UGg2eW1YbmhtU3VwbE1ETFF2OVVLZjRGWkp1ck5CajEzemJaa1Q5VUJ6WURhZTl4RDZlUXBEUHR0NFZHLXVGbnFPTTAxRXlJaldUbW9FWVFXemlRX2YyWVZ0N25JQWJrdmh0enI1QVhtSEd5QVVVRmVKSUJQX2g5Tmh0M3JLdFFzZjdpU0VSMkE2QVNnNkQ4aWw5VnN6TkVmdk1RSVBFaWtld0kta1gzQWE0emoxYU9Va2RKRXdpQXJWSlRsaDgw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 66,
+      "title_original": "France records its hottest month since 1900: July 2026 with 24.9°C and 70% drought due to climate change - Noticias Ambientales",
+      "title_zh": "法国录得1900年以来最热月份：2026年7月均温24.9℃，七成地区干旱",
+      "summary_source": "France records its hottest month since 1900: July 2026 with 24.9°C and 70% drought due to climate change Noticias Ambientales",
+      "summary_zh": "法国2026年7月平均气温达到24.9℃，成为1900年以来最热月份；报道同时称全国70%的地区受到干旱影响。",
+      "theme_zh": "极端高温与干旱",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-04T23:04:13+00:00",
+      "fetched_at": "2026-08-05T08:20:10.209315+00:00",
+      "topics": [
+        "极端高温",
+        "干旱"
+      ],
+      "numbers": [
+        "24.9℃",
+        "70%"
+      ],
+      "places": [
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "101353b2f8a6a93e9bc97fb98078963ab533f7850fec09264199c0782c25aa29",
+      "poster_phrase": "极端天气预警",
+      "quality": {
+        "passed": true,
+        "score": 65,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_5da3e3fe9175f45b",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "极端高温",
+          "干旱"
+        ],
+        "number_atoms": [
+          "24.9℃",
+          "70%"
+        ],
+        "geo_atoms": [
+          "法国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_6be6139614763fad",
+      "article_id": "article_6be6139614763fad",
+      "canonical_url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOZktrOWI1OFhXQmE5VDZGenFXOEFaa2Y0VF82ZFRKNFBIRlVXU2xhd2dqbndkRXJPaDNQVmljaEhEc3ByUW0tdlZZVExheXptNl9rUkJseEpyQW90T1kwM3FiWkNBYm1XQmExM2NMVGozeTJsN2h2RzA0a0VHbS1qYnA1Wkx3a0t1SXBKZnZNZVVEODh4QWFTOVROMm9wbHRkZ1dNaVJRSFNoTDMzc0hoU1lpeU8?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOZktrOWI1OFhXQmE5VDZGenFXOEFaa2Y0VF82ZFRKNFBIRlVXU2xhd2dqbndkRXJPaDNQVmljaEhEc3ByUW0tdlZZVExheXptNl9rUkJseEpyQW90T1kwM3FiWkNBYm1XQmExM2NMVGozeTJsN2h2RzA0a0VHbS1qYnA1Wkx3a0t1SXBKZnZNZVVEODh4QWFTOVROMm9wbHRkZ1dNaVJRSFNoTDMzc0hoU1lpeU8?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 72,
+      "title_original": "Renewable Energy Certificates Global Market Report 2026: Growth Drivers, Key Trends, and Forecast to 2030 - The National Law Review",
+      "title_zh": "《2026年全球可再生能源证书市场报告》：增长动力、主要趋势及2030年前预测",
+      "summary_source": "Renewable Energy Certificates Global Market Report 2026: Growth Drivers, Key Trends, and Forecast to 2030 The National Law Review",
+      "summary_zh": "",
+      "theme_zh": "可再生能源证书",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-04T18:09:31+00:00",
+      "fetched_at": "2026-08-05T08:20:10.209315+00:00",
+      "topics": [
+        "可再生能源证书",
+        "市场预测"
+      ],
+      "numbers": [
+        "2030年"
+      ],
+      "places": [],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "786e133f823efcff2b33dd1037f0e87f2dab48dca56df077daa699ef63df430a",
+      "poster_phrase": "能源转型提速",
+      "quality": {
+        "passed": true,
+        "score": 67,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_6be6139614763fad",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "可再生能源证书",
+          "市场预测"
+        ],
+        "number_atoms": [
+          "2030年"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_d12bd87d287fb861",
+      "article_id": "article_d12bd87d287fb861",
+      "canonical_url": "https://www.theguardian.com/business/ng-interactive/2026/aug/04/revealed-major-oil-firms-make-93bn-profits-amid-war-and-climate-crisis",
+      "source_url": "https://www.theguardian.com/business/ng-interactive/2026/aug/04/revealed-major-oil-firms-make-93bn-profits-amid-war-and-climate-crisis",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 82,
+      "title_original": "Revealed: major oil firms make $93bn profits amid war and climate crisis",
+      "title_zh": "调查：战争与气候危机期间，主要石油公司获利930亿美元",
+      "summary_source": "Iran conflict windfall over three months reignites calls for companies ‘cashing in on human misery’ to pay for environmental damage Eight of the biggest oil companies amassed profits of more than $90bn (£67bn) in just three months as the Iran conflict sent energy prices soaring and the emissions-fuelled climate crisis caused deadly heatwaves. The windfall war profits have reignited calls for oil and gas supermajors such as Saudi Aramco and BP to pay for the environmental damage caused by “cashing in on human misery” and fund a rapid transition to renewable energy. Continue reading...",
+      "summary_zh": "八家大型石油公司在三个月内获利超过900亿美元；伊朗冲突推高能源价格，再次引发要求油气企业为环境损害出资并支持可再生能源转型的呼声。",
+      "theme_zh": "石油利润与气候责任",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-04T17:49:16+00:00",
+      "fetched_at": "2026-08-05T08:19:16.974784+00:00",
+      "topics": [
+        "石油天然气",
+        "气候责任",
+        "能源价格"
+      ],
+      "numbers": [
+        "930亿美元",
+        "三个月"
+      ],
+      "places": [
+        {
+          "name_zh": "伊朗",
+          "lon": 53.0,
+          "lat": 32.0
+        },
+        {
+          "name_zh": "沙特阿拉伯",
+          "lon": 45.0,
+          "lat": 24.0
+        },
+        {
+          "name_zh": "英国",
+          "lon": -2.0,
+          "lat": 54.0
+        }
+      ],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "3c8cfdb5c6a1113f4fa24cf92ddf9b50d720ea7cb9f0f7635d10970c5a2d5db4",
+      "poster_phrase": "能源转型提速",
+      "quality": {
+        "passed": true,
+        "score": 89,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_d12bd87d287fb861",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "石油天然气",
+          "气候责任",
+          "能源价格"
+        ],
+        "number_atoms": [
+          "930亿美元",
+          "三个月"
+        ],
+        "geo_atoms": [
+          "伊朗",
+          "沙特阿拉伯",
+          "英国"
+        ],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+    },
+    {
+      "record_id": "article_f276f2a85355a220",
+      "article_id": "article_f276f2a85355a220",
+      "canonical_url": "https://www.climatechangenews.com/2026/08/04/is-fomo-undermining-climate-diplomacy",
+      "source_url": "https://www.climatechangenews.com/2026/08/04/is-fomo-undermining-climate-diplomacy/",
+      "source_id": "INT002",
+      "source_name": "Climate Home News",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 74,
+      "title_original": "Is FOMO undermining climate diplomacy?",
+      "title_zh": "“错失恐惧”正在削弱气候外交吗？",
+      "summary_source": "The negotiating community has not become 20 times larger, but the COP has - and the rising number of participants, from politicians to business executives, is getting in the way of the task at hand The post Is FOMO undermining climate diplomacy? appeared first on Climate Home News .",
+      "summary_zh": "文章指出，气候大会参会人数大幅扩张，但谈判群体规模并未同比增长；政界和企业代表增加可能挤压正式谈判工作的空间。",
+      "theme_zh": "气候大会治理",
+      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-04T16:55:01+00:00",
+      "fetched_at": "2026-08-05T08:19:14.997966+00:00",
+      "topics": [
+        "气候外交",
+        "大会治理"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "human_reviewed",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "9331756051017538ebb683764583ab2171af43eef3b73c793bac20276b5d9715",
+      "poster_phrase": "谈判信号更新",
+      "quality": {
+        "passed": true,
+        "score": 86,
+        "tier": "A",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_f276f2a85355a220",
+        "source_atom": {
+          "name": "Climate Home News",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "fallback_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候外交",
+          "大会治理"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+      },
+      "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
+      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
     }
   ],
   "map_events": [
     {
-      "marker_id": "article_c5b5abc1795a29d9_0",
-      "article_id": "article_c5b5abc1795a29d9",
-      "place": "全球油气产区",
-      "lon": 25.0,
-      "lat": 20.0,
-      "theme": "甲烷减排",
-      "title_zh": "AI 正把卫星发现的甲烷泄漏转化为真实减排",
-      "summary_zh": "联合国环境署称，人工智能正在帮助油气行业把卫星观测转化为甲烷减排行动；相关措施带来的气候效益，相当于减少近 2400 万辆汽油乘用车一年的排放。",
+      "marker_id": "article_c9a6956b6ba6facb_primary",
+      "article_id": "article_c9a6956b6ba6facb",
+      "place": "地中海地区",
+      "lon": 18.0,
+      "lat": 36.0,
+      "theme": "海洋生态保护",
+      "title_zh": "《奥德赛》登上大银幕之际，地中海也在经历自己的史诗旅程",
+      "summary_zh": "联合国环境规划署借影片《奥德赛》重返影院，介绍地中海当前面临的环境威胁，以及地中海行动计划正在采取的保护措施。",
       "source_name": "UN Environment Programme",
-      "published_at": "2026-07-15T06:05:51+00:00",
-      "url": "http://www.unep.org/news-and-stories/press-release/ai-helping-un-detect-methane-emissions-and-spark-real-reductions"
+      "published_at": "2026-08-05T07:40:58+00:00",
+      "url": "https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own"
     },
     {
-      "marker_id": "article_564ab2b4e2f26c1f_0",
-      "article_id": "article_564ab2b4e2f26c1f",
-      "place": "主要排放国",
-      "lon": 65.0,
-      "lat": 42.0,
-      "theme": "气候责任",
-      "title_zh": "主要排放国被指早在数十年前已知化石燃料的气候风险",
-      "summary_zh": "Climate Home News 报道称，多国政府至少从 20 世纪 60 年代起已了解化石燃料使用会导致全球变暖，但相关信息并未充分公开。",
-      "source_name": "Climate Home News",
-      "published_at": "2026-07-15T10:51:19+00:00",
-      "url": "https://www.climatechangenews.com/2026/07/15/major-emitting-countries-knew-of-climate-risks-decades-earlier-than-claimed"
+      "marker_id": "article_ff78f0fb97528ea2_primary",
+      "article_id": "article_ff78f0fb97528ea2",
+      "place": "安第斯地区",
+      "lon": -69.0,
+      "lat": -20.0,
+      "theme": "极端环境适应",
+      "title_zh": "生活在火山之巅的高海拔小鼠如何生存？研究揭示答案",
+      "summary_zh": "研究发现，安第斯叶耳鼠通过生物适应机制，在低氧、常年低于冰点的火山高海拔环境中生存。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-08-05T06:21:14+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how"
     },
     {
-      "marker_id": "article_5b8f40780203e19e_0",
-      "article_id": "article_5b8f40780203e19e",
-      "place": "西非沿海",
-      "lon": -4.0,
-      "lat": 8.0,
-      "theme": "西非洪灾",
-      "title_zh": "气候变暖放大西非洪灾，数千人流离失所",
-      "summary_zh": "科学家认为，全球变暖增强了近期西非沿海地区的强降雨。洪灾造成数十人死亡、数百人获救，数千人被迫转移。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-07-16T00:01:08+00:00",
-      "url": "https://www.theguardian.com/world/2026/jul/16/how-global-heating-supercharged-floods-west-africa-displacing-thousands"
-    },
-    {
-      "marker_id": "article_76f4e61f3d6cd7a4_0",
-      "article_id": "article_76f4e61f3d6cd7a4",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "高温与健康",
-      "title_zh": "世卫组织敦促欧洲医院为极端高温做好准备",
-      "summary_zh": "欧洲遭遇破纪录热浪之际，世界卫生组织发布新指南，要求各国提高医院和卫生系统抵御当前及未来高温风险的能力。",
-      "source_name": "UN News - Climate Change",
-      "published_at": "2026-07-16T12:00:00+00:00",
-      "url": "https://news.un.org/feed/view/en/story/2026/07/1167955"
-    },
-    {
-      "marker_id": "article_7c68d785f132c311_0",
-      "article_id": "article_7c68d785f132c311",
-      "place": "美国得州",
-      "lon": -99.0,
-      "lat": 31.0,
-      "theme": "极端降雨",
-      "title_zh": "强降雨再度引发美国得州洪水与人员转移",
-      "summary_zh": "强降雨导致美国得州部分地区洪水暴涨并触发疏散和水上救援；同一地区在 2025 年洪灾中曾有儿童和辅导员遇难。",
-      "source_name": "BBC Science & Environment",
-      "published_at": "2026-07-16T16:45:55+00:00",
-      "url": "https://www.bbc.co.uk/news/videos/cyvlp93r2dyo?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "marker_id": "article_25dca4c9c2c8f5e0_0",
-      "article_id": "article_25dca4c9c2c8f5e0",
-      "place": "乌干达",
-      "lon": 32.0,
-      "lat": 1.0,
-      "theme": "土地与粮食",
-      "title_zh": "土地与粮食观察：乌干达饥饿、美国放松栖息地保护、英国削减雨林资金",
-      "summary_zh": "Carbon Brief 汇总了三条土地与粮食领域的重要动态：乌干达粮食危机、美国濒危物种栖息地政策变化，以及英国削减刚果雨林项目资助。",
-      "source_name": "Carbon Brief",
-      "published_at": "2026-07-15T14:49:04+00:00",
-      "url": "https://www.carbonbrief.org/cropped-15-july-2026-uganda-starves-trump-opens-endangered-habitats-uk-cuts-rainforest-aid"
-    },
-    {
-      "marker_id": "article_25dca4c9c2c8f5e0_1",
-      "article_id": "article_25dca4c9c2c8f5e0",
+      "marker_id": "article_3d06fe0312c1d3f1_primary",
+      "article_id": "article_3d06fe0312c1d3f1",
       "place": "美国",
       "lon": -100.0,
       "lat": 39.0,
-      "theme": "土地与粮食",
-      "title_zh": "土地与粮食观察：乌干达饥饿、美国放松栖息地保护、英国削减雨林资金",
-      "summary_zh": "Carbon Brief 汇总了三条土地与粮食领域的重要动态：乌干达粮食危机、美国濒危物种栖息地政策变化，以及英国削减刚果雨林项目资助。",
-      "source_name": "Carbon Brief",
-      "published_at": "2026-07-15T14:49:04+00:00",
-      "url": "https://www.carbonbrief.org/cropped-15-july-2026-uganda-starves-trump-opens-endangered-habitats-uk-cuts-rainforest-aid"
+      "theme": "气候资金诉讼",
+      "title_zh": "美国上诉法院阻止特朗普政府取消数十亿美元气候赠款",
+      "summary_zh": "美国联邦上诉法院叫停特朗普政府取消数十亿美元气候赠款的决定。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-05T05:15:00+00:00",
+      "url": "https://english.news.cn/20260805/846fcc321ba240ee8fd13c0838bd2f35/c.html"
     },
     {
-      "marker_id": "article_25dca4c9c2c8f5e0_2",
-      "article_id": "article_25dca4c9c2c8f5e0",
-      "place": "刚果盆地",
+      "marker_id": "article_9d36560bb109055b_primary",
+      "article_id": "article_9d36560bb109055b",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "欧洲干旱",
+      "title_zh": "欧洲河流正在干涸，连锁后果严重",
+      "summary_zh": "多瑙河布达佩斯段水位降至41厘米，距2018年历史低点仅8厘米；罗马尼亚河段录得1996年以来最低水位，渡轮和粮食驳船运输被迫暂停。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-05T04:00:09+00:00",
+      "url": "https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine"
+    },
+    {
+      "marker_id": "article_12b76e7375a965f4_primary",
+      "article_id": "article_12b76e7375a965f4",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "气候与健康",
+      "title_zh": "研究预测：气候变化将重塑非洲疟疾流行版图",
+      "summary_zh": "研究预测气候变化将改变非洲疟疾的地理分布范围。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-05T03:00:00+00:00",
+      "url": "https://www.news.cn/world/20260805/9f51728665e64710bce5ff2600b2f6b9/c.html"
+    },
+    {
+      "marker_id": "article_13ba664a39eb5819_primary",
+      "article_id": "article_13ba664a39eb5819",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "绿色融资诉讼",
+      "title_zh": "法院裁定特朗普政府冻结200亿美元“绿色银行”资金不当",
+      "summary_zh": "美国联邦上诉法院裁定，环境保护署终止200亿美元“绿色银行”融资的做法不当；案件可能继续提交联邦最高法院。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-04T23:37:00+00:00",
+      "url": "https://www.canarymedia.com/articles/climatetech-finance/court-rules-against-trump-epas-freeze-of-20b-in-green-bank-funds"
+    },
+    {
+      "marker_id": "article_5da3e3fe9175f45b_primary",
+      "article_id": "article_5da3e3fe9175f45b",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "极端高温与干旱",
+      "title_zh": "法国录得1900年以来最热月份：2026年7月均温24.9℃，七成地区干旱",
+      "summary_zh": "法国2026年7月平均气温达到24.9℃，成为1900年以来最热月份；报道同时称全国70%的地区受到干旱影响。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-04T23:04:13+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQQXhSazlGdThuWEE2RHBkZUZwTTdUUGI4cnhtcFJ4RjFGaHNZUWQtOEpqWEUtZUl5UHdLWGJHYkZ1V09tcnRFRmVpOUtrX3ZGME5DVmpvS2dQNi12Zm16ZG9OZEtiYWJFSXlXUjVlcWNVSzlMSzE2OVdGZ2VWUDYzRmJHYk1Yc0x1SVRvRDBFeVRaS2lvR1BJR0FTWk9RTXF5d3NQa1lsbmU5UTJabFVPbHN3YldabWRKY1Z2bi1EWXN5TmUxRWNJekg3UmJzQll1T0t2eXAxS3ZoTUtheEIyLTJPRdIB6AFBVV95cUxQSVM5QWl6RXAwQkRvMW9LbUd0R1YxV0gzWVJrT2VLSXZ4UGg2eW1YbmhtU3VwbE1ETFF2OVVLZjRGWkp1ck5CajEzemJaa1Q5VUJ6WURhZTl4RDZlUXBEUHR0NFZHLXVGbnFPTTAxRXlJaldUbW9FWVFXemlRX2YyWVZ0N25JQWJrdmh0enI1QVhtSEd5QVVVRmVKSUJQX2g5Tmh0M3JLdFFzZjdpU0VSMkE2QVNnNkQ4aWw5VnN6TkVmdk1RSVBFaWtld0kta1gzQWE0emoxYU9Va2RKRXdpQXJWSlRsaDgw?oc=5"
+    },
+    {
+      "marker_id": "article_d12bd87d287fb861_primary",
+      "article_id": "article_d12bd87d287fb861",
+      "place": "伊朗",
+      "lon": 53.0,
+      "lat": 32.0,
+      "theme": "石油利润与气候责任",
+      "title_zh": "调查：战争与气候危机期间，主要石油公司获利930亿美元",
+      "summary_zh": "八家大型石油公司在三个月内获利超过900亿美元；伊朗冲突推高能源价格，再次引发要求油气企业为环境损害出资并支持可再生能源转型的呼声。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-04T17:49:16+00:00",
+      "url": "https://www.theguardian.com/business/ng-interactive/2026/aug/04/revealed-major-oil-firms-make-93bn-profits-amid-war-and-climate-crisis"
+    }
+  ],
+  "map_events_today": [
+    {
+      "marker_id": "article_c9a6956b6ba6facb_primary",
+      "article_id": "article_c9a6956b6ba6facb",
+      "place": "地中海地区",
       "lon": 18.0,
-      "lat": -1.0,
-      "theme": "土地与粮食",
-      "title_zh": "土地与粮食观察：乌干达饥饿、美国放松栖息地保护、英国削减雨林资金",
-      "summary_zh": "Carbon Brief 汇总了三条土地与粮食领域的重要动态：乌干达粮食危机、美国濒危物种栖息地政策变化，以及英国削减刚果雨林项目资助。",
-      "source_name": "Carbon Brief",
-      "published_at": "2026-07-15T14:49:04+00:00",
-      "url": "https://www.carbonbrief.org/cropped-15-july-2026-uganda-starves-trump-opens-endangered-habitats-uk-cuts-rainforest-aid"
+      "lat": 36.0,
+      "theme": "海洋生态保护",
+      "title_zh": "《奥德赛》登上大银幕之际，地中海也在经历自己的史诗旅程",
+      "summary_zh": "联合国环境规划署借影片《奥德赛》重返影院，介绍地中海当前面临的环境威胁，以及地中海行动计划正在采取的保护措施。",
+      "source_name": "UN Environment Programme",
+      "published_at": "2026-08-05T07:40:58+00:00",
+      "url": "https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own"
+    },
+    {
+      "marker_id": "article_ff78f0fb97528ea2_primary",
+      "article_id": "article_ff78f0fb97528ea2",
+      "place": "安第斯地区",
+      "lon": -69.0,
+      "lat": -20.0,
+      "theme": "极端环境适应",
+      "title_zh": "生活在火山之巅的高海拔小鼠如何生存？研究揭示答案",
+      "summary_zh": "研究发现，安第斯叶耳鼠通过生物适应机制，在低氧、常年低于冰点的火山高海拔环境中生存。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-08-05T06:21:14+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how"
+    },
+    {
+      "marker_id": "article_3d06fe0312c1d3f1_primary",
+      "article_id": "article_3d06fe0312c1d3f1",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候资金诉讼",
+      "title_zh": "美国上诉法院阻止特朗普政府取消数十亿美元气候赠款",
+      "summary_zh": "美国联邦上诉法院叫停特朗普政府取消数十亿美元气候赠款的决定。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-05T05:15:00+00:00",
+      "url": "https://english.news.cn/20260805/846fcc321ba240ee8fd13c0838bd2f35/c.html"
+    },
+    {
+      "marker_id": "article_9d36560bb109055b_primary",
+      "article_id": "article_9d36560bb109055b",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "欧洲干旱",
+      "title_zh": "欧洲河流正在干涸，连锁后果严重",
+      "summary_zh": "多瑙河布达佩斯段水位降至41厘米，距2018年历史低点仅8厘米；罗马尼亚河段录得1996年以来最低水位，渡轮和粮食驳船运输被迫暂停。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-05T04:00:09+00:00",
+      "url": "https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine"
+    },
+    {
+      "marker_id": "article_12b76e7375a965f4_primary",
+      "article_id": "article_12b76e7375a965f4",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "气候与健康",
+      "title_zh": "研究预测：气候变化将重塑非洲疟疾流行版图",
+      "summary_zh": "研究预测气候变化将改变非洲疟疾的地理分布范围。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-05T03:00:00+00:00",
+      "url": "https://www.news.cn/world/20260805/9f51728665e64710bce5ff2600b2f6b9/c.html"
+    },
+    {
+      "marker_id": "article_13ba664a39eb5819_primary",
+      "article_id": "article_13ba664a39eb5819",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "绿色融资诉讼",
+      "title_zh": "法院裁定特朗普政府冻结200亿美元“绿色银行”资金不当",
+      "summary_zh": "美国联邦上诉法院裁定，环境保护署终止200亿美元“绿色银行”融资的做法不当；案件可能继续提交联邦最高法院。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-04T23:37:00+00:00",
+      "url": "https://www.canarymedia.com/articles/climatetech-finance/court-rules-against-trump-epas-freeze-of-20b-in-green-bank-funds"
+    },
+    {
+      "marker_id": "article_5da3e3fe9175f45b_primary",
+      "article_id": "article_5da3e3fe9175f45b",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "极端高温与干旱",
+      "title_zh": "法国录得1900年以来最热月份：2026年7月均温24.9℃，七成地区干旱",
+      "summary_zh": "法国2026年7月平均气温达到24.9℃，成为1900年以来最热月份；报道同时称全国70%的地区受到干旱影响。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-04T23:04:13+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQQXhSazlGdThuWEE2RHBkZUZwTTdUUGI4cnhtcFJ4RjFGaHNZUWQtOEpqWEUtZUl5UHdLWGJHYkZ1V09tcnRFRmVpOUtrX3ZGME5DVmpvS2dQNi12Zm16ZG9OZEtiYWJFSXlXUjVlcWNVSzlMSzE2OVdGZ2VWUDYzRmJHYk1Yc0x1SVRvRDBFeVRaS2lvR1BJR0FTWk9RTXF5d3NQa1lsbmU5UTJabFVPbHN3YldabWRKY1Z2bi1EWXN5TmUxRWNJekg3UmJzQll1T0t2eXAxS3ZoTUtheEIyLTJPRdIB6AFBVV95cUxQSVM5QWl6RXAwQkRvMW9LbUd0R1YxV0gzWVJrT2VLSXZ4UGg2eW1YbmhtU3VwbE1ETFF2OVVLZjRGWkp1ck5CajEzemJaa1Q5VUJ6WURhZTl4RDZlUXBEUHR0NFZHLXVGbnFPTTAxRXlJaldUbW9FWVFXemlRX2YyWVZ0N25JQWJrdmh0enI1QVhtSEd5QVVVRmVKSUJQX2g5Tmh0M3JLdFFzZjdpU0VSMkE2QVNnNkQ4aWw5VnN6TkVmdk1RSVBFaWtld0kta1gzQWE0emoxYU9Va2RKRXdpQXJWSlRsaDgw?oc=5"
+    },
+    {
+      "marker_id": "article_d12bd87d287fb861_primary",
+      "article_id": "article_d12bd87d287fb861",
+      "place": "伊朗",
+      "lon": 53.0,
+      "lat": 32.0,
+      "theme": "石油利润与气候责任",
+      "title_zh": "调查：战争与气候危机期间，主要石油公司获利930亿美元",
+      "summary_zh": "八家大型石油公司在三个月内获利超过900亿美元；伊朗冲突推高能源价格，再次引发要求油气企业为环境损害出资并支持可再生能源转型的呼声。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-04T17:49:16+00:00",
+      "url": "https://www.theguardian.com/business/ng-interactive/2026/aug/04/revealed-major-oil-firms-make-93bn-profits-amid-war-and-climate-crisis"
+    }
+  ],
+  "map_events_week": [
+    {
+      "marker_id": "article_d12bd87d287fb861_primary",
+      "article_id": "article_d12bd87d287fb861",
+      "place": "伊朗",
+      "lon": 53.0,
+      "lat": 32.0,
+      "theme": "石油利润与气候责任",
+      "title_zh": "调查：战争与气候危机期间，主要石油公司获利930亿美元",
+      "summary_zh": "八家大型石油公司在三个月内获利超过900亿美元；伊朗冲突推高能源价格，再次引发要求油气企业为环境损害出资并支持可再生能源转型的呼声。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-04T17:49:16+00:00",
+      "url": "https://www.theguardian.com/business/ng-interactive/2026/aug/04/revealed-major-oil-firms-make-93bn-profits-amid-war-and-climate-crisis"
+    },
+    {
+      "marker_id": "article_dbab5b3ffec46e40_primary",
+      "article_id": "article_dbab5b3ffec46e40",
+      "place": "美国太平洋西北地区",
+      "lon": -120.0,
+      "lat": 46.0,
+      "theme": "野火疏散",
+      "title_zh": "美国太平洋西北地区野火迫使6.4万人撤离",
+      "summary_zh": "美国太平洋西北地区发生野火，约6.4万人被迫撤离。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-04T02:45:00+00:00",
+      "url": "https://www.illawarramercury.com.au/story/9323313/wildfires-in-us-pacific-northwest-force-64000-to-flee"
+    },
+    {
+      "marker_id": "article_5da3e3fe9175f45b_primary",
+      "article_id": "article_5da3e3fe9175f45b",
+      "place": "法国",
+      "lon": 2.0,
+      "lat": 46.0,
+      "theme": "极端高温与干旱",
+      "title_zh": "法国录得1900年以来最热月份：2026年7月均温24.9℃，七成地区干旱",
+      "summary_zh": "法国2026年7月平均气温达到24.9℃，成为1900年以来最热月份；报道同时称全国70%的地区受到干旱影响。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-04T23:04:13+00:00",
+      "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQQXhSazlGdThuWEE2RHBkZUZwTTdUUGI4cnhtcFJ4RjFGaHNZUWQtOEpqWEUtZUl5UHdLWGJHYkZ1V09tcnRFRmVpOUtrX3ZGME5DVmpvS2dQNi12Zm16ZG9OZEtiYWJFSXlXUjVlcWNVSzlMSzE2OVdGZ2VWUDYzRmJHYk1Yc0x1SVRvRDBFeVRaS2lvR1BJR0FTWk9RTXF5d3NQa1lsbmU5UTJabFVPbHN3YldabWRKY1Z2bi1EWXN5TmUxRWNJekg3UmJzQll1T0t2eXAxS3ZoTUtheEIyLTJPRdIB6AFBVV95cUxQSVM5QWl6RXAwQkRvMW9LbUd0R1YxV0gzWVJrT2VLSXZ4UGg2eW1YbmhtU3VwbE1ETFF2OVVLZjRGWkp1ck5CajEzemJaa1Q5VUJ6WURhZTl4RDZlUXBEUHR0NFZHLXVGbnFPTTAxRXlJaldUbW9FWVFXemlRX2YyWVZ0N25JQWJrdmh0enI1QVhtSEd5QVVVRmVKSUJQX2g5Tmh0M3JLdFFzZjdpU0VSMkE2QVNnNkQ4aWw5VnN6TkVmdk1RSVBFaWtld0kta1gzQWE0emoxYU9Va2RKRXdpQXJWSlRsaDgw?oc=5"
+    },
+    {
+      "marker_id": "article_b4e0b07e7098b7c6_primary",
+      "article_id": "article_b4e0b07e7098b7c6",
+      "place": "美国得州",
+      "lon": -99.0,
+      "lat": 31.0,
+      "theme": "洪灾预警",
+      "title_zh": "得州再次发生洪灾，暴露预警系统哪些问题",
+      "summary_zh": "得州在上次丘陵地区洪灾造成139人死亡后改造预警系统；今年7月的历史性洪灾检验了改造成效，也暴露出仍待解决的问题。",
+      "source_name": "Grist",
+      "published_at": "2026-08-04T08:45:00+00:00",
+      "url": "https://grist.org/extreme-weather/what-another-texas-flood-revealed-about-the-states-warning-system"
+    },
+    {
+      "marker_id": "article_abb526d3ea838f5c_primary",
+      "article_id": "article_abb526d3ea838f5c",
+      "place": "东南亚",
+      "lon": 110.0,
+      "lat": 5.0,
+      "theme": "森林保护融资",
+      "title_zh": "研究：仅靠碳市场无法保护东南亚森林",
+      "summary_zh": "研究估计东南亚林业和种植园特许区内仍有约4200万公顷森林；按现有碳价，仅靠碳市场难以形成足够保护激励，需要混合融资、绿色债券等补充工具。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-08-04T02:00:36+00:00",
+      "url": "https://news.mongabay.com/2026/08/carbon-markets-alone-wont-keep-southeast-asias-forests-standing-study-says"
+    },
+    {
+      "marker_id": "article_ff78f0fb97528ea2_primary",
+      "article_id": "article_ff78f0fb97528ea2",
+      "place": "安第斯地区",
+      "lon": -69.0,
+      "lat": -20.0,
+      "theme": "极端环境适应",
+      "title_zh": "生活在火山之巅的高海拔小鼠如何生存？研究揭示答案",
+      "summary_zh": "研究发现，安第斯叶耳鼠通过生物适应机制，在低氧、常年低于冰点的火山高海拔环境中生存。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-08-05T06:21:14+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how"
+    },
+    {
+      "marker_id": "article_c9a6956b6ba6facb_primary",
+      "article_id": "article_c9a6956b6ba6facb",
+      "place": "地中海地区",
+      "lon": 18.0,
+      "lat": 36.0,
+      "theme": "海洋生态保护",
+      "title_zh": "《奥德赛》登上大银幕之际，地中海也在经历自己的史诗旅程",
+      "summary_zh": "联合国环境规划署借影片《奥德赛》重返影院，介绍地中海当前面临的环境威胁，以及地中海行动计划正在采取的保护措施。",
+      "source_name": "UN Environment Programme",
+      "published_at": "2026-08-05T07:40:58+00:00",
+      "url": "https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own"
+    },
+    {
+      "marker_id": "article_13ba664a39eb5819_primary",
+      "article_id": "article_13ba664a39eb5819",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "绿色融资诉讼",
+      "title_zh": "法院裁定特朗普政府冻结200亿美元“绿色银行”资金不当",
+      "summary_zh": "美国联邦上诉法院裁定，环境保护署终止200亿美元“绿色银行”融资的做法不当；案件可能继续提交联邦最高法院。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-04T23:37:00+00:00",
+      "url": "https://www.canarymedia.com/articles/climatetech-finance/court-rules-against-trump-epas-freeze-of-20b-in-green-bank-funds"
+    },
+    {
+      "marker_id": "article_3d06fe0312c1d3f1_primary",
+      "article_id": "article_3d06fe0312c1d3f1",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候资金诉讼",
+      "title_zh": "美国上诉法院阻止特朗普政府取消数十亿美元气候赠款",
+      "summary_zh": "美国联邦上诉法院叫停特朗普政府取消数十亿美元气候赠款的决定。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-05T05:15:00+00:00",
+      "url": "https://english.news.cn/20260805/846fcc321ba240ee8fd13c0838bd2f35/c.html"
+    },
+    {
+      "marker_id": "article_9d36560bb109055b_primary",
+      "article_id": "article_9d36560bb109055b",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "欧洲干旱",
+      "title_zh": "欧洲河流正在干涸，连锁后果严重",
+      "summary_zh": "多瑙河布达佩斯段水位降至41厘米，距2018年历史低点仅8厘米；罗马尼亚河段录得1996年以来最低水位，渡轮和粮食驳船运输被迫暂停。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-05T04:00:09+00:00",
+      "url": "https://www.theguardian.com/commentisfree/2026/aug/05/europe-rivers-running-dry-catastrophe-danube-rhine"
+    },
+    {
+      "marker_id": "article_34eb6ba3342d3843_primary",
+      "article_id": "article_34eb6ba3342d3843",
+      "place": "婆罗洲",
+      "lon": 114.0,
+      "lat": 1.0,
+      "theme": "森林抗旱研究",
+      "title_zh": "婆罗洲巨树如何突破重力限制和传统科学理论",
+      "summary_zh": "研究发现，马来西亚婆罗洲巨型热带树木向最高枝条输水的能力不弱于低处枝条，这对“高大树木更易受干旱影响”的传统假说提出挑战。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-08-04T04:24:40+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/08/how-borneos-giant-trees-defy-gravity-and-old-scientific-theories"
+    },
+    {
+      "marker_id": "article_e7b8c8426c001c1e_primary",
+      "article_id": "article_e7b8c8426c001c1e",
+      "place": "美国俄勒冈州",
+      "lon": -120.5,
+      "lat": 44.0,
+      "theme": "农业节水适应",
+      "title_zh": "农民学习用大幅减少的水量种植作物",
+      "summary_zh": "随着积雪储量减少，美国俄勒冈州旱作农业研究所正培训农民减少灌溉用水。",
+      "source_name": "Yale Climate Connections",
+      "published_at": "2026-08-04T11:00:00+00:00",
+      "url": "https://yaleclimateconnections.org/2026/08/farmers-learn-how-to-grow-crops-with-dramatically-less-water"
+    },
+    {
+      "marker_id": "article_12b76e7375a965f4_primary",
+      "article_id": "article_12b76e7375a965f4",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "气候与健康",
+      "title_zh": "研究预测：气候变化将重塑非洲疟疾流行版图",
+      "summary_zh": "研究预测气候变化将改变非洲疟疾的地理分布范围。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-05T03:00:00+00:00",
+      "url": "https://www.news.cn/world/20260805/9f51728665e64710bce5ff2600b2f6b9/c.html"
+    },
+    {
+      "marker_id": "article_d78fb1ce220cf059_primary",
+      "article_id": "article_d78fb1ce220cf059",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "可再生能源融资",
+      "title_zh": "澳大利亚推出1亿美元计划，补足可再生能源转型的“中间缺口”",
+      "summary_zh": "澳大利亚推出规模1亿美元的新计划，旨在支持可再生能源转型中融资或项目开发不足的中间环节。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-04T03:23:51+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxONnhES1VsSWU2eDZEa1RmN3M1cHV2SHpiOF9yTERqT1JRYWZfLTYzeGN1TzRCRDI4eWlVMkQ5aVFkUWoxQmFFX3lZaldzT2tJMVF2UFJtSkhCUFZZeVhXUHFYVkxfZXk3RjdCRloyXy0tOUE2YlBvaW9hMGZ6bVFiRWdZLVVMelBaU1hxU2l0REJPb2Roam5JSS0wX3ZPLTNBZ1p1SHFrbVRNLW1aaUZNanlrbU00bXdTQkFLd3FDVjRzQQ?oc=5"
     }
   ],
   "phrases": [
     {
-      "text": "卫星正在看见甲烷",
-      "theme": "甲烷减排",
+      "text": "气候线索更新",
+      "theme": "海洋生态保护",
       "weight": 10
     },
     {
-      "text": "气候责任追溯至 1960 年代",
-      "theme": "气候责任",
+      "text": "谈判信号更新",
+      "theme": "极端环境适应",
       "weight": 9
     },
     {
-      "text": "西非洪水被气候变暖放大",
-      "theme": "西非洪灾",
+      "text": "气候线索更新",
+      "theme": "气候资金诉讼",
       "weight": 8
     },
     {
-      "text": "高温正在考验医院",
-      "theme": "高温与健康",
+      "text": "极端天气预警",
+      "theme": "欧洲干旱",
       "weight": 7
     },
     {
-      "text": "得州再次响起洪水警报",
-      "theme": "极端降雨",
+      "text": "气候线索更新",
+      "theme": "气候与健康",
       "weight": 6
     },
     {
-      "text": "土地、粮食与资金同时承压",
-      "theme": "土地与粮食",
+      "text": "气候线索更新",
+      "theme": "绿色融资诉讼",
       "weight": 5
+    },
+    {
+      "text": "极端天气预警",
+      "theme": "极端高温与干旱",
+      "weight": 4
+    },
+    {
+      "text": "能源转型提速",
+      "theme": "可再生能源证书",
+      "weight": 3
     }
   ],
   "events": [],
   "topics": [
     {
-      "name": "能源与排放",
-      "weight": 3
+      "name": "司法裁决",
+      "weight": 2
     },
     {
-      "name": "气候动态",
-      "weight": 3
+      "name": "干旱",
+      "weight": 2
     },
     {
-      "name": "气候适应",
+      "name": "海洋生态保护",
+      "weight": 1
+    },
+    {
+      "name": "环境治理",
+      "weight": 1
+    },
+    {
+      "name": "极端环境适应",
+      "weight": 1
+    },
+    {
+      "name": "生物多样性",
+      "weight": 1
+    },
+    {
+      "name": "气候资金",
+      "weight": 1
+    },
+    {
+      "name": "水资源",
+      "weight": 1
+    },
+    {
+      "name": "航运",
+      "weight": 1
+    },
+    {
+      "name": "气候与健康",
+      "weight": 1
+    },
+    {
+      "name": "疟疾风险",
+      "weight": 1
+    },
+    {
+      "name": "绿色融资",
+      "weight": 1
+    },
+    {
+      "name": "极端高温",
+      "weight": 1
+    },
+    {
+      "name": "可再生能源证书",
+      "weight": 1
+    },
+    {
+      "name": "市场预测",
+      "weight": 1
+    },
+    {
+      "name": "石油天然气",
+      "weight": 1
+    },
+    {
+      "name": "气候责任",
+      "weight": 1
+    },
+    {
+      "name": "能源价格",
+      "weight": 1
+    },
+    {
+      "name": "气候外交",
+      "weight": 1
+    },
+    {
+      "name": "大会治理",
       "weight": 1
     }
   ],
   "coverage": [
     {
       "name": "全球",
-      "count": 9
+      "count": 10
     },
     {
       "name": "全球/英国",
@@ -421,34 +1329,34 @@
       "count": 3
     },
     {
+      "name": "美国/全球",
+      "count": 3
+    },
+    {
+      "name": "中国",
+      "count": 3
+    },
+    {
       "name": "土耳其",
       "count": 2
     },
     {
-      "name": "中国",
+      "name": "全球/美国",
       "count": 2
     },
     {
-      "name": "全球/欧洲",
-      "count": 1
-    },
-    {
-      "name": "中国/全球",
-      "count": 1
-    },
-    {
-      "name": "美国/全球",
+      "name": "南极洲/极地",
       "count": 1
     }
   ],
   "phases": [
     {
       "name": "P0",
-      "count": 17
+      "count": 26
     },
     {
       "name": "P1",
-      "count": 18
+      "count": 17
     },
     {
       "name": "P2",
@@ -456,7 +1364,7 @@
     },
     {
       "name": "Discovery",
-      "count": 5
+      "count": 4
     }
   ],
   "source_health": [
@@ -907,18 +1815,18 @@
     }
   ],
   "archive": {
-    "dataset_name": "ClimateText-3000",
-    "updated_at": "2026-07-21T02:45:11.962554+00:00",
-    "total": 6,
-    "limit": 3000,
+    "dataset_name": "ClimateText-100000",
+    "updated_at": "2026-08-06T02:05:37.355072+00:00",
+    "total": 174,
+    "limit": 100000,
     "statistics": {
-      "previous_total": 0,
-      "added": 6,
+      "previous_total": 174,
+      "added": 0,
       "updated": 0,
       "rejected": 0,
       "pruned": 0,
-      "tier_a": 6,
-      "tier_b": 0
+      "tier_a": 36,
+      "tier_b": 73
     }
   }
 }

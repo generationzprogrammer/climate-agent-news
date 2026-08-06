@@ -40,7 +40,7 @@ jobs:
       - name: 增量采集、中文编译与质量门禁
         env:
           PYTHONPATH: src
-          CLIMATE_ARCHIVE_LIMIT: "8760"
+          CLIMATE_ARCHIVE_LIMIT: "100000"
           # Code pushes run a one-time wider translation pass so newly added
           # regional sources can repair the current seven-day balance. The
           # scheduled daily job returns to the normal 20-record budget.
@@ -52,7 +52,7 @@ jobs:
         run: |
           python -m climate_agent.cli init
           python -m climate_agent.cli sync --skip-ndc
-          python -m climate_agent.cli export-web --output site --archive-limit 8760
+          python -m climate_agent.cli export-web --output site --archive-limit 100000
           python -m climate_agent.cli validate-publish --site site
           cp site/data/news_archive.json data/news_archive.json
       - name: 保存滚动档案与来源健康状态

@@ -8,7 +8,7 @@ from pathlib import Path
 from .corpus_analytics import is_energy_record
 
 
-ENERGY_DATASET_NAME = "EnergyTech-8760"
+ENERGY_DATASET_NAME = "EnergyTech-100000"
 
 
 def _parse_time(value: str | None) -> datetime | None:
@@ -30,7 +30,7 @@ def _energy_records(archive: dict) -> list[dict]:
     return sorted(records, key=lambda row: row.get("published_at") or "", reverse=True)
 
 
-def build_energy_archive(archive: dict, *, limit: int = 8760) -> dict:
+def build_energy_archive(archive: dict, *, limit: int = 100000) -> dict:
     records = _energy_records(archive)[:limit]
     topics = Counter(topic for record in records for topic in (record.get("topics") or []))
     places = Counter(
@@ -87,24 +87,27 @@ def _within_week(records: list[dict], latest_day: str | None) -> list[dict]:
 def _map_events(records: list[dict], *, prefix: str, limit: int = 40) -> list[dict]:
     events = []
     for record in records:
-        for place in record.get("places") or []:
-            if not place.get("name_zh"):
-                continue
-            events.append({
-                "marker_id": f"{prefix}_{len(events)}_{record.get('record_id')}",
-                "article_id": record.get("article_id"),
-                "place": place.get("name_zh"),
-                "lon": place.get("lon"),
-                "lat": place.get("lat"),
-                "theme": record.get("theme_zh") or ((record.get("topics") or ["能源技术"])[0]),
-                "title_zh": record.get("title_zh") or record.get("title_original"),
-                "summary_zh": record.get("summary_zh") or record.get("summary_source"),
-                "source_name": record.get("source_name"),
-                "published_at": record.get("published_at"),
-                "url": record.get("canonical_url"),
-            })
-            if len(events) >= limit:
-                return events
+        place = next(
+            (place for place in record.get("places") or [] if place.get("name_zh") and place.get("lon") is not None and place.get("lat") is not None),
+            None,
+        )
+        if not place:
+            continue
+        events.append({
+            "marker_id": f"{prefix}_{len(events)}_{record.get('record_id')}",
+            "article_id": record.get("article_id"),
+            "place": place.get("name_zh"),
+            "lon": place.get("lon"),
+            "lat": place.get("lat"),
+            "theme": record.get("theme_zh") or ((record.get("topics") or ["能源技术"])[0]),
+            "title_zh": record.get("title_zh") or record.get("title_original"),
+            "summary_zh": record.get("summary_zh") or record.get("summary_source"),
+            "source_name": record.get("source_name"),
+            "published_at": record.get("published_at"),
+            "url": record.get("canonical_url"),
+        })
+        if len(events) >= limit:
+            return events
     return events
 
 
@@ -126,7 +129,7 @@ def build_energy_dashboard(climate_payload: dict, energy_archive: dict) -> dict:
         "dataset_name": energy_archive["dataset_name"],
         "updated_at": energy_archive.get("updated_at"),
         "total": energy_archive.get("total", 0),
-        "limit": energy_archive.get("limit", 8760),
+        "limit": energy_archive.get("limit", 100000),
         "statistics": energy_archive.get("statistics", {}),
     }
     payload["metrics"] = {**climate_payload.get("metrics", {}), "archive_total": energy_archive.get("total", 0)}
@@ -142,7 +145,7 @@ def build_energy_dashboard(climate_payload: dict, energy_archive: dict) -> dict:
     return payload
 
 
-def write_energy_view(climate_payload: dict, archive: dict, data_dir: Path, *, limit: int = 8760) -> dict:
+def write_energy_view(climate_payload: dict, archive: dict, data_dir: Path, *, limit: int = 100000) -> dict:
     energy_archive = build_energy_archive(archive, limit=limit)
     energy_dashboard = build_energy_dashboard(climate_payload, energy_archive)
     (data_dir / "energy_archive.json").write_text(json.dumps(energy_archive, ensure_ascii=False, indent=2), encoding="utf-8")

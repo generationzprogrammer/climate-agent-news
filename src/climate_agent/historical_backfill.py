@@ -156,7 +156,7 @@ COUNTRY_CONTINENT.update({
     if country in COUNTRY_LABEL_ZH
 })
 DEFAULT_TARGET_PER_DAY = 8
-DEFAULT_ARCHIVE_LIMIT = 8760
+DEFAULT_ARCHIVE_LIMIT = 100000
 
 
 def ensure_historical_schema(db: Database) -> None:

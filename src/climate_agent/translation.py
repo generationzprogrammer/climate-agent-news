@@ -49,6 +49,7 @@ GEO_TERMS = {
     "法国": ("法国", 2.0, 46.0),
     "philippines": ("菲律宾", 122.0, 13.0),
     "uganda": ("乌干达", 32.0, 1.0),
+    "new mexico": ("美国新墨西哥州", -106.0, 34.5),
     "mexico": ("墨西哥", -102.0, 23.0),
     "latin america": ("拉丁美洲", -66.0, -15.0),
     "amazon": ("亚马孙地区", -62.0, -4.0),
@@ -86,10 +87,20 @@ def detect_places(text: str) -> list[dict]:
     haystack = re.sub(r"\bu\s*\.\s*s\s*\.?\b", " u s ", haystack)
     places = []
     seen = set()
+    occupied: list[tuple[int, int]] = []
     for term, (name, lon, lat) in sorted(GEO_TERMS.items(), key=lambda item: len(item[0]), reverse=True):
-        if re.search(rf"(?<![a-z0-9]){re.escape(term.lower())}(?![a-z0-9-])", haystack) and name not in seen:
+        pattern = rf"(?<![a-z0-9]){re.escape(term.lower())}(?![a-z0-9-])"
+        match = next(
+            (
+                candidate for candidate in re.finditer(pattern, haystack)
+                if not any(candidate.start() < end and start < candidate.end() for start, end in occupied)
+            ),
+            None,
+        )
+        if match and name not in seen:
             places.append({"name_zh": name, "lon": lon, "lat": lat})
             seen.add(name)
+            occupied.append(match.span())
     return places[:3]
 
 
