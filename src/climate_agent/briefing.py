@@ -220,6 +220,8 @@ def select_daily_window(
         candidates.append((publication_day, selected, source_total, mapped_total))
         if len(selected) >= min_items and source_total >= min_sources and mapped_total:
             return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
+        if publication_day == latest and len(selected) >= min_items and mapped_total:
+            return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
         if (
             publication_day == latest
             and len(selected) >= min_fresh_items
@@ -318,7 +320,16 @@ def _publishable_candidates(db: Database) -> list[dict]:
             or len(intelligence_keywords(item)) >= 2
         )
     ]
-    return publishable[:120]
+    recent = sorted(publishable, key=lambda item: item.get("published_at") or "", reverse=True)
+    merged: list[dict] = []
+    seen_urls: set[str] = set()
+    for item in [*publishable[:160], *recent[:160]]:
+        url = item.get("canonical_url") or item.get("article_id")
+        if url in seen_urls:
+            continue
+        seen_urls.add(url)
+        merged.append(item)
+    return merged[:240]
 
 
 def _live_intelligence(db: Database) -> list[dict]:

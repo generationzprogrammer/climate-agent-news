@@ -531,15 +531,25 @@ class CoreTests(unittest.TestCase):
         self.assertEqual([row["source_id"] for row in selected[:3]], ["A", "C", "D"])
         self.assertEqual({row["source_id"] for row in selected}, {"A", "B", "C", "D"})
 
-    def test_translation_fallback_does_not_fabricate_english_title(self) -> None:
+    def test_translation_fallback_compiles_metadata_title_without_summary(self) -> None:
         item = _fallback_translation({
             "title_original": "Heat wave brings heightened wildfire risk to Western US",
             "summary_source": "",
         })
-        self.assertEqual(item["title_zh"], "")
+        self.assertIn("美国", item["title_zh"])
+        self.assertIn("高温", item["title_zh"])
         self.assertEqual(item["summary_zh"], "")
-        self.assertEqual(item["translation_status"], "pending")
+        self.assertEqual(item["translation_status"], "metadata_compiled_needs_review")
         self.assertEqual(item["places"][0]["name_zh"], "美国")
+
+    def test_translation_fallback_compiles_recent_metadata_places(self) -> None:
+        item = _fallback_translation({
+            "title_original": "Climate change in Malaysia turns up heat on youth",
+            "summary_source": "",
+        })
+        self.assertEqual(item["places"][0]["name_zh"], "马来西亚")
+        self.assertIn("马来西亚", item["title_zh"])
+        self.assertIn("高温", item["title_zh"])
 
     def test_source_health_quarantines_only_after_repeated_failures(self) -> None:
         state = {"sources": {}}

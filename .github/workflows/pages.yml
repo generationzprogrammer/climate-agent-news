@@ -41,6 +41,7 @@ jobs:
         env:
           PYTHONPATH: src
           CLIMATE_ARCHIVE_LIMIT: "100000"
+          CLIMATE_MAX_STALE_DAYS: "2"
           # Code pushes run a one-time wider translation pass so newly added
           # regional sources can repair the current seven-day balance. The
           # scheduled daily job returns to the normal 20-record budget.
@@ -60,7 +61,7 @@ jobs:
         run: |
           git config user.name "climate-text-bot"
           git config user.email "climate-text-bot@users.noreply.github.com"
-          git add data/news_archive.json data/source_health.json
+          git add data/climate.db data/news_archive.json data/source_health.json
           if ! git diff --cached --quiet; then
             git commit -m "data: daily climate text archive [skip ci]"
             git push

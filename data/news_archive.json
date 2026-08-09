@@ -1,19 +1,861 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-100000",
-  "updated_at": "2026-08-08T23:57:13.228931+00:00",
+  "updated_at": "2026-08-09T02:54:49.045352+00:00",
   "limit": 100000,
-  "total": 174,
+  "total": 186,
   "statistics": {
-    "previous_total": 174,
-    "added": 0,
-    "updated": 0,
+    "previous_total": 184,
+    "added": 2,
+    "updated": 10,
     "rejected": 0,
     "pruned": 0,
     "tier_a": 36,
-    "tier_b": 73
+    "tier_b": 85
   },
   "records": [
+    {
+      "record_id": "article_e4debfed40c14da9",
+      "article_id": "article_e4debfed40c14da9",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQVndNbFVpeFdUV296anJRT0daMUstQ0k4dkxpT2N2dXc1elZDcjNQSEZlcGZFdmdfaU42REpfeXV6dy03dl83V3ZiZjVTM1h4VGFKZERWbmt3aktmVktIVTk2RzFrX202MWtneWtTMmU0WjlNLXZiWUdZRXN1bXR0SW1oYWk4M0RSRUs2ZmpmWG1ITkhMQk03WWtMY3FiUmZPanU4b2VNRnJpeXhWYkJEaWFMTdIBswFBVV95cUxNU3l0eUEtTGtZVTFPWEM3WjU1NHBCVEpHSVF4N2FzWS1LRFMyUVpnZGRJbVZCRWNqNEhwR2k2RVpaOE9vb0wyWF9ibk1FWW9SeVdLR0VrOGpHbHpZUHpJVG9fNFhzdjA1SGJXc1BsTGVndEJUaXB0WlBaOHRIcnB5OUhYREpqSHplamRmYldIc3VKRFFrTVd3c3phUjJHTjJlS3ZUU2F4cFkxcThuSDVBNGQ0aw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQVndNbFVpeFdUV296anJRT0daMUstQ0k4dkxpT2N2dXc1elZDcjNQSEZlcGZFdmdfaU42REpfeXV6dy03dl83V3ZiZjVTM1h4VGFKZERWbmt3aktmVktIVTk2RzFrX202MWtneWtTMmU0WjlNLXZiWUdZRXN1bXR0SW1oYWk4M0RSRUs2ZmpmWG1ITkhMQk03WWtMY3FiUmZPanU4b2VNRnJpeXhWYkJEaWFMTdIBswFBVV95cUxNU3l0eUEtTGtZVTFPWEM3WjU1NHBCVEpHSVF4N2FzWS1LRFMyUVpnZGRJbVZCRWNqNEhwR2k2RVpaOE9vb0wyWF9ibk1FWW9SeVdLR0VrOGpHbHpZUHpJVG9fNFhzdjA1SGJXc1BsTGVndEJUaXB0WlBaOHRIcnB5OUhYREpqSHplamRmYldIc3VKRFFrTVd3c3phUjJHTjJlS3ZUU2F4cFkxcThuSDVBNGQ0aw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 54,
+      "title_original": "Climate change in Malaysia turns up heat on youth - South China Morning Post",
+      "title_zh": "马来西亚气候变化加剧高温风险",
+      "summary_source": "Climate change in Malaysia turns up heat on youth South China Morning Post",
+      "summary_zh": "",
+      "theme_zh": "高温风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T02:00:09+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "马来西亚",
+          "lon": 102.0,
+          "lat": 4.0
+        },
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "ded13fb185851f2afc228bd327cf464df3602ed29aa012cd822340b93b5b10db",
+      "poster_phrase": "马来西亚气候变化加剧高温风险",
+      "quality": {
+        "passed": true,
+        "score": 46,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_e4debfed40c14da9",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "马来西亚",
+          "中国"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_44d5d86a48f8dd57",
+      "article_id": "article_44d5d86a48f8dd57",
+      "canonical_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8zM2lmbkJFQTJVVnFDSXo0SkdtN0ZjQzNTX19lVloxWG1LdFRJMXRFYlRLTnlDWHI1b0FwandWOFRYMXV4bG80ZWdpVG5zelFEd0gyU25TS3hiYl9kcFh5RzVFWEtWQmVaYUNUREZoWEc?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8zM2lmbkJFQTJVVnFDSXo0SkdtN0ZjQzNTX19lVloxWG1LdFRJMXRFYlRLTnlDWHI1b0FwandWOFRYMXV4bG80ZWdpVG5zelFEd0gyU25TS3hiYl9kcFh5RzVFWEtWQmVaYUNUREZoWEc?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 54,
+      "title_original": "Pacific looks to renewable energy - The Fiji Times",
+      "title_zh": "太平洋地区推进可再生能源转型",
+      "summary_source": "Pacific looks to renewable energy The Fiji Times",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T01:50:06+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "太平洋地区",
+          "lon": 165.0,
+          "lat": -10.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "d48f2c4f24b071420843fa2805aec6b4e4c2cdc7c9fed4c99e29ec6e876b7c4e",
+      "poster_phrase": "太平洋地区推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 46,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_44d5d86a48f8dd57",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "太平洋地区"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_5a1d7b5ffb109851",
+      "article_id": "article_5a1d7b5ffb109851",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPeERjSTZDUEZTdnkyc0FsZFg0NDRibjJmVWsyMFA2TjlEdVBBaHQwWDFLWk1oMnQwT0diZHFDUVVUSGlQREtoeWlZOEVkMGx3LUtmOWN5dGpPMHZQT1NsWnF5RVA1V1pzal9SWUpOR3VsN0M5dEg3Qm9VelpPUHlkUDItMnpabFp6clN3WTZoX1daanNYYjFuYUFvOGxFbEl0TEVkaGlZbEt5aDZ3cmQ0cmY1Y21JMUhaelNGd1hwelZ4MFpwQXU2TmpvX05QWTd6OGdTQ9IB2gFBVV95cUxOdmU1MHExblVEZGJRZlRsajYzMVBqaklQU0JLdkZqUHZTUmhkSURMRmtYR1RYSEtQNlBnbW13cmlVSVAtV21yMWIwcnlJU0hEN2N2elF2eW51MjYxVGRLMzdndUZxX29hdTFMRHpWMWxxeEZnajFUczlDUzBnVmZDMm5kdjFmckY2YWZSTmxWWjY0N0RqUWtRYjdfY0wzNE1lekpQOVpiNEhubE5zeW4wMURyTUpVMnRybllrdEtWTTRJSFNFLXRrSHB5R0IxYl9MSVJpelVhWFNsZw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPeERjSTZDUEZTdnkyc0FsZFg0NDRibjJmVWsyMFA2TjlEdVBBaHQwWDFLWk1oMnQwT0diZHFDUVVUSGlQREtoeWlZOEVkMGx3LUtmOWN5dGpPMHZQT1NsWnF5RVA1V1pzal9SWUpOR3VsN0M5dEg3Qm9VelpPUHlkUDItMnpabFp6clN3WTZoX1daanNYYjFuYUFvOGxFbEl0TEVkaGlZbEt5aDZ3cmQ0cmY1Y21JMUhaelNGd1hwelZ4MFpwQXU2TmpvX05QWTd6OGdTQ9IB2gFBVV95cUxOdmU1MHExblVEZGJRZlRsajYzMVBqaklQU0JLdkZqUHZTUmhkSURMRmtYR1RYSEtQNlBnbW13cmlVSVAtV21yMWIwcnlJU0hEN2N2elF2eW51MjYxVGRLMzdndUZxX29hdTFMRHpWMWxxeEZnajFUczlDUzBnVmZDMm5kdjFmckY2YWZSTmxWWjY0N0RqUWtRYjdfY0wzNE1lekpQOVpiNEhubE5zeW4wMURyTUpVMnRybllrdEtWTTRJSFNFLXRrSHB5R0IxYl9MSVJpelVhWFNsZw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "1km rider on border energy projects as Centre tightens security rules for renewables - Telegraph India",
+      "title_zh": "印度推进可再生能源转型",
+      "summary_source": "1km rider on border energy projects as Centre tightens security rules for renewables Telegraph India",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T00:00:54+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "1"
+      ],
+      "places": [
+        {
+          "name_zh": "印度",
+          "lon": 78.0,
+          "lat": 22.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "f3067c62cf6b2f3721906ac51593f599680bb4feef5d198636ef20fe2c25cf87",
+      "poster_phrase": "印度推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_5a1d7b5ffb109851",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "1"
+        ],
+        "geo_atoms": [
+          "印度"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_3377295e8281ff9b",
+      "article_id": "article_3377295e8281ff9b",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQVXd2NVNPbEJycHJIMkJBZzJFTGdmRE9mYVh6a1UzdWMtdHhyQlVUTDdlOGdGWkRBaDg3bFVnaU9iZXpEZ3c2X05neXlaVmZaeUx0ajBlWEVfSkxTaXZzOHRaZTNVaTRZaG02MGg1NWR4V2RTTDlLRzBXbHdXeWt0eWF3bEw4SDVMLW1WU3c5eGRmZlNheXI2allWZkdMSFJzc0lSX1VndFNBbk9SOWduT2Rqc3dLSzlpcGVnLWNINzFXTzZDMWVkREtYUWxuTWFvRTVvVktSUUNIUdIB3wFBVV95cUxPWjBEdUJFeWxCcHBCTnpoR2pJSF9OR0FXaFlYcEI0M3c2eUp5VDZ0aVg2WWxKMjlTSTFlNmU4N0twSF95MXpob3QtVW5UQ1M5N3AyQ0YwX1Rqc0w4c1ladjdkNFRJdGJ2cFRzNjR5ZjhYZGk2MlF1M3dpakxJTHlQR210V1JmRUxMRWNKcXFlYV9wMjQ2Q3VWSE1HNGx5S1NRVEdoSXNudHhSWVZVZmpqNDFlbGp4cUR4WEQyd0NGMjBUVXRGd0Myd2pyR0g2ei1rS2ZCc29ERERJNmJpcTZZ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQVXd2NVNPbEJycHJIMkJBZzJFTGdmRE9mYVh6a1UzdWMtdHhyQlVUTDdlOGdGWkRBaDg3bFVnaU9iZXpEZ3c2X05neXlaVmZaeUx0ajBlWEVfSkxTaXZzOHRaZTNVaTRZaG02MGg1NWR4V2RTTDlLRzBXbHdXeWt0eWF3bEw4SDVMLW1WU3c5eGRmZlNheXI2allWZkdMSFJzc0lSX1VndFNBbk9SOWduT2Rqc3dLSzlpcGVnLWNINzFXTzZDMWVkREtYUWxuTWFvRTVvVktSUUNIUdIB3wFBVV95cUxPWjBEdUJFeWxCcHBCTnpoR2pJSF9OR0FXaFlYcEI0M3c2eUp5VDZ0aVg2WWxKMjlTSTFlNmU4N0twSF95MXpob3QtVW5UQ1M5N3AyQ0YwX1Rqc0w4c1ladjdkNFRJdGJ2cFRzNjR5ZjhYZGk2MlF1M3dpakxJTHlQR210V1JmRUxMRWNKcXFlYV9wMjQ2Q3VWSE1HNGx5S1NRVEdoSXNudHhSWVZVZmpqNDFlbGp4cUR4WEQyd0NGMjBUVXRGd0Myd2pyR0g2ei1rS2ZCc29ERERJNmJpcTZZ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 66,
+      "title_original": "Renewable Energy Stocks for Grid Resilience as Europe Power Stress Grows - simplywall.st",
+      "title_zh": "欧洲电网压力推高可再生能源韧性需求",
+      "summary_source": "Renewable Energy Stocks for Grid Resilience as Europe Power Stress Grows simplywall.st",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T23:39:41+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放",
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "cf20a7e578416bbbd9169e378b67daa1f185e38e4b1a4d78db23aacd23bf38a7",
+      "poster_phrase": "欧洲电网压力推高可再生能源韧",
+      "quality": {
+        "passed": true,
+        "score": 50,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_3377295e8281ff9b",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放",
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_53fd652c6aa28305",
+      "article_id": "article_53fd652c6aa28305",
+      "canonical_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 68,
+      "title_original": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy - Region Canberra",
+      "title_zh": "全球净零与减排措施受到关注",
+      "summary_source": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy Region Canberra",
+      "summary_zh": "",
+      "theme_zh": "净零转型",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T22:47:32+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "30"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "67a10370ef2ae9439fe90d38f61469ae9fbd4471b7f6ae522e2095aa1a621f9e",
+      "poster_phrase": "全球净零与减排措施受到关注",
+      "quality": {
+        "passed": true,
+        "score": 51,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_53fd652c6aa28305",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "30"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_80dd2cb9f44ed86a",
+      "article_id": "article_80dd2cb9f44ed86a",
+      "canonical_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8tQnE0SXdsX1V5VXlERG5Qc1NqUU4zSVdwLXRRQ0o2NzFneURLZDI2RVVZM2FpZnBNWVhLakE2M0lxMHB5V3l5MGw2RzZ6bnFlOUM5RUQ3TE9IOUM5eHZLQld5RkxsSkpzdTBEZXpqbWU?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8tQnE0SXdsX1V5VXlERG5Qc1NqUU4zSVdwLXRRQ0o2NzFneURLZDI2RVVZM2FpZnBNWVhLakE2M0lxMHB5V3l5MGw2RzZ6bnFlOUM5RUQ3TE9IOUM5eHZLQld5RkxsSkpzdTBEZXpqbWU?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 50,
+      "title_original": "University of Guelph Opens 4-Year Postdoctoral Position on Climate Change Research in the Himalayas | Salary from CAD $70,000 - Global South Opportunities",
+      "title_zh": "喜马拉雅地区气候变化议题受到关注",
+      "summary_source": "University of Guelph Opens 4-Year Postdoctoral Position on Climate Change Research in the Himalayas | Salary from CAD $70,000 Global South Opportunities",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T22:44:38+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "4",
+        "$70,000"
+      ],
+      "places": [
+        {
+          "name_zh": "喜马拉雅地区",
+          "lon": 86.0,
+          "lat": 28.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "dc0805f48be944375fb784d4272fbccef4626a72b42a42dfc9650d20c41fc562",
+      "poster_phrase": "喜马拉雅地区气候变化议题受到",
+      "quality": {
+        "passed": true,
+        "score": 44,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_80dd2cb9f44ed86a",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "4",
+          "$70,000"
+        ],
+        "geo_atoms": [
+          "喜马拉雅地区"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_ad5775a22e90a1b1",
+      "article_id": "article_ad5775a22e90a1b1",
+      "canonical_url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQY3ZEWmxVTExXRjFOVU5meHZvWXpGSnNLbDRaak1QOVJzelBMek4xZmpHMzRmeUdVQmRkdFdnSlpLdlZXRk9yZGtqaVdTZ3lEWjV5X1NpMVNfbVJsMGpPeDdaMjJnZWJpM2dlZlhTdmhocG1KSVZZWFdhMXBRYXo0NkpUT0pGdy1OWUFSQWR6cVBocFJYOUVtX2h3?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQY3ZEWmxVTExXRjFOVU5meHZvWXpGSnNLbDRaak1QOVJzelBMek4xZmpHMzRmeUdVQmRkdFdnSlpLdlZXRk9yZGtqaVdTZ3lEWjV5X1NpMVNfbVJsMGpPeDdaMjJnZWJpM2dlZlhTdmhocG1KSVZZWFdhMXBRYXo0NkpUT0pGdy1OWUFSQWR6cVBocFJYOUVtX2h3?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "MHA Bars New Renewable Energy Projects Within 1 Km of India’s Borders - Daily Pioneer",
+      "title_zh": "印度推进可再生能源转型",
+      "summary_source": "MHA Bars New Renewable Energy Projects Within 1 Km of India’s Borders Daily Pioneer",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T22:35:29+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "1"
+      ],
+      "places": [
+        {
+          "name_zh": "印度",
+          "lon": 78.0,
+          "lat": 22.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "a22ce89f4aae0d0b118df87ced6cd524b86d03ec1caadd827ce2d06101a15f28",
+      "poster_phrase": "印度推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_ad5775a22e90a1b1",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "1"
+        ],
+        "geo_atoms": [
+          "印度"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_ee21f8438bcc4c4e",
+      "article_id": "article_ee21f8438bcc4c4e",
+      "canonical_url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNX1gyN2Z3dUJtNV9NQkFoY3lLV0RRbkVNYmE4eDBzMG5qQXdLdDl6S0F0cWdWNVhfV1pka0p5ajY4RGlRckNzTHFXbnMtRE5RRGhzenJCT2Z3WVdqdnJ3RDVOSEpLX0hvd00zVzg2UTMtRWxXdUd2b1g1S2cwbkkyMjVPcWRfN29PdVRQU2N5bm9MX3d0Vm1OU29DUXVGZw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNX1gyN2Z3dUJtNV9NQkFoY3lLV0RRbkVNYmE4eDBzMG5qQXdLdDl6S0F0cWdWNVhfV1pka0p5ajY4RGlRckNzTHFXbnMtRE5RRGhzenJCT2Z3WVdqdnJ3RDVOSEpLX0hvd00zVzg2UTMtRWxXdUd2b1g1S2cwbkkyMjVPcWRfN29PdVRQU2N5bm9MX3d0Vm1OU29DUXVGZw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 46,
+      "title_original": "4 Things to Know About Cyclospora and Climate Change - The Good Men Project",
+      "title_zh": "全球气候变化议题受到关注",
+      "summary_source": "4 Things to Know About Cyclospora and Climate Change The Good Men Project",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T21:08:48+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "4"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "c4de64854e6117ea699a6fa7e8c4dd44d022917e332efcc49b8d34681522fb47",
+      "poster_phrase": "全球气候变化议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 43,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_ee21f8438bcc4c4e",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "4"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_4801b1c402bda4e0",
+      "article_id": "article_4801b1c402bda4e0",
+      "canonical_url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQakFWdkExRHJiVTVXVjVnUmhDV1lBbDBpSDRVNDZkR2cxd0Q1WlRnTU83aTB1MDJNVWZlLS0yeVQ4VDJrekJhRVpNT2tqdE42ejUxclBmekhRVDd6dnl1QXNoczlQb3lJSWF4V3BYTkpMcWxUNkoxb0x2eU10SjIwOQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQakFWdkExRHJiVTVXVjVnUmhDV1lBbDBpSDRVNDZkR2cxd0Q1WlRnTU83aTB1MDJNVWZlLS0yeVQ4VDJrekJhRVpNT2tqdE42ejUxclBmekhRVDd6dnl1QXNoczlQb3lJSWF4V3BYTkpMcWxUNkoxb0x2eU10SjIwOQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 54,
+      "title_original": "How has climate change reshaped drought? - aol.com",
+      "title_zh": "全球干旱风险议题受到关注",
+      "summary_source": "How has climate change reshaped drought? aol.com",
+      "summary_zh": "",
+      "theme_zh": "干旱风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T20:49:58+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "73a674c2738eb4bb0d7dad80060ae2c58f52e8ae4e02ee38c0636a69e993b355",
+      "poster_phrase": "全球干旱风险议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 46,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_4801b1c402bda4e0",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_d28eb01008fb72b8",
+      "article_id": "article_d28eb01008fb72b8",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQLUU1bXNpTTFQU1Y1U09MMS1TczEwdG5YbzY3OS1MMzdnWWxwcDdERGtndFVBcDBLd01ock9GRVhLa2FycFlkUjJfMi11c2pmTHFXODQ1WEwxdHctSXd3VXNFN0JZNDdNUDlLQThqTzV1Q3dwRXVPTDlNQklucXB0OGJJVHRCM3hDdWJYZlJaNWtnNVNZcUFrbjl4eDdydmEzN1FDS1hfc3I?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQLUU1bXNpTTFQU1Y1U09MMS1TczEwdG5YbzY3OS1MMzdnWWxwcDdERGtndFVBcDBLd01ock9GRVhLa2FycFlkUjJfMi11c2pmTHFXODQ1WEwxdHctSXd3VXNFN0JZNDdNUDlLQThqTzV1Q3dwRXVPTDlNQklucXB0OGJJVHRCM3hDdWJYZlJaNWtnNVNZcUFrbjl4eDdydmEzN1FDS1hfc3I?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "DHL and LONGi Partner on Solar Deployment and Low-Emission Logistics | 2026 - News and Statistics - IndexBox",
+      "title_zh": "全球推进可再生能源转型",
+      "summary_source": "DHL and LONGi Partner on Solar Deployment and Low-Emission Logistics | 2026 - News and Statistics IndexBox",
+      "summary_zh": "",
+      "theme_zh": "太阳能",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T18:40:00+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "2026"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "cec7e26b1ba1e8693204731a22e54257d450e52473c1fb302c5751d5de7aa2ae",
+      "poster_phrase": "全球推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_d28eb01008fb72b8",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "2026"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_d958709875e01853",
+      "article_id": "article_d958709875e01853",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPeHFKV1I2YThxYkdpYWFjdVJJWFdha19DN0NfdUNpX3ZKREItWnBEYzBoRDNPTU4xQ1VPN3lONlBxclgxdFZsVmxUcmdXNVFFZE02bzNJR3JwUWV6RXhGQnpBc0R0SjV3Uzk5UUN2YnBwNm8xZVV1THJrZ04zUy1iMEQ0bzV6X1M3dHlsc0REWFcxbTdZQU5uVEs5ZlJfYjNJcHN3dHVlcHl5OFU?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPeHFKV1I2YThxYkdpYWFjdVJJWFdha19DN0NfdUNpX3ZKREItWnBEYzBoRDNPTU4xQ1VPN3lONlBxclgxdFZsVmxUcmdXNVFFZE02bzNJR3JwUWV6RXhGQnpBc0R0SjV3Uzk5UUN2YnBwNm8xZVV1THJrZ04zUy1iMEQ0bzV6X1M3dHlsc0REWFcxbTdZQU5uVEs5ZlJfYjNJcHN3dHVlcHl5OFU?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "Best Renewable Energy Stocks To Follow Now - August 8th - MarketBeat",
+      "title_zh": "全球推进可再生能源转型",
+      "summary_source": "Best Renewable Energy Stocks To Follow Now - August 8th MarketBeat",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T18:08:21+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "8"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "2bbeb3aa157b7730a2bc6945f6a5c606eca59f5191e111158d90006b00e40a87",
+      "poster_phrase": "全球推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_d958709875e01853",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "8"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:54:49.045352+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
+    {
+      "record_id": "article_214d626287000dc6",
+      "article_id": "article_214d626287000dc6",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUGFacG1tUHNrZU1fbmNnRWhXRWRiejd1TThncThGRndINVluU0pIYzh0NURwTU9EcTdSWVNwbDJBcjIyMm1lbDloTUZRcVFYNjJ3VGh3ZnI4cUZWelFHeFJJcEJsSW82YWFIX0VCQXFDRzlUaXdJTTVxMy1ZTDRlMUtCZXpZd1JNeUpKclpKc3YyNjNMUmFRaVJySlpTYThsT2JtWU82OWVSUGJCNGdDWDhQc181ZnZIbzVCakpGWThzWm1CRk9UTWZjVU0zZmtHaGZUSDQ0azRWd0pobTJ1cUQ4X2hiWklx?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNUGFacG1tUHNrZU1fbmNnRWhXRWRiejd1TThncThGRndINVluU0pIYzh0NURwTU9EcTdSWVNwbDJBcjIyMm1lbDloTUZRcVFYNjJ3VGh3ZnI4cUZWelFHeFJJcEJsSW82YWFIX0VCQXFDRzlUaXdJTTVxMy1ZTDRlMUtCZXpZd1JNeUpKclpKc3YyNjNMUmFRaVJySlpTYThsT2JtWU82OWVSUGJCNGdDWDhQc181ZnZIbzVCakpGWThzWm1CRk9UTWZjVU0zZmtHaGZUSDQ0azRWd0pobTJ1cUQ4X2hiWklx?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 54,
+      "title_original": "DHL Group and LONGi Solar sign MoU to advance global renewable energy and sustainable logistics solutions - hydrogen included - Hydrogen Central",
+      "title_zh": "全球推进可再生能源转型",
+      "summary_source": "DHL Group and LONGi Solar sign MoU to advance global renewable energy and sustainable logistics solutions - hydrogen included Hydrogen Central",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T18:04:47+00:00",
+      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "c0bfc67a87e65989bbea8a6a7a4a60ee1c01a07ece212bc7c64abd1a100a4c04",
+      "poster_phrase": "全球推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 46,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_214d626287000dc6",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:54:49.045352+00:00",
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+    },
     {
       "record_id": "article_c9a6956b6ba6facb",
       "article_id": "article_c9a6956b6ba6facb",
@@ -6880,7 +7722,7 @@
       "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
       "language": "en",
       "published_at": "2026-07-28T00:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "极端天气",
         "气候适应"
@@ -6943,7 +7785,7 @@
         "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_be2d7f67b6b1bbc3",
@@ -7415,7 +8257,7 @@
       "why_zh": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。",
       "language": "en",
       "published_at": "2026-07-26T00:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -7478,7 +8320,7 @@
         "decision_atom": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_32a028df4d103aba",
@@ -8607,7 +9449,7 @@
       "why_zh": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。",
       "language": "en",
       "published_at": "2026-07-24T00:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "能源与排放",
         "清洁能源"
@@ -8670,7 +9512,7 @@
         "decision_atom": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_6c67b4eafaf74973",
@@ -9274,7 +10116,7 @@
       "why_zh": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。",
       "language": "zh",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "能源与排放",
         "国家气候承诺"
@@ -9339,7 +10181,7 @@
         "decision_atom": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "curated_4550f4e28217628b",
@@ -9359,7 +10201,7 @@
       "why_zh": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "能源与排放",
         "产业转型"
@@ -9418,7 +10260,7 @@
         "decision_atom": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "curated_7c6b8d0a74561df8",
@@ -9438,7 +10280,7 @@
       "why_zh": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "能源与排放",
         "交通转型"
@@ -9495,7 +10337,7 @@
         "decision_atom": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_e0247ad0502dc99c",
@@ -11649,7 +12491,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -11720,7 +12562,7 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_29e088b267592809",
@@ -11731,7 +12573,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 68,
+      "relevance_score": 50,
       "title_original": "Africa can lead the Age of Electrification",
       "title_zh": "非洲能否在全球电气化浪潮中掌握主动权",
       "summary_source": "The electrification agenda presents both an extraordinary opportunity for Africa and an immense challenge for the continent The post Africa can lead the Age of Electrification appeared first on Climate Home News .",
@@ -11740,7 +12582,7 @@
       "why_zh": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。",
       "language": "en",
       "published_at": "2026-07-16T09:52:53+00:00",
-      "fetched_at": "2026-08-08T23:56:03.913569+00:00",
+      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
       "topics": [
         "气候动态"
       ],
@@ -11758,7 +12600,7 @@
       "poster_phrase": "非洲竞逐电气化时代",
       "quality": {
         "passed": true,
-        "score": 84,
+        "score": 77,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -11791,7 +12633,7 @@
         "decision_atom": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -11931,7 +12773,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_1349a508fd370638",
@@ -12008,7 +12850,7 @@
         "decision_atom": "资金撤回可能影响森林保护、当地社区生计和发达国家资金承诺的可信度，需继续核对项目清单与官方解释。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -12097,7 +12939,7 @@
         "decision_atom": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_564ab2b4e2f26c1f",
@@ -12108,7 +12950,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 84,
+      "relevance_score": 66,
       "title_original": "Major emitting countries knew of climate risks decades earlier than claimed",
       "title_zh": "主要排放国被指早在数十年前已知化石燃料的气候风险",
       "summary_source": "Governments have known since at least the 1960s that fossil fuel use was warming the planet. They kept quiet to avoid responsibility. The post Major emitting countries knew of climate risks decades earlier than claimed appeared first on Climate Home News .",
@@ -12117,7 +12959,7 @@
       "why_zh": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。",
       "language": "en",
       "published_at": "2026-07-15T10:51:19+00:00",
-      "fetched_at": "2026-08-08T23:56:03.913569+00:00",
+      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -12137,7 +12979,7 @@
       "poster_phrase": "气候责任追溯至 1960 年代",
       "quality": {
         "passed": true,
-        "score": 89,
+        "score": 83,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -12172,7 +13014,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -12183,7 +13025,7 @@
       "source_name": "UN Environment Programme",
       "source_type": "联合国官方信息",
       "authority": 5,
-      "relevance_score": 100,
+      "relevance_score": 86,
       "title_original": "AI helping UN detect methane emissions and spark real reductions in climate-warming gas",
       "title_zh": "AI 正把卫星发现的甲烷泄漏转化为真实减排",
       "summary_source": "Artificial Intelligence (AI) is helping turn satellite observations into methane mitigation action in the oil and gas sector. These mitigation efforts have delivered a climate benefit comparable to removing the annual emissions of almost 24 million gasoline-powered passenger cars, according to a new report by the UN Environment Programme (UNEP).",
@@ -12192,7 +13034,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-08-08T23:56:08.290902+00:00",
+      "fetched_at": "2026-07-17T04:24:12.097703+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -12212,7 +13054,7 @@
       "poster_phrase": "卫星正在看见甲烷",
       "quality": {
         "passed": true,
-        "score": 95,
+        "score": 90,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -12247,7 +13089,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
@@ -12327,7 +13169,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 68,
+      "relevance_score": 50,
       "title_original": "UN seabed regulator defends authority as mining firms seek to halt inquiry",
       "title_zh": "深海采矿企业试图阻止联合国海底监管机构调查",
       "summary_source": "Campaigners accused deep-sea mining frontrunner The Metals Company of obstructing an inquiry into its subsidiaries. The firm says it is being targeted without procedural basis The post UN seabed regulator defends authority as mining firms seek to halt inquiry appeared first on Climate Home News .",
@@ -12336,7 +13178,7 @@
       "why_zh": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。",
       "language": "en",
       "published_at": "2026-07-14T18:02:01+00:00",
-      "fetched_at": "2026-08-08T23:56:03.913569+00:00",
+      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
       "topics": [
         "气候动态"
       ],
@@ -12354,7 +13196,7 @@
       "poster_phrase": "深海采矿规则受到挑战",
       "quality": {
         "passed": true,
-        "score": 84,
+        "score": 77,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -12387,7 +13229,7 @@
         "decision_atom": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "article_a02797620e6f6e19",
@@ -12458,7 +13300,7 @@
         "decision_atom": "这是观点性内容，主要用于观察英国国内气候政策的政治阻力，不应作为事实报道直接引用。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "curated_94ab11482ec24494",
@@ -12478,7 +13320,7 @@
       "why_zh": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。",
       "language": "zh",
       "published_at": "2026-07-13T16:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "国家气候承诺",
         "能源与排放"
@@ -12541,7 +13383,7 @@
         "decision_atom": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     },
     {
       "record_id": "curated_cf238b7caf84c933",
@@ -12561,7 +13403,7 @@
       "why_zh": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。",
       "language": "zh",
       "published_at": "2026-02-08T16:00:00+00:00",
-      "fetched_at": "2026-08-08T23:57:13.154120+00:00",
+      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
       "topics": [
         "碳市场",
         "履约与透明度"
@@ -12622,7 +13464,7 @@
         "decision_atom": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-08T23:57:13.228931+00:00"
+      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
     }
   ]
 }

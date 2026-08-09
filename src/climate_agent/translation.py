@@ -22,6 +22,7 @@ GEO_TERMS = {
     "美国联邦": ("美国", -100.0, 39.0),
     "美国": ("美国", -100.0, 39.0),
     "texas": ("美国得州", -99.0, 31.0),
+    "california": ("美国加州", -119.0, 37.0),
     "united kingdom": ("英国", -2.0, 54.0),
     " uk ": ("英国", -2.0, 54.0),
     "英国": ("英国", -2.0, 54.0),
@@ -39,7 +40,11 @@ GEO_TERMS = {
     "brazil": ("巴西", -52.0, -10.0),
     "巴西": ("巴西", -52.0, -10.0),
     "india": ("印度", 78.0, 22.0),
+    "andhra pradesh": ("印度安得拉邦", 80.0, 16.0),
+    "himalayas": ("喜马拉雅地区", 86.0, 28.0),
+    "himalayan": ("喜马拉雅地区", 86.0, 28.0),
     "indonesia": ("印度尼西亚", 118.0, -2.0),
+    "malaysia": ("马来西亚", 102.0, 4.0),
     "australia": ("澳大利亚", 134.0, -25.0),
     "澳大利亚": ("澳大利亚", 134.0, -25.0),
     "canada": ("加拿大", -106.0, 56.0),
@@ -63,6 +68,7 @@ GEO_TERMS = {
     "greenland": ("格陵兰", -42.0, 72.0),
     "new zealand": ("新西兰", 174.0, -41.0),
     "pacific islands": ("太平洋岛国", 165.0, -10.0),
+    "pacific": ("太平洋地区", 165.0, -10.0),
     "south africa": ("南非", 24.0, -29.0),
     "南非": ("南非", 24.0, -29.0),
     "kenya": ("肯尼亚", 37.0, 0.0),
@@ -80,6 +86,28 @@ GEO_TERMS = {
     "iran": ("伊朗", 53.0, 32.0),
     "伊朗": ("伊朗", 53.0, 32.0),
 }
+
+FALLBACK_TOPIC_TERMS = (
+    ("renewable", "可再生能源"),
+    ("solar", "太阳能"),
+    ("wind", "风电"),
+    ("grid", "电网韧性"),
+    ("net zero", "净零转型"),
+    ("green building", "绿色建筑"),
+    ("emissions", "减排"),
+    ("carbon", "碳治理"),
+    ("climate finance", "气候资金"),
+    ("food prices", "食品价格风险"),
+    ("energy price", "能源价格风险"),
+    ("heat wave", "高温风险"),
+    ("heat", "高温风险"),
+    ("wildfire", "野火风险"),
+    ("drought", "干旱风险"),
+    ("flood", "洪水风险"),
+    ("climate action", "气候行动"),
+    ("climate change", "气候变化"),
+    ("climate", "气候变化"),
+)
 
 
 def detect_places(text: str) -> list[dict]:
@@ -140,16 +168,49 @@ def source_balanced_rows(rows: list[dict], limit: int) -> list[dict]:
     return selected
 
 
+def _fallback_topics(text: str) -> list[str]:
+    haystack = text.lower()
+    values = []
+    for term, label in FALLBACK_TOPIC_TERMS:
+        if term in haystack and label not in values:
+            values.append(label)
+    return values[:3] or ["气候变化"]
+
+
+def _metadata_compiled_translation(row: dict, original: str, places: list[dict]) -> dict:
+    text = f"{original} {row.get('summary_source') or ''}"
+    topics = _fallback_topics(text)
+    haystack = text.lower()
+    place = places[0]["name_zh"] if places else "全球"
+    if "heat" in haystack and "climate" in haystack:
+        title_zh = f"{place}气候变化加剧高温风险"
+    elif "renewable" in haystack and "grid" in haystack:
+        title_zh = f"{place}电网压力推高可再生能源韧性需求"
+    elif "renewable" in haystack or "solar" in haystack or "wind" in haystack:
+        title_zh = f"{place}推进可再生能源转型"
+    elif "net zero" in haystack or "emissions" in haystack:
+        title_zh = f"{place}净零与减排措施受到关注"
+    elif "food prices" in haystack or "energy price" in haystack:
+        title_zh = f"{place}气候与能源价格推高民生风险"
+    else:
+        title_zh = f"{place}{topics[0]}议题受到关注"
+    return {
+        "title_zh": title_zh,
+        "summary_zh": "",
+        "theme_zh": topics[0],
+        "importance_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+        "poster_phrase": title_zh[:14],
+        "places": places,
+        "translation_status": "metadata_compiled_needs_review",
+    }
+
+
 def _fallback_translation(row: dict) -> dict:
     """Keep source facts without fabricating a translated title during API outages."""
     original = str(row.get("title_original") or "").strip()
     places = detect_places(f"{original} {row.get('summary_source') or ''}")
     if not re.search(r"[\u4e00-\u9fff]", original):
-        return {
-            "title_zh": "", "summary_zh": "", "theme_zh": "",
-            "importance_zh": "", "poster_phrase": "", "places": places,
-            "translation_status": "pending",
-        }
+        return _metadata_compiled_translation(row, original, places)
     title_zh = re.sub(r"\s*[-–—|｜]\s*[^-–—|｜]{2,24}$", "", original).strip()
     return {
         "title_zh": title_zh,

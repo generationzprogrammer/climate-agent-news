@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 import re
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -249,6 +250,15 @@ def validate_public_payload(dashboard: dict, archive: dict) -> list[str]:
         errors.append("archive_exceeds_100000")
     if archive.get("total") != len(archive.get("records", [])):
         errors.append("archive_total_mismatch")
+    max_stale_days = os.getenv("CLIMATE_MAX_STALE_DAYS")
+    if max_stale_days and dashboard.get("meta"):
+        try:
+            page_day = date.fromisoformat(str(dashboard["meta"].get("date")))
+            latest_day = date.fromisoformat(str(dashboard["meta"].get("latest_news_date")))
+            if (page_day - latest_day).days > int(max_stale_days):
+                errors.append(f"latest_news_stale:{latest_day.isoformat()}")
+        except (TypeError, ValueError):
+            errors.append("latest_news_date_invalid")
     for item in intelligence:
         if not quality_result(item)["passed"]:
             errors.append(f"dashboard_quality_gate_failed:{item.get('article_id')}")
