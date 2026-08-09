@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-100000",
-  "updated_at": "2026-08-09T02:54:49.045352+00:00",
+  "updated_at": "2026-08-09T02:57:53.536329+00:00",
   "limit": 100000,
-  "total": 186,
+  "total": 200,
   "statistics": {
-    "previous_total": 184,
-    "added": 2,
-    "updated": 10,
-    "rejected": 0,
+    "previous_total": 200,
+    "added": 0,
+    "updated": 0,
+    "rejected": 13,
     "pruned": 0,
-    "tier_a": 36,
-    "tier_b": 85
+    "tier_a": 32,
+    "tier_b": 104
   },
   "records": [
     {
@@ -32,7 +32,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-09T02:00:09+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "气候动态"
       ],
@@ -89,7 +89,74 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_53fd652c6aa28305",
+      "article_id": "article_53fd652c6aa28305",
+      "canonical_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 68,
+      "title_original": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy - region.com.au",
+      "title_zh": "全球净零与减排措施受到关注",
+      "summary_source": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy region.com.au",
+      "summary_zh": "",
+      "theme_zh": "净零转型",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T01:53:27+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "30"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "a3c4a45d023222625345fc9bfc795e5dc807d9234d16c230ca8c4f66fd8c5eb1",
+      "poster_phrase": "全球净零与减排措施受到关注",
+      "quality": {
+        "passed": true,
+        "score": 51,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_53fd652c6aa28305",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "30"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_44d5d86a48f8dd57",
@@ -109,7 +176,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-09T01:50:06+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -160,7 +227,98 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_4d6dc2331505e400",
+      "article_id": "article_4d6dc2331505e400",
+      "canonical_url": "https://news.mongabay.com/2026/08/amazon-deforestation-alerts-fall-to-lowest-level-since-2013-brazilian-data-show",
+      "source_url": "https://news.mongabay.com/2026/08/amazon-deforestation-alerts-fall-to-lowest-level-since-2013-brazilian-data-show/",
+      "source_id": "INT019",
+      "source_name": "Mongabay Latin America",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 74,
+      "title_original": "Amazon deforestation alerts fall to lowest level since 2013, Brazilian data show",
+      "title_zh": "巴西干旱风险议题受到关注",
+      "summary_source": "- INPE’s DETER system recorded 2,874 sq km of Amazon deforestation alerts from August 2025 through July 2026, down 36% from the previous year and 55.6% below the preceding 10-year average. - The total is the lowest since 2013 when earlier DETER data are included. If the trend is confirmed by the higher-resolution PRODES system, Brazil could record its lowest official Amazon deforestation rate since monitoring began in 1988. - The decline has coincided with stronger environmental enforcement under President Luiz Inácio Lula da Silva. Alerts also fell in the Cerrado, Caatinga, Atlantic Forest, and Pampa, with the Cerrado reaching a five-year low. - Despite the decline in clear-cutting, the Amazon remains vulnerable to logging, drought, forest degradation, and fire, which can cause substantial ecological damage without immediately appearing in deforestation statistics.",
+      "summary_zh": "",
+      "theme_zh": "干旱风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-09T00:08:49+00:00",
+      "fetched_at": "2026-08-09T02:56:54.561383+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "2013",
+        "2,874",
+        "2025",
+        "2026",
+        "36%",
+        "55.6%"
+      ],
+      "places": [
+        {
+          "name_zh": "巴西",
+          "lon": -52.0,
+          "lat": -10.0
+        },
+        {
+          "name_zh": "亚马孙地区",
+          "lon": -62.0,
+          "lat": -4.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "c0161d700a8c13d8f7722a83bd29dddda26ee784e428767b5fc143ebbc74647e",
+      "poster_phrase": "巴西干旱风险议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 62,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_4d6dc2331505e400",
+        "source_atom": {
+          "name": "Mongabay Latin America",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "2013",
+          "2,874",
+          "2025",
+          "2026",
+          "36%",
+          "55.6%"
+        ],
+        "geo_atoms": [
+          "巴西",
+          "亚马孙地区"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_5a1d7b5ffb109851",
@@ -180,7 +338,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-09T00:00:54+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -235,7 +393,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_3377295e8281ff9b",
@@ -255,7 +413,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T23:39:41+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -308,41 +466,45 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
-      "record_id": "article_53fd652c6aa28305",
-      "article_id": "article_53fd652c6aa28305",
-      "canonical_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
+      "record_id": "article_1d43b34f574b63e5",
+      "article_id": "article_1d43b34f574b63e5",
+      "canonical_url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOY3NIYWJwWE5xYVFoMGItZVg4Y2N1Wmg5bEpxTVd6MnlldGxQX1lRUkZWV0FzdGllTDFKc0pFbktKSTFXZFgxX0M5YklIamVfM2J1ZTBYQVcydnVadFd0RU9OWUxKdUlRVEYwTkRPSUM2UEVBUXIxUmNhZk9EcjZZcWgyVThrb0pRZEhFNmxfU2RidFF2bHMtaHhTVE90R0N5WUVYSHJla2xKREZpQjMzQy1FREdxaTlEdVZmdNIBwgFBVV95cUxPTk5mTE9zMFM1XzZzNVc2QnZFMGNTd3ZpX0gyVlV3RkhDYUw1ZnBVQ1hPMnhEbEpHX01pOERPUE5fT0IwVzlEcE8wZklIbE0tZ2R2UzVReF8wVjJMcUI3UTBZRGo5dTNIMWVIVGVXTGV1M1h1UnRtVjlfeUtJX0YzNkwyUGI3ay01SWVsY0Y1bTQ4RW9vX0llLTNpSVZoUThIYnljd2tvd1FCZ282c0VKUThHaDhEYUlFcFBrN0ZNeDlJUQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOY3NIYWJwWE5xYVFoMGItZVg4Y2N1Wmg5bEpxTVd6MnlldGxQX1lRUkZWV0FzdGllTDFKc0pFbktKSTFXZFgxX0M5YklIamVfM2J1ZTBYQVcydnVadFd0RU9OWUxKdUlRVEYwTkRPSUM2UEVBUXIxUmNhZk9EcjZZcWgyVThrb0pRZEhFNmxfU2RidFF2bHMtaHhTVE90R0N5WUVYSHJla2xKREZpQjMzQy1FREdxaTlEdVZmdNIBwgFBVV95cUxPTk5mTE9zMFM1XzZzNVc2QnZFMGNTd3ZpX0gyVlV3RkhDYUw1ZnBVQ1hPMnhEbEpHX01pOERPUE5fT0IwVzlEcE8wZklIbE0tZ2R2UzVReF8wVjJMcUI3UTBZRGo5dTNIMWVIVGVXTGV1M1h1UnRtVjlfeUtJX0YzNkwyUGI3ay01SWVsY0Y1bTQ4RW9vX0llLTNpSVZoUThIYnljd2tvd1FCZ282c0VKUThHaDhEYUlFcFBrN0ZNeDlJUQ?oc=5",
       "source_id": "API004",
       "source_name": "Google News RSS Search",
       "source_type": "搜索聚合Feed",
       "authority": 3,
-      "relevance_score": 68,
-      "title_original": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy - Region Canberra",
-      "title_zh": "全球净零与减排措施受到关注",
-      "summary_source": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy Region Canberra",
+      "relevance_score": 54,
+      "title_original": "Climate change made Spain, France wildfires far more likely: Scientists - Qatar Tribune",
+      "title_zh": "法国野火风险议题受到关注",
+      "summary_source": "Climate change made Spain, France wildfires far more likely: Scientists Qatar Tribune",
       "summary_zh": "",
-      "theme_zh": "净零转型",
+      "theme_zh": "野火风险",
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
-      "published_at": "2026-08-08T22:47:32+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "published_at": "2026-08-08T23:36:36+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
-        "能源与排放"
+        "气候适应"
       ],
-      "numbers": [
-        "30"
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
       ],
-      "places": [],
       "translation_status": "metadata_compiled_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "67a10370ef2ae9439fe90d38f61469ae9fbd4471b7f6ae522e2095aa1a621f9e",
-      "poster_phrase": "全球净零与减排措施受到关注",
+      "content_hash": "a5d18614505bc1fc6082b363b5832fafde99e8bf5444458072ebbb5dcaf26327",
+      "poster_phrase": "法国野火风险议题受到关注",
       "quality": {
         "passed": true,
-        "score": 51,
+        "score": 46,
         "tier": "B",
         "checks": {
           "canonical_https": true,
@@ -354,7 +516,7 @@
         }
       },
       "molecule": {
-        "identity": "article_53fd652c6aa28305",
+        "identity": "article_1d43b34f574b63e5",
         "source_atom": {
           "name": "Google News RSS Search",
           "authority": 3,
@@ -366,16 +528,16 @@
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "能源与排放"
+          "气候适应"
         ],
-        "number_atoms": [
-          "30"
+        "number_atoms": [],
+        "geo_atoms": [
+          "法国"
         ],
-        "geo_atoms": [],
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
-      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_80dd2cb9f44ed86a",
@@ -395,7 +557,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T22:44:38+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "气候动态"
       ],
@@ -452,7 +614,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_ad5775a22e90a1b1",
@@ -472,7 +634,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T22:35:29+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -527,7 +689,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_ee21f8438bcc4c4e",
@@ -547,7 +709,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T21:08:48+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "气候动态"
       ],
@@ -594,7 +756,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_4801b1c402bda4e0",
@@ -606,15 +768,15 @@
       "source_type": "搜索聚合Feed",
       "authority": 3,
       "relevance_score": 54,
-      "title_original": "How has climate change reshaped drought? - aol.com",
+      "title_original": "How has climate change reshaped drought? - AOL.com",
       "title_zh": "全球干旱风险议题受到关注",
-      "summary_source": "How has climate change reshaped drought? aol.com",
+      "summary_source": "How has climate change reshaped drought? AOL.com",
       "summary_zh": "",
       "theme_zh": "干旱风险",
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T20:49:58+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "气候适应"
       ],
@@ -622,7 +784,7 @@
       "places": [],
       "translation_status": "metadata_compiled_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "73a674c2738eb4bb0d7dad80060ae2c58f52e8ae4e02ee38c0636a69e993b355",
+      "content_hash": "ab8fb88659b6589d5de24bfb27541f1279f398deb9e99842c9b8167f2f7b9d7f",
       "poster_phrase": "全球干旱风险议题受到关注",
       "quality": {
         "passed": true,
@@ -657,7 +819,90 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_94f5f09a5945de90",
+      "article_id": "article_94f5f09a5945de90",
+      "canonical_url": "https://www.theguardian.com/us-news/2026/aug/08/super-el-nino-winter-flooding",
+      "source_url": "https://www.theguardian.com/us-news/2026/aug/08/super-el-nino-winter-flooding",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 78,
+      "title_original": "‘Super El Niño’ could bring wet winter and flooding to western US, climate scientists warn",
+      "title_zh": "美国推进可再生能源转型",
+      "summary_source": "Weather system tied to warming sea surface expected to intensify in fall and winter, persisting until early spring 2027 El Niño , a recurring climate phenomenon marked by above-average sea surface temperatures, when changes in wind patterns allow warmer water to spread across the central and eastern equatorial Pacific, could spell a wet winter for portions of the western and south-eastern US, climate models show. Coastal areas may be at elevated risk of flooding, experts warn. Climate scientists predict this year’s “super” El Niño, a label assigned when sea surface temperatures climb by at least 2C , will be the strongest of the century. The weather system is expected to intensify in the fall and winter, persisting until early spring 2027, according to the US National Oceanic and Atmospheric Administration (Noaa). Continue reading...",
+      "summary_zh": "",
+      "theme_zh": "风电",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-08T19:21:14+00:00",
+      "fetched_at": "2026-08-09T02:56:54.033699+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "2027",
+        "2c"
+      ],
+      "places": [
+        {
+          "name_zh": "美国",
+          "lon": -100.0,
+          "lat": 39.0
+        },
+        {
+          "name_zh": "太平洋地区",
+          "lon": 165.0,
+          "lat": -10.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "58fbc4067d072eac8e54c80d9584247beb5feaaf18fcb65de6db54ce4130036f",
+      "poster_phrase": "美国推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 72,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_94f5f09a5945de90",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "2027",
+          "2c"
+        ],
+        "geo_atoms": [
+          "美国",
+          "太平洋地区"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_d28eb01008fb72b8",
@@ -677,7 +922,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T18:40:00+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -724,7 +969,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_d958709875e01853",
@@ -744,7 +989,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T18:08:21+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -791,7 +1036,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:54:49.045352+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_214d626287000dc6",
@@ -811,7 +1056,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-08T18:04:47+00:00",
-      "fetched_at": "2026-08-09T02:47:21.054643+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -854,7 +1099,776 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:54:49.045352+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_828c902456d4e03d",
+      "article_id": "article_828c902456d4e03d",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YVnYyTTRhUm1oTnJ0LVZHd2gwTGRNMk5wX21Ub2pnYmVNZVVwanZvUmUwZjk1OHFQdm1oNzJBdklWclhCNDZxQ0JoYlBZSDZUbWtFQ3paTU00RU0?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9YVnYyTTRhUm1oTnJ0LVZHd2gwTGRNMk5wX21Ub2pnYmVNZVVwanZvUmUwZjk1OHFQdm1oNzJBdklWclhCNDZxQ0JoYlBZSDZUbWtFQ3paTU00RU0?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 54,
+      "title_original": "Climate Change And Extreme Weather Events And Health Outcomes In Greater Cincinnati Balmoral Show (O6zIAV9TP2) - Mshale",
+      "title_zh": "全球气候变化议题受到关注",
+      "summary_source": "Climate Change And Extreme Weather Events And Health Outcomes In Greater Cincinnati Balmoral Show (O6zIAV9TP2) Mshale",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T17:47:49+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "043eedf08a1b77ee9b92a5b1aecd0c4bc2042cc76a19208b55ea7366a325e822",
+      "poster_phrase": "全球气候变化议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 46,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_828c902456d4e03d",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_a1ec30afdfd2ec00",
+      "article_id": "article_a1ec30afdfd2ec00",
+      "canonical_url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxOTWhxX2tpNldyTFZYSjFqZWo5M2ZUdjc5RllNa29sNXBGTG5wNDE2N0Y1SWxaSWp0RkhKd3dsQUdzaElHdmw5NWFkbUU2SWlGU3ZySHNwaHcxdzRtLU1NZ3Y4c0xreGx2S3dZa1owQTlkb1llbmMwbkFCMGgwZENwZWJwMHJaVEVzLW9Ca2FVS2FpTEhkMlpkQ0RSZjFNUlFqT0txdUthQUZzQVFsZnBHQ1hOZGdwc1cteEdLZVRYTDRmeVEtMWRJTDVpTnRHSTVydWdmTUJzWG1kcjNfV1YxUHRTQ3FYQWgtVElQTkpocGlMRExIR2kwYXdMY0dTa2NDaFhqbENCVmREZENZblYw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxOTWhxX2tpNldyTFZYSjFqZWo5M2ZUdjc5RllNa29sNXBGTG5wNDE2N0Y1SWxaSWp0RkhKd3dsQUdzaElHdmw5NWFkbUU2SWlGU3ZySHNwaHcxdzRtLU1NZ3Y4c0xreGx2S3dZa1owQTlkb1llbmMwbkFCMGgwZENwZWJwMHJaVEVzLW9Ca2FVS2FpTEhkMlpkQ0RSZjFNUlFqT0txdUthQUZzQVFsZnBHQ1hOZGdwc1cteEdLZVRYTDRmeVEtMWRJTDVpTnRHSTVydWdmTUJzWG1kcjNfV1YxUHRTQ3FYQWgtVElQTkpocGlMRExIR2kwYXdMY0dTa2NDaFhqbENCVmREZENZblYw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "University Students Install Renewable Energy Solutions in South African Community of 70,000, Reviving School Computers - CPG Click Oil and Gas",
+      "title_zh": "全球推进可再生能源转型",
+      "summary_source": "University Students Install Renewable Energy Solutions in South African Community of 70,000, Reviving School Computers CPG Click Oil and Gas",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T17:41:00+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "70,000"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "163309affed3518e0c2b2dfd10ff0d3d44308b7fad766cf81be01e47e94323b7",
+      "poster_phrase": "全球推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_a1ec30afdfd2ec00",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "70,000"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_9dedfeba6f990fb2",
+      "article_id": "article_9dedfeba6f990fb2",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQzZEcXktaDFDQnBCNTJzVS11SUtraWk5UHNlU2xidXdEaWFhcEhOR0dfSm04TkZHM0R2NDZXVkxBeEpHVG5YNlE1MmNmbG5QWXJNWTcteDU5NUs4VmFCMVlfUWhDWU9QU2JLV2FpcDFkMXhISFJWak9lUFJfaU50MUlKRE5HeTh0cUQ4d0dDeEdEbGpoaU9vNV9zTDI2ZW1PdmJKZjhnUm1uQQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQzZEcXktaDFDQnBCNTJzVS11SUtraWk5UHNlU2xidXdEaWFhcEhOR0dfSm04TkZHM0R2NDZXVkxBeEpHVG5YNlE1MmNmbG5QWXJNWTcteDU5NUs4VmFCMVlfUWhDWU9QU2JLV2FpcDFkMXhISFJWak9lUFJfaU50MUlKRE5HeTh0cUQ4d0dDeEdEbGpoaU9vNV9zTDI2ZW1PdmJKZjhnUm1uQQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 54,
+      "title_original": "Finland expands renewable energy with sand battery - The Portugal News",
+      "title_zh": "全球推进可再生能源转型",
+      "summary_source": "Finland expands renewable energy with sand battery The Portugal News",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-08T16:53:43+00:00",
+      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "e2079b5f763682a7f3579822e76c018c28dc312bd60744e169ac425057054b35",
+      "poster_phrase": "全球推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 46,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_9dedfeba6f990fb2",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_2aa70e01926498a8",
+      "article_id": "article_2aa70e01926498a8",
+      "canonical_url": "https://dialogue.earth/en/climate/brazils-indigenous-mps-build-bridges-on-climate-action",
+      "source_url": "https://dialogue.earth/en/climate/brazils-indigenous-mps-build-bridges-on-climate-action/",
+      "source_id": "INT009",
+      "source_name": "Dialogue Earth",
+      "source_type": "非营利环境媒体",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "Brazil’s Indigenous MPs build bridges on climate action",
+      "title_zh": "巴西气候行动议题受到关注",
+      "summary_source": "The ‘cocar’ caucus is stronger than ever but it faces a bitter battle with agricultural interests this election year The post Brazil’s Indigenous MPs build bridges on climate action appeared first on Dialogue Earth .",
+      "summary_zh": "",
+      "theme_zh": "气候行动",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-07T12:33:13+00:00",
+      "fetched_at": "2026-08-09T02:56:53.484617+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "巴西",
+          "lon": -52.0,
+          "lat": -10.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "3e9b00d6334e122f0ef058f44b8b24ed4ac121a18cfb137f434533c77866f89f",
+      "poster_phrase": "巴西气候行动议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_2aa70e01926498a8",
+        "source_atom": {
+          "name": "Dialogue Earth",
+          "authority": 4,
+          "type": "非营利环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "巴西"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_610ec69399d876d5",
+      "article_id": "article_610ec69399d876d5",
+      "canonical_url": "https://yaleclimateconnections.org/2026/08/the-floods-of-the-future-wont-come-one-at-a-time",
+      "source_url": "https://yaleclimateconnections.org/2026/08/the-floods-of-the-future-wont-come-one-at-a-time/",
+      "source_id": "INT008",
+      "source_name": "Yale Climate Connections",
+      "source_type": "大学支持的气候媒体",
+      "authority": 4,
+      "relevance_score": 62,
+      "title_original": "The floods of the future won’t come one at a time",
+      "title_zh": "美国得州洪水风险议题受到关注",
+      "summary_source": "A dangerous collision of storm surge, torrential rain, and sea level rise threatens to overwhelm communities from Texas to Maine. The post The floods of the future won’t come one at a time appeared first on Yale Climate Connections .",
+      "summary_zh": "",
+      "theme_zh": "洪水风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-07T11:00:00+00:00",
+      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "美国得州",
+          "lon": -99.0,
+          "lat": 31.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "123900caf58f3dd4842af590e396432caef486782f27eadf2fc122368d8e721d",
+      "poster_phrase": "美国得州洪水风险议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_610ec69399d876d5",
+        "source_atom": {
+          "name": "Yale Climate Connections",
+          "authority": 4,
+          "type": "大学支持的气候媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "美国得州"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_3dab1f406516f1cb",
+      "article_id": "article_3dab1f406516f1cb",
+      "canonical_url": "https://www.canarymedia.com/articles/wind/pentagon-wind-farm-blockade-over",
+      "source_url": "https://www.canarymedia.com/articles/wind/pentagon-wind-farm-blockade-over",
+      "source_id": "INT010",
+      "source_name": "Canary Media",
+      "source_type": "非营利清洁能源媒体",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "The Pentagon's wind farm blockade is over — for now",
+      "title_zh": "美国推进可再生能源转型",
+      "summary_source": "The U.S. Department of Defense has for months refused to conduct routine military evaluations of proposed onshore wind farms, creating a de facto moratorium on the clean energy source at a time of exploding electricity demand. On Thursday, a federal judge appointed by President Donald Trump ordered the agency to…",
+      "summary_zh": "",
+      "theme_zh": "风电",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-06T21:53:00+00:00",
+      "fetched_at": "2026-08-09T02:56:53.747188+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "美国",
+          "lon": -100.0,
+          "lat": 39.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "5c294c35ebbd01a4da38db495ff7442caab9fca1ab100326713a15f55ace2271",
+      "poster_phrase": "美国推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_3dab1f406516f1cb",
+        "source_atom": {
+          "name": "Canary Media",
+          "authority": 4,
+          "type": "非营利清洁能源媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "美国"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_27a63996a2080aa0",
+      "article_id": "article_27a63996a2080aa0",
+      "canonical_url": "https://www.carbonbrief.org/qa-what-is-in-chinas-new-five-year-plan-for-climate-change",
+      "source_url": "https://www.carbonbrief.org/qa-what-is-in-chinas-new-five-year-plan-for-climate-change",
+      "source_id": "INT001",
+      "source_name": "Carbon Brief",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 74,
+      "title_original": "Q&A: What is in China’s new five-year plan for climate change?",
+      "title_zh": "中国碳治理议题受到关注",
+      "summary_source": "China has released a five-year plan dedicated to addressing climate change. The 15th five-year plan for a national response to… The post Q&A: What is in China’s new five-year plan for climate change? appeared first on Carbon Brief .",
+      "summary_zh": "",
+      "theme_zh": "碳治理",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-06T14:48:40+00:00",
+      "fetched_at": "2026-08-09T02:56:50.927484+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "15"
+      ],
+      "places": [
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "b966a30cd41cd50a19bfb9a8a2d02a8a18870d9d83e5caaf418ab7059fb268f8",
+      "poster_phrase": "中国碳治理议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 71,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_27a63996a2080aa0",
+        "source_atom": {
+          "name": "Carbon Brief",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "15"
+        ],
+        "geo_atoms": [
+          "中国"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_7309d66143eb7c17",
+      "article_id": "article_7309d66143eb7c17",
+      "canonical_url": "https://yaleclimateconnections.org/2026/08/15-new-books-for-five-new-takes-on-climate-change",
+      "source_url": "https://yaleclimateconnections.org/2026/08/15-new-books-for-five-new-takes-on-climate-change/",
+      "source_id": "INT008",
+      "source_name": "Yale Climate Connections",
+      "source_type": "大学支持的气候媒体",
+      "authority": 4,
+      "relevance_score": 54,
+      "title_original": "15 new books for five new takes on climate change",
+      "title_zh": "全球气候变化议题受到关注",
+      "summary_source": "Recent years have seen a boom in books on climate change. This collection spans from techno-optimism to philosophical pessimism. The post 15 new books for five new takes on climate change appeared first on Yale Climate Connections .",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-06T11:00:00+00:00",
+      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "15"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "348f93ad0c1b6ff3fc2c2aa57bced23898345088c2cecb796efa9f2080c8eb93",
+      "poster_phrase": "全球气候变化议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 55,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_7309d66143eb7c17",
+        "source_atom": {
+          "name": "Yale Climate Connections",
+          "authority": 4,
+          "type": "大学支持的气候媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "15"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_b716998d7cc98677",
+      "article_id": "article_b716998d7cc98677",
+      "canonical_url": "https://yaleclimateconnections.org/2026/08/when-the-power-goes-out-homes-can-become-heat-traps",
+      "source_url": "https://yaleclimateconnections.org/2026/08/when-the-power-goes-out-homes-can-become-heat-traps/",
+      "source_id": "INT008",
+      "source_name": "Yale Climate Connections",
+      "source_type": "大学支持的气候媒体",
+      "authority": 4,
+      "relevance_score": 50,
+      "title_original": "When the power goes out, homes can become heat traps",
+      "title_zh": "美国得州气候变化加剧高温风险",
+      "summary_source": "Austin, Texas, is helping low-income residents make energy efficiency upgrades, maintaining cooling centers, and urging people to check on neighbors. The post When the power goes out, homes can become heat traps appeared first on Yale Climate Connections .",
+      "summary_zh": "",
+      "theme_zh": "高温风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-06T11:00:00+00:00",
+      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "美国得州",
+          "lon": -99.0,
+          "lat": 31.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "6a151cc2952f0d20568177c73ddcb46ef43071dc82f19d6472d437f7f925912a",
+      "poster_phrase": "美国得州气候变化加剧高温风险",
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_b716998d7cc98677",
+        "source_atom": {
+          "name": "Yale Climate Connections",
+          "authority": 4,
+          "type": "大学支持的气候媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "美国得州"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_d7d01dac97ec19f1",
+      "article_id": "article_d7d01dac97ec19f1",
+      "canonical_url": "https://www.climatechangenews.com/2026/08/06/china-wastes-clean-power-stopping-coal-use-from-falling",
+      "source_url": "https://www.climatechangenews.com/2026/08/06/china-wastes-clean-power-stopping-coal-use-from-falling/",
+      "source_id": "INT002",
+      "source_name": "Climate Home News",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 82,
+      "title_original": "China’s coal power rebounds as record clean energy goes to waste",
+      "title_zh": "中国推进可再生能源转型",
+      "summary_source": "Long-term contracts guarantee coal plants buyers regardless of demand, crowding out renewables, report finds The post China’s coal power rebounds as record clean energy goes to waste appeared first on Climate Home News .",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-06T00:00:00+00:00",
+      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "45912ccc95fbba985311767d9beb0e7a190bdffca8a2b3ae306615fb2fd8932a",
+      "poster_phrase": "中国推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 74,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_d7d01dac97ec19f1",
+        "source_atom": {
+          "name": "Climate Home News",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "中国"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+    },
+    {
+      "record_id": "article_72e2f8902d910a7d",
+      "article_id": "article_72e2f8902d910a7d",
+      "canonical_url": "https://yaleclimateconnections.org/2026/08/9-million-u-s-students-lost-school-time-for-weather-in-the-2024-2025-school-year",
+      "source_url": "https://yaleclimateconnections.org/2026/08/9-million-u-s-students-lost-school-time-for-weather-in-the-2024-2025-school-year/",
+      "source_id": "INT008",
+      "source_name": "Yale Climate Connections",
+      "source_type": "大学支持的气候媒体",
+      "authority": 4,
+      "relevance_score": 74,
+      "title_original": "9 million U.S. students lost school time for weather in the 2024-2025 school year",
+      "title_zh": "美国气候变化加剧高温风险",
+      "summary_source": "Extreme heat, smoke, floods, and storms are disrupting education across the country. The post 9 million U.S. students lost school time for weather in the 2024-2025 school year appeared first on Yale Climate Connections .",
+      "summary_zh": "",
+      "theme_zh": "高温风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-05T11:00:00+00:00",
+      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "9 million",
+        "2024",
+        "2025"
+      ],
+      "places": [
+        {
+          "name_zh": "美国",
+          "lon": -100.0,
+          "lat": 39.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "2293cbb2cf7b7eaaaecd2ce81aaa81751bcdd9214e41573b821fe9cf7e97938c",
+      "poster_phrase": "美国气候变化加剧高温风险",
+      "quality": {
+        "passed": true,
+        "score": 62,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_72e2f8902d910a7d",
+        "source_atom": {
+          "name": "Yale Climate Connections",
+          "authority": 4,
+          "type": "大学支持的气候媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "9 million",
+          "2024",
+          "2025"
+        ],
+        "geo_atoms": [
+          "美国"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_c9a6956b6ba6facb",
@@ -867,17 +1881,16 @@
       "authority": 5,
       "relevance_score": 58,
       "title_original": "As The Odyssey brings the Mediterranean to big screens, the sea is on an epic journey of its own",
-      "title_zh": "《奥德赛》登上大银幕之际，地中海也在经历自己的史诗旅程",
+      "title_zh": "地中海地区气候变化议题受到关注",
       "summary_source": "As The Odyssey returns to cinemas, discover the Mediterranean’s modern-day threats – and how UNEP/MAP is helping protect its future.",
-      "summary_zh": "联合国环境规划署借影片《奥德赛》重返影院，介绍地中海当前面临的环境威胁，以及地中海行动计划正在采取的保护措施。",
-      "theme_zh": "海洋生态保护",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-05T07:40:58+00:00",
-      "fetched_at": "2026-08-05T08:19:18.270702+00:00",
+      "fetched_at": "2026-08-09T02:56:55.540359+00:00",
       "topics": [
-        "海洋生态保护",
-        "环境治理"
+        "气候动态"
       ],
       "numbers": [],
       "places": [
@@ -887,14 +1900,14 @@
           "lat": 36.0
         }
       ],
-      "translation_status": "human_reviewed",
+      "translation_status": "metadata_compiled_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "048a7e46280baddd287a458b42bb331cc35b8ac081bdb75ee378a340dfcacb10",
-      "poster_phrase": "气候线索更新",
+      "poster_phrase": "地中海地区气候变化议题受到关",
       "quality": {
         "passed": true,
-        "score": 80,
-        "tier": "A",
+        "score": 65,
+        "tier": "B",
         "checks": {
           "canonical_https": true,
           "original_title": true,
@@ -913,21 +1926,20 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
+          "translation_status": "metadata_compiled_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "海洋生态保护",
-          "环境治理"
+          "气候动态"
         ],
         "number_atoms": [],
         "geo_atoms": [
           "地中海地区"
         ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
-      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_ff78f0fb97528ea2",
@@ -940,17 +1952,16 @@
       "authority": 4,
       "relevance_score": 62,
       "title_original": "These mice live on volcano summits at extreme elevations. Study finds how",
-      "title_zh": "生活在火山之巅的高海拔小鼠如何生存？研究揭示答案",
+      "title_zh": "安第斯地区气候变化议题受到关注",
       "summary_source": "The Andean leaf-eared mouse thrives at extreme elevations where most other mammals wouldn’t survive. At these altitudes, oxygen levels are low; temperatures are permanently below freezing; and humans can’t survive for long without oxygen masks and insulated clothing. Yet, the mighty mouse is right at home, and scientists have now figured out the biological adaptations […]",
-      "summary_zh": "研究发现，安第斯叶耳鼠通过生物适应机制，在低氧、常年低于冰点的火山高海拔环境中生存。",
-      "theme_zh": "极端环境适应",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-05T06:21:14+00:00",
-      "fetched_at": "2026-08-05T08:19:17.484950+00:00",
+      "fetched_at": "2026-08-09T02:56:54.561383+00:00",
       "topics": [
-        "极端环境适应",
-        "生物多样性"
+        "气候适应"
       ],
       "numbers": [],
       "places": [
@@ -960,14 +1971,14 @@
           "lat": -20.0
         }
       ],
-      "translation_status": "human_reviewed",
+      "translation_status": "metadata_compiled_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "b3ea23423d9e7b8b446d9e1bab225bbf82a88fcae6dc1d5aae86d7d41cd6ae22",
-      "poster_phrase": "谈判信号更新",
+      "poster_phrase": "安第斯地区气候变化议题受到关",
       "quality": {
         "passed": true,
-        "score": 73,
-        "tier": "A",
+        "score": 58,
+        "tier": "B",
         "checks": {
           "canonical_https": true,
           "original_title": true,
@@ -986,21 +1997,20 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
+          "translation_status": "metadata_compiled_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "极端环境适应",
-          "生物多样性"
+          "气候适应"
         ],
         "number_atoms": [],
         "geo_atoms": [
           "安第斯地区"
         ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
-      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_af955c07f3bc3be1",
@@ -2051,34 +3061,27 @@
       "authority": 4,
       "relevance_score": 62,
       "title_original": "How Borneo’s giant trees defy gravity and old scientific theories",
-      "title_zh": "婆罗洲巨树如何突破重力限制和传统科学理论",
+      "title_zh": "全球干旱风险议题受到关注",
       "summary_source": "Giant tropical trees in Malaysian Borneo pump water to their highest branches just as easily as to their lower-most branches, a new study says. Researchers say this suggests tall trees are not more vulnerable to drought than shorter trees, as was previously believed. For decades, scientists have hypothesized that as trees become taller, the effects […]",
-      "summary_zh": "研究发现，马来西亚婆罗洲巨型热带树木向最高枝条输水的能力不弱于低处枝条，这对“高大树木更易受干旱影响”的传统假说提出挑战。",
-      "theme_zh": "森林抗旱研究",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "summary_zh": "",
+      "theme_zh": "干旱风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T04:24:40+00:00",
-      "fetched_at": "2026-08-05T08:19:16.459004+00:00",
+      "fetched_at": "2026-08-09T02:56:52.923320+00:00",
       "topics": [
-        "森林生态",
-        "干旱适应"
+        "气候适应"
       ],
       "numbers": [],
-      "places": [
-        {
-          "name_zh": "婆罗洲",
-          "lon": 114.0,
-          "lat": 1.0
-        }
-      ],
-      "translation_status": "human_reviewed",
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "b8586fa834d68205cdbbdcb7bc9e74a72a0c8dd7a9af7a328e1d967b369c36d1",
-      "poster_phrase": "极端天气预警",
+      "poster_phrase": "全球干旱风险议题受到关注",
       "quality": {
         "passed": true,
-        "score": 73,
-        "tier": "A",
+        "score": 58,
+        "tier": "B",
         "checks": {
           "canonical_https": true,
           "original_title": true,
@@ -2097,21 +3100,18 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
+          "translation_status": "metadata_compiled_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "森林生态",
-          "干旱适应"
+          "气候适应"
         ],
         "number_atoms": [],
-        "geo_atoms": [
-          "婆罗洲"
-        ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_d78fb1ce220cf059",
@@ -2347,37 +3347,29 @@
       "authority": 4,
       "relevance_score": 66,
       "title_original": "Carbon markets alone won’t keep Southeast Asia’s forests standing, study says",
-      "title_zh": "研究：仅靠碳市场无法保护东南亚森林",
+      "title_zh": "全球碳治理议题受到关注",
       "summary_source": "- A new study has identified “massive and untapped” conservation potential within forestry and plantation concessions in Southeast Asia. - Roughly 42 million hectares of forests remain standing inside logging, oil palm, timber and rubber plantation concessions across the region, the study says. - The researchers examined what it would take to financially incentivize forest conservation inside these concessions, finding that using carbon markets alone would require carbon prices many times higher than current values. - They point to the need for diversified sources of conservation funding to complement carbon markets, such as blended finance, green bonds and payment for ecosystems services, as well as more supportive governance frameworks that elevate the viability of conservation over development.",
-      "summary_zh": "研究估计东南亚林业和种植园特许区内仍有约4200万公顷森林；按现有碳价，仅靠碳市场难以形成足够保护激励，需要混合融资、绿色债券等补充工具。",
-      "theme_zh": "森林保护融资",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "summary_zh": "",
+      "theme_zh": "碳治理",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T02:00:36+00:00",
-      "fetched_at": "2026-08-05T08:19:16.459004+00:00",
+      "fetched_at": "2026-08-09T02:56:52.923320+00:00",
       "topics": [
-        "碳市场",
-        "森林保护",
-        "混合融资"
+        "国际碳市场"
       ],
       "numbers": [
-        "4200万公顷"
+        "42 million"
       ],
-      "places": [
-        {
-          "name_zh": "东南亚",
-          "lon": 110.0,
-          "lat": 5.0
-        }
-      ],
-      "translation_status": "human_reviewed",
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "fe7f3979f3b29cd92631f0f7cccae503ac915a148d2680c5b9729aeceb70dca4",
-      "poster_phrase": "减排信号更新",
+      "poster_phrase": "全球碳治理议题受到关注",
       "quality": {
         "passed": true,
-        "score": 74,
-        "tier": "A",
+        "score": 59,
+        "tier": "B",
         "checks": {
           "canonical_https": true,
           "original_title": true,
@@ -2396,24 +3388,20 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
+          "translation_status": "metadata_compiled_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "碳市场",
-          "森林保护",
-          "混合融资"
+          "国际碳市场"
         ],
         "number_atoms": [
-          "4200万公顷"
+          "42 million"
         ],
-        "geo_atoms": [
-          "东南亚"
-        ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-04T02:57:35.322175+00:00",
-      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_84d54f97fc760284",
@@ -2767,14 +3755,14 @@
       "authority": 4,
       "relevance_score": 72,
       "title_original": "‘COP30 is not over’: Indigenous peoples press for hard power",
-      "title_zh": "国际气候谈判出现新动向",
+      "title_zh": "巴西气候变化议题受到关注",
       "summary_source": "With no seat at the negotiating table, Brazil’s Indigenous movement is pushing for change using marches and underground policy proposals The post ‘COP30 is not over’: Indigenous peoples press for hard power appeared first on Dialogue Earth .",
-      "summary_zh": "涉及巴西，这条情报聚焦国际谈判、国家承诺或大会进程。需要重点关注其对政策执行、谈判表述或风险研判的影响。",
-      "theme_zh": "气候谈判",
-      "why_zh": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T17:15:27+00:00",
-      "fetched_at": "2026-08-05T08:19:16.773336+00:00",
+      "fetched_at": "2026-08-09T02:56:53.484617+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -2786,18 +3774,18 @@
           "lat": -10.0
         }
       ],
-      "translation_status": "fallback_needs_review",
+      "translation_status": "metadata_compiled_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "1081e6925bd6f45214510050cb6e6c4978acac7384ad6b6a47d19874de57c8f3",
-      "poster_phrase": "谈判信号更新",
+      "poster_phrase": "巴西气候变化议题受到关注",
       "quality": {
-        "passed": false,
+        "passed": true,
         "score": 61,
-        "tier": "C",
+        "tier": "B",
         "checks": {
           "canonical_https": true,
           "original_title": true,
-          "chinese_title": false,
+          "chinese_title": true,
           "substantive_content": true,
           "published_time": true,
           "source_trace": true
@@ -2812,7 +3800,7 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "fallback_needs_review",
+          "translation_status": "metadata_compiled_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
@@ -2822,10 +3810,10 @@
         "geo_atoms": [
           "巴西"
         ],
-        "decision_atom": "这是模型不可用时生成的待复核线索，只用于提示当日变化；引用前必须打开原文核验。"
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-05T08:20:11.978316+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_a86068009a53a8cf",
@@ -7722,7 +8710,7 @@
       "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
       "language": "en",
       "published_at": "2026-07-28T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "极端天气",
         "气候适应"
@@ -7785,7 +8773,7 @@
         "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_be2d7f67b6b1bbc3",
@@ -8257,7 +9245,7 @@
       "why_zh": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。",
       "language": "en",
       "published_at": "2026-07-26T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -8320,7 +9308,7 @@
         "decision_atom": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_32a028df4d103aba",
@@ -9449,7 +10437,7 @@
       "why_zh": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。",
       "language": "en",
       "published_at": "2026-07-24T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "能源与排放",
         "清洁能源"
@@ -9512,7 +10500,7 @@
         "decision_atom": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_6c67b4eafaf74973",
@@ -10116,7 +11104,7 @@
       "why_zh": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。",
       "language": "zh",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "能源与排放",
         "国家气候承诺"
@@ -10181,7 +11169,7 @@
         "decision_atom": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "curated_4550f4e28217628b",
@@ -10201,7 +11189,7 @@
       "why_zh": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "能源与排放",
         "产业转型"
@@ -10260,7 +11248,7 @@
         "decision_atom": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "curated_7c6b8d0a74561df8",
@@ -10280,7 +11268,7 @@
       "why_zh": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "能源与排放",
         "交通转型"
@@ -10337,7 +11325,7 @@
         "decision_atom": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_e0247ad0502dc99c",
@@ -12491,7 +13479,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -12562,7 +13550,7 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_29e088b267592809",
@@ -12573,7 +13561,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 50,
+      "relevance_score": 68,
       "title_original": "Africa can lead the Age of Electrification",
       "title_zh": "非洲能否在全球电气化浪潮中掌握主动权",
       "summary_source": "The electrification agenda presents both an extraordinary opportunity for Africa and an immense challenge for the continent The post Africa can lead the Age of Electrification appeared first on Climate Home News .",
@@ -12582,7 +13570,7 @@
       "why_zh": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。",
       "language": "en",
       "published_at": "2026-07-16T09:52:53+00:00",
-      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
       "topics": [
         "气候动态"
       ],
@@ -12600,7 +13588,7 @@
       "poster_phrase": "非洲竞逐电气化时代",
       "quality": {
         "passed": true,
-        "score": 77,
+        "score": 84,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -12633,7 +13621,7 @@
         "decision_atom": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -12773,7 +13761,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_1349a508fd370638",
@@ -12850,7 +13838,7 @@
         "decision_atom": "资金撤回可能影响森林保护、当地社区生计和发达国家资金承诺的可信度，需继续核对项目清单与官方解释。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -12939,7 +13927,7 @@
         "decision_atom": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_564ab2b4e2f26c1f",
@@ -12950,7 +13938,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 66,
+      "relevance_score": 84,
       "title_original": "Major emitting countries knew of climate risks decades earlier than claimed",
       "title_zh": "主要排放国被指早在数十年前已知化石燃料的气候风险",
       "summary_source": "Governments have known since at least the 1960s that fossil fuel use was warming the planet. They kept quiet to avoid responsibility. The post Major emitting countries knew of climate risks decades earlier than claimed appeared first on Climate Home News .",
@@ -12959,7 +13947,7 @@
       "why_zh": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。",
       "language": "en",
       "published_at": "2026-07-15T10:51:19+00:00",
-      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -12979,7 +13967,7 @@
       "poster_phrase": "气候责任追溯至 1960 年代",
       "quality": {
         "passed": true,
-        "score": 83,
+        "score": 89,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -13014,7 +14002,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -13025,7 +14013,7 @@
       "source_name": "UN Environment Programme",
       "source_type": "联合国官方信息",
       "authority": 5,
-      "relevance_score": 86,
+      "relevance_score": 100,
       "title_original": "AI helping UN detect methane emissions and spark real reductions in climate-warming gas",
       "title_zh": "AI 正把卫星发现的甲烷泄漏转化为真实减排",
       "summary_source": "Artificial Intelligence (AI) is helping turn satellite observations into methane mitigation action in the oil and gas sector. These mitigation efforts have delivered a climate benefit comparable to removing the annual emissions of almost 24 million gasoline-powered passenger cars, according to a new report by the UN Environment Programme (UNEP).",
@@ -13034,7 +14022,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-07-17T04:24:12.097703+00:00",
+      "fetched_at": "2026-08-09T02:56:55.540359+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -13054,7 +14042,7 @@
       "poster_phrase": "卫星正在看见甲烷",
       "quality": {
         "passed": true,
-        "score": 90,
+        "score": 95,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -13089,7 +14077,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
@@ -13169,7 +14157,7 @@
       "source_name": "Climate Home News",
       "source_type": "气候专业媒体",
       "authority": 5,
-      "relevance_score": 50,
+      "relevance_score": 68,
       "title_original": "UN seabed regulator defends authority as mining firms seek to halt inquiry",
       "title_zh": "深海采矿企业试图阻止联合国海底监管机构调查",
       "summary_source": "Campaigners accused deep-sea mining frontrunner The Metals Company of obstructing an inquiry into its subsidiaries. The firm says it is being targeted without procedural basis The post UN seabed regulator defends authority as mining firms seek to halt inquiry appeared first on Climate Home News .",
@@ -13178,7 +14166,7 @@
       "why_zh": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。",
       "language": "en",
       "published_at": "2026-07-14T18:02:01+00:00",
-      "fetched_at": "2026-07-17T04:23:55.422222+00:00",
+      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
       "topics": [
         "气候动态"
       ],
@@ -13196,7 +14184,7 @@
       "poster_phrase": "深海采矿规则受到挑战",
       "quality": {
         "passed": true,
-        "score": 77,
+        "score": 84,
         "tier": "A",
         "checks": {
           "canonical_https": true,
@@ -13229,7 +14217,7 @@
         "decision_atom": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "article_a02797620e6f6e19",
@@ -13300,7 +14288,7 @@
         "decision_atom": "这是观点性内容，主要用于观察英国国内气候政策的政治阻力，不应作为事实报道直接引用。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "curated_94ab11482ec24494",
@@ -13320,7 +14308,7 @@
       "why_zh": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。",
       "language": "zh",
       "published_at": "2026-07-13T16:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "国家气候承诺",
         "能源与排放"
@@ -13383,7 +14371,7 @@
         "decision_atom": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     },
     {
       "record_id": "curated_cf238b7caf84c933",
@@ -13403,7 +14391,7 @@
       "why_zh": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。",
       "language": "zh",
       "published_at": "2026-02-08T16:00:00+00:00",
-      "fetched_at": "2026-08-09T02:54:48.623718+00:00",
+      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
       "topics": [
         "碳市场",
         "履约与透明度"
@@ -13464,7 +14452,7 @@
         "decision_atom": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:54:49.045352+00:00"
+      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
     }
   ]
 }
