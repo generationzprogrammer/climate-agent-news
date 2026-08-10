@@ -1,19 +1,747 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-100000",
-  "updated_at": "2026-08-09T02:57:53.536329+00:00",
+  "updated_at": "2026-08-10T00:01:09.965945+00:00",
   "limit": 100000,
-  "total": 200,
+  "total": 210,
   "statistics": {
-    "previous_total": 200,
+    "previous_total": 210,
     "added": 0,
     "updated": 0,
     "rejected": 13,
     "pruned": 0,
     "tier_a": 32,
-    "tier_b": 104
+    "tier_b": 114
   },
   "records": [
+    {
+      "record_id": "article_8d099093bdbf2d1b",
+      "article_id": "article_8d099093bdbf2d1b",
+      "canonical_url": "https://allafrica.com/stories/202608070276.html",
+      "source_url": "https://allafrica.com/stories/202608070276.html",
+      "source_id": "API001",
+      "source_name": "GDELT 2.0 DOC API",
+      "source_type": "全球新闻聚合API",
+      "authority": 4,
+      "relevance_score": 76,
+      "title_original": "Nigeria : 2027 - NDC Admits Crisis , Sets Up Reconciliation Committee",
+      "title_zh": "尼日利亚气候变化议题受到关注",
+      "summary_source": null,
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "English",
+      "published_at": "2026-08-09T23:30:00+00:00",
+      "fetched_at": "2026-08-10T00:01:07.487019+00:00",
+      "topics": [
+        "国家气候承诺"
+      ],
+      "numbers": [
+        "2027"
+      ],
+      "places": [
+        {
+          "name_zh": "尼日利亚",
+          "lon": 8.0,
+          "lat": 9.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "f2640c181d5e2d36b92ce0c71702a6a1683401128f1ee26d2b663649685dfc3d",
+      "poster_phrase": "尼日利亚气候变化议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 63,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_8d099093bdbf2d1b",
+        "source_atom": {
+          "name": "GDELT 2.0 DOC API",
+          "authority": 4,
+          "type": "全球新闻聚合API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国家气候承诺"
+        ],
+        "number_atoms": [
+          "2027"
+        ],
+        "geo_atoms": [
+          "尼日利亚"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_384a534e319d8d4e",
+      "article_id": "article_384a534e319d8d4e",
+      "canonical_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1xcktVUEtiRHFCaktfX29fT2VQZ0pKWDEyYzhLQUNvZjZOblcyY3ZTRXRKaUlGVl9HWHFwU04wdHhVVVZ2cjk1TzJOcWtxUGlHdTNDaTFMYjNYSkh0M1dMa0tYYTVzNEw4V08yelFaWERDVi1wUVBOV3lKSXQ4QQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1xcktVUEtiRHFCaktfX29fT2VQZ0pKWDEyYzhLQUNvZjZOblcyY3ZTRXRKaUlGVl9HWHFwU04wdHhVVVZ2cjk1TzJOcWtxUGlHdTNDaTFMYjNYSkh0M1dMa0tYYTVzNEw4V08yelFaWERDVi1wUVBOV3lKSXQ4QQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 66,
+      "title_original": "AI making renewable energy generation more reliable - China Daily",
+      "title_zh": "中国推进可再生能源转型",
+      "summary_source": "AI making renewable energy generation more reliable China Daily",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T23:20:05+00:00",
+      "fetched_at": "2026-08-10T00:01:07.969584+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "42fd08f9c7c3662ffe61625d730afdbe46d43a79f29f31e47b3ccf3e041b8c4f",
+      "poster_phrase": "中国推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 50,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_384a534e319d8d4e",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "中国"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_5fe686e462963840",
+      "article_id": "article_5fe686e462963840",
+      "canonical_url": "https://www.bbc.co.uk/news/articles/c20d89jxpqno?at_medium=RSS&at_campaign=rss",
+      "source_url": "https://www.bbc.co.uk/news/articles/c20d89jxpqno?at_medium=RSS&at_campaign=rss",
+      "source_id": "INT014",
+      "source_name": "BBC Science & Environment",
+      "source_type": "公共媒体",
+      "authority": 5,
+      "relevance_score": 70,
+      "title_original": "'Not afraid to stay': The Canadians taking fighting wildfires into their own hands",
+      "title_zh": "加拿大野火风险议题受到关注",
+      "summary_source": "With wildfires now widespread and frequent, some rural residents in Canada are learning how to fight the flames themselves and protect their own homes.",
+      "summary_zh": "",
+      "theme_zh": "野火风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-09T23:02:39+00:00",
+      "fetched_at": "2026-08-09T23:59:31.284442+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "加拿大",
+          "lon": -106.0,
+          "lat": 56.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "24e004b22a5726e4372515370cfc7d704b69c87f8c47d2f3a8e9ea05349f9637",
+      "poster_phrase": "加拿大野火风险议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 70,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_5fe686e462963840",
+        "source_atom": {
+          "name": "BBC Science & Environment",
+          "authority": 5,
+          "type": "公共媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "加拿大"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_13591037ee5783f0",
+      "article_id": "article_13591037ee5783f0",
+      "canonical_url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPYUkwY1hreGZhaWcwMUZVeFd2VThuTXpMRGZWVElWUmtNRTFmaGdxTVlUVDExQkZJUFhCRzY0cUpCRFRWTDUxVmdZN0xQUGFocXZaTXp1X0xPMUVaS3YtNFQ1TzdERGwyQ210dF94Rk5zV2RwdFBreTI2Ujd0QVdpaUVTcFlMN19laUtGeEw2UE1UM3BMRVVlWmR3SlZPVHV1RXVhaXROR2YzbjFhRkkxSUo4b1VzUDQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPYUkwY1hreGZhaWcwMUZVeFd2VThuTXpMRGZWVElWUmtNRTFmaGdxTVlUVDExQkZJUFhCRzY0cUpCRFRWTDUxVmdZN0xQUGFocXZaTXp1X0xPMUVaS3YtNFQ1TzdERGwyQ210dF94Rk5zV2RwdFBreTI2Ujd0QVdpaUVTcFlMN19laUtGeEw2UE1UM3BMRVVlWmR3SlZPVHV1RXVhaXROR2YzbjFhRkkxSUo4b1VzUDQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 62,
+      "title_original": "Climate change: Flood threatens 6.5m Nigerians, 151 communities, says Red Cross - Champion Newspapers LTD",
+      "title_zh": "全球洪水风险议题受到关注",
+      "summary_source": "Climate change: Flood threatens 6.5m Nigerians, 151 communities, says Red Cross Champion Newspapers LTD",
+      "summary_zh": "",
+      "theme_zh": "洪水风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T19:17:35+00:00",
+      "fetched_at": "2026-08-10T00:01:07.969584+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "6.5",
+        "151 c"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "0c3d7b2b3bec29086eee4ea01d8753940dfc63c99fa7c8d938977bebbf73df5c",
+      "poster_phrase": "全球洪水风险议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 49,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_13591037ee5783f0",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "6.5",
+          "151 c"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_3c4e8dad433b77f8",
+      "article_id": "article_3c4e8dad433b77f8",
+      "canonical_url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRTZjU3NOU0ZfYzVxdXgzTXdLeGlnQTlDcUtPRlJUZC1RbWE5dkN2NXhBQVhVeU41MW9rNndHYklDS3piSjVXcy1VQ2tWbGFhVUNVMFRWcl9lRTkyekxHdHBWdm1TRXpfZmJxcXZKSHB5SlBXYTRoQ2lDbkJoTmVRYUVMLTR0cnU3ek5GZC0teHluTElKcnpUNmJvWmlIZjRVTUI5bDRMemNKVnpsUG5Hb0EtaEVwdw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRTZjU3NOU0ZfYzVxdXgzTXdLeGlnQTlDcUtPRlJUZC1RbWE5dkN2NXhBQVhVeU41MW9rNndHYklDS3piSjVXcy1VQ2tWbGFhVUNVMFRWcl9lRTkyekxHdHBWdm1TRXpfZmJxcXZKSHB5SlBXYTRoQ2lDbkJoTmVRYUVMLTR0cnU3ek5GZC0teHluTElKcnpUNmJvWmlIZjRVTUI5bDRMemNKVnpsUG5Hb0EtaEVwdw?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "Union Minister Shripad Yesso Naik virtually addresses India Energy Transition Summit 2026 | Akashvani News - News On AIR",
+      "title_zh": "印度气候变化议题受到关注",
+      "summary_source": "Union Minister Shripad Yesso Naik virtually addresses India Energy Transition Summit 2026 | Akashvani News News On AIR",
+      "summary_zh": "",
+      "theme_zh": "气候变化",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T18:36:16+00:00",
+      "fetched_at": "2026-08-10T00:01:07.969584+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "2026"
+      ],
+      "places": [
+        {
+          "name_zh": "印度",
+          "lon": 78.0,
+          "lat": 22.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "8a4d7f04c22fad389ff5781cb1d1b0332935c4925469a2a249e3ede0c202957f",
+      "poster_phrase": "印度气候变化议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_3c4e8dad433b77f8",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "2026"
+        ],
+        "geo_atoms": [
+          "印度"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_53fd652c6aa28305",
+      "article_id": "article_53fd652c6aa28305",
+      "canonical_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 68,
+      "title_original": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy - Region Canberra",
+      "title_zh": "全球净零与减排措施受到关注",
+      "summary_source": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy Region Canberra",
+      "summary_zh": "",
+      "theme_zh": "净零转型",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T18:28:08+00:00",
+      "fetched_at": "2026-08-10T00:01:07.969584+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "30"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "67a10370ef2ae9439fe90d38f61469ae9fbd4471b7f6ae522e2095aa1a621f9e",
+      "poster_phrase": "全球净零与减排措施受到关注",
+      "quality": {
+        "passed": true,
+        "score": 51,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_53fd652c6aa28305",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "30"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_f1f56de3ce8a6f30",
+      "article_id": "article_f1f56de3ce8a6f30",
+      "canonical_url": "https://www.theguardian.com/world/2026/aug/09/canada-british-columbia-government-wildfires",
+      "source_url": "https://www.theguardian.com/world/2026/aug/09/canada-british-columbia-government-wildfires",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 92,
+      "title_original": "Canadian government steps in as ‘out of control’ wildfires force thousands to flee",
+      "title_zh": "加拿大野火风险议题受到关注",
+      "summary_source": "British Columbia battling 102 fires day and night across province, as breakneck speed hampers firefighters’ efforts Canada’s federal government has announced it will provide urgent assistance to British Columbia after an onslaught of unprecedented fast-moving wildfires forced about 22,000 people to flee their homes in frantic evacuations. A total of 102 wildfires were raging across the province on Sunday, of which nearly half were categorised as “out of control”, according to the BC Wildfire Service. Of those fires, 78 ignited during the past week. Continue reading...",
+      "summary_zh": "",
+      "theme_zh": "野火风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-09T18:20:25+00:00",
+      "fetched_at": "2026-08-09T23:59:31.181090+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "102",
+        "22,000",
+        "78"
+      ],
+      "places": [
+        {
+          "name_zh": "加拿大",
+          "lon": -106.0,
+          "lat": 56.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "b9e6abca41df6d680b4c6970a612804e8c348c32f1aa8eaf44767381237f80b8",
+      "poster_phrase": "加拿大野火风险议题受到关注",
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_f1f56de3ce8a6f30",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "102",
+          "22,000",
+          "78"
+        ],
+        "geo_atoms": [
+          "加拿大"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_38d40536a6f876cc",
+      "article_id": "article_38d40536a6f876cc",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPRUx2VWRNaWpxWXA0dDRuMUk2b2huZzFlWEtHOGx4ZVNvNVFTbm9nTDQyZzQxa2JzNS1jZ3htOGt1MEZVc0JQNkZoSEJFRHk4NXRsTWxLY3ltaGo4VEpyN1A0YU5NLWhsX0tlbjVNeWxTMWdUclRtckFpU2FQVVB5ZnpDalVpeTZTbnN3N1F2bE9ma0tiUjc5elplbW9SRW1IMThwMDlHbVJRUQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPRUx2VWRNaWpxWXA0dDRuMUk2b2huZzFlWEtHOGx4ZVNvNVFTbm9nTDQyZzQxa2JzNS1jZ3htOGt1MEZVc0JQNkZoSEJFRHk4NXRsTWxLY3ltaGo4VEpyN1A0YU5NLWhsX0tlbjVNeWxTMWdUclRtckFpU2FQVVB5ZnpDalVpeTZTbnN3N1F2bE9ma0tiUjc5elplbW9SRW1IMThwMDlHbVJRUQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Google News RSS Search",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "Renewable Energy Stocks To Keep An Eye On - August 9th - MarketBeat",
+      "title_zh": "全球推进可再生能源转型",
+      "summary_source": "Renewable Energy Stocks To Keep An Eye On - August 9th MarketBeat",
+      "summary_zh": "",
+      "theme_zh": "可再生能源",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "multilingual",
+      "published_at": "2026-08-09T18:07:33+00:00",
+      "fetched_at": "2026-08-10T00:01:07.969584+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "9"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "33d9c04fc8349dc3e25517d8c82ccb166ea470c3adf0fd28b14e599d003040d1",
+      "poster_phrase": "全球推进可再生能源转型",
+      "quality": {
+        "passed": true,
+        "score": 47,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_38d40536a6f876cc",
+        "source_atom": {
+          "name": "Google News RSS Search",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "9"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_1e4fe7fd2f9defb4",
+      "article_id": "article_1e4fe7fd2f9defb4",
+      "canonical_url": "https://www.theguardian.com/commentisfree/2026/aug/09/the-guardian-view-on-indias-green-growth-gamble-it-will-need-more-than-private-finance",
+      "source_url": "https://www.theguardian.com/commentisfree/2026/aug/09/the-guardian-view-on-indias-green-growth-gamble-it-will-need-more-than-private-finance",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 64,
+      "title_original": "The Guardian view on India’s green growth gamble: it will need more than private finance | Editorial",
+      "title_zh": "欧洲净零与减排措施受到关注",
+      "summary_source": "The world’s most populous country needs state-generated demand to industrialise, decarbonise and avoid China’s overcapacity trap India is attempting to do something the world has never seen before. So claimed Niti Aayog, the government of India’s policy thinktank, earlier this year. It said that no major economy has tried to expand GDP nearly eightfold within a generation while simultaneously redirecting its energy and industrial systems to reach net zero within two generations. Hence its detailed report ’s claim that there is “no historical precedent”. There is something to this. China industrialised at vast scale, but not on a sustainable net zero path. Korea, Japan and Europe became wealthy by industrialising before decarbonising. Today, rich nations have already satisfied the basic demands of their people and created the infrastructure and high per-capita energy use that India is still trying to build. The world’s most populous country has to do this while also reducing emissions. Continue reading...",
+      "summary_zh": "",
+      "theme_zh": "净零转型",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-09T16:25:19+00:00",
+      "fetched_at": "2026-08-09T23:59:31.181090+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        },
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        },
+        {
+          "name_zh": "印度",
+          "lon": 78.0,
+          "lat": 22.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "opinion_or_context",
+      "content_hash": "2ba98cc6ff04f4ecde3e31e5b2e3415f7c9ef12165f1a3ff9a0040a1ae2e435d",
+      "poster_phrase": "欧洲净零与减排措施受到关注",
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_1e4fe7fd2f9defb4",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "opinion_or_context",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "欧洲",
+          "中国",
+          "印度"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_1a7acf120ae2591d",
+      "article_id": "article_1a7acf120ae2591d",
+      "canonical_url": "https://www.theguardian.com/uk-news/2026/aug/09/these-are-human-fires-not-wildfires-dunwich-reflects-on-the-devastation",
+      "source_url": "https://www.theguardian.com/uk-news/2026/aug/09/these-are-human-fires-not-wildfires-dunwich-reflects-on-the-devastation",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 82,
+      "title_original": "‘These are human fires, not wildfires’: Dunwich reflects on the devastation",
+      "title_zh": "全球气候变化加剧高温风险",
+      "summary_source": "As residents, nature wardens and experts consider the damage to the heathland and how to restore it, the climate crisis is foremost in their minds A local community pulling together, emergency services saving homes and caravan parks from catastrophe, and farmers and nature reserve wardens working to rapidly create fire breaks to halt a marauding fireball 40 metres high – there was plenty to praise the week after a swathe of east Suffolk burned . But local people were also in tears at the blackened, ruined state of more than 112 hectares (277 acres) of Dunwich Heath, mourning the devastation of a much-loved nature reserve alongside neighbouring Minsmere. The rare birds that inhabit the reserve have lost crucial habitat, while the rare invertebrate species there will have been “decimated”, according to the reserve staff. Continue reading...",
+      "summary_zh": "",
+      "theme_zh": "高温风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-09T06:00:07+00:00",
+      "fetched_at": "2026-08-09T23:59:31.181090+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "40",
+        "112",
+        "277"
+      ],
+      "places": [],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "41a889ab32428a1d57925ac9c94d6252bf48e18c1e12b5c0f8772db4b055dace",
+      "poster_phrase": "全球气候变化加剧高温风险",
+      "quality": {
+        "passed": true,
+        "score": 74,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_1a7acf120ae2591d",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "40",
+          "112",
+          "277"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
     {
       "record_id": "article_e4debfed40c14da9",
       "article_id": "article_e4debfed40c14da9",
@@ -32,7 +760,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
       "published_at": "2026-08-09T02:00:09+00:00",
-      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
+      "fetched_at": "2026-08-10T00:01:07.969584+00:00",
       "topics": [
         "气候动态"
       ],
@@ -89,74 +817,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
-    },
-    {
-      "record_id": "article_53fd652c6aa28305",
-      "article_id": "article_53fd652c6aa28305",
-      "canonical_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNYTQ0cXhOaW1qMjBPLXRhald2Rkl3RlFuZE85ZXJwa2I4b0duQVc0LVBCdlBVcHFldzkxWU1ybjlPY0h1ZXI2cE5RdGZzaVJnWFpjYlVBLUdoaWZlRDIxV1NVYUlQcnlmWWh2UWQzWDBDUjZRMi15Ym9rcTJqWmFpNHJSNzhXQ042RXIyLUg2ejBfdWxUZW1BeUd0OFFRdG9iakdmeGpmUmZIRjNDQ3ItYjVjS0ZOeFBvMGVldVZ2T2ItZzQ2dTNWaG9qSnQ?oc=5",
-      "source_id": "API004",
-      "source_name": "Google News RSS Search",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
-      "relevance_score": 68,
-      "title_original": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy - region.com.au",
-      "title_zh": "全球净零与减排措施受到关注",
-      "summary_source": "Only six of ACT's 30 new climate actions directly cut emissions as government defends net zero strategy region.com.au",
-      "summary_zh": "",
-      "theme_zh": "净零转型",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "multilingual",
-      "published_at": "2026-08-09T01:53:27+00:00",
-      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [
-        "30"
-      ],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "a3c4a45d023222625345fc9bfc795e5dc807d9234d16c230ca8c4f66fd8c5eb1",
-      "poster_phrase": "全球净零与减排措施受到关注",
-      "quality": {
-        "passed": true,
-        "score": 51,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_53fd652c6aa28305",
-        "source_atom": {
-          "name": "Google News RSS Search",
-          "authority": 3,
-          "type": "搜索聚合Feed"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放"
-        ],
-        "number_atoms": [
-          "30"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
-      },
-      "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_44d5d86a48f8dd57",
@@ -175,8 +836,8 @@
       "theme_zh": "可再生能源",
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "multilingual",
-      "published_at": "2026-08-09T01:50:06+00:00",
-      "fetched_at": "2026-08-09T02:57:51.609510+00:00",
+      "published_at": "2026-08-09T01:50:53+00:00",
+      "fetched_at": "2026-08-10T00:01:07.969584+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -227,7 +888,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_4d6dc2331505e400",
@@ -247,7 +908,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-09T00:08:49+00:00",
-      "fetched_at": "2026-08-09T02:56:54.561383+00:00",
+      "fetched_at": "2026-08-09T23:59:31.450144+00:00",
       "topics": [
         "气候适应"
       ],
@@ -318,7 +979,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_5a1d7b5ffb109851",
@@ -393,7 +1054,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_3377295e8281ff9b",
@@ -466,7 +1127,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_1d43b34f574b63e5",
@@ -537,7 +1198,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_80dd2cb9f44ed86a",
@@ -614,7 +1275,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_ad5775a22e90a1b1",
@@ -689,7 +1350,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_ee21f8438bcc4c4e",
@@ -756,7 +1417,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_4801b1c402bda4e0",
@@ -819,7 +1480,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_94f5f09a5945de90",
@@ -839,7 +1500,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-08T19:21:14+00:00",
-      "fetched_at": "2026-08-09T02:56:54.033699+00:00",
+      "fetched_at": "2026-08-09T23:59:31.181090+00:00",
       "topics": [
         "气候适应"
       ],
@@ -902,7 +1563,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_d28eb01008fb72b8",
@@ -969,7 +1630,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:51:11.274881+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_d958709875e01853",
@@ -1036,7 +1697,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:54:49.045352+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_214d626287000dc6",
@@ -1099,7 +1760,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:54:49.045352+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_828c902456d4e03d",
@@ -1162,7 +1823,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_a1ec30afdfd2ec00",
@@ -1229,7 +1890,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_9dedfeba6f990fb2",
@@ -1292,7 +1953,94 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
+    },
+    {
+      "record_id": "article_e668adc24a564715",
+      "article_id": "article_e668adc24a564715",
+      "canonical_url": "https://www.theguardian.com/commentisfree/2026/aug/08/burning-summer-climate-denial-green-policies-sadiq-khan",
+      "source_url": "https://www.theguardian.com/commentisfree/2026/aug/08/burning-summer-climate-denial-green-policies-sadiq-khan",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 64,
+      "title_original": "This burning summer is the proof: the voices of climate denial aren’t just delusional, they’re deadly | Sadiq Khan",
+      "title_zh": "欧洲气候变化加剧高温风险",
+      "summary_source": "Look at our blazing forests and parched cities. Green policies aren’t a ‘luxury’, and we can’t burn more oil and gas. People need the truth Report: Sadiq Khan calls on Andy Burnham to commit to climate action as pressure grows over North Sea oil Europe is burning. This summer, an unprecedented series of heatwaves has swept through the continent and across many parts of the globe. The consequences have been nothing short of catastrophic. In recent weeks deadly blazes have torn through France, Greece and Spain, killing firefighters, forcing people from their homes and robbing them of their livelihoods. With Tuesday marking Britain’s 34th day of temperatures exceeding 30C (86F) this year, the UK has also found itself reckoning with ferocious heat. Wildfires have forced evacuations in Suffolk and the Cairngorms . In London – where parks have become burnt, brittle and brown – hundreds of grass fires have put our firefighters under pressure like never before. In July, the weather station at Kew Gardens recorded its first ever month without rain since it started operating in 1871. As rivers run dry and reservoirs run low, farmers are warning of food shortages amid the deepening drought. W",
+      "summary_zh": "",
+      "theme_zh": "高温风险",
+      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "language": "en",
+      "published_at": "2026-08-08T08:00:41+00:00",
+      "fetched_at": "2026-08-09T23:59:31.181090+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "34",
+        "30c",
+        "86",
+        "1871"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        },
+        {
+          "name_zh": "法国",
+          "lon": 2.0,
+          "lat": 46.0
+        }
+      ],
+      "translation_status": "metadata_compiled_needs_review",
+      "fact_status": "opinion_or_context",
+      "content_hash": "a07b5485fb3e529466f3045d349d1b128db82891a1b79bf42e54a0510ee03c06",
+      "poster_phrase": "欧洲气候变化加剧高温风险",
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_e668adc24a564715",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "opinion_or_context",
+          "translation_status": "metadata_compiled_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "34",
+          "30c",
+          "86",
+          "1871"
+        ],
+        "geo_atoms": [
+          "欧洲",
+          "法国"
+        ],
+        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+      },
+      "first_archived_at": "2026-08-10T00:01:09.092748+00:00",
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_2aa70e01926498a8",
@@ -1312,7 +2060,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-07T12:33:13+00:00",
-      "fetched_at": "2026-08-09T02:56:53.484617+00:00",
+      "fetched_at": "2026-08-09T23:59:30.789234+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1363,7 +2111,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_610ec69399d876d5",
@@ -1383,7 +2131,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-07T11:00:00+00:00",
-      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "fetched_at": "2026-08-09T23:59:29.672421+00:00",
       "topics": [
         "气候适应"
       ],
@@ -1434,7 +2182,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_3dab1f406516f1cb",
@@ -1454,7 +2202,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-06T21:53:00+00:00",
-      "fetched_at": "2026-08-09T02:56:53.747188+00:00",
+      "fetched_at": "2026-08-09T23:59:30.894456+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1505,7 +2253,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_27a63996a2080aa0",
@@ -1525,7 +2273,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-06T14:48:40+00:00",
-      "fetched_at": "2026-08-09T02:56:50.927484+00:00",
+      "fetched_at": "2026-08-09T23:59:27.049085+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1580,7 +2328,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_7309d66143eb7c17",
@@ -1600,7 +2348,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-06T11:00:00+00:00",
-      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "fetched_at": "2026-08-09T23:59:29.672421+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1647,7 +2395,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_b716998d7cc98677",
@@ -1667,7 +2415,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-06T11:00:00+00:00",
-      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "fetched_at": "2026-08-09T23:59:29.672421+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1718,7 +2466,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_d7d01dac97ec19f1",
@@ -1738,7 +2486,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-06T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
+      "fetched_at": "2026-08-09T23:59:28.907333+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -1789,7 +2537,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_72e2f8902d910a7d",
@@ -1809,7 +2557,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-05T11:00:00+00:00",
-      "fetched_at": "2026-08-09T02:56:53.041006+00:00",
+      "fetched_at": "2026-08-09T23:59:29.672421+00:00",
       "topics": [
         "气候适应"
       ],
@@ -1868,7 +2616,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-09T02:57:52.638908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_c9a6956b6ba6facb",
@@ -1888,7 +2636,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-05T07:40:58+00:00",
-      "fetched_at": "2026-08-09T02:56:55.540359+00:00",
+      "fetched_at": "2026-08-09T23:59:32.229423+00:00",
       "topics": [
         "气候动态"
       ],
@@ -1939,7 +2687,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_ff78f0fb97528ea2",
@@ -1959,7 +2707,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-05T06:21:14+00:00",
-      "fetched_at": "2026-08-09T02:56:54.561383+00:00",
+      "fetched_at": "2026-08-09T23:59:31.450144+00:00",
       "topics": [
         "气候适应"
       ],
@@ -2010,7 +2758,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-05T08:20:11.102908+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_af955c07f3bc3be1",
@@ -3068,7 +3816,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T04:24:40+00:00",
-      "fetched_at": "2026-08-09T02:56:52.923320+00:00",
+      "fetched_at": "2026-08-09T23:59:29.103476+00:00",
       "topics": [
         "气候适应"
       ],
@@ -3111,7 +3859,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-05T00:56:44.461421+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_d78fb1ce220cf059",
@@ -3354,7 +4102,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-04T02:00:36+00:00",
-      "fetched_at": "2026-08-09T02:56:52.923320+00:00",
+      "fetched_at": "2026-08-09T23:59:29.103476+00:00",
       "topics": [
         "国际碳市场"
       ],
@@ -3401,7 +4149,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-04T02:57:35.322175+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_84d54f97fc760284",
@@ -3762,7 +4510,7 @@
       "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
       "language": "en",
       "published_at": "2026-08-03T17:15:27+00:00",
-      "fetched_at": "2026-08-09T02:56:53.484617+00:00",
+      "fetched_at": "2026-08-09T23:59:30.789234+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -3813,7 +4561,7 @@
         "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
       },
       "first_archived_at": "2026-08-04T01:02:11.947084+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_a86068009a53a8cf",
@@ -8710,7 +9458,7 @@
       "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
       "language": "en",
       "published_at": "2026-07-28T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "极端天气",
         "气候适应"
@@ -8773,7 +9521,7 @@
         "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_be2d7f67b6b1bbc3",
@@ -9245,7 +9993,7 @@
       "why_zh": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。",
       "language": "en",
       "published_at": "2026-07-26T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -9308,7 +10056,7 @@
         "decision_atom": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_32a028df4d103aba",
@@ -10437,7 +11185,7 @@
       "why_zh": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。",
       "language": "en",
       "published_at": "2026-07-24T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "能源与排放",
         "清洁能源"
@@ -10500,7 +11248,7 @@
         "decision_atom": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_6c67b4eafaf74973",
@@ -11104,7 +11852,7 @@
       "why_zh": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。",
       "language": "zh",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "能源与排放",
         "国家气候承诺"
@@ -11169,7 +11917,7 @@
         "decision_atom": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "curated_4550f4e28217628b",
@@ -11189,7 +11937,7 @@
       "why_zh": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "能源与排放",
         "产业转型"
@@ -11248,7 +11996,7 @@
         "decision_atom": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "curated_7c6b8d0a74561df8",
@@ -11268,7 +12016,7 @@
       "why_zh": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "能源与排放",
         "交通转型"
@@ -11325,7 +12073,7 @@
         "decision_atom": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_e0247ad0502dc99c",
@@ -13479,7 +14227,7 @@
         "decision_atom": "连续灾害暴露出洪水风险管理、预警和基础设施适应能力问题，但单次事件与气候变化的关系仍需归因研究支持。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_76f4e61f3d6cd7a4",
@@ -13550,7 +14298,7 @@
         "decision_atom": "高温正在从天气议题转化为公共卫生和基础设施韧性议题，适应政策需要进入医院运行、城市规划和脆弱人群保护。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_29e088b267592809",
@@ -13570,7 +14318,7 @@
       "why_zh": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。",
       "language": "en",
       "published_at": "2026-07-16T09:52:53+00:00",
-      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
+      "fetched_at": "2026-08-09T23:59:28.907333+00:00",
       "topics": [
         "气候动态"
       ],
@@ -13621,7 +14369,7 @@
         "decision_atom": "电气化能否兼顾发展权、能源可及性和本地增值，将影响全球南方对公正转型议程的接受度。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_5c1108a8cf5f1ab7",
@@ -13761,7 +14509,7 @@
         "decision_atom": "事件同时指向适应缺口、损失与损害以及早期预警能力，可能强化发展中国家对资金与技术支持的诉求。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_1349a508fd370638",
@@ -13838,7 +14586,7 @@
         "decision_atom": "资金撤回可能影响森林保护、当地社区生计和发达国家资金承诺的可信度，需继续核对项目清单与官方解释。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_25dca4c9c2c8f5e0",
@@ -13927,7 +14675,7 @@
         "decision_atom": "三项动态共同反映气候、生态保护与发展资金之间的政策张力，适合作为跨议题背景阅读。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_564ab2b4e2f26c1f",
@@ -13947,7 +14695,7 @@
       "why_zh": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。",
       "language": "en",
       "published_at": "2026-07-15T10:51:19+00:00",
-      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
+      "fetched_at": "2026-08-09T23:59:28.907333+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -14002,7 +14750,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -14022,7 +14770,7 @@
       "why_zh": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。",
       "language": "en",
       "published_at": "2026-07-15T06:05:51+00:00",
-      "fetched_at": "2026-08-09T02:56:55.540359+00:00",
+      "fetched_at": "2026-08-09T23:59:32.229423+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -14077,7 +14825,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
@@ -14166,7 +14914,7 @@
       "why_zh": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。",
       "language": "en",
       "published_at": "2026-07-14T18:02:01+00:00",
-      "fetched_at": "2026-08-09T02:56:52.640647+00:00",
+      "fetched_at": "2026-08-09T23:59:28.907333+00:00",
       "topics": [
         "气候动态"
       ],
@@ -14217,7 +14965,7 @@
         "decision_atom": "争议关系到深海采矿规则、国际机构权威以及关键矿产需求与海洋生态保护之间的平衡。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "article_a02797620e6f6e19",
@@ -14288,7 +15036,7 @@
         "decision_atom": "这是观点性内容，主要用于观察英国国内气候政策的政治阻力，不应作为事实报道直接引用。"
       },
       "first_archived_at": "2026-07-29T03:10:23.645201+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "curated_94ab11482ec24494",
@@ -14308,7 +15056,7 @@
       "why_zh": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。",
       "language": "zh",
       "published_at": "2026-07-13T16:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "国家气候承诺",
         "能源与排放"
@@ -14371,7 +15119,7 @@
         "decision_atom": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     },
     {
       "record_id": "curated_cf238b7caf84c933",
@@ -14391,7 +15139,7 @@
       "why_zh": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。",
       "language": "zh",
       "published_at": "2026-02-08T16:00:00+00:00",
-      "fetched_at": "2026-08-09T02:57:53.428575+00:00",
+      "fetched_at": "2026-08-10T00:01:09.856126+00:00",
       "topics": [
         "碳市场",
         "履约与透明度"
@@ -14452,7 +15200,7 @@
         "decision_atom": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-08-09T02:57:53.536329+00:00"
+      "last_archived_at": "2026-08-10T00:01:09.965945+00:00"
     }
   ]
 }
