@@ -10,7 +10,9 @@
 - 双模式入口：右上角可在“气候情报”和“能源技术”之间切换。能源技术模式使用同一页面结构，但加载 `energy_dashboard.json`、`energy_archive.json` 和 `energy_corpus_analytics.json`，聚焦能源转型、能源技术趋势、数字能源、储能、电网、风光氢等记录。
 - 气候情报问答：浏览器内执行“问题规划—证据检索—比较/时间线—引用”流程，支持中美等国家比较、政策含义和连续追问；不需要 API 密钥，也不会用档案外知识补写当日事实。
 - ClimateText-100000 文本数据库：支持关键词与议题检索；按规范 URL 去重后最多保留 100000 条。
-- 今日 PDF 简报：与页面和问答中的“今日简报”使用同一批最新日记录；中文使用宋体兼容字体，英文与数字使用 Times Roman（Times New Roman 兼容度量），避免拉宽。
+- 今日 PDF 简报：与页面和问答中的“今日简报”使用同一批最新日记录；每条包括中文标题和一段实质性概括，原文链接统一置于文末。中文使用宋体兼容字体，英文与数字使用 Times Roman（Times New Roman 兼容度量），避免拉宽。
+- 周报订阅：每周自动汇总最近 7 天每日简报，提炼高频议题、重点地区和推荐阅读；订阅按钮默认使用公开联系邮箱发起人工订阅请求，若配置订阅接口则改为接口提交。
+- 曲线监测：全球气候现场上方展示近 3 个月文本档案累计曲线和网站访问累计曲线。访问曲线基于 GitHub Traffic API 可获得的访问量增量累计，适合观察趋势，不等同于严格独立访客审计。
 
 网页不展示 Agent 流水线、P0 接入状态、新闻元数据、相关度分数、A/B 审核等级、内部质量方法等后台信息；这些字段仍保留在数据库中，供审计和编辑使用。
 
@@ -46,7 +48,7 @@
 
 公开演示：<https://generationzprogrammer.github.io/climate-agent-news/>
 
-仓库包含完整采集代码与 `.github/workflows/pages.yml`。推送到 `main` 会部署；定时任务每天北京时间 07:30 增量抓取、编译、合并档案并重新发布。
+仓库包含完整采集代码与 `.github/workflows/pages.yml`。推送到 `main` 会部署；定时任务每天北京时间 06:30 增量抓取、编译、合并档案并重新发布；每周一北京时间 08:00 生成并发送周报。
 
 1. 在 GitHub 新建仓库，把本目录作为仓库根目录推送到 `main`。
 2. 打开仓库 `Settings → Pages`，将 Source 设为 **GitHub Actions**。
@@ -61,18 +63,18 @@ CLIMATE_MODEL_API_KEY
 CLIMATE_MODEL_NAME
 ```
 
-密钥只保存在 GitHub Secrets 中，不要写入代码或提交到仓库。仓库配置为每天 `23:30 UTC`，即北京时间次日 07:30。内部仍保存审核状态用于发布门禁，但不在公开网站展示等级。正式决策使用前仍应核对原文。
+密钥只保存在 GitHub Secrets 中，不要写入代码或提交到仓库。仓库配置为每天 `22:30 UTC`，即北京时间次日 06:30；周报配置为每周一 `00:00 UTC`，即北京时间 08:00。内部仍保存审核状态用于发布门禁，但不在公开网站展示等级。正式决策使用前仍应核对原文。
 
 ## 每日更新与 100000 条档案
 
 1. P0 RSS/API 各自限时、有限重试；单源失败不阻塞其他来源。连续失败 3 次进入观察，7 次进入隔离；隔离来源每 7 天自动复测，恢复后自动启用。
 2. 新文章执行 URL 规范化、未来时间剔除、主题与相关性评分。
-3. GitHub Models 将最近新记录编译为中文结构化字段；失败记录不会公开。
+3. GitHub Models 将最近新记录编译为中文结构化字段；若模型输出缺失或出现套话，系统使用来源、标题、地点、数字和议题自动生成保守中文段落，避免第二天定时更新后只剩标题和标签。
 4. 只有中文标题、中文概要、来源、发布时间和 HTTPS 原文全部存在，且权威度与相关性达标的记录才进入公开数据集。
 5. `data/news_archive.json` 按 canonical URL 合并，保留内容哈希与首次/最近归档时间，按发布时间排序并裁剪为最多 100000 条。
 6. 质量门禁通过后才部署 Pages；失败时网站保持上一成功版本。
 7. 合格档案和 `data/source_health.json` 由工作流机器人提交回仓库，使下一次定时运行能够增量合并并判断来源健康状态。
-8. 公开首页和 PDF 优先采用最新北京时间自然日，目标展示约 10 条；当日合格记录不足但已有多个可靠来源和明确地点时，系统会用近 7 天高质量记录补足，并在 `daily_backfilled` 中记录补足条数。地图“本周”仍取最近 7 日窗口。
+8. 公开首页和 PDF 优先采用最新北京时间自然日，目标展示约 10 条；当日合格记录不足但已有多个可靠来源和明确地点时，系统会用近 7 天高质量记录补足，并在 `daily_backfilled` 中记录补足条数。地图“本周”仍取最近 7 日窗口；位置识别会优先从标题、摘要和国家标签中抽取一个主地点，无法合理归类时才保留为“全球”。
 9. 2026-07-29 的来源扩展在代码推送时把中文编译上限临时提高到 40 条，完成一次美国、中国及其他地区的七日补录；后续定时任务恢复每日 20 条，canonical URL 去重保证不会重复灌库。
 
 本次地域修复另含 8 条人工逐页核验的中美基准记录（中美各 4 条），文件为 `data/one_time_regional_intelligence.json`。其中本周样本覆盖中国可再生能源规划、零碳工厂，以及美国野火、光储项目、海上风电和车网互动；导入器校验来源域名、发布日期和 HTTPS 链接，并以 `human_reviewed` 标记。它只用于这次补录，之后的常规 RSS/API 日更与 100000 条去重上限不变。
@@ -95,7 +97,9 @@ CLIMATE_MODEL_NAME
 .\run.ps1 deliver --channel wecom --public-url https://你的域名/
 ```
 
-邮件兜底使用 `CLIMATE_SMTP_*` 和逗号分隔的 `CLIMATE_MAIL_TO`。`--channel auto` 会发送到已配置的渠道；没有配置渠道时安全跳过。GitHub Pages 工作流会在每天 07:30 完成同步、中文质量门禁和部署后，再自动运行这一步。手动运行工作流时，需要勾选“发送企业微信/邮件提醒”。
+邮件兜底使用 `CLIMATE_SMTP_*` 和逗号分隔的 `CLIMATE_MAIL_TO`。`--channel auto` 会发送到已配置的渠道；没有配置渠道时安全跳过。GitHub Pages 工作流会在每天 06:30 完成同步、中文质量门禁和部署后，再自动运行这一步。手动运行工作流时，需要勾选“发送企业微信/邮件提醒”。
+
+每周订阅发送使用 `CLIMATE_WEEKLY_SUBSCRIBERS`，以逗号分隔收件人。网页“订阅”按钮不会在静态站点中保存邮箱；默认打开邮件请求，管理员确认后把地址加入 GitHub Secrets。若后续接入表单服务，可设置 `CLIMATE_SUBSCRIBE_ENDPOINT` 与 `CLIMATE_UNSUBSCRIBE_ENDPOINT`。
 
 GitHub Secrets 可配置：
 
@@ -105,9 +109,13 @@ CLIMATE_MAIL_TO
 CLIMATE_SMTP_HOST
 CLIMATE_SMTP_PORT
 CLIMATE_SMTP_SECURITY       # starttls 或 ssl
-CLIMATE_SMTP_USERNAME
-CLIMATE_SMTP_PASSWORD
-CLIMATE_SMTP_SENDER
+  CLIMATE_SMTP_USERNAME
+  CLIMATE_SMTP_PASSWORD
+  CLIMATE_SMTP_SENDER
+  CLIMATE_WEEKLY_SUBSCRIBERS
+  CLIMATE_SUBSCRIBE_ENDPOINT
+  CLIMATE_UNSUBSCRIBE_ENDPOINT
+  CLIMATE_PUBLIC_CONTACT_EMAIL
 ```
 
 Webhook 和邮箱密码属于密钥，不应写进 `.env.example` 的真实值或提交到仓库。首次应只向 5—15 人的内部试点群发送，连续观察两周的打开率、退订意见、误报和重复事件，再扩大范围。

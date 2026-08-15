@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>ClimateText Lab｜国际气候情报与文本数据库</title>
-  <link rel="stylesheet" href="./styles.css?v=20260729-1">
+  <link rel="stylesheet" href="./styles.css?v=20260815-1">
 </head>
 <body>
   <header class="topbar">
@@ -22,10 +22,24 @@
       <a href="#database">文本数据库</a>
     </nav>
     <button class="mode-toggle" id="modeToggle" type="button">切换到能源技术</button>
-    <a class="data-download" id="briefDownload" href="./data/daily_brief.pdf" download>下载今日简报</a>
+    <div class="brief-actions">
+      <a class="data-download" id="briefDownload" href="./data/daily_brief.pdf" download>下载今日简报</a>
+      <button class="subscribe-button" id="subscribeOpen" type="button">订阅</button>
+    </div>
   </header>
 
   <main id="top">
+    <section class="metrics-strip" aria-label="站点更新曲线">
+      <article class="mini-chart-card">
+        <div><span>TEXT ARCHIVE</span><h2>过去3个月累计气候文本档案</h2></div>
+        <div class="mini-chart" id="archiveGrowthChart"><div class="skeleton small"></div></div>
+      </article>
+      <article class="mini-chart-card">
+        <div><span>SITE TRAFFIC</span><h2>过去3个月累计访客/访问量</h2></div>
+        <div class="mini-chart" id="visitorGrowthChart"><div class="skeleton small"></div></div>
+      </article>
+    </section>
+
     <section class="section map-section map-section-lead" id="map">
       <div class="section-heading">
         <div><p class="overline" id="mapOverline">GLOBAL CLIMATE SITUATION</p><h1 id="mapTitle">全球气候现场</h1></div>
@@ -56,7 +70,7 @@
         <p class="hero-lede" id="heroLede">从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。</p>
         <div class="update-line">
           <span class="live-dot" aria-hidden="true"></span>
-          <b>每日 07:30 自动更新</b>
+          <b>每日 06:30 自动更新</b>
           <span id="generatedAt">正在读取数据版本…</span>
         </div>
       </div>
@@ -149,7 +163,7 @@
     <section class="section database-section" id="database">
       <div class="section-heading">
         <div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 id="databaseTitle">气候新闻文本数据库</h2></div>
-        <p>滚动保存最多 100000 条中文气候新闻记录，可按关键词、议题或地域检索并回到原始来源。</p>
+        <p>滚动保存最多 100000 条中文气候新闻记录，可按关键词、议题或地域检索并回到原始来源。<button class="team-link" id="teamOpen" type="button">团队信息</button></p>
       </div>
       <div class="search-panel">
         <label class="search-box">
@@ -171,7 +185,26 @@
     <div><b>ClimateText Lab</b><span>国际气候情报与高质量中文文本数据库</span></div>
     <div><a href="./data/daily_brief.pdf">下载今日简报</a><a href="./data/global_climate_analysis_report_latest.html">全球气候分析报告</a><a href="./data/news_archive.json">开放数据</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
   </footer>
+  <dialog class="modal" id="subscribeModal">
+    <form method="dialog" class="modal-card" id="subscribeForm">
+      <button class="modal-close" value="cancel" aria-label="关闭">×</button>
+      <p class="overline">WEEKLY BRIEFING</p>
+      <h2>订阅每周气候情报周报</h2>
+      <p>请输入邮箱。若站点已配置安全订阅端点，系统会提交订阅请求；若未配置，将自动生成一封订阅申请邮件。邮箱列表不会写入公开源码或 Git 历史。</p>
+      <label><span>邮箱</span><input id="subscribeEmail" type="email" required placeholder="name@example.com" autocomplete="email"></label>
+      <div class="modal-actions"><button type="submit">提交订阅</button><a href="./data/weekly_report.pdf" download>下载本周周报</a></div>
+      <small id="subscribeHint">订阅后每周一北京时间自动发送周报；退订可回复“退订气候周报”。</small>
+    </form>
+  </dialog>
+  <dialog class="modal" id="teamModal">
+    <div class="modal-card team-modal-card">
+      <button class="modal-close" id="teamClose" type="button" aria-label="关闭">×</button>
+      <p class="overline">TEAM</p>
+      <h2>团队信息</h2>
+      <div class="team-list" id="teamList">正在读取团队信息…</div>
+    </div>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260729-1" defer></script>
+  <script src="./app.js?v=20260815-1" defer></script>
 </body>
 </html>

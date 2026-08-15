@@ -46,28 +46,65 @@ def _brief_lines(payload: dict) -> list[tuple[str, int, int]]:
     lines: list[tuple[str, int, int]] = [
         ("国际气候情报今日简报", 22, 30),
         (f"发布日期：{meta.get('date', '时间待核')}（北京时间）", 11, 20),
-        ("优先采用最新北京时间自然日；当天不足时以近 7 天高质量记录补足约 10 条。重要数字与立场请回到原文复核。", 10, 28),
+        ("面向政策研究与会前阅读；每条情报保留标题与一段事实性概括，原文链接统一列于文末。", 10, 28),
     ]
+    links: list[tuple[str, str]] = []
     for index, item in enumerate(payload.get("intelligence", []), 1):
         theme = item.get("theme_zh") or "气候动态"
         title = item.get("title_zh") or item.get("title_original") or "未命名情报"
         summary = item.get("summary_zh") or "概要待补充。"
         source = item.get("source_name") or "来源待核"
         published = item.get("published_at") or "时间待核"
-        why = item.get("why_zh") or "请结合原文判断其政策含义。"
         url = item.get("canonical_url") or ""
         lines.append((f"{index:02d}  [{theme}] {title}", 14, 18))
         lines.extend((part, 10, 14) for part in _wrap_text(summary, 48))
         lines.extend((part, 9, 13) for part in _wrap_text(f"来源：{source}｜{published}", 64))
-        lines.extend((part, 9, 13) for part in _wrap_text(f"关注理由：{why}", 60))
         if url:
-            lines.extend((part, 8, 12) for part in _wrap_text(f"原文：{url}", 78))
+            links.append((title, url))
         lines.append(("", 8, 10))
     if not payload.get("intelligence"):
         lines.append(("今日暂无通过质量门槛的新情报。", 12, 20))
+    if links:
+        lines.extend([("原文链接", 13, 20)])
+        for index, (title, url) in enumerate(links, 1):
+            lines.extend((part, 8, 11) for part in _wrap_text(f"{index}. {title}：{url}", 88))
     lines.extend([
         ("数据边界", 13, 18),
         ("新闻标题与中文摘要不等于独立事实核验；涉及数字、承诺和立场时，请通过原文链接复核。", 9, 13),
+    ])
+    return lines
+
+
+def _weekly_lines(report: dict) -> list[tuple[str, int, int]]:
+    meta = report.get("meta", {})
+    lines: list[tuple[str, int, int]] = [
+        (meta.get("title") or "国际气候情报周报", 21, 30),
+        (f"周期：{meta.get('start_date', '待核')} 至 {meta.get('end_date', '待核')}（北京时间）", 11, 20),
+        (f"本周纳入 {meta.get('total', 0)} 条通过质量门禁的公开新闻记录；周报为自动生成，适合会前浏览和选题跟踪。", 10, 28),
+        ("一周观察", 14, 22),
+    ]
+    for observation in report.get("observations", []):
+        lines.extend((part, 10, 14) for part in _wrap_text(f"• {observation}", 54))
+    lines.append(("", 8, 10))
+    links: list[tuple[str, str]] = []
+    for index, item in enumerate(report.get("highlights", []), 1):
+        title = item.get("title_zh") or item.get("title_original") or "未命名情报"
+        summary = item.get("summary_zh") or "概要待补充。"
+        source = item.get("source_name") or "来源待核"
+        theme = item.get("theme_zh") or "气候动态"
+        lines.append((f"{index:02d}  [{theme}] {title}", 13, 18))
+        lines.extend((part, 10, 14) for part in _wrap_text(summary, 50))
+        lines.extend((part, 9, 13) for part in _wrap_text(f"来源：{source}｜{item.get('published_at') or '时间待核'}", 64))
+        if item.get("canonical_url"):
+            links.append((title, item["canonical_url"]))
+        lines.append(("", 8, 10))
+    if links:
+        lines.append(("原文链接", 13, 20))
+        for index, (title, url) in enumerate(links, 1):
+            lines.extend((part, 8, 11) for part in _wrap_text(f"{index}. {title}：{url}", 88))
+    lines.extend([
+        ("退订说明", 13, 18),
+        ("如通过邮件收到本周报，可回复邮件标题“退订气候周报”；管理员应在下一次发送前从订阅列表中移除该邮箱。", 9, 13),
     ])
     return lines
 
@@ -91,10 +128,18 @@ def _page_stream(lines: list[tuple[str, int, int]]) -> bytes:
 
 def write_daily_brief_pdf(payload: dict, path: Path) -> Path:
     """Write a dependency-free, searchable Chinese PDF using a standard CJK font."""
+    return _write_pdf(_brief_lines(payload), path)
+
+
+def write_weekly_report_pdf(report: dict, path: Path) -> Path:
+    return _write_pdf(_weekly_lines(report), path)
+
+
+def _write_pdf(lines: list[tuple[str, int, int]], path: Path) -> Path:
     pages: list[list[tuple[str, int, int]]] = []
     page: list[tuple[str, int, int]] = []
     used = 0
-    for line in _brief_lines(payload):
+    for line in lines:
         height = line[2]
         if page and used + height > 720:
             pages.append(page)

@@ -10,6 +10,7 @@ GENERIC_SUMMARY_MARKERS = (
     "具体数字、责任主体和政策含义仍需回到原文核验",
     "这条情报聚焦",
     "需要重点关注其对政策执行、谈判表述或风险研判的影响",
+    "概要待补充",
 )
 
 GENERIC_TITLE_MARKERS = (
@@ -99,6 +100,7 @@ def infer_focus(text: str, theme_zh: str) -> str:
 def factual_fallback_summary(record: dict) -> str:
     title_zh = str(record.get("title_zh") or "该条情报").strip()
     theme_zh = str(record.get("theme_zh") or record.get("theme") or "气候动态").strip()
+    source_name = str(record.get("source_name") or record.get("source_domain") or "来源").strip()
     source_text = " ".join(str(record.get(key) or "") for key in ("title_original", "summary_source", "source_name", "source_domain"))
     places = record.get("places") or []
     place_names = []
@@ -111,6 +113,11 @@ def factual_fallback_summary(record: dict) -> str:
             place_names.append(str(name))
     place_part = f"涉及{ '、'.join(place_names[:2]) }，" if place_names else ""
     numbers = extract_numbers(source_text)
-    number_part = f"原文出现{ '、'.join(numbers) }等量化信息，" if numbers else ""
-    focus = infer_focus(source_text, theme_zh)
-    return f"{place_part}这条情报聚焦{focus}。{number_part}需要重点关注其对政策执行、谈判表述或风险研判的影响。".replace("。。", "。")[:220]
+    number_part = f"报道中出现{ '、'.join(numbers) }等量化信息，" if numbers else ""
+    if title_zh.endswith(("。", "！", "？")):
+        title_sentence = title_zh
+    else:
+        title_sentence = f"{title_zh}。"
+    theme_part = f"主题上属于{theme_zh}。"
+    caveat = "该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。"
+    return f"{source_name}消息显示，{place_part}{title_sentence}{number_part}{theme_part}{caveat}".replace("。。", "。")[:220]

@@ -9,7 +9,8 @@ from datetime import UTC, date, datetime, timedelta, timezone
 
 from .db import Database
 from .pipeline import decode_event, module_manifest
-from .summary_utils import intelligence_keywords, is_generic_summary, is_generic_title
+from .summary_utils import factual_fallback_summary, intelligence_keywords, is_generic_summary, is_generic_title
+from .translation import detect_places
 
 
 TOPIC_ZH_ALIASES = {
@@ -23,6 +24,32 @@ TOPIC_ZH_ALIASES = {
 }
 
 BEIJING_TZ = timezone(timedelta(hours=8))
+
+COUNTRY_PLACE_MAP = {
+    "中国": {"name_zh": "中国", "lon": 105.0, "lat": 35.0},
+    "美国": {"name_zh": "美国", "lon": -100.0, "lat": 39.0},
+    "欧盟": {"name_zh": "欧盟", "lon": 10.0, "lat": 51.0},
+    "欧洲": {"name_zh": "欧洲", "lon": 10.0, "lat": 51.0},
+    "英国": {"name_zh": "英国", "lon": -2.0, "lat": 54.0},
+    "法国": {"name_zh": "法国", "lon": 2.0, "lat": 46.0},
+    "德国": {"name_zh": "德国", "lon": 10.0, "lat": 51.0},
+    "印度": {"name_zh": "印度", "lon": 78.0, "lat": 22.0},
+    "非洲": {"name_zh": "非洲", "lon": 22.0, "lat": 2.0},
+    "巴西": {"name_zh": "巴西", "lon": -52.0, "lat": -10.0},
+    "加拿大": {"name_zh": "加拿大", "lon": -106.0, "lat": 56.0},
+    "澳大利亚": {"name_zh": "澳大利亚", "lon": 134.0, "lat": -25.0},
+    "新西兰": {"name_zh": "新西兰", "lon": 174.0, "lat": -41.0},
+    "日本": {"name_zh": "日本", "lon": 138.0, "lat": 37.0},
+    "韩国": {"name_zh": "韩国", "lon": 128.0, "lat": 36.0},
+    "印度尼西亚": {"name_zh": "印度尼西亚", "lon": 118.0, "lat": -2.0},
+    "马来西亚": {"name_zh": "马来西亚", "lon": 102.0, "lat": 4.0},
+    "菲律宾": {"name_zh": "菲律宾", "lon": 122.0, "lat": 13.0},
+    "土耳其": {"name_zh": "土耳其", "lon": 35.0, "lat": 39.0},
+    "墨西哥": {"name_zh": "墨西哥", "lon": -102.0, "lat": 23.0},
+    "加勒比地区": {"name_zh": "加勒比地区", "lon": -75.0, "lat": 18.0},
+    "拉丁美洲": {"name_zh": "拉丁美洲", "lon": -66.0, "lat": -15.0},
+    "南极洲": {"name_zh": "南极洲", "lon": 0.0, "lat": -78.0},
+}
 
 
 def _decode_json(value: str | None, fallback):
@@ -83,6 +110,37 @@ def _continent(item: dict) -> str:
 
 def _source_key(item: dict) -> str:
     return item.get("source_name") or item.get("source_id") or "未知来源"
+
+
+def _ensure_summary(item: dict) -> dict:
+    if not item.get("summary_zh") or is_generic_summary(item.get("summary_zh")):
+        item["summary_zh"] = factual_fallback_summary(item)
+    return item
+
+
+def _ensure_places(item: dict) -> dict:
+    places = [
+        place for place in (item.get("places") or [])
+        if isinstance(place, dict) and all(key in place for key in ("name_zh", "lon", "lat"))
+        and str(place.get("name_zh") or "") not in {"全球", "全球/未标注", "未标注"}
+    ]
+    if not places:
+        text = " ".join(str(item.get(key) or "") for key in (
+            "title_zh", "title_original", "summary_zh", "summary_source", "source_name", "source_domain",
+        ))
+        places = detect_places(text)
+    if not places:
+        for country in item.get("country_tags") or []:
+            mapped = COUNTRY_PLACE_MAP.get(str(country))
+            if mapped:
+                places = [dict(mapped)]
+                break
+    item["places"] = places[:1]
+    return item
+
+
+def _prepare_public_item(item: dict) -> dict:
+    return _ensure_places(_ensure_summary(item))
 
 
 def _title_units(item: dict) -> set[str]:
@@ -288,6 +346,7 @@ def _publishable_candidates(db: Database) -> list[dict]:
         row["translation_status"] = metadata.get("translation_status", "pending")
         row["fact_status"] = metadata.get("fact_status", "source_claim_unverified")
         row["published_at"] = row.pop("published_at_utc")
+        _prepare_public_item(row)
         signal = f"{row['title_original']} {row['canonical_url']}".lower()
         decision_score = int(row["relevance_score"])
         if row["source_id"] in {"OFF001", "OFF006"}:
@@ -315,10 +374,8 @@ def _publishable_candidates(db: Database) -> list[dict]:
         item for item in items
         if item.get("title_zh")
         and not is_generic_title(item.get("title_zh"))
-        and (
-            (item.get("summary_zh") and not is_generic_summary(item.get("summary_zh")))
-            or len(intelligence_keywords(item)) >= 2
-        )
+        and item.get("summary_zh")
+        and not is_generic_summary(item.get("summary_zh"))
     ]
     recent = sorted(publishable, key=lambda item: item.get("published_at") or "", reverse=True)
     merged: list[dict] = []
@@ -371,6 +428,7 @@ def _official_data(db: Database) -> dict:
 def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
     events: list[dict] = []
     for item in items:
+        _prepare_public_item(item)
         place = next(
             (place for place in item.get("places", []) if all(key in place for key in ("name_zh", "lon", "lat"))),
             None,
@@ -397,15 +455,16 @@ def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
 
 def apply_archive_windows(payload: dict, archive: dict) -> dict:
     """Make the public windows derive from the cumulative, quality-gated archive."""
-    records = [
-        record for record in (archive.get("records") or [])
-        if record.get("title_zh")
-        and not is_generic_title(record.get("title_zh"))
-        and (
-            (record.get("summary_zh") and not is_generic_summary(record.get("summary_zh")))
-            or len(intelligence_keywords(record)) >= 2
-        )
-    ]
+    records = []
+    for record in archive.get("records") or []:
+        prepared = _prepare_public_item(dict(record))
+        if (
+            prepared.get("title_zh")
+            and not is_generic_title(prepared.get("title_zh"))
+            and prepared.get("summary_zh")
+            and not is_generic_summary(prepared.get("summary_zh"))
+        ):
+            records.append(prepared)
     today_items = select_daily_window(records, limit=10)
     week_items = select_latest_week(records, limit=60)
     if not today_items:
@@ -544,7 +603,7 @@ def render_markdown(payload: dict) -> str:
     ]
     for index, item in enumerate(payload.get("intelligence", []), 1):
         title = item.get("title_zh") or item["title_original"]
-        summary = item.get("summary_zh") or "来源仅提供标题，概要待人工补充。"
+        summary = item.get("summary_zh") or factual_fallback_summary(item)
         theme = item.get("theme_zh") or "气候动态"
         lines.extend([
             f"### {index}. [{theme}] {title}", "",
@@ -561,6 +620,72 @@ def render_markdown(payload: dict) -> str:
                 f"- 事实：{event['fact']}", f"- 系统研判：{event['assessment']}", "",
             ])
     lines.extend(["## 数据边界", "", "新闻标题与中文概要不等于已独立核实的事实；涉及数字、承诺和立场时，请通过原文链接回到原始文件复核。", ""])
+    return "\n".join(lines)
+
+
+def weekly_report_payload(archive: dict) -> dict:
+    records = [
+        _prepare_public_item(dict(record)) for record in (archive.get("records") or [])
+        if record.get("title_zh") and not is_generic_title(record.get("title_zh"))
+    ]
+    week_items = select_latest_week(records, limit=70)
+    latest_day = max((_published_day(item.get("published_at")) for item in week_items), default=datetime.now(BEIJING_TZ).date())
+    start_day = latest_day - timedelta(days=6)
+    topic_counts = Counter(topic for item in week_items for topic in item.get("topics", []) if topic)
+    place_counts = Counter((item.get("places") or [{}])[0].get("name_zh") for item in week_items if item.get("places"))
+    source_counts = Counter(_source_key(item) for item in week_items)
+    daily_counts = Counter((_published_day(item.get("published_at")) or latest_day).isoformat() for item in week_items)
+    highlights = balanced_select(week_items, 10)
+    observations: list[str] = []
+    if topic_counts:
+        primary_topic, primary_count = topic_counts.most_common(1)[0]
+        secondary_topics = "、".join(name for name, _ in topic_counts.most_common(3)[1:])
+        if secondary_topics:
+            observations.append(f"本周样本中，{primary_topic}是最高频议题，共出现{primary_count}次；{secondary_topics}构成次级关注线。")
+        else:
+            observations.append(f"本周样本中，{primary_topic}是最高频议题，共出现{primary_count}次。")
+    if place_counts:
+        observations.append(f"地域上，{ '、'.join(name for name, _ in place_counts.most_common(5)) }出现较多，说明本周可定位情报并未完全停留在全球层面。")
+    observations.append("周报只反映本站已通过质量门禁的公开新闻样本；重要数字、政策承诺和责任归属仍应回到原文核验。")
+    return {
+        "meta": {
+            "title": f"国际气候情报周报｜{start_day.isoformat()}—{latest_day.isoformat()}",
+            "start_date": start_day.isoformat(),
+            "end_date": latest_day.isoformat(),
+            "generated_at": datetime.now(UTC).isoformat(),
+            "timezone": "Asia/Shanghai",
+            "total": len(week_items),
+        },
+        "observations": observations,
+        "hot_topics": [{"name": name, "count": count} for name, count in topic_counts.most_common(6)],
+        "hot_places": [{"name": name, "count": count} for name, count in place_counts.most_common(8)],
+        "top_sources": [{"name": name, "count": count} for name, count in source_counts.most_common(8)],
+        "daily_counts": [{"date": day, "count": daily_counts.get(day, 0)} for day in sorted(daily_counts)],
+        "highlights": highlights,
+        "links": [{"title": item.get("title_zh"), "url": item.get("canonical_url")} for item in highlights if item.get("canonical_url")],
+    }
+
+
+def render_weekly_markdown(report: dict) -> str:
+    meta = report.get("meta", {})
+    lines = [
+        f"# {meta.get('title', '国际气候情报周报')}", "",
+        f"> 本周共纳入 {meta.get('total', 0)} 条通过质量门禁的气候新闻记录。周报为自动生成，适合会前浏览和选题跟踪。", "",
+        "## 一周观察", "",
+    ]
+    for item in report.get("observations", []):
+        lines.append(f"- {item}")
+    lines.extend(["", "## 值得重点阅读的情报", ""])
+    for index, item in enumerate(report.get("highlights", []), 1):
+        lines.extend([
+            f"### {index}. {item.get('title_zh') or item.get('title_original')}", "",
+            item.get("summary_zh") or factual_fallback_summary(item), "",
+            f"来源：{item.get('source_name', '来源待核')}｜{item.get('published_at', '时间待核')}｜主题：{item.get('theme_zh') or '气候动态'}", "",
+        ])
+    lines.extend(["## 原文链接", ""])
+    for index, link in enumerate(report.get("links", []), 1):
+        lines.append(f"{index}. {link.get('title')}：{link.get('url')}")
+    lines.extend(["", "## 退订", "", "如通过邮件收到本周报，可回复邮件标题“退订气候周报”；管理员应在下一次发送前从 CLIMATE_WEEKLY_SUBSCRIBERS Secret 中移除该邮箱。", ""])
     return "\n".join(lines)
 
 

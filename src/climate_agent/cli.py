@@ -6,11 +6,11 @@ import os
 from datetime import date, timedelta
 from pathlib import Path
 
-from .archive import DEFAULT_ARCHIVE_LIMIT, load_archive, validate_public_payload
-from .briefing import dashboard_payload, save_brief
+from .archive import DEFAULT_ARCHIVE_LIMIT, load_archive, update_archive, validate_public_payload
+from .briefing import dashboard_payload, publishable_intelligence, render_weekly_markdown, save_brief, weekly_report_payload
 from .collector import fetch_feed, parse_feed
 from .db import Database
-from .delivery import build_push_message
+from .delivery import build_push_message, build_weekly_message
 from .editorial import apply_editorial_overrides
 from .exporter import export_static_site
 from .historical_backfill import DEFAULT_ARCHIVE_LIMIT as HISTORY_LIMIT, backfill_history, export_historical_jsonl, refresh_historical_tags
@@ -19,6 +19,7 @@ from .providers import OpenAICompatibleModel, publish_email, publish_file, publi
 from .regional_seed import import_regional_seed
 from .sync import P0_SOURCE_IDS, sync_p0
 from .source_health import load_source_health, save_source_health, source_is_due, update_source_health
+from .site_metrics import update_github_visitor_history
 from .translation import translate_pending
 from .web import serve
 
@@ -84,6 +85,17 @@ def parser() -> argparse.ArgumentParser:
     deliver.add_argument("--max-items", type=int, default=3)
     deliver.add_argument("--output", type=Path, help="同时保存推送文本")
     deliver.add_argument("--snapshot", type=Path, help="读取已通过门禁的 dashboard.json，而不是重新查询数据库")
+    weekly = sub.add_parser("weekly", help="生成最近七天自动周报")
+    weekly.add_argument("--output", type=Path, default=ROOT / "outputs" / "weekly_report.md")
+    weekly.add_argument("--archive", type=Path, default=ROOT / "data" / "news_archive.json")
+    deliver_weekly = sub.add_parser("deliver-weekly", help="投递最近七天自动周报")
+    deliver_weekly.add_argument("--channel", choices=("preview", "email", "auto"), default="preview")
+    deliver_weekly.add_argument("--public-url", default=os.getenv("CLIMATE_PUBLIC_URL", ""))
+    deliver_weekly.add_argument("--recipient", action="append", help="周报邮件收件人；未提供时读取 CLIMATE_WEEKLY_SUBSCRIBERS")
+    deliver_weekly.add_argument("--snapshot", type=Path, help="读取 weekly_report.json")
+    deliver_weekly.add_argument("--output", type=Path, help="同时保存周报推送文本")
+    visitors = sub.add_parser("update-visitors", help="从 GitHub Traffic API 更新访客历史")
+    visitors.add_argument("--output", type=Path, default=ROOT / "data" / "visitor_history.json")
     return cli
 
 
@@ -234,6 +246,35 @@ def main(argv: list[str] | None = None) -> int:
                 publish_email(message, recipient, subject=f"国际气候谈判情报｜{payload['meta']['date']}")
             sent.append(f"email:{len(recipients)}")
         print(json.dumps({"status": "sent" if sent else "skipped", "channels": sent}, ensure_ascii=False))
+    elif args.command == "weekly":
+        archive = load_archive(args.archive)
+        if not archive.get("records"):
+            archive = update_archive(args.archive, publishable_intelligence(db), limit=int(os.getenv("CLIMATE_ARCHIVE_LIMIT", str(DEFAULT_ARCHIVE_LIMIT))))
+        report = weekly_report_payload(archive)
+        output = publish_file(render_weekly_markdown(report), args.output)
+        print(json.dumps({"status": "ok", "output": str(output), "items": len(report.get("highlights", []))}, ensure_ascii=False))
+    elif args.command == "deliver-weekly":
+        report = (
+            json.loads(args.snapshot.read_text(encoding="utf-8"))
+            if args.snapshot else weekly_report_payload(load_archive(ROOT / "data" / "news_archive.json"))
+        )
+        message = build_weekly_message(report, args.public_url)
+        if args.output:
+            publish_file(message, args.output)
+        if args.channel == "preview":
+            print(message)
+            return 0
+        recipients = args.recipient or [
+            item.strip() for item in os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS", "").split(",") if item.strip()
+        ]
+        if not recipients:
+            print(json.dumps({"status": "skipped", "reason": "no_weekly_subscribers"}, ensure_ascii=False))
+            return 0
+        for recipient in recipients:
+            publish_email(message, recipient, subject=report.get("meta", {}).get("title", "国际气候情报周报"))
+        print(json.dumps({"status": "sent", "channels": [f"email:{len(recipients)}"]}, ensure_ascii=False))
+    elif args.command == "update-visitors":
+        print(json.dumps(update_github_visitor_history(args.output), ensure_ascii=False, indent=2))
     return 0
 
 

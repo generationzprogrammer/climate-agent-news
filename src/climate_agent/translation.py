@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 
 from .db import Database
 from .providers import OpenAICompatibleModel
+from .summary_utils import factual_fallback_summary, is_generic_summary
 
 
 GEO_TERMS = {
@@ -23,6 +24,13 @@ GEO_TERMS = {
     "美国": ("美国", -100.0, 39.0),
     "texas": ("美国得州", -99.0, 31.0),
     "california": ("美国加州", -119.0, 37.0),
+    "oregon": ("美国俄勒冈州", -120.5, 44.0),
+    "washington state": ("美国华盛顿州", -120.5, 47.4),
+    "florida": ("美国佛罗里达州", -81.5, 28.0),
+    "georgia": ("美国佐治亚州", -83.5, 33.0),
+    "colorado": ("美国科罗拉多州", -105.5, 39.0),
+    "arizona": ("美国亚利桑那州", -111.7, 34.2),
+    "wellington": ("新西兰惠灵顿", 174.8, -41.3),
     "united kingdom": ("英国", -2.0, 54.0),
     " uk ": ("英国", -2.0, 54.0),
     "英国": ("英国", -2.0, 54.0),
@@ -194,7 +202,7 @@ def _metadata_compiled_translation(row: dict, original: str, places: list[dict])
         title_zh = f"{place}气候与能源价格推高民生风险"
     else:
         title_zh = f"{place}{topics[0]}议题受到关注"
-    return {
+    item = {
         "title_zh": title_zh,
         "summary_zh": "",
         "theme_zh": topics[0],
@@ -203,6 +211,8 @@ def _metadata_compiled_translation(row: dict, original: str, places: list[dict])
         "places": places,
         "translation_status": "metadata_compiled_needs_review",
     }
+    item["summary_zh"] = factual_fallback_summary({**row, **item})
+    return item
 
 
 def _fallback_translation(row: dict) -> dict:
@@ -212,7 +222,7 @@ def _fallback_translation(row: dict) -> dict:
     if not re.search(r"[\u4e00-\u9fff]", original):
         return _metadata_compiled_translation(row, original, places)
     title_zh = re.sub(r"\s*[-–—|｜]\s*[^-–—|｜]{2,24}$", "", original).strip()
-    return {
+    item = {
         "title_zh": title_zh,
         "summary_zh": "",
         "theme_zh": "气候动态",
@@ -221,6 +231,8 @@ def _fallback_translation(row: dict) -> dict:
         "places": places,
         "translation_status": "source_title_only",
     }
+    item["summary_zh"] = factual_fallback_summary({**row, **item})
+    return item
 
 
 def _write_translation(db: Database, row: dict, item: dict, *, fallback: bool = False) -> bool:
@@ -231,11 +243,14 @@ def _write_translation(db: Database, row: dict, item: dict, *, fallback: bool = 
         metadata = json.loads(row.get("metadata_json") or "{}")
     except json.JSONDecodeError:
         metadata = {}
+    summary = item.get("summary_zh")
+    if not summary or is_generic_summary(summary):
+        summary = factual_fallback_summary({**row, **item})
     metadata.update({
-        "summary_zh": item["summary_zh"],
-        "theme_zh": item["theme_zh"],
-        "importance_zh": item["importance_zh"],
-        "poster_phrase": item["poster_phrase"],
+        "summary_zh": summary,
+        "theme_zh": item.get("theme_zh", "气候动态"),
+        "importance_zh": item.get("importance_zh", "需要结合原文核验其政策含义。"),
+        "poster_phrase": item.get("poster_phrase", "气候情报"),
         "places": item.get("places") or detect_places(
             f"{row['title_original']} {row.get('summary_source') or ''} "
             f"{item.get('title_zh') or ''} {item.get('summary_zh') or ''}"

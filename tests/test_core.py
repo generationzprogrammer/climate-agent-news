@@ -9,12 +9,12 @@ from datetime import date
 from pathlib import Path
 
 from climate_agent.archive import quality_result, update_archive, validate_public_payload
-from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week
+from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week, weekly_report_payload
 from climate_agent.cli import ROOT, bootstrap
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
 from climate_agent.corpus_analytics import build_corpus_analytics
 from climate_agent.db import Database
-from climate_agent.delivery import build_push_message
+from climate_agent.delivery import build_push_message, build_weekly_message
 from climate_agent.exporter import export_static_site
 from climate_agent.historical_backfill import article_to_historical_record, upsert_historical_records
 from climate_agent.official_data import parse_ndc_csv
@@ -273,6 +273,12 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / "data" / "energy_archive.json").exists())
         self.assertTrue((output_dir / "data" / "energy_dashboard.json").exists())
         self.assertTrue((output_dir / "data" / "energy_corpus_analytics.json").exists())
+        self.assertTrue((output_dir / "data" / "weekly_report.json").exists())
+        self.assertTrue((output_dir / "data" / "weekly_report.md").exists())
+        self.assertTrue((output_dir / "data" / "weekly_report.pdf").exists())
+        self.assertTrue((output_dir / "data" / "site_metrics.json").exists())
+        self.assertTrue((output_dir / "data" / "subscription.json").exists())
+        self.assertTrue((output_dir / "data" / "team.json").exists())
         pdf = (output_dir / "data" / "daily_brief.pdf").read_bytes()
         self.assertTrue(pdf.startswith(b"%PDF-1.4"))
         self.assertIn(b"/BaseFont /Times-Roman", pdf)
@@ -308,6 +314,8 @@ class CoreTests(unittest.TestCase):
         self.assertIn('data-map-period="today"', html)
         self.assertIn('data-map-period="week"', html)
         self.assertIn('id="analytics"', html)
+        self.assertIn('id="archiveGrowthChart"', html)
+        self.assertIn('id="visitorGrowthChart"', html)
         self.assertIn('id="monthlyTrendChart"', html)
         self.assertIn('id="countryTopicHeatmap"', html)
         self.assertIn('id="modeToggle"', html)
@@ -316,6 +324,9 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="assistant"', html)
         app = (ROOT / "static" / "app.js").read_text(encoding="utf-8")
         self.assertIn("function renderAnalytics", app)
+        self.assertIn("function renderSiteMetrics", app)
+        self.assertIn("function setupSubscribe", app)
+        self.assertIn("function setupTeam", app)
         self.assertIn("corpus_analytics.json", app)
         self.assertIn("energy_dashboard.json", app)
         self.assertIn("function activateMode", app)
@@ -325,6 +336,8 @@ class CoreTests(unittest.TestCase):
         self.assertNotIn("function latestDayItems", app)
         self.assertIn("items.slice(0, 10)", app)
         self.assertIn("下载今日简报", html)
+        self.assertIn('id="subscribeOpen"', html)
+        self.assertIn('id="teamOpen"', html)
         self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
         self.assertIn("CLIMATETEXT-100000", html)
@@ -344,12 +357,15 @@ class CoreTests(unittest.TestCase):
 
     def test_workflow_runs_daily_with_models_and_writeback(self) -> None:
         workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
-        self.assertIn('cron: "30 23 * * *"', workflow)
+        self.assertIn('cron: "30 22 * * *"', workflow)
+        self.assertIn('cron: "0 0 * * 1"', workflow)
         self.assertIn("models: read", workflow)
         self.assertIn("contents: write", workflow)
         self.assertIn("data/news_archive.json", workflow)
         self.assertIn("data/source_health.json", workflow)
+        self.assertIn("data/visitor_history.json", workflow)
         self.assertIn("CLIMATE_TRANSLATION_LIMIT", workflow)
+        self.assertIn("deliver-weekly", workflow)
 
     def test_latest_day_and_week_use_beijing_calendar(self) -> None:
         rows = [
@@ -538,7 +554,8 @@ class CoreTests(unittest.TestCase):
         })
         self.assertIn("美国", item["title_zh"])
         self.assertIn("高温", item["title_zh"])
-        self.assertEqual(item["summary_zh"], "")
+        self.assertGreater(len(item["summary_zh"]), 20)
+        self.assertNotIn("概要待补充", item["summary_zh"])
         self.assertEqual(item["translation_status"], "metadata_compiled_needs_review")
         self.assertEqual(item["places"][0]["name_zh"], "美国")
 
@@ -618,6 +635,15 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(analytics["monthly_records"][0]["month"], "2026-01")
         self.assertEqual(analytics["top_countries"][0]["name"], "中国")
         self.assertIn("亚洲", {item["name"] for item in analytics["continents"]})
+
+    def test_weekly_report_contains_summaries_and_links_at_end(self) -> None:
+        self.seed_publishable_article()
+        archive = update_archive(Path(self.temp.name) / "news_archive.json", dashboard_payload(self.db)["intelligence"], limit=100000)
+        report = weekly_report_payload(archive)
+        message = build_weekly_message(report, "https://example.org")
+        self.assertIn("一周观察", message)
+        self.assertIn("PDF周报", message)
+        self.assertTrue(report["highlights"][0]["summary_zh"])
 
 
 if __name__ == "__main__":

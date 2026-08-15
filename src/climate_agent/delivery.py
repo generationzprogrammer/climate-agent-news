@@ -34,3 +34,27 @@ def build_push_message(payload: dict, public_url: str, *, max_items: int = 3) ->
         lines.append(f"完整地图、来源与原文：{urljoin(public_url.rstrip('/') + '/', './')}" )
     lines.append("说明：中文编译不替代原文核验；未通过质量门禁的内容不会推送。")
     return "\n".join(lines)
+
+
+def build_weekly_message(report: dict, public_url: str, *, max_items: int = 7) -> str:
+    meta = report.get("meta", {})
+    lines = [
+        f"【{meta.get('title', '国际气候情报周报')}】",
+        f"本周纳入 {meta.get('total', 0)} 条通过质量门禁的公开气候新闻记录。",
+        "",
+        "一周观察：",
+    ]
+    for observation in report.get("observations", [])[:3]:
+        lines.append(f"- {_clip(observation, 130)}")
+    lines.extend(["", "重点阅读："])
+    for index, item in enumerate(report.get("highlights", [])[: max(1, min(max_items, 10))], 1):
+        lines.extend([
+            f"{index}. [{_clip(item.get('theme_zh') or '气候动态', 12)}] {_clip(item.get('title_zh') or item.get('title_original'), 54)}",
+            f"概括：{_clip(item.get('summary_zh') or '概要待补充。', 120)}",
+            "",
+        ])
+    if public_url:
+        lines.append(f"网页与PDF周报：{urljoin(public_url.rstrip('/') + '/', './data/weekly_report.pdf')}")
+    lines.append("退订：回复本邮件并在标题中注明“退订气候周报”。")
+    lines.append("说明：周报为自动生成；重要数字、承诺和立场请回到原文核验。")
+    return "\n".join(lines)
