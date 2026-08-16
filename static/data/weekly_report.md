@@ -1,87 +1,87 @@
-# 国际气候情报周报｜2026-08-03—2026-08-09
+# 国际气候情报周报｜2026-08-10—2026-08-16
 
-> 本周共纳入 30 条通过质量门禁的气候新闻记录。周报为自动生成，适合会前浏览和选题跟踪。
+> 本周共纳入 70 条通过质量门禁的气候新闻记录。周报为自动生成，适合会前浏览和选题跟踪。
 
 ## 一周观察
 
-- 本周样本中，能源与排放是最高频议题，共出现8次；气候动态、气候适应构成次级关注线。
-- 地域上，欧洲、美国、印度、伊朗、美国太平洋西北地区出现较多，说明本周可定位情报并未完全停留在全球层面。
+- 本周样本中，气候适应是最高频议题，共出现33次；能源与排放、气候动态构成次级关注线。
+- 地域上，美国、加拿大、中国、非洲、欧洲出现较多，说明本周可定位情报并未完全停留在全球层面。
 - 周报只反映本站已通过质量门禁的公开新闻样本；重要数字、政策承诺和责任归属仍应回到原文核验。
 
 ## 值得重点阅读的情报
 
-### 1. 调查：战争与气候危机期间，主要石油公司获利930亿美元
+### 1. 中国碳治理议题受到关注
 
-八家大型石油公司在三个月内获利超过900亿美元；伊朗冲突推高能源价格，再次引发要求油气企业为环境损害出资并支持可再生能源转型的呼声。
+Carbon Brief消息显示，涉及中国，中国碳治理议题受到关注。主题上属于碳治理。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：The Guardian Climate Crisis｜2026-08-04T17:49:16+00:00｜主题：石油利润与气候责任
+来源：Carbon Brief｜2026-08-14T14:09:31+00:00｜主题：碳治理
 
-### 2. 欧洲电网压力推高可再生能源韧性需求
+### 2. 澳大利亚气候变化议题受到关注
 
-Google News RSS Search消息显示，涉及欧洲，欧洲电网压力推高可再生能源韧性需求。主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
+Climate Home News消息显示，涉及澳大利亚、中国，澳大利亚气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：Google News RSS Search｜2026-08-08T23:39:41+00:00｜主题：可再生能源
+来源：Climate Home News｜2026-08-14T11:39:49+00:00｜主题：气候变化
 
-### 3. 美国太平洋西北地区野火迫使6.4万人撤离
+### 3. 全球净零与减排措施受到关注
 
-美国太平洋西北地区发生野火，约6.4万人被迫撤离。
+The Guardian Climate Crisis消息显示，全球净零与减排措施受到关注。主题上属于减排。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：GDELT 2.0 DOC API｜2026-08-04T02:45:00+00:00｜主题：野火疏散
+来源：The Guardian Climate Crisis｜2026-08-14T18:51:11+00:00｜主题：减排
 
-### 4. 得州再次发生洪灾，暴露预警系统哪些问题
+### 4. 拉丁美洲气候资金议题受到关注
 
-得州在上次丘陵地区洪灾造成139人死亡后改造预警系统；今年7月的历史性洪灾检验了改造成效，也暴露出仍待解决的问题。
+Google News RSS Search消息显示，涉及拉丁美洲、加勒比地区，拉丁美洲气候资金议题受到关注。主题上属于气候资金。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：Grist｜2026-08-04T08:45:00+00:00｜主题：洪灾预警
+来源：Google News RSS Search｜2026-08-12T17:50:41+00:00｜主题：气候资金
 
-### 5. 研究：仅靠碳市场无法保护东南亚森林
+### 5. 亚马孙地区碳治理议题受到关注
 
-研究估计东南亚林业和种植园特许区内仍有约4200万公顷森林；按现有碳价，仅靠碳市场难以形成足够保护激励，需要混合融资、绿色债券等补充工具。
+Mongabay Latin America消息显示，涉及亚马孙地区，亚马孙地区碳治理议题受到关注。主题上属于碳治理。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：Mongabay Climate Change｜2026-08-04T02:00:36+00:00｜主题：森林保护融资
+来源：Mongabay Latin America｜2026-08-14T14:31:04+00:00｜主题：碳治理
 
-### 6. 生活在火山之巅的高海拔小鼠如何生存？研究揭示答案
+### 6. 全球气候变化议题受到关注
 
-研究发现，安第斯叶耳鼠通过生物适应机制，在低氧、常年低于冰点的火山高海拔环境中生存。
+BBC Science & Environment消息显示，全球气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：Mongabay Latin America｜2026-08-05T06:21:14+00:00｜主题：极端环境适应
+来源：BBC Science & Environment｜2026-08-15T23:34:24+00:00｜主题：气候变化
 
-### 7. “错失恐惧”正在削弱气候外交吗？
+### 7. 非洲干旱风险议题受到关注
 
-文章指出，气候大会参会人数大幅扩张，但谈判群体规模并未同比增长；政界和企业代表增加可能挤压正式谈判工作的空间。
+Mongabay Climate Change消息显示，涉及非洲，非洲干旱风险议题受到关注。主题上属于干旱风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：Climate Home News｜2026-08-04T16:55:01+00:00｜主题：气候大会治理
+来源：Mongabay Climate Change｜2026-08-14T02:43:26+00:00｜主题：干旱风险
 
-### 8. 《奥德赛》登上大银幕之际，地中海也在经历自己的史诗旅程
+### 8. 太平洋地区野火风险议题受到关注
 
-联合国环境规划署借影片《奥德赛》重返影院，介绍地中海当前面临的环境威胁，以及地中海行动计划正在采取的保护措施。
+NASA Earth Observatory Image of the Day消息显示，涉及太平洋地区，太平洋地区野火风险议题受到关注。主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：UN Environment Programme｜2026-08-05T07:40:58+00:00｜主题：海洋生态保护
+来源：NASA Earth Observatory Image of the Day｜2026-08-13T04:00:00+00:00｜主题：野火风险
 
-### 9. 事实核查：热浪如何影响核电、天然气、风电和太阳能发电
+### 9. 欧洲气候变化加剧高温风险
 
-Carbon Brief梳理热浪对核电、天然气、风电和太阳能发电的影响；气候变化正使热浪发生概率和强度上升。
+The Guardian Climate Crisis消息显示，涉及欧洲，欧洲气候变化加剧高温风险。主题上属于减排。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：Carbon Brief｜2026-08-04T15:39:06+00:00｜主题：热浪与电力系统
+来源：The Guardian Climate Crisis｜2026-08-11T18:04:47+00:00｜主题：减排
 
-### 10. 法院裁定特朗普政府冻结200亿美元“绿色银行”资金不当
+### 10. 尼日利亚气候变化议题受到关注
 
-美国联邦上诉法院裁定，环境保护署终止200亿美元“绿色银行”融资的做法不当；案件可能继续提交联邦最高法院。
+GDELT 2.0 DOC API消息显示，涉及尼日利亚，尼日利亚气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。
 
-来源：Canary Media｜2026-08-04T23:37:00+00:00｜主题：绿色融资诉讼
+来源：GDELT 2.0 DOC API｜2026-08-09T23:30:00+00:00｜主题：气候变化
 
 ## 原文链接
 
-1. 调查：战争与气候危机期间，主要石油公司获利930亿美元：https://www.theguardian.com/business/ng-interactive/2026/aug/04/revealed-major-oil-firms-make-93bn-profits-amid-war-and-climate-crisis
-2. 欧洲电网压力推高可再生能源韧性需求：https://news.google.com/rss/articles/CBMi2gFBVV95cUxQVXd2NVNPbEJycHJIMkJBZzJFTGdmRE9mYVh6a1UzdWMtdHhyQlVUTDdlOGdGWkRBaDg3bFVnaU9iZXpEZ3c2X05neXlaVmZaeUx0ajBlWEVfSkxTaXZzOHRaZTNVaTRZaG02MGg1NWR4V2RTTDlLRzBXbHdXeWt0eWF3bEw4SDVMLW1WU3c5eGRmZlNheXI2allWZkdMSFJzc0lSX1VndFNBbk9SOWduT2Rqc3dLSzlpcGVnLWNINzFXTzZDMWVkREtYUWxuTWFvRTVvVktSUUNIUdIB3wFBVV95cUxPWjBEdUJFeWxCcHBCTnpoR2pJSF9OR0FXaFlYcEI0M3c2eUp5VDZ0aVg2WWxKMjlTSTFlNmU4N0twSF95MXpob3QtVW5UQ1M5N3AyQ0YwX1Rqc0w4c1ladjdkNFRJdGJ2cFRzNjR5ZjhYZGk2MlF1M3dpakxJTHlQR210V1JmRUxMRWNKcXFlYV9wMjQ2Q3VWSE1HNGx5S1NRVEdoSXNudHhSWVZVZmpqNDFlbGp4cUR4WEQyd0NGMjBUVXRGd0Myd2pyR0g2ei1rS2ZCc29ERERJNmJpcTZZ?oc=5
-3. 美国太平洋西北地区野火迫使6.4万人撤离：https://www.illawarramercury.com.au/story/9323313/wildfires-in-us-pacific-northwest-force-64000-to-flee
-4. 得州再次发生洪灾，暴露预警系统哪些问题：https://grist.org/extreme-weather/what-another-texas-flood-revealed-about-the-states-warning-system
-5. 研究：仅靠碳市场无法保护东南亚森林：https://news.mongabay.com/2026/08/carbon-markets-alone-wont-keep-southeast-asias-forests-standing-study-says
-6. 生活在火山之巅的高海拔小鼠如何生存？研究揭示答案：https://news.mongabay.com/short-article/2026/08/these-mice-live-on-volcano-summits-at-extreme-elevations-study-finds-how
-7. “错失恐惧”正在削弱气候外交吗？：https://www.climatechangenews.com/2026/08/04/is-fomo-undermining-climate-diplomacy
-8. 《奥德赛》登上大银幕之际，地中海也在经历自己的史诗旅程：https://www.unep.org/news-and-stories/story/odyssey-brings-mediterranean-big-screens-sea-epic-journey-its-own
-9. 事实核查：热浪如何影响核电、天然气、风电和太阳能发电：https://www.carbonbrief.org/factcheck-how-nuclear-gas-wind-and-solar-power-are-affected-during-heatwaves
-10. 法院裁定特朗普政府冻结200亿美元“绿色银行”资金不当：https://www.canarymedia.com/articles/climatetech-finance/court-rules-against-trump-epas-freeze-of-20b-in-green-bank-funds
+1. 中国碳治理议题受到关注：https://www.carbonbrief.org/qa-what-does-chinas-15th-five-year-plan-for-coal-mean-for-climate-action
+2. 澳大利亚气候变化议题受到关注：https://www.climatechangenews.com/2026/08/14/new-coal-mine-openings-slow-as-east-asian-demand-plateaus
+3. 全球净零与减排措施受到关注：https://www.theguardian.com/environment/2026/aug/14/andy-burnham-new-ev-sales-targets
+4. 拉丁美洲气候资金议题受到关注：https://news.google.com/rss/articles/CBMiygFBVV95cUxPYjd3OXQ3N3MzYkdaNm9qQTBaTUtNdG1oNURxbjgzVDJZT2VXb3pqbTZjYm5LMERXdU1mZnJFdno5TEtYSUtmZ1hxdVVvcEVTdWxRdUctdGJrVFJ1TktrYmRVVWpqakVKOGVrZXJoTlNxSENJVk1EWldoLWF1WHlIYWxfUTlscTdkeUNqUzRrWFFsUjF2WjZ6c2c3ODF1UkZlVlNpWXQ2QWJxVFQxQUNkQWUtZ2h2OERibFR6c3VySHU2NEpQZkJMNXFR?oc=5
+5. 亚马孙地区碳治理议题受到关注：https://news.mongabay.com/2026/08/new-studies-portray-amazon-as-surprisingly-resilient-but-tipping-point-looms
+6. 全球气候变化议题受到关注：https://www.bbc.co.uk/news/articles/crmrr7kjy9vo?at_medium=RSS&at_campaign=rss
+7. 非洲干旱风险议题受到关注：https://news.mongabay.com/short-article/2026/08/more-people-farms-and-drought-could-mean-more-elephant-conflict-in-southern-africa
+8. 太平洋地区野火风险议题受到关注：https://science.nasa.gov/earth/earth-observatory/cascade-volcanoes-shrouded-in-smoke
+9. 欧洲气候变化加剧高温风险：https://www.theguardian.com/commentisfree/2026/aug/11/the-guardian-view-on-wildfires-firefighters-cant-handle-this-crisis-alone
+10. 尼日利亚气候变化议题受到关注：https://allafrica.com/stories/202608070276.html
 
 ## 退订
 
