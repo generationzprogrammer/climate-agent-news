@@ -66,6 +66,15 @@ a { color: inherit; }
 .topbar nav { display: flex; gap: 28px; margin: auto; }
 .topbar nav a { color: #414a57; font-size: 14px; text-decoration: none; }
 .topbar nav a:hover { color: var(--blue); }
+.topbar nav .nav-team-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #414a57;
+  font: 700 14px var(--sans);
+  white-space: nowrap;
+}
+.topbar nav .nav-team-link:hover { color: var(--blue); }
 .mode-toggle {
   padding: 10px 14px;
   border: 1px solid #aeb8c7;
