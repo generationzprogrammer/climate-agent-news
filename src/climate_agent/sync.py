@@ -80,6 +80,8 @@ CLIMATE_SIGNAL_TERMS = (
     "climate finance", "loss and damage", "adaptation", "resilience",
     "heat wave", "wildfire", "drought", "flood", "storm", "hurricane",
     "green cooperation", "green transition", "clean energy", "global warming",
+    "battery", "energy storage", "power grid", "geothermal", "hydrogen",
+    "energy startup", "energy company", "clean technology", "fusion energy",
     "气候", "碳", "排放", "可再生能源", "净零", "低碳", "绿色转型",
     "高温", "热浪", "野火", "干旱", "洪水", "风暴", "飓风",
 )
@@ -196,7 +198,13 @@ def _gdelt_url(endpoint: str, source_id: str) -> str:
 
 
 def _google_news_url(endpoint: str) -> str:
-    query = '("climate change" OR "carbon emissions" OR "renewable energy" OR "net zero" OR "climate finance" OR "wildfire climate" OR "heat wave climate") when:1d'
+    query = (
+        '(("climate change" OR "carbon emissions" OR "renewable energy" OR "net zero" '
+        'OR "climate finance" OR "wildfire climate" OR "heat wave climate") OR '
+        '(("energy company" OR "energy startup" OR battery OR "power grid" OR hydrogen '
+        'OR geothermal OR solar OR "wind power" OR "fusion energy") '
+        '(project OR partnership OR collaboration OR investment OR factory))) when:1d'
+    )
     params = {
         "q": query,
         "hl": "en-US",

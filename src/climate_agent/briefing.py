@@ -351,6 +351,7 @@ def _publishable_candidates(db: Database) -> list[dict]:
         row["why_zh"] = metadata.get("importance_zh") or metadata.get("why_zh", "进入人工复核队列。")
         row["places"] = metadata.get("places", [])
         row["poster_phrase"] = metadata.get("poster_phrase") or row["theme_zh"]
+        row["company_entities"] = metadata.get("company_entities") or []
         row["translation_status"] = metadata.get("translation_status", "pending")
         row["fact_status"] = metadata.get("fact_status", "source_claim_unverified")
         row["published_at"] = row.pop("published_at_utc")

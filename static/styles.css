@@ -37,7 +37,7 @@ a { color: inherit; }
   z-index: 30;
   display: flex;
   align-items: center;
-  gap: 34px;
+  gap: 20px;
   height: 72px;
   padding: 0 clamp(20px, 4vw, 60px);
   border-bottom: 1px solid #cbd1db;
@@ -48,7 +48,7 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 300px;
+  min-width: 260px;
   text-decoration: none;
 }
 .brand-symbol {
@@ -63,7 +63,7 @@ a { color: inherit; }
 }
 .brand b { display: block; font-size: 16px; }
 .brand small { display: block; margin-top: 2px; color: #667080; font-size: 12px; }
-.topbar nav { display: flex; gap: 28px; margin: auto; }
+.topbar nav { display: flex; gap: 18px; margin: auto; }
 .topbar nav a { color: #414a57; font-size: 14px; text-decoration: none; }
 .topbar nav a:hover { color: var(--blue); }
 .topbar nav .nav-team-link {
@@ -277,6 +277,51 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 .map-place-list button:focus { border-color: var(--blue); color: var(--blue); outline: none; }
 .map-place-list button i { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: var(--red); }
 .map-place-list button span { margin-left: 7px; color: #737c89; font-size: 12px; }
+
+.company-section { padding-top: 96px; }
+.company-database,
+.company-live { margin-top: 34px; }
+.company-live { padding-top: 52px; border-top: 1px solid var(--line); }
+.subsection-heading { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 20px; }
+.subsection-heading span { color: var(--blue); font: 800 11px var(--mono); letter-spacing: .13em; }
+.subsection-heading h3 { margin: 7px 0 0; font: 650 32px/1.2 var(--serif); }
+.subsection-heading p { max-width: 620px; margin: 0; color: #626d7b; font-size: 14px; line-height: 1.7; text-align: right; }
+.company-kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); border-bottom: 0; }
+.company-kpis article { min-width: 0; padding: 18px; border-right: 1px solid var(--line); background: #f8fafc; }
+.company-kpis article:last-child { border-right: 0; }
+.company-kpis span,
+.company-kpis small { display: block; }
+.company-kpis span { color: #5d6877; font: 750 11px var(--mono); letter-spacing: .06em; }
+.company-kpis b { display: block; margin: 8px 0 6px; color: var(--blue); font: 700 28px var(--mono); }
+.company-kpis small { color: #707a88; font-size: 12px; line-height: 1.45; }
+.company-search-panel { display: grid; grid-template-columns: minmax(260px, 1.4fr) minmax(190px, .65fr) minmax(170px, .55fr) 130px; gap: 12px; margin-bottom: 18px; padding: 18px; border: 1px solid var(--line); background: var(--soft); }
+.company-search-panel label,
+.company-search-panel .result-count { display: flex; flex-direction: column; gap: 8px; }
+.company-search-panel label > span { color: #626d7c; font: 11px var(--mono); letter-spacing: .08em; }
+.company-search-panel input,
+.company-search-panel select { width: 100%; height: 45px; padding: 0 12px; border: 1px solid #c4cbd6; background: #fff; color: var(--ink); font: 14px var(--sans); }
+.company-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.company-card { display: flex; min-width: 0; min-height: 330px; flex-direction: column; padding: 22px; border: 1px solid var(--line); border-top: 3px solid var(--blue); background: #fff; }
+.company-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.company-card-head span { color: var(--blue); font: 750 11px var(--mono); }
+.company-card-head small { color: #697483; font-size: 12px; }
+.company-card h4 { margin: 18px 0 2px; font: 650 24px/1.25 var(--serif); }
+.company-name-en { margin: 0 0 15px; color: #727c89; font-size: 13px; }
+.company-business { display: flex; flex-wrap: wrap; gap: 6px; }
+.company-business i { padding: 5px 7px; background: #edf2f7; color: #44515f; font: normal 12px var(--sans); }
+.company-latest { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.company-latest b,
+.company-latest a,
+.company-latest small { display: block; }
+.company-latest b { margin-bottom: 7px; color: #626d7c; font: 750 11px var(--mono); }
+.company-latest a { color: var(--ink); font: 600 15px/1.55 var(--serif); text-decoration: none; }
+.company-latest a:hover { color: var(--blue); }
+.company-latest small { margin-top: 7px; color: #747e8b; font-size: 12px; }
+.company-latest.empty-state { color: #697483; }
+.company-site { margin-top: auto; padding-top: 18px; color: var(--blue); font-size: 13px; font-weight: 750; text-decoration: none; }
+.company-event-companies { margin-bottom: 9px !important; color: var(--ink) !important; font-weight: 700; }
+.company-map-layout { min-height: 500px; }
+.company-map-layout .map-canvas svg { min-height: 500px; }
 
 .hero {
   display: grid;
@@ -617,6 +662,9 @@ footer a:hover { color: var(--blue); }
   .map-layout { grid-template-columns: minmax(0, 1fr) 340px; }
   .hero { grid-template-columns: 1fr .62fr; gap: 44px; }
   .analytics-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .company-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .company-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .company-search-panel { grid-template-columns: 1fr 1fr; }
   .metrics-strip { grid-template-columns: 1fr; }
   .analytics-grid { grid-template-columns: 1fr; }
   .chart-card.wide { grid-column: auto; }
@@ -647,6 +695,13 @@ footer a:hover { color: var(--blue); }
   .section-heading h1,
   .section-heading h2 { font-size: 36px; }
   .section-heading > p { font-size: 15px; text-align: left; }
+  .subsection-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .subsection-heading p { text-align: left; }
+  .company-kpis,
+  .company-grid,
+  .company-search-panel { grid-template-columns: 1fr; }
+  .company-kpis article { border-right: 0; border-bottom: 1px solid var(--line); }
+  .company-card { min-height: 0; }
   .map-layout { grid-template-columns: 1fr; min-height: 0; }
   .map-canvas svg { min-height: 350px; }
   .map-period-toggle { top: 10px; left: 10px; }

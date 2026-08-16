@@ -14,6 +14,7 @@ from climate_agent.article_content import extract_article_text
 from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week, weekly_report_payload
 from climate_agent.cli import ROOT, bootstrap
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
+from climate_agent.company_intelligence import build_company_intelligence, load_company_catalogue
 from climate_agent.corpus_analytics import build_corpus_analytics
 from climate_agent.db import Database
 from climate_agent.delivery import build_push_message, build_weekly_message
@@ -157,6 +158,7 @@ class CoreTests(unittest.TestCase):
     def test_google_news_fallback_is_climate_scoped(self) -> None:
         url = _google_news_url("https://news.google.com/rss/search?q={query}&hl={hl}&gl={gl}&ceid={ceid}")
         self.assertIn("news.google.com/rss/search", url)
+        self.assertIn("energy", url.lower())
         self.assertNotIn("{query}", url)
         climate = NormalizedArticle(
             article_id="g", source_id="API004", source_url="https://news.google.com/rss",
@@ -276,6 +278,7 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / "data" / "energy_archive.json").exists())
         self.assertTrue((output_dir / "data" / "energy_dashboard.json").exists())
         self.assertTrue((output_dir / "data" / "energy_corpus_analytics.json").exists())
+        self.assertTrue((output_dir / "data" / "energy_companies.json").exists())
         self.assertTrue((output_dir / "data" / "weekly_report.json").exists())
         self.assertTrue((output_dir / "data" / "weekly_report.md").exists())
         self.assertTrue((output_dir / "data" / "weekly_report.pdf").exists())
@@ -291,6 +294,38 @@ class CoreTests(unittest.TestCase):
         self.assertIn("map_events_week", payload)
         self.assertEqual(result["quality_gate"], "passed")
         self.assertEqual(result["articles"], len(payload["intelligence"]))
+
+    def test_company_intelligence_classifies_startups_cooperation_and_locations(self) -> None:
+        catalogue = load_company_catalogue()
+        archive = {"updated_at": "2026-08-16T08:00:00+00:00", "records": [
+            {
+                "record_id": "cooperation", "title_original": "Shell and Siemens Energy sign partnership for hydrogen project",
+                "title_zh": "壳牌与西门子能源签署氢能项目合作协议", "summary_zh": "双方将共同推进氢能项目。",
+                "published_at": "2026-08-16T06:00:00+00:00", "canonical_url": "https://example.org/cooperation",
+                "source_name": "Example", "places": [{"name_zh": "德国", "lon": 10, "lat": 51}],
+            },
+            {
+                "record_id": "startup", "title_original": "Form Energy opens iron-air battery factory",
+                "title_zh": "Form Energy启用铁空气电池工厂", "summary_zh": "企业启用长时储能工厂。",
+                "published_at": "2026-08-16T05:00:00+00:00", "canonical_url": "https://example.org/startup",
+                "source_name": "Example", "places": [],
+            },
+            {
+                "record_id": "dynamic", "title_original": "NovaGrid opens a smart-grid project in Kenya",
+                "title_zh": "NovaGrid在肯尼亚启动智能电网项目", "summary_zh": "NovaGrid在肯尼亚启动智能电网项目，为当地电力系统提供数字化调度能力。",
+                "published_at": "2026-08-16T04:00:00+00:00", "canonical_url": "https://example.org/dynamic",
+                "source_name": "Example", "places": [{"name_zh": "肯尼亚", "lon": 36.82, "lat": -1.29}],
+                "company_entities": [{"name_en": "NovaGrid", "name_zh": "NovaGrid", "business_zh": ["智能电网"], "country": "肯尼亚", "company_type": "energy_company"}],
+            },
+        ]}
+        payload = build_company_intelligence(archive, catalogue)
+        self.assertGreaterEqual(payload["statistics"]["companies"], 40)
+        self.assertTrue({"cooperation", "startup"}.issubset({item["category"] for item in payload["today"]}))
+        self.assertEqual(payload["statistics"]["dynamically_discovered"], 1)
+        cooperation = next(item for item in payload["today"] if item["category"] == "cooperation")
+        self.assertEqual(cooperation["location"]["basis_zh"], "新闻明确地点")
+        startup = next(item for item in payload["today"] if item["category"] == "startup")
+        self.assertIn("企业总部", startup["location"]["basis_zh"])
 
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()
@@ -385,6 +420,11 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="subscribeClose"', html)
         self.assertIn('id="weeklyDownload"', html)
         self.assertIn('id="teamOpen"', html)
+        self.assertIn('id="companyNav"', html)
+        self.assertIn('id="companies"', html)
+        self.assertIn('id="companySearch"', html)
+        self.assertIn('data-company-map-period="today"', html)
+        self.assertIn('data-company-map-period="week"', html)
         self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
         self.assertIn("CLIMATETEXT-100000", html)

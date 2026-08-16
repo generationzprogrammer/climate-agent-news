@@ -4,6 +4,7 @@ const state = {
   mapPeriod: "today", mapTopology: null,
   assistant: { lastRecords: [], lastPlan: null },
   siteMetrics: null, subscription: null, team: null,
+  companyData: null, companyFiltered: [], companyVisible: 12, companyMapPeriod: "today",
 };
 const $ = id => document.getElementById(id);
 const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
@@ -142,6 +143,9 @@ function applyModeCopy() {
     if (element) element.textContent = copy[id];
   });
   if ($("heroTitle")) $("heroTitle").innerHTML = copy.heroTitle;
+  const energyMode = state.mode === "energy";
+  if ($("companies")) $("companies").hidden = !energyMode;
+  if ($("companyNav")) $("companyNav").hidden = !energyMode;
   document.querySelectorAll(".quick-prompts button").forEach((button, index) => {
     const prompt = copy.quickPrompts?.[index];
     if (!prompt) return;
@@ -162,6 +166,7 @@ function activateMode(mode) {
   state.assistant = { lastRecords: [], lastPlan: null };
   localStorage.setItem("climateTextMode", nextMode);
   applyModeCopy();
+  if (state.mode === "energy" && state.companyData) renderCompanyIntelligence();
   renderMeta();
   renderToday();
   if ($("archiveSearch")) $("archiveSearch").value = "";
@@ -497,6 +502,157 @@ function updateMapPeriodCounts() {
   const weekEvents = mapEventsFor("week");
   $("todayMapCount").textContent = todayEvents.length;
   $("weekMapCount").textContent = weekEvents.length;
+}
+
+function companyTypeLabel(type) {
+  if (type === "energy_startup") return "能源初创企业";
+  if (type === "energy_company") return "动态识别能源企业";
+  return "能源巨头与龙头企业";
+}
+
+function setupCompanyIntelligence() {
+  if (!state.companyData) return;
+  const countries = [...new Set((state.companyData.companies || []).map(company => company.country))]
+    .sort((left, right) => left.localeCompare(right, "zh-CN"));
+  $("companyCountryFilter").innerHTML = '<option value="">全部国家</option>'
+    + countries.map(country => `<option value="${esc(country)}">${esc(country)}</option>`).join("");
+  ["companySearch", "companyTypeFilter", "companyCountryFilter"].forEach(id => {
+    const element = $(id);
+    if (!element) return;
+    element.addEventListener(id === "companySearch" ? "input" : "change", () => {
+      state.companyVisible = 12;
+      applyCompanyFilters();
+    });
+  });
+  $("companyLoadMore")?.addEventListener("click", () => {
+    state.companyVisible += 12;
+    renderCompanyCards();
+  });
+  document.querySelectorAll("[data-company-map-period]").forEach(button => {
+    button.addEventListener("click", () => switchCompanyMapPeriod(button.dataset.companyMapPeriod).catch(error => {
+      console.error("Company map period switch failed", error);
+      toast("企业地图切换失败，请稍后重试。");
+    }));
+  });
+}
+
+function renderCompanyIntelligence() {
+  const data = state.companyData;
+  if (!data) return;
+  const stats = data.statistics || {};
+  $("companyScopeNote").textContent = data.meta?.scope_note_zh || "持续扩展的全球能源企业情报库。";
+  $("companyKpis").innerHTML = [
+    ["企业样本", stats.companies || 0, "持续扩展，不以数量替代质量"],
+    ["能源巨头与龙头", stats.majors || 0, "项目、产能与跨国布局"],
+    ["能源初创企业", stats.startups || 0, "技术路线与商业化进展"],
+    ["覆盖国家", stats.countries || 0, "总部口径"],
+    ["关联企业情报", stats.intelligence || 0, `动态识别企业 ${stats.dynamically_discovered || 0} 家`],
+  ].map(([label, value, note]) => `<article><span>${esc(label)}</span><b>${formatCount(value)}</b><small>${esc(note)}</small></article>`).join("");
+  applyCompanyFilters();
+  $("companyTodayMapCount").textContent = (data.map_events_today || []).length;
+  $("companyWeekMapCount").textContent = (data.map_events_week || []).length;
+  switchCompanyMapPeriod(state.companyMapPeriod).catch(error => console.error("Company map failed", error));
+}
+
+function applyCompanyFilters() {
+  const data = state.companyData;
+  if (!data) return;
+  const query = $("companySearch")?.value.trim().toLowerCase() || "";
+  const type = $("companyTypeFilter")?.value || "";
+  const country = $("companyCountryFilter")?.value || "";
+  state.companyFiltered = (data.companies || []).filter(company => {
+    const haystack = [company.name_zh, company.name_en, company.country, company.continent, ...(company.business_zh || [])].join(" ").toLowerCase();
+    return (!query || haystack.includes(query)) && (!type || company.type === type) && (!country || company.country === country);
+  }).sort((left, right) => Number(right.intelligence_count || 0) - Number(left.intelligence_count || 0)
+    || left.name_zh.localeCompare(right.name_zh, "zh-CN"));
+  renderCompanyCards();
+}
+
+function renderCompanyCards() {
+  const shown = state.companyFiltered.slice(0, state.companyVisible);
+  $("companyResultCount").textContent = state.companyFiltered.length;
+  $("companyList").innerHTML = shown.length ? shown.map(company => {
+    const latest = (company.latest_intelligence || [])[0];
+    return `<article class="company-card">
+      <div class="company-card-head"><span>${esc(companyTypeLabel(company.type))}</span><small>${esc(company.country)} · ${esc(company.continent)}</small></div>
+      <h4>${esc(company.name_zh)}</h4><p class="company-name-en">${esc(company.name_en)}</p>
+      <div class="company-business">${(company.business_zh || []).map(item => `<i>${esc(item)}</i>`).join("")}</div>
+      ${latest ? `<div class="company-latest"><b>最新关联情报</b><a href="${esc(safeUrl(latest.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(latest.title_zh)} ↗</a><small>${esc(formatDate(latest.published_at))} · ${esc(latest.category_zh)}</small></div>` : '<div class="company-latest empty-state"><b>暂无站内关联动态</b><small>企业基础资料保留，后续新闻将自动关联。</small></div>'}
+      ${company.website ? `<a class="company-site" href="${esc(safeUrl(company.website))}" target="_blank" rel="noopener noreferrer">企业官网 ↗</a>` : '<span class="company-site">资料来源：关联新闻原文</span>'}
+    </article>`;
+  }).join("") : '<div class="empty compact"><b>没有匹配企业</b><p>请减少筛选条件或更换业务关键词。</p></div>';
+  $("companyLoadMore").hidden = state.companyVisible >= state.companyFiltered.length;
+}
+
+function companyMapEvents(period) {
+  if (!state.companyData) return [];
+  return period === "week" ? (state.companyData.map_events_week || []) : (state.companyData.map_events_today || []);
+}
+
+function selectCompanyMapEvent(item) {
+  $("companyMapDetail").innerHTML = `<span>${esc(item.place)} · ${esc(item.theme)}</span><h2>${esc(item.title_zh)}</h2>
+    <p class="company-event-companies">涉及企业：${esc((item.companies || []).join("、"))}</p>
+    ${summaryOrAtoms(item)}<small>${esc(item.location_basis_zh || "新闻明确地点")} · ${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small>
+    <a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>`;
+}
+
+function showCompanyMapTooltip(event, item) {
+  const tooltip = $("companyMapTooltip");
+  const bounds = $("companyMapCanvas").getBoundingClientRect();
+  tooltip.innerHTML = `<b>${esc(item.place)} · ${esc((item.companies || []).join("、"))}</b><span>${esc(item.title_zh)}</span>`;
+  tooltip.style.left = `${Math.min(bounds.width - 280, Math.max(12, event.clientX - bounds.left + 12))}px`;
+  tooltip.style.top = `${Math.max(12, event.clientY - bounds.top - 80)}px`;
+  tooltip.classList.add("show");
+}
+
+async function renderCompanyMap(events) {
+  const topology = state.mapTopology || await fetchJson(new URL("./assets/countries-110m.json", document.baseURI).href);
+  state.mapTopology = topology;
+  if (!topology?.objects?.countries?.geometries?.length) throw new Error("invalid map topology");
+  const svg = $("companyWorldMap");
+  svg.replaceChildren();
+  const countries = svgEl("g", { "aria-hidden": "true" });
+  topology.objects.countries.geometries.forEach(geometry => {
+    const path = geometryPath(topology, geometry);
+    if (path) countries.appendChild(svgEl("path", { d: path, class: "map-country", "fill-rule": "evenodd" }));
+  });
+  const shift = 500 - (MAP_CENTER_LON + 180) / 360 * 1000;
+  const westernCopy = countries.cloneNode(true);
+  const easternCopy = countries.cloneNode(true);
+  westernCopy.setAttribute("transform", `translate(${shift},0)`);
+  easternCopy.setAttribute("transform", `translate(${shift + 1000},0)`);
+  svg.append(westernCopy, easternCopy);
+  spreadMarkerPositions(events).forEach(({ item, x, y, originX, originY }) => {
+    if (Math.hypot(x - originX, y - originY) > 4) svg.appendChild(svgEl("line", { x1: originX, y1: originY, x2: x, y2: y, class: "event-stem" }));
+    const pin = svgEl("g", { class: "event-pin", tabindex: "0", role: "button", "aria-label": `${item.place}：${item.title_zh}` });
+    pin.append(svgEl("circle", { cx: x, cy: y, r: 13, class: "event-halo" }), svgEl("circle", { cx: x, cy: y, r: 6.5, class: "event-marker" }));
+    pin.addEventListener("click", () => selectCompanyMapEvent(item));
+    pin.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") selectCompanyMapEvent(item); });
+    pin.addEventListener("mouseenter", event => showCompanyMapTooltip(event, item));
+    pin.addEventListener("mouseleave", () => $("companyMapTooltip").classList.remove("show"));
+    svg.appendChild(pin);
+  });
+  if (events[0]) selectCompanyMapEvent(events[0]);
+  $("companyMapLoading").hidden = true;
+  $("companyMapCanvas").classList.add("map-ready");
+}
+
+async function switchCompanyMapPeriod(period) {
+  state.companyMapPeriod = period === "week" ? "week" : "today";
+  document.querySelectorAll("[data-company-map-period]").forEach(button => {
+    const active = button.dataset.companyMapPeriod === state.companyMapPeriod;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  const events = companyMapEvents(state.companyMapPeriod);
+  $("companyMapPlaceList").innerHTML = events.length
+    ? events.map(item => `<button type="button" data-company-map-id="${esc(item.marker_id)}"><i></i>${esc(item.place)}<span>${esc((item.companies || []).join("、"))}</span></button>`).join("")
+    : `<span>${state.companyMapPeriod === "today" ? "今日队列" : "本周"}暂无可定位的企业情报；系统不会为填满地图而猜测项目地点。</span>`;
+  document.querySelectorAll("[data-company-map-id]").forEach(button => button.addEventListener("click", () => {
+    const item = events.find(event => event.marker_id === button.dataset.companyMapId);
+    if (item) selectCompanyMapEvent(item);
+  }));
+  await renderCompanyMap(events);
 }
 
 const COUNTRY_CONCEPTS = [
@@ -902,7 +1058,7 @@ function renderHeatmap(id, matrix) {
 }
 
 async function init() {
-  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team] = await Promise.all([
+  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
     fetchJson("./data/corpus_analytics.json").catch(() => null),
@@ -912,15 +1068,19 @@ async function init() {
     fetchJson("./data/site_metrics.json").catch(() => null),
     fetchJson("./data/subscription.json").catch(() => null),
     fetchJson("./data/team.json").catch(() => null),
+    fetchJson("./data/energy_companies.json").catch(() => null),
   ]);
   state.siteMetrics = siteMetrics;
   state.subscription = subscription;
   state.team = team;
+  state.companyData = companyData;
   state.datasets.climate = { dashboard, archive, analytics };
   if (energyDashboard && energyArchive) {
     state.datasets.energy = { dashboard: energyDashboard, archive: energyArchive, analytics: energyAnalytics };
   }
-  const requestedMode = localStorage.getItem("climateTextMode") === "energy" ? "energy" : "climate";
+  const requestedMode = new URLSearchParams(location.search).get("mode") === "energy"
+    || localStorage.getItem("climateTextMode") === "energy" ? "energy" : "climate";
+  setupCompanyIntelligence();
   activateMode(requestedMode);
   setupFilters();
   setupAssistant();

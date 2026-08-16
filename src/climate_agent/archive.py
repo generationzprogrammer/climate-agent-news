@@ -137,6 +137,7 @@ def _record(item: dict, now: str, previous: dict | None = None) -> dict:
         "fact_status": item.get("fact_status"),
         "content_hash": item.get("content_hash"),
         "poster_phrase": item.get("poster_phrase"),
+        "company_entities": list(item.get("company_entities") or [])[:8],
         "quality": quality,
         "molecule": {
             "identity": item.get("article_id"),
