@@ -196,26 +196,36 @@ function renderMiniLineChart(id, rows, label) {
     element.innerHTML = '<div class="empty compact"><b>暂无曲线数据</b></div>';
     return;
   }
-  const width = 620, height = 168, left = 50, right = 18, top = 16, bottom = 34;
+  const width = 620, height = 168, left = 58, right = 18, top = 14, bottom = 36;
   const values = rows.map(row => Number(row.value || 0));
   const minValue = Math.min(...values);
-  const maxValue = Math.max(...values, minValue + 1);
+  const rawMax = Math.max(...values);
+  const rawRange = Math.max(1, rawMax - minValue);
+  let tickStep = Math.max(1, Math.ceil(rawRange / 3));
+  let yStart = Math.floor(minValue / tickStep) * tickStep;
+  while (yStart + tickStep * 3 < rawMax) tickStep += 1;
+  const yTicks = Array.from({ length: 4 }, (_, index) => yStart + tickStep * index);
+  const maxValue = yTicks.at(-1);
   const span = Math.max(1, rows.length - 1);
   const px = index => left + index / span * (width - left - right);
-  const py = value => top + (1 - (value - minValue) / (maxValue - minValue)) * (height - top - bottom);
+  const py = value => top + (1 - (value - yStart) / Math.max(1, maxValue - yStart)) * (height - top - bottom);
   const points = rows.map((row, index) => [px(index), py(Number(row.value || 0))]);
   const path = points.map((point, index) => `${index ? "L" : "M"}${point[0].toFixed(1)},${point[1].toFixed(1)}`).join(" ");
   const area = `${path} L${points.at(-1)[0].toFixed(1)},${height - bottom} L${points[0][0].toFixed(1)},${height - bottom} Z`;
-  const tickIndexes = [...new Set([0, Math.floor(span / 2), span])];
+  const tickIndexes = [...new Set(Array.from({ length: 5 }, (_, index) => Math.round(span * index / 4)))];
+  const dateLabel = value => {
+    const parts = String(value || "").split("-");
+    return parts.length === 3 ? `${Number(parts[1])}月${Number(parts[2])}日` : value;
+  };
   element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}">
-    <line class="chart-gridline" x1="${left}" y1="${top}" x2="${width - right}" y2="${top}"></line>
-    <line class="chart-gridline" x1="${left}" y1="${height - bottom}" x2="${width - right}" y2="${height - bottom}"></line>
-    <text class="chart-muted" x="${left - 8}" y="${top + 4}" text-anchor="end">${formatCount(maxValue)}</text>
-    <text class="chart-muted" x="${left - 8}" y="${height - bottom + 4}" text-anchor="end">${formatCount(minValue)}</text>
+    ${yTicks.map(value => {
+      const y = py(value);
+      return `<line class="chart-gridline" x1="${left}" y1="${y}" x2="${width - right}" y2="${y}"></line><text class="chart-muted mini-axis-label" x="${left - 8}" y="${y + 4}" text-anchor="end">${Math.round(value)}</text>`;
+    }).join("")}
+    <line class="chart-axis" x1="${left}" y1="${height - bottom}" x2="${width - right}" y2="${height - bottom}"></line>
     <path class="chart-area" d="${area}"></path>
     <path class="chart-line" d="${path}"></path>
-    <circle class="chart-dot" cx="${points.at(-1)[0]}" cy="${points.at(-1)[1]}" r="3.4"></circle>
-    ${tickIndexes.map(index => `<text class="chart-muted" x="${px(index)}" y="${height - 10}" text-anchor="middle">${esc(rows[index].date.slice(5))}</text>`).join("")}
+    ${tickIndexes.map(index => `<line class="chart-axis-tick" x1="${px(index)}" y1="${height - bottom}" x2="${px(index)}" y2="${height - bottom + 4}"></line><circle class="chart-dot chart-hover-dot" cx="${points[index][0]}" cy="${points[index][1]}" r="4"><title>${esc(rows[index].date)}：${Math.round(values[index])}</title></circle><text class="chart-muted mini-axis-label" x="${px(index)}" y="${height - 10}" text-anchor="middle">${esc(dateLabel(rows[index].date))}</text>`).join("")}
   </svg>`;
 }
 
@@ -751,8 +761,13 @@ function setupSubscribe() {
   const open = $("subscribeOpen");
   const modal = $("subscribeModal");
   const form = $("subscribeForm");
+  const close = $("subscribeClose");
   if (!open || !modal || !form) return;
   open.addEventListener("click", () => modal.showModal());
+  close?.addEventListener("click", () => modal.close());
+  modal.addEventListener("click", event => {
+    if (event.target === modal) modal.close();
+  });
   form.addEventListener("submit", async event => {
     event.preventDefault();
     const email = $("subscribeEmail").value.trim();

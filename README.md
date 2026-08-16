@@ -55,7 +55,7 @@
 3. 在 `Actions` 中手动运行一次“发布气候情报网站”，或等待首次推送触发。
 4. 部署完成后，Pages 页面会显示公开网址。
 
-默认使用工作流自带的 `GITHUB_TOKEN` 调用 GitHub Models（`openai/gpt-4.1`）编译新记录，无需另存模型密钥。工作流带有中文、来源、时间、HTTPS 链接和 100000 条上限门禁，检查不通过时停止部署并保留上一版网站。需要替换为其他 OpenAI 兼容模型时，可添加：
+默认使用工作流自带的 `GITHUB_TOKEN` 调用 GitHub Models（`openai/gpt-4.1-mini`）编译新记录，无需另存模型密钥。每日仅处理新近候选，适合当前原型阶段的免费限额；GitHub Models 免费接口属于受限的试验服务，若后续订阅规模扩大，可通过下列 Secrets 切换到付费 OpenAI 兼容接口。工作流带有中文、来源、时间、HTTPS 链接和 100000 条上限门禁，检查不通过时停止部署并保留上一版网站：
 
 ```text
 CLIMATE_MODEL_BASE_URL
@@ -69,7 +69,7 @@ CLIMATE_MODEL_NAME
 
 1. P0 RSS/API 各自限时、有限重试；单源失败不阻塞其他来源。连续失败 3 次进入观察，7 次进入隔离；隔离来源每 7 天自动复测，恢复后自动启用。
 2. 新文章执行 URL 规范化、未来时间剔除、主题与相关性评分。
-3. GitHub Models 将最近新记录编译为中文结构化字段；若模型输出缺失或出现套话，系统使用来源、标题、地点、数字和议题自动生成保守中文段落，避免第二天定时更新后只剩标题和标签。
+3. 在来源许可与 `robots.txt` 允许的情况下，系统以明确 User-Agent、10 秒超时和 1 MB 响应上限读取公开文章页，只在内存中提取短正文片段，不保存网页全文。GitHub Models 根据英文标题、来源短摘要和该片段生成忠实中文标题与实质性概括；若模型失败、输出套话或把标题改写成分类标签，该记录继续留在待重试队列，不进入公开首页。
 4. 只有中文标题、中文概要、来源、发布时间和 HTTPS 原文全部存在，且权威度与相关性达标的记录才进入公开数据集。
 5. `data/news_archive.json` 按 canonical URL 合并，保留内容哈希与首次/最近归档时间，按发布时间排序并裁剪为最多 100000 条。
 6. 质量门禁通过后才部署 Pages；失败时网站保持上一成功版本。
@@ -99,7 +99,7 @@ CLIMATE_MODEL_NAME
 
 邮件兜底使用 `CLIMATE_SMTP_*` 和逗号分隔的 `CLIMATE_MAIL_TO`。`--channel auto` 会发送到已配置的渠道；没有配置渠道时安全跳过。GitHub Pages 工作流会在每天 06:30 完成同步、中文质量门禁和部署后，再自动运行这一步。手动运行工作流时，需要勾选“发送企业微信/邮件提醒”。
 
-每周订阅发送使用 `CLIMATE_WEEKLY_SUBSCRIBERS`，以逗号分隔收件人。网页“订阅”按钮不会在静态站点中保存邮箱；默认打开邮件请求，管理员确认后把地址加入 GitHub Secrets。若后续接入表单服务，可设置 `CLIMATE_SUBSCRIBE_ENDPOINT` 与 `CLIMATE_UNSUBSCRIBE_ENDPOINT`。
+每周订阅发送使用 `CLIMATE_WEEKLY_SUBSCRIBERS`，以逗号分隔收件人；同时必须配置 `CLIMATE_SMTP_*`。网页“订阅”按钮不会在静态站点中保存邮箱；默认打开邮件请求，管理员确认后把地址加入 GitHub Secrets。每周一北京时间 08:00 的工作流读取最新周报快照并逐一发送，日志只显示收件人数。若接入具备访问控制的外部表单服务，可设置 `CLIMATE_SUBSCRIBE_ENDPOINT` 与 `CLIMATE_UNSUBSCRIBE_ENDPOINT`，订阅地址仍不得写入仓库。
 
 GitHub Secrets 可配置：
 

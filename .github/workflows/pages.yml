@@ -55,7 +55,9 @@ jobs:
           CLIMATE_TRANSLATION_LIMIT: ${{ github.event_name == 'push' && '40' || '20' }}
           CLIMATE_MODEL_BASE_URL: ${{ secrets.CLIMATE_MODEL_BASE_URL || 'https://models.github.ai/inference' }}
           CLIMATE_MODEL_API_KEY: ${{ secrets.CLIMATE_MODEL_API_KEY || github.token }}
-          CLIMATE_MODEL_NAME: ${{ secrets.CLIMATE_MODEL_NAME || 'openai/gpt-4.1' }}
+          # 低成本多语言模型足以完成标题忠实翻译和短篇事实概括；
+          # 如需生产级额度，可用同名 Secret 切换到付费 OpenAI 兼容接口。
+          CLIMATE_MODEL_NAME: ${{ secrets.CLIMATE_MODEL_NAME || 'openai/gpt-4.1-mini' }}
           CLIMATE_SUBSCRIBE_ENDPOINT: ${{ secrets.CLIMATE_SUBSCRIBE_ENDPOINT }}
           CLIMATE_UNSUBSCRIBE_ENDPOINT: ${{ secrets.CLIMATE_UNSUBSCRIBE_ENDPOINT }}
           CLIMATE_PUBLIC_CONTACT_EMAIL: ${{ secrets.CLIMATE_PUBLIC_CONTACT_EMAIL }}

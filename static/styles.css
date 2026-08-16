@@ -396,6 +396,7 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
   vector-effect: non-scaling-stroke;
 }
 .chart-gridline { stroke-dasharray: 2 4; }
+.chart-axis-tick { stroke: #9ba7b7; stroke-width: 1; vector-effect: non-scaling-stroke; }
 .chart-label {
   fill: #263242;
   font: 12px var(--sans);
@@ -416,6 +417,9 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 }
 .chart-area { fill: rgba(23, 78, 166, .09); }
 .chart-dot { fill: #fff; stroke: var(--blue); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.chart-hover-dot { cursor: crosshair; }
+.chart-hover-dot:hover { fill: var(--blue); }
+.mini-axis-label { font-family: Arial, "Microsoft YaHei", sans-serif; font-size: 10px; font-variant-numeric: tabular-nums; }
 .bar-fill { fill: #174ea6; }
 .bar-fill.alt { fill: #6f7f95; }
 .bar-track { fill: #edf1f6; }

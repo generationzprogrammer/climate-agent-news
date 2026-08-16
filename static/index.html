@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>ClimateText Lab｜国际气候情报与文本数据库</title>
-  <link rel="stylesheet" href="./styles.css?v=20260815-1">
+  <link rel="stylesheet" href="./styles.css?v=20260816-2">
 </head>
 <body>
   <header class="topbar">
@@ -186,14 +186,14 @@
     <div><a href="./data/daily_brief.pdf">下载今日简报</a><a href="./data/global_climate_analysis_report_latest.html">全球气候分析报告</a><a href="./data/news_archive.json">开放数据</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
   </footer>
   <dialog class="modal" id="subscribeModal">
-    <form method="dialog" class="modal-card" id="subscribeForm">
-      <button class="modal-close" value="cancel" aria-label="关闭">×</button>
+    <form class="modal-card" id="subscribeForm">
+      <button class="modal-close" id="subscribeClose" type="button" aria-label="关闭订阅窗口">×</button>
       <p class="overline">WEEKLY BRIEFING</p>
       <h2>订阅每周气候情报周报</h2>
       <p>请输入邮箱。若站点已配置安全订阅端点，系统会提交订阅请求；若未配置，将自动生成一封订阅申请邮件。邮箱列表不会写入公开源码或 Git 历史。</p>
       <label><span>邮箱</span><input id="subscribeEmail" type="email" required placeholder="name@example.com" autocomplete="email"></label>
-      <div class="modal-actions"><button type="submit">提交订阅</button><a href="./data/weekly_report.pdf" download>下载本周周报</a></div>
-      <small id="subscribeHint">订阅后每周一北京时间自动发送周报；退订可回复“退订气候周报”。</small>
+      <div class="modal-actions"><button type="submit">提交订阅</button><a id="weeklyDownload" href="./data/weekly_report.pdf" target="_blank" rel="noopener">下载本周周报</a></div>
+      <small id="subscribeHint">订阅经确认后，每周一北京时间自动发送周报；退订可回复“退订气候周报”。</small>
     </form>
   </dialog>
   <dialog class="modal" id="teamModal">
@@ -205,6 +205,6 @@
     </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260815-1" defer></script>
+  <script src="./app.js?v=20260816-2" defer></script>
 </body>
 </html>

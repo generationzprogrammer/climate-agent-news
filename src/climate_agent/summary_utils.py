@@ -11,6 +11,12 @@ GENERIC_SUMMARY_MARKERS = (
     "这条情报聚焦",
     "需要重点关注其对政策执行、谈判表述或风险研判的影响",
     "概要待补充",
+    "来源消息显示",
+    "消息显示，涉及",
+    "报道中出现",
+    "主题上属于",
+    "该段为题名与来源摘要的保守编译",
+    "议题受到关注",
 )
 
 GENERIC_TITLE_MARKERS = (
@@ -27,6 +33,10 @@ GENERIC_TITLE_MARKERS = (
     "气候资金议题出现新进展",
     "清洁能源转型出现新进展",
     "碳排放治理出现新动向",
+    "议题受到关注",
+    "受到关注",
+    "推进可再生能源转型",
+    "净零与减排措施受到关注",
 )
 
 NUMBER_RE = re.compile(
@@ -43,7 +53,21 @@ def is_generic_summary(text: str | None) -> bool:
 
 def is_generic_title(text: str | None) -> bool:
     value = str(text or "").strip()
-    return not value or value in GENERIC_TITLE_MARKERS
+    return not value or any(marker in value for marker in GENERIC_TITLE_MARKERS)
+
+
+def sanitize_summary(text: str | None) -> str:
+    value = re.sub(r"<[^>]+>", " ", str(text or ""))
+    value = re.sub(r"\s+", " ", value).strip()
+    if not value:
+        return ""
+    sentences = re.split(r"(?<=[。！？!?])\s*", value)
+    kept = [
+        sentence.strip()
+        for sentence in sentences
+        if sentence.strip() and not any(marker in sentence for marker in GENERIC_SUMMARY_MARKERS)
+    ]
+    return "".join(kept).strip()[:220]
 
 
 def intelligence_keywords(record: dict, limit: int = 5) -> list[str]:
@@ -98,26 +122,10 @@ def infer_focus(text: str, theme_zh: str) -> str:
 
 
 def factual_fallback_summary(record: dict) -> str:
-    title_zh = str(record.get("title_zh") or "该条情报").strip()
-    theme_zh = str(record.get("theme_zh") or record.get("theme") or "气候动态").strip()
-    source_name = str(record.get("source_name") or record.get("source_domain") or "来源").strip()
-    source_text = " ".join(str(record.get(key) or "") for key in ("title_original", "summary_source", "source_name", "source_domain"))
-    places = record.get("places") or []
-    place_names = []
-    for place in places:
-        if isinstance(place, dict):
-            name = place.get("name_zh") or place.get("name")
-        else:
-            name = str(place)
-        if name and name not in place_names:
-            place_names.append(str(name))
-    place_part = f"涉及{ '、'.join(place_names[:2]) }，" if place_names else ""
-    numbers = extract_numbers(source_text)
-    number_part = f"报道中出现{ '、'.join(numbers) }等量化信息，" if numbers else ""
-    if title_zh.endswith(("。", "！", "？")):
-        title_sentence = title_zh
-    else:
-        title_sentence = f"{title_zh}。"
-    theme_part = f"主题上属于{theme_zh}。"
-    caveat = "该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。"
-    return f"{source_name}消息显示，{place_part}{title_sentence}{number_part}{theme_part}{caveat}".replace("。。", "。")[:220]
+    # Fallbacks must remain extractive. English evidence is never pseudo-translated
+    # with a template; it stays pending until the model can produce grounded Chinese.
+    for key in ("summary_source", "source_excerpt"):
+        value = sanitize_summary(record.get(key))
+        if value and re.search(r"[\u4e00-\u9fff]", value):
+            return value
+    return ""

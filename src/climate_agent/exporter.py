@@ -59,7 +59,7 @@ def export_static_site(
         "privacy_note": "订阅邮箱不写入公开源码或Git历史；请使用表单端点或GitHub Secrets保存订阅列表。",
     }, ensure_ascii=False, indent=2), encoding="utf-8")
     team = {
-        "updated_at": "2026-08-15",
+        "updated_at": "2026-08-16",
         "members": [
             {
                 "name": "宋伟泽",
@@ -68,7 +68,7 @@ def export_static_site(
                 "research": "低碳转型情景推演理论与方法；环境系统与智能决策；零碳园区治理与政策创新；城市空间环境绩效量化评估。",
             },
             {
-                "name": "袁宇航",
+                "name": "袁誉杭",
                 "role": "清华大学化学工程系在读博士",
                 "email": "yuan-yh21@mails.tsinghua.edu.cn",
                 "research": "锂电池电解液与人工智能交叉领域。",

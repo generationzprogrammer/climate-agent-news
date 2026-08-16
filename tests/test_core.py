@@ -7,8 +7,10 @@ import unittest
 from collections import Counter
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
 from climate_agent.archive import quality_result, update_archive, validate_public_payload
+from climate_agent.article_content import extract_article_text
 from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week, weekly_report_payload
 from climate_agent.cli import ROOT, bootstrap
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
@@ -21,7 +23,7 @@ from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _source_scope_match
-from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows
+from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
 class CoreTests(unittest.TestCase):
@@ -279,6 +281,8 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / "data" / "site_metrics.json").exists())
         self.assertTrue((output_dir / "data" / "subscription.json").exists())
         self.assertTrue((output_dir / "data" / "team.json").exists())
+        team = json.loads((output_dir / "data" / "team.json").read_text(encoding="utf-8"))
+        self.assertIn("袁誉杭", {member["name"] for member in team["members"]})
         pdf = (output_dir / "data" / "daily_brief.pdf").read_bytes()
         self.assertTrue(pdf.startswith(b"%PDF-1.4"))
         self.assertIn(b"/BaseFont /Times-Roman", pdf)
@@ -337,6 +341,8 @@ class CoreTests(unittest.TestCase):
         self.assertIn("items.slice(0, 10)", app)
         self.assertIn("下载今日简报", html)
         self.assertIn('id="subscribeOpen"', html)
+        self.assertIn('id="subscribeClose"', html)
+        self.assertIn('id="weeklyDownload"', html)
         self.assertIn('id="teamOpen"', html)
         self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
@@ -365,6 +371,7 @@ class CoreTests(unittest.TestCase):
         self.assertIn("data/source_health.json", workflow)
         self.assertIn("data/visitor_history.json", workflow)
         self.assertIn("CLIMATE_TRANSLATION_LIMIT", workflow)
+        self.assertIn("openai/gpt-4.1-mini", workflow)
         self.assertIn("deliver-weekly", workflow)
 
     def test_latest_day_and_week_use_beijing_calendar(self) -> None:
@@ -547,16 +554,14 @@ class CoreTests(unittest.TestCase):
         self.assertEqual([row["source_id"] for row in selected[:3]], ["A", "C", "D"])
         self.assertEqual({row["source_id"] for row in selected}, {"A", "B", "C", "D"})
 
-    def test_translation_fallback_compiles_metadata_title_without_summary(self) -> None:
+    def test_translation_fallback_keeps_english_item_out_of_public_queue(self) -> None:
         item = _fallback_translation({
             "title_original": "Heat wave brings heightened wildfire risk to Western US",
             "summary_source": "",
         })
-        self.assertIn("美国", item["title_zh"])
-        self.assertIn("高温", item["title_zh"])
-        self.assertGreater(len(item["summary_zh"]), 20)
-        self.assertNotIn("概要待补充", item["summary_zh"])
-        self.assertEqual(item["translation_status"], "metadata_compiled_needs_review")
+        self.assertEqual(item["title_zh"], "Heat wave brings heightened wildfire risk to Western US")
+        self.assertEqual(item["summary_zh"], "")
+        self.assertEqual(item["translation_status"], "model_retry_required")
         self.assertEqual(item["places"][0]["name_zh"], "美国")
 
     def test_translation_fallback_compiles_recent_metadata_places(self) -> None:
@@ -565,8 +570,53 @@ class CoreTests(unittest.TestCase):
             "summary_source": "",
         })
         self.assertEqual(item["places"][0]["name_zh"], "马来西亚")
-        self.assertIn("马来西亚", item["title_zh"])
-        self.assertIn("高温", item["title_zh"])
+        self.assertEqual(item["title_zh"], "Climate change in Malaysia turns up heat on youth")
+        self.assertEqual(item["translation_status"], "model_retry_required")
+
+    def test_article_extractor_prefers_public_article_body(self) -> None:
+        html = """<html><head><meta name="description" content="Short description."></head><body>
+        <nav>Navigation text must not be used.</nav><article>
+        <p>The government approved a 2.4 billion dollar climate resilience programme covering coastal infrastructure and early-warning systems.</p>
+        <p>The first projects will begin in 2027 and prioritise communities exposed to flooding.</p>
+        </article></body></html>"""
+        result = extract_article_text(html)
+        self.assertEqual(result["basis"], "article_paragraphs")
+        self.assertIn("2.4 billion", result["text"])
+        self.assertNotIn("Navigation", result["text"])
+
+    def test_translation_uses_page_excerpt_and_records_model_basis(self) -> None:
+        row = {
+            "article_id": "article_model", "source_id": "INT001", "source_url": "https://example.org/climate",
+            "canonical_url": "https://example.org/climate", "title_original": "Government approves coastal climate fund",
+            "title_zh": None, "summary_source": "A new programme was approved.",
+            "published_at_utc": f"{date.today().isoformat()}T00:00:00+00:00", "language": "en",
+            "rights_status": "metadata_only", "content_hash": "model-test", "fetched_at": f"{date.today().isoformat()}T01:00:00+00:00",
+            "relevance_score": 80, "topics": ["气候适应"], "numbers": [], "metadata": {},
+        }
+        self.db.upsert_articles([row])
+
+        class Model:
+            model = "openai/test-mini"
+            payload = None
+
+            def complete_json(self, system, payload):
+                self.payload = payload
+                return {"translations": [{
+                    "article_id": "article_model", "title_zh": "政府批准沿海气候基金",
+                    "summary_zh": "政府批准新的沿海气候韧性基金，资金将用于防洪基础设施和社区预警系统建设。",
+                    "theme_zh": "气候适应", "importance_zh": "为沿海适应项目提供实施资金。", "poster_phrase": "沿海韧性基金",
+                }]}
+
+        model = Model()
+        with patch("climate_agent.translation.fetch_article_text", return_value={"text": "The fund covers flood barriers and warning systems.", "basis": "article_paragraphs"}):
+            result = translate_pending(self.db, model, limit=1)
+        self.assertEqual(result["translated"], 1)
+        self.assertIn("flood barriers", model.payload["articles"][0]["article_excerpt"])
+        saved = self.db.rows("SELECT title_zh,metadata_json FROM articles WHERE article_id='article_model'")[0]
+        metadata = json.loads(saved["metadata_json"])
+        self.assertEqual(saved["title_zh"], "政府批准沿海气候基金")
+        self.assertEqual(metadata["translation_model"], "openai/test-mini")
+        self.assertEqual(metadata["content_basis"], "article_paragraphs")
 
     def test_source_health_quarantines_only_after_repeated_failures(self) -> None:
         state = {"sources": {}}
