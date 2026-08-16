@@ -154,6 +154,15 @@ def main(argv: list[str] | None = None) -> int:
                 )
             except Exception as exc:
                 result["translation"] = {"status": "failed", "error": str(exc)}
+        # Emit collection and model diagnostics before export: a strict stale-data
+        # gate may intentionally stop publication, but must not hide its cause.
+        print(json.dumps({
+            "sync_progress": {
+                "status": result.get("status"),
+                "p0": result.get("p0"),
+                "translation": result.get("translation"),
+            }
+        }, ensure_ascii=False), flush=True)
         result["web_export"] = export_static_site(
             db,
             ROOT / "static",

@@ -4,6 +4,8 @@ import json
 import os
 import smtplib
 import ssl
+import time
+import urllib.error
 import urllib.request
 from urllib.parse import urlparse
 from dataclasses import dataclass
@@ -49,9 +51,34 @@ class OpenAICompatibleModel:
         request = urllib.request.Request(
             f"{self.base_url}/chat/completions", data=body, method="POST", headers=headers,
         )
-        with urllib.request.urlopen(request, timeout=self.timeout) as response:
-            result = json.loads(response.read())
-        return json.loads(result["choices"][0]["message"]["content"])
+        last_error: Exception | None = None
+        for attempt, delay in enumerate((0, 2, 5)):
+            if delay:
+                time.sleep(delay)
+            try:
+                with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                    result = json.loads(response.read())
+                content = str(result["choices"][0]["message"]["content"]).strip()
+                if content.startswith("```"):
+                    content = content.split("\n", 1)[-1]
+                    content = content.rsplit("```", 1)[0].strip()
+                try:
+                    return json.loads(content)
+                except json.JSONDecodeError:
+                    start = content.find("{")
+                    end = content.rfind("}")
+                    if start >= 0 and end > start:
+                        return json.loads(content[start:end + 1])
+                    raise
+            except urllib.error.HTTPError as exc:
+                last_error = exc
+                if exc.code not in {408, 429, 500, 502, 503, 504} or attempt == 2:
+                    raise
+            except (OSError, urllib.error.URLError) as exc:
+                last_error = exc
+                if attempt == 2:
+                    raise
+        raise RuntimeError(f"model request failed: {last_error}")
 
 
 def publish_file(markdown: str, output: Path) -> Path:
