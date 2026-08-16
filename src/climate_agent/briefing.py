@@ -332,7 +332,15 @@ def _publishable_candidates(db: Database) -> list[dict]:
                  a.published_at_utc DESC
         LIMIT 600
     """
+    # Relevance-only truncation can hide today's moderate-score regional news
+    # behind older high-score records. Merge a quality slice with a freshness
+    # slice before applying the public-language and editorial gates.
     rows = db.rows(base_query.format(where_clause=""))
+    recent_rows = db.rows(base_query.format(
+        where_clause="WHERE datetime(a.published_at_utc) >= datetime('now','-8 days')"
+    ))
+    seen_article_ids = {row["article_id"] for row in rows}
+    rows.extend(row for row in recent_rows if row["article_id"] not in seen_article_ids)
     items = []
     for row in rows:
         metadata = _decode_json(row.pop("metadata_json"), {})

@@ -365,13 +365,13 @@ class CoreTests(unittest.TestCase):
         workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
         self.assertIn('cron: "30 22 * * *"', workflow)
         self.assertIn('cron: "0 0 * * 1"', workflow)
-        self.assertIn("models: read", workflow)
         self.assertIn("contents: write", workflow)
         self.assertIn("data/news_archive.json", workflow)
         self.assertIn("data/source_health.json", workflow)
         self.assertIn("data/visitor_history.json", workflow)
         self.assertIn("CLIMATE_TRANSLATION_LIMIT", workflow)
-        self.assertIn("openai/gpt-4.1-mini", workflow)
+        self.assertIn("gemini-3.5-flash-lite", workflow)
+        self.assertIn("secrets.GEMINI_API_KEY", workflow)
         self.assertIn("deliver-weekly", workflow)
 
     def test_latest_day_and_week_use_beijing_calendar(self) -> None:
