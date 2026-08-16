@@ -65,6 +65,8 @@ CLIMATE_MODEL_NAME
 
 免费方案只需配置 `GEMINI_API_KEY`；付费或其他服务使用上面的三个通用 Secret。密钥只保存在 GitHub Secrets 中，不要写入代码或提交到仓库。仓库配置为每天 `22:30 UTC`，即北京时间次日 06:30；周报配置为每周一 `00:00 UTC`，即北京时间 08:00。内部仍保存审核状态用于发布门禁，但不在公开网站展示等级。正式决策使用前仍应核对原文。
 
+访问曲线使用 Cloudflare Web Analytics 的真实页面加载事件。前端只注入Cloudflare公开站点令牌；只读API令牌和Account ID仅由每日工作流从GitHub Secrets读取，不进入网页、源码或日志。配置项为 `CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN`、`CLOUDFLARE_ACCOUNT_ID` 和 `CLOUDFLARE_ANALYTICS_API_TOKEN`。曲线随每日部署刷新，并从启用统计之日起累计。
+
 ## 每日更新与 100000 条档案
 
 1. P0 RSS/API 各自限时、有限重试；单源失败不阻塞其他来源。连续失败 3 次进入观察，7 次进入隔离；隔离来源每 7 天自动复测，恢复后自动启用。

@@ -145,3 +145,84 @@ def update_github_visitor_history(path: Path, *, repo: str | None = None, token:
     ]
     saved = save_visitor_history(path, [*existing, *incoming])
     return {"status": "ok", "records": len(saved["records"])}
+
+
+def update_cloudflare_visitor_history(
+    path: Path,
+    *,
+    account_id: str,
+    api_token: str,
+    hostname: str,
+    days: int = 92,
+) -> dict:
+    """Read privacy-preserving Web Analytics page loads into daily history."""
+    if not account_id or not api_token or not hostname:
+        return {"status": "skipped", "reason": "missing_cloudflare_configuration"}
+    end_day = datetime.now(UTC).date()
+    start_day = end_day - timedelta(days=max(1, days) - 1)
+    query = """
+    query DailyPageviews($accountTag: string!, $filter: AccountRumPageloadEventsAdaptiveGroupsFilter_InputObject!) {
+      viewer {
+        accounts(filter: {accountTag: $accountTag}) {
+          series: rumPageloadEventsAdaptiveGroups(
+            limit: 1000
+            orderBy: [date_ASC]
+            filter: $filter
+          ) {
+            count
+            dimensions { date }
+          }
+        }
+      }
+    }
+    """
+    body = json.dumps({
+        "query": query,
+        "variables": {
+            "accountTag": account_id,
+            "filter": {
+                "AND": [
+                    {
+                        "datetime_geq": f"{start_day.isoformat()}T00:00:00Z",
+                        "datetime_leq": f"{end_day.isoformat()}T23:59:59Z",
+                    },
+                    {"requestHost": hostname},
+                    {"bot": 0},
+                ]
+            },
+        },
+    }).encode("utf-8")
+    request = urllib.request.Request(
+        "https://api.cloudflare.com/client/v4/graphql",
+        data=body,
+        method="POST",
+        headers={
+            "Authorization": f"Bearer {api_token}",
+            "Content-Type": "application/json",
+            "User-Agent": "ClimateText-Lab/1.0",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+    if payload.get("errors"):
+        messages = "; ".join(str(item.get("message") or "GraphQL error") for item in payload["errors"][:3])
+        raise RuntimeError(f"Cloudflare analytics query failed: {messages[:300]}")
+    accounts = (((payload.get("data") or {}).get("viewer") or {}).get("accounts") or [])
+    if not accounts:
+        raise RuntimeError("Cloudflare analytics query returned no accessible account")
+    incoming = [
+        {
+            "date": str((item.get("dimensions") or {}).get("date") or "")[:10],
+            "views": int(item.get("count") or 0),
+            "uniques": 0,
+        }
+        for item in accounts[0].get("series", [])
+        if (item.get("dimensions") or {}).get("date")
+    ]
+    saved = save_visitor_history(path, [*load_visitor_history(path), *incoming])
+    return {
+        "status": "ok",
+        "provider": "cloudflare_web_analytics",
+        "records": len(saved["records"]),
+        "latest_views": incoming[-1]["views"] if incoming else 0,
+    }

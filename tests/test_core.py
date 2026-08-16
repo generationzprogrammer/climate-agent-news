@@ -22,6 +22,7 @@ from climate_agent.historical_backfill import article_to_historical_record, upse
 from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
+from climate_agent.site_metrics import update_cloudflare_visitor_history
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _source_scope_match
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
@@ -291,6 +292,46 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(result["quality_gate"], "passed")
         self.assertEqual(result["articles"], len(payload["intelligence"]))
 
+    def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
+        self.seed_publishable_article()
+        static_dir = Path(self.temp.name) / "static-cloudflare"
+        output_dir = Path(self.temp.name) / "dist-cloudflare"
+        shutil.copytree(ROOT / "static", static_dir)
+        site_token = "public_site_token_1234567890"
+        with patch.dict("os.environ", {"CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN": site_token}):
+            result = export_static_site(self.db, static_dir, output_dir)
+        deployed = (output_dir / "index.html").read_text(encoding="utf-8")
+        source = (static_dir / "index.html").read_text(encoding="utf-8")
+        self.assertTrue(result["analytics_beacon"])
+        self.assertIn("static.cloudflareinsights.com/beacon.min.js", deployed)
+        self.assertIn(site_token, deployed)
+        self.assertNotIn(site_token, source)
+
+    def test_cloudflare_pageviews_are_saved_without_api_token(self) -> None:
+        class Response:
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def read(self):
+                return json.dumps({"data": {"viewer": {"accounts": [{"series": [
+                    {"count": 3, "dimensions": {"date": "2026-08-16"}},
+                ]}]}}}).encode("utf-8")
+
+        path = Path(self.temp.name) / "visitor_history.json"
+        with patch("climate_agent.site_metrics.urllib.request.urlopen", return_value=Response()) as mocked:
+            result = update_cloudflare_visitor_history(
+                path,
+                account_id="account-id",
+                api_token="private-token",
+                hostname="generationzprogrammer.github.io",
+            )
+        request = mocked.call_args.args[0]
+        body = json.loads(request.data)
+        saved = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(result["provider"], "cloudflare_web_analytics")
+        self.assertEqual(saved["records"][-1]["views"], 3)
+        self.assertNotIn("private-token", json.dumps(saved))
+        self.assertIn("generationzprogrammer.github.io", json.dumps(body))
+
     def test_push_message_uses_only_user_facing_intelligence(self) -> None:
         payload = {
             "meta": {"date": "2026-07-17"},
@@ -372,6 +413,8 @@ class CoreTests(unittest.TestCase):
         self.assertIn("CLIMATE_TRANSLATION_LIMIT", workflow)
         self.assertIn("gemini-3.5-flash-lite", workflow)
         self.assertIn("secrets.GEMINI_API_KEY", workflow)
+        self.assertIn("secrets.CLOUDFLARE_ANALYTICS_API_TOKEN", workflow)
+        self.assertIn("secrets.CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN", workflow)
         self.assertIn("deliver-weekly", workflow)
 
     def test_latest_day_and_week_use_beijing_calendar(self) -> None:

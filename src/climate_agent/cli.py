@@ -19,7 +19,7 @@ from .providers import OpenAICompatibleModel, publish_email, publish_file, publi
 from .regional_seed import import_regional_seed
 from .sync import P0_SOURCE_IDS, sync_p0
 from .source_health import load_source_health, save_source_health, source_is_due, update_source_health
-from .site_metrics import update_github_visitor_history
+from .site_metrics import update_cloudflare_visitor_history, update_github_visitor_history
 from .translation import translate_pending
 from .web import serve
 
@@ -283,7 +283,21 @@ def main(argv: list[str] | None = None) -> int:
             publish_email(message, recipient, subject=report.get("meta", {}).get("title", "国际气候情报周报"))
         print(json.dumps({"status": "sent", "channels": [f"email:{len(recipients)}"]}, ensure_ascii=False))
     elif args.command == "update-visitors":
-        print(json.dumps(update_github_visitor_history(args.output), ensure_ascii=False, indent=2))
+        cloudflare_names = (
+            "CLOUDFLARE_ACCOUNT_ID",
+            "CLOUDFLARE_ANALYTICS_API_TOKEN",
+            "CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN",
+        )
+        if all(os.getenv(name) for name in cloudflare_names):
+            result = update_cloudflare_visitor_history(
+                args.output,
+                account_id=os.environ["CLOUDFLARE_ACCOUNT_ID"],
+                api_token=os.environ["CLOUDFLARE_ANALYTICS_API_TOKEN"],
+                hostname=os.getenv("CLIMATE_SITE_HOSTNAME", "generationzprogrammer.github.io"),
+            )
+        else:
+            result = update_github_visitor_history(args.output)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 
 

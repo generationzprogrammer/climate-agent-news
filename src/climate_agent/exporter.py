@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 from pathlib import Path
 
@@ -12,6 +13,25 @@ from .db import Database
 from .energy_view import write_energy_view
 from .pdf_brief import write_daily_brief_pdf, write_weekly_report_pdf
 from .site_metrics import write_site_metrics
+
+
+def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
+    """Inject only Cloudflare's public site token; never an API credential."""
+    token = (token or "").strip()
+    if not token:
+        return False
+    if not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", token):
+        raise ValueError("invalid Cloudflare Web Analytics site token format")
+    html = index_path.read_text(encoding="utf-8")
+    marker = "https://static.cloudflareinsights.com/beacon.min.js"
+    if marker not in html:
+        beacon = (
+            "  <script defer src=\"https://static.cloudflareinsights.com/beacon.min.js\" "
+            f"data-cf-beacon='{{\"token\":\"{token}\"}}'></script>\n"
+        )
+        html = html.replace("</body>", f"{beacon}</body>")
+        index_path.write_text(html, encoding="utf-8")
+    return True
 
 
 def export_static_site(
@@ -100,6 +120,10 @@ def export_static_site(
             shutil.copy2(report_path, data_dir / report_name)
     output_dir.mkdir(parents=True, exist_ok=True)
     shutil.copytree(static_dir, output_dir, dirs_exist_ok=True)
+    analytics_beacon = _inject_cloudflare_beacon(
+        output_dir / "index.html",
+        os.getenv("CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN", ""),
+    )
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
     return {
         "output": str(output_dir),
@@ -115,6 +139,7 @@ def export_static_site(
         "energy_archive_total": energy_view["archive"].get("total", 0),
         "corpus_analytics_records": (analytics or {}).get("records", 0),
         "site_metrics_points": len(site_metrics.get("archive_cumulative", [])),
+        "analytics_beacon": analytics_beacon,
         "quality_gate": "passed",
         "generated_at": payload["meta"]["generated_at"],
     }

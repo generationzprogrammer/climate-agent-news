@@ -60,11 +60,15 @@ jobs:
           CLIMATE_SUBSCRIBE_ENDPOINT: ${{ secrets.CLIMATE_SUBSCRIBE_ENDPOINT }}
           CLIMATE_UNSUBSCRIBE_ENDPOINT: ${{ secrets.CLIMATE_UNSUBSCRIBE_ENDPOINT }}
           CLIMATE_PUBLIC_CONTACT_EMAIL: ${{ secrets.CLIMATE_PUBLIC_CONTACT_EMAIL }}
+          CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN: ${{ secrets.CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ANALYTICS_API_TOKEN: ${{ secrets.CLOUDFLARE_ANALYTICS_API_TOKEN }}
+          CLIMATE_SITE_HOSTNAME: generationzprogrammer.github.io
           GITHUB_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           python -m climate_agent.cli init
-          python -m climate_agent.cli update-visitors || true
+          python -m climate_agent.cli update-visitors
           python -m climate_agent.cli sync --skip-ndc
           python -m climate_agent.cli export-web --output site --archive-limit 100000
           python -m climate_agent.cli validate-publish --site site
