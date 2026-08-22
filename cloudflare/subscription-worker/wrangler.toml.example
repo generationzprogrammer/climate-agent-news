@@ -1,0 +1,12 @@
+name = "climate-news-subscriptions"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://generationzprogrammer.github.io"
+
+[[kv_namespaces]]
+binding = "SUBSCRIBERS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# ADMIN_TOKEN must be added with: npx wrangler secret put ADMIN_TOKEN

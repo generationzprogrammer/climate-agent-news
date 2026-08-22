@@ -5,6 +5,7 @@ const state = {
   assistant: { lastRecords: [], lastPlan: null },
   siteMetrics: null, subscription: null, team: null,
   companyData: null, companyFiltered: [], companyVisible: 12, companyMapPeriod: "today",
+  reportData: null, reportFiltered: [], reportVisible: 12,
 };
 const $ = id => document.getElementById(id);
 const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
@@ -146,6 +147,8 @@ function applyModeCopy() {
   const energyMode = state.mode === "energy";
   if ($("companies")) $("companies").hidden = !energyMode;
   if ($("companyNav")) $("companyNav").hidden = !energyMode;
+  if ($("energyReports")) $("energyReports").hidden = !energyMode;
+  if ($("reportNav")) $("reportNav").hidden = !energyMode;
   document.querySelectorAll(".quick-prompts button").forEach((button, index) => {
     const prompt = copy.quickPrompts?.[index];
     if (!prompt) return;
@@ -167,6 +170,7 @@ function activateMode(mode) {
   localStorage.setItem("climateTextMode", nextMode);
   applyModeCopy();
   if (state.mode === "energy" && state.companyData) renderCompanyIntelligence();
+  if (state.mode === "energy" && state.reportData) renderEnergyReports();
   renderMeta();
   renderToday();
   if ($("archiveSearch")) $("archiveSearch").value = "";
@@ -561,11 +565,43 @@ function applyCompanyFilters() {
   const type = $("companyTypeFilter")?.value || "";
   const country = $("companyCountryFilter")?.value || "";
   state.companyFiltered = (data.companies || []).filter(company => {
-    const haystack = [company.name_zh, company.name_en, company.country, company.continent, ...(company.business_zh || [])].join(" ").toLowerCase();
+    const haystack = [company.name_zh, company.name_en, company.country, company.continent,
+      company.overview_zh, company.strategy_zh, ...(company.business_zh || []),
+      ...(company.core_technologies_zh || []),
+      ...(company.key_projects || []).flatMap(project => [project.name_zh, project.location_zh, project.status_zh]),
+    ].join(" ").toLowerCase();
     return (!query || haystack.includes(query)) && (!type || company.type === type) && (!country || company.country === country);
   }).sort((left, right) => Number(right.intelligence_count || 0) - Number(left.intelligence_count || 0)
     || left.name_zh.localeCompare(right.name_zh, "zh-CN"));
   renderCompanyCards();
+}
+
+function financialValue(metric, currency) {
+  if (!metric || metric.value === null || metric.value === undefined) return "未公开";
+  const symbols = { USD: "$", EUR: "€", CNY: "¥", GBP: "£", SAR: "SAR " };
+  const units = { billion: "十亿", million: "百万" };
+  const value = Number(metric.value);
+  return `${symbols[currency] || `${currency} `}${Number.isFinite(value) ? value.toLocaleString("zh-CN") : metric.value}${units[metric.unit] || metric.unit || ""}`;
+}
+
+function companyProfileHtml(company) {
+  const finance = company.financials;
+  const financeHtml = finance ? `<div class="company-finance">
+    <div><span>${esc(finance.revenue?.label_zh || "营业收入")}</span><b>${esc(financialValue(finance.revenue, finance.currency))}</b></div>
+    <div><span>${esc(finance.profit?.label_zh || "净利润")}</span><b>${esc(financialValue(finance.profit, finance.currency))}</b></div>
+    <small>${esc(`${finance.fiscal_year || "最新"}财年 · ${finance.note_zh || "以企业披露口径为准"}`)}</small>
+  </div>` : "";
+  const technologies = (company.core_technologies_zh || []).map(item => `<i>${esc(item)}</i>`).join("");
+  const projects = (company.key_projects || []).map(project => `<li><b>${esc(project.name_zh)}</b><span>${esc(project.location_zh || "")}</span><p>${esc(project.status_zh || "")}</p></li>`).join("");
+  const sources = (company.profile_sources || []).map(source => `<a href="${esc(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer">${esc(source.label_zh)} ↗</a>`).join("");
+  if (!financeHtml && !technologies && !projects && !company.strategy_zh) return "";
+  return `<details class="company-profile"><summary>查看完整企业档案</summary>
+    ${financeHtml}
+    ${technologies ? `<div class="company-profile-block"><b>核心技术</b><div class="company-business">${technologies}</div></div>` : ""}
+    ${projects ? `<div class="company-profile-block"><b>重点项目</b><ul>${projects}</ul></div>` : ""}
+    ${company.strategy_zh ? `<div class="company-profile-block"><b>发展方向</b><p>${esc(company.strategy_zh)}</p></div>` : ""}
+    ${sources ? `<div class="company-profile-sources">${sources}</div>` : ""}
+  </details>`;
 }
 
 function renderCompanyCards() {
@@ -576,7 +612,9 @@ function renderCompanyCards() {
     return `<article class="company-card">
       <div class="company-card-head"><span>${esc(companyTypeLabel(company.type))}</span><small>${esc(company.country)} · ${esc(company.continent)}</small></div>
       <h4>${esc(company.name_zh)}</h4><p class="company-name-en">${esc(company.name_en)}</p>
+      ${company.overview_zh ? `<p class="company-overview">${esc(company.overview_zh)}</p>` : ""}
       <div class="company-business">${(company.business_zh || []).map(item => `<i>${esc(item)}</i>`).join("")}</div>
+      ${companyProfileHtml(company)}
       ${latest ? `<div class="company-latest"><b>最新关联情报</b><a href="${esc(safeUrl(latest.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(latest.title_zh)} ↗</a><small>${esc(formatDate(latest.published_at))} · ${esc(latest.category_zh)}</small></div>` : '<div class="company-latest empty-state"><b>暂无站内关联动态</b><small>企业基础资料保留，后续新闻将自动关联。</small></div>'}
       ${company.website ? `<a class="company-site" href="${esc(safeUrl(company.website))}" target="_blank" rel="noopener noreferrer">企业官网 ↗</a>` : '<span class="company-site">资料来源：关联新闻原文</span>'}
     </article>`;
@@ -653,6 +691,69 @@ async function switchCompanyMapPeriod(period) {
     if (item) selectCompanyMapEvent(item);
   }));
   await renderCompanyMap(events);
+}
+
+function setupEnergyReports() {
+  if (!state.reportData) return;
+  const filters = state.reportData.filters || {};
+  $("energyReportCountry").innerHTML = '<option value="">全部国家或组织</option>'
+    + (filters.countries_or_regions || []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
+  $("energyReportYear").innerHTML = '<option value="">全部年份</option>'
+    + (filters.years || []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
+  ["energyReportSearch", "energyReportCountry", "energyReportYear"].forEach(id => {
+    $(id)?.addEventListener(id === "energyReportSearch" ? "input" : "change", () => {
+      state.reportVisible = 12;
+      applyEnergyReportFilters();
+    });
+  });
+  $("energyReportLoadMore")?.addEventListener("click", () => {
+    state.reportVisible += 12;
+    renderEnergyReportCards();
+  });
+}
+
+function renderEnergyReports() {
+  const data = state.reportData;
+  if (!data) return;
+  const stats = data.statistics || {};
+  $("energyReportScope").textContent = data.meta?.scope_note_zh || "近三年官方能源报告数据库。";
+  $("energyReportKpis").innerHTML = [
+    ["重点报告", stats.reports || 0],
+    ["国家或组织", stats.countries_or_regions || 0],
+    ["发布机构", stats.publishers || 0],
+    ["覆盖年份", (stats.years || []).join(" / ") || "—"],
+  ].map(([label, value]) => `<article><span>${esc(label)}</span><b>${esc(value)}</b></article>`).join("");
+  $("energyReportNote").textContent = `${data.meta?.selection_note_zh || ""} 数据版本：${formatDate(data.meta?.updated_at, true)}`;
+  applyEnergyReportFilters();
+}
+
+function applyEnergyReportFilters() {
+  if (!state.reportData) return;
+  const query = $("energyReportSearch")?.value.trim().toLowerCase() || "";
+  const country = $("energyReportCountry")?.value || "";
+  const year = $("energyReportYear")?.value || "";
+  state.reportFiltered = (state.reportData.reports || []).filter(report => {
+    const haystack = [report.title_zh, report.title_original, report.summary_zh, report.publisher,
+      report.country_or_region, ...(report.topics || [])].join(" ").toLowerCase();
+    return (!query || haystack.includes(query))
+      && (!country || report.country_or_region === country)
+      && (!year || String(report.year) === year);
+  });
+  renderEnergyReportCards();
+}
+
+function renderEnergyReportCards() {
+  const shown = state.reportFiltered.slice(0, state.reportVisible);
+  $("energyReportResultCount").textContent = state.reportFiltered.length;
+  $("energyReportList").innerHTML = shown.length ? shown.map(report => `<article class="report-card">
+    <div class="report-card-meta"><span>${esc(report.country_or_region)}</span><b>${esc(report.year)}</b></div>
+    <h3><a href="${esc(safeUrl(report.report_url))}" target="_blank" rel="noopener noreferrer">${esc(report.title_zh)} ↗</a></h3>
+    <p class="report-title-original">${esc(report.title_original)}</p>
+    ${substantiveSummary(report.summary_zh) ? `<p class="report-summary">${esc(report.summary_zh)}</p>` : ""}
+    <div class="report-tags">${(report.topics || []).map(topic => `<i>${esc(topic)}</i>`).join("")}</div>
+    <footer><span>${esc(report.publisher)}</span><small>${esc(report.language)} · ${esc(formatDate(report.published_at))}</small></footer>
+  </article>`).join("") : '<div class="empty compact"><b>没有匹配报告</b><p>请减少筛选条件或更换检索词。</p></div>';
+  $("energyReportLoadMore").hidden = state.reportVisible >= state.reportFiltered.length;
 }
 
 const COUNTRY_CONCEPTS = [
@@ -918,6 +1019,7 @@ function setupSubscribe() {
   const modal = $("subscribeModal");
   const form = $("subscribeForm");
   const close = $("subscribeClose");
+  const unsubscribe = $("unsubscribeSubmit");
   if (!open || !modal || !form) return;
   open.addEventListener("click", () => modal.showModal());
   close?.addEventListener("click", () => modal.close());
@@ -941,7 +1043,7 @@ function setupSubscribe() {
         });
         if (!response.ok) throw new Error(String(response.status));
         modal.close();
-        toast("订阅申请已提交，请留意邮箱确认。");
+        toast("订阅成功，周报将在每周一发送。");
         return;
       } catch (error) {
         console.error("Subscribe endpoint failed", error);
@@ -953,6 +1055,30 @@ function setupSubscribe() {
     const body = encodeURIComponent(`请将 ${email} 加入国际气候情报周报订阅列表。\n\n退订方式：回复“退订气候周报”。`);
     location.href = `mailto:${contact}?subject=${subject}&body=${body}`;
     modal.close();
+  });
+  unsubscribe?.addEventListener("click", async () => {
+    const email = $("subscribeEmail").value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast("请先输入需要退订的有效邮箱。");
+      return;
+    }
+    const endpoint = state.subscription?.unsubscribe_endpoint;
+    if (!endpoint) {
+      toast("退订端点尚未配置，请通过联系邮箱申请退订。");
+      return;
+    }
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, list: "climate-weekly", source: location.href }),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      modal.close();
+      toast("退订成功，该邮箱将不再接收周报。");
+    } catch (error) {
+      console.error("Unsubscribe endpoint failed", error);
+      toast("退订失败，请稍后重试或通过联系邮箱处理。");
+    }
   });
 }
 
@@ -1058,7 +1184,7 @@ function renderHeatmap(id, matrix) {
 }
 
 async function init() {
-  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData] = await Promise.all([
+  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
     fetchJson("./data/corpus_analytics.json").catch(() => null),
@@ -1069,11 +1195,13 @@ async function init() {
     fetchJson("./data/subscription.json").catch(() => null),
     fetchJson("./data/team.json").catch(() => null),
     fetchJson("./data/energy_companies.json").catch(() => null),
+    fetchJson("./data/energy_reports.json").catch(() => null),
   ]);
   state.siteMetrics = siteMetrics;
   state.subscription = subscription;
   state.team = team;
   state.companyData = companyData;
+  state.reportData = reportData;
   state.datasets.climate = { dashboard, archive, analytics };
   if (energyDashboard && energyArchive) {
     state.datasets.energy = { dashboard: energyDashboard, archive: energyArchive, analytics: energyAnalytics };
@@ -1081,6 +1209,7 @@ async function init() {
   const requestedMode = new URLSearchParams(location.search).get("mode") === "energy"
     || localStorage.getItem("climateTextMode") === "energy" ? "energy" : "climate";
   setupCompanyIntelligence();
+  setupEnergyReports();
   activateMode(requestedMode);
   setupFilters();
   setupAssistant();

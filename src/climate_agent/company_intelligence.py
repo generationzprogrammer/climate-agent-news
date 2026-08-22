@@ -11,6 +11,7 @@ from .summary_utils import is_generic_summary, is_generic_title
 
 
 DEFAULT_CATALOGUE = Path(__file__).resolve().parents[2] / "config" / "energy_companies.json"
+DEFAULT_PROFILES = Path(__file__).resolve().parents[2] / "config" / "energy_company_profiles.json"
 COOPERATION_TERMS = (
     "partnership", "partner with", "collaboration", "collaborate", "joint venture", "consortium",
     "memorandum of understanding", "mou", "alliance", "teams up", "agreement with",
@@ -25,7 +26,7 @@ PROJECT_TERMS = (
 BOILERPLATE_TERMS = ("消息显示，涉及", "报道中出现", "主题上属于", "该段为题名与来源摘要")
 
 
-def load_company_catalogue(path: Path = DEFAULT_CATALOGUE) -> dict:
+def load_company_catalogue(path: Path = DEFAULT_CATALOGUE, profiles_path: Path = DEFAULT_PROFILES) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
     companies = payload.get("companies") or []
     required = {"id", "name_zh", "name_en", "type", "country", "continent", "lon", "lat", "business_zh", "aliases", "website"}
@@ -37,6 +38,13 @@ def load_company_catalogue(path: Path = DEFAULT_CATALOGUE) -> dict:
         if company["id"] in seen:
             raise ValueError(f"duplicate company id: {company['id']}")
         seen.add(company["id"])
+    if profiles_path.exists():
+        profiles = json.loads(profiles_path.read_text(encoding="utf-8")).get("profiles") or []
+        by_id = {str(profile.get("company_id")): profile for profile in profiles if profile.get("company_id")}
+        for company in companies:
+            profile = by_id.get(company["id"])
+            if profile:
+                company.update({key: value for key, value in profile.items() if key != "company_id"})
     return payload
 
 
@@ -265,6 +273,7 @@ def build_company_intelligence(energy_archive: dict, catalogue: dict) -> dict:
             "dynamically_discovered": len(discovered),
             "countries": len(countries),
             "intelligence": len(events),
+            "detailed_profiles": sum(bool(company.get("profile_updated_at")) for company in companies),
             "categories": dict(categories),
         },
         "methodology_sources": catalogue.get("methodology_sources") or [],

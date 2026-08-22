@@ -9,9 +9,11 @@ from pathlib import Path
 from .archive import DEFAULT_ARCHIVE_LIMIT, update_archive, validate_public_payload
 from .briefing import apply_archive_windows, dashboard_payload, publishable_intelligence, render_markdown, render_weekly_markdown, weekly_report_payload
 from .company_intelligence import write_company_intelligence
+from .corpus_update import merge_archive_into_corpus
 from .corpus_analytics import write_corpus_analytics, write_energy_corpus_analytics
 from .db import Database
 from .energy_view import write_energy_view
+from .energy_reports import write_energy_report_database
 from .pdf_brief import write_daily_brief_pdf, write_weekly_report_pdf
 from .site_metrics import write_site_metrics
 
@@ -101,8 +103,14 @@ def export_static_site(
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"
     )
+    energy_reports = write_energy_report_database(
+        energy_view["archive"], db.path.parent / "energy_reports.json", data_dir / "energy_reports.json"
+    )
     corpus_path = db.path.parent / "climate_text_corpus.jsonl"
     manifest_path = db.path.parent / "climate_text_corpus.manifest.json"
+    corpus_merge = merge_archive_into_corpus(
+        corpus_path, manifest_path, archive, limit=archive_limit
+    )
     analytics = None
     if corpus_path.exists():
         analytics = write_corpus_analytics(corpus_path, data_dir / "corpus_analytics.json", manifest_path)
@@ -143,6 +151,8 @@ def export_static_site(
         "energy_archive_total": energy_view["archive"].get("total", 0),
         "energy_companies": company_intelligence["statistics"].get("companies", 0),
         "company_intelligence": company_intelligence["statistics"].get("intelligence", 0),
+        "energy_reports": energy_reports["statistics"].get("reports", 0),
+        "corpus_added": corpus_merge.get("added", 0),
         "corpus_analytics_records": (analytics or {}).get("records", 0),
         "site_metrics_points": len(site_metrics.get("archive_cumulative", [])),
         "analytics_beacon": analytics_beacon,

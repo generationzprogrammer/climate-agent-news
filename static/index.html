@@ -21,6 +21,7 @@
       <a href="#assistant">情报问答</a>
       <a href="#database">文本数据库</a>
       <a class="energy-only-nav" id="companyNav" href="#companies" hidden>企业情报</a>
+      <a class="energy-only-nav" id="reportNav" href="#energyReports" hidden>能源报告</a>
       <button class="team-link nav-team-link" id="teamOpen" type="button">团队信息</button>
     </nav>
     <button class="mode-toggle" id="modeToggle" type="button">切换到能源技术</button>
@@ -103,6 +104,23 @@
         </div>
         <div class="map-place-list" id="companyMapPlaceList" aria-label="企业情报地点快捷入口"></div>
       </section>
+    </section>
+
+    <section class="section energy-report-section" id="energyReports" hidden>
+      <div class="section-heading">
+        <div><p class="overline">OFFICIAL ENERGY REPORTS</p><h2>能源报告</h2></div>
+        <p id="energyReportScope">近三年各国政府与国际组织重点能源报告，优先收录官方英文版并保留原文入口。</p>
+      </div>
+      <div class="report-kpis" id="energyReportKpis"><div class="skeleton small"></div></div>
+      <div class="report-search-panel">
+        <label class="search-box"><span>检索报告</span><input id="energyReportSearch" type="search" placeholder="标题、机构、国家或主题，如：关键矿产" autocomplete="off"></label>
+        <label><span>国家或组织</span><select id="energyReportCountry"><option value="">全部国家或组织</option></select></label>
+        <label><span>年份</span><select id="energyReportYear"><option value="">全部年份</option></select></label>
+        <div class="result-count"><span>当前结果</span><b id="energyReportResultCount">—</b></div>
+      </div>
+      <div class="report-grid" id="energyReportList"><div class="skeleton"></div></div>
+      <button class="load-more" id="energyReportLoadMore" type="button">显示更多报告</button>
+      <p class="analytics-note" id="energyReportNote">报告库每日扫描官方发布页；仅在发现新的、可追溯报告时增量更新。</p>
     </section>
 
     <section class="hero" aria-labelledby="heroTitle">
@@ -234,8 +252,8 @@
       <h2>订阅每周气候情报周报</h2>
       <p>请输入邮箱。若站点已配置安全订阅端点，系统会提交订阅请求；若未配置，将自动生成一封订阅申请邮件。邮箱列表不会写入公开源码或 Git 历史。</p>
       <label><span>邮箱</span><input id="subscribeEmail" type="email" required placeholder="name@example.com" autocomplete="email"></label>
-      <div class="modal-actions"><button type="submit">提交订阅</button><a id="weeklyDownload" href="./data/weekly_report.pdf" target="_blank" rel="noopener">下载本周周报</a></div>
-      <small id="subscribeHint">订阅经确认后，每周一北京时间自动发送周报；退订可回复“退订气候周报”。</small>
+      <div class="modal-actions"><button type="submit">提交订阅</button><button class="secondary" id="unsubscribeSubmit" type="button">退订</button><a id="weeklyDownload" href="./data/weekly_report.pdf" target="_blank" rel="noopener">下载本周周报</a></div>
+      <small id="subscribeHint">订阅后每周一北京时间自动发送周报；使用同一邮箱可随时退订。</small>
     </form>
   </dialog>
   <dialog class="modal" id="teamModal">

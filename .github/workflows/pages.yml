@@ -6,6 +6,10 @@ on:
     paths-ignore:
       - "data/news_archive.json"
       - "data/source_health.json"
+      - "data/climate_text_corpus.jsonl"
+      - "data/climate_text_corpus.manifest.json"
+      - "data/energy_reports.json"
+      - "data/visitor_history.json"
   workflow_dispatch:
     inputs:
       send_notification:
@@ -52,6 +56,7 @@ jobs:
           # regional sources can repair the current seven-day balance. The
           # scheduled daily job returns to the normal 20-record budget.
           CLIMATE_TRANSLATION_LIMIT: ${{ github.event_name == 'push' && '40' || '20' }}
+          ENERGY_REPORT_DISCOVERY_LIMIT: "12"
           # GitHub Models 已于 2026-07-30 退役。默认迁移到 Gemini
           # OpenAI 兼容接口；GEMINI_API_KEY 仅保存在仓库 Secret 中。
           CLIMATE_MODEL_BASE_URL: ${{ secrets.CLIMATE_MODEL_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai' }}
@@ -78,7 +83,7 @@ jobs:
         run: |
           git config user.name "climate-text-bot"
           git config user.email "climate-text-bot@users.noreply.github.com"
-          git add data/climate.db data/news_archive.json data/source_health.json
+          git add data/climate.db data/news_archive.json data/source_health.json data/climate_text_corpus.jsonl data/climate_text_corpus.manifest.json data/energy_reports.json
           if [ -f data/visitor_history.json ]; then
             git add data/visitor_history.json
           fi
@@ -159,6 +164,8 @@ jobs:
           PYTHONPATH: src
           CLIMATE_PUBLIC_URL: ${{ needs.deploy.outputs.page_url }}
           CLIMATE_WEEKLY_SUBSCRIBERS: ${{ secrets.CLIMATE_WEEKLY_SUBSCRIBERS }}
+          CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT: ${{ secrets.CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT }}
+          CLIMATE_SUBSCRIBER_ADMIN_TOKEN: ${{ secrets.CLIMATE_SUBSCRIBER_ADMIN_TOKEN }}
           CLIMATE_SMTP_HOST: ${{ secrets.CLIMATE_SMTP_HOST }}
           CLIMATE_SMTP_PORT: ${{ secrets.CLIMATE_SMTP_PORT }}
           CLIMATE_SMTP_SECURITY: ${{ secrets.CLIMATE_SMTP_SECURITY }}

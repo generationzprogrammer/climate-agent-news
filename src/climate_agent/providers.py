@@ -138,3 +138,31 @@ def publish_email(markdown: str, recipient: str, *, subject: str = "国际气候
         if username:
             client.login(username, password)
         client.send_message(message)
+
+
+def fetch_subscribers(endpoint: str, admin_token: str, *, timeout: int = 20) -> list[str]:
+    """Read the active weekly list from a protected HTTPS subscription service."""
+    parts = urlparse(endpoint or "")
+    if parts.scheme != "https" or not parts.netloc:
+        raise ValueError("订阅者接口必须使用公开 HTTPS 地址")
+    if not admin_token:
+        raise ValueError("缺少订阅者接口管理令牌")
+    request = urllib.request.Request(
+        endpoint,
+        headers={
+            "Authorization": f"Bearer {admin_token}",
+            "Accept": "application/json",
+            "User-Agent": "ClimateText-Lab/1.0",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        payload = response.read(1_000_001)
+        if len(payload) > 1_000_000:
+            raise ValueError("订阅者接口响应过大")
+    result = json.loads(payload)
+    subscribers = []
+    for value in result.get("subscribers") or []:
+        email = str(value or "").strip().lower()
+        if email and "@" in email and email not in subscribers:
+            subscribers.append(email)
+    return subscribers

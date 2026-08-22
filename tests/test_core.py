@@ -272,13 +272,17 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / "data" / "climate_text_corpus.jsonl").exists())
         self.assertTrue((output_dir / "data" / "climate_text_corpus.manifest.json").exists())
         analytics = json.loads((output_dir / "data" / "corpus_analytics.json").read_text(encoding="utf-8"))
-        self.assertEqual(analytics["records"], 1)
-        self.assertEqual(analytics["top_topics"][0]["name"], "能源与排放")
-        self.assertEqual(result["corpus_analytics_records"], 1)
+        self.assertGreater(analytics["records"], 1)
+        self.assertEqual(result["corpus_analytics_records"], analytics["records"])
+        self.assertGreater(result["corpus_added"], 0)
         self.assertTrue((output_dir / "data" / "energy_archive.json").exists())
         self.assertTrue((output_dir / "data" / "energy_dashboard.json").exists())
         self.assertTrue((output_dir / "data" / "energy_corpus_analytics.json").exists())
         self.assertTrue((output_dir / "data" / "energy_companies.json").exists())
+        self.assertTrue((output_dir / "data" / "energy_reports.json").exists())
+        reports = json.loads((output_dir / "data" / "energy_reports.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(reports["statistics"]["reports"], 50)
+        self.assertEqual(result["energy_reports"], reports["statistics"]["reports"])
         self.assertTrue((output_dir / "data" / "weekly_report.json").exists())
         self.assertTrue((output_dir / "data" / "weekly_report.md").exists())
         self.assertTrue((output_dir / "data" / "weekly_report.pdf").exists())
@@ -297,6 +301,10 @@ class CoreTests(unittest.TestCase):
 
     def test_company_intelligence_classifies_startups_cooperation_and_locations(self) -> None:
         catalogue = load_company_catalogue()
+        shell = next(company for company in catalogue["companies"] if company["id"] == "shell")
+        self.assertEqual(shell["financials"]["fiscal_year"], 2025)
+        self.assertTrue(shell["core_technologies_zh"])
+        self.assertTrue(shell["key_projects"])
         archive = {"updated_at": "2026-08-16T08:00:00+00:00", "records": [
             {
                 "record_id": "cooperation", "title_original": "Shell and Siemens Energy sign partnership for hydrogen project",
@@ -423,12 +431,18 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="companyNav"', html)
         self.assertIn('id="companies"', html)
         self.assertIn('id="companySearch"', html)
+        self.assertIn('id="reportNav"', html)
+        self.assertIn('id="energyReports"', html)
+        self.assertIn('id="energyReportSearch"', html)
+        self.assertIn('id="unsubscribeSubmit"', html)
         self.assertIn('data-company-map-period="today"', html)
         self.assertIn('data-company-map-period="week"', html)
         self.assertNotIn("下载数据 JSON", html)
         self.assertIn('id="database"', html)
         self.assertIn("CLIMATETEXT-100000", html)
         self.assertLess(html.index('id="map"'), html.index('class="hero"'))
+        self.assertIn("function renderEnergyReports", app)
+        self.assertIn("function companyProfileHtml", app)
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
         self.seed_publishable_article()
@@ -450,12 +464,16 @@ class CoreTests(unittest.TestCase):
         self.assertIn("data/news_archive.json", workflow)
         self.assertIn("data/source_health.json", workflow)
         self.assertIn("data/visitor_history.json", workflow)
+        self.assertIn("data/climate_text_corpus.jsonl", workflow)
+        self.assertIn("data/energy_reports.json", workflow)
         self.assertIn("CLIMATE_TRANSLATION_LIMIT", workflow)
         self.assertIn("gemini-3.5-flash-lite", workflow)
         self.assertIn("secrets.GEMINI_API_KEY", workflow)
         self.assertIn("secrets.CLOUDFLARE_ANALYTICS_API_TOKEN", workflow)
         self.assertIn("secrets.CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN", workflow)
         self.assertIn("deliver-weekly", workflow)
+        self.assertIn("CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT", workflow)
+        self.assertIn("CLIMATE_SUBSCRIBER_ADMIN_TOKEN", workflow)
 
     def test_latest_day_and_week_use_beijing_calendar(self) -> None:
         rows = [

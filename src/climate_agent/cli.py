@@ -12,10 +12,11 @@ from .collector import fetch_feed, parse_feed
 from .db import Database
 from .delivery import build_push_message, build_weekly_message
 from .editorial import apply_editorial_overrides
+from .energy_reports import discover_official_reports
 from .exporter import export_static_site
 from .historical_backfill import DEFAULT_ARCHIVE_LIMIT as HISTORY_LIMIT, backfill_history, export_historical_jsonl, refresh_historical_tags
 from .official_data import import_curated_unfccc, import_ndcs
-from .providers import OpenAICompatibleModel, publish_email, publish_file, publish_wecom
+from .providers import OpenAICompatibleModel, fetch_subscribers, publish_email, publish_file, publish_wecom
 from .regional_seed import import_regional_seed
 from .sync import P0_SOURCE_IDS, sync_p0
 from .source_health import load_source_health, save_source_health, source_is_due, update_source_health
@@ -145,15 +146,25 @@ def main(argv: list[str] | None = None) -> int:
                 result["ndc"] = {"status": "failed", "error": str(exc)}
                 result["status"] = "partial"
         result["editorial"] = apply_editorial_overrides(db, ROOT / "config" / "editorial_overrides.json")
+        configured_model = None
         if all(os.getenv(name) for name in ("CLIMATE_MODEL_BASE_URL", "CLIMATE_MODEL_API_KEY", "CLIMATE_MODEL_NAME")):
             try:
+                configured_model = OpenAICompatibleModel.from_env()
                 result["translation"] = translate_pending(
                     db,
-                    OpenAICompatibleModel.from_env(),
+                    configured_model,
                     limit=int(os.getenv("CLIMATE_TRANSLATION_LIMIT", "20")),
                 )
             except Exception as exc:
                 result["translation"] = {"status": "failed", "error": str(exc)}
+        try:
+            result["energy_reports"] = discover_official_reports(
+                ROOT / "data" / "energy_reports.json",
+                model=configured_model,
+                max_new=int(os.getenv("ENERGY_REPORT_DISCOVERY_LIMIT", "12")),
+            ) if configured_model else {"status": "skipped", "reason": "model_not_configured"}
+        except Exception as exc:
+            result["energy_reports"] = {"status": "failed", "error": str(exc)}
         # Emit collection and model diagnostics before export: a strict stale-data
         # gate may intentionally stop publication, but must not hide its cause.
         print(json.dumps({
@@ -276,6 +287,14 @@ def main(argv: list[str] | None = None) -> int:
         recipients = args.recipient or [
             item.strip() for item in os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS", "").split(",") if item.strip()
         ]
+        subscriber_endpoint = os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT", "")
+        subscriber_token = os.getenv("CLIMATE_SUBSCRIBER_ADMIN_TOKEN", "")
+        if subscriber_endpoint and subscriber_token:
+            try:
+                recipients.extend(fetch_subscribers(subscriber_endpoint, subscriber_token))
+            except Exception as exc:
+                print(json.dumps({"subscriber_endpoint": "failed", "error": type(exc).__name__}, ensure_ascii=False))
+        recipients = list(dict.fromkeys(recipient.strip().lower() for recipient in recipients if recipient.strip()))
         if not recipients:
             print(json.dumps({"status": "skipped", "reason": "no_weekly_subscribers"}, ensure_ascii=False))
             return 0

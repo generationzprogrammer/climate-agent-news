@@ -307,6 +307,7 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 .company-card-head small { color: #697483; font-size: 12px; }
 .company-card h4 { margin: 18px 0 2px; font: 650 24px/1.25 var(--serif); }
 .company-name-en { margin: 0 0 15px; color: #727c89; font-size: 13px; }
+.company-overview { margin: 0 0 14px; color: #344153; font-size: 14px; line-height: 1.65; }
 .company-business { display: flex; flex-wrap: wrap; gap: 6px; }
 .company-business i { padding: 5px 7px; background: #edf2f7; color: #44515f; font: normal 12px var(--sans); }
 .company-latest { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
@@ -319,9 +320,59 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 .company-latest small { margin-top: 7px; color: #747e8b; font-size: 12px; }
 .company-latest.empty-state { color: #697483; }
 .company-site { margin-top: auto; padding-top: 18px; color: var(--blue); font-size: 13px; font-weight: 750; text-decoration: none; }
+.company-profile { margin-top: 16px; border-top: 1px solid var(--line); }
+.company-profile summary { padding: 13px 0 4px; color: var(--blue); font-size: 13px; font-weight: 750; cursor: pointer; }
+.company-finance { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.company-finance > div { padding: 10px; background: #f4f7fb; }
+.company-finance span,
+.company-finance b { display: block; }
+.company-finance span { color: #657181; font-size: 11px; }
+.company-finance b { margin-top: 5px; color: var(--ink); font: 700 16px var(--mono); }
+.company-finance > small { grid-column: 1 / -1; color: #6c7785; font-size: 11px; line-height: 1.5; }
+.company-profile-block { margin-top: 15px; }
+.company-profile-block > b { display: block; margin-bottom: 8px; color: #536071; font: 750 11px var(--mono); letter-spacing: .06em; }
+.company-profile-block > p { margin: 0; color: #344153; font-size: 13px; line-height: 1.65; }
+.company-profile-block ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.company-profile-block li { padding-left: 10px; border-left: 2px solid #b7c9e7; }
+.company-profile-block li b,
+.company-profile-block li span { display: block; }
+.company-profile-block li b { font-size: 13px; }
+.company-profile-block li span { margin-top: 2px; color: #697585; font-size: 11px; }
+.company-profile-block li p { margin: 4px 0 0; color: #445164; font-size: 12px; line-height: 1.55; }
+.company-profile-sources { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: 14px; }
+.company-profile-sources a { color: var(--blue); font-size: 12px; text-decoration: none; }
 .company-event-companies { margin-bottom: 9px !important; color: var(--ink) !important; font-weight: 700; }
 .company-map-layout { min-height: 500px; }
 .company-map-layout .map-canvas svg { min-height: 500px; }
+
+.energy-report-section { padding-top: 96px; }
+.report-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 0; border: 1px solid var(--line); border-bottom: 0; }
+.report-kpis article { padding: 17px 19px; border-right: 1px solid var(--line); background: #f8fafc; }
+.report-kpis article:last-child { border-right: 0; }
+.report-kpis span,
+.report-kpis b { display: block; }
+.report-kpis span { color: #687485; font: 750 11px var(--mono); letter-spacing: .06em; }
+.report-kpis b { margin-top: 7px; color: var(--blue); font: 700 22px var(--mono); }
+.report-search-panel { display: grid; grid-template-columns: minmax(280px, 1.4fr) minmax(180px, .6fr) 150px 130px; gap: 12px; margin-bottom: 18px; padding: 18px; border: 1px solid var(--line); background: var(--soft); }
+.report-search-panel label,
+.report-search-panel .result-count { display: flex; flex-direction: column; gap: 8px; }
+.report-search-panel label > span { color: #626d7c; font: 11px var(--mono); letter-spacing: .08em; }
+.report-search-panel input,
+.report-search-panel select { width: 100%; height: 45px; padding: 0 12px; border: 1px solid #c4cbd6; background: #fff; color: var(--ink); font: 14px var(--sans); }
+.report-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.report-card { display: flex; min-width: 0; min-height: 330px; flex-direction: column; padding: 22px; border: 1px solid var(--line); border-top: 3px solid #174ea6; background: #fff; }
+.report-card-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #667386; font: 750 11px var(--mono); }
+.report-card-meta span { color: var(--blue); }
+.report-card h3 { margin: 17px 0 7px; font: 650 21px/1.42 var(--serif); }
+.report-card h3 a { color: var(--ink); text-decoration: none; }
+.report-card h3 a:hover { color: var(--blue); }
+.report-title-original { margin: 0 0 14px; color: #6a7584; font-size: 12px; line-height: 1.5; }
+.report-summary { margin: 0 0 14px; color: #344153; font-size: 14px; line-height: 1.7; }
+.report-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.report-tags i { padding: 5px 7px; background: #edf2f7; color: #44515f; font: normal 12px var(--sans); }
+.report-card footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: 17px; padding-top: 13px; border-top: 1px solid var(--line); }
+.report-card footer span { color: #354155; font-size: 12px; font-weight: 700; }
+.report-card footer small { color: #727d8b; font-size: 11px; text-align: right; }
 
 .hero {
   display: grid;
@@ -636,6 +687,7 @@ footer a:hover { color: var(--blue); }
   cursor: pointer;
 }
 .modal-actions a { background: #eef3f9; color: var(--blue); }
+.modal-actions button.secondary { background: #eef3f9; color: #344153; }
 .modal-close {
   position: absolute;
   top: 14px;
@@ -665,6 +717,8 @@ footer a:hover { color: var(--blue); }
   .company-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .company-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .company-search-panel { grid-template-columns: 1fr 1fr; }
+  .report-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-search-panel { grid-template-columns: 1fr 1fr; }
   .metrics-strip { grid-template-columns: 1fr; }
   .analytics-grid { grid-template-columns: 1fr; }
   .chart-card.wide { grid-column: auto; }
@@ -700,6 +754,11 @@ footer a:hover { color: var(--blue); }
   .company-kpis,
   .company-grid,
   .company-search-panel { grid-template-columns: 1fr; }
+  .report-kpis,
+  .report-grid,
+  .report-search-panel { grid-template-columns: 1fr; }
+  .report-kpis article { border-right: 0; border-bottom: 1px solid var(--line); }
+  .report-card { min-height: 0; }
   .company-kpis article { border-right: 0; border-bottom: 1px solid var(--line); }
   .company-card { min-height: 0; }
   .map-layout { grid-template-columns: 1fr; min-height: 0; }
