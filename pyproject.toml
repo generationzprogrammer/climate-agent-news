@@ -7,7 +7,7 @@ name = "climate-text-lab"
 version = "0.2.0"
 description = "每日更新、来源可追溯的国际气候情报与高质量中文文本数据库"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["opencc-python-reimplemented>=0.1.7"]
 
 [project.scripts]
 climate-brief = "climate_agent.cli:main"

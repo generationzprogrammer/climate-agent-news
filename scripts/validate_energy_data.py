@@ -10,8 +10,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
+from opencc import OpenCC
+
 
 ROOT = Path(__file__).resolve().parents[1]
+SIMPLIFIER = OpenCC("t2s")
+MALFORMED_DASHED_LATIN = __import__("re").compile(r"(?:[A-Za-z0-9]-){3,}")
 
 
 def _probe(url: str) -> dict:
@@ -52,6 +56,8 @@ def validate(check_urls: bool = False) -> dict:
             issues.append({"severity": "high", "code": "report_url_not_https", "row": index, "url": row.get("report_url")})
         if not any("\u4e00" <= char <= "\u9fff" for char in str(row.get("title_zh") or "")):
             issues.append({"severity": "high", "code": "report_chinese_title_missing", "row": index})
+        if SIMPLIFIER.convert(str(row.get("title_zh") or "")) != str(row.get("title_zh") or "") or MALFORMED_DASHED_LATIN.search(str(row.get("title_zh") or "")):
+            issues.append({"severity": "high", "code": "report_display_not_clean_simplified_chinese", "row": index})
 
     company_ids_all = [company.get("id") for company in all_companies]
     if len(company_ids_all) != len(set(company_ids_all)):
@@ -61,6 +67,9 @@ def validate(check_urls: bool = False) -> dict:
         missing = [field for field in company_required if not company.get(field)]
         if missing:
             issues.append({"severity": "high", "code": "company_required_field", "row": index, "missing": missing})
+        name_zh = str(company.get("name_zh") or "")
+        if sum("\u4e00" <= char <= "\u9fff" for char in name_zh) < 2 or SIMPLIFIER.convert(name_zh) != name_zh:
+            issues.append({"severity": "high", "code": "company_display_not_clean_simplified_chinese", "row": index, "name_zh": name_zh})
 
     company_ids = {company["id"] for company in catalogue}
     for profile in profiles:

@@ -10,6 +10,7 @@ from pathlib import Path
 from urllib.parse import urlencode, urljoin, urlparse
 
 from .collector import fetch_resource
+from .chinese_text import is_readable_chinese_title, to_simplified
 from .providers import OpenAICompatibleModel
 from .summary_utils import is_generic_summary, is_generic_title
 
@@ -104,10 +105,10 @@ def _record_key(record: dict) -> str:
 def _normalise_record(record: dict, *, added_at: str) -> dict | None:
     url = str(record.get("report_url") or record.get("source_url") or "").strip()
     original = str(record.get("title_original") or "").strip()
-    chinese = str(record.get("title_zh") or "").strip()
-    if not url.startswith("https://") or not original or not chinese or is_generic_title(chinese):
+    chinese = to_simplified(record.get("title_zh"))
+    if not url.startswith("https://") or not original or not is_readable_chinese_title(chinese) or is_generic_title(chinese):
         return None
-    summary = str(record.get("summary_zh") or "").strip()
+    summary = to_simplified(record.get("summary_zh"))
     if summary and is_generic_summary(summary):
         summary = ""
     year_match = re.search(r"\b(202[3-9])\b", " ".join((original, url, str(record.get("year") or ""))))
@@ -118,13 +119,13 @@ def _normalise_record(record: dict, *, added_at: str) -> dict | None:
         "title_zh": chinese,
         "title_original": original,
         "summary_zh": summary,
-        "publisher": str(record.get("publisher") or "未标注机构"),
-        "publisher_type": str(record.get("publisher_type") or "政府或国际组织"),
-        "country_or_region": str(record.get("country_or_region") or "国际组织"),
+        "publisher": to_simplified(record.get("publisher") or "未标注机构"),
+        "publisher_type": to_simplified(record.get("publisher_type") or "政府或国际组织"),
+        "country_or_region": to_simplified(record.get("country_or_region") or "国际组织"),
         "year": year,
         "published_at": str(record.get("published_at") or f"{year}-01-01"),
         "language": str(record.get("language") or "English"),
-        "topics": list(dict.fromkeys(str(item) for item in topics if str(item).strip()))[:5],
+        "topics": list(dict.fromkeys(to_simplified(item) for item in topics if str(item).strip()))[:5],
         "report_url": url,
         "source_url": str(record.get("source_url") or url),
         "discovery_method": str(record.get("discovery_method") or "curated_official_source"),
@@ -132,7 +133,7 @@ def _normalise_record(record: dict, *, added_at: str) -> dict | None:
     }
     for key in ("abstract_original", "translation_method", "source_tier", "access_note_zh"):
         if record.get(key):
-            normalised[key] = record[key]
+            normalised[key] = to_simplified(record[key]) if key != "abstract_original" else record[key]
     return normalised
 
 

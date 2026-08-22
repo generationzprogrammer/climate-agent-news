@@ -10,12 +10,16 @@ from collections import deque
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
+from opencc import OpenCC
+
 
 ROOT = Path(__file__).resolve().parents[1]
 WORLD_BANK_API = "https://search.worldbank.org/api/v3/wds"
 WIKIDATA_SPARQL = "https://query.wikidata.org/sparql"
 USER_AGENT = "ClimateAgentNews/1.0 (https://github.com/generationzprogrammer/climate-agent-news)"
 TRANSLATION_MODEL = "Helsinki-NLP/opus-mt-en-zh"
+SIMPLIFIER = OpenCC("t2s")
+MALFORMED_DASHED_LATIN = re.compile(r"(?:[A-Za-z0-9]-){3,}")
 
 REPORT_TERMS = (
     "energy", "electricity", "power sector", "power system", "renewable", "solar", "wind",
@@ -77,6 +81,19 @@ def text_value(value) -> str:
 def report_relevant(title: str) -> bool:
     lowered = title.lower()
     return any(term in lowered for term in REPORT_TERMS) and not any(term in lowered for term in REPORT_EXCLUDES)
+
+
+def simplified(value: object) -> str:
+    return SIMPLIFIER.convert(str(value or "")).strip()
+
+
+def chinese_count(value: object) -> int:
+    return len(re.findall(r"[\u3400-\u4dbf\u4e00-\u9fff]", str(value or "")))
+
+
+def readable_chinese_title(value: object) -> bool:
+    text = simplified(value)
+    return 4 <= chinese_count(text) <= 120 and len(text) <= 180 and not MALFORMED_DASHED_LATIN.search(text)
 
 
 def world_bank_reports(target: int) -> list[dict]:
@@ -157,9 +174,9 @@ def translate_titles(records: list[dict], *, batch_size: int = 20) -> list[dict]
             generated = model.generate(**encoded, max_new_tokens=160, num_beams=3)
         translated = tokenizer.batch_decode(generated, skip_special_tokens=True)
         for row, title in zip(batch, translated):
-            title = re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", title).strip()
+            title = re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", simplified(title))
             title = title.replace("世界银行集团", "世界银行")
-            if re.search(r"[\u4e00-\u9fff]", title):
+            if readable_chinese_title(title):
                 row["title_zh"] = title
     return [row for row in records if row.get("title_zh")]
 
@@ -190,9 +207,9 @@ def wikidata_industry_companies(industry_id: str, limit: int = 320) -> list[dict
         company_uri = binding_value(binding, "company")
         qid = company_uri.rsplit("/", 1)[-1]
         name_en = binding_value(binding, "nameEn")
-        name_zh = binding_value(binding, "nameZh") or name_en
+        name_zh = simplified(binding_value(binding, "nameZh"))
         description_en = binding_value(binding, "descEn").lower()
-        if not qid.startswith("Q") or not name_en or any(term in description_en for term in INACTIVE_TERMS):
+        if not qid.startswith("Q") or not name_en or chinese_count(name_zh) < 2 or any(term in description_en for term in INACTIVE_TERMS):
             continue
         website = binding_value(binding, "website")
         if not website.startswith(("https://", "http://")):
@@ -202,14 +219,14 @@ def wikidata_industry_companies(industry_id: str, limit: int = 320) -> list[dict
             "name_zh": name_zh,
             "name_en": name_en,
             "type": "energy_company",
-            "country": binding_value(binding, "countryZh") or binding_value(binding, "countryEn") or "未标注",
-            "continent": binding_value(binding, "continentZh") or binding_value(binding, "continentEn") or "未标注",
+            "country": simplified(binding_value(binding, "countryZh") or binding_value(binding, "countryEn") or "未标注"),
+            "continent": simplified(binding_value(binding, "continentZh") or binding_value(binding, "continentEn") or "未标注"),
             "lon": None,
             "lat": None,
             "business_zh": [INDUSTRIES[industry_id]],
             "aliases": list(dict.fromkeys([name_zh, name_en])),
             "website": website,
-            "overview_zh": binding_value(binding, "descZh"),
+            "overview_zh": simplified(binding_value(binding, "descZh")),
             "source_url": f"https://www.wikidata.org/wiki/{qid}",
             "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
             "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",

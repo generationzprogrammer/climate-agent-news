@@ -8,6 +8,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from .summary_utils import is_generic_summary, is_generic_title
+from .chinese_text import chinese_character_count, to_simplified
 
 
 DEFAULT_CATALOGUE = Path(__file__).resolve().parents[2] / "config" / "energy_companies.json"
@@ -33,13 +34,25 @@ def _website_host(value: str) -> str:
     return (urlparse(str(value or "")).hostname or "").lower().removeprefix("www.")
 
 
+def _normalise_company_display(company: dict) -> dict:
+    """Simplify every user-facing text field while preserving IDs, aliases and URLs."""
+    result = dict(company)
+    for key in ("name_zh", "country", "continent", "overview_zh", "profile_basis_zh", "data_completeness_zh"):
+        if key in result:
+            result[key] = to_simplified(result[key])
+    for key in ("business_zh", "core_technologies_zh", "future_direction_zh"):
+        if isinstance(result.get(key), list):
+            result[key] = [to_simplified(item) for item in result[key]]
+    return result
+
+
 def load_company_catalogue(
     path: Path = DEFAULT_CATALOGUE,
     profiles_path: Path = DEFAULT_PROFILES,
     wikidata_path: Path = DEFAULT_WIKIDATA,
 ) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
-    companies = [dict(company) for company in (payload.get("companies") or [])]
+    companies = [_normalise_company_display(company) for company in (payload.get("companies") or [])]
     if wikidata_path.exists():
         wikidata = json.loads(wikidata_path.read_text(encoding="utf-8"))
         seen_names = {
@@ -49,7 +62,12 @@ def load_company_catalogue(
             if value
         }
         seen_hosts = {_website_host(company.get("website")) for company in companies if _website_host(company.get("website"))}
-        for company in wikidata.get("companies") or []:
+        for raw_company in wikidata.get("companies") or []:
+            company = _normalise_company_display(raw_company)
+            # A bare Latin brand or a two-letter token cannot be reliably presented
+            # as Chinese intelligence; keep it out until an auditable Chinese name exists.
+            if chinese_character_count(company.get("name_zh")) < 2:
+                continue
             names = {
                 re.sub(r"\W+", "", str(value).lower(), flags=re.UNICODE)
                 for value in (company.get("name_zh"), company.get("name_en"), *(company.get("aliases") or []))

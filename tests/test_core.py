@@ -301,7 +301,9 @@ class CoreTests(unittest.TestCase):
 
     def test_company_intelligence_classifies_startups_cooperation_and_locations(self) -> None:
         catalogue = load_company_catalogue()
-        self.assertGreaterEqual(len(catalogue["companies"]), 1000)
+        self.assertGreaterEqual(len(catalogue["companies"]), 200)
+        self.assertTrue(all(any("\u4e00" <= char <= "\u9fff" for char in company["name_zh"]) for company in catalogue["companies"]))
+        self.assertNotIn("OK", {company["name_zh"] for company in catalogue["companies"]})
         shell = next(company for company in catalogue["companies"] if company["id"] == "shell")
         self.assertEqual(shell["financials"]["fiscal_year"], 2025)
         self.assertTrue(shell["core_technologies_zh"])
