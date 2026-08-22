@@ -47,6 +47,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: 安装项目依赖
+        run: python -m pip install --disable-pip-version-check -e .
       - name: 增量采集、中文编译与质量门禁
         env:
           PYTHONPATH: src
