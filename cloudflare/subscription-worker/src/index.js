@@ -20,7 +20,7 @@ async function keyFor(email) {
 }
 
 function allowedOrigin(request, env) {
-  const configured = String(env.ALLOWED_ORIGIN || "https://generationzprogrammer.github.io").replace(/\/$/, "");
+  const configured = String(env.CLIMATE_ALLOWED_ORIGIN || "https://generationzprogrammer.github.io").replace(/\/$/, "");
   const origin = String(request.headers.get("origin") || "").replace(/\/$/, "");
   return origin === configured ? configured : "";
 }
@@ -35,13 +35,13 @@ export default {
     if (url.pathname === "/health") return json({ ok: true, service: "climate-news-subscriptions" }, 200, origin || "null");
     if (url.pathname === "/subscribers" && request.method === "GET") {
       const auth = request.headers.get("authorization") || "";
-      if (!env.ADMIN_TOKEN || auth !== `Bearer ${env.ADMIN_TOKEN}`) return json({ error: "unauthorized" }, 401, "null");
+      if (!env.CLIMATE_SUBSCRIBER_ADMIN_TOKEN || auth !== `Bearer ${env.CLIMATE_SUBSCRIBER_ADMIN_TOKEN}`) return json({ error: "unauthorized" }, 401, "null");
       const emails = [];
       let cursor;
       do {
-        const page = await env.SUBSCRIBERS.list({ prefix: "subscriber:", cursor });
+        const page = await env.CLIMATE_SUBSCRIBERS_KV.list({ prefix: "subscriber:", cursor });
         for (const key of page.keys) {
-          const record = await env.SUBSCRIBERS.get(key.name, "json");
+          const record = await env.CLIMATE_SUBSCRIBERS_KV.get(key.name, "json");
           if (record?.status === "active" && validEmail(record.email)) emails.push(record.email);
         }
         cursor = page.list_complete ? undefined : page.cursor;
@@ -62,10 +62,10 @@ export default {
     if (!validEmail(email)) return json({ error: "invalid_email" }, 400, origin);
     const key = await keyFor(email);
     if (url.pathname === "/unsubscribe") {
-      await env.SUBSCRIBERS.delete(key);
+      await env.CLIMATE_SUBSCRIBERS_KV.delete(key);
       return json({ ok: true, status: "unsubscribed" }, 200, origin);
     }
-    await env.SUBSCRIBERS.put(key, JSON.stringify({
+    await env.CLIMATE_SUBSCRIBERS_KV.put(key, JSON.stringify({
       email,
       status: "active",
       subscribed_at: new Date().toISOString(),

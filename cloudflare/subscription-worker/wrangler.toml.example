@@ -3,10 +3,10 @@ main = "src/index.js"
 compatibility_date = "2026-08-01"
 
 [vars]
-ALLOWED_ORIGIN = "https://generationzprogrammer.github.io"
+CLIMATE_ALLOWED_ORIGIN = "https://generationzprogrammer.github.io"
 
 [[kv_namespaces]]
-binding = "SUBSCRIBERS"
+binding = "CLIMATE_SUBSCRIBERS_KV"
 id = "REPLACE_WITH_KV_NAMESPACE_ID"
 
-# ADMIN_TOKEN must be added with: npx wrangler secret put ADMIN_TOKEN
+# Add CLIMATE_SUBSCRIBER_ADMIN_TOKEN as an encrypted Worker secret.
