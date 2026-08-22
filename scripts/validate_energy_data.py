@@ -6,6 +6,7 @@ import urllib.error
 import urllib.request
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -25,8 +26,14 @@ def _probe(url: str) -> dict:
 
 
 def validate(check_urls: bool = False) -> dict:
-    reports = json.loads((ROOT / "config" / "energy_reports.seed.json").read_text(encoding="utf-8"))["reports"]
+    seed_reports = json.loads((ROOT / "config" / "energy_reports.seed.json").read_text(encoding="utf-8"))["reports"]
+    bulk_path = ROOT / "config" / "energy_reports.bulk.json"
+    bulk_reports = json.loads(bulk_path.read_text(encoding="utf-8"))["reports"] if bulk_path.exists() else []
+    reports = seed_reports + bulk_reports
     catalogue = json.loads((ROOT / "config" / "energy_companies.json").read_text(encoding="utf-8"))["companies"]
+    wikidata_path = ROOT / "config" / "energy_companies.wikidata.json"
+    wikidata_companies = json.loads(wikidata_path.read_text(encoding="utf-8"))["companies"] if wikidata_path.exists() else []
+    all_companies = catalogue + wikidata_companies
     profiles = json.loads((ROOT / "config" / "energy_company_profiles.json").read_text(encoding="utf-8"))["profiles"]
     issues = []
     urls = [row.get("report_url") for row in reports]
@@ -38,10 +45,22 @@ def validate(check_urls: bool = False) -> dict:
         missing = [field for field in required if not row.get(field)]
         if missing:
             issues.append({"severity": "high", "code": "report_required_field", "row": index, "missing": missing})
-        if int(row.get("year") or 0) < 2023 or int(row.get("year") or 0) > 2026:
+        current_year = datetime.now(UTC).year
+        if int(row.get("year") or 0) < current_year - 3 or int(row.get("year") or 0) > current_year:
             issues.append({"severity": "medium", "code": "report_year_outside_window", "row": index, "year": row.get("year")})
         if urlparse(str(row.get("report_url") or "")).scheme != "https":
             issues.append({"severity": "high", "code": "report_url_not_https", "row": index, "url": row.get("report_url")})
+        if not any("\u4e00" <= char <= "\u9fff" for char in str(row.get("title_zh") or "")):
+            issues.append({"severity": "high", "code": "report_chinese_title_missing", "row": index})
+
+    company_ids_all = [company.get("id") for company in all_companies]
+    if len(company_ids_all) != len(set(company_ids_all)):
+        issues.append({"severity": "high", "code": "duplicate_company_id"})
+    company_required = ("id", "name_zh", "name_en", "type", "country", "business_zh", "aliases", "website")
+    for index, company in enumerate(all_companies):
+        missing = [field for field in company_required if not company.get(field)]
+        if missing:
+            issues.append({"severity": "high", "code": "company_required_field", "row": index, "missing": missing})
 
     company_ids = {company["id"] for company in catalogue}
     for profile in profiles:
@@ -68,10 +87,13 @@ def validate(check_urls: bool = False) -> dict:
     return {
         "status": "passed" if not any(issue["severity"] == "high" for issue in issues) else "failed",
         "reports": len(reports),
+        "bulk_reports": len(bulk_reports),
         "report_publishers": len({row["publisher"] for row in reports}),
         "report_countries_or_regions": len({row["country_or_region"] for row in reports}),
         "company_profiles": len(profiles),
         "company_profiles_with_financials": sum(bool(row.get("financials")) for row in profiles),
+        "company_directory_records": len(all_companies),
+        "wikidata_company_records": len(wikidata_companies),
         "url_checks": len(probes),
         "issues": issues,
     }

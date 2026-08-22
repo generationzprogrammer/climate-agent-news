@@ -12,6 +12,7 @@ from .summary_utils import is_generic_summary, is_generic_title
 
 DEFAULT_CATALOGUE = Path(__file__).resolve().parents[2] / "config" / "energy_companies.json"
 DEFAULT_PROFILES = Path(__file__).resolve().parents[2] / "config" / "energy_company_profiles.json"
+DEFAULT_WIKIDATA = Path(__file__).resolve().parents[2] / "config" / "energy_companies.wikidata.json"
 COOPERATION_TERMS = (
     "partnership", "partner with", "collaboration", "collaborate", "joint venture", "consortium",
     "memorandum of understanding", "mou", "alliance", "teams up", "agreement with",
@@ -26,9 +27,49 @@ PROJECT_TERMS = (
 BOILERPLATE_TERMS = ("消息显示，涉及", "报道中出现", "主题上属于", "该段为题名与来源摘要")
 
 
-def load_company_catalogue(path: Path = DEFAULT_CATALOGUE, profiles_path: Path = DEFAULT_PROFILES) -> dict:
+def _website_host(value: str) -> str:
+    from urllib.parse import urlparse
+
+    return (urlparse(str(value or "")).hostname or "").lower().removeprefix("www.")
+
+
+def load_company_catalogue(
+    path: Path = DEFAULT_CATALOGUE,
+    profiles_path: Path = DEFAULT_PROFILES,
+    wikidata_path: Path = DEFAULT_WIKIDATA,
+) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
-    companies = payload.get("companies") or []
+    companies = [dict(company) for company in (payload.get("companies") or [])]
+    if wikidata_path.exists():
+        wikidata = json.loads(wikidata_path.read_text(encoding="utf-8"))
+        seen_names = {
+            re.sub(r"\W+", "", str(value).lower(), flags=re.UNICODE)
+            for company in companies
+            for value in (company.get("name_zh"), company.get("name_en"), *(company.get("aliases") or []))
+            if value
+        }
+        seen_hosts = {_website_host(company.get("website")) for company in companies if _website_host(company.get("website"))}
+        for company in wikidata.get("companies") or []:
+            names = {
+                re.sub(r"\W+", "", str(value).lower(), flags=re.UNICODE)
+                for value in (company.get("name_zh"), company.get("name_en"), *(company.get("aliases") or []))
+                if value
+            }
+            host = _website_host(company.get("website"))
+            if names & seen_names or (host and host in seen_hosts):
+                continue
+            companies.append(dict(company))
+            seen_names.update(names)
+            if host:
+                seen_hosts.add(host)
+        payload["scope_note_zh"] = (
+            "全球能源企业分层目录：基础层采用Wikidata可追溯的企业、国家、行业与官网字段，"
+            "深度层补充经官方财报核验的营收、利润、技术、项目和发展方向；基础层不估算缺失财务数据。"
+        )
+        methodology = payload.setdefault("methodology_sources", [])
+        if not any(item.get("url") == wikidata.get("source_url") for item in methodology if isinstance(item, dict)):
+            methodology.append({"name_zh": "Wikidata Query Service", "url": wikidata.get("source_url")})
+    payload["companies"] = companies
     required = {"id", "name_zh", "name_en", "type", "country", "continent", "lon", "lat", "business_zh", "aliases", "website"}
     seen: set[str] = set()
     for company in companies:
@@ -274,6 +315,7 @@ def build_company_intelligence(energy_archive: dict, catalogue: dict) -> dict:
             "countries": len(countries),
             "intelligence": len(events),
             "detailed_profiles": sum(bool(company.get("profile_updated_at")) for company in companies),
+            "traceable_basic_profiles": sum(bool(company.get("source_url")) for company in companies),
             "categories": dict(categories),
         },
         "methodology_sources": catalogue.get("methodology_sources") or [],

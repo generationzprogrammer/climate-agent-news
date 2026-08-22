@@ -3,11 +3,11 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urlencode, urljoin, urlparse
 
 from .collector import fetch_resource
 from .providers import OpenAICompatibleModel
@@ -16,11 +16,27 @@ from .summary_utils import is_generic_summary, is_generic_title
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SEED = ROOT / "config" / "energy_reports.seed.json"
+DEFAULT_BULK = ROOT / "config" / "energy_reports.bulk.json"
 DEFAULT_SOURCES = ROOT / "config" / "energy_report_sources.json"
+WORLD_BANK_API = "https://search.worldbank.org/api/v3/wds"
 REPORT_TERMS = (
     "report", "outlook", "review", "statistics", "assessment", "white paper", "roadmap",
     "energy balance", "energy in brief", "technology perspectives", "market report",
     "报告", "展望", "白皮书", "统计", "评估", "路线图", "能源平衡",
+)
+ENERGY_SCOPE_TERMS = (
+    "energy", "electricity", "power system", "power sector", "renewable", "solar", "wind",
+    "hydrogen", "battery", "storage", "oil", "petroleum", "natural gas", "lng", "coal",
+    "nuclear", "geothermal", "biofuel", "grid", "electrification", "critical mineral",
+    "decarbon", "net zero", "clean cooking", "能源", "电力", "可再生", "光伏", "风电",
+    "氢能", "储能", "电池", "石油", "天然气", "煤炭", "核能", "电网", "关键矿产",
+)
+REPORT_TITLE_EXCLUDES = (
+    "procurement plan", "resettlement plan", "environmental and social commitment",
+    "implementation status", "audit report", "loan agreement", "financing agreement",
+    "contract award", "project appraisal document", "project information document",
+    "disclosable version of the isr", "audited financial statement", "project introduction",
+    "frequently asked questions",
 )
 OFFICIAL_REPORT_HOSTS = (
     "iea.org", "irena.org", "eia.gov", "energy.gov", "energy.gov.au", "gov.uk",
@@ -97,7 +113,7 @@ def _normalise_record(record: dict, *, added_at: str) -> dict | None:
     year_match = re.search(r"\b(202[3-9])\b", " ".join((original, url, str(record.get("year") or ""))))
     year = int(record.get("year") or (year_match.group(1) if year_match else datetime.now(UTC).year))
     topics = record.get("topics") or _topics_for(f"{original} {chinese} {summary}")
-    return {
+    normalised = {
         "report_id": str(record.get("report_id") or "report_" + hashlib.sha1(url.encode("utf-8")).hexdigest()[:16]),
         "title_zh": chinese,
         "title_original": original,
@@ -114,6 +130,10 @@ def _normalise_record(record: dict, *, added_at: str) -> dict | None:
         "discovery_method": str(record.get("discovery_method") or "curated_official_source"),
         "added_at": str(record.get("added_at") or added_at),
     }
+    for key in ("abstract_original", "translation_method", "source_tier", "access_note_zh"):
+        if record.get(key):
+            normalised[key] = record[key]
+    return normalised
 
 
 def _topics_for(text: str) -> list[str]:
@@ -166,8 +186,14 @@ def _archive_candidates(energy_archive: dict) -> list[dict]:
     return candidates
 
 
-def build_energy_report_database(energy_archive: dict, persistent_path: Path, seed_path: Path = DEFAULT_SEED) -> dict:
+def build_energy_report_database(
+    energy_archive: dict,
+    persistent_path: Path,
+    seed_path: Path = DEFAULT_SEED,
+    bulk_path: Path = DEFAULT_BULK,
+) -> dict:
     seed = _load_json(seed_path, {"reports": []})
+    bulk = _load_json(bulk_path, {"reports": []})
     existing = _load_json(persistent_path, {"reports": []})
     seed_titles = {str(row.get("title_original") or "").strip().lower() for row in seed.get("reports") or []}
     retained_existing = [
@@ -184,7 +210,12 @@ def build_energy_report_database(energy_archive: dict, persistent_path: Path, se
             for allowed in OFFICIAL_REPORT_HOSTS
         )
     ]
-    reports = _merge_records(retained_existing, _archive_candidates(energy_archive), seed.get("reports") or [])
+    reports = _merge_records(
+        retained_existing,
+        _archive_candidates(energy_archive),
+        bulk.get("reports") or [],
+        seed.get("reports") or [],
+    )
     countries = sorted({row["country_or_region"] for row in reports})
     publishers = sorted({row["publisher"] for row in reports})
     years = sorted({row["year"] for row in reports}, reverse=True)
@@ -192,10 +223,13 @@ def build_energy_report_database(energy_archive: dict, persistent_path: Path, se
         "schema_version": "1.0",
         "meta": {
             "updated_at": datetime.now(UTC).isoformat(),
-            "scope_note_zh": "近三年能源重点报告数据库，优先收录政府与国际组织官方英文版；每日扫描官方发布页，有新报告时增量入库。",
-            "selection_note_zh": "报告数量反映当前收录范围，不代表各国发布强度；条目均保留官方原文入口。",
+            "scope_note_zh": "近三年能源技术、产业与转型报告数据库，覆盖政府、国际组织、研究机构、行业智库和专业协会；每日扫描可追溯发布源并增量入库。",
+            "selection_note_zh": "基础目录与编辑精选分层管理；报告数量反映当前收录范围，不代表各国发布强度，条目均保留原文或正式发布信息入口。",
         },
-        "statistics": {"reports": len(reports), "countries_or_regions": len(countries), "publishers": len(publishers), "years": years},
+        "statistics": {
+            "reports": len(reports), "countries_or_regions": len(countries), "publishers": len(publishers), "years": years,
+            "with_abstract": sum(bool(row.get("abstract_original") or row.get("summary_zh")) for row in reports),
+        },
         "filters": {"countries_or_regions": countries, "publishers": publishers, "years": years},
         "reports": reports,
     }
@@ -211,6 +245,67 @@ def write_energy_report_database(energy_archive: dict, persistent_path: Path, ou
     return payload
 
 
+def _api_text(value) -> str:
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, dict):
+        return str(value.get("cdata!") or value.get("value") or "").strip()
+    if isinstance(value, list):
+        return "; ".join(filter(None, (_api_text(item) for item in value)))
+    return ""
+
+
+def _report_title_in_scope(title: str) -> bool:
+    lowered = title.lower()
+    return any(term in lowered for term in ENERGY_SCOPE_TERMS) and not any(term in lowered for term in REPORT_TITLE_EXCLUDES)
+
+
+def _world_bank_daily_candidates(existing: list[dict], max_new: int) -> list[dict]:
+    cutoff = (datetime.now(UTC).date() - timedelta(days=21)).isoformat()
+    query = urlencode({
+        "format": "json", "qterm": "energy", "strdate": cutoff,
+        "enddate": datetime.now(UTC).date().isoformat(), "docty_exact": "Report",
+        "srt": "docdt", "order": "desc", "rows": 200, "os": 0,
+        "fl": "display_title,docdt,docty,count,abstracts,lang,repnme,url,txturl",
+    })
+    response = fetch_resource(f"{WORLD_BANK_API}?{query}", max_bytes=4_000_000, accept="application/json")
+    payload = json.loads(response.payload.decode("utf-8", errors="replace"))
+    known_urls = {str(row.get("report_url") or "") for row in existing}
+    output = []
+    for raw in (payload.get("documents") or {}).values():
+        title = _api_text(raw.get("display_title"))
+        language = _api_text(raw.get("lang"))
+        if len(title) < 12 or not _report_title_in_scope(title) or (language and "english" not in language.lower()):
+            continue
+        published = _api_text(raw.get("docdt"))[:10]
+        year_match = re.match(r"(20\d{2})", published)
+        profile_url = _api_text(raw.get("url"))
+        if profile_url.startswith("http://"):
+            profile_url = "https://" + profile_url[7:]
+        report_url = _api_text(raw.get("pdfurl")) or profile_url
+        if not year_match or not report_url.startswith("https://") or report_url in known_urls:
+            continue
+        output.append({
+            "title_original": title,
+            "publisher": "世界银行",
+            "publisher_type": "国际组织",
+            "country_or_region": _api_text(raw.get("count")) or "国际组织",
+            "year": int(year_match.group(1)),
+            "published_at": published,
+            "language": "English",
+            "topics": _topics_for(title),
+            "report_url": report_url,
+            "source_url": profile_url or report_url,
+            "abstract_original": _api_text(raw.get("abstracts"))[:1600],
+            "discovery_method": "world_bank_documents_api_daily",
+            "source_tier": "official_metadata",
+            "access_note_zh": "世界银行正式报告页面或全文",
+        })
+        if len(output) >= max_new:
+            break
+    return output
+
+
 def discover_official_reports(
     persistent_path: Path,
     *,
@@ -224,7 +319,13 @@ def discover_official_reports(
     sources = _load_json(sources_path, {"sources": []}).get("sources") or []
     found: list[dict] = []
     failures: list[dict] = []
+    try:
+        found.extend(_world_bank_daily_candidates(current.get("reports") or [], max_new))
+    except Exception as exc:
+        failures.append({"publisher": "世界银行", "error": type(exc).__name__})
     for source in sources:
+        if len(found) >= max_new:
+            break
         try:
             response = fetch_resource(str(source["listing_url"]), max_bytes=2_000_000, accept="text/html,application/xhtml+xml")
             parser = _LinkParser()
@@ -266,11 +367,14 @@ def discover_official_reports(
     translated: list[dict] = []
     if found and model:
         result = model.complete_json(
-            "你是能源报告目录编辑。逐字忠实翻译英文报告标题，并根据标题写一句40至90字的中文内容说明；不得虚构数字、结论或发布日期。只返回JSON对象，键为reports。",
-            {"reports": [{"index": index, "title": item["title_original"], "publisher": item["publisher"]} for index, item in enumerate(found)]},
+            "你是能源报告目录编辑。逐义忠实翻译英文报告标题；如提供原文摘要，再将摘要压缩为一段60至120字中文概括。不得虚构数字、结论或发布日期；没有摘要时summary_zh留空。只返回JSON对象，键为reports。",
+            {"reports": [{
+                "index": index, "title": item["title_original"], "publisher": item["publisher"],
+                "abstract": str(item.get("abstract_original") or "")[:1200],
+            } for index, item in enumerate(found[:max_new])]},
         )
         by_index = {int(item.get("index")): item for item in result.get("reports") or [] if str(item.get("index", "")).isdigit()}
-        for index, item in enumerate(found):
+        for index, item in enumerate(found[:max_new]):
             translation = by_index.get(index, {})
             title_zh = str(translation.get("title_zh") or "").strip()
             if not title_zh or is_generic_title(title_zh):

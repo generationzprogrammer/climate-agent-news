@@ -301,6 +301,7 @@ class CoreTests(unittest.TestCase):
 
     def test_company_intelligence_classifies_startups_cooperation_and_locations(self) -> None:
         catalogue = load_company_catalogue()
+        self.assertGreaterEqual(len(catalogue["companies"]), 1000)
         shell = next(company for company in catalogue["companies"] if company["id"] == "shell")
         self.assertEqual(shell["financials"]["fiscal_year"], 2025)
         self.assertTrue(shell["core_technologies_zh"])
@@ -334,6 +335,15 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(cooperation["location"]["basis_zh"], "新闻明确地点")
         startup = next(item for item in payload["today"] if item["category"] == "startup")
         self.assertIn("企业总部", startup["location"]["basis_zh"])
+
+    def test_energy_report_catalogue_has_scale_and_requested_examples(self) -> None:
+        from climate_agent.energy_reports import build_energy_report_database
+
+        payload = build_energy_report_database({}, Path(self.temp.name) / "energy-reports-empty.json")
+        self.assertGreaterEqual(payload["statistics"]["reports"], 200)
+        titles = {item["title_zh"] for item in payload["reports"]}
+        self.assertTrue(any("全球新型储能产业发展形势" in title for title in titles))
+        self.assertIn("《中国工业领域绿色低碳发展技术蓝皮书》", titles)
 
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()

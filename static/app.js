@@ -510,7 +510,7 @@ function updateMapPeriodCounts() {
 
 function companyTypeLabel(type) {
   if (type === "energy_startup") return "能源初创企业";
-  if (type === "energy_company") return "动态识别能源企业";
+  if (type === "energy_company") return "能源企业";
   return "能源巨头与龙头企业";
 }
 
@@ -546,11 +546,11 @@ function renderCompanyIntelligence() {
   const stats = data.statistics || {};
   $("companyScopeNote").textContent = data.meta?.scope_note_zh || "持续扩展的全球能源企业情报库。";
   $("companyKpis").innerHTML = [
-    ["企业样本", stats.companies || 0, "持续扩展，不以数量替代质量"],
+    ["企业样本", stats.companies || 0, `可追溯基础档案 ${formatCount(stats.traceable_basic_profiles || 0)} 家`],
     ["能源巨头与龙头", stats.majors || 0, "项目、产能与跨国布局"],
     ["能源初创企业", stats.startups || 0, "技术路线与商业化进展"],
     ["覆盖国家", stats.countries || 0, "总部口径"],
-    ["关联企业情报", stats.intelligence || 0, `动态识别企业 ${stats.dynamically_discovered || 0} 家`],
+    ["关联企业情报", stats.intelligence || 0, `深度档案 ${stats.detailed_profiles || 0} 家`],
   ].map(([label, value, note]) => `<article><span>${esc(label)}</span><b>${formatCount(value)}</b><small>${esc(note)}</small></article>`).join("");
   applyCompanyFilters();
   $("companyTodayMapCount").textContent = (data.map_events_today || []).length;
@@ -718,10 +718,10 @@ function renderEnergyReports() {
   const stats = data.statistics || {};
   $("energyReportScope").textContent = data.meta?.scope_note_zh || "近三年官方能源报告数据库。";
   $("energyReportKpis").innerHTML = [
-    ["重点报告", stats.reports || 0],
+    ["报告记录", stats.reports || 0],
     ["国家或组织", stats.countries_or_regions || 0],
     ["发布机构", stats.publishers || 0],
-    ["覆盖年份", (stats.years || []).join(" / ") || "—"],
+    ["含摘要信息", stats.with_abstract || 0],
   ].map(([label, value]) => `<article><span>${esc(label)}</span><b>${esc(value)}</b></article>`).join("");
   $("energyReportNote").textContent = `${data.meta?.selection_note_zh || ""} 数据版本：${formatDate(data.meta?.updated_at, true)}`;
   applyEnergyReportFilters();
@@ -733,7 +733,7 @@ function applyEnergyReportFilters() {
   const country = $("energyReportCountry")?.value || "";
   const year = $("energyReportYear")?.value || "";
   state.reportFiltered = (state.reportData.reports || []).filter(report => {
-    const haystack = [report.title_zh, report.title_original, report.summary_zh, report.publisher,
+    const haystack = [report.title_zh, report.title_original, report.summary_zh, report.abstract_original, report.publisher,
       report.country_or_region, ...(report.topics || [])].join(" ").toLowerCase();
     return (!query || haystack.includes(query))
       && (!country || report.country_or_region === country)
@@ -751,7 +751,7 @@ function renderEnergyReportCards() {
     <p class="report-title-original">${esc(report.title_original)}</p>
     ${substantiveSummary(report.summary_zh) ? `<p class="report-summary">${esc(report.summary_zh)}</p>` : ""}
     <div class="report-tags">${(report.topics || []).map(topic => `<i>${esc(topic)}</i>`).join("")}</div>
-    <footer><span>${esc(report.publisher)}</span><small>${esc(report.language)} · ${esc(formatDate(report.published_at))}</small></footer>
+    <footer><span>${esc(report.publisher)}</span><small>${esc(report.language)} · ${esc(formatDate(report.published_at))}${report.access_note_zh ? ` · ${esc(report.access_note_zh)}` : ""}</small></footer>
   </article>`).join("") : '<div class="empty compact"><b>没有匹配报告</b><p>请减少筛选条件或更换检索词。</p></div>';
   $("energyReportLoadMore").hidden = state.reportVisible >= state.reportFiltered.length;
 }
