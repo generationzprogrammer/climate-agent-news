@@ -47,10 +47,14 @@
 1. 普通文本变量：Name 填 `CLIMATE_ALLOWED_ORIGIN`，Value 填 `https://generationzprogrammer.github.io`。
 2. 加密 Secret：Name 填 `CLIMATE_SUBSCRIBER_ADMIN_TOKEN`，Value 填自行生成的至少 32 字节随机字符串。
 
-可在自己的 Windows PowerShell 中生成令牌：
+旧版 Windows PowerShell 可用以下命令生成令牌：
 
 ```powershell
-[Convert]::ToHexString([Security.Cryptography.RandomNumberGenerator]::GetBytes(32))
+$bytes = New-Object byte[] 32
+$rng = New-Object System.Security.Cryptography.RNGCryptoServiceProvider
+$rng.GetBytes($bytes)
+[BitConverter]::ToString($bytes).Replace('-', '').ToLowerInvariant()
+$rng.Dispose()
 ```
 
 立即把结果保存到密码管理器。不要发到聊天框、写入源码或截图公开。添加两项后点击 **Deploy**。
