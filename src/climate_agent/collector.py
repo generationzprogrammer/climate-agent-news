@@ -47,6 +47,7 @@ class NormalizedArticle:
     rights_status: str = "metadata_only"
     extraction_method: str = "rss"
     parser_version: str = "rss.v1"
+    publisher_name: str | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -127,6 +128,7 @@ def parse_feed(payload: bytes, source_id: str, language: str | None = None) -> l
         summary = _plain_text(_text(node, [
             "description", "field_synopsis", "{http://www.w3.org/2005/Atom}summary", "field_body",
         ]))
+        publisher_name = _text(node, ["source", "{http://www.w3.org/2005/Atom}source"])
         digest = hashlib.sha256(f"{title}\n{summary or ''}".encode("utf-8")).hexdigest()
         articles.append(NormalizedArticle(
             article_id=stable_id("article", canonical), source_id=source_id, source_url=link,
@@ -134,6 +136,7 @@ def parse_feed(payload: bytes, source_id: str, language: str | None = None) -> l
             published_at_utc=_date_to_utc(raw_date), summary_from_source=summary,
             language=language, content_hash=digest,
             parser_version="rss.recovered.v1" if recovered else "rss.v1",
+            publisher_name=publisher_name,
         ))
     return articles
 

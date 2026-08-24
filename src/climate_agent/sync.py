@@ -14,14 +14,26 @@ from .db import Database
 P0_SOURCE_IDS = (
     "INT001", "INT002", "INT007", "INT008", "INT009", "INT010", "INT013",
     "INT014", "INT019", "INT020", "OFF001", "OFF006", "OFF013", "OFF014",
-    "API005", "API001", "API004",
+    "API001", "API005", "API004",
 )
 
 GDELT_SOURCE_IDS = {"API001", "API005"}
 GOOGLE_NEWS_SOURCE_IDS = {"API004"}
 GOOGLE_NEWS_EXCLUDE_TERMS = (
     "sesame", "nickalive", "movie", "celebrity", "sports", "football",
-    "basketball", "baseball", "horoscope", "recipe",
+    "basketball", "baseball", "golf", "tennis", "horoscope", "recipe",
+)
+
+# Several short searches are more reliable than one long Boolean expression in
+# Google News RSS.  They also make the daily recall less dependent on GDELT,
+# which periodically returns HTTP 429 from shared GitHub Actions runners.
+GOOGLE_NEWS_QUERIES = (
+    '("climate change" OR "climate policy" OR "climate finance" OR emissions) when:1d',
+    '(heatwave OR "extreme heat" OR wildfire OR drought OR flooding) climate when:1d',
+    '("clean energy" OR "renewable energy" OR solar OR wind OR battery OR "power grid") '
+    '(policy OR project OR investment OR technology) when:1d',
+    '(China OR "United States" OR Africa OR "Latin America" OR Australia) '
+    '("climate change" OR "energy transition" OR "clean energy") when:1d',
 )
 
 GDELT_PROFILES = {
@@ -30,9 +42,8 @@ GDELT_PROFILES = {
         "maxrecords": "25",
         "timespan": "24h",
     },
-    # The seven-day window is deliberate: this profile supplies a high-quality,
-    # one-time regional catch-up on first deployment and remains idempotent on
-    # later daily runs because canonical URLs are unique in the database/archive.
+    # Keep the regional query narrow and lightweight.  A seven-day window caused
+    # repeated HTTP 429 responses and could also starve the global GDELT query.
     "API005": {
         "query": (
             '("climate change" OR "carbon neutrality" OR "carbon market" OR '
@@ -40,8 +51,8 @@ GDELT_PROFILES = {
             '(domain:news.cn OR domain:gov.cn OR domain:mee.gov.cn OR '
             'domain:cma.gov.cn OR domain:dialogue.earth)'
         ),
-        "maxrecords": "50",
-        "timespan": "7d",
+        "maxrecords": "25",
+        "timespan": "24h",
     },
 }
 
@@ -65,10 +76,14 @@ TOPIC_RULES = {
     "国际气候谈判": ("unfccc", "cop30", "cop31", "climate talks", "climate summit", "negotiat"),
     "国家气候承诺": ("ndc", "nationally determined", "climate target", "2035 target"),
     "气候资金": ("climate finance", "green climate fund", "loss and damage", "adaptation fund", "finance goal"),
-    "能源与排放": ("emission", "renewable", "fossil fuel", "coal", "methane", "energy transition"),
+    "能源与排放": (
+        "emission", "renewable", "fossil fuel", "coal", "methane", "energy transition",
+        "clean energy", "clean power", "solar", "wind power", "battery", "energy storage", "power grid",
+    ),
     "气候适应": (
         "adaptation", "loss and damage", "resilience", "climate disaster",
-        "extreme weather", "heat wave", "wildfire", "drought", "flood", "storm", "hurricane",
+        "extreme weather", "heat wave", "heatwave", "extreme heat", "wildfire", "wildfires",
+        "drought", "flood", "flooding", "storm", "hurricane",
     ),
     "国际碳市场": ("article 6", "carbon market", "carbon credit", "emissions trading"),
     "履约与全球盘点": ("global stocktake", "transparency", "biennial transparency", "btr"),
@@ -78,9 +93,11 @@ CLIMATE_SIGNAL_TERMS = (
     "climate", "unfccc", "cop30", "cop31", "ndc", "emission", "carbon",
     "net zero", "renewable", "fossil fuel", "methane", "energy transition",
     "climate finance", "loss and damage", "adaptation", "resilience",
-    "heat wave", "wildfire", "drought", "flood", "storm", "hurricane",
+    "heat wave", "heatwave", "extreme heat", "wildfire", "wildfires", "drought",
+    "flood", "flooding", "storm", "hurricane",
     "green cooperation", "green transition", "clean energy", "global warming",
-    "battery", "energy storage", "power grid", "geothermal", "hydrogen",
+    "battery", "energy storage", "power grid", "geothermal", "hydrogen", "solar",
+    "wind power", "clean power",
     "energy startup", "energy company", "clean technology", "fusion energy",
     "气候", "碳", "排放", "可再生能源", "净零", "低碳", "绿色转型",
     "高温", "热浪", "野火", "干旱", "洪水", "风暴", "飓风",
@@ -173,6 +190,7 @@ def _article_rows(articles: list[NormalizedArticle], source: dict) -> tuple[list
                 "why_zh": analysis["why_zh"],
                 "extraction_method": article.extraction_method,
                 "parser_version": article.parser_version,
+                "publisher_name": article.publisher_name,
                 "fact_status": "source_claim_unverified",
             },
         })
@@ -197,26 +215,19 @@ def _gdelt_url(endpoint: str, source_id: str) -> str:
     return f"{endpoint}?{urlencode(params)}"
 
 
-def _google_news_url(endpoint: str) -> str:
-    query = (
-        '(("climate change" OR "carbon emissions" OR "renewable energy" OR "net zero" '
-        'OR "climate finance" OR "wildfire climate" OR "heat wave climate") OR '
-        '(("energy company" OR "energy startup" OR battery OR "power grid" OR hydrogen '
-        'OR geothermal OR solar OR "wind power" OR "fusion energy") '
-        '(project OR partnership OR collaboration OR investment OR factory))) when:1d'
-    )
-    params = {
-        "q": query,
-        "hl": "en-US",
-        "gl": "US",
-        "ceid": "US:en",
-    }
+def _google_news_url(endpoint: str, query: str | None = None) -> str:
+    query = query or GOOGLE_NEWS_QUERIES[0]
+    params = {"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"}
     return endpoint.format(
         query=urlencode({"q": query})[2:],
         hl=params["hl"],
         gl=params["gl"],
         ceid=params["ceid"],
     )
+
+
+def _google_news_urls(endpoint: str) -> list[str]:
+    return [_google_news_url(endpoint, query) for query in GOOGLE_NEWS_QUERIES]
 
 
 def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
@@ -251,26 +262,43 @@ def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
                 request_url = _google_news_url(endpoint)
             else:
                 request_url = endpoint
-            response = fetch_resource(
-                request_url,
-                max_bytes=3_000_000,
-                accept="application/json" if source_id in GDELT_SOURCE_IDS else "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9",
-            )
+            request_urls = _google_news_urls(endpoint) if source_id in GOOGLE_NEWS_SOURCE_IDS else [request_url]
+            responses = []
+            request_errors = []
+            for url in request_urls:
+                try:
+                    responses.append(fetch_resource(
+                        url,
+                        max_bytes=3_000_000,
+                        accept="application/json" if source_id in GDELT_SOURCE_IDS else "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9",
+                    ))
+                except Exception as exc:
+                    request_errors.append(f"{type(exc).__name__}: {str(exc)[:120]}")
+            if not responses:
+                raise RuntimeError("all discovery requests failed: " + "; ".join(request_errors))
             languages = json.loads(source["languages_json"])
-            articles = parse_gdelt(response.payload, source_id) if source_id in GDELT_SOURCE_IDS else parse_feed(
-                response.payload, source_id, languages[0] if languages else None,
-            )
+            if source_id in GDELT_SOURCE_IDS:
+                articles = parse_gdelt(responses[0].payload, source_id)
+            else:
+                articles = []
+                for response in responses:
+                    articles.extend(parse_feed(response.payload, source_id, languages[0] if languages else None))
             rows, quality = _article_rows(articles, source)
             counts = db.upsert_articles(rows)
             run.update({
                 "status": "success" if rows else "empty",
-                "http_status": response.status,
-                "content_type": response.content_type,
-                "response_bytes": response.size,
+                "http_status": max(response.status for response in responses),
+                "content_type": responses[0].content_type,
+                "response_bytes": sum(response.size for response in responses),
                 "items_seen": counts["seen"],
                 "items_new": counts["new"],
                 "items_updated": counts["updated"],
-                "quality": quality,
+                "quality": {
+                    **quality,
+                    "requests_succeeded": len(responses),
+                    "requests_total": len(request_urls),
+                    "request_errors": request_errors,
+                },
             })
         except Exception as exc:  # each source is an isolated failure domain
             run.update({

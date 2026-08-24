@@ -149,7 +149,7 @@ def source_balanced_rows(rows: list[dict], limit: int) -> list[dict]:
     source_order: dict[str, list[str]] = {}
     for row in rows:
         region = row.get("source_region") or row.get("region") or "unknown"
-        source_id = row.get("source_id") or "unknown"
+        source_id = row.get("publisher_name") or row.get("source_id") or "unknown"
         if region not in buckets:
             buckets[region] = {}
             source_order[region] = []
@@ -283,6 +283,12 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
                  a.published_at_utc DESC
         LIMIT ?
     """, (max(limit * 8, limit),))
+    for row in rows:
+        try:
+            metadata = json.loads(row.get("metadata_json") or "{}")
+        except json.JSONDecodeError:
+            metadata = {}
+        row["publisher_name"] = metadata.get("publisher_name")
     rows = source_balanced_rows(rows, limit)
     def load_context(row: dict) -> tuple[str, str]:
         try:

@@ -251,28 +251,20 @@ def select_daily_window(
     min_fresh_items: int = 3,
     min_fresh_sources: int = 2,
 ) -> list[dict]:
-    """Select the freshest publication-ready Beijing window.
+    """Select only the newest publication-ready Beijing calendar day.
 
-    The newest available Beijing publication day always leads the public queue.
-    When that day contains fewer than the target number of distinct stories, the
-    remaining positions are filled from the preceding six days. This prevents a
-    complete older edition from hiding genuinely newer records while retaining a
-    useful briefing size during low-volume mornings.
+    ``lookback_days`` and the minimum arguments remain in the public signature
+    for compatibility with older callers.  The public "today" queue must never
+    silently mix earlier dates; acquisition breadth and a later refresh job are
+    responsible for meeting the target volume.
     """
     dated = [(item, _published_day(item.get("published_at"))) for item in items]
     latest = max((day for _, day in dated if day), default=None)
     if not latest:
         return []
-    first_day = latest - timedelta(days=max(0, lookback_days - 1))
-    recent_items = [item for item, day in dated if day and first_day <= day <= latest]
     latest_items = _deduplicate_items([item for item, day in dated if day == latest])
     selected = balanced_select(latest_items, limit)
-    fillers = balanced_select(
-        [item for item in recent_items if _published_day(item.get("published_at")) != latest],
-        max(0, limit - len(selected)),
-        already_selected=selected,
-    )
-    return sorted(selected + fillers, key=lambda item: item.get("published_at") or "", reverse=True)
+    return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
 
 
 def count_backfilled_items(items: list[dict]) -> int:
@@ -315,6 +307,7 @@ def _publishable_candidates(db: Database) -> list[dict]:
     items = []
     for row in rows:
         metadata = _decode_json(row.pop("metadata_json"), {})
+        row["source_name"] = metadata.get("publisher_name") or row["source_name"]
         row["topics"] = [TOPIC_ZH_ALIASES.get(topic, topic) for topic in _decode_json(row.pop("topics_json"), [])]
         row["numbers"] = _decode_json(row.pop("numbers_json"), [])
         row["summary_zh"] = metadata.get("summary_zh")
@@ -465,7 +458,7 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
     payload["meta"]["daily_window_start"] = min(selected_days).isoformat() if selected_days else payload["meta"]["date"]
     payload["meta"]["daily_target"] = 10
     payload["meta"]["daily_backfilled"] = count_backfilled_items(today_items)
-    payload["meta"]["daily_complete_day"] = payload["meta"]["daily_backfilled"] == 0
+    payload["meta"]["daily_complete_day"] = len(today_items) >= 8
     payload["meta"]["daily_sources"] = len({_source_key(item) for item in today_items})
     payload["meta"]["daily_continents"] = len({_continent(item) for item in today_items if _continent(item) != "未标注"})
     payload["metrics"]["high_priority"] = sum(item.get("relevance_score", 0) >= 70 for item in today_items)
@@ -533,14 +526,14 @@ def dashboard_payload(db: Database) -> dict:
             "timezone": "Asia/Shanghai",
             "demo_mode": not live,
             "notice": (
-                f"今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
+                f"今日简报按北京时间自然日生成且不混入往日记录；系统通过分主题聚合检索和每日晚间刷新，将当天目标维持在约 10 条。动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
                 if live else "尚未执行在线同步，以下事件仅用于界面演示；UNFCCC 本地档案可独立浏览。"
             ),
             "latest_news_date": max(intelligence_days, default=today).isoformat(),
             "daily_window_start": min(intelligence_days, default=today).isoformat(),
             "daily_target": 10,
             "daily_backfilled": backfilled,
-            "daily_complete_day": backfilled == 0,
+            "daily_complete_day": len(intelligence) >= 8,
             "daily_sources": len({_source_key(item) for item in intelligence}),
             "daily_continents": len({_continent(item) for item in intelligence if _continent(item) != "未标注"}),
         },

@@ -24,7 +24,7 @@ from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
 from climate_agent.site_metrics import update_cloudflare_visitor_history
-from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _source_scope_match
+from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
@@ -60,19 +60,19 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM events")[0]["n"], 3)
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM articles WHERE article_id LIKE 'curated_%'")[0]["n"], 8)
 
-    def test_dashboard_reconciles_source_counts(self) -> None:
+    def test_dashboard_reconciles_counts_and_uses_latest_day(self) -> None:
         payload = dashboard_payload(self.db)
         self.assertEqual(payload["metrics"]["source_total"], 53)
         self.assertEqual(payload["metrics"]["source_enabled"], 33)
         self.assertGreaterEqual(len(payload["intelligence"]), 1)
-        self.assertGreaterEqual(len({item["source_id"] for item in payload["intelligence"]}), 3)
+        self.assertEqual(len(select_latest_day(payload["intelligence"], limit=20)), len(payload["intelligence"]))
 
     def test_brief_is_versioned(self) -> None:
         payload = dashboard_payload(self.db)
         first, second = save_brief(self.db, payload), save_brief(self.db, payload)
         self.assertEqual((first["version"], second["version"]), (1, 2))
         markdown = render_markdown(payload)
-        self.assertIn("中国发布“十五五”可再生能源发展规划", markdown)
+        self.assertIn(payload["intelligence"][0]["title_zh"], markdown)
         self.assertIn("数据边界", markdown)
 
     def test_url_normalization(self) -> None:
@@ -86,11 +86,12 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(event_priority(event), 100)
 
     def test_rss_and_atom_contract(self) -> None:
-        rss = b"""<rss><channel><item><title>Climate policy update</title><link>https://example.org/a?utm_medium=rss</link><pubDate>Thu, 16 Jul 2026 10:00:00 GMT</pubDate><description>Numbers and facts.</description></item></channel></rss>"""
+        rss = b"""<rss><channel><item><title>Climate policy update</title><link>https://example.org/a?utm_medium=rss</link><pubDate>Thu, 16 Jul 2026 10:00:00 GMT</pubDate><description>Numbers and facts.</description><source>Reuters</source></item></channel></rss>"""
         articles = parse_feed(rss, "TEST", "en")
         self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0].canonical_url, "https://example.org/a")
         self.assertEqual(articles[0].rights_status, "metadata_only")
+        self.assertEqual(articles[0].publisher_name, "Reuters")
 
     def test_unep_nonstandard_feed_contract(self) -> None:
         payload = b'''<rss><channel><item><title>UNEP update</title><path>https://www.unep.org/story</path><field_synopsis><![CDATA[<p>Verified synopsis.</p>]]></field_synopsis><created><![CDATA[<time datetime="2026-07-16T04:26:47+03:00">date</time>]]></created></item></channel></rss>'''
@@ -153,13 +154,25 @@ class CoreTests(unittest.TestCase):
             language="English", content_hash="m",
         )
         self.assertGreaterEqual(_analyse(heat, 4)["score"], 45)
+        heatwaves = NormalizedArticle(
+            article_id="fr", source_id="INT014", source_url="https://example.org/france",
+            canonical_url="https://example.org/france",
+            title="France links sharp rise in drownings to heatwaves",
+            published_at_raw=None, published_at_utc=None, summary_from_source=None,
+            language="English", content_hash="fr",
+        )
+        self.assertGreaterEqual(_analyse(heatwaves, 4)["score"], 45)
         self.assertLess(_analyse(moon, 5)["score"], 45)
 
     def test_google_news_fallback_is_climate_scoped(self) -> None:
-        url = _google_news_url("https://news.google.com/rss/search?q={query}&hl={hl}&gl={gl}&ceid={ceid}")
+        endpoint = "https://news.google.com/rss/search?q={query}&hl={hl}&gl={gl}&ceid={ceid}"
+        url = _google_news_url(endpoint)
         self.assertIn("news.google.com/rss/search", url)
-        self.assertIn("energy", url.lower())
+        self.assertIn("climate", url.lower())
         self.assertNotIn("{query}", url)
+        urls = _google_news_urls(endpoint)
+        self.assertEqual(len(urls), 4)
+        self.assertTrue(all("when%3A1d" in item for item in urls))
         climate = NormalizedArticle(
             article_id="g", source_id="API004", source_url="https://news.google.com/rss",
             canonical_url="https://example.org/climate", title="Climate summit calls for faster clean energy finance",
@@ -493,6 +506,7 @@ class CoreTests(unittest.TestCase):
     def test_workflow_runs_daily_with_models_and_writeback(self) -> None:
         workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
         self.assertIn('cron: "30 22 * * *"', workflow)
+        self.assertIn('cron: "30 10 * * *"', workflow)
         self.assertIn('cron: "0 0 * * 1"', workflow)
         self.assertIn("contents: write", workflow)
         self.assertIn("data/news_archive.json", workflow)
@@ -518,7 +532,7 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(select_latest_day(rows), [rows[1]])
         self.assertEqual({row["source_id"] for row in select_latest_week(rows)}, {"A", "B"})
 
-    def test_daily_window_keeps_partial_latest_day_and_backfills(self) -> None:
+    def test_daily_window_never_backfills_earlier_days(self) -> None:
         rows = [
             {
                 "article_id": "latest-a", "source_id": "API", "source_name": "GDELT",
@@ -549,14 +563,11 @@ class CoreTests(unittest.TestCase):
                 "places": [place_cycle[index % len(place_cycle)]],
             })
         selected = select_daily_window(rows, limit=10)
-        source_counts = Counter(row["source_name"] for row in selected)
-        self.assertEqual(len(selected), 10)
-        self.assertTrue({"latest-a", "latest-b"} & {row["article_id"] for row in selected})
-        self.assertEqual({date.fromisoformat(row["published_at"][:10]) for row in selected}, {date(2026, 7, 28), date(2026, 7, 29)})
-        self.assertLessEqual(max(source_counts.values()), 2)
-        self.assertGreaterEqual(sum(bool(row["places"]) for row in selected), 8)
+        self.assertEqual(len(selected), 1)
+        self.assertTrue({row["article_id"] for row in selected}.issubset({"latest-a", "latest-b"}))
+        self.assertEqual({date.fromisoformat(row["published_at"][:10]) for row in selected}, {date(2026, 7, 29)})
 
-    def test_daily_window_uses_fresh_day_and_backfills_when_quality_is_enough(self) -> None:
+    def test_daily_window_uses_only_fresh_day(self) -> None:
         rows = []
         for index in range(4):
             rows.append({
@@ -581,8 +592,8 @@ class CoreTests(unittest.TestCase):
         selected = select_daily_window(rows, limit=10)
         selected_ids = {row["article_id"] for row in selected}
         self.assertTrue({"fresh-0", "fresh-1", "fresh-2", "fresh-3"}.issubset(selected_ids))
-        self.assertEqual(len(selected), 10)
-        self.assertEqual(max(date.fromisoformat(row["published_at"][:10]) for row in selected), date(2026, 8, 2))
+        self.assertEqual(len(selected), 4)
+        self.assertEqual({date.fromisoformat(row["published_at"][:10]) for row in selected}, {date(2026, 8, 2)})
 
     def test_place_detection_uses_boundaries_and_caribbean(self) -> None:
         places = detect_places("Caribbean countries face £43 billion in climate disaster losses")
