@@ -1,0 +1,5983 @@
+{
+  "schema_version": "1.0",
+  "meta": {
+    "updated_at": "2026-08-24T02:08:57.625075+00:00",
+    "latest_news_date": "2026-08-16",
+    "scope_note_zh": "全球能源企业分层目录：基础层采用Wikidata可追溯的企业、国家、行业与官网字段，深度层补充经官方财报核验的营收、利润、技术、项目和发展方向；基础层不估算缺失财务数据。",
+    "location_rule_zh": "优先采用新闻明确地点；缺失时使用企业总部并明确标注，不把总部推断为项目所在地。"
+  },
+  "statistics": {
+    "companies": 214,
+    "majors": 32,
+    "startups": 17,
+    "dynamically_discovered": 2,
+    "countries": 59,
+    "intelligence": 2,
+    "detailed_profiles": 16,
+    "traceable_basic_profiles": 163,
+    "categories": {
+      "能源巨头项目": 1,
+      "能源初创企业": 1
+    }
+  },
+  "methodology_sources": [
+    {
+      "name": "IEA Energy Start-up Data Explorer",
+      "url": "https://www.iea.org/data-and-statistics/data-tools/energy-start-up-data-explorer"
+    },
+    {
+      "name": "IEA ETP Clean Energy Technology Guide",
+      "url": "https://www.iea.org/data-and-statistics/data-tools/etp-clean-energy-technology-guide"
+    },
+    {
+      "name_zh": "Wikidata Query Service",
+      "url": "https://query.wikidata.org/"
+    }
+  ],
+  "companies": [
+    {
+      "id": "aramco",
+      "name_zh": "沙特阿美",
+      "name_en": "Saudi Aramco",
+      "type": "energy_major",
+      "country": "沙特阿拉伯",
+      "continent": "亚洲",
+      "lon": 50.1,
+      "lat": 26.3,
+      "business_zh": [
+        "石油与天然气",
+        "炼化与化工",
+        "低碳氢与碳管理"
+      ],
+      "aliases": [
+        "Saudi Aramco",
+        "Aramco",
+        "沙特阿美"
+      ],
+      "website": "https://www.aramco.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "全球大型综合油气和化工企业，拥有低成本上游资源，并扩展天然气、炼化化工和低碳技术业务。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "USD",
+        "revenue": {
+          "value": 480.2,
+          "unit": "billion",
+          "label_zh": "收入及其他销售相关收入"
+        },
+        "profit": {
+          "value": 106.2,
+          "unit": "billion",
+          "label_zh": "净利润"
+        },
+        "source_url": "https://www.aramco.com/en/investors/annual-reports",
+        "note_zh": "按Saudi Aramco 2024年年度报告披露的美元口径。"
+      },
+      "core_technologies_zh": [
+        "大型油气田开发",
+        "天然气处理",
+        "炼化化工一体化",
+        "碳捕集与低碳氢"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "Jafurah非常规天然气",
+          "location_zh": "沙特阿拉伯",
+          "status_zh": "分阶段建设大型非常规天然气产能"
+        },
+        {
+          "name_zh": "Amiral石化综合体",
+          "location_zh": "沙特阿拉伯",
+          "status_zh": "推进炼化与石化一体化扩建"
+        }
+      ],
+      "strategy_zh": "维持上游竞争力，扩大天然气和液化天然气布局，提高油转化为化学品能力，并投资碳管理和新型燃料。",
+      "profile_sources": [
+        {
+          "label_zh": "年度报告",
+          "url": "https://www.aramco.com/en/investors/annual-reports"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "shell",
+      "name_zh": "壳牌",
+      "name_en": "Shell",
+      "type": "energy_major",
+      "country": "英国",
+      "continent": "欧洲",
+      "lon": -0.13,
+      "lat": 51.51,
+      "business_zh": [
+        "综合油气",
+        "液化天然气",
+        "电力与可再生能源",
+        "充电服务"
+      ],
+      "aliases": [
+        "Shell plc",
+        "Shell",
+        "壳牌"
+      ],
+      "website": "https://www.shell.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "综合能源集团，业务覆盖液化天然气、上游油气、炼化与化工、终端营销以及电力和低碳解决方案。",
+      "financials": {
+        "fiscal_year": 2025,
+        "currency": "USD",
+        "revenue": {
+          "value": 264.3,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": 17.8,
+          "unit": "billion",
+          "label_zh": "归属于股东的利润"
+        },
+        "source_url": "https://www.shell.com/investors/results-and-reporting/annual-report.html",
+        "note_zh": "按Shell 2025年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "液化天然气一体化",
+        "深水油气开发",
+        "碳捕集与封存",
+        "电力交易与充电网络"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "LNG Canada",
+          "location_zh": "加拿大",
+          "status_zh": "大型液化天然气项目进入运营爬坡阶段"
+        },
+        {
+          "name_zh": "Northern Lights",
+          "location_zh": "挪威",
+          "status_zh": "参与跨境二氧化碳运输与封存基础设施"
+        }
+      ],
+      "strategy_zh": "提高综合天然气和优势上游资产比重，同时以选择性投资方式发展低碳燃料、碳管理和电力业务。",
+      "profile_sources": [
+        {
+          "label_zh": "2025年年度报告",
+          "url": "https://www.shell.com/investors/results-and-reporting/annual-report.html"
+        },
+        {
+          "label_zh": "项目与投资组合",
+          "url": "https://www.shell.com/investors/results-and-reporting.html"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "bp",
+      "name_zh": "英国石油",
+      "name_en": "bp",
+      "type": "energy_major",
+      "country": "英国",
+      "continent": "欧洲",
+      "lon": -0.13,
+      "lat": 51.51,
+      "business_zh": [
+        "综合油气",
+        "生物能源",
+        "电动交通",
+        "低碳电力"
+      ],
+      "aliases": [
+        "BP plc",
+        "British Petroleum",
+        "英国石油"
+      ],
+      "website": "https://www.bp.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "综合能源企业，业务覆盖上游油气、炼化销售、生物能源、充电、可再生电力和天然气电力交易。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "USD",
+        "revenue": {
+          "value": 189.8,
+          "unit": "billion",
+          "label_zh": "销售及其他经营收入"
+        },
+        "profit": {
+          "value": 0.4,
+          "unit": "billion",
+          "label_zh": "归属于股东的利润"
+        },
+        "source_url": "https://www.bp.com/en/global/corporate/investors/results-reporting-and-presentations/annual-report.html",
+        "note_zh": "按bp 2024年IFRS年度报告口径；不以调整后重置成本利润替代法定利润。"
+      },
+      "core_technologies_zh": [
+        "深水油气与液化天然气",
+        "生物能源",
+        "电动汽车充电",
+        "海上风电与电力交易"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "Greater Tortue Ahmeyim LNG",
+          "location_zh": "毛里塔尼亚和塞内加尔",
+          "status_zh": "跨境海上天然气与液化天然气项目"
+        },
+        {
+          "name_zh": "Tangguh UCC",
+          "location_zh": "印度尼西亚",
+          "status_zh": "推进液化天然气与碳捕集协同开发"
+        }
+      ],
+      "strategy_zh": "在强化油气和现金流基础上，选择性推进生物能源、充电、氢能、碳捕集和可再生电力项目。",
+      "profile_sources": [
+        {
+          "label_zh": "年度报告",
+          "url": "https://www.bp.com/en/global/corporate/investors/results-reporting-and-presentations/annual-report.html"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "exxonmobil",
+      "name_zh": "埃克森美孚",
+      "name_en": "ExxonMobil",
+      "type": "energy_major",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -96.95,
+      "lat": 32.9,
+      "business_zh": [
+        "石油与天然气",
+        "炼化与化工",
+        "碳捕集",
+        "低碳氢"
+      ],
+      "aliases": [
+        "ExxonMobil",
+        "Exxon Mobil",
+        "埃克森美孚"
+      ],
+      "website": "https://corporate.exxonmobil.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "全球综合油气与化工企业，重点布局低成本上游资源、液化天然气、高附加值产品和低碳解决方案。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "USD",
+        "revenue": {
+          "value": 349.6,
+          "unit": "billion",
+          "label_zh": "营业收入及其他收入"
+        },
+        "profit": {
+          "value": 33.7,
+          "unit": "billion",
+          "label_zh": "净利润"
+        },
+        "source_url": "https://corporate.exxonmobil.com/investors/annual-report",
+        "note_zh": "按ExxonMobil 2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "深水油气开发",
+        "液化天然气",
+        "碳捕集与封存",
+        "低碳氢与锂资源开发"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "圭亚那Stabroek区块",
+          "location_zh": "圭亚那",
+          "status_zh": "持续扩建海上生产能力"
+        },
+        {
+          "name_zh": "Golden Pass LNG",
+          "location_zh": "美国",
+          "status_zh": "建设液化天然气出口能力"
+        }
+      ],
+      "strategy_zh": "集中投资圭亚那、二叠纪盆地和液化天然气等优势资产，并推动碳管理、氢能和锂业务商业化。",
+      "profile_sources": [
+        {
+          "label_zh": "年度报告",
+          "url": "https://corporate.exxonmobil.com/investors/annual-report"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "chevron",
+      "name_zh": "雪佛龙",
+      "name_en": "Chevron",
+      "type": "energy_major",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -95.37,
+      "lat": 29.76,
+      "business_zh": [
+        "石油与天然气",
+        "炼化",
+        "可再生燃料",
+        "碳管理"
+      ],
+      "aliases": [
+        "Chevron",
+        "雪佛龙"
+      ],
+      "website": "https://www.chevron.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "全球综合油气公司，业务覆盖上游勘探开发、液化天然气、炼化销售和新能源业务。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "USD",
+        "revenue": {
+          "value": 193.4,
+          "unit": "billion",
+          "label_zh": "销售及其他经营收入"
+        },
+        "profit": {
+          "value": 17.7,
+          "unit": "billion",
+          "label_zh": "归属于公司的净利润"
+        },
+        "source_url": "https://www.chevron.com/investors/annual-reports",
+        "note_zh": "按Chevron 2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "深水开发",
+        "非常规油气",
+        "液化天然气",
+        "碳捕集、氢能与可再生燃料"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "Tengiz Future Growth Project",
+          "location_zh": "哈萨克斯坦",
+          "status_zh": "扩建大型油田产能"
+        },
+        {
+          "name_zh": "Anchor深水项目",
+          "location_zh": "美国墨西哥湾",
+          "status_zh": "采用高压深水生产技术"
+        }
+      ],
+      "strategy_zh": "提升低成本油气产量和资本效率，并通过Chevron New Energies发展碳捕集、氢能和新型燃料。",
+      "profile_sources": [
+        {
+          "label_zh": "年度报告",
+          "url": "https://www.chevron.com/investors/annual-reports"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "totalenergies",
+      "name_zh": "道达尔能源",
+      "name_en": "TotalEnergies",
+      "type": "energy_major",
+      "country": "法国",
+      "continent": "欧洲",
+      "lon": 2.35,
+      "lat": 48.86,
+      "business_zh": [
+        "综合油气",
+        "液化天然气",
+        "太阳能与风电",
+        "电力零售"
+      ],
+      "aliases": [
+        "TotalEnergies",
+        "Total Energies",
+        "道达尔能源"
+      ],
+      "website": "https://totalenergies.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "全球多能源公司，业务覆盖油气、液化天然气、炼化化工、可再生发电、储能和电力零售。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "USD",
+        "revenue": {
+          "value": 195.6,
+          "unit": "billion",
+          "label_zh": "销售收入"
+        },
+        "profit": {
+          "value": 15.8,
+          "unit": "billion",
+          "label_zh": "集团净利润"
+        },
+        "source_url": "https://totalenergies.com/investors/publications-and-regulated-information/reports-and-publications",
+        "note_zh": "按TotalEnergies 2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "液化天然气",
+        "深水油气",
+        "太阳能与海上风电",
+        "电池储能和综合电力"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "North Field East",
+          "location_zh": "卡塔尔",
+          "status_zh": "参与大型液化天然气扩建"
+        },
+        {
+          "name_zh": "Integrated Power组合",
+          "location_zh": "全球",
+          "status_zh": "扩大发电、储能、交易和零售协同"
+        }
+      ],
+      "strategy_zh": "保持油气和液化天然气优势，同时扩大低碳电力资产与客户规模，形成生产、交易和销售一体化。",
+      "profile_sources": [
+        {
+          "label_zh": "报告与出版物",
+          "url": "https://totalenergies.com/investors/publications-and-regulated-information/reports-and-publications"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "equinor",
+      "name_zh": "挪威国家能源公司",
+      "name_en": "Equinor",
+      "type": "energy_major",
+      "country": "挪威",
+      "continent": "欧洲",
+      "lon": 5.73,
+      "lat": 58.97,
+      "business_zh": [
+        "海上油气",
+        "海上风电",
+        "氢能与碳捕集"
+      ],
+      "aliases": [
+        "Equinor",
+        "Statoil",
+        "挪威国家能源公司"
+      ],
+      "website": "https://www.equinor.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "petrobras",
+      "name_zh": "巴西国家石油公司",
+      "name_en": "Petrobras",
+      "type": "energy_major",
+      "country": "巴西",
+      "continent": "南美洲",
+      "lon": -43.17,
+      "lat": -22.91,
+      "business_zh": [
+        "深水油气",
+        "炼化",
+        "生物燃料",
+        "低碳投资"
+      ],
+      "aliases": [
+        "Petrobras",
+        "巴西国家石油公司",
+        "巴西石油"
+      ],
+      "website": "https://petrobras.com.br/en/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "cnpc",
+      "name_zh": "中国石油",
+      "name_en": "CNPC / PetroChina",
+      "type": "energy_major",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 116.41,
+      "lat": 39.9,
+      "business_zh": [
+        "石油与天然气",
+        "管网与炼化",
+        "地热与新能源"
+      ],
+      "aliases": [
+        "CNPC",
+        "PetroChina",
+        "China National Petroleum",
+        "中国石油",
+        "中石油"
+      ],
+      "website": "https://www.cnpc.com.cn/en/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "中国综合油气企业，覆盖勘探生产、炼油化工、销售、天然气与管输以及新能源业务；财务数据采用上市主体中国石油口径。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "CNY",
+        "revenue": {
+          "value": 2938.0,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": 164.7,
+          "unit": "billion",
+          "label_zh": "归属于母公司股东净利润"
+        },
+        "source_url": "https://www.petrochina.com.cn/ptr/ndbg/ndbg.shtml",
+        "note_zh": "按中国石油2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "复杂油气藏开发",
+        "页岩油气",
+        "天然气供应链",
+        "地热、风光与碳管理"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "塔里木油气开发",
+          "location_zh": "中国新疆",
+          "status_zh": "推进深层和超深层油气勘探开发"
+        },
+        {
+          "name_zh": "吉林油田二氧化碳驱与封存",
+          "location_zh": "中国吉林",
+          "status_zh": "开展二氧化碳驱油和封存示范"
+        }
+      ],
+      "strategy_zh": "提升国内油气勘探开发和天然气保障能力，同时发展新能源、新材料、碳捕集利用封存和数字化运营。",
+      "profile_sources": [
+        {
+          "label_zh": "年度报告",
+          "url": "https://www.petrochina.com.cn/ptr/ndbg/ndbg.shtml"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "sinopec",
+      "name_zh": "中国石化",
+      "name_en": "Sinopec",
+      "type": "energy_major",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 116.41,
+      "lat": 39.9,
+      "business_zh": [
+        "炼化与化工",
+        "油气",
+        "氢能",
+        "地热与充换电"
+      ],
+      "aliases": [
+        "Sinopec",
+        "China Petroleum & Chemical",
+        "中国石化",
+        "中石化"
+      ],
+      "website": "https://www.sinopecgroup.com/group/en/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "中国大型综合能源化工企业，业务涵盖勘探开发、炼油、成品油销售、化工、新能源与新材料。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "CNY",
+        "revenue": {
+          "value": 3072.6,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": 50.3,
+          "unit": "billion",
+          "label_zh": "归属于母公司股东净利润"
+        },
+        "source_url": "https://www.sinopec.com/listco/en/Resource/Pdf/2025032480.pdf",
+        "note_zh": "按中国石化2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "炼化一体化",
+        "页岩油气开发",
+        "氢能制储运加",
+        "地热与碳捕集利用封存"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "齐鲁—胜利油田百万吨级碳捕集项目",
+          "location_zh": "中国山东",
+          "status_zh": "运行二氧化碳捕集、运输与驱油封存链条"
+        },
+        {
+          "name_zh": "加氢站网络",
+          "location_zh": "中国",
+          "status_zh": "依托成品油终端布局氢能交通基础设施"
+        }
+      ],
+      "strategy_zh": "巩固油气和炼化主业，发展氢能、地热、绿色电力、新材料与碳管理，推动传统业务低碳化。",
+      "profile_sources": [
+        {
+          "label_zh": "2024年年度报告",
+          "url": "https://www.sinopec.com/listco/en/Resource/Pdf/2025032480.pdf"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "cnooc",
+      "name_zh": "中国海油",
+      "name_en": "CNOOC",
+      "type": "energy_major",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 116.41,
+      "lat": 39.9,
+      "business_zh": [
+        "海上油气",
+        "液化天然气",
+        "海上风电"
+      ],
+      "aliases": [
+        "CNOOC",
+        "China National Offshore Oil",
+        "中国海油",
+        "中海油"
+      ],
+      "website": "https://www.cnoocltd.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "state_grid",
+      "name_zh": "国家电网",
+      "name_en": "State Grid Corporation of China",
+      "type": "energy_major",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 116.41,
+      "lat": 39.9,
+      "business_zh": [
+        "输配电网络",
+        "特高压",
+        "电力数字化",
+        "跨区电力交易"
+      ],
+      "aliases": [
+        "State Grid",
+        "SGCC",
+        "国家电网"
+      ],
+      "website": "https://www.sgcc.com.cn/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "nextera",
+      "name_zh": "新纪元能源",
+      "name_en": "NextEra Energy",
+      "type": "energy_major",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -80.05,
+      "lat": 26.82,
+      "business_zh": [
+        "风电与太阳能",
+        "电池储能",
+        "公用事业电力"
+      ],
+      "aliases": [
+        "NextEra Energy",
+        "NextEra",
+        "新纪元能源"
+      ],
+      "website": "https://www.nexteraenergy.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "iberdrola",
+      "name_zh": "伊维尔德罗拉",
+      "name_en": "Iberdrola",
+      "type": "energy_major",
+      "country": "西班牙",
+      "continent": "欧洲",
+      "lon": -2.94,
+      "lat": 43.26,
+      "business_zh": [
+        "可再生能源",
+        "智能电网",
+        "电力零售"
+      ],
+      "aliases": [
+        "Iberdrola",
+        "伊维尔德罗拉"
+      ],
+      "website": "https://www.iberdrola.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "enel",
+      "name_zh": "意大利国家电力公司",
+      "name_en": "Enel",
+      "type": "energy_major",
+      "country": "意大利",
+      "continent": "欧洲",
+      "lon": 12.5,
+      "lat": 41.9,
+      "business_zh": [
+        "可再生电力",
+        "配电网络",
+        "电力零售与充电"
+      ],
+      "aliases": [
+        "Enel",
+        "意大利国家电力公司"
+      ],
+      "website": "https://www.enel.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "orsted",
+      "name_zh": "沃旭能源",
+      "name_en": "Ørsted",
+      "type": "energy_major",
+      "country": "丹麦",
+      "continent": "欧洲",
+      "lon": 12.57,
+      "lat": 55.68,
+      "business_zh": [
+        "海上风电",
+        "陆上可再生能源",
+        "绿色燃料"
+      ],
+      "aliases": [
+        "Ørsted",
+        "Orsted",
+        "沃旭能源"
+      ],
+      "website": "https://orsted.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "rwe",
+      "name_zh": "莱茵集团",
+      "name_en": "RWE",
+      "type": "energy_major",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": 7.01,
+      "lat": 51.46,
+      "business_zh": [
+        "可再生电力",
+        "灵活发电",
+        "储能与能源交易"
+      ],
+      "aliases": [
+        "RWE",
+        "RWE Renewables",
+        "莱茵集团"
+      ],
+      "website": "https://www.rwe.com/",
+      "latest_intelligence": [
+        {
+          "event_id": "company_article_fcf16fe01258fa8c",
+          "record_id": "article_fcf16fe01258fa8c",
+          "category": "major_project",
+          "category_zh": "能源巨头项目",
+          "company_ids": [
+            "rwe"
+          ],
+          "companies": [
+            "莱茵集团"
+          ],
+          "title_zh": "莱茵集团在2026年上半年扩大可再生能源与电网投资",
+          "summary_zh": "能源企业莱茵集团（RWE）在2026年上半年进一步扩大了其在可再生能源以及电网方面的投资规模，旨在推动能源转型与基础设施建设。",
+          "source_name": "Google News RSS Search",
+          "published_at": "2026-08-16T07:03:26+00:00",
+          "canonical_url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOG5aR0ZCRzE3XzVIbEtkcDAwOC05ekVHdkhtTGZYRkU0czdfUW5VS2NqTE1kMnNBczBsaGJ5VHFwOVEwU3ZkcEVodDZZRElWdVdVaEo2UE1HWGZ1MUo3emM3QldpcVphRlJ0WHJiN1VtZl9vRlN3YUFIYTdjNXpHNUJySUJCOGxsSExJVHd0LUNnQQ?oc=5",
+          "location": {
+            "name_zh": "德国",
+            "lon": 7.01,
+            "lat": 51.46,
+            "basis_zh": "企业总部（新闻未明确项目地点）"
+          }
+        }
+      ],
+      "intelligence_count": 1
+    },
+    {
+      "id": "ge_vernova",
+      "name_zh": "通用电气维诺瓦",
+      "name_en": "GE Vernova",
+      "type": "energy_major",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -71.06,
+      "lat": 42.36,
+      "business_zh": [
+        "发电设备",
+        "风电设备",
+        "电网技术与软件"
+      ],
+      "aliases": [
+        "GE Vernova",
+        "GE Power",
+        "GE Renewable Energy"
+      ],
+      "website": "https://www.gevernova.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "电力设备和服务企业，覆盖燃气发电、风电、电网设备、电力电子和能源软件。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "USD",
+        "revenue": {
+          "value": 34.9,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": -0.2,
+          "unit": "billion",
+          "label_zh": "净利润"
+        },
+        "source_url": "https://www.gevernova.com/investors/annual-reports",
+        "note_zh": "按GE Vernova 2024年年度报告口径，负值表示净亏损。"
+      },
+      "core_technologies_zh": [
+        "燃气轮机",
+        "海上与陆上风机",
+        "高压输电和变电设备",
+        "电网编排软件"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "HVDC与电网扩建订单",
+          "location_zh": "全球",
+          "status_zh": "服务可再生能源并网和跨区输电"
+        },
+        {
+          "name_zh": "Haliade-X海上风机平台",
+          "location_zh": "全球",
+          "status_zh": "用于大型海上风电项目"
+        }
+      ],
+      "strategy_zh": "受益于全球电气化和电网投资增长，重点扩大燃机、电网设备与服务产能，并改善风电业务执行。",
+      "profile_sources": [
+        {
+          "label_zh": "年度报告",
+          "url": "https://www.gevernova.com/investors/annual-reports"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "siemens_energy",
+      "name_zh": "西门子能源",
+      "name_en": "Siemens Energy",
+      "type": "energy_major",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": 11.58,
+      "lat": 48.14,
+      "business_zh": [
+        "电网技术",
+        "燃气轮机",
+        "风电设备",
+        "氢能系统"
+      ],
+      "aliases": [
+        "Siemens Energy",
+        "Siemens Gamesa",
+        "西门子能源",
+        "歌美飒"
+      ],
+      "website": "https://www.siemens-energy.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "能源设备与服务集团，业务涵盖燃气服务、电网技术、工业转型以及Siemens Gamesa风电。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "EUR",
+        "revenue": {
+          "value": 34.5,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": 1.3,
+          "unit": "billion",
+          "label_zh": "净利润"
+        },
+        "source_url": "https://www.siemens-energy.com/global/en/home/investor-relations/publications.html",
+        "note_zh": "按Siemens Energy 2024财年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "燃气轮机与发电服务",
+        "高压直流输电",
+        "电网稳定技术",
+        "风力发电机组和电解槽"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "全球高压直流输电项目",
+          "location_zh": "全球",
+          "status_zh": "支持海上风电接入和远距离输电"
+        },
+        {
+          "name_zh": "Berlin电解槽制造基地",
+          "location_zh": "德国",
+          "status_zh": "推进工业级电解水制氢设备"
+        }
+      ],
+      "strategy_zh": "聚焦电网扩张、灵活发电和工业脱碳增长，同时修复风电质量与项目执行能力。",
+      "profile_sources": [
+        {
+          "label_zh": "年度报告与出版物",
+          "url": "https://www.siemens-energy.com/global/en/home/investor-relations/publications.html"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "catl",
+      "name_zh": "宁德时代",
+      "name_en": "CATL",
+      "type": "energy_major",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 119.55,
+      "lat": 26.67,
+      "business_zh": [
+        "动力电池",
+        "储能电池",
+        "电池材料与回收"
+      ],
+      "aliases": [
+        "CATL",
+        "Contemporary Amperex",
+        "宁德时代"
+      ],
+      "website": "https://www.catl.com/en/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "动力电池和储能电池制造商，业务覆盖电芯、系统集成、电池材料、回收和电池资产服务。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "CNY",
+        "revenue": {
+          "value": 362.0,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": 50.7,
+          "unit": "billion",
+          "label_zh": "归属于上市公司股东净利润"
+        },
+        "source_url": "https://www.catl.com/en/uploads/1/file/public/202504/20250415085125_0t9da57kd1.pdf",
+        "note_zh": "按宁德时代2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "磷酸铁锂与三元电池",
+        "钠离子电池",
+        "麒麟电池结构集成",
+        "电池管理和回收"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "匈牙利德布勒森电池基地",
+          "location_zh": "匈牙利",
+          "status_zh": "建设面向欧洲客户的大型电池产能"
+        },
+        {
+          "name_zh": "零碳电力与储能解决方案",
+          "location_zh": "全球",
+          "status_zh": "推进储能系统和能源管理业务"
+        }
+      ],
+      "strategy_zh": "通过材料体系、结构创新和制造效率降低全生命周期成本，并扩展储能、换电和电池回收生态。",
+      "profile_sources": [
+        {
+          "label_zh": "2024年年度报告",
+          "url": "https://www.catl.com/en/uploads/1/file/public/202504/20250415085125_0t9da57kd1.pdf"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "byd",
+      "name_zh": "比亚迪",
+      "name_en": "BYD",
+      "type": "energy_major",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 114.06,
+      "lat": 22.55,
+      "business_zh": [
+        "新能源汽车",
+        "动力与储能电池",
+        "太阳能与轨道交通"
+      ],
+      "aliases": [
+        "BYD",
+        "比亚迪"
+      ],
+      "website": "https://www.bydglobal.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "新能源汽车、电池、电子和轨道交通企业，能源业务覆盖动力与储能电池、光伏和综合零碳解决方案。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "CNY",
+        "revenue": {
+          "value": 777.1,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": 40.3,
+          "unit": "billion",
+          "label_zh": "归属于上市公司股东净利润"
+        },
+        "source_url": "https://www.bydglobal.com/en/InvestorNotice.html",
+        "note_zh": "按比亚迪2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "刀片电池",
+        "电驱与功率半导体",
+        "插电混动系统",
+        "储能系统集成"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "全球新能源汽车制造基地",
+          "location_zh": "多国",
+          "status_zh": "推进本地化整车和零部件产能"
+        },
+        {
+          "name_zh": "电网级储能产品",
+          "location_zh": "全球",
+          "status_zh": "向电源侧和电网侧提供电池储能系统"
+        }
+      ],
+      "strategy_zh": "以电池、电驱、电子控制和整车垂直整合扩大新能源汽车规模，同时发展电网级储能和海外制造。",
+      "profile_sources": [
+        {
+          "label_zh": "投资者公告",
+          "url": "https://www.bydglobal.com/en/InvestorNotice.html"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "adani_green",
+      "name_zh": "阿达尼绿色能源",
+      "name_en": "Adani Green Energy",
+      "type": "energy_major",
+      "country": "印度",
+      "continent": "亚洲",
+      "lon": 72.57,
+      "lat": 23.02,
+      "business_zh": [
+        "大型太阳能",
+        "陆上风电",
+        "混合可再生能源"
+      ],
+      "aliases": [
+        "Adani Green Energy",
+        "Adani Green",
+        "阿达尼绿色能源"
+      ],
+      "website": "https://www.adanigreenenergy.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "acwa_power",
+      "name_zh": "沙特国际电力和水务公司",
+      "name_en": "ACWA Power",
+      "type": "energy_major",
+      "country": "沙特阿拉伯",
+      "continent": "亚洲",
+      "lon": 46.68,
+      "lat": 24.71,
+      "business_zh": [
+        "可再生电力",
+        "海水淡化",
+        "绿色氢能"
+      ],
+      "aliases": [
+        "ACWA Power",
+        "ACWA"
+      ],
+      "website": "https://www.acwapower.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "masdar",
+      "name_zh": "马斯达尔",
+      "name_en": "Masdar",
+      "type": "energy_major",
+      "country": "阿联酋",
+      "continent": "亚洲",
+      "lon": 54.37,
+      "lat": 24.45,
+      "business_zh": [
+        "太阳能与风电",
+        "绿色氢能",
+        "全球清洁能源投资"
+      ],
+      "aliases": [
+        "Masdar",
+        "Abu Dhabi Future Energy",
+        "马斯达尔"
+      ],
+      "website": "https://masdar.ae/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "fortescue",
+      "name_zh": "福德士集团",
+      "name_en": "Fortescue",
+      "type": "energy_major",
+      "country": "澳大利亚",
+      "continent": "大洋洲",
+      "lon": 115.86,
+      "lat": -31.95,
+      "business_zh": [
+        "矿业能源",
+        "绿色氢能",
+        "可再生能源项目"
+      ],
+      "aliases": [
+        "Fortescue",
+        "Fortescue Future Industries",
+        "福德士"
+      ],
+      "website": "https://www.fortescue.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "eskom",
+      "name_zh": "南非国家电力公司",
+      "name_en": "Eskom",
+      "type": "energy_major",
+      "country": "南非",
+      "continent": "非洲",
+      "lon": 28.05,
+      "lat": -26.2,
+      "business_zh": [
+        "电力生产与输配电",
+        "煤电转型",
+        "可再生能源并网"
+      ],
+      "aliases": [
+        "Eskom",
+        "南非国家电力公司"
+      ],
+      "website": "https://www.eskom.co.za/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "edf",
+      "name_zh": "法国电力集团",
+      "name_en": "EDF",
+      "type": "energy_major",
+      "country": "法国",
+      "continent": "欧洲",
+      "lon": 2.35,
+      "lat": 48.86,
+      "business_zh": [
+        "核电",
+        "可再生电力",
+        "电网与能源服务"
+      ],
+      "aliases": [
+        "Électricité de France",
+        "EDF Energy",
+        "法国电力集团"
+      ],
+      "website": "https://www.edf.fr/en",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "vestas",
+      "name_zh": "维斯塔斯",
+      "name_en": "Vestas",
+      "type": "energy_major",
+      "country": "丹麦",
+      "continent": "欧洲",
+      "lon": 10.2,
+      "lat": 56.16,
+      "business_zh": [
+        "风力发电机组",
+        "风电项目运维",
+        "能源数字化"
+      ],
+      "aliases": [
+        "Vestas",
+        "维斯塔斯"
+      ],
+      "website": "https://www.vestas.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "全球风力发电设备与服务企业，提供陆上和海上风机、项目工程以及长期运维服务。",
+      "financials": {
+        "fiscal_year": 2024,
+        "currency": "EUR",
+        "revenue": {
+          "value": 17.3,
+          "unit": "billion",
+          "label_zh": "营业收入"
+        },
+        "profit": {
+          "value": 0.5,
+          "unit": "billion",
+          "label_zh": "年度净利润"
+        },
+        "source_url": "https://www.vestas.com/en/investor/reports-and-presentations/financial",
+        "note_zh": "按Vestas 2024年年度报告口径。"
+      },
+      "core_technologies_zh": [
+        "大型陆上风机",
+        "海上风机平台",
+        "叶片与控制系统",
+        "预测性运维"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "V236-15.0 MW海上风机",
+          "location_zh": "欧洲和全球市场",
+          "status_zh": "推进样机验证与商业项目交付"
+        },
+        {
+          "name_zh": "全球风机服务组合",
+          "location_zh": "全球",
+          "status_zh": "通过长期服务协议管理在役机组"
+        }
+      ],
+      "strategy_zh": "提升高容量风机平台可靠性和项目盈利能力，扩大高毛利服务业务并加强供应链韧性。",
+      "profile_sources": [
+        {
+          "label_zh": "财务报告",
+          "url": "https://www.vestas.com/en/investor/reports-and-presentations/financial"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "tesla_energy",
+      "name_zh": "特斯拉能源",
+      "name_en": "Tesla Energy",
+      "type": "energy_major",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -97.74,
+      "lat": 30.27,
+      "business_zh": [
+        "电网与家庭储能",
+        "太阳能系统",
+        "虚拟电厂"
+      ],
+      "aliases": [
+        "Tesla Energy",
+        "Tesla Megapack",
+        "Tesla Powerwall",
+        "特斯拉能源"
+      ],
+      "website": "https://www.tesla.com/energy",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "longi",
+      "name_zh": "隆基绿能",
+      "name_en": "LONGi Green Energy",
+      "type": "energy_major",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 108.94,
+      "lat": 34.34,
+      "business_zh": [
+        "光伏硅片与电池组件",
+        "大型与分布式光伏方案",
+        "绿氢设备"
+      ],
+      "aliases": [
+        "LONGi Green Energy",
+        "LONGi Solar",
+        "LONGi",
+        "隆基绿能",
+        "隆基"
+      ],
+      "website": "https://www.longi.com/en/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "enlight",
+      "name_zh": "恩莱特可再生能源",
+      "name_en": "Enlight Renewable Energy",
+      "type": "energy_major",
+      "country": "以色列",
+      "continent": "亚洲",
+      "lon": 34.78,
+      "lat": 32.08,
+      "business_zh": [
+        "大型太阳能",
+        "风电",
+        "电池储能与独立发电"
+      ],
+      "aliases": [
+        "Enlight Renewable Energy",
+        "Enlight Energy"
+      ],
+      "website": "https://enlightenergy.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "citicore",
+      "name_zh": "赛提科尔可再生能源",
+      "name_en": "Citicore Renewable Energy",
+      "type": "energy_major",
+      "country": "菲律宾",
+      "continent": "亚洲",
+      "lon": 121.04,
+      "lat": 14.6,
+      "business_zh": [
+        "太阳能与风电开发",
+        "电池储能",
+        "可再生能源资产运营"
+      ],
+      "aliases": [
+        "Citicore Renewable Energy",
+        "Citicore Energy",
+        "CREC"
+      ],
+      "website": "https://crec.com.ph/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "limes_re",
+      "name_zh": "利梅斯可再生能源",
+      "name_en": "LIMES Renewable Energy",
+      "type": "energy_startup",
+      "country": "意大利",
+      "continent": "欧洲",
+      "lon": 9.19,
+      "lat": 45.46,
+      "business_zh": [
+        "可再生能源项目开发",
+        "项目融资与资产管理",
+        "风光储项目"
+      ],
+      "aliases": [
+        "Limes Renewable Energy",
+        "LIMES Renewable Energy"
+      ],
+      "website": "https://www.limes-re.com/en/home",
+      "latest_intelligence": [
+        {
+          "event_id": "company_article_186c3b96aa0ea07f",
+          "record_id": "article_186c3b96aa0ea07f",
+          "category": "startup",
+          "category_zh": "能源初创企业",
+          "company_ids": [
+            "limes_re"
+          ],
+          "companies": [
+            "利梅斯可再生能源"
+          ],
+          "title_zh": "利梅斯可再生能源在智利推进200兆瓦、1吉瓦时储能项目",
+          "summary_zh": "利梅斯可再生能源在智利开发的200兆瓦、1吉瓦时电池储能项目已达到开工准备阶段。",
+          "source_name": "Google News RSS Search",
+          "published_at": "2026-08-14T16:15:00+00:00",
+          "canonical_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5",
+          "location": {
+            "name_zh": "智利",
+            "lon": -71.0,
+            "lat": -33.0,
+            "basis_zh": "新闻明确地点"
+          }
+        }
+      ],
+      "intelligence_count": 1
+    },
+    {
+      "id": "form_energy",
+      "name_zh": "福姆能源",
+      "name_en": "Form Energy",
+      "type": "energy_startup",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -71.18,
+      "lat": 42.37,
+      "business_zh": [
+        "铁空气长时储能",
+        "多日储能系统"
+      ],
+      "aliases": [
+        "Form Energy"
+      ],
+      "website": "https://formenergy.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "美国长时储能初创企业，开发铁空气电池系统，目标是以低成本实现多日尺度电力储存。",
+      "financials": {
+        "fiscal_year": 2025,
+        "currency": "USD",
+        "revenue": null,
+        "profit": null,
+        "source_url": "https://formenergy.com/",
+        "note_zh": "非上市初创企业未公开可比年度营收和利润。"
+      },
+      "core_technologies_zh": [
+        "铁空气可逆氧化还原电池",
+        "多日储能系统",
+        "电网级模块化集成"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "Weirton制造基地",
+          "location_zh": "美国西弗吉尼亚州",
+          "status_zh": "建设铁空气电池商业化制造能力"
+        },
+        {
+          "name_zh": "Great River Energy示范项目",
+          "location_zh": "美国明尼苏达州",
+          "status_zh": "验证百小时级储能应用"
+        }
+      ],
+      "strategy_zh": "以100小时级储能补充锂离子电池，面向高比例可再生能源电网提供跨日和极端天气韧性。",
+      "profile_sources": [
+        {
+          "label_zh": "企业官网",
+          "url": "https://formenergy.com/"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "fervo",
+      "name_zh": "费尔沃能源",
+      "name_en": "Fervo Energy",
+      "type": "energy_startup",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -95.37,
+      "lat": 29.76,
+      "business_zh": [
+        "增强型地热系统",
+        "地热钻井与发电"
+      ],
+      "aliases": [
+        "Fervo Energy",
+        "Fervo"
+      ],
+      "website": "https://fervoenergy.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "美国增强型地热系统开发商，将水平钻井、光纤监测和储层工程用于可调度地热发电。",
+      "financials": {
+        "fiscal_year": 2025,
+        "currency": "USD",
+        "revenue": null,
+        "profit": null,
+        "source_url": "https://fervoenergy.com/",
+        "note_zh": "非上市初创企业未公开可比年度营收和利润。"
+      },
+      "core_technologies_zh": [
+        "水平地热井",
+        "增强型地热储层",
+        "分布式光纤监测",
+        "地热项目数字化开发"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "Cape Station",
+          "location_zh": "美国犹他州",
+          "status_zh": "建设大型增强型地热发电项目"
+        },
+        {
+          "name_zh": "Project Red",
+          "location_zh": "美国内华达州",
+          "status_zh": "完成商业用电验证"
+        }
+      ],
+      "strategy_zh": "复制油气行业钻井学习曲线，降低增强型地热成本，为数据中心和电网提供全天候无碳电力。",
+      "profile_sources": [
+        {
+          "label_zh": "企业官网",
+          "url": "https://fervoenergy.com/"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "cfs",
+      "name_zh": "联邦聚变系统",
+      "name_en": "Commonwealth Fusion Systems",
+      "type": "energy_startup",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -71.61,
+      "lat": 42.54,
+      "business_zh": [
+        "高温超导磁体",
+        "聚变能源系统"
+      ],
+      "aliases": [
+        "Commonwealth Fusion Systems",
+        "CFS fusion",
+        "联邦聚变系统"
+      ],
+      "website": "https://cfs.energy/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "antora",
+      "name_zh": "安托拉能源",
+      "name_en": "Antora Energy",
+      "type": "energy_startup",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -121.89,
+      "lat": 37.34,
+      "business_zh": [
+        "工业热储能",
+        "热光伏发电"
+      ],
+      "aliases": [
+        "Antora Energy",
+        "Antora"
+      ],
+      "website": "https://www.antora.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "rondo",
+      "name_zh": "朗多能源",
+      "name_en": "Rondo Energy",
+      "type": "energy_startup",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -122.27,
+      "lat": 37.8,
+      "business_zh": [
+        "砖式热储能",
+        "工业过程脱碳"
+      ],
+      "aliases": [
+        "Rondo Energy",
+        "Rondo Heat Battery"
+      ],
+      "website": "https://rondo.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "twelve",
+      "name_zh": "特韦尔夫",
+      "name_en": "Twelve",
+      "type": "energy_startup",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": -122.27,
+      "lat": 37.87,
+      "business_zh": [
+        "二氧化碳电解",
+        "可持续航空燃料",
+        "电合成化学品"
+      ],
+      "aliases": [
+        "Twelve",
+        "Twelve e-fuels",
+        "Twelve Sustainable Aviation Fuel"
+      ],
+      "website": "https://www.twelve.co/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "climeworks",
+      "name_zh": "克莱姆沃克斯",
+      "name_en": "Climeworks",
+      "type": "energy_startup",
+      "country": "瑞士",
+      "continent": "欧洲",
+      "lon": 8.54,
+      "lat": 47.37,
+      "business_zh": [
+        "直接空气碳捕集",
+        "二氧化碳永久封存"
+      ],
+      "aliases": [
+        "Climeworks"
+      ],
+      "website": "https://climeworks.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "energy_dome",
+      "name_zh": "能源穹顶",
+      "name_en": "Energy Dome",
+      "type": "energy_startup",
+      "country": "意大利",
+      "continent": "欧洲",
+      "lon": 9.19,
+      "lat": 45.46,
+      "business_zh": [
+        "二氧化碳长时储能",
+        "电网级储能"
+      ],
+      "aliases": [
+        "Energy Dome",
+        "CO2 Battery"
+      ],
+      "website": "https://energydome.com/",
+      "profile_updated_at": "2026-08-22",
+      "overview_zh": "意大利长时储能企业，以封闭式二氧化碳热力循环储存电力，主要面向电网级应用。",
+      "financials": {
+        "fiscal_year": 2025,
+        "currency": "EUR",
+        "revenue": null,
+        "profit": null,
+        "source_url": "https://energydome.com/",
+        "note_zh": "非上市初创企业未公开可比年度营收和利润。"
+      },
+      "core_technologies_zh": [
+        "二氧化碳电池热力循环",
+        "长时储能系统",
+        "常温常压储气穹顶"
+      ],
+      "key_projects": [
+        {
+          "name_zh": "Ottana二氧化碳电池示范",
+          "location_zh": "意大利撒丁岛",
+          "status_zh": "完成电网级技术示范"
+        },
+        {
+          "name_zh": "商业规模二氧化碳电池",
+          "location_zh": "多国",
+          "status_zh": "推进与公用事业和独立发电商合作"
+        }
+      ],
+      "strategy_zh": "使用成熟工业部件实现8至24小时储能，降低对锂和关键矿产的依赖并推进全球授权和项目开发。",
+      "profile_sources": [
+        {
+          "label_zh": "企业官网",
+          "url": "https://energydome.com/"
+        }
+      ],
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "stegra",
+      "name_zh": "斯泰格拉",
+      "name_en": "Stegra",
+      "type": "energy_startup",
+      "country": "瑞典",
+      "continent": "欧洲",
+      "lon": 22.15,
+      "lat": 65.83,
+      "business_zh": [
+        "绿氢炼钢",
+        "低碳钢铁"
+      ],
+      "aliases": [
+        "Stegra",
+        "H2 Green Steel"
+      ],
+      "website": "https://stegra.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "hysata",
+      "name_zh": "海萨塔",
+      "name_en": "Hysata",
+      "type": "energy_startup",
+      "country": "澳大利亚",
+      "continent": "大洋洲",
+      "lon": 150.89,
+      "lat": -34.43,
+      "business_zh": [
+        "高效率电解槽",
+        "绿色氢能设备"
+      ],
+      "aliases": [
+        "Hysata"
+      ],
+      "website": "https://hysata.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "sunculture",
+      "name_zh": "太阳文化",
+      "name_en": "SunCulture",
+      "type": "energy_startup",
+      "country": "肯尼亚",
+      "continent": "非洲",
+      "lon": 36.82,
+      "lat": -1.29,
+      "business_zh": [
+        "太阳能灌溉",
+        "农业能源服务"
+      ],
+      "aliases": [
+        "SunCulture"
+      ],
+      "website": "https://sunculture.io/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "m_kopa",
+      "name_zh": "科帕能源",
+      "name_en": "M-KOPA",
+      "type": "energy_startup",
+      "country": "肯尼亚",
+      "continent": "非洲",
+      "lon": 36.82,
+      "lat": -1.29,
+      "business_zh": [
+        "分布式太阳能",
+        "按使用付费能源与电动交通"
+      ],
+      "aliases": [
+        "M-KOPA",
+        "M KOPA"
+      ],
+      "website": "https://www.m-kopa.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "husk_power",
+      "name_zh": "赫斯克电力系统",
+      "name_en": "Husk Power Systems",
+      "type": "energy_startup",
+      "country": "印度",
+      "continent": "亚洲",
+      "lon": 77.1,
+      "lat": 28.7,
+      "business_zh": [
+        "可再生能源微电网",
+        "农村工商业供电"
+      ],
+      "aliases": [
+        "Husk Power Systems",
+        "Husk Power"
+      ],
+      "website": "https://huskpowersystems.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "solshare",
+      "name_zh": "太阳共享",
+      "name_en": "SOLshare",
+      "type": "energy_startup",
+      "country": "孟加拉国",
+      "continent": "亚洲",
+      "lon": 90.41,
+      "lat": 23.81,
+      "business_zh": [
+        "点对点太阳能交易",
+        "分布式微电网"
+      ],
+      "aliases": [
+        "SOLshare",
+        "ME SOLshare"
+      ],
+      "website": "https://solshare.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "ampersand",
+      "name_zh": "安珀桑德",
+      "name_en": "Ampersand",
+      "type": "energy_startup",
+      "country": "卢旺达",
+      "continent": "非洲",
+      "lon": 30.06,
+      "lat": -1.95,
+      "business_zh": [
+        "电动摩托车",
+        "电池换电网络"
+      ],
+      "aliases": [
+        "Ampersand electric motorcycles",
+        "Ampersand Rwanda"
+      ],
+      "website": "https://www.ampersand.solar/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "ecoflow",
+      "name_zh": "正浩创新",
+      "name_en": "EcoFlow",
+      "type": "energy_startup",
+      "country": "中国",
+      "continent": "亚洲",
+      "lon": 114.06,
+      "lat": 22.55,
+      "business_zh": [
+        "便携式储能",
+        "家庭储能",
+        "智能能源管理"
+      ],
+      "aliases": [
+        "EcoFlow",
+        "正浩创新"
+      ],
+      "website": "https://www.ecoflow.com/",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1006925",
+      "name_zh": "中国电力投资集团公司",
+      "name_en": "China Power Investment Corporation",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "中国电力投资集团公司",
+        "China Power Investment Corporation"
+      ],
+      "website": "http://eng.cpicorp.com.cn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1006925",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1004799",
+      "name_zh": "布汨资源控股",
+      "name_en": "Bumi Resources",
+      "type": "energy_company",
+      "country": "印度尼西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "布汨资源控股",
+        "Bumi Resources"
+      ],
+      "website": "http://www.bumiresources.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1004799",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1090900",
+      "name_zh": "金风科技",
+      "name_en": "Goldwind",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "风电"
+      ],
+      "aliases": [
+        "金风科技",
+        "Goldwind"
+      ],
+      "website": "https://www.goldwind.com/en/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1090900",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q107268866",
+      "name_zh": "广东省能源集团有限公司",
+      "name_en": "Guangdong Energy Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "广东省能源集团有限公司",
+        "Guangdong Energy Group"
+      ],
+      "website": "https://www.geg.com.cn",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q107268866",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1073240",
+      "name_zh": "中煤能源",
+      "name_en": "China Coal Energy",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "中煤能源",
+        "China Coal Energy"
+      ],
+      "website": "https://en.chinacoalenergy.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1073240",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q105966435",
+      "name_zh": "亿纬锂能",
+      "name_en": "EVE Energy Co., Ltd",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电池与储能"
+      ],
+      "aliases": [
+        "亿纬锂能",
+        "EVE Energy Co., Ltd"
+      ],
+      "website": "http://www.evebattery.com",
+      "overview_zh": "惠州亿纬锂能股份有限公司主要业务是消费电池(包括锂原电池、小型锂离子电池)和动力电池(包括新能源汽车电池及其电池系统、储能电池)的研发、生产和销售。其主要产品为锂原电池、锂离子电池。公司先后被认定为国家知识产权优势企业、国家知识产权示范企业等系列荣誉,公司研究检测中心于2019年获得中国合格评定国家认可委员会(CNAS)实验室认可证书。具有先进知识产权的产品技术,保证公司产品性能在国际竞争中更有竞争优势,成为公司创新驱动力,2019年公司被工信部认定为“国家技术创新示范企业”。",
+      "source_url": "https://www.wikidata.org/wiki/Q105966435",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1055434",
+      "name_zh": "赛维太阳能",
+      "name_en": "LDK Solar Co",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "赛维太阳能",
+        "LDK Solar Co"
+      ],
+      "website": "http://www.ldksolar.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1055434",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1367577",
+      "name_zh": "田纳西河谷管理局",
+      "name_en": "Tennessee Valley Authority",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "水电"
+      ],
+      "aliases": [
+        "田纳西河谷管理局",
+        "Tennessee Valley Authority"
+      ],
+      "website": "https://www.tva.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1367577",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q110706493",
+      "name_zh": "Oklo公司",
+      "name_en": "Oklo",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "核能产业"
+      ],
+      "aliases": [
+        "Oklo公司",
+        "Oklo"
+      ],
+      "website": "https://oklo.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q110706493",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q10852440",
+      "name_zh": "汉思集团",
+      "name_en": "Hans Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "汉思集团",
+        "Hans Group"
+      ],
+      "website": "https://www.hanshg.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q10852440",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1049970",
+      "name_zh": "嘉实多",
+      "name_en": "Castrol",
+      "type": "energy_company",
+      "country": "英国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "嘉实多",
+        "Castrol"
+      ],
+      "website": "https://www.castrol.com/",
+      "overview_zh": "英国石油旗下的润滑油品牌",
+      "source_url": "https://www.wikidata.org/wiki/Q1049970",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2504145",
+      "name_zh": "华锐风电",
+      "name_en": "Sinovel",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "风电"
+      ],
+      "aliases": [
+        "华锐风电",
+        "Sinovel"
+      ],
+      "website": "http://www.sinovel.com/en/index.aspx",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2504145",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q12132842",
+      "name_zh": "乌克兰电网",
+      "name_en": "National Power Company Ukrenergo",
+      "type": "energy_company",
+      "country": "乌克兰",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "乌克兰电网",
+        "National Power Company Ukrenergo"
+      ],
+      "website": "https://ua.energy/",
+      "overview_zh": "乌克兰国家电力公司",
+      "source_url": "https://www.wikidata.org/wiki/Q12132842",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1073509",
+      "name_zh": "神华能源",
+      "name_en": "China Shenhua Energy Company",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "神华能源",
+        "China Shenhua Energy Company"
+      ],
+      "website": "http://www.csec.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1073509",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q112276255",
+      "name_zh": "中创新航",
+      "name_en": "CALB",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电池与储能"
+      ],
+      "aliases": [
+        "中创新航",
+        "CALB"
+      ],
+      "website": "http://en.calb-tech.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q112276255",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1138888",
+      "name_zh": "第一太阳能",
+      "name_en": "First Solar",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "第一太阳能",
+        "First Solar"
+      ],
+      "website": "https://www.firstsolar.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1138888",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2035424",
+      "name_zh": "罗斯水力",
+      "name_en": "RusHydro",
+      "type": "energy_company",
+      "country": "俄罗斯",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "水电"
+      ],
+      "aliases": [
+        "罗斯水力",
+        "RusHydro"
+      ],
+      "website": "https://www.eng.rushydro.ru/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2035424",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1739548",
+      "name_zh": "采矿化学联合企业",
+      "name_en": "Mining and Chemical Combine",
+      "type": "energy_company",
+      "country": "俄罗斯",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "核能产业"
+      ],
+      "aliases": [
+        "采矿化学联合企业",
+        "Mining and Chemical Combine"
+      ],
+      "website": "http://www.sibghk.ru/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1739548",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q10926029",
+      "name_zh": "国家开发投资集团",
+      "name_en": "State Development and Investment Corporation",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "国家开发投资集团",
+        "State Development and Investment Corporation"
+      ],
+      "website": "http://www.sdic.com.cn/",
+      "overview_zh": "中国的国有资本投资公司",
+      "source_url": "https://www.wikidata.org/wiki/Q10926029",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q107293117",
+      "name_zh": "世霸动力",
+      "name_en": "Serba Dinamik",
+      "type": "energy_company",
+      "country": "马来西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "世霸动力",
+        "Serba Dinamik"
+      ],
+      "website": "https://www.e-serbadk.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q107293117",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q508839",
+      "name_zh": "爱纳康",
+      "name_en": "Enercon",
+      "type": "energy_company",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "风电"
+      ],
+      "aliases": [
+        "爱纳康",
+        "Enercon"
+      ],
+      "website": "https://www.enercon.de",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q508839",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q13636760",
+      "name_zh": "克罗埃西亚电力公司",
+      "name_en": "Hrvatska elektroprivreda",
+      "type": "energy_company",
+      "country": "克罗地亚",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "克罗埃西亚电力公司",
+        "Hrvatska elektroprivreda"
+      ],
+      "website": "https://www.hep.hr/en",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q13636760",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q10875850",
+      "name_zh": "中煤能源集团",
+      "name_en": "China National Coal Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "中煤能源集团",
+        "China National Coal Group"
+      ],
+      "website": "http://www.chinacoal.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q10875850",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q138744359",
+      "name_zh": "深圳市海马士电子有限公司",
+      "name_en": "Shenzhen HIMAX Electronics Co., Ltd.",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电池与储能"
+      ],
+      "aliases": [
+        "深圳市海马士电子有限公司",
+        "Shenzhen HIMAX Electronics Co., Ltd."
+      ],
+      "website": "https://www.himaxelectronics.com",
+      "overview_zh": "总部位于深圳的锂电池及储能系统制造商",
+      "source_url": "https://www.wikidata.org/wiki/Q138744359",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1572831",
+      "name_zh": "英利",
+      "name_en": "Yingli",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "英利",
+        "Yingli"
+      ],
+      "website": "http://www.yinglisolar.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1572831",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q752496",
+      "name_zh": "长江电力",
+      "name_en": "China Yangtze Power",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "水电"
+      ],
+      "aliases": [
+        "长江电力",
+        "China Yangtze Power"
+      ],
+      "website": "http://www.cypc.com.cn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q752496",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q4065069",
+      "name_zh": "安加尔斯克电解化工基地",
+      "name_en": "Angarsk Electrochemical Combine",
+      "type": "energy_company",
+      "country": "俄罗斯",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "核能产业"
+      ],
+      "aliases": [
+        "安加尔斯克电解化工基地",
+        "Angarsk Electrochemical Combine"
+      ],
+      "website": "http://www.aecc.ru",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q4065069",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1120899",
+      "name_zh": "克拉斯诺亚尔斯克水坝",
+      "name_en": "Krasnoyarsk Dam",
+      "type": "energy_company",
+      "country": "俄罗斯",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "克拉斯诺亚尔斯克水坝",
+        "Krasnoyarsk Dam"
+      ],
+      "website": "http://www.kges.ru/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1120899",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1090717",
+      "name_zh": "阿尔及利亚国家石油公司",
+      "name_en": "Sonatrach",
+      "type": "energy_company",
+      "country": "阿尔及利亚",
+      "continent": "非洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "阿尔及利亚国家石油公司",
+        "Sonatrach"
+      ],
+      "website": "https://sonatrach.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1090717",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q571700",
+      "name_zh": "诺德克斯（Nordex）",
+      "name_en": "Nordex SE",
+      "type": "energy_company",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "风电"
+      ],
+      "aliases": [
+        "诺德克斯（Nordex）",
+        "Nordex SE"
+      ],
+      "website": "https://www.nordex-online.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q571700",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1465461",
+      "name_zh": "英国国家电网公司",
+      "name_en": "National Grid plc",
+      "type": "energy_company",
+      "country": "英国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "英国国家电网公司",
+        "National Grid plc"
+      ],
+      "website": "https://nationalgrid.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1465461",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q12477510",
+      "name_zh": "武吉亚参煤炭公司",
+      "name_en": "Bukit Asam",
+      "type": "energy_company",
+      "country": "印度尼西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "武吉亚参煤炭公司",
+        "Bukit Asam"
+      ],
+      "website": "https://www.ptba.co.id",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q12477510",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q17063030",
+      "name_zh": "顺风清洁能源",
+      "name_en": "SFCE",
+      "type": "energy_company",
+      "country": "香港",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "顺风清洁能源",
+        "SFCE"
+      ],
+      "website": "http://www.sf-pv.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q17063030",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q514140",
+      "name_zh": "俄罗斯国家原子能公司",
+      "name_en": "Rosatom",
+      "type": "energy_company",
+      "country": "俄罗斯",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "核能产业"
+      ],
+      "aliases": [
+        "俄罗斯国家原子能公司",
+        "Rosatom"
+      ],
+      "website": "http://www.rosatom.ru/en/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q514140",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1127536",
+      "name_zh": "联合爱迪生",
+      "name_en": "Consolidated Edison",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "联合爱迪生",
+        "Consolidated Edison"
+      ],
+      "website": "http://www.coned.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1127536",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q110681306",
+      "name_zh": "中国石油天然气股份有限公司西南油气田分公司",
+      "name_en": "PetroChina Southwest Oil and Gas Field Company",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "中国石油天然气股份有限公司西南油气田分公司",
+        "PetroChina Southwest Oil and Gas Field Company"
+      ],
+      "website": "http://chuanyouxinsheng.com/",
+      "overview_zh": "公司",
+      "source_url": "https://www.wikidata.org/wiki/Q110681306",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q634056",
+      "name_zh": "通用电气风电公司",
+      "name_en": "GE Wind Energy",
+      "type": "energy_company",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "风电"
+      ],
+      "aliases": [
+        "通用电气风电公司",
+        "GE Wind Energy"
+      ],
+      "website": "https://renewables.gepower.com/wind-energy.html/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q634056",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1507642",
+      "name_zh": "华能国际",
+      "name_en": "Huaneng Power International",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "华能国际",
+        "Huaneng Power International"
+      ],
+      "website": "http://www.hpi.com.cn",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1507642",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q17997679",
+      "name_zh": "阿达罗能源",
+      "name_en": "AlamTri Resources",
+      "type": "energy_company",
+      "country": "印度尼西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "阿达罗能源",
+        "AlamTri Resources"
+      ],
+      "website": "http://www.adaro.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q17997679",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q21120876",
+      "name_zh": "三星SDI",
+      "name_en": "Samsung SDI",
+      "type": "energy_company",
+      "country": "大韩民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电池与储能"
+      ],
+      "aliases": [
+        "三星SDI",
+        "Samsung SDI"
+      ],
+      "website": "http://www.samsungsdi.co.kr",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q21120876",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q20182011",
+      "name_zh": "晶科能源控股有限公司",
+      "name_en": "Jinko Solar",
+      "type": "energy_company",
+      "country": "开曼群岛",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "晶科能源控股有限公司",
+        "Jinko Solar"
+      ],
+      "website": "http://www.jinkosolar.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q20182011",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q113625344",
+      "name_zh": "小兔充充",
+      "name_en": "BunnyPower",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "小兔充充",
+        "BunnyPower"
+      ],
+      "website": "https://www.xiaotucc.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q113625344",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q11374726",
+      "name_zh": "京叶瓦斯",
+      "name_en": "Keiyo Gas",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "京叶瓦斯",
+        "Keiyo Gas"
+      ],
+      "website": "http://www.keiyogas.co.jp/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q11374726",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1551220",
+      "name_zh": "西班牙电网公司",
+      "name_en": "Red Eléctrica de España",
+      "type": "energy_company",
+      "country": "西班牙",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "西班牙电网公司",
+        "Red Eléctrica de España"
+      ],
+      "website": "https://www.redeia.com/es",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1551220",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q27487446",
+      "name_zh": "陕西煤业化工",
+      "name_en": "Shaanxi Coal and Chemical Industry",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "陕西煤业化工",
+        "Shaanxi Coal and Chemical Industry"
+      ],
+      "website": "http://www.shccig.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q27487446",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q486976",
+      "name_zh": "LG化学",
+      "name_en": "LG Chem",
+      "type": "energy_company",
+      "country": "大韩民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电池与储能"
+      ],
+      "aliases": [
+        "LG化学",
+        "LG Chem"
+      ],
+      "website": "http://www.lgchem.com/",
+      "overview_zh": "韩国公司",
+      "source_url": "https://www.wikidata.org/wiki/Q486976",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2453426",
+      "name_zh": "天合光能",
+      "name_en": "Trina Solar",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "天合光能",
+        "Trina Solar"
+      ],
+      "website": "https://www.trinasolar.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2453426",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q11509961",
+      "name_zh": "日立GE核能",
+      "name_en": "Hitachi-GE Nuclear Energy",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "日立GE核能",
+        "Hitachi-GE Nuclear Energy"
+      ],
+      "website": "https://www.hitachi-hgne.co.jp/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q11509961",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q11402466",
+      "name_zh": "北海道瓦斯",
+      "name_en": "Hokkaido Gas",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "北海道瓦斯",
+        "Hokkaido Gas"
+      ],
+      "website": "http://www.hokkaido-gas.co.jp/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q11402466",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1584297",
+      "name_zh": "国家能源公司",
+      "name_en": "Tenaga Nasional",
+      "type": "energy_company",
+      "country": "马来西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "国家能源公司",
+        "Tenaga Nasional"
+      ],
+      "website": "https://www.tnb.com.my/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1584297",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q38180956",
+      "name_zh": "国家能源集团",
+      "name_en": "CHN Energy",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "国家能源集团",
+        "CHN Energy"
+      ],
+      "website": "https://www.ceic.com/gjnyjtwwEn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q38180956",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q67932360",
+      "name_zh": "合肥国轩高科动力能源有限公司",
+      "name_en": "Gotion",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电池与储能"
+      ],
+      "aliases": [
+        "合肥国轩高科动力能源有限公司",
+        "Gotion"
+      ],
+      "website": "https://www.gotion.com/",
+      "overview_zh": "新能源汽车动力电池与输变电产品公司",
+      "source_url": "https://www.wikidata.org/wiki/Q67932360",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q117748687",
+      "name_zh": "韦能能源",
+      "name_en": "Vena Energy",
+      "type": "energy_company",
+      "country": "新加坡",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "韦能能源",
+        "Vena Energy"
+      ],
+      "website": "https://www.venaenergy.com/",
+      "overview_zh": "总部位于新加坡的电力投资开发公司",
+      "source_url": "https://www.wikidata.org/wiki/Q117748687",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1141123",
+      "name_zh": "俄罗斯石油公司",
+      "name_en": "Rosneft",
+      "type": "energy_company",
+      "country": "俄罗斯",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "俄罗斯石油公司",
+        "Rosneft"
+      ],
+      "website": "https://www.rosneft.com/",
+      "overview_zh": "俄罗斯能源企业",
+      "source_url": "https://www.wikidata.org/wiki/Q1141123",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q16241616",
+      "name_zh": "长生电力公司",
+      "name_en": "Ever Power IPP Co., Ltd.",
+      "type": "energy_company",
+      "country": "中华民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "长生电力公司",
+        "Ever Power IPP Co., Ltd."
+      ],
+      "website": "http://www.everpoweripp.com.tw",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q16241616",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q4055547",
+      "name_zh": "阿夫迪伊夫卡焦炭厂",
+      "name_en": "Avdeyevka Coke and Chemical Plant",
+      "type": "energy_company",
+      "country": "乌克兰",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "阿夫迪伊夫卡焦炭厂",
+        "Avdeyevka Coke and Chemical Plant"
+      ],
+      "website": "https://akhz.metinvestholding.com/ru",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q4055547",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q570372",
+      "name_zh": "太阳能世界",
+      "name_en": "SolarWorld Industries",
+      "type": "energy_company",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "太阳能世界",
+        "SolarWorld Industries"
+      ],
+      "website": "https://www.solarworld.de/en/home/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q570372",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q12027629",
+      "name_zh": "KKCG集团",
+      "name_en": "KKCG",
+      "type": "energy_company",
+      "country": "瑞士",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "KKCG集团",
+        "KKCG"
+      ],
+      "website": "https://kkcg.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q12027629",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q16241726",
+      "name_zh": "和平电力公司",
+      "name_en": "Ho-Ping Power Company",
+      "type": "energy_company",
+      "country": "中华民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "和平电力公司",
+        "Ho-Ping Power Company"
+      ],
+      "website": "https://www.hppc.com.tw/",
+      "overview_zh": "台湾独立发电公司",
+      "source_url": "https://www.wikidata.org/wiki/Q16241726",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q688725",
+      "name_zh": "泰克资源",
+      "name_en": "Teck Resources",
+      "type": "energy_company",
+      "country": "加拿大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "泰克资源",
+        "Teck Resources"
+      ],
+      "website": "http://www.teck.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q688725",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q645525",
+      "name_zh": "太阳能源",
+      "name_en": "SunPower",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "光伏技术"
+      ],
+      "aliases": [
+        "太阳能源",
+        "SunPower"
+      ],
+      "website": "https://us.sunpower.com/",
+      "overview_zh": "美国生产太阳能版的企业",
+      "source_url": "https://www.wikidata.org/wiki/Q645525",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1206980",
+      "name_zh": "德文能源公司",
+      "name_en": "Devon Energy",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "德文能源公司",
+        "Devon Energy"
+      ],
+      "website": "http://www.devonenergy.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1206980",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q16241995",
+      "name_zh": "麦寮汽电",
+      "name_en": "Mai-Liao Power Corporation",
+      "type": "energy_company",
+      "country": "中华民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "麦寮汽电",
+        "Mai-Liao Power Corporation"
+      ],
+      "website": "https://www.mlmpc.com.tw/j2mpc/enus/index.do",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q16241995",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q7489116",
+      "name_zh": "山西焦化",
+      "name_en": "Shanxi Coking Co., Ltd.",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "山西焦化",
+        "Shanxi Coking Co., Ltd."
+      ],
+      "website": "http://www.sxjh.com.cn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q7489116",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1295560",
+      "name_zh": "爱沙尼亚能源公司",
+      "name_en": "Eesti Energia",
+      "type": "energy_company",
+      "country": "爱沙尼亚",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "爱沙尼亚能源公司",
+        "Eesti Energia"
+      ],
+      "website": "https://www.enefit.ee/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1295560",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1208279",
+      "name_zh": "加拿大国营石油",
+      "name_en": "Petro-Canada",
+      "type": "energy_company",
+      "country": "加拿大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "加拿大国营石油",
+        "Petro-Canada"
+      ],
+      "website": "https://www.petro-canada.ca/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1208279",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q167840",
+      "name_zh": "魁北克电力公司",
+      "name_en": "Hydro-Quebec",
+      "type": "energy_company",
+      "country": "加拿大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "魁北克电力公司",
+        "Hydro-Quebec"
+      ],
+      "website": "https://www.hydroquebec.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q167840",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q96100147",
+      "name_zh": "巴彦资源",
+      "name_en": "Bayan Resources",
+      "type": "energy_company",
+      "country": "印度尼西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "煤炭产业"
+      ],
+      "aliases": [
+        "巴彦资源",
+        "Bayan Resources"
+      ],
+      "website": "http://www.bayan.com.sg",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q96100147",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1305984",
+      "name_zh": "日本原子力产业协会",
+      "name_en": "Japan Atomic Industrial Forum",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "日本原子力产业协会",
+        "Japan Atomic Industrial Forum"
+      ],
+      "website": "https://www.jaif.or.jp/en/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1305984",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q12220267",
+      "name_zh": "卡塔尔工业",
+      "name_en": "Industries Qatar",
+      "type": "energy_company",
+      "country": "卡塔尔",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "卡塔尔工业",
+        "Industries Qatar"
+      ],
+      "website": "http://www.iq.com.qa/IQ/IQ.nsf/en_Index?ReadForm",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q12220267",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q16850559",
+      "name_zh": "加州电力调度中心",
+      "name_en": "California Independent System Operator",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "加州电力调度中心",
+        "California Independent System Operator"
+      ],
+      "website": "https://www.caiso.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q16850559",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q13095961",
+      "name_zh": "印尼国家天然气公司",
+      "name_en": "Perusahaan Gas Negara",
+      "type": "energy_company",
+      "country": "印度尼西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "印尼国家天然气公司",
+        "Perusahaan Gas Negara"
+      ],
+      "website": "http://www.pgn.co.id",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q13095961",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1278087",
+      "name_zh": "奥菲西石油",
+      "name_en": "Petrol Ofisi",
+      "type": "energy_company",
+      "country": "土耳其",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "奥菲西石油",
+        "Petrol Ofisi"
+      ],
+      "website": "https://www.petrolofisi.com.tr/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1278087",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q16951703",
+      "name_zh": "森霸电力",
+      "name_en": "Sun Ba Power Corporation",
+      "type": "energy_company",
+      "country": "中华民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "森霸电力",
+        "Sun Ba Power Corporation"
+      ],
+      "website": "http://www.sunbapower.com.tw/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q16951703",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q13416787",
+      "name_zh": "恩基",
+      "name_en": "Engie",
+      "type": "energy_company",
+      "country": "法国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "恩基",
+        "Engie"
+      ],
+      "website": "https://www.engie.com",
+      "overview_zh": "法国能源公司",
+      "source_url": "https://www.wikidata.org/wiki/Q13416787",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1282130",
+      "name_zh": "哥伦比亚国家石油公司",
+      "name_en": "Ecopetrol",
+      "type": "energy_company",
+      "country": "哥伦比亚",
+      "continent": "南美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "哥伦比亚国家石油公司",
+        "Ecopetrol"
+      ],
+      "website": "http://www.ecopetrol.com.co/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1282130",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1749435",
+      "name_zh": "波兰电网",
+      "name_en": "Polskie Sieci Elektroenergetyczne",
+      "type": "energy_company",
+      "country": "波兰",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "波兰电网",
+        "Polskie Sieci Elektroenergetyczne"
+      ],
+      "website": "https://www.pse.pl/home",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1749435",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1283291",
+      "name_zh": "瓦莱罗能源",
+      "name_en": "Valero Energy",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "瓦莱罗能源",
+        "Valero Energy"
+      ],
+      "website": "https://www.valero.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1283291",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1769991",
+      "name_zh": "中国广核集团",
+      "name_en": "China General Nuclear Power Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "中国广核集团",
+        "China General Nuclear Power Group"
+      ],
+      "website": "http://www.cgnpc.com.cn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1769991",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q128577",
+      "name_zh": "ENEOS控股",
+      "name_en": "ENEOS Holdings",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "ENEOS控股",
+        "ENEOS Holdings"
+      ],
+      "website": "https://www.hd.eneos.co.jp/english/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q128577",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2000377",
+      "name_zh": "北美电力可靠度协会",
+      "name_en": "North American Electric Reliability Corporation",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "北美电力可靠度协会",
+        "North American Electric Reliability Corporation"
+      ],
+      "website": "https://www.nerc.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2000377",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1383669",
+      "name_zh": "爱克斯龙电力公司",
+      "name_en": "Exelon",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "爱克斯龙电力公司",
+        "Exelon"
+      ],
+      "website": "https://www.exeloncorp.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1383669",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1289348",
+      "name_zh": "印度石油公司",
+      "name_en": "Indian Oil Corporation",
+      "type": "energy_company",
+      "country": "印度",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "印度石油公司",
+        "Indian Oil Corporation"
+      ],
+      "website": "https://www.iocl.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1289348",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q20062801",
+      "name_zh": "国家电力投资集团公司",
+      "name_en": "State Power Investment Corporation",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "国家电力投资集团公司",
+        "State Power Investment Corporation"
+      ],
+      "website": "http://www.spic.com.cn",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q20062801",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1406826",
+      "name_zh": "欧洲风能协会",
+      "name_en": "WindEurope",
+      "type": "energy_company",
+      "country": "比利时",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "欧洲风能协会",
+        "WindEurope"
+      ],
+      "website": "http://www.ewea.org",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1406826",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1290900",
+      "name_zh": "辛克莱石油公司",
+      "name_en": "Sinclair Oil Corporation",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "辛克莱石油公司",
+        "Sinclair Oil Corporation"
+      ],
+      "website": "https://www.sinclairoil.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1290900",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2045479",
+      "name_zh": "太平洋公司",
+      "name_en": "PacifiCorp",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "太平洋公司",
+        "PacifiCorp"
+      ],
+      "website": "http://www.pacificorp.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2045479",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1516108",
+      "name_zh": "加拿大TC能源公司",
+      "name_en": "TC Energy",
+      "type": "energy_company",
+      "country": "加拿大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "加拿大TC能源公司",
+        "TC Energy"
+      ],
+      "website": "https://www.tcenergy.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1516108",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1339966",
+      "name_zh": "加拿大安桥管道公司",
+      "name_en": "Enbridge",
+      "type": "energy_company",
+      "country": "加拿大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "加拿大安桥管道公司",
+        "Enbridge"
+      ],
+      "website": "https://www.enbridge.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1339966",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q209039",
+      "name_zh": "中国南方电网",
+      "name_en": "China Southern Power Grid",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "中国南方电网",
+        "China Southern Power Grid"
+      ],
+      "website": "http://www.csg.cn/",
+      "overview_zh": "中国国营的电力企业，经营广东、广西、海南、云南、贵州五省区的电网业务",
+      "source_url": "https://www.wikidata.org/wiki/Q209039",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1681145",
+      "name_zh": "挪威国家电力公司",
+      "name_en": "Statkraft AS",
+      "type": "energy_company",
+      "country": "挪威",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "挪威国家电力公司",
+        "Statkraft AS"
+      ],
+      "website": "https://www.statkraft.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1681145",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q136060930",
+      "name_zh": "统一精工股份有限公司",
+      "name_en": "Mech Smile Inc.",
+      "type": "energy_company",
+      "country": "中华民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "统一精工股份有限公司",
+        "Mech Smile Inc."
+      ],
+      "website": "https://www.mech-smile.com.tw/",
+      "overview_zh": "台湾公司",
+      "source_url": "https://www.wikidata.org/wiki/Q136060930",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q17036101",
+      "name_zh": "魏桥创业",
+      "name_en": "Shandong Weiqiao Pioneering Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "魏桥创业",
+        "Shandong Weiqiao Pioneering Group"
+      ],
+      "website": "http://www.weiqiaocy.com/en/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q17036101",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1360622",
+      "name_zh": "加拿大蚬壳石油",
+      "name_en": "Shell Canada",
+      "type": "energy_company",
+      "country": "加拿大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "加拿大蚬壳石油",
+        "Shell Canada"
+      ],
+      "website": "https://www.shell.ca/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1360622",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q21036415",
+      "name_zh": "克伊斯卢森堡",
+      "name_en": "Creos Luxembourg",
+      "type": "energy_company",
+      "country": "卢森堡",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "克伊斯卢森堡",
+        "Creos Luxembourg"
+      ],
+      "website": "http://www.creos-net.lu/",
+      "overview_zh": "卢森堡能源公司",
+      "source_url": "https://www.wikidata.org/wiki/Q21036415",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1837429",
+      "name_zh": "法国电力比利时公司",
+      "name_en": "Luminus",
+      "type": "energy_company",
+      "country": "比利时",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "法国电力比利时公司",
+        "Luminus"
+      ],
+      "website": "https://www.luminus.be",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1837429",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1417227",
+      "name_zh": "哈萨克斯坦国家石油天然气公司",
+      "name_en": "KazMunayGas",
+      "type": "energy_company",
+      "country": "哈萨克斯坦",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "哈萨克斯坦国家石油天然气公司",
+        "KazMunayGas"
+      ],
+      "website": "http://www.kmg.kz",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1417227",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2304693",
+      "name_zh": "美国南方电力公司",
+      "name_en": "Southern Company",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "美国南方电力公司",
+        "Southern Company"
+      ],
+      "website": "http://www.southerncompany.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2304693",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1852211",
+      "name_zh": "阿达尼电力公司",
+      "name_en": "Adani Power",
+      "type": "energy_company",
+      "country": "印度",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "阿达尼电力公司",
+        "Adani Power"
+      ],
+      "website": "https://www.adanipower.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1852211",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1423218",
+      "name_zh": "太阳石油公司",
+      "name_en": "Sunoco",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "太阳石油公司",
+        "Sunoco"
+      ],
+      "website": "https://www.sunoco.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1423218",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2373251",
+      "name_zh": "瑞士电网公司",
+      "name_en": "Swissgrid",
+      "type": "energy_company",
+      "country": "瑞士",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "瑞士电网公司",
+        "Swissgrid"
+      ],
+      "website": "https://www.swissgrid.ch/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2373251",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q19885401",
+      "name_zh": "联合组织数据倡议",
+      "name_en": "Joint Organization Data Initiative",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "联合组织数据倡议",
+        "Joint Organization Data Initiative"
+      ],
+      "website": "http://www.jodidata.org",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q19885401",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1425316",
+      "name_zh": "斯伦贝谢",
+      "name_en": "SLB",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "斯伦贝谢",
+        "SLB"
+      ],
+      "website": "https://www.slb.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1425316",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q241331",
+      "name_zh": "50赫兹输电公司的电网",
+      "name_en": "50Hertz Transmission",
+      "type": "energy_company",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "50赫兹输电公司的电网",
+        "50Hertz Transmission"
+      ],
+      "website": "https://www.50hertz.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q241331",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q243278",
+      "name_zh": "罗尔斯·罗伊斯控股",
+      "name_en": "Rolls-Royce",
+      "type": "energy_company",
+      "country": "英国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "罗尔斯·罗伊斯控股",
+        "Rolls-Royce"
+      ],
+      "website": "https://www.rolls-royce.com/",
+      "overview_zh": "英国航空与国防公司",
+      "source_url": "https://www.wikidata.org/wiki/Q243278",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1437742",
+      "name_zh": "台塑石化",
+      "name_en": "Formosa Petrochemical",
+      "type": "energy_company",
+      "country": "中华民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "台塑石化",
+        "Formosa Petrochemical"
+      ],
+      "website": "http://www.fpcc.com.tw",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1437742",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q25004450",
+      "name_zh": "PJM 互联",
+      "name_en": "PJM Interconnection",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "PJM 互联",
+        "PJM Interconnection"
+      ],
+      "website": "https://www.pjm.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q25004450",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2658695",
+      "name_zh": "亥伯龙神电力股份有限公司",
+      "name_en": "Gen4 Energy",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "亥伯龙神电力股份有限公司",
+        "Gen4 Energy"
+      ],
+      "website": "http://www.gen4energy.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2658695",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1477156",
+      "name_zh": "系卓尔公司",
+      "name_en": "Seadrill",
+      "type": "energy_company",
+      "country": "百慕大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "系卓尔公司",
+        "Seadrill"
+      ],
+      "website": "http://www.seadrill.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1477156",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q28197109",
+      "name_zh": "菲律宾国家电力网公司",
+      "name_en": "National Grid Corporation of the Philippines",
+      "type": "energy_company",
+      "country": "菲律宾",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "菲律宾国家电力网公司",
+        "National Grid Corporation of the Philippines"
+      ],
+      "website": "https://www.ngcp.ph",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q28197109",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2913670",
+      "name_zh": "芬兰电力公司",
+      "name_en": "Teollisuuden Voima",
+      "type": "energy_company",
+      "country": "芬兰",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "芬兰电力公司",
+        "Teollisuuden Voima"
+      ],
+      "website": "https://www.tvo.fi/en/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q2913670",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1496384",
+      "name_zh": "科氏工业集团",
+      "name_en": "Koch, Inc.",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "科氏工业集团",
+        "Koch, Inc."
+      ],
+      "website": "https://www.kochinc.com",
+      "overview_zh": "企业",
+      "source_url": "https://www.wikidata.org/wiki/Q1496384",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q287744",
+      "name_zh": "大唐发电",
+      "name_en": "Datang International Power Generation Co., Ltd.",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "大唐发电",
+        "Datang International Power Generation Co., Ltd."
+      ],
+      "website": "http://www.dtpower.com/",
+      "overview_zh": "中国五大国有电力集团之一",
+      "source_url": "https://www.wikidata.org/wiki/Q287744",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1496677",
+      "name_zh": "欧洲确保能源公司",
+      "name_en": "Securing Energy for Europe",
+      "type": "energy_company",
+      "country": "德国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "欧洲确保能源公司",
+        "Securing Energy for Europe"
+      ],
+      "website": "https://www.sefe-group.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1496677",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q2963711",
+      "name_zh": "中国大唐集团有限公司",
+      "name_en": "China Datang Corporation Ltd.",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "中国大唐集团有限公司",
+        "China Datang Corporation Ltd."
+      ],
+      "website": "https://en.china-cdt.com/",
+      "overview_zh": "中国发电企业",
+      "source_url": "https://www.wikidata.org/wiki/Q2963711",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q3045868",
+      "name_zh": "EDF再生能源",
+      "name_en": "EDF power solutions",
+      "type": "energy_company",
+      "country": "法国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "EDF再生能源",
+        "EDF power solutions"
+      ],
+      "website": "https://edf-renouvelables.com/en/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q3045868",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1503753",
+      "name_zh": "瓦达塔资源股份有限公司",
+      "name_en": "Vedanta Resources",
+      "type": "energy_company",
+      "country": "英国",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "瓦达塔资源股份有限公司",
+        "Vedanta Resources"
+      ],
+      "website": "http://www.vedantaresources.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1503753",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q333894",
+      "name_zh": "东京电力",
+      "name_en": "Tokyo Electric Power Company Holdings",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "东京电力",
+        "Tokyo Electric Power Company Holdings"
+      ],
+      "website": "https://www.tepco.co.jp/en/hd/index-e.html",
+      "overview_zh": "日本公司",
+      "source_url": "https://www.wikidata.org/wiki/Q333894",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q326345",
+      "name_zh": "希腊公共电力公司",
+      "name_en": "Public Power Corporation SA",
+      "type": "energy_company",
+      "country": "希腊",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "希腊公共电力公司",
+        "Public Power Corporation SA"
+      ],
+      "website": "https://www.dei.gr",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q326345",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1516410",
+      "name_zh": "森科能源公司",
+      "name_en": "Suncor Energy",
+      "type": "energy_company",
+      "country": "加拿大",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "森科能源公司",
+        "Suncor Energy"
+      ],
+      "website": "http://www.suncor.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1516410",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q3805077",
+      "name_zh": "电源开发公司",
+      "name_en": "Electric Power Development Company",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "电源开发公司",
+        "Electric Power Development Company"
+      ],
+      "website": "https://www.jpower.co.jp/",
+      "overview_zh": "日本电力公司",
+      "source_url": "https://www.wikidata.org/wiki/Q3805077",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q3278155",
+      "name_zh": "芬诺能源",
+      "name_en": "Fennovoima",
+      "type": "energy_company",
+      "country": "芬兰",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "芬诺能源",
+        "Fennovoima"
+      ],
+      "website": "https://www.fennovoima.fi/",
+      "overview_zh": "芬兰的能源公司",
+      "source_url": "https://www.wikidata.org/wiki/Q3278155",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1535587",
+      "name_zh": "阿曼石油开发公司",
+      "name_en": "Petroleum Development Oman",
+      "type": "energy_company",
+      "country": "阿曼",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "阿曼石油开发公司",
+        "Petroleum Development Oman"
+      ],
+      "website": "http://www.pdo.co.om/pdo/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1535587",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q4201636",
+      "name_zh": "印尼国营电力公司",
+      "name_en": "Perusahaan Listrik Negara",
+      "type": "energy_company",
+      "country": "印度尼西亚",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "印尼国营电力公司",
+        "Perusahaan Listrik Negara"
+      ],
+      "website": "https://web.pln.co.id/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q4201636",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q336735",
+      "name_zh": "CEZ能源集团",
+      "name_en": "ČEZ Group",
+      "type": "energy_company",
+      "country": "捷克",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "CEZ能源集团",
+        "ČEZ Group"
+      ],
+      "website": "https://www.cez.cz/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q336735",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q462984",
+      "name_zh": "阿莫林电力",
+      "name_en": "Ameren",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "阿莫林电力",
+        "Ameren"
+      ],
+      "website": "https://www.amereninvestors.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q462984",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q4050859",
+      "name_zh": "泰拉能源",
+      "name_en": "TerraPower",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "泰拉能源",
+        "TerraPower"
+      ],
+      "website": "https://www.terrapower.com/",
+      "overview_zh": "美国核能公司",
+      "source_url": "https://www.wikidata.org/wiki/Q4050859",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q4705296",
+      "name_zh": "阿拉巴马州电力公司",
+      "name_en": "Alabama Power",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "阿拉巴马州电力公司",
+        "Alabama Power"
+      ],
+      "website": "https://www.alabamapower.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q4705296",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q4726783",
+      "name_zh": "阿林塔能源",
+      "name_en": "Alinta Energy",
+      "type": "energy_company",
+      "country": "澳大利亚",
+      "continent": "大洋洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "阿林塔能源",
+        "Alinta Energy"
+      ],
+      "website": "https://www.alintaenergy.com.au",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q4726783",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1615684",
+      "name_zh": "赫斯公司",
+      "name_en": "Hess Corporation",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "赫斯公司",
+        "Hess Corporation"
+      ],
+      "website": "http://www.hess.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1615684",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q5217854",
+      "name_zh": "立陶宛电网",
+      "name_en": "Litgrid, AB",
+      "type": "energy_company",
+      "country": "立陶宛",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "立陶宛电网",
+        "Litgrid, AB"
+      ],
+      "website": "http://www.litgrid.eu/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q5217854",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q4828988",
+      "name_zh": "阿维斯塔公司",
+      "name_en": "Avista",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "能源综合"
+      ],
+      "aliases": [
+        "阿维斯塔公司",
+        "Avista"
+      ],
+      "website": "https://www.myavista.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q4828988",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1619375",
+      "name_zh": "印度斯坦石油公司",
+      "name_en": "Hindustan Petroleum",
+      "type": "energy_company",
+      "country": "印度",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "印度斯坦石油公司",
+        "Hindustan Petroleum"
+      ],
+      "website": "https://www.hindustanpetroleum.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1619375",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q5357475",
+      "name_zh": "德克萨斯州电力可靠性委员会",
+      "name_en": "Electric Reliability Council of Texas",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "德克萨斯州电力可靠性委员会",
+        "Electric Reliability Council of Texas"
+      ],
+      "website": "http://www.ercot.com",
+      "overview_zh": "德克萨斯州电网的电力调度中心",
+      "source_url": "https://www.wikidata.org/wiki/Q5357475",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1622293",
+      "name_zh": "阿塞拜疆共和国国家石油公司",
+      "name_en": "State Oil Company of Azerbaijan Republic",
+      "type": "energy_company",
+      "country": "阿塞拜疆",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "阿塞拜疆共和国国家石油公司",
+        "State Oil Company of Azerbaijan Republic"
+      ],
+      "website": "https://www.socarenergy.ch/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1622293",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1654229",
+      "name_zh": "国际石油开发帝石",
+      "name_en": "Inpex",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "国际石油开发帝石",
+        "Inpex"
+      ],
+      "website": "https://www.inpex.co.jp/",
+      "overview_zh": "日本公司",
+      "source_url": "https://www.wikidata.org/wiki/Q1654229",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q6378658",
+      "name_zh": "考艾岛公共事业合作社",
+      "name_en": "Kauaʻi Island Utility Cooperative",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "考艾岛公共事业合作社",
+        "Kauaʻi Island Utility Cooperative"
+      ],
+      "website": "http://website.kiuc.coop/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q6378658",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1656230",
+      "name_zh": "菲利普斯66公司",
+      "name_en": "Phillips 66",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "菲利普斯66公司",
+        "Phillips 66"
+      ],
+      "website": "https://www.phillips66gas.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1656230",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q6431646",
+      "name_zh": "韩国水电与核电公司",
+      "name_en": "Korea Hydro & Nuclear Power",
+      "type": "energy_company",
+      "country": "大韩民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "韩国水电与核电公司",
+        "Korea Hydro & Nuclear Power"
+      ],
+      "website": "https://www.khnp.co.kr/eng/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q6431646",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q166729",
+      "name_zh": "阿布扎比国家石油公司",
+      "name_en": "Abu Dhabi National Oil Company",
+      "type": "energy_company",
+      "country": "阿拉伯联合酋长国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "阿布扎比国家石油公司",
+        "Abu Dhabi National Oil Company"
+      ],
+      "website": "https://www.adnoc.ae/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q166729",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q6817918",
+      "name_zh": "马尼拉",
+      "name_en": "Meralco",
+      "type": "energy_company",
+      "country": "菲律宾",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "马尼拉",
+        "Meralco"
+      ],
+      "website": "https://www.meralco.com.ph",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q6817918",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1671299",
+      "name_zh": "奈及利亚国家石油公司",
+      "name_en": "Nigerian National Petroleum Corporation",
+      "type": "energy_company",
+      "country": "奈及利亚",
+      "continent": "非洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "奈及利亚国家石油公司",
+        "Nigerian National Petroleum Corporation"
+      ],
+      "website": "http://www.nnpcgroup.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1671299",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q694507",
+      "name_zh": "九州电力公司",
+      "name_en": "Kyushu Electric Power",
+      "type": "energy_company",
+      "country": "日本",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "九州电力公司",
+        "Kyushu Electric Power"
+      ],
+      "website": "https://www.kyuden.co.jp/english_index.html",
+      "overview_zh": "日本公司",
+      "source_url": "https://www.wikidata.org/wiki/Q694507",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q168238",
+      "name_zh": "奥地利石油天然气集团",
+      "name_en": "OMV",
+      "type": "energy_company",
+      "country": "奥地利",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "奥地利石油天然气集团",
+        "OMV"
+      ],
+      "website": "https://www.omv.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q168238",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q711691",
+      "name_zh": "台湾电力公司",
+      "name_en": "Taiwan Power Company",
+      "type": "energy_company",
+      "country": "中华民国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "台湾电力公司",
+        "Taiwan Power Company"
+      ],
+      "website": "https://www.taipower.com.tw/2763/?checkLang=N",
+      "overview_zh": "中华民国经济部所属的国营企业，亦是台湾最大的电力公司",
+      "source_url": "https://www.wikidata.org/wiki/Q711691",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q17001581",
+      "name_zh": "中地海外集团",
+      "name_en": "CGC Overseas Construction Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "中地海外集团",
+        "CGC Overseas Construction Group"
+      ],
+      "website": "http://www.cgcoc.com.cn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q17001581",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q7494368",
+      "name_zh": "深圳能源",
+      "name_en": "Shenzhen Energy Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "深圳能源",
+        "Shenzhen Energy Group"
+      ],
+      "website": "http://www.sec.com.cn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q7494368",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q17326957",
+      "name_zh": "Westlake公司",
+      "name_en": "Westlake Corporation",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "Westlake公司",
+        "Westlake Corporation"
+      ],
+      "website": "http://www.westlake.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q17326957",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q7548740",
+      "name_zh": "雪山水电",
+      "name_en": "Snowy Hydro",
+      "type": "energy_company",
+      "country": "澳大利亚",
+      "continent": "大洋洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "雪山水电",
+        "Snowy Hydro"
+      ],
+      "website": "https://www.snowyhydro.com.au/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q7548740",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q174747",
+      "name_zh": "雷普索尔",
+      "name_en": "Repsol",
+      "type": "energy_company",
+      "country": "西班牙",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "雷普索尔",
+        "Repsol"
+      ],
+      "website": "https://www.repsol.com/",
+      "overview_zh": "能源公司",
+      "source_url": "https://www.wikidata.org/wiki/Q174747",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q7571339",
+      "name_zh": "西南电力库",
+      "name_en": "Southwest Power Pool",
+      "type": "energy_company",
+      "country": "美国",
+      "continent": "北美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "西南电力库",
+        "Southwest Power Pool"
+      ],
+      "website": "http://www.spp.org/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q7571339",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1770909",
+      "name_zh": "康斯贝格",
+      "name_en": "Kongsberg Gruppen",
+      "type": "energy_company",
+      "country": "挪威",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "康斯贝格",
+        "Kongsberg Gruppen"
+      ],
+      "website": "http://www.kongsberg.com/",
+      "overview_zh": "挪威国防承包商和海上自动化供应商",
+      "source_url": "https://www.wikidata.org/wiki/Q1770909",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q8041759",
+      "name_zh": "中国西电集团公司",
+      "name_en": "XD Group",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "中国西电集团公司",
+        "XD Group"
+      ],
+      "website": "http://www.xd.com.cn/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q8041759",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1781702",
+      "name_zh": "喀琅施塔得集团",
+      "name_en": "Sistema",
+      "type": "energy_company",
+      "country": "俄罗斯",
+      "continent": "欧洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "喀琅施塔得集团",
+        "Sistema"
+      ],
+      "website": "https://www.sistema.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1781702",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q8071980",
+      "name_zh": "辛巴威电力供应局",
+      "name_en": "Zimbabwe Electricity Supply Authority",
+      "type": "energy_company",
+      "country": "津巴布韦",
+      "continent": "非洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "辛巴威电力供应局",
+        "Zimbabwe Electricity Supply Authority"
+      ],
+      "website": "http://www.zesa.co.zw",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q8071980",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1792238",
+      "name_zh": "昆仑能源",
+      "name_en": "Kunlun Energy",
+      "type": "energy_company",
+      "country": "香港",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "昆仑能源",
+        "Kunlun Energy"
+      ],
+      "website": "http://www.cnpc.com.hk/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1792238",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q842509",
+      "name_zh": "中国华能集团有限公司",
+      "name_en": "China Huaneng Group Co., Ltd.",
+      "type": "energy_company",
+      "country": "中华人民共和国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "中国华能集团有限公司",
+        "China Huaneng Group Co., Ltd."
+      ],
+      "website": "https://www.chng.com.cn/en",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q842509",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1804128",
+      "name_zh": "乌兹别克石油公司",
+      "name_en": "Uzbekneftegaz",
+      "type": "energy_company",
+      "country": "乌兹别克斯坦",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "乌兹别克石油公司",
+        "Uzbekneftegaz"
+      ],
+      "website": "http://www.ung.uz",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1804128",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q847931",
+      "name_zh": "原始能源公司",
+      "name_en": "Origin Energy",
+      "type": "energy_company",
+      "country": "澳大利亚",
+      "continent": "大洋洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "电力产业"
+      ],
+      "aliases": [
+        "原始能源公司",
+        "Origin Energy"
+      ],
+      "website": "https://www.originenergy.com.au",
+      "overview_zh": "能源公司",
+      "source_url": "https://www.wikidata.org/wiki/Q847931",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1810389",
+      "name_zh": "泰国国家石油股份",
+      "name_en": "PTT Public Company Limited",
+      "type": "energy_company",
+      "country": "泰国",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "泰国国家石油股份",
+        "PTT Public Company Limited"
+      ],
+      "website": "https://www.pttplc.com",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1810389",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1811692",
+      "name_zh": "卡塔尔石油公司",
+      "name_en": "QatarEnergy",
+      "type": "energy_company",
+      "country": "卡塔尔",
+      "continent": "亚洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "卡塔尔石油公司",
+        "QatarEnergy"
+      ],
+      "website": "http://www.qp.com.qa/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1811692",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1812208",
+      "name_zh": "伍德塞德石油",
+      "name_en": "Woodside Energy",
+      "type": "energy_company",
+      "country": "澳大利亚",
+      "continent": "大洋洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "伍德塞德石油",
+        "Woodside Energy"
+      ],
+      "website": "https://www.woodside.com/",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1812208",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "wikidata_Q1812822",
+      "name_zh": "厄瓜多尔石油公司",
+      "name_en": "EP Petroecuador",
+      "type": "energy_company",
+      "country": "厄瓜多尔",
+      "continent": "南美洲",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "石油产业"
+      ],
+      "aliases": [
+        "厄瓜多尔石油公司",
+        "EP Petroecuador"
+      ],
+      "website": "http://www.eppetroecuador.ec",
+      "overview_zh": "",
+      "source_url": "https://www.wikidata.org/wiki/Q1812822",
+      "profile_basis_zh": "Wikidata企业、国家、行业与官网结构化字段；未把国家中心点当作企业总部",
+      "data_completeness_zh": "基础档案；财务、项目与技术字段仅在官方资料可核验时补充",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "discovered_2dba8fcb38a0",
+      "name_zh": "巴瓦新能源",
+      "name_en": "BayWa r.e.",
+      "type": "energy_company",
+      "country": "Germany",
+      "continent": "动态识别",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "可再生能源资产运营"
+      ],
+      "aliases": [
+        "BayWa r.e.",
+        "巴瓦新能源"
+      ],
+      "website": "",
+      "profile_basis_zh": "由新闻原文与模型结构化抽取，名称已通过原文逐字校验",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    },
+    {
+      "id": "discovered_f04d0e630c4b",
+      "name_zh": "Citicore可再生能源公司",
+      "name_en": "Citicore Renewable Energy Corporation",
+      "type": "energy_company",
+      "country": "菲律宾",
+      "continent": "动态识别",
+      "lon": null,
+      "lat": null,
+      "business_zh": [
+        "可再生能源发电与业务运营"
+      ],
+      "aliases": [
+        "Citicore Renewable Energy Corporation",
+        "Citicore可再生能源公司"
+      ],
+      "website": "",
+      "profile_basis_zh": "由新闻原文与模型结构化抽取，名称已通过原文逐字校验",
+      "latest_intelligence": [],
+      "intelligence_count": 0
+    }
+  ],
+  "intelligence": [
+    {
+      "event_id": "company_article_fcf16fe01258fa8c",
+      "record_id": "article_fcf16fe01258fa8c",
+      "category": "major_project",
+      "category_zh": "能源巨头项目",
+      "company_ids": [
+        "rwe"
+      ],
+      "companies": [
+        "莱茵集团"
+      ],
+      "title_zh": "莱茵集团在2026年上半年扩大可再生能源与电网投资",
+      "summary_zh": "能源企业莱茵集团（RWE）在2026年上半年进一步扩大了其在可再生能源以及电网方面的投资规模，旨在推动能源转型与基础设施建设。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-16T07:03:26+00:00",
+      "canonical_url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOG5aR0ZCRzE3XzVIbEtkcDAwOC05ekVHdkhtTGZYRkU0czdfUW5VS2NqTE1kMnNBczBsaGJ5VHFwOVEwU3ZkcEVodDZZRElWdVdVaEo2UE1HWGZ1MUo3emM3QldpcVphRlJ0WHJiN1VtZl9vRlN3YUFIYTdjNXpHNUJySUJCOGxsSExJVHd0LUNnQQ?oc=5",
+      "location": {
+        "name_zh": "德国",
+        "lon": 7.01,
+        "lat": 51.46,
+        "basis_zh": "企业总部（新闻未明确项目地点）"
+      }
+    },
+    {
+      "event_id": "company_article_186c3b96aa0ea07f",
+      "record_id": "article_186c3b96aa0ea07f",
+      "category": "startup",
+      "category_zh": "能源初创企业",
+      "company_ids": [
+        "limes_re"
+      ],
+      "companies": [
+        "利梅斯可再生能源"
+      ],
+      "title_zh": "利梅斯可再生能源在智利推进200兆瓦、1吉瓦时储能项目",
+      "summary_zh": "利梅斯可再生能源在智利开发的200兆瓦、1吉瓦时电池储能项目已达到开工准备阶段。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-14T16:15:00+00:00",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5",
+      "location": {
+        "name_zh": "智利",
+        "lon": -71.0,
+        "lat": -33.0,
+        "basis_zh": "新闻明确地点"
+      }
+    }
+  ],
+  "today": [
+    {
+      "event_id": "company_article_fcf16fe01258fa8c",
+      "record_id": "article_fcf16fe01258fa8c",
+      "category": "major_project",
+      "category_zh": "能源巨头项目",
+      "company_ids": [
+        "rwe"
+      ],
+      "companies": [
+        "莱茵集团"
+      ],
+      "title_zh": "莱茵集团在2026年上半年扩大可再生能源与电网投资",
+      "summary_zh": "能源企业莱茵集团（RWE）在2026年上半年进一步扩大了其在可再生能源以及电网方面的投资规模，旨在推动能源转型与基础设施建设。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-16T07:03:26+00:00",
+      "canonical_url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOG5aR0ZCRzE3XzVIbEtkcDAwOC05ekVHdkhtTGZYRkU0czdfUW5VS2NqTE1kMnNBczBsaGJ5VHFwOVEwU3ZkcEVodDZZRElWdVdVaEo2UE1HWGZ1MUo3emM3QldpcVphRlJ0WHJiN1VtZl9vRlN3YUFIYTdjNXpHNUJySUJCOGxsSExJVHd0LUNnQQ?oc=5",
+      "location": {
+        "name_zh": "德国",
+        "lon": 7.01,
+        "lat": 51.46,
+        "basis_zh": "企业总部（新闻未明确项目地点）"
+      }
+    }
+  ],
+  "week": [
+    {
+      "event_id": "company_article_fcf16fe01258fa8c",
+      "record_id": "article_fcf16fe01258fa8c",
+      "category": "major_project",
+      "category_zh": "能源巨头项目",
+      "company_ids": [
+        "rwe"
+      ],
+      "companies": [
+        "莱茵集团"
+      ],
+      "title_zh": "莱茵集团在2026年上半年扩大可再生能源与电网投资",
+      "summary_zh": "能源企业莱茵集团（RWE）在2026年上半年进一步扩大了其在可再生能源以及电网方面的投资规模，旨在推动能源转型与基础设施建设。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-16T07:03:26+00:00",
+      "canonical_url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOG5aR0ZCRzE3XzVIbEtkcDAwOC05ekVHdkhtTGZYRkU0czdfUW5VS2NqTE1kMnNBczBsaGJ5VHFwOVEwU3ZkcEVodDZZRElWdVdVaEo2UE1HWGZ1MUo3emM3QldpcVphRlJ0WHJiN1VtZl9vRlN3YUFIYTdjNXpHNUJySUJCOGxsSExJVHd0LUNnQQ?oc=5",
+      "location": {
+        "name_zh": "德国",
+        "lon": 7.01,
+        "lat": 51.46,
+        "basis_zh": "企业总部（新闻未明确项目地点）"
+      }
+    },
+    {
+      "event_id": "company_article_186c3b96aa0ea07f",
+      "record_id": "article_186c3b96aa0ea07f",
+      "category": "startup",
+      "category_zh": "能源初创企业",
+      "company_ids": [
+        "limes_re"
+      ],
+      "companies": [
+        "利梅斯可再生能源"
+      ],
+      "title_zh": "利梅斯可再生能源在智利推进200兆瓦、1吉瓦时储能项目",
+      "summary_zh": "利梅斯可再生能源在智利开发的200兆瓦、1吉瓦时电池储能项目已达到开工准备阶段。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-14T16:15:00+00:00",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5",
+      "location": {
+        "name_zh": "智利",
+        "lon": -71.0,
+        "lat": -33.0,
+        "basis_zh": "新闻明确地点"
+      }
+    }
+  ],
+  "map_events_today": [
+    {
+      "marker_id": "company_today_0_company_article_fcf16fe01258fa8c",
+      "place": "德国",
+      "lon": 7.01,
+      "lat": 51.46,
+      "location_basis_zh": "企业总部（新闻未明确项目地点）",
+      "theme": "能源巨头项目",
+      "title_zh": "莱茵集团在2026年上半年扩大可再生能源与电网投资",
+      "summary_zh": "能源企业莱茵集团（RWE）在2026年上半年进一步扩大了其在可再生能源以及电网方面的投资规模，旨在推动能源转型与基础设施建设。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-16T07:03:26+00:00",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOG5aR0ZCRzE3XzVIbEtkcDAwOC05ekVHdkhtTGZYRkU0czdfUW5VS2NqTE1kMnNBczBsaGJ5VHFwOVEwU3ZkcEVodDZZRElWdVdVaEo2UE1HWGZ1MUo3emM3QldpcVphRlJ0WHJiN1VtZl9vRlN3YUFIYTdjNXpHNUJySUJCOGxsSExJVHd0LUNnQQ?oc=5",
+      "companies": [
+        "莱茵集团"
+      ]
+    }
+  ],
+  "map_events_week": [
+    {
+      "marker_id": "company_week_0_company_article_fcf16fe01258fa8c",
+      "place": "德国",
+      "lon": 7.01,
+      "lat": 51.46,
+      "location_basis_zh": "企业总部（新闻未明确项目地点）",
+      "theme": "能源巨头项目",
+      "title_zh": "莱茵集团在2026年上半年扩大可再生能源与电网投资",
+      "summary_zh": "能源企业莱茵集团（RWE）在2026年上半年进一步扩大了其在可再生能源以及电网方面的投资规模，旨在推动能源转型与基础设施建设。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-16T07:03:26+00:00",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOG5aR0ZCRzE3XzVIbEtkcDAwOC05ekVHdkhtTGZYRkU0czdfUW5VS2NqTE1kMnNBczBsaGJ5VHFwOVEwU3ZkcEVodDZZRElWdVdVaEo2UE1HWGZ1MUo3emM3QldpcVphRlJ0WHJiN1VtZl9vRlN3YUFIYTdjNXpHNUJySUJCOGxsSExJVHd0LUNnQQ?oc=5",
+      "companies": [
+        "莱茵集团"
+      ]
+    },
+    {
+      "marker_id": "company_week_1_company_article_186c3b96aa0ea07f",
+      "place": "智利",
+      "lon": -71.0,
+      "lat": -33.0,
+      "location_basis_zh": "新闻明确地点",
+      "theme": "能源初创企业",
+      "title_zh": "利梅斯可再生能源在智利推进200兆瓦、1吉瓦时储能项目",
+      "summary_zh": "利梅斯可再生能源在智利开发的200兆瓦、1吉瓦时电池储能项目已达到开工准备阶段。",
+      "source_name": "Google News RSS Search",
+      "published_at": "2026-08-14T16:15:00+00:00",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5",
+      "companies": [
+        "利梅斯可再生能源"
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>ClimateText Lab｜国际气候情报与文本数据库</title>
-  <link rel="stylesheet" href="./styles.css?v=20260816-5">
+  <link rel="stylesheet" href="./styles.css?v=20260824-1">
 </head>
 <body>
   <header class="topbar">
@@ -14,6 +14,7 @@
       <span class="brand-symbol" aria-hidden="true">CT</span>
       <span><b>ClimateText Lab</b><small>国际气候情报与文本数据库</small></span>
     </a>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="打开页面导航">菜单</button>
     <nav aria-label="页面导航">
       <a href="#map">全球现场</a>
       <a href="#today">今日情报</a>
@@ -21,7 +22,7 @@
       <a href="#assistant">情报问答</a>
       <a href="#database">文本数据库</a>
       <a class="energy-only-nav" id="companyNav" href="#companies" hidden>企业情报</a>
-      <a class="energy-only-nav" id="reportNav" href="#energyReports" hidden>能源报告</a>
+      <a class="energy-only-nav" id="reportNav" href="#energyReports" hidden>能源报告与数据库</a>
       <button class="team-link nav-team-link" id="teamOpen" type="button">团队信息</button>
     </nav>
     <button class="mode-toggle" id="modeToggle" type="button">切换到能源技术</button>
@@ -30,6 +31,19 @@
       <button class="subscribe-button" id="subscribeOpen" type="button">订阅</button>
     </div>
   </header>
+  <aside class="mobile-menu" id="mobileMenu" hidden aria-label="移动端页面导航">
+    <nav>
+      <a href="#map">全球现场</a><a href="#today">今日情报</a><a href="#analytics">语料分析</a><a href="#assistant">情报问答</a><a href="#database">文本数据库</a>
+      <a class="energy-only-nav" id="mobileCompanyNav" href="#companies" hidden>企业情报</a>
+      <a class="energy-only-nav" id="mobileReportNav" href="#energyReports" hidden>能源报告与数据库</a>
+    </nav>
+    <div class="mobile-menu-actions">
+      <button class="team-link" data-open-team type="button">团队信息</button>
+      <button class="subscribe-button" data-open-subscribe type="button">订阅周报</button>
+      <button class="mode-toggle" id="mobileModeToggle" type="button">切换到能源技术</button>
+      <a class="data-download" href="./data/daily_brief.pdf" download>下载今日简报</a>
+    </div>
+  </aside>
 
   <main id="top">
     <section class="metrics-strip" aria-label="站点更新曲线">
@@ -108,18 +122,19 @@
 
     <section class="section energy-report-section" id="energyReports" hidden>
       <div class="section-heading">
-        <div><p class="overline">OFFICIAL ENERGY REPORTS</p><h2>能源报告</h2></div>
-        <p id="energyReportScope">近三年能源技术、产业与转型报告，覆盖政府、国际组织、研究机构、行业智库和专业协会，并保留原文或正式发布入口。</p>
+        <div><p class="overline">ENERGY REPORTS &amp; DATA</p><h2>能源报告与数据库</h2></div>
+        <p id="energyReportScope">近三年能源技术、产业与转型报告，以及可用于能源研究、技术筛选和产业分析的国际数据库，均保留正式来源入口。</p>
       </div>
       <div class="report-kpis" id="energyReportKpis"><div class="skeleton small"></div></div>
       <div class="report-search-panel">
-        <label class="search-box"><span>检索报告</span><input id="energyReportSearch" type="search" placeholder="标题、机构、国家或主题，如：关键矿产" autocomplete="off"></label>
+        <label class="search-box"><span>检索资源</span><input id="energyReportSearch" type="search" placeholder="报告、数据库、机构或主题，如：电池、核聚变" autocomplete="off"></label>
+        <label><span>资源类型</span><select id="energyResourceType"><option value="">全部类型</option><option value="能源报告">能源报告</option><option value="能源数据库">能源数据库</option></select></label>
         <label><span>国家或组织</span><select id="energyReportCountry"><option value="">全部国家或组织</option></select></label>
         <label><span>年份</span><select id="energyReportYear"><option value="">全部年份</option></select></label>
         <div class="result-count"><span>当前结果</span><b id="energyReportResultCount">—</b></div>
       </div>
       <div class="report-grid" id="energyReportList"><div class="skeleton"></div></div>
-      <button class="load-more" id="energyReportLoadMore" type="button">显示更多报告</button>
+      <button class="load-more" id="energyReportLoadMore" type="button">显示更多资源</button>
       <p class="analytics-note" id="energyReportNote">报告库每日扫描官方发布页；仅在发现新的、可追溯报告时增量更新。</p>
     </section>
 
@@ -265,6 +280,6 @@
     </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260816-3" defer></script>
+  <script src="./app.js?v=20260824-1" defer></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import unicodedata
 from datetime import UTC, date, datetime
 from pathlib import Path
 from urllib.parse import urlparse
@@ -35,6 +36,98 @@ def _https_url(value: str | None) -> str | None:
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         return None
     return parsed._replace(scheme="https").geturl()
+
+
+def _story_title_key(item: dict) -> str:
+    """Return a conservative title fingerprint for syndicated-copy detection."""
+    title = str(item.get("title_original") or "").strip()
+    if not title:
+        title = str(item.get("title_zh") or "").strip()
+        if is_generic_title(title):
+            return ""
+    normalised = unicodedata.normalize("NFKC", title).lower()
+    normalised = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", normalised)
+    return normalised if len(normalised) >= 24 else ""
+
+
+def _url_key(value: str | None) -> str:
+    return (_https_url(value) or "").rstrip("/")
+
+
+def _published_datetime(item: dict) -> datetime | None:
+    value = str(item.get("published_at") or "").strip()
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return parsed.replace(tzinfo=UTC) if parsed.tzinfo is None else parsed.astimezone(UTC)
+
+
+def _same_story(left: dict, right: dict) -> bool:
+    left_url = _url_key(left.get("canonical_url"))
+    right_url = _url_key(right.get("canonical_url"))
+    if left_url and right_url and left_url == right_url:
+        return True
+    left_key, right_key = _story_title_key(left), _story_title_key(right)
+    if not left_key or left_key != right_key:
+        return False
+    left_time, right_time = _published_datetime(left), _published_datetime(right)
+    return not left_time or not right_time or abs((left_time - right_time).total_seconds()) <= 72 * 3600
+
+
+def _observation(item: dict) -> dict:
+    return {
+        "article_id": item.get("article_id") or item.get("record_id"),
+        "canonical_url": _https_url(item.get("canonical_url")) or item.get("canonical_url"),
+        "source_id": item.get("source_id"),
+        "source_name": item.get("source_name"),
+        "published_at": item.get("published_at"),
+    }
+
+
+def _merge_duplicate(primary: dict, duplicate: dict) -> dict:
+    """Keep one public record while retaining every traceable observation."""
+    urls = [primary.get("canonical_url"), *(primary.get("alternate_urls") or []), duplicate.get("canonical_url")]
+    primary["alternate_urls"] = list(dict.fromkeys(
+        url for url in (_https_url(value) for value in urls) if url and url != primary.get("canonical_url")
+    ))[:12]
+    observations = [*(primary.get("duplicate_observations") or []), _observation(duplicate)]
+    unique: dict[str, dict] = {}
+    for item in observations:
+        key = str(item.get("canonical_url") or item.get("article_id") or "")
+        if key and key != primary.get("canonical_url"):
+            unique[key] = item
+    primary["duplicate_observations"] = list(unique.values())[:12]
+    return primary
+
+
+def _collapse_archive_records(records: list[dict]) -> tuple[list[dict], int]:
+    survivors: list[dict] = []
+    by_url: dict[str, dict] = {}
+    by_title: dict[str, list[dict]] = {}
+    collapsed = 0
+    for record in sorted(
+        records,
+        key=lambda row: (row.get("published_at") or "", row.get("last_archived_at") or ""),
+        reverse=True,
+    ):
+        url_key = _url_key(record.get("canonical_url"))
+        title_key = _story_title_key(record)
+        duplicate_of = by_url.get(url_key) if url_key else None
+        if not duplicate_of and title_key:
+            duplicate_of = next((kept for kept in by_title.get(title_key, []) if _same_story(kept, record)), None)
+        if duplicate_of:
+            _merge_duplicate(duplicate_of, record)
+            collapsed += 1
+        else:
+            survivors.append(record)
+            if url_key:
+                by_url[url_key] = record
+            if title_key:
+                by_title.setdefault(title_key, []).append(record)
+    return survivors, collapsed
 
 
 def _record_scope_passes(item: dict) -> bool:
@@ -138,6 +231,8 @@ def _record(item: dict, now: str, previous: dict | None = None) -> dict:
         "content_hash": item.get("content_hash"),
         "poster_phrase": item.get("poster_phrase"),
         "company_entities": list(item.get("company_entities") or [])[:8],
+        "alternate_urls": list((previous or {}).get("alternate_urls") or [])[:12],
+        "duplicate_observations": list((previous or {}).get("duplicate_observations") or [])[:12],
         "quality": quality,
         "molecule": {
             "identity": item.get("article_id"),
@@ -178,11 +273,18 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
     if not 1 <= limit <= DEFAULT_ARCHIVE_LIMIT:
         raise ValueError(f"archive limit must be between 1 and {DEFAULT_ARCHIVE_LIMIT}")
     existing = load_archive(path)
+    existing_records, duplicates_collapsed = _collapse_archive_records([
+        record for record in existing.get("records", []) if record.get("canonical_url") and _record_scope_passes(record)
+    ])
     by_url = {
-        record.get("canonical_url"): record
-        for record in existing.get("records", [])
-        if record.get("canonical_url") and _record_scope_passes(record)
+        _url_key(record.get("canonical_url")): record
+        for record in existing_records
     }
+    by_title: dict[str, list[dict]] = {}
+    for record in by_url.values():
+        title_key = _story_title_key(record)
+        if title_key:
+            by_title.setdefault(title_key, []).append(record)
     for record in by_url.values():
         record.update(_repair_geocoding_text(record))
         # Schema 1.0 archives created before 2026-07-29 did not persist this
@@ -195,7 +297,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
             record["molecule"]["geo_atoms"] = [
                 place.get("name_zh") for place in record["places"] if place.get("name_zh")
             ]
-    before = len(by_url)
+    before = len(existing.get("records", []))
     added = updated = rejected = 0
     now = datetime.now(UTC).isoformat()
     for item in candidates:
@@ -204,14 +306,29 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
         if not gate["passed"] or not url or not _record_scope_passes(item):
             rejected += 1
             continue
-        previous = by_url.get(url)
+        previous = by_url.get(_url_key(url))
         record = _record(item, now, previous)
         if previous:
             changed = previous.get("content_hash") != record.get("content_hash") or previous.get("title_zh") != record.get("title_zh")
             updated += int(changed)
         else:
+            title_key = _story_title_key(record)
+            duplicate_of = next(
+                (kept for kept in by_title.get(title_key, []) if _same_story(kept, record)),
+                None,
+            ) if title_key else None
+            if duplicate_of:
+                _merge_duplicate(duplicate_of, record)
+                duplicates_collapsed += 1
+                updated += 1
+                continue
             added += 1
-        by_url[url] = record
+        by_url[_url_key(url)] = record
+        title_key = _story_title_key(record)
+        if title_key:
+            by_title[title_key] = [kept for kept in by_title.get(title_key, []) if kept is not previous]
+            if record not in by_title[title_key]:
+                by_title[title_key].append(record)
     records = sorted(
         by_url.values(),
         key=lambda row: (row.get("published_at") or "", row.get("last_archived_at") or ""),
@@ -232,6 +349,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
             "updated": updated,
             "rejected": rejected,
             "pruned": pruned,
+            "duplicates_collapsed": duplicates_collapsed,
             "tier_a": tier_counts["A"],
             "tier_b": tier_counts["B"],
         },

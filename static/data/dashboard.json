@@ -1,196 +1,71 @@
 {
   "meta": {
     "product": "国际气候情报与高质量中文文本数据库",
-    "date": "2026-08-16",
-    "generated_at": "2026-08-16T01:07:53.661185+00:00",
+    "date": "2026-08-24",
+    "generated_at": "2026-08-24T02:08:56.359055+00:00",
     "timezone": "Asia/Shanghai",
     "demo_mode": false,
-    "notice": "今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 13 个。标题和摘要是来源陈述，尚需人工核验。",
-    "latest_news_date": "2026-08-15",
-    "daily_window_start": "2026-08-15",
+    "notice": "今日简报按北京时间每日生成；新闻素材优先采用最新自然日，若当天合格记录不足，则用近 7 天高质量记录补足至约 10 条。动态 P0 入口最近成功 15 个。标题和摘要是来源陈述，尚需人工核验。",
+    "latest_news_date": "2026-08-24",
+    "daily_window_start": "2026-08-18",
     "daily_target": 10,
-    "daily_backfilled": 0,
-    "daily_complete_day": true,
-    "daily_sources": 6,
-    "daily_continents": 2,
-    "dataset_version": "2026-08-16T01:07:54.978012+00:00"
+    "daily_backfilled": 8,
+    "daily_complete_day": false,
+    "daily_sources": 8,
+    "daily_continents": 6,
+    "dataset_version": "2026-08-24T02:08:57.625075+00:00"
   },
   "metrics": {
     "source_total": 53,
     "source_enabled": 33,
-    "p0_connected": 13,
+    "p0_connected": 15,
     "p0_total": 26,
     "official_enabled": 12,
     "languages": 15,
-    "article_total": 1413,
-    "high_priority": 4,
+    "article_total": 2043,
+    "high_priority": 7,
     "official_documents": 576,
-    "cop31_countdown": 85,
-    "archive_total": 299
+    "cop31_countdown": 77,
+    "archive_total": 477
   },
   "intelligence": [
     {
-      "record_id": "article_054af26146e54e0c",
-      "article_id": "article_054af26146e54e0c",
-      "canonical_url": "https://www.theguardian.com/world/2026/aug/15/people-react-severe-alert-phones-message-uk-wildfires",
-      "source_url": "https://www.theguardian.com/world/2026/aug/15/people-react-severe-alert-phones-message-uk-wildfires",
-      "source_id": "INT013",
-      "source_name": "The Guardian Climate Crisis",
-      "source_type": "综合媒体",
-      "authority": 5,
-      "relevance_score": 74,
-      "title_original": "Alarmed by the alarm: people react to ‘severe alert’ on phones over UK wildfires",
-      "title_zh": "全球碳治理议题受到关注",
-      "summary_source": "Many complained online that piercingly loud tone was ‘overreach’ while others lamented lack of action on decarbonisation On Friday at 7pm, Thérèse Coffey was nine miles away from a nuclear power station when her phone made a loud, piercing and very worrying sound: it was a “severe” emergency alert . “Was expecting [a] much more specific alert, not a generic message on wildfires,” the former Conservative cabinet minister said on X. She wasn’t alone in being alarmed by the alarm sent to phones in England and Wales. In the aftermath, thousands of social media users expressed their shock at alert. Some shared funny memes and others lamented what they viewed as lack of government action on decarbonisation. Academic John Ritzema called it a “massive overreach” and said the alert system should be “be for ‘drop everything and prepare for something terrible’ situations”, something Coffey echoed, saying alerts should not become commonplace to avoid “Peter cries wolf situations”. Continue reading...",
-      "summary_zh": "The Guardian Climate Crisis消息显示，全球碳治理议题受到关注。主题上属于碳治理。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "碳治理",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "en",
-      "published_at": "2026-08-15T15:54:15+00:00",
-      "fetched_at": "2026-08-15T23:46:28.438196+00:00",
-      "topics": [
-        "气候适应"
-      ],
-      "numbers": [
-        "7"
-      ],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "fe441f662950b638aa418fd88261d5f556bbcb991518f419da16eccdf122ba82",
-      "poster_phrase": "全球碳治理议题受到关注",
-      "quality": {
-        "passed": true,
-        "score": 71,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_054af26146e54e0c",
-        "source_atom": {
-          "name": "The Guardian Climate Crisis",
-          "authority": 5,
-          "type": "综合媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候适应"
-        ],
-        "number_atoms": [
-          "7"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
-      },
-      "first_archived_at": "2026-08-15T23:48:06.322673+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
-    },
-    {
-      "record_id": "article_a4e12737acaf2683",
-      "article_id": "article_a4e12737acaf2683",
-      "canonical_url": "https://grist.org/business/ai-could-help-fossil-fuel-companies-create-more-emissions",
-      "source_url": "https://grist.org/business/ai-could-help-fossil-fuel-companies-create-more-emissions/",
-      "source_id": "INT020",
-      "source_name": "Grist",
-      "source_type": "非营利气候与环境媒体",
-      "authority": 4,
-      "relevance_score": 66,
-      "title_original": "AI could help fossil fuel companies create more emissions",
-      "title_zh": "全球净零与减排措施受到关注",
-      "summary_source": "New research finds that by making the fossil fuel industry more productive, AI could help increase carbon emissions by up to nearly 5 percent — vastly outpacing the impact of data centers.",
-      "summary_zh": "Grist消息显示，全球净零与减排措施受到关注。报道中出现5 percent等量化信息，主题上属于减排。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "减排",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "en",
-      "published_at": "2026-08-15T13:00:00+00:00",
-      "fetched_at": "2026-08-15T23:46:29.102168+00:00",
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [
-        "5"
-      ],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "965da17455a29a84a607c7d556323302e7c674384ec5fafb422c58fbf8e7d460",
-      "poster_phrase": "全球净零与减排措施受到关注",
-      "quality": {
-        "passed": true,
-        "score": 59,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_a4e12737acaf2683",
-        "source_atom": {
-          "name": "Grist",
-          "authority": 4,
-          "type": "非营利气候与环境媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放"
-        ],
-        "number_atoms": [
-          "5"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
-      },
-      "first_archived_at": "2026-08-15T23:48:06.322673+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
-    },
-    {
-      "record_id": "article_baab197c6b73dd69",
-      "article_id": "article_baab197c6b73dd69",
-      "canonical_url": "https://www.vanguardngr.com/2026/08/ndc-primaries-leadership-moves-to-heal-wounds-avert-defections",
-      "source_url": "https://www.vanguardngr.com/2026/08/ndc-primaries-leadership-moves-to-heal-wounds-avert-defections/",
+      "record_id": "article_b306ff9f44b7c5d3",
+      "article_id": "article_b306ff9f44b7c5d3",
+      "canonical_url": "https://www.adnews.com.au/campaigns/city-of-hobart-climate-ready-via-showpony",
+      "source_url": "https://www.adnews.com.au/campaigns/city-of-hobart-climate-ready-via-showpony",
       "source_id": "API001",
       "source_name": "GDELT 2.0 DOC API",
       "source_type": "全球新闻聚合API",
       "authority": 4,
-      "relevance_score": 72,
-      "title_original": "NDC primaries : Leadership moves to heal wounds , avert defections",
-      "title_zh": "全球气候变化议题受到关注",
+      "relevance_score": 50,
+      "title_original": "City of Hobart  Climate Ready  via Showpony",
+      "title_zh": "霍巴特市通过 Showpony 推出“气候就绪”宣传活动",
       "summary_source": null,
-      "summary_zh": "GDELT 2.0 DOC API消息显示，全球气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "气候变化",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "summary_zh": "澳大利亚霍巴特市联合创意机构 Showpony 推出了“气候就绪”整合宣传活动，通过展示当地居民、企业和社区群体在生态恢复、建筑节能和减排方面的实际行动，鼓励更多市民参与气候行动。该市设定了在 2040 年实现零排放的目标，其气候与生物多样性应对战略处于全国领先地位。",
+      "theme_zh": "城市气候适应",
+      "why_zh": "该宣传活动展现了地方政府在动员公众和企业参与城市减排方面的具体策略，事实表明霍巴特正通过宣传本地行动来推进其 2040 年零排放目标。",
       "language": "English",
-      "published_at": "2026-08-14T23:15:00+00:00",
-      "fetched_at": "2026-08-14T23:50:13.053132+00:00",
+      "published_at": "2026-08-23T23:15:00+00:00",
+      "fetched_at": "2026-08-24T00:45:07.058186+00:00",
       "topics": [
-        "国家气候承诺"
+        "气候动态"
       ],
       "numbers": [],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
+      "places": [
+        {
+          "name_zh": "澳大利亚",
+          "lon": 134.0,
+          "lat": -25.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "a69ad970d0b8308dec653f7f8679a7fa728387db3a4bdb7d3bc0ac77a68318bb",
-      "poster_phrase": "全球气候变化议题受到关注",
+      "content_hash": "0ffabcc427c09ca01ec7e6d6301992d6919b5eaf929f196885899d147d1d6873",
+      "poster_phrase": "霍巴特市启动气候就绪宣传活动",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
       "quality": {
         "passed": true,
         "score": 61,
@@ -205,7 +80,7 @@
         }
       },
       "molecule": {
-        "identity": "article_baab197c6b73dd69",
+        "identity": "article_b306ff9f44b7c5d3",
         "source_atom": {
           "name": "GDELT 2.0 DOC API",
           "authority": 4,
@@ -213,50 +88,81 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
+          "translation_status": "model_generated_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "国家气候承诺"
+          "气候动态"
         ],
         "number_atoms": [],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+        "geo_atoms": [
+          "澳大利亚"
+        ],
+        "decision_atom": "该宣传活动展现了地方政府在动员公众和企业参与城市减排方面的具体策略，事实表明霍巴特正通过宣传本地行动来推进其 2040 年零排放目标。"
       },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
+      "first_archived_at": "2026-08-24T00:45:49.560240+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
     },
     {
-      "record_id": "article_11b44a3bef42ffc7",
-      "article_id": "article_11b44a3bef42ffc7",
-      "canonical_url": "https://www.lechodelaval.ca/actualites-nationale/les-progres-d-ottawa-en-adaptation-climatique-juges-insuffisants/39919",
-      "source_url": "https://www.lechodelaval.ca/actualites-nationale/les-progres-d-ottawa-en-adaptation-climatique-juges-insuffisants/39919",
+      "record_id": "article_538b192b4afe3697",
+      "article_id": "article_538b192b4afe3697",
+      "canonical_url": "https://www.knau.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them",
+      "source_url": "https://www.knau.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them",
       "source_id": "API001",
       "source_name": "GDELT 2.0 DOC API",
       "source_type": "全球新闻聚合API",
       "authority": 4,
-      "relevance_score": 62,
-      "title_original": "Les progrès dOttawa en adaptation climatique jugés insuffisants",
-      "title_zh": "全球气候变化议题受到关注",
+      "relevance_score": 50,
+      "title_original": "Climate change is unearthing new archeological discoveries , while also threating them",
+      "title_zh": "气候变化正在发掘新的考古发现，同时也对其构成威胁",
       "summary_source": null,
-      "summary_zh": "GDELT 2.0 DOC API消息显示，全球气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "气候变化",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "French",
-      "published_at": "2026-08-14T22:45:00+00:00",
-      "fetched_at": "2026-08-14T23:50:13.053132+00:00",
+      "summary_zh": "丹麦国家博物馆高级研究员约尔根·霍利森在接受采访时表示，气候变化正在对考古学研究产生双重影响，一方面促成了新的考古发现，另一方面也对这些珍贵的历史遗迹构成了切实的威胁。",
+      "theme_zh": "气候变化影响",
+      "why_zh": "该采访揭示了气候变化对文化遗产和科学研究带来的复杂影响，事实证明环境变迁正在改变全球考古发现的现状与保护挑战。",
+      "language": "English",
+      "published_at": "2026-08-23T23:15:00+00:00",
+      "fetched_at": "2026-08-24T00:45:07.058186+00:00",
       "topics": [
-        "气候适应"
+        "气候动态"
       ],
       "numbers": [],
       "places": [],
-      "translation_status": "metadata_compiled_needs_review",
+      "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "75fe83507876d96df8813549967e961c5e4e7e70a3d7ebec9fe64c9e6c784a87",
-      "poster_phrase": "全球气候变化议题受到关注",
+      "content_hash": "3e49d49c949261279d400dc4ede1613a6e4be473e4a23d8f4e8ecfc635ef0d55",
+      "poster_phrase": "气候变化双重影响考古研究",
+      "company_entities": [],
+      "alternate_urls": [
+        "https://www.krcu.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them",
+        "https://www.ksmu.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them",
+        "https://www.spokanepublicradio.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them"
+      ],
+      "duplicate_observations": [
+        {
+          "article_id": "article_90ea6268c990f444",
+          "canonical_url": "https://www.krcu.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them",
+          "source_id": "API001",
+          "source_name": "GDELT 2.0 DOC API",
+          "published_at": "2026-08-23T23:15:00+00:00"
+        },
+        {
+          "article_id": "article_8f958926f7b51c2f",
+          "canonical_url": "https://www.ksmu.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them",
+          "source_id": "API001",
+          "source_name": "GDELT 2.0 DOC API",
+          "published_at": "2026-08-23T23:00:00+00:00"
+        },
+        {
+          "article_id": "article_478e26cef5d8047a",
+          "canonical_url": "https://www.spokanepublicradio.org/2026-08-23/climate-change-is-unearthing-new-archeological-discoveries-while-also-threating-them",
+          "source_id": "API001",
+          "source_name": "GDELT 2.0 DOC API",
+          "published_at": "2026-08-23T23:00:00+00:00"
+        }
+      ],
       "quality": {
         "passed": true,
-        "score": 58,
+        "score": 61,
         "tier": "B",
         "checks": {
           "canonical_https": true,
@@ -268,7 +174,7 @@
         }
       },
       "molecule": {
-        "identity": "article_11b44a3bef42ffc7",
+        "identity": "article_538b192b4afe3697",
         "source_atom": {
           "name": "GDELT 2.0 DOC API",
           "authority": 4,
@@ -276,258 +182,56 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
+          "translation_status": "model_generated_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "气候适应"
+          "气候动态"
         ],
         "number_atoms": [],
         "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+        "decision_atom": "该采访揭示了气候变化对文化遗产和科学研究带来的复杂影响，事实证明环境变迁正在改变全球考古发现的现状与保护挑战。"
       },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
+      "first_archived_at": "2026-08-24T00:45:49.560240+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
     },
     {
-      "record_id": "article_dc95546f0c4ef99d",
-      "article_id": "article_dc95546f0c4ef99d",
-      "canonical_url": "https://www.theguardian.com/environment/2026/aug/14/andy-burnham-climate-response-drought-hit-farmers-labour-pressure",
-      "source_url": "https://www.theguardian.com/environment/2026/aug/14/andy-burnham-climate-response-drought-hit-farmers-labour-pressure",
-      "source_id": "INT013",
-      "source_name": "The Guardian Climate Crisis",
-      "source_type": "综合媒体",
-      "authority": 5,
-      "relevance_score": 74,
-      "title_original": "Burnham announces £65m for drought-hit farmers after Labour pressure",
-      "title_zh": "全球野火风险议题受到关注",
-      "summary_source": "PM steps up climate response with measures including better water access and support for building farm reservoirs Farmers must not carry the risks of the climate crisis alone, Andy Burnham has said, as he announced £65m of funding to help them manage the devastating drought. The prime minister is stepping up his response to the immediate climate crisis after facing a backlash from his own MPs and Labour’s grassroots for not addressing the climate crisis despite wildfires tearing through Britain and a drought affecting food producers. Labour MPs argued Burnham had taken too long to talk about the climate crisis and had not made it a priority. Continue reading...",
-      "summary_zh": "The Guardian Climate Crisis消息显示，全球野火风险议题受到关注。主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "野火风险",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "en",
-      "published_at": "2026-08-14T21:30:38+00:00",
-      "fetched_at": "2026-08-15T23:46:28.438196+00:00",
-      "topics": [
-        "气候适应"
-      ],
-      "numbers": [
-        "£65"
-      ],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "4dbe52a851c5ac86a1a0d64fcebd61a1bfa4c8a3ea29d62c319db4ba2db182cb",
-      "poster_phrase": "全球野火风险议题受到关注",
-      "quality": {
-        "passed": true,
-        "score": 71,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_dc95546f0c4ef99d",
-        "source_atom": {
-          "name": "The Guardian Climate Crisis",
-          "authority": 5,
-          "type": "综合媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候适应"
-        ],
-        "number_atoms": [
-          "£65"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
-      },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
-    },
-    {
-      "record_id": "article_131056bd533165c3",
-      "article_id": "article_131056bd533165c3",
-      "canonical_url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNZVhDd3pWbkF1b0I3UEU3UFkyQ1lETXpHbEdJWXhBbUdKMFpRZHRZOFlfZXF2Z3pUZkFkOFo3dU9RQ3ZyUlpZa29WdmdDQmxKNFpKM1Foby1GV0VaeGNYY18xSl9VQ0V5UVZQamt0eXlEOU5yeGdjdTd1a0ZBZnFfQ2t2dG9hMHdWSUd4VzVGNjdPYXA2MHM3S2VoWUJDTzhtMkMzMzNIUjlmTmpvYVE4Sm5HYWhsOUVSeW9ZbjhEOHJMSjlT?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNZVhDd3pWbkF1b0I3UEU3UFkyQ1lETXpHbEdJWXhBbUdKMFpRZHRZOFlfZXF2Z3pUZkFkOFo3dU9RQ3ZyUlpZa29WdmdDQmxKNFpKM1Foby1GV0VaeGNYY18xSl9VQ0V5UVZQamt0eXlEOU5yeGdjdTd1a0ZBZnFfQ2t2dG9hMHdWSUd4VzVGNjdPYXA2MHM3S2VoWUJDTzhtMkMzMzNIUjlmTmpvYVE4Sm5HYWhsOUVSeW9ZbjhEOHJMSjlT?oc=5",
-      "source_id": "API004",
-      "source_name": "Google News RSS Search",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
+      "record_id": "article_ba680537f065de45",
+      "article_id": "article_ba680537f065de45",
+      "canonical_url": "https://grist.org/wildfires/firefighters-sound-alarm-as-us-faces-critical-staffing-shortage-we-dont-have-enough-people",
+      "source_url": "https://grist.org/wildfires/firefighters-sound-alarm-as-us-faces-critical-staffing-shortage-we-dont-have-enough-people/",
+      "source_id": "INT020",
+      "source_name": "Grist",
+      "source_type": "非营利气候与环境媒体",
+      "authority": 4,
       "relevance_score": 62,
-      "title_original": "Saturable Core Reactors Market to Surge on Renewable Grid Integration, Reaching 165 Index by 2035 - IndexBox",
-      "title_zh": "全球电网压力推高可再生能源韧性需求",
-      "summary_source": "Saturable Core Reactors Market to Surge on Renewable Grid Integration, Reaching 165 Index by 2035 IndexBox",
-      "summary_zh": "Google News RSS Search消息显示，全球电网压力推高可再生能源韧性需求。主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "可再生能源",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "multilingual",
-      "published_at": "2026-08-14T21:11:24+00:00",
-      "fetched_at": "2026-08-14T23:50:13.654917+00:00",
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [
-        "165",
-        "2035"
-      ],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "37d36d2a3712b4a0a6995987fc719a444fcda7874dd2da3e74e2a2e082238ffa",
-      "poster_phrase": "全球电网压力推高可再生能源韧",
-      "quality": {
-        "passed": true,
-        "score": 49,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_131056bd533165c3",
-        "source_atom": {
-          "name": "Google News RSS Search",
-          "authority": 3,
-          "type": "搜索聚合Feed"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放"
-        ],
-        "number_atoms": [
-          "165",
-          "2035"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
-      },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
-    },
-    {
-      "record_id": "article_c547f5fae2b7ba90",
-      "article_id": "article_c547f5fae2b7ba90",
-      "canonical_url": "https://www.theguardian.com/environment/2026/aug/14/andy-burnham-new-ev-sales-targets",
-      "source_url": "https://www.theguardian.com/environment/2026/aug/14/andy-burnham-new-ev-sales-targets",
-      "source_id": "INT013",
-      "source_name": "The Guardian Climate Crisis",
-      "source_type": "综合媒体",
-      "authority": 5,
-      "relevance_score": 96,
-      "title_original": "Burnham criticised for EV and North Sea approach amid climate crisis",
-      "title_zh": "全球净零与减排措施受到关注",
-      "summary_source": "Cut in electric vehicle sales targets could add millions of tonnes of CO 2 to emissions in UK, say green campaigners Andy Burnham has been criticised for moving to cut electric vehicle (EV) sales targets and accept North Sea drilling at a time of devastating wildfires caused by the climate emergency. The prime minister for the first time acknowledged on Friday that the climate crisis was behind hundreds of wildfires that have ripped across the parts of the UK. Continue reading...",
-      "summary_zh": "The Guardian Climate Crisis消息显示，全球净零与减排措施受到关注。主题上属于减排。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "减排",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "title_original": "Firefighters sound alarm as US faces critical staffing shortage: ‘We don’t have enough people’",
+      "title_zh": "美国面临严重消防员短缺，消防员拉响警报：“我们没有足够的人手”",
+      "summary_source": "Firefighters describe being pushed to limit by a brutal wildfire season, with key leadership roles going unfilled.",
+      "summary_zh": "由于今年夏季全美野火频发，美国森林服务局遭遇严重的消防员和关键领导岗位短缺。多名内部人员透露，人手不足导致应对系统被推向崩溃边缘，在极端火灾季节中，现有精简队伍被迫承受不可持续的工作压力与高额加班。",
+      "theme_zh": "气候危机与消防人力资源",
+      "why_zh": "该报道反映了气候危机加剧下美国联邦应急与林业机构面临的严重体制和人力瓶颈，对未来极端气候适应和灾害治理能力敲响了警钟。此判断基于匿名字通报与机构内部招聘数据的公开事实。",
       "language": "en",
-      "published_at": "2026-08-14T18:51:11+00:00",
-      "fetched_at": "2026-08-15T23:46:28.438196+00:00",
+      "published_at": "2026-08-22T13:00:00+00:00",
+      "fetched_at": "2026-08-24T00:44:13.587501+00:00",
       "topics": [
-        "能源与排放",
         "气候适应"
-      ],
-      "numbers": [
-        "2"
-      ],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "0fb98252746546e24ee973e15bacb6a041c4cebadaac55694ba9a6df14d7006c",
-      "poster_phrase": "全球净零与减排措施受到关注",
-      "quality": {
-        "passed": true,
-        "score": 79,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_c547f5fae2b7ba90",
-        "source_atom": {
-          "name": "The Guardian Climate Crisis",
-          "authority": 5,
-          "type": "综合媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放",
-          "气候适应"
-        ],
-        "number_atoms": [
-          "2"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
-      },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
-    },
-    {
-      "record_id": "article_71174d6042af09de",
-      "article_id": "article_71174d6042af09de",
-      "canonical_url": "https://www.climatechangenews.com/2026/08/14/south-africas-top-court-blocks-shells-offshore-oil-exploration-right",
-      "source_url": "https://www.climatechangenews.com/2026/08/14/south-africas-top-court-blocks-shells-offshore-oil-exploration-right/",
-      "source_id": "INT002",
-      "source_name": "Climate Home News",
-      "source_type": "气候专业媒体",
-      "authority": 5,
-      "relevance_score": 58,
-      "title_original": "South Africa’s top court blocks Shell’s offshore oil exploration right",
-      "title_zh": "南非气候变化议题受到关注",
-      "summary_source": "South Africa's Constitutional Court ruled that Shell and its partners failed to consult affected communities and did not properly consider the environmental risks of offshore oil exploration The post South Africa’s top court blocks Shell’s offshore oil exploration right appeared first on Climate Home News .",
-      "summary_zh": "Climate Home News消息显示，涉及南非、非洲，南非气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "气候变化",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "en",
-      "published_at": "2026-08-14T17:18:04+00:00",
-      "fetched_at": "2026-08-15T23:46:26.567858+00:00",
-      "topics": [
-        "气候动态"
       ],
       "numbers": [],
       "places": [
         {
-          "name_zh": "南非",
-          "lon": 24.0,
-          "lat": -29.0
+          "name_zh": "美国",
+          "lon": -100.0,
+          "lat": 39.0
         }
       ],
-      "translation_status": "metadata_compiled_needs_review",
+      "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "82b05ed96271b02bb349bc43746d4efb91a6592fae2b15347a3c8d57ea28cf2e",
-      "poster_phrase": "南非气候变化议题受到关注",
+      "content_hash": "abe9c41b6554ab4987c788ab425620e49f65b5daee48ee10c8682cdbf0d8c300",
+      "poster_phrase": "美林业局陷严重人手短缺",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
       "quality": {
         "passed": true,
         "score": 65,
@@ -542,7 +246,393 @@
         }
       },
       "molecule": {
-        "identity": "article_71174d6042af09de",
+        "identity": "article_ba680537f065de45",
+        "source_atom": {
+          "name": "Grist",
+          "authority": 4,
+          "type": "非营利气候与环境媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "美国"
+        ],
+        "decision_atom": "该报道反映了气候危机加剧下美国联邦应急与林业机构面临的严重体制和人力瓶颈，对未来极端气候适应和灾害治理能力敲响了警钟。此判断基于匿名字通报与机构内部招聘数据的公开事实。"
+      },
+      "first_archived_at": "2026-08-22T22:52:23.667967+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
+    },
+    {
+      "record_id": "article_f6dd3761c1e08f6b",
+      "article_id": "article_f6dd3761c1e08f6b",
+      "canonical_url": "https://www.bbc.co.uk/news/articles/cp9e9rg255vo?at_medium=RSS&at_campaign=rss",
+      "source_url": "https://www.bbc.co.uk/news/articles/cp9e9rg255vo?at_medium=RSS&at_campaign=rss",
+      "source_id": "INT014",
+      "source_name": "BBC Science & Environment",
+      "source_type": "公共媒体",
+      "authority": 5,
+      "relevance_score": 86,
+      "title_original": "Welsh county becomes global hotspot for carbon emissions after wildfires",
+      "title_zh": "威尔士一郡因野火成为全球碳排放热点地区",
+      "summary_source": "The smell of burning from the Blaenavon wildfire was reported 30 miles away in Cardiff.",
+      "summary_zh": "根据欧盟哥白尼地球观测计划的数据，今年 7 月威尔士托法恩的每平方公里野火碳排放量位居全球前列。布莱纳温附近发生了一场面积达 300 个足球场大小的野火，浓烟扩散至 30 英里外的加的夫，引发了当地对儿童健康和空气质量的担忧。",
+      "theme_zh": "极端野火与碳排放",
+      "why_zh": "该事件揭示了极端气候下野火对地方碳收支及公共健康的严重影响，凸显出欧洲区域空气质量监测与气候适应政策面临的现实挑战。此判断基于慈善机构引用的欧盟观测数据与地方议会通报。",
+      "language": "en",
+      "published_at": "2026-08-22T11:31:09+00:00",
+      "fetched_at": "2026-08-24T00:44:13.433820+00:00",
+      "topics": [
+        "能源与排放",
+        "气候适应"
+      ],
+      "numbers": [
+        "30"
+      ],
+      "places": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "2601e08d3363122df7431ad52f36fb9921261205d5c97e53deeb1a3357d21ac2",
+      "poster_phrase": "威尔士野火致碳排激增",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 82,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_f6dd3761c1e08f6b",
+        "source_atom": {
+          "name": "BBC Science & Environment",
+          "authority": 5,
+          "type": "公共媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放",
+          "气候适应"
+        ],
+        "number_atoms": [
+          "30"
+        ],
+        "geo_atoms": [],
+        "decision_atom": "该事件揭示了极端气候下野火对地方碳收支及公共健康的严重影响，凸显出欧洲区域空气质量监测与气候适应政策面临的现实挑战。此判断基于慈善机构引用的欧盟观测数据与地方议会通报。"
+      },
+      "first_archived_at": "2026-08-22T22:52:23.667967+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
+    },
+    {
+      "record_id": "article_a08709c1af4b86a3",
+      "article_id": "article_a08709c1af4b86a3",
+      "canonical_url": "https://www.canarymedia.com/articles/green-steel/trump-clean-steel-grant-coal",
+      "source_url": "https://www.canarymedia.com/articles/green-steel/trump-clean-steel-grant-coal",
+      "source_id": "INT010",
+      "source_name": "Canary Media",
+      "source_type": "非营利清洁能源媒体",
+      "authority": 4,
+      "relevance_score": 80,
+      "title_original": "Trump turns $500M grant for clean steel into funding for coal furnace",
+      "title_zh": "特朗普将五亿美元的清洁钢铁补贴变更为煤炭高炉资助资金",
+      "summary_source": "A $500 million Biden-era grant to decarbonize steelmaking has been refashioned by the Trump administration to upgrade a coal-fueled blast furnace in southern Ohio. On Friday, Cleveland-Cliffs confirmed that the U.S. Department of Energy had changed the scope of the previously awarded funding for Cliffs’ Middletown…",
+      "summary_zh": "美国拜登政府时期旨在实现钢铁生产脱碳的一笔五亿美元联邦补贴，经特朗普政府调整后，被重新用于升级俄亥俄州南部的一个燃煤高炉。克利夫兰-克里夫斯公司确认美国能源部更改了这笔原本用于米德尔顿钢厂资金的资助范围，此举引发了环保倡导者对地方空气污染加剧的担忧。",
+      "theme_zh": "气候资金",
+      "why_zh": "该事件体现了美国政府更迭对工业脱碳政策方向的实质性逆转，凸显了化石能源资产保留与温室气体减排目标之间的政治博弈。事实边界在于美国能源部确已更改资金用途，放弃了原本旨在替代燃煤高炉的低碳技术路线。",
+      "language": "en",
+      "published_at": "2026-08-21T19:30:00+00:00",
+      "fetched_at": "2026-08-24T00:44:13.053391+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "$500",
+        "$500 million"
+      ],
+      "places": [
+        {
+          "name_zh": "美国",
+          "lon": -100.0,
+          "lat": 39.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "63d1e73be84aaef6cd8a5e3c9fd7a4bbdb2b2440bd042ee6783c83f0c7b22e19",
+      "poster_phrase": "清洁钢铁补贴转向煤炭",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 71,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_a08709c1af4b86a3",
+        "source_atom": {
+          "name": "Canary Media",
+          "authority": 4,
+          "type": "非营利清洁能源媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "$500",
+          "$500 million"
+        ],
+        "geo_atoms": [
+          "美国"
+        ],
+        "decision_atom": "该事件体现了美国政府更迭对工业脱碳政策方向的实质性逆转，凸显了化石能源资产保留与温室气体减排目标之间的政治博弈。事实边界在于美国能源部确已更改资金用途，放弃了原本旨在替代燃煤高炉的低碳技术路线。"
+      },
+      "first_archived_at": "2026-08-21T22:53:19.241358+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
+    },
+    {
+      "record_id": "article_708219152a6605aa",
+      "article_id": "article_708219152a6605aa",
+      "canonical_url": "https://www.theguardian.com/uk-news/2026/aug/21/proposed-london-datacentre-will-have-annual-carbon-footprint-of-27000-flights-to-new-york",
+      "source_url": "https://www.theguardian.com/uk-news/2026/aug/21/proposed-london-datacentre-will-have-annual-carbon-footprint-of-27000-flights-to-new-york",
+      "source_id": "INT013",
+      "source_name": "The Guardian Climate Crisis",
+      "source_type": "综合媒体",
+      "authority": 5,
+      "relevance_score": 92,
+      "title_original": "Proposed London datacentre ‘incompatible’ with net zero with 1m-tonne carbon footprint",
+      "title_zh": "拟建的伦敦数据中心碳足迹达100万吨，与净零目标“不相容”",
+      "summary_source": "Exclusive: Planning documents show annual emissions from North Ockendon project would be equivalent to 8,480 flights to New York A “hyperscale” datacentre in outer London would generate more than 1m tonnes of carbon dioxide a year, equivalent to the carbon footprint of 8,480 flights from London to New York, planning documents show. The East Havering Data Centre Campus (EHDCC) in North Ockendon would be one of the largest datacentres in Europe if approved by Havering council, using 218 hectares of green belt to run servers and data storage systems for AI and cloud computing. Its developer, Digital Reef, has described the scheme as “a unique opportunity to create a sustainable datacentre campus of the future”. Continue reading...",
+      "summary_zh": "规划文件显示，位于伦敦外围的东黑弗灵数据中心园区每年将产生超过100万吨二氧化碳，其全生命周期60年内预计产生超7200万吨二氧化碳当量。该项目由Digital Reef开发，占地218公顷绿化带，全面运营后预计每年耗电26.5亿千瓦时，对英国的脱碳进程构成重大威胁。",
+      "theme_zh": "数据中心碳排放",
+      "why_zh": "该项目凸显了人工智能与云计算驱动下大型数据中心激增对国家电网和净零目标的严峻挑战。报道反映的事实表明高能耗数字基础设施与长期减排路径存在显著冲突。",
+      "language": "en",
+      "published_at": "2026-08-21T10:00:31+00:00",
+      "fetched_at": "2026-08-23T05:46:39.320325+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "1",
+        "8,480",
+        "218"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "9b399f7cc636ed823cae4d9bdec4c2e46c42dbd37f56d616a63328dac441d106",
+      "poster_phrase": "拟建伦敦数据中心碳排惊人",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 84,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_708219152a6605aa",
+        "source_atom": {
+          "name": "The Guardian Climate Crisis",
+          "authority": 5,
+          "type": "综合媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "1",
+          "8,480",
+          "218"
+        ],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "decision_atom": "该项目凸显了人工智能与云计算驱动下大型数据中心激增对国家电网和净零目标的严峻挑战。报道反映的事实表明高能耗数字基础设施与长期减排路径存在显著冲突。"
+      },
+      "first_archived_at": "2026-08-22T02:14:37.019337+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
+    },
+    {
+      "record_id": "article_ab2ae6b54e5fdad1",
+      "article_id": "article_ab2ae6b54e5fdad1",
+      "canonical_url": "https://www.carbonbrief.org/factcheck-10-flaws-in-the-conservative-report-on-cheap-power",
+      "source_url": "https://www.carbonbrief.org/factcheck-10-flaws-in-the-conservative-report-on-cheap-power",
+      "source_id": "INT001",
+      "source_name": "Carbon Brief",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 72,
+      "title_original": "Factcheck: 10 flaws in the Conservative report on ‘cheap power’",
+      "title_zh": "事实核查：保守党关于“廉价电力”报告的 10 个缺陷",
+      "summary_source": "In a new report, the opposition Conservatives argue that UK electricity prices are too high and that it would be… The post Factcheck: 10 flaws in the Conservative report on ‘cheap power’ appeared first on Carbon Brief .",
+      "summary_zh": "英国反对党保守党在一份新报告中主张放弃 2050 年净零排放目标，并声称通过采用更多天然气和核能来替代可再生能源可节省超过 3200 亿英镑。然而，专家指出该报告的建模和假设存在严重漏洞，其实际替代方案不仅会导致减排力度大减，还会增加数亿吨二氧化碳排放，且无法带来最低的总成本。",
+      "theme_zh": "气候政策与脱碳",
+      "why_zh": "该报道剖析了英国保守党关于放弃净零目标的经济论点，指出其依赖有缺陷的建模和不切实际的假设，具有重要的国内气候政治风向分析意义。事实表明该报告方案将导致更高的碳排放，而观点认为可再生能源仍是实现最低总成本的途径。",
+      "language": "en",
+      "published_at": "2026-08-20T15:56:40+00:00",
+      "fetched_at": "2026-08-24T00:44:10.763810+00:00",
+      "topics": [
+        "气候动态"
+      ],
+      "numbers": [
+        "10"
+      ],
+      "places": [
+        {
+          "name_zh": "英国",
+          "lon": -2.0,
+          "lat": 54.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "6f24004cfab173cc695932dca7e06e65b8b1869234702eb8b8b0d7f46792d8e4",
+      "poster_phrase": "保守党廉价电力报告漏洞百出",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_ab2ae6b54e5fdad1",
+        "source_atom": {
+          "name": "Carbon Brief",
+          "authority": 5,
+          "type": "气候专业媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候动态"
+        ],
+        "number_atoms": [
+          "10"
+        ],
+        "geo_atoms": [
+          "英国"
+        ],
+        "decision_atom": "该报道剖析了英国保守党关于放弃净零目标的经济论点，指出其依赖有缺陷的建模和不切实际的假设，具有重要的国内气候政治风向分析意义。事实表明该报告方案将导致更高的碳排放，而观点认为可再生能源仍是实现最低总成本的途径。"
+      },
+      "first_archived_at": "2026-08-21T22:53:19.241358+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
+    },
+    {
+      "record_id": "article_09ecc1c065cd6f22",
+      "article_id": "article_09ecc1c065cd6f22",
+      "canonical_url": "https://www.climatechangenews.com/2026/08/20/marine-heat-records-countries-ocean-roadmap-australia-turkiye-cop31",
+      "source_url": "https://www.climatechangenews.com/2026/08/20/marine-heat-records-countries-ocean-roadmap-australia-turkiye-cop31/",
+      "source_id": "INT002",
+      "source_name": "Climate Home News",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 80,
+      "title_original": "As marine heat breaks records, countries seek ocean roadmap at COP31",
+      "title_zh": "随着海洋热浪打破记录，各国寻求在COP31上制定海洋路线图",
+      "summary_source": "Africa and the EU are leading a push for COP31 to deliver a roadmap that lays out measures to protect fast-warming oceans The post As marine heat breaks records, countries seek ocean roadmap at COP31 appeared first on Climate Home News .",
+      "summary_zh": "由于创纪录的海洋温度削弱了全球最大的碳汇，非洲国家、欧盟、部分拉美国家和小岛屿国家正联合推动 COP31 峰会制定海洋保护路线图。COP31 共同主席国土耳其和澳大利亚正与有关国家合作制定旨在将海洋和气候保护措施纳入区域与国际行动的自愿路线图。专家指出，这一努力可能会受到气候资金不断缩减的掣肘。",
+      "theme_zh": "海洋保护与气候峰会",
+      "why_zh": "多国推动将海洋保护纳入气候谈判决定，标志着联合国气候进程可能从非正式对话转向具体行动方案，但资金短缺是其面临的主要障碍。本段为事实，评估基于国际气候谈判议程的扩展与资金制约。",
+      "language": "en",
+      "published_at": "2026-08-20T15:07:29+00:00",
+      "fetched_at": "2026-08-24T00:44:12.431465+00:00",
+      "topics": [
+        "国际气候谈判"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "非洲",
+          "lon": 22.0,
+          "lat": 2.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "c5714dcb36f47d0ed27fd29e51f258850ce31dd9d72b03fb93ab321aed9cfa5d",
+      "poster_phrase": "多国寻求COP31海洋保护路线图",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 80,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_09ecc1c065cd6f22",
         "source_atom": {
           "name": "Climate Home News",
           "authority": 5,
@@ -550,128 +640,64 @@
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
+          "translation_status": "model_generated_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "气候动态"
+          "国际气候谈判"
         ],
         "number_atoms": [],
         "geo_atoms": [
-          "南非"
+          "非洲"
         ],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+        "decision_atom": "多国推动将海洋保护纳入气候谈判决定，标志着联合国气候进程可能从非正式对话转向具体行动方案，但资金短缺是其面临的主要障碍。本段为事实，评估基于国际气候谈判议程的扩展与资金制约。"
       },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
+      "first_archived_at": "2026-08-22T02:14:37.019337+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
     },
     {
-      "record_id": "article_0da6a0b5488dd918",
-      "article_id": "article_0da6a0b5488dd918",
-      "canonical_url": "https://yaleclimateconnections.org/2026/08/hawaiian-islands-brace-for-lala-this-weekend",
-      "source_url": "https://yaleclimateconnections.org/2026/08/hawaiian-islands-brace-for-lala-this-weekend/",
-      "source_id": "INT008",
-      "source_name": "Yale Climate Connections",
-      "source_type": "大学支持的气候媒体",
-      "authority": 4,
-      "relevance_score": 66,
-      "title_original": "Hawaiian Islands brace for Lala this weekend",
-      "title_zh": "全球气候变化议题受到关注",
-      "summary_source": "The system could become the first hurricane on record to strike Hawaii's Big Island, where up to 25 inches of rain are possible. The post Hawaiian Islands brace for Lala this weekend appeared first on Yale Climate Connections .",
-      "summary_zh": "Yale Climate Connections消息显示，全球气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "气候变化",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
+      "record_id": "article_3da1b90b78d9211b",
+      "article_id": "article_3da1b90b78d9211b",
+      "canonical_url": "https://www.climatechangenews.com/2026/08/20/collective-global-roadmap-can-boost-cambodias-energy-transition-goals",
+      "source_url": "https://www.climatechangenews.com/2026/08/20/collective-global-roadmap-can-boost-cambodias-energy-transition-goals/",
+      "source_id": "INT002",
+      "source_name": "Climate Home News",
+      "source_type": "气候专业媒体",
+      "authority": 5,
+      "relevance_score": 78,
+      "title_original": "Collective global roadmap can boost Cambodia’s energy transition goals",
+      "title_zh": "集体全球路线图如何助力柬埔寨的能源转型目标",
+      "summary_source": "The kingdom aims to source 70% of its power capacity from renewables by 2030 - to get there, it needs international support and cooperation The post Collective global roadmap can boost Cambodia’s energy transition goals appeared first on Climate Home News .",
+      "summary_zh": "柬埔寨计划到 2030 年实现 70% 的电力容量来自可再生能源。专家指出，这一目标的实现需要国际社会的合作与支持，而 COP30 巴西主席国倡导的化石能源转型路线图进程将为各国提供有序转型的契机。",
+      "theme_zh": "能源转型",
+      "why_zh": "该评论探讨了发展中国家摆脱化石燃料依赖及推进可再生能源目标的政策路径与国际合作需求（基于专家评论观点）。",
       "language": "en",
-      "published_at": "2026-08-14T16:24:30+00:00",
-      "fetched_at": "2026-08-15T23:46:28.096091+00:00",
-      "topics": [
-        "气候适应"
-      ],
-      "numbers": [
-        "25"
-      ],
-      "places": [],
-      "translation_status": "metadata_compiled_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "5d7ca3846423576beae26deef34b59679323bd6720a256b89b3ad8182a6416d2",
-      "poster_phrase": "全球气候变化议题受到关注",
-      "quality": {
-        "passed": true,
-        "score": 59,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_0da6a0b5488dd918",
-        "source_atom": {
-          "name": "Yale Climate Connections",
-          "authority": 4,
-          "type": "大学支持的气候媒体"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "气候适应"
-        ],
-        "number_atoms": [
-          "25"
-        ],
-        "geo_atoms": [],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
-      },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
-    },
-    {
-      "record_id": "article_186c3b96aa0ea07f",
-      "article_id": "article_186c3b96aa0ea07f",
-      "canonical_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5",
-      "source_id": "API004",
-      "source_name": "Google News RSS Search",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
-      "relevance_score": 62,
-      "title_original": "Limes Renewable Energy Reaches RTB Stage for 200MW/1GWh BESS Project in Chile - IndexBox",
-      "title_zh": "智利推进可再生能源转型",
-      "summary_source": "Limes Renewable Energy Reaches RTB Stage for 200MW/1GWh BESS Project in Chile IndexBox",
-      "summary_zh": "Google News RSS Search消息显示，涉及智利，智利推进可再生能源转型。报道中出现200MW、1GWh等量化信息，主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "theme_zh": "可再生能源",
-      "why_zh": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。",
-      "language": "multilingual",
-      "published_at": "2026-08-14T16:15:00+00:00",
-      "fetched_at": "2026-08-14T23:50:13.654917+00:00",
+      "published_at": "2026-08-20T08:09:05+00:00",
+      "fetched_at": "2026-08-24T00:44:12.431465+00:00",
       "topics": [
         "能源与排放"
       ],
       "numbers": [
-        "200mw",
-        "1gw"
+        "70%",
+        "2030"
       ],
       "places": [
         {
-          "name_zh": "智利",
-          "lon": -71.0,
-          "lat": -33.0
+          "name_zh": "巴西",
+          "lon": -52.0,
+          "lat": -10.0
         }
       ],
-      "translation_status": "metadata_compiled_needs_review",
+      "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "9d7729fab309a3e61e6b2435fe15b0aadd7ec58566b1349a42ef01bbe774b3f7",
-      "poster_phrase": "智利推进可再生能源转型",
+      "content_hash": "c1c2ec0f58f23749200bce380db1a44b3fa502b3973ec5796326519bd55cdb67",
+      "poster_phrase": "全球路线图助力柬埔寨转型",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
       "quality": {
         "passed": true,
-        "score": 49,
+        "score": 79,
         "tier": "B",
         "checks": {
           "canonical_https": true,
@@ -683,643 +709,1025 @@
         }
       },
       "molecule": {
-        "identity": "article_186c3b96aa0ea07f",
+        "identity": "article_3da1b90b78d9211b",
         "source_atom": {
-          "name": "Google News RSS Search",
-          "authority": 3,
-          "type": "搜索聚合Feed"
+          "name": "Climate Home News",
+          "authority": 5,
+          "type": "气候专业媒体"
         },
         "evidence_atom": {
           "fact_status": "source_claim_unverified",
-          "translation_status": "metadata_compiled_needs_review",
+          "translation_status": "model_generated_needs_review",
           "quality_tier": "B"
         },
         "topic_atoms": [
           "能源与排放"
         ],
         "number_atoms": [
-          "200mw",
-          "1gw"
+          "70%",
+          "2030"
         ],
         "geo_atoms": [
-          "智利"
+          "巴西"
         ],
-        "decision_atom": "模型中文编译不可用时生成的保守元数据记录；页面仅展示标题、地点、议题和原文入口，引用前需打开原文核验。"
+        "decision_atom": "该评论探讨了发展中国家摆脱化石燃料依赖及推进可再生能源目标的政策路径与国际合作需求（基于专家评论观点）。"
       },
-      "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-08-16T01:07:54.978012+00:00"
+      "first_archived_at": "2026-08-20T22:56:57.516206+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
+    },
+    {
+      "record_id": "article_31225feac26bb808",
+      "article_id": "article_31225feac26bb808",
+      "canonical_url": "https://english.news.cn/20260818/63f151dbfa9442e2b22a092ffaf0c62f/c.html",
+      "source_url": "https://english.news.cn/20260818/63f151dbfa9442e2b22a092ffaf0c62f/c.html",
+      "source_id": "API005",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "source_type": "中国官方与专业来源定向发现API",
+      "authority": 4,
+      "relevance_score": 84,
+      "title_original": "Norway climate finance hits record 30 . 3 bln NOK in 2025 - Xinhua",
+      "title_zh": "挪威2025年气候资金达到创纪录的303亿挪威克朗",
+      "summary_source": null,
+      "summary_zh": "挪威政府宣布，其2025年气候资金达到创纪录的303亿挪威克朗（约合32.2亿美元），较上年增长60%，且连续第四年实现2021年作出的将气候资金翻倍的承诺。增长主要由挪威发展中国家投资基金旗下的气候投资基金撬动的私人资本驱动，相关项目预计每年可避免22.7公吨二氧化碳排放。挪威政府计划在今年底前提出新的气候资金目标。",
+      "theme_zh": "气候资金",
+      "why_zh": "该政策展示了挪威通过撬动私人资本大幅增加气候资金援助的成效，对推进发展中国家减排与适应气候变化具有积极的国际谈判与示范意义，体现了对国际气候融资承诺的履约进展。",
+      "language": "English",
+      "published_at": "2026-08-17T19:45:00+00:00",
+      "fetched_at": "2026-08-23T05:47:21.382143+00:00",
+      "topics": [
+        "气候资金"
+      ],
+      "numbers": [
+        "30",
+        "3",
+        "2025"
+      ],
+      "places": [
+        {
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
+        }
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "2fb210ddd064cc09bf17628264f1a8d0d116a5f2a96308078778b469aeecf3d2",
+      "poster_phrase": "挪威2025年气候资金创新高",
+      "company_entities": [],
+      "alternate_urls": [
+        "https://english.news.cn/europe/20260818/7c722cdd820e47988d6d1100a5fe15de/c.html"
+      ],
+      "duplicate_observations": [
+        {
+          "article_id": "article_2952ef1ce617dea4",
+          "canonical_url": "https://english.news.cn/europe/20260818/7c722cdd820e47988d6d1100a5fe15de/c.html",
+          "source_id": "API005",
+          "source_name": "中国官方气候来源（GDELT定向发现）",
+          "published_at": "2026-08-17T19:45:00+00:00"
+        }
+      ],
+      "quality": {
+        "passed": true,
+        "score": 72,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_31225feac26bb808",
+        "source_atom": {
+          "name": "中国官方气候来源（GDELT定向发现）",
+          "authority": 4,
+          "type": "中国官方与专业来源定向发现API"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候资金"
+        ],
+        "number_atoms": [
+          "30",
+          "3",
+          "2025"
+        ],
+        "geo_atoms": [
+          "中国"
+        ],
+        "decision_atom": "该政策展示了挪威通过撬动私人资本大幅增加气候资金援助的成效，对推进发展中国家减排与适应气候变化具有积极的国际谈判与示范意义，体现了对国际气候融资承诺的履约进展。"
+      },
+      "first_archived_at": "2026-08-18T22:53:32.842367+00:00",
+      "last_archived_at": "2026-08-24T02:08:57.625075+00:00"
     }
   ],
   "map_events": [
     {
-      "marker_id": "article_71174d6042af09de_primary",
-      "article_id": "article_71174d6042af09de",
-      "place": "南非",
-      "lon": 24.0,
-      "lat": -29.0,
-      "theme": "气候变化",
-      "title_zh": "南非气候变化议题受到关注",
-      "summary_zh": "Climate Home News消息显示，涉及南非、非洲，南非气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Climate Home News",
-      "published_at": "2026-08-14T17:18:04+00:00",
-      "url": "https://www.climatechangenews.com/2026/08/14/south-africas-top-court-blocks-shells-offshore-oil-exploration-right"
+      "marker_id": "article_b306ff9f44b7c5d3_primary",
+      "article_id": "article_b306ff9f44b7c5d3",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "城市气候适应",
+      "title_zh": "霍巴特市通过 Showpony 推出“气候就绪”宣传活动",
+      "summary_zh": "澳大利亚霍巴特市联合创意机构 Showpony 推出了“气候就绪”整合宣传活动，通过展示当地居民、企业和社区群体在生态恢复、建筑节能和减排方面的实际行动，鼓励更多市民参与气候行动。该市设定了在 2040 年实现零排放的目标，其气候与生物多样性应对战略处于全国领先地位。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-23T23:15:00+00:00",
+      "url": "https://www.adnews.com.au/campaigns/city-of-hobart-climate-ready-via-showpony"
     },
     {
-      "marker_id": "article_186c3b96aa0ea07f_primary",
-      "article_id": "article_186c3b96aa0ea07f",
-      "place": "智利",
-      "lon": -71.0,
-      "lat": -33.0,
-      "theme": "可再生能源",
-      "title_zh": "智利推进可再生能源转型",
-      "summary_zh": "Google News RSS Search消息显示，涉及智利，智利推进可再生能源转型。报道中出现200MW、1GWh等量化信息，主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-14T16:15:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5"
+      "marker_id": "article_ba680537f065de45_primary",
+      "article_id": "article_ba680537f065de45",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候危机与消防人力资源",
+      "title_zh": "美国面临严重消防员短缺，消防员拉响警报：“我们没有足够的人手”",
+      "summary_zh": "由于今年夏季全美野火频发，美国森林服务局遭遇严重的消防员和关键领导岗位短缺。多名内部人员透露，人手不足导致应对系统被推向崩溃边缘，在极端火灾季节中，现有精简队伍被迫承受不可持续的工作压力与高额加班。",
+      "source_name": "Grist",
+      "published_at": "2026-08-22T13:00:00+00:00",
+      "url": "https://grist.org/wildfires/firefighters-sound-alarm-as-us-faces-critical-staffing-shortage-we-dont-have-enough-people"
+    },
+    {
+      "marker_id": "article_a08709c1af4b86a3_primary",
+      "article_id": "article_a08709c1af4b86a3",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候资金",
+      "title_zh": "特朗普将五亿美元的清洁钢铁补贴变更为煤炭高炉资助资金",
+      "summary_zh": "美国拜登政府时期旨在实现钢铁生产脱碳的一笔五亿美元联邦补贴，经特朗普政府调整后，被重新用于升级俄亥俄州南部的一个燃煤高炉。克利夫兰-克里夫斯公司确认美国能源部更改了这笔原本用于米德尔顿钢厂资金的资助范围，此举引发了环保倡导者对地方空气污染加剧的担忧。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-21T19:30:00+00:00",
+      "url": "https://www.canarymedia.com/articles/green-steel/trump-clean-steel-grant-coal"
+    },
+    {
+      "marker_id": "article_708219152a6605aa_primary",
+      "article_id": "article_708219152a6605aa",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "数据中心碳排放",
+      "title_zh": "拟建的伦敦数据中心碳足迹达100万吨，与净零目标“不相容”",
+      "summary_zh": "规划文件显示，位于伦敦外围的东黑弗灵数据中心园区每年将产生超过100万吨二氧化碳，其全生命周期60年内预计产生超7200万吨二氧化碳当量。该项目由Digital Reef开发，占地218公顷绿化带，全面运营后预计每年耗电26.5亿千瓦时，对英国的脱碳进程构成重大威胁。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-21T10:00:31+00:00",
+      "url": "https://www.theguardian.com/uk-news/2026/aug/21/proposed-london-datacentre-will-have-annual-carbon-footprint-of-27000-flights-to-new-york"
+    },
+    {
+      "marker_id": "article_ab2ae6b54e5fdad1_primary",
+      "article_id": "article_ab2ae6b54e5fdad1",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "气候政策与脱碳",
+      "title_zh": "事实核查：保守党关于“廉价电力”报告的 10 个缺陷",
+      "summary_zh": "英国反对党保守党在一份新报告中主张放弃 2050 年净零排放目标，并声称通过采用更多天然气和核能来替代可再生能源可节省超过 3200 亿英镑。然而，专家指出该报告的建模和假设存在严重漏洞，其实际替代方案不仅会导致减排力度大减，还会增加数亿吨二氧化碳排放，且无法带来最低的总成本。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-08-20T15:56:40+00:00",
+      "url": "https://www.carbonbrief.org/factcheck-10-flaws-in-the-conservative-report-on-cheap-power"
+    },
+    {
+      "marker_id": "article_09ecc1c065cd6f22_primary",
+      "article_id": "article_09ecc1c065cd6f22",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "海洋保护与气候峰会",
+      "title_zh": "随着海洋热浪打破记录，各国寻求在COP31上制定海洋路线图",
+      "summary_zh": "由于创纪录的海洋温度削弱了全球最大的碳汇，非洲国家、欧盟、部分拉美国家和小岛屿国家正联合推动 COP31 峰会制定海洋保护路线图。COP31 共同主席国土耳其和澳大利亚正与有关国家合作制定旨在将海洋和气候保护措施纳入区域与国际行动的自愿路线图。专家指出，这一努力可能会受到气候资金不断缩减的掣肘。",
+      "source_name": "Climate Home News",
+      "published_at": "2026-08-20T15:07:29+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/20/marine-heat-records-countries-ocean-roadmap-australia-turkiye-cop31"
+    },
+    {
+      "marker_id": "article_3da1b90b78d9211b_primary",
+      "article_id": "article_3da1b90b78d9211b",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "能源转型",
+      "title_zh": "集体全球路线图如何助力柬埔寨的能源转型目标",
+      "summary_zh": "柬埔寨计划到 2030 年实现 70% 的电力容量来自可再生能源。专家指出，这一目标的实现需要国际社会的合作与支持，而 COP30 巴西主席国倡导的化石能源转型路线图进程将为各国提供有序转型的契机。",
+      "source_name": "Climate Home News",
+      "published_at": "2026-08-20T08:09:05+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/20/collective-global-roadmap-can-boost-cambodias-energy-transition-goals"
+    },
+    {
+      "marker_id": "article_31225feac26bb808_primary",
+      "article_id": "article_31225feac26bb808",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候资金",
+      "title_zh": "挪威2025年气候资金达到创纪录的303亿挪威克朗",
+      "summary_zh": "挪威政府宣布，其2025年气候资金达到创纪录的303亿挪威克朗（约合32.2亿美元），较上年增长60%，且连续第四年实现2021年作出的将气候资金翻倍的承诺。增长主要由挪威发展中国家投资基金旗下的气候投资基金撬动的私人资本驱动，相关项目预计每年可避免22.7公吨二氧化碳排放。挪威政府计划在今年底前提出新的气候资金目标。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-17T19:45:00+00:00",
+      "url": "https://english.news.cn/20260818/63f151dbfa9442e2b22a092ffaf0c62f/c.html"
     }
   ],
   "map_events_today": [
     {
-      "marker_id": "article_71174d6042af09de_primary",
-      "article_id": "article_71174d6042af09de",
-      "place": "南非",
-      "lon": 24.0,
-      "lat": -29.0,
-      "theme": "气候变化",
-      "title_zh": "南非气候变化议题受到关注",
-      "summary_zh": "Climate Home News消息显示，涉及南非、非洲，南非气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Climate Home News",
-      "published_at": "2026-08-14T17:18:04+00:00",
-      "url": "https://www.climatechangenews.com/2026/08/14/south-africas-top-court-blocks-shells-offshore-oil-exploration-right"
+      "marker_id": "article_b306ff9f44b7c5d3_primary",
+      "article_id": "article_b306ff9f44b7c5d3",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "城市气候适应",
+      "title_zh": "霍巴特市通过 Showpony 推出“气候就绪”宣传活动",
+      "summary_zh": "澳大利亚霍巴特市联合创意机构 Showpony 推出了“气候就绪”整合宣传活动，通过展示当地居民、企业和社区群体在生态恢复、建筑节能和减排方面的实际行动，鼓励更多市民参与气候行动。该市设定了在 2040 年实现零排放的目标，其气候与生物多样性应对战略处于全国领先地位。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-23T23:15:00+00:00",
+      "url": "https://www.adnews.com.au/campaigns/city-of-hobart-climate-ready-via-showpony"
     },
     {
-      "marker_id": "article_186c3b96aa0ea07f_primary",
-      "article_id": "article_186c3b96aa0ea07f",
-      "place": "智利",
-      "lon": -71.0,
-      "lat": -33.0,
-      "theme": "可再生能源",
-      "title_zh": "智利推进可再生能源转型",
-      "summary_zh": "Google News RSS Search消息显示，涉及智利，智利推进可再生能源转型。报道中出现200MW、1GWh等量化信息，主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-14T16:15:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5"
+      "marker_id": "article_ba680537f065de45_primary",
+      "article_id": "article_ba680537f065de45",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候危机与消防人力资源",
+      "title_zh": "美国面临严重消防员短缺，消防员拉响警报：“我们没有足够的人手”",
+      "summary_zh": "由于今年夏季全美野火频发，美国森林服务局遭遇严重的消防员和关键领导岗位短缺。多名内部人员透露，人手不足导致应对系统被推向崩溃边缘，在极端火灾季节中，现有精简队伍被迫承受不可持续的工作压力与高额加班。",
+      "source_name": "Grist",
+      "published_at": "2026-08-22T13:00:00+00:00",
+      "url": "https://grist.org/wildfires/firefighters-sound-alarm-as-us-faces-critical-staffing-shortage-we-dont-have-enough-people"
+    },
+    {
+      "marker_id": "article_a08709c1af4b86a3_primary",
+      "article_id": "article_a08709c1af4b86a3",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候资金",
+      "title_zh": "特朗普将五亿美元的清洁钢铁补贴变更为煤炭高炉资助资金",
+      "summary_zh": "美国拜登政府时期旨在实现钢铁生产脱碳的一笔五亿美元联邦补贴，经特朗普政府调整后，被重新用于升级俄亥俄州南部的一个燃煤高炉。克利夫兰-克里夫斯公司确认美国能源部更改了这笔原本用于米德尔顿钢厂资金的资助范围，此举引发了环保倡导者对地方空气污染加剧的担忧。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-21T19:30:00+00:00",
+      "url": "https://www.canarymedia.com/articles/green-steel/trump-clean-steel-grant-coal"
+    },
+    {
+      "marker_id": "article_708219152a6605aa_primary",
+      "article_id": "article_708219152a6605aa",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "数据中心碳排放",
+      "title_zh": "拟建的伦敦数据中心碳足迹达100万吨，与净零目标“不相容”",
+      "summary_zh": "规划文件显示，位于伦敦外围的东黑弗灵数据中心园区每年将产生超过100万吨二氧化碳，其全生命周期60年内预计产生超7200万吨二氧化碳当量。该项目由Digital Reef开发，占地218公顷绿化带，全面运营后预计每年耗电26.5亿千瓦时，对英国的脱碳进程构成重大威胁。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-21T10:00:31+00:00",
+      "url": "https://www.theguardian.com/uk-news/2026/aug/21/proposed-london-datacentre-will-have-annual-carbon-footprint-of-27000-flights-to-new-york"
+    },
+    {
+      "marker_id": "article_ab2ae6b54e5fdad1_primary",
+      "article_id": "article_ab2ae6b54e5fdad1",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "气候政策与脱碳",
+      "title_zh": "事实核查：保守党关于“廉价电力”报告的 10 个缺陷",
+      "summary_zh": "英国反对党保守党在一份新报告中主张放弃 2050 年净零排放目标，并声称通过采用更多天然气和核能来替代可再生能源可节省超过 3200 亿英镑。然而，专家指出该报告的建模和假设存在严重漏洞，其实际替代方案不仅会导致减排力度大减，还会增加数亿吨二氧化碳排放，且无法带来最低的总成本。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-08-20T15:56:40+00:00",
+      "url": "https://www.carbonbrief.org/factcheck-10-flaws-in-the-conservative-report-on-cheap-power"
+    },
+    {
+      "marker_id": "article_09ecc1c065cd6f22_primary",
+      "article_id": "article_09ecc1c065cd6f22",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "海洋保护与气候峰会",
+      "title_zh": "随着海洋热浪打破记录，各国寻求在COP31上制定海洋路线图",
+      "summary_zh": "由于创纪录的海洋温度削弱了全球最大的碳汇，非洲国家、欧盟、部分拉美国家和小岛屿国家正联合推动 COP31 峰会制定海洋保护路线图。COP31 共同主席国土耳其和澳大利亚正与有关国家合作制定旨在将海洋和气候保护措施纳入区域与国际行动的自愿路线图。专家指出，这一努力可能会受到气候资金不断缩减的掣肘。",
+      "source_name": "Climate Home News",
+      "published_at": "2026-08-20T15:07:29+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/20/marine-heat-records-countries-ocean-roadmap-australia-turkiye-cop31"
+    },
+    {
+      "marker_id": "article_3da1b90b78d9211b_primary",
+      "article_id": "article_3da1b90b78d9211b",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "能源转型",
+      "title_zh": "集体全球路线图如何助力柬埔寨的能源转型目标",
+      "summary_zh": "柬埔寨计划到 2030 年实现 70% 的电力容量来自可再生能源。专家指出，这一目标的实现需要国际社会的合作与支持，而 COP30 巴西主席国倡导的化石能源转型路线图进程将为各国提供有序转型的契机。",
+      "source_name": "Climate Home News",
+      "published_at": "2026-08-20T08:09:05+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/20/collective-global-roadmap-can-boost-cambodias-energy-transition-goals"
+    },
+    {
+      "marker_id": "article_31225feac26bb808_primary",
+      "article_id": "article_31225feac26bb808",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "气候资金",
+      "title_zh": "挪威2025年气候资金达到创纪录的303亿挪威克朗",
+      "summary_zh": "挪威政府宣布，其2025年气候资金达到创纪录的303亿挪威克朗（约合32.2亿美元），较上年增长60%，且连续第四年实现2021年作出的将气候资金翻倍的承诺。增长主要由挪威发展中国家投资基金旗下的气候投资基金撬动的私人资本驱动，相关项目预计每年可避免22.7公吨二氧化碳排放。挪威政府计划在今年底前提出新的气候资金目标。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-17T19:45:00+00:00",
+      "url": "https://english.news.cn/20260818/63f151dbfa9442e2b22a092ffaf0c62f/c.html"
     }
   ],
   "map_events_week": [
     {
-      "marker_id": "article_9b63c709583298ae_primary",
-      "article_id": "article_9b63c709583298ae",
+      "marker_id": "article_708219152a6605aa_primary",
+      "article_id": "article_708219152a6605aa",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "数据中心碳排放",
+      "title_zh": "拟建的伦敦数据中心碳足迹达100万吨，与净零目标“不相容”",
+      "summary_zh": "规划文件显示，位于伦敦外围的东黑弗灵数据中心园区每年将产生超过100万吨二氧化碳，其全生命周期60年内预计产生超7200万吨二氧化碳当量。该项目由Digital Reef开发，占地218公顷绿化带，全面运营后预计每年耗电26.5亿千瓦时，对英国的脱碳进程构成重大威胁。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-21T10:00:31+00:00",
+      "url": "https://www.theguardian.com/uk-news/2026/aug/21/proposed-london-datacentre-will-have-annual-carbon-footprint-of-27000-flights-to-new-york"
+    },
+    {
+      "marker_id": "article_a08709c1af4b86a3_primary",
+      "article_id": "article_a08709c1af4b86a3",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候资金",
+      "title_zh": "特朗普将五亿美元的清洁钢铁补贴变更为煤炭高炉资助资金",
+      "summary_zh": "美国拜登政府时期旨在实现钢铁生产脱碳的一笔五亿美元联邦补贴，经特朗普政府调整后，被重新用于升级俄亥俄州南部的一个燃煤高炉。克利夫兰-克里夫斯公司确认美国能源部更改了这笔原本用于米德尔顿钢厂资金的资助范围，此举引发了环保倡导者对地方空气污染加剧的担忧。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-21T19:30:00+00:00",
+      "url": "https://www.canarymedia.com/articles/green-steel/trump-clean-steel-grant-coal"
+    },
+    {
+      "marker_id": "article_09ecc1c065cd6f22_primary",
+      "article_id": "article_09ecc1c065cd6f22",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "海洋保护与气候峰会",
+      "title_zh": "随着海洋热浪打破记录，各国寻求在COP31上制定海洋路线图",
+      "summary_zh": "由于创纪录的海洋温度削弱了全球最大的碳汇，非洲国家、欧盟、部分拉美国家和小岛屿国家正联合推动 COP31 峰会制定海洋保护路线图。COP31 共同主席国土耳其和澳大利亚正与有关国家合作制定旨在将海洋和气候保护措施纳入区域与国际行动的自愿路线图。专家指出，这一努力可能会受到气候资金不断缩减的掣肘。",
+      "source_name": "Climate Home News",
+      "published_at": "2026-08-20T15:07:29+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/20/marine-heat-records-countries-ocean-roadmap-australia-turkiye-cop31"
+    },
+    {
+      "marker_id": "article_31225feac26bb808_primary",
+      "article_id": "article_31225feac26bb808",
       "place": "中国",
       "lon": 105.0,
       "lat": 35.0,
-      "theme": "碳治理",
-      "title_zh": "中国碳治理议题受到关注",
-      "summary_zh": "Carbon Brief消息显示，涉及中国，中国碳治理议题受到关注。主题上属于碳治理。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Carbon Brief",
-      "published_at": "2026-08-14T14:09:31+00:00",
-      "url": "https://www.carbonbrief.org/qa-what-does-chinas-15th-five-year-plan-for-coal-mean-for-climate-action"
+      "theme": "气候资金",
+      "title_zh": "挪威2025年气候资金达到创纪录的303亿挪威克朗",
+      "summary_zh": "挪威政府宣布，其2025年气候资金达到创纪录的303亿挪威克朗（约合32.2亿美元），较上年增长60%，且连续第四年实现2021年作出的将气候资金翻倍的承诺。增长主要由挪威发展中国家投资基金旗下的气候投资基金撬动的私人资本驱动，相关项目预计每年可避免22.7公吨二氧化碳排放。挪威政府计划在今年底前提出新的气候资金目标。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-17T19:45:00+00:00",
+      "url": "https://english.news.cn/20260818/63f151dbfa9442e2b22a092ffaf0c62f/c.html"
     },
     {
-      "marker_id": "article_3a79ec9a853258fc_primary",
-      "article_id": "article_3a79ec9a853258fc",
+      "marker_id": "article_b306ff9f44b7c5d3_primary",
+      "article_id": "article_b306ff9f44b7c5d3",
       "place": "澳大利亚",
       "lon": 134.0,
       "lat": -25.0,
-      "theme": "气候变化",
-      "title_zh": "澳大利亚气候变化议题受到关注",
-      "summary_zh": "Climate Home News消息显示，涉及澳大利亚、中国，澳大利亚气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Climate Home News",
-      "published_at": "2026-08-14T11:39:49+00:00",
-      "url": "https://www.climatechangenews.com/2026/08/14/new-coal-mine-openings-slow-as-east-asian-demand-plateaus"
-    },
-    {
-      "marker_id": "article_9decd730b0ff15a4_primary",
-      "article_id": "article_9decd730b0ff15a4",
-      "place": "加勒比地区",
-      "lon": -75.0,
-      "lat": 18.0,
-      "theme": "气候资金",
-      "title_zh": "拉丁美洲气候资金议题受到关注",
-      "summary_zh": "Google News RSS Search消息显示，涉及拉丁美洲、加勒比地区，拉丁美洲气候资金议题受到关注。主题上属于气候资金。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-12T17:50:41+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPYjd3OXQ3N3MzYkdaNm9qQTBaTUtNdG1oNURxbjgzVDJZT2VXb3pqbTZjYm5LMERXdU1mZnJFdno5TEtYSUtmZ1hxdVVvcEVTdWxRdUctdGJrVFJ1TktrYmRVVWpqakVKOGVrZXJoTlNxSENJVk1EWldoLWF1WHlIYWxfUTlscTdkeUNqUzRrWFFsUjF2WjZ6c2c3ODF1UkZlVlNpWXQ2QWJxVFQxQUNkQWUtZ2h2OERibFR6c3VySHU2NEpQZkJMNXFR?oc=5"
-    },
-    {
-      "marker_id": "article_617919f26471b3f8_primary",
-      "article_id": "article_617919f26471b3f8",
-      "place": "亚马孙地区",
-      "lon": -62.0,
-      "lat": -4.0,
-      "theme": "碳治理",
-      "title_zh": "亚马孙地区碳治理议题受到关注",
-      "summary_zh": "Mongabay Latin America消息显示，涉及亚马孙地区，亚马孙地区碳治理议题受到关注。主题上属于碳治理。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-08-14T14:31:04+00:00",
-      "url": "https://news.mongabay.com/2026/08/new-studies-portray-amazon-as-surprisingly-resilient-but-tipping-point-looms"
-    },
-    {
-      "marker_id": "article_71df7eaf6b3f37f9_primary",
-      "article_id": "article_71df7eaf6b3f37f9",
-      "place": "非洲",
-      "lon": 22.0,
-      "lat": 2.0,
-      "theme": "干旱风险",
-      "title_zh": "非洲干旱风险议题受到关注",
-      "summary_zh": "Mongabay Climate Change消息显示，涉及非洲，非洲干旱风险议题受到关注。主题上属于干旱风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-08-14T02:43:26+00:00",
-      "url": "https://news.mongabay.com/short-article/2026/08/more-people-farms-and-drought-could-mean-more-elephant-conflict-in-southern-africa"
-    },
-    {
-      "marker_id": "article_6d699292891c7640_primary",
-      "article_id": "article_6d699292891c7640",
-      "place": "太平洋地区",
-      "lon": 165.0,
-      "lat": -10.0,
-      "theme": "野火风险",
-      "title_zh": "太平洋地区野火风险议题受到关注",
-      "summary_zh": "NASA Earth Observatory Image of the Day消息显示，涉及太平洋地区，太平洋地区野火风险议题受到关注。主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "NASA Earth Observatory Image of the Day",
-      "published_at": "2026-08-13T04:00:00+00:00",
-      "url": "https://science.nasa.gov/earth/earth-observatory/cascade-volcanoes-shrouded-in-smoke"
-    },
-    {
-      "marker_id": "article_2f82ac7ed5167f32_primary",
-      "article_id": "article_2f82ac7ed5167f32",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "减排",
-      "title_zh": "欧洲气候变化加剧高温风险",
-      "summary_zh": "The Guardian Climate Crisis消息显示，涉及欧洲，欧洲气候变化加剧高温风险。主题上属于减排。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-08-11T18:04:47+00:00",
-      "url": "https://www.theguardian.com/commentisfree/2026/aug/11/the-guardian-view-on-wildfires-firefighters-cant-handle-this-crisis-alone"
-    },
-    {
-      "marker_id": "article_454770ce7a4982b5_primary",
-      "article_id": "article_454770ce7a4982b5",
-      "place": "美国",
-      "lon": -100.0,
-      "lat": 39.0,
-      "theme": "干旱风险",
-      "title_zh": "美国干旱风险议题受到关注",
-      "summary_zh": "Yale Climate Connections消息显示，涉及美国，美国干旱风险议题受到关注。主题上属于干旱风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Yale Climate Connections",
-      "published_at": "2026-08-13T18:47:12+00:00",
-      "url": "https://yaleclimateconnections.org/2026/08/what-you-need-to-know-about-the-water-crisis-in-puerto-rico"
-    },
-    {
-      "marker_id": "article_096543d98ce0cbdd_primary",
-      "article_id": "article_096543d98ce0cbdd",
-      "place": "印度",
-      "lon": 78.0,
-      "lat": 22.0,
-      "theme": "洪水风险",
-      "title_zh": "印度洪水风险议题受到关注",
-      "summary_zh": "Mongabay Climate Change消息显示，涉及印度，印度洪水风险议题受到关注。主题上属于洪水风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-08-14T11:25:30+00:00",
-      "url": "https://news.mongabay.com/short-article/2026/08/infrastructure-and-land-use-behind-devastating-india-monsoon-floods"
-    },
-    {
-      "marker_id": "article_cac9940a1d9cac96_primary",
-      "article_id": "article_cac9940a1d9cac96",
-      "place": "美国",
-      "lon": -100.0,
-      "lat": 39.0,
-      "theme": "太阳能",
-      "title_zh": "美国推进可再生能源转型",
-      "summary_zh": "Canary Media消息显示，涉及美国，美国推进可再生能源转型。报道中出现490 million等量化信息，主题上属于太阳能。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Canary Media",
-      "published_at": "2026-08-12T07:30:00+00:00",
-      "url": "https://www.canarymedia.com/articles/batteries/puerto-rico-trump-admin-battery-project"
-    },
-    {
-      "marker_id": "article_3f8434ac481f4a24_primary",
-      "article_id": "article_3f8434ac481f4a24",
-      "place": "南非",
-      "lon": 24.0,
-      "lat": -29.0,
-      "theme": "气候变化",
-      "title_zh": "南非气候变化议题受到关注",
-      "summary_zh": "Climate Home News消息显示，涉及南非、非洲，南非气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Climate Home News",
-      "published_at": "2026-08-11T16:30:26+00:00",
-      "url": "https://www.climatechangenews.com/2026/08/11/south-africas-offshore-oil-push-ground-resistance-courts-litigation-ocean"
-    },
-    {
-      "marker_id": "article_186c3b96aa0ea07f_primary",
-      "article_id": "article_186c3b96aa0ea07f",
-      "place": "智利",
-      "lon": -71.0,
-      "lat": -33.0,
-      "theme": "可再生能源",
-      "title_zh": "智利推进可再生能源转型",
-      "summary_zh": "Google News RSS Search消息显示，涉及智利，智利推进可再生能源转型。报道中出现200MW、1GWh等量化信息，主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-14T16:15:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcmZZRnZBbEJsbGo3YVBHVUEtZG9DN01MVkw3ZlRWS2dKemYyY0Vmb2lGVG5RT0xxckh4SzRySmZNd1ZRb0dzMmhGay03bHMySHAxQWNvc2JQNDB3S2hYYU4yWGpmcVpmWXozMUVDcFNNX20wNnNXQWtsMHBrUXF5aGlrNmwyWHJYSEJJR2ZlMUo3UFpRYkh4eWtWRHVOZk1ra004ZE1TX2RLQQ?oc=5"
-    },
-    {
-      "marker_id": "article_cb9451ad8916369e_primary",
-      "article_id": "article_cb9451ad8916369e",
-      "place": "印度尼西亚",
-      "lon": 118.0,
-      "lat": -2.0,
-      "theme": "碳治理",
-      "title_zh": "印度尼西亚碳治理议题受到关注",
-      "summary_zh": "Dialogue Earth消息显示，涉及印度尼西亚，印度尼西亚碳治理议题受到关注。主题上属于碳治理。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Dialogue Earth",
-      "published_at": "2026-08-12T17:43:30+00:00",
-      "url": "https://dialogue.earth/en/energy/carbon-crossroads-petrochemicals-boom-tests-indonesias-climate-goals"
-    },
-    {
-      "marker_id": "article_8d099093bdbf2d1b_primary",
-      "article_id": "article_8d099093bdbf2d1b",
-      "place": "尼日利亚",
-      "lon": 8.0,
-      "lat": 9.0,
-      "theme": "气候变化",
-      "title_zh": "尼日利亚气候变化议题受到关注",
-      "summary_zh": "GDELT 2.0 DOC API消息显示，涉及尼日利亚，尼日利亚气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
+      "theme": "城市气候适应",
+      "title_zh": "霍巴特市通过 Showpony 推出“气候就绪”宣传活动",
+      "summary_zh": "澳大利亚霍巴特市联合创意机构 Showpony 推出了“气候就绪”整合宣传活动，通过展示当地居民、企业和社区群体在生态恢复、建筑节能和减排方面的实际行动，鼓励更多市民参与气候行动。该市设定了在 2040 年实现零排放的目标，其气候与生物多样性应对战略处于全国领先地位。",
       "source_name": "GDELT 2.0 DOC API",
-      "published_at": "2026-08-09T23:30:00+00:00",
-      "url": "https://allafrica.com/stories/202608070276.html"
+      "published_at": "2026-08-23T23:15:00+00:00",
+      "url": "https://www.adnews.com.au/campaigns/city-of-hobart-climate-ready-via-showpony"
     },
     {
-      "marker_id": "article_d0b37e0d1c3f6eeb_primary",
-      "article_id": "article_d0b37e0d1c3f6eeb",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "高温风险",
-      "title_zh": "欧洲气候变化加剧高温风险",
-      "summary_zh": "The Guardian Climate Crisis消息显示，涉及欧洲，欧洲气候变化加剧高温风险。报道中出现27 million等量化信息，主题上属于高温风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-08-10T16:32:53+00:00",
-      "url": "https://www.theguardian.com/uk-news/2026/aug/10/uk-temperatures-heatwave-summer-met-office-warning"
-    },
-    {
-      "marker_id": "article_a5ed4a2f4d4b2174_primary",
-      "article_id": "article_a5ed4a2f4d4b2174",
-      "place": "加勒比地区",
-      "lon": -75.0,
-      "lat": 18.0,
-      "theme": "洪水风险",
-      "title_zh": "加勒比地区洪水风险议题受到关注",
-      "summary_zh": "Yale Climate Connections消息显示，涉及加勒比地区，加勒比地区洪水风险议题受到关注。主题上属于洪水风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Yale Climate Connections",
-      "published_at": "2026-08-12T22:43:16+00:00",
-      "url": "https://yaleclimateconnections.org/2026/08/ptc-one-c-heads-toward-hawaii-life-threatening-floods-possible"
-    },
-    {
-      "marker_id": "article_6d79f0c306e8123d_primary",
-      "article_id": "article_6d79f0c306e8123d",
-      "place": "中国",
-      "lon": 105.0,
-      "lat": 35.0,
-      "theme": "气候变化",
-      "title_zh": "中国气候变化议题受到关注",
-      "summary_zh": "Google News RSS Search消息显示，涉及中国，中国气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-12T16:10:44+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxORlRETWlOZktFLW1WNk9PTnl3NGkxQ19lYXZhX0ZxZlUzbDBnUXNrWk56VEZKWGNGdloxT1g5S2N3ZG5xRHlnamc4VHY2cFNhQ213aGpMZU9uaXIyT28xYW05LVlFVEVhbGdlLXU4bnlYVndNVk91RXBxQThKYTJ0eVQ1aVQ1SmJkS2NB?oc=5"
-    },
-    {
-      "marker_id": "article_5ba889bbbc1b807c_primary",
-      "article_id": "article_5ba889bbbc1b807c",
-      "place": "亚马孙地区",
-      "lon": -62.0,
-      "lat": -4.0,
-      "theme": "碳治理",
-      "title_zh": "亚马孙地区碳治理议题受到关注",
-      "summary_zh": "Mongabay Latin America消息显示，涉及亚马孙地区，亚马孙地区碳治理议题受到关注。主题上属于碳治理。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Mongabay Latin America",
-      "published_at": "2026-08-10T00:02:06+00:00",
-      "url": "https://news.mongabay.com/2026/08/mariano-cenamo-advocate-for-a-sustainable-amazon-bioeconomy-has-died-aged-46"
-    },
-    {
-      "marker_id": "article_c7f9b73be424e5e7_primary",
-      "article_id": "article_c7f9b73be424e5e7",
-      "place": "印度尼西亚",
-      "lon": 118.0,
-      "lat": -2.0,
-      "theme": "野火风险",
-      "title_zh": "印度尼西亚野火风险议题受到关注",
-      "summary_zh": "Mongabay Climate Change消息显示，涉及印度尼西亚、马来西亚，印度尼西亚野火风险议题受到关注。报道中出现000 hectares、000 acres等量化信息，主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-08-13T14:23:57+00:00",
-      "url": "https://news.mongabay.com/2026/08/indonesias-wildfire-season-surges-as-haze-spreads-into-malaysia"
-    },
-    {
-      "marker_id": "article_71174d6042af09de_primary",
-      "article_id": "article_71174d6042af09de",
-      "place": "南非",
-      "lon": 24.0,
-      "lat": -29.0,
-      "theme": "气候变化",
-      "title_zh": "南非气候变化议题受到关注",
-      "summary_zh": "Climate Home News消息显示，涉及南非、非洲，南非气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
+      "marker_id": "article_3da1b90b78d9211b_primary",
+      "article_id": "article_3da1b90b78d9211b",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "能源转型",
+      "title_zh": "集体全球路线图如何助力柬埔寨的能源转型目标",
+      "summary_zh": "柬埔寨计划到 2030 年实现 70% 的电力容量来自可再生能源。专家指出，这一目标的实现需要国际社会的合作与支持，而 COP30 巴西主席国倡导的化石能源转型路线图进程将为各国提供有序转型的契机。",
       "source_name": "Climate Home News",
-      "published_at": "2026-08-14T17:18:04+00:00",
-      "url": "https://www.climatechangenews.com/2026/08/14/south-africas-top-court-blocks-shells-offshore-oil-exploration-right"
+      "published_at": "2026-08-20T08:09:05+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/20/collective-global-roadmap-can-boost-cambodias-energy-transition-goals"
     },
     {
-      "marker_id": "article_540ff48afb28f1e6_primary",
-      "article_id": "article_540ff48afb28f1e6",
-      "place": "加拿大",
-      "lon": -106.0,
-      "lat": 56.0,
-      "theme": "野火风险",
-      "title_zh": "加拿大野火风险议题受到关注",
-      "summary_zh": "BBC Science & Environment消息显示，涉及加拿大，加拿大野火风险议题受到关注。主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "BBC Science & Environment",
-      "published_at": "2026-08-10T19:17:11+00:00",
-      "url": "https://www.bbc.co.uk/news/articles/cx2lwv032j9o?at_medium=RSS&at_campaign=rss"
+      "marker_id": "article_ab2ae6b54e5fdad1_primary",
+      "article_id": "article_ab2ae6b54e5fdad1",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "气候政策与脱碳",
+      "title_zh": "事实核查：保守党关于“廉价电力”报告的 10 个缺陷",
+      "summary_zh": "英国反对党保守党在一份新报告中主张放弃 2050 年净零排放目标，并声称通过采用更多天然气和核能来替代可再生能源可节省超过 3200 亿英镑。然而，专家指出该报告的建模和假设存在严重漏洞，其实际替代方案不仅会导致减排力度大减，还会增加数亿吨二氧化碳排放，且无法带来最低的总成本。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-08-20T15:56:40+00:00",
+      "url": "https://www.carbonbrief.org/factcheck-10-flaws-in-the-conservative-report-on-cheap-power"
     },
     {
-      "marker_id": "article_f1f56de3ce8a6f30_primary",
-      "article_id": "article_f1f56de3ce8a6f30",
-      "place": "加拿大",
-      "lon": -106.0,
-      "lat": 56.0,
-      "theme": "野火风险",
-      "title_zh": "加拿大野火风险议题受到关注",
-      "summary_zh": "The Guardian Climate Crisis消息显示，涉及加拿大，加拿大野火风险议题受到关注。主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-08-09T18:20:25+00:00",
-      "url": "https://www.theguardian.com/world/2026/aug/09/canada-british-columbia-government-wildfires"
-    },
-    {
-      "marker_id": "article_97846b198095d490_primary",
-      "article_id": "article_97846b198095d490",
+      "marker_id": "article_ba680537f065de45_primary",
+      "article_id": "article_ba680537f065de45",
       "place": "美国",
       "lon": -100.0,
       "lat": 39.0,
-      "theme": "高温风险",
-      "title_zh": "美国高温风险议题受到关注",
-      "summary_zh": "Grist消息显示，涉及美国，美国高温风险议题受到关注。主题上属于高温风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
+      "theme": "气候危机与消防人力资源",
+      "title_zh": "美国面临严重消防员短缺，消防员拉响警报：“我们没有足够的人手”",
+      "summary_zh": "由于今年夏季全美野火频发，美国森林服务局遭遇严重的消防员和关键领导岗位短缺。多名内部人员透露，人手不足导致应对系统被推向崩溃边缘，在极端火灾季节中，现有精简队伍被迫承受不可持续的工作压力与高额加班。",
       "source_name": "Grist",
-      "published_at": "2026-08-12T08:45:00+00:00",
-      "url": "https://grist.org/science/new-heat-wave-category-snow-eaters-study"
+      "published_at": "2026-08-22T13:00:00+00:00",
+      "url": "https://grist.org/wildfires/firefighters-sound-alarm-as-us-faces-critical-staffing-shortage-we-dont-have-enough-people"
     },
     {
-      "marker_id": "article_93d8ada210954a39_primary",
-      "article_id": "article_93d8ada210954a39",
-      "place": "尼日利亚",
-      "lon": 8.0,
-      "lat": 9.0,
-      "theme": "可再生能源",
-      "title_zh": "尼日利亚推进可再生能源转型",
-      "summary_zh": "Google News RSS Search消息显示，涉及尼日利亚，尼日利亚推进可再生能源转型。主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-10T16:51:05+00:00",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQTVdwbGhCckhSY29GV0I5MW5MMnRkZkpDM3NoNG54MXhtZ0hKcGI4Rnl6TUtIM3FqcDNZRkpUMWFLUUlZSUI2NWI3YjVnbFB2SmpLQ3JqS0pZVUxRMFZGaFZWTlQ5dzF6TFBQQjg5TkxoVEV5Mnd1Y0JEVWtMMHpFVVlZcXpKQUNFRURsMUNWVkZpYlAxamlXWWRfMThxS0xkbGw1THVER2lOazhuSkRCalpYOUtYWFViZm5SbXJ3clJqNTdSVFFvN2V3?oc=5"
-    },
-    {
-      "marker_id": "article_1e4fe7fd2f9defb4_primary",
-      "article_id": "article_1e4fe7fd2f9defb4",
-      "place": "欧洲",
-      "lon": 10.0,
-      "lat": 51.0,
-      "theme": "净零转型",
-      "title_zh": "欧洲净零与减排措施受到关注",
-      "summary_zh": "The Guardian Climate Crisis消息显示，涉及欧洲、中国，欧洲净零与减排措施受到关注。主题上属于净零转型。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-08-09T16:25:19+00:00",
-      "url": "https://www.theguardian.com/commentisfree/2026/aug/09/the-guardian-view-on-indias-green-growth-gamble-it-will-need-more-than-private-finance"
-    },
-    {
-      "marker_id": "article_b79e047986dfa550_primary",
-      "article_id": "article_b79e047986dfa550",
+      "marker_id": "article_b8681f38205e8041_primary",
+      "article_id": "article_b8681f38205e8041",
       "place": "印度尼西亚",
       "lon": 118.0,
       "lat": -2.0,
-      "theme": "可再生能源",
-      "title_zh": "印度尼西亚推进可再生能源转型",
-      "summary_zh": "Mongabay Climate Change消息显示，涉及印度尼西亚，印度尼西亚推进可再生能源转型。主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
+      "theme": "碳市场与森林保护",
+      "title_zh": "为什么仅靠碳市场无法拯救东南亚的特许经营森林",
+      "summary_zh": "新研究表明，东南亚商业特许经营区内仍保存有约 4200 万公顷的完整森林，清除这些森林可能在未来 30 年内释放 12 亿吨二氧化碳。研究指出，按当前每吨 5 至 12 美元的碳价，仅依靠碳市场激励特许经营商保护森林在经济上并不可行，需要辅以绿色金融和生态系统服务付费等更广泛的融资组合。",
       "source_name": "Mongabay Climate Change",
-      "published_at": "2026-08-12T09:20:00+00:00",
-      "url": "https://news.mongabay.com/2026/08/nickel-expansion-puts-indonesias-biodiversity-goals-under-pressure-study-finds"
+      "published_at": "2026-08-19T05:25:05+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/08/why-carbon-markets-alone-wont-save-southeast-asias-concessions-forests"
     },
     {
-      "marker_id": "article_de252dc06dc43001_primary",
-      "article_id": "article_de252dc06dc43001",
-      "place": "非洲",
-      "lon": 22.0,
-      "lat": 2.0,
-      "theme": "气候变化",
-      "title_zh": "非洲气候变化议题受到关注",
-      "summary_zh": "Yale Climate Connections消息显示，涉及非洲，非洲气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Yale Climate Connections",
-      "published_at": "2026-08-11T16:08:21+00:00",
-      "url": "https://yaleclimateconnections.org/2026/08/july-2026-ties-with-july-2024-as-earths-hottest-month-on-record"
-    },
-    {
-      "marker_id": "article_5fe686e462963840_primary",
-      "article_id": "article_5fe686e462963840",
-      "place": "加拿大",
-      "lon": -106.0,
-      "lat": 56.0,
-      "theme": "野火风险",
-      "title_zh": "加拿大野火风险议题受到关注",
-      "summary_zh": "BBC Science & Environment消息显示，涉及加拿大，加拿大野火风险议题受到关注。主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "BBC Science & Environment",
-      "published_at": "2026-08-09T23:02:39+00:00",
-      "url": "https://www.bbc.co.uk/news/articles/c20d89jxpqno?at_medium=RSS&at_campaign=rss"
-    },
-    {
-      "marker_id": "article_384a534e319d8d4e_primary",
-      "article_id": "article_384a534e319d8d4e",
-      "place": "中国",
-      "lon": 105.0,
-      "lat": 35.0,
-      "theme": "可再生能源",
-      "title_zh": "中国推进可再生能源转型",
-      "summary_zh": "Google News RSS Search消息显示，涉及中国，中国推进可再生能源转型。主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-09T23:20:05+00:00",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1xcktVUEtiRHFCaktfX29fT2VQZ0pKWDEyYzhLQUNvZjZOblcyY3ZTRXRKaUlGVl9HWHFwU04wdHhVVVZ2cjk1TzJOcWtxUGlHdTNDaTFMYjNYSkh0M1dMa0tYYTVzNEw4V08yelFaWERDVi1wUVBOV3lKSXQ4QQ?oc=5"
-    },
-    {
-      "marker_id": "article_8515c921b28ba4c6_primary",
-      "article_id": "article_8515c921b28ba4c6",
-      "place": "加拿大",
-      "lon": -106.0,
-      "lat": 56.0,
-      "theme": "野火风险",
-      "title_zh": "加拿大野火风险议题受到关注",
-      "summary_zh": "Mongabay Climate Change消息显示，涉及加拿大，加拿大野火风险议题受到关注。报道中出现3.8 million、9.4 million等量化信息，主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Mongabay Climate Change",
-      "published_at": "2026-08-10T04:44:17+00:00",
-      "url": "https://news.mongabay.com/short-article/2026/08/climate-change-doubled-likelihood-of-canadas-extreme-fire-weather-study-finds"
-    },
-    {
-      "marker_id": "article_2b2acfcb44ef3154_primary",
-      "article_id": "article_2b2acfcb44ef3154",
-      "place": "非洲",
-      "lon": 22.0,
-      "lat": 2.0,
-      "theme": "风电",
-      "title_zh": "非洲推进可再生能源转型",
-      "summary_zh": "Yale Climate Connections消息显示，涉及非洲、美国，非洲推进可再生能源转型。主题上属于风电。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Yale Climate Connections",
-      "published_at": "2026-08-10T14:37:18+00:00",
-      "url": "https://yaleclimateconnections.org/2026/08/watching-the-atlantic-could-tropical-waves-exiting-africa-make-it-past-the-wind-shear"
-    },
-    {
-      "marker_id": "article_85b3b16a2f7cf899_primary",
-      "article_id": "article_85b3b16a2f7cf899",
-      "place": "加拿大",
-      "lon": -106.0,
-      "lat": 56.0,
-      "theme": "野火风险",
-      "title_zh": "加拿大野火风险议题受到关注",
-      "summary_zh": "Grist消息显示，涉及加拿大，加拿大野火风险议题受到关注。主题上属于野火风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Grist",
-      "published_at": "2026-08-11T18:23:30+00:00",
-      "url": "https://grist.org/global-indigenous-affairs-desk/canadas-wildfire-season-is-taking-a-heavy-toll-on-first-nations"
-    },
-    {
-      "marker_id": "article_683cfadf4771e27a_primary",
-      "article_id": "article_683cfadf4771e27a",
-      "place": "印度",
-      "lon": 78.0,
-      "lat": 22.0,
-      "theme": "可再生能源",
-      "title_zh": "印度推进可再生能源转型",
-      "summary_zh": "Google News RSS Search消息显示，涉及印度，印度推进可再生能源转型。主题上属于可再生能源。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-11T19:29:00+00:00",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQX25tOVJkMzNVYzkyeUtjczVlZTF5THdNSk9NOHFsX0ZKUWJQSDlNVlRXekFvVXZKMnJ2SGdESFl4SEVTN3hVaFIxS3Q5VW8zaXpEcXpCNDg2OW9jeVBjX1NTLW13U1RlOW9hTTd2OVh5LTIzNWtFZU9xWE8wNklmdG1nNGlfRkVPc202Z0ZfMW5ZbFg2NTNfUjNpOWlpcmtraEoxTnlPWVFJTmt4QnREaFEyaGVWOGRrWkpSN21OTDdxXzl0OGpucVZiOVfSAdIBQVVfeXFMTm1PWU15M2E4N1FHSW5LVlI2bzJZZHNKTm01aUdWMlBLYnFYdEcxRVU4SFVTSGRITmpIOThjY05VY2IyTUJmVWNJQlBmZEJVdVRleEpKUlUxdXVUb0NWaFNybDNNMXFlRjliamY3RVpvNDdyQkNxU2RlbGllMktKNW8xTFlzU01BcHBzRDNCTDExNUJhUDZSTG9IOUtaallBVC1RR2Ntc2FZcDhETE52YVhFUlU1Q2RlSl9XODIxOUZBT2xMc3FqbldKVXlsZFZHSGln?oc=5"
-    },
-    {
-      "marker_id": "article_d865ff94a26bcf3a_primary",
-      "article_id": "article_d865ff94a26bcf3a",
-      "place": "美国",
-      "lon": -100.0,
-      "lat": 39.0,
-      "theme": "高温风险",
-      "title_zh": "美国气候变化加剧高温风险",
-      "summary_zh": "The Guardian Climate Crisis消息显示，涉及美国，美国气候变化加剧高温风险。主题上属于高温风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "The Guardian Climate Crisis",
-      "published_at": "2026-08-10T18:49:51+00:00",
-      "url": "https://www.theguardian.com/us-news/2026/aug/10/july-hottest-month-ever-recorded-heatwaves"
-    },
-    {
-      "marker_id": "article_60d39cb7c5bf6438_primary",
-      "article_id": "article_60d39cb7c5bf6438",
-      "place": "美国加州",
-      "lon": -119.0,
-      "lat": 37.0,
-      "theme": "洪水风险",
-      "title_zh": "美国加州洪水风险议题受到关注",
-      "summary_zh": "Grist消息显示，涉及美国加州，美国加州洪水风险议题受到关注。主题上属于洪水风险。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Grist",
-      "published_at": "2026-08-11T08:30:00+00:00",
-      "url": "https://grist.org/solutions/a-new-type-of-levee-is-taking-root-in-northern-california"
-    },
-    {
-      "marker_id": "article_3c4e8dad433b77f8_primary",
-      "article_id": "article_3c4e8dad433b77f8",
-      "place": "印度",
-      "lon": 78.0,
-      "lat": 22.0,
-      "theme": "气候变化",
-      "title_zh": "印度气候变化议题受到关注",
-      "summary_zh": "Google News RSS Search消息显示，涉及印度，印度气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Google News RSS Search",
-      "published_at": "2026-08-09T18:36:16+00:00",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNRTZjU3NOU0ZfYzVxdXgzTXdLeGlnQTlDcUtPRlJUZC1RbWE5dkN2NXhBQVhVeU41MW9rNndHYklDS3piSjVXcy1VQ2tWbGFhVUNVMFRWcl9lRTkyekxHdHBWdm1TRXpfZmJxcXZKSHB5SlBXYTRoQ2lDbkJoTmVRYUVMLTR0cnU3ek5GZC0teHluTElKcnpUNmJvWmlIZjRVTUI5bDRMemNKVnpsUG5Hb0EtaEVwdw?oc=5"
-    },
-    {
-      "marker_id": "article_94b2ac2ceeb26e5a_primary",
-      "article_id": "article_94b2ac2ceeb26e5a",
-      "place": "美国",
-      "lon": -100.0,
-      "lat": 39.0,
-      "theme": "气候变化",
-      "title_zh": "美国气候变化议题受到关注",
-      "summary_zh": "Yale Climate Connections消息显示，涉及美国，美国气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
-      "source_name": "Yale Climate Connections",
-      "published_at": "2026-08-10T18:45:16+00:00",
-      "url": "https://yaleclimateconnections.org/2026/08/the-u-s-just-had-its-hottest-month-in-recorded-history-surpassing-dust-bowl-record"
-    },
-    {
-      "marker_id": "article_1062b64b0d61aa18_primary",
-      "article_id": "article_1062b64b0d61aa18",
+      "marker_id": "article_12bafaf7809dabcd_primary",
+      "article_id": "article_12bafaf7809dabcd",
       "place": "美国得州",
       "lon": -99.0,
       "lat": 31.0,
-      "theme": "气候变化",
-      "title_zh": "美国得州气候变化议题受到关注",
-      "summary_zh": "Grist消息显示，涉及美国得州，美国得州气候变化议题受到关注。主题上属于气候变化。该段为题名与来源摘要的保守编译，涉及数字、承诺或责任归属时应打开原文核验。",
+      "theme": "极端高温",
+      "title_zh": "德克萨斯州的一起联邦诉讼可能会改变我们在炎热天气下对待囚犯的方式",
+      "summary_zh": "随着极端热浪加剧，倡导者正推动为囚犯提供防暑保护。2026年4月，德克萨斯州一家联邦地区法院审理了一起诉讼，囚犯和维权团体控告该州许多监狱缺乏空调。数据显示，未装空调区域的夏季气温可超过110华氏度，原告认为这违反了宪法。该案裁决可能影响全美监狱应对极端热威胁的方式。",
+      "source_name": "Yale Climate Connections",
+      "published_at": "2026-08-21T11:00:00+00:00",
+      "url": "https://yaleclimateconnections.org/2026/08/a-federal-case-in-texas-could-change-how-we-treat-prisoners-during-hot-weather"
+    },
+    {
+      "marker_id": "article_6389794b5551d944_primary",
+      "article_id": "article_6389794b5551d944",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "煤炭规划",
+      "title_zh": "圆桌会议：解读中国煤炭五年规划",
+      "summary_zh": "中国新发布的煤炭行业规划强调能源安全与绿色低碳转型，但未明确设定煤炭消费量达峰或削减的时间表。专家意见存在分歧，部分观点认为该规划旨在到2030年前稳定而非积极削减煤炭消费，并对继续发展煤炭化学工业表示关切；另有观点则认为，受房地产低迷、工业用煤减少及煤炭进口下降等因素影响，中国的煤炭消费可能已经达峰或将在今年至明年的短时间内实现达峰。",
+      "source_name": "Dialogue Earth",
+      "published_at": "2026-08-20T17:41:13+00:00",
+      "url": "https://dialogue.earth/en/climate/roundtable-unpacking-chinas-five-year-plan-for-coal"
+    },
+    {
+      "marker_id": "article_5935d9b2bffa6304_primary",
+      "article_id": "article_5935d9b2bffa6304",
+      "place": "巴西",
+      "lon": -52.0,
+      "lat": -10.0,
+      "theme": "生物经济",
+      "title_zh": "作为产业和烹饪原料，海藻正在巴西取得进展",
+      "summary_zh": "在巴西帕拉蒂，一个凯萨拉家庭将海藻种植转化为餐饮、教育旅游和收入来源。源自菲律宾的大藻卡帕藻最初引入巴西是为了供应卡拉胶产业，如今也被用作生物肥料和食品。海藻种植能产生氧气、吸收碳并通过过滤多余营养改善水质，但专家指出其发展仍面临信贷、营销、技术和监管瓶颈。",
+      "source_name": "Mongabay Latin America",
+      "published_at": "2026-08-18T12:26:44+00:00",
+      "url": "https://news.mongabay.com/2026/08/as-an-industry-and-a-cooking-ingredient-seaweed-is-gaining-ground-in-brazil"
+    },
+    {
+      "marker_id": "article_602300aa355875c7_primary",
+      "article_id": "article_602300aa355875c7",
+      "place": "太平洋地区",
+      "lon": 165.0,
+      "lat": -10.0,
+      "theme": "极端天气与气候预测",
+      "title_zh": "气象局预测世纪最强厄尔尼诺现象将为英国带来更多秋季降雨与风暴",
+      "summary_zh": "英国气象局表示，太平洋正在形成的厄尔尼诺现象可能是百年来最强的一次，并将使2027年成为又一个打破温度纪录的年份。受此影响，英国今年秋季预计将迎来更多降雨和风暴，同时全球气温将暂时较工业化前平均水平高出1.5摄氏度以上。南美洲和西太平洋等地预计将遭遇严重干旱。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-21T14:10:04+00:00",
+      "url": "https://www.theguardian.com/environment/2026/aug/21/increased-rainfall-and-storms-to-hit-uk-due-to-biggest-el-nino-for-a-century-say-met-office"
+    },
+    {
+      "marker_id": "article_988b0006031992a8_primary",
+      "article_id": "article_988b0006031992a8",
+      "place": "美国科罗拉多州",
+      "lon": -105.5,
+      "lat": 39.0,
+      "theme": "山火防范",
+      "title_zh": "科罗拉多州流域面临的山火威胁规模远超现有资金",
+      "summary_zh": "科罗拉多州上雅姆帕水利保守区的水源管理人员和人工机组正通过砍伐和稀疏林木来降低山火风险并保护流域，但干旱少雨的气候及过厚的森林枯木使得山火威胁的广度与严重程度远远超过了现有拨款和资助项目的能力范围。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-22T06:30:00+00:00",
+      "url": "https://www.vaildaily.com/news/vast-scale-of-wildfire-threats-to-colorado-watersheds-far-exceeds-funding"
+    },
+    {
+      "marker_id": "article_c48671f0c3997c4c_primary",
+      "article_id": "article_c48671f0c3997c4c",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "极端高温",
+      "title_zh": "今年夏天打破纪录的高温和干旱期间，太阳能支撑了欧洲电网",
+      "summary_zh": "今年夏天欧洲遭遇创纪录热浪与干旱，导致风力发电受阻，核电、燃气和煤电等热电厂因冷却水短缺被迫减产。相比之下，太阳能发电表现超常，结合电池储能满足了历史性高温下的空调电力需求，为欧洲气候适应能源系统提供了关键经验。",
       "source_name": "Grist",
-      "published_at": "2026-08-13T08:45:00+00:00",
-      "url": "https://grist.org/indigenous/texas-carrizo-comecrudo-juan-mancias-climate-indigenous-identity"
+      "published_at": "2026-08-21T08:45:00+00:00",
+      "url": "https://grist.org/energy/heat-waves-europe-grid-solar-energy"
+    },
+    {
+      "marker_id": "article_b0963637948b8ae5_primary",
+      "article_id": "article_b0963637948b8ae5",
+      "place": "地中海地区",
+      "lon": 18.0,
+      "lat": 36.0,
+      "theme": "海洋极端高温",
+      "title_zh": "研究发现气候变化导致欧洲海域七月极端高温",
+      "summary_zh": "世界天气归因组织的一项最新研究显示，2026 年 7 月欧洲沿岸海域记录到前所未有的海面温度，人类活动引起的气候变化是导致此次极端高温的主要原因。研究表明，在化石燃料燃烧驱动的全球变暖影响下，凯尔特海、比斯开湾及地中海等区域的海温较历史基准偏高 2.4 摄氏度，如果没有人为全球变暖，这种极端高温几乎不可能发生。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-08-20T08:31:30+00:00",
+      "url": "https://news.mongabay.com/short-article/2026/08/climate-change-drove-extreme-july-heat-in-european-seas-study-finds"
+    },
+    {
+      "marker_id": "article_d8b1c1bd0cc23bff_primary",
+      "article_id": "article_d8b1c1bd0cc23bff",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "野火风险",
+      "title_zh": "研究：气候变化可能使欧洲野火过火面积增加近三倍",
+      "summary_zh": "德国波茨坦气候影响研究所发布的一项研究显示，在高排放情景下，受持续的高温、干旱和风力天气驱动，到本世纪末气候变化可能使欧洲野火过火面积增加近三倍。低排放情景下过火面积预计增加约39%，高排放情景下则可能高达192%。研究人员指出，随着极端天气加剧，即使升温幅度相对较小，地中海及西欧和中欧地区也将面临更频繁的野火威胁，消防能力或将接近极限。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-20T18:00:00+00:00",
+      "url": "https://english.news.cn/20260821/dcf86a768eef453ba979405d0c50603c/c.html"
+    },
+    {
+      "marker_id": "article_449c3efc559e74e2_primary",
+      "article_id": "article_449c3efc559e74e2",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "清洁能源与电网建设",
+      "title_zh": "太阳能与储能依然在美国电站建设中占主导地位",
+      "summary_zh": "尽管2026年特朗普政府采取了逐步取消税收抵免、冻结清洁能源许可以及加征关税等措施，美国能源信息署的数据显示，今年上半年美国新增电网发电容量中仍有90%来自太阳能、储能或风能，其中太阳能和电池更是占到新增总容量的三分之二以上。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-21T07:30:00+00:00",
+      "url": "https://www.canarymedia.com/articles/clean-energy/solar-storage-dominate-us-power-construction"
+    },
+    {
+      "marker_id": "article_26c1001beb5bddd1_primary",
+      "article_id": "article_26c1001beb5bddd1",
+      "place": "非洲",
+      "lon": 22.0,
+      "lat": 2.0,
+      "theme": "能源转型模型",
+      "title_zh": "每个国家都需要一个模型来帮助优化其能源转型",
+      "summary_zh": "联合国非洲经济委员会执行秘书克拉韦尔·加泰特等专家撰文指出，仅靠国家自主贡献和国家平台无法确保建立安全且负担得起的低碳能源系统。当前全球缺乏将减排意图转化为具体投资的分析基础，为此，每个国家都需要为其能源系统建立一个可落地、全经济范围的优化模型，以明确未来能源系统的形态并计算投资需求与序列。",
+      "source_name": "Climate Home News",
+      "published_at": "2026-08-18T17:24:55+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/18/every-country-needs-a-model-to-help-optimise-its-energy-transition"
+    },
+    {
+      "marker_id": "article_ecd1ada323ba250b_primary",
+      "article_id": "article_ecd1ada323ba250b",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "极端天气",
+      "title_zh": "颠倒的世界：气候变化如何使极端天气成为全球常态",
+      "summary_zh": "全球各地正遭受极端天气的破坏，欧洲与亚洲遭遇热浪袭击，西班牙、加拿大和印尼发生野火，中国上海遭遇台风。印度阿萨姆邦遭遇严重季风洪灾，造成百余人死亡。世界天气归因组织分析显示，该地区降雨量符合近期趋势，人类管理不善也是导致洪灾严重的重要因素。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-22T04:45:00+00:00",
+      "url": "https://www.livemint.com/newsletters/climate-change-and-you/climate-change-assam-floods-heat-europe-wildifires-11787224390686.html"
+    },
+    {
+      "marker_id": "article_34c9e5767807480c_primary",
+      "article_id": "article_34c9e5767807480c",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "长时间储能",
+      "title_zh": "问答：什么是“长时间储能”——以及英国为什么需要它？",
+      "summary_zh": "英国正开创性地使用能够长时间储存能量的“超级电池”，以此平抑风能和太阳能发电的输出波动，推进净零排放目标。英国能源监管机构 Ofgem 已确定在新的“上限-下限机制”下支持 16 个长时间储能项目，采用抽水蓄能、大容量锂离子电池及压缩空气储能等技术，预计可在 2030 至 2050 年间为英国节省超过 240 亿英镑的能源系统成本。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-08-19T11:18:11+00:00",
+      "url": "https://www.carbonbrief.org/qa-what-is-long-duration-energy-storage-and-why-does-the-uk-need-it"
+    },
+    {
+      "marker_id": "article_a8ec3fb3e59a87fb_primary",
+      "article_id": "article_a8ec3fb3e59a87fb",
+      "place": "澳大利亚",
+      "lon": 134.0,
+      "lat": -25.0,
+      "theme": "生态保护与土著管理",
+      "title_zh": "在大堡礁，传统所有者的管理作用正在增强",
+      "summary_zh": "澳大利亚大堡礁的共同管理模式正在发生变化，传统所有者在保护这一世界自然遗产方面发挥着日益重要的作用。尽管气候持续对大堡礁健康构成威胁，但世界遗产委员会再次决定不将其列入“濒危”名单，并在决策中提及了传统所有者管理水平的提高。目前，传统使用和管理协议已覆盖大堡礁43%的海岸线，政府也宣布了新的资金和措施以进一步纳入土著管理。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-08-18T18:35:11+00:00",
+      "url": "https://news.mongabay.com/2026/08/on-the-great-barrier-reef-management-by-traditional-owners-is-growing"
+    },
+    {
+      "marker_id": "article_87dfbc6cd026cea5_primary",
+      "article_id": "article_87dfbc6cd026cea5",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "可再生能源预测",
+      "title_zh": "哈萨克斯坦将利用人工智能提升可再生能源发电预测能力",
+      "summary_zh": "哈萨克斯坦能源部宣布，将于 2026 年底前推出基于人工智能的系统，以预测可再生能源发电量。该系统由国有能源企业萨姆鲁克能源公司开发，旨在将预测准确率提升至 80%，减少经济损失并支持更高效的运营规划。哈萨克斯坦正持续扩大发电能力，预计 2026 年将新增约 2.6 吉瓦发电能力。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-20T13:45:00+00:00",
+      "url": "https://english.news.cn/asiapacific/20260820/b5560a17fe564de99a3d7b526b90e2b5/c.html"
+    },
+    {
+      "marker_id": "article_29a88a6f6de99772_primary",
+      "article_id": "article_29a88a6f6de99772",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "极端天气",
+      "title_zh": "随着强烈的厄尔尼诺现象发展，英国铁路正为更多极端天气做准备",
+      "summary_zh": "在近期热浪期间连续两天内发生两起列车脱轨事故后，专家指出英国必须采取更多措施适应不断变化的气候。随着厄尔尼诺现象的发展可能导致未来几年打破更多高温记录，英国铁路系统正面临严峻挑战，铁路运营商已采取减少列车班次和降低运行速度的应对措施。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-21T18:07:51+00:00",
+      "url": "https://www.theguardian.com/environment/2026/aug/21/britains-railway-prepares-for-more-extreme-weather-as-intense-el-nino-develops"
+    },
+    {
+      "marker_id": "article_e3947d8bfb8dd743_primary",
+      "article_id": "article_e3947d8bfb8dd743",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "建筑脱碳",
+      "title_zh": "美国公寓楼已倾向于使用热泵",
+      "summary_zh": "根据美国人口普查局的数据，2025年标志着全美新建公寓楼中有超过一半配备了热泵，这是该高效电气设备首次在全国新建住宅市场占据多数。燃烧化石燃料的建筑约占美国温室气体总排放量的十分之一，热泵的普及有助于减少建筑领域的碳排放，推动住宅供暖的脱碳进程。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-20T07:30:00+00:00",
+      "url": "https://www.canarymedia.com/articles/heat-pumps/most-new-apartment-buildings-have-heat-pumps"
+    },
+    {
+      "marker_id": "article_5f331a4e2f18cb7e_primary",
+      "article_id": "article_5f331a4e2f18cb7e",
+      "place": "尼日利亚",
+      "lon": 8.0,
+      "lat": 9.0,
+      "theme": "土地退化",
+      "title_zh": "访谈：联合国防治荒漠化公约、粮农组织、世界银行如何支持尼日利亚抗击干旱与土地退化",
+      "summary_zh": "尼日利亚环境部荒漠化、土地退化和干旱管理局局长埃蒂姆·威廉表示，荒漠化、土地退化和干旱是全球性威胁，导致生物多样性丧失、农业减产、粮食不安全及贫困，并加剧了农民与牧民之间的冲突。联合国防治荒漠化公约、粮农组织和世界银行等机构正通过支持土地修复和旱灾管理来协助尼日利亚应对这一危机。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-19T22:15:00+00:00",
+      "url": "https://www.premiumtimesng.com/business/business-news/904112-interview-how-unccd-fao-world-bank-back-nigerias-fight-against-drought-land-degradation-official.html"
+    },
+    {
+      "marker_id": "article_349ffcb23e952d50_primary",
+      "article_id": "article_349ffcb23e952d50",
+      "place": "印度尼西亚",
+      "lon": 118.0,
+      "lat": -2.0,
+      "theme": "关键矿产与电池供应链",
+      "title_zh": "中国让印尼的电池梦想浮存，但未来充满不确定性",
+      "summary_zh": "韩国企业撤资后，中国资本与技术通过“泰坦项目”接手印尼镍矿开发与电池制造，维持了印尼的电动汽车电池产业链规划，但也加剧了印尼在资金和技术上对中国的绝对依赖，且面临无镍电池兴起等长远不确定性。",
+      "source_name": "Climate Home News",
+      "published_at": "2026-08-20T05:00:00+00:00",
+      "url": "https://www.climatechangenews.com/2026/08/20/china-keeps-indonesias-battery-dream-afloat-but-future-less-certain"
+    },
+    {
+      "marker_id": "article_1d718d87ce78330d_primary",
+      "article_id": "article_1d718d87ce78330d",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "厄尔尼诺与极端天气",
+      "title_zh": "多风暴的秋季、寒冷的冬季：厄尔尼诺现象将如何影响英国天气？",
+      "summary_zh": "英国气象局指出，当前正在太平洋发展且规模空前的厄尔尼诺现象预计将成为有记忆以来最强的一次。受其引发的全球风型扰动影响，英国今年秋冬季节可能面临降雨增多、秋季多风暴以及引发洪涝灾害的风险。",
+      "source_name": "BBC Science & Environment",
+      "published_at": "2026-08-21T14:17:03+00:00",
+      "url": "https://www.bbc.co.uk/weather/articles/cd0x17r4j0yo?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "marker_id": "article_735fa6898745d36a_primary",
+      "article_id": "article_735fa6898745d36a",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "清洁能源就业",
+      "title_zh": "顶风前行：尽管特朗普发难，工会仍在为美国优质清洁能源工作岗位而战",
+      "summary_zh": "自 2012 年桑迪飓风以来，不断壮大的美国劳工运动开始应对气候危机与经济不平等。国际电气工会成员瑞安·麦克罗恩参与建设了纽约的大型海上风电项目。在气候目标与《通胀削减法案》推动下，劳工领袖致力于确保工人获得清洁能源领域的工会化职业。面对特朗普政府试图放缓能源转型并削弱海上风电的政策，工会表示将坚决回击。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-23T10:00:30+00:00",
+      "url": "https://www.theguardian.com/us-news/2026/aug/23/wind-energy-unions-trump"
+    },
+    {
+      "marker_id": "article_abf6c846b5d7f2ad_primary",
+      "article_id": "article_abf6c846b5d7f2ad",
+      "place": "韩国",
+      "lon": 128.0,
+      "lat": 36.0,
+      "theme": "极端高温",
+      "title_zh": "关于亚洲热浪及其健康影响需要了解的六件事",
+      "summary_zh": "受史上最强厄尔尼诺现象及人为气候变化共同影响，亚洲多地近期遭遇创纪录热浪。韩国、日本、中国及中国香港等地气温纷纷突破 40℃，韩国阳山更录得 42.5℃高温。专家警告，极端高温不仅导致中暑和死亡风险上升，还会加速登革热病毒传播媒介伊蚊的生命周期并缩短病毒复制时间。",
+      "source_name": "Mongabay Climate Change",
+      "published_at": "2026-08-21T10:09:11+00:00",
+      "url": "https://news.mongabay.com/2026/08/six-things-to-know-about-asias-heatwave-and-the-health-impacts"
+    },
+    {
+      "marker_id": "article_aee2d0b8d1c72d08_primary",
+      "article_id": "article_aee2d0b8d1c72d08",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "水力发电与干旱",
+      "title_zh": "美国的水力发电挑战远超美国西部",
+      "summary_zh": "美国严重依赖水力发电，但不断加剧的干旱正威胁其电力供应。由于降水稀少及春季气温偏高导致积雪迅速融化，科罗拉多河流域的米德湖和鲍威尔湖水位降至历史新低，发电能力锐减。同时，加拿大魁北克省也深陷多年干旱，导致输往美国东北部的清洁电力远低于预期，凸显气候变化对北美多地水电供应的严峻挑战。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-21T15:44:00+00:00",
+      "url": "https://www.canarymedia.com/articles/hydropower/hydropower-drought-west-lake-mead"
+    },
+    {
+      "marker_id": "article_fb0902ffdbd368a9_primary",
+      "article_id": "article_fb0902ffdbd368a9",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "极端天气",
+      "title_zh": "周末前降雨将停止，阳光重现",
+      "summary_zh": "英国近日由暴雨引发的山洪暴发将在周五有所缓解，周末各地将迎来阳光和回暖天气，但部分地区夜间气温仍然偏低。尽管本周出现降雨，但由于储水量未满，英格利亚和威尔士的干旱形势仍在持续，国家干旱小组已宣布将开会频率由每月一次改为每周一次。",
+      "source_name": "BBC Science & Environment",
+      "published_at": "2026-08-21T00:14:00+00:00",
+      "url": "https://www.bbc.co.uk/weather/articles/c2el98pkd3po?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "marker_id": "article_47143155f319c93f_primary",
+      "article_id": "article_47143155f319c93f",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "能源供应",
+      "title_zh": "中国设定到2030年实现4.4亿吨油气供应目标",
+      "summary_zh": "根据国家能源局发布的能源行业新五年规划，中国国内油气供应量预计到2030年将达到4.4亿吨油当量。规划由国家能源局和国家发展改革委联合印发，设定了到2030年新增2万公里长输油气管道、使总里程达到22万公里、天然气储备达到全国消费量13%以上，以及碳捕集与封存项目年二氧化碳注入量达到1000万吨的目标。中国2025年油气总产量创下4.2亿吨油当量的历史新高。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-17T20:15:00+00:00",
+      "url": "https://english.news.cn/20260818/5a0d38a16113490ca609d5442917fe6c/c.html"
+    },
+    {
+      "marker_id": "article_20ec660b8e66fe24_primary",
+      "article_id": "article_20ec660b8e66fe24",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "极端天气",
+      "title_zh": "气候变化如何影响龙卷风？",
+      "summary_zh": "美国伊利诺伊州今年上半年记录的龙卷风数量远超历史平均，密西西比州也曾在一夜之间遭遇多场龙卷风袭击。数据显示大平原以东地区的龙卷风频率正不断增加，且群发趋势更加明显。然而，科学家表示，全球变暖对风力条件及龙卷风形成机制的具体影响仍然存在不确定性。",
+      "source_name": "Yale Climate Connections",
+      "published_at": "2026-08-21T10:59:00+00:00",
+      "url": "https://yaleclimateconnections.org/2026/08/how-does-climate-change-affect-tornadoes"
+    },
+    {
+      "marker_id": "article_d8069d349ccd0cf4_primary",
+      "article_id": "article_d8069d349ccd0cf4",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "野火风险",
+      "title_zh": "研究发现：即便在最佳气候情景下，若不采取行动，欧洲野火也将增加39%",
+      "summary_zh": "一项研究发现，到本世纪末，即便在阻止地球变暖的最佳情景下，欧洲野火焚烧面积仍将增加39%。如果全球升温达到工业化前水平的3.6度这一最坏情景，过火面积将几乎翻倍。研究同时显示，改善消防管理能够将火灾增加幅度缓解70%以上，但无法完全消除影响。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-20T09:01:47+00:00",
+      "url": "https://www.theguardian.com/world/2026/aug/20/wildfires-europe-increase-climate-scenario-study"
+    },
+    {
+      "marker_id": "article_ee04396601777ef5_primary",
+      "article_id": "article_ee04396601777ef5",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "水资源危机",
+      "title_zh": "分析：美国最大的两个水库水位降至历史新低",
+      "summary_zh": "美国第二大水库于周六创下历史最低水位，几天前该国最大的水库也打破了自身的纪录。米德湖和鲍威尔湖均位于科罗拉多河上，为美国西南部七个州的约 4000 万人口以及约 55 万英亩农田提供城市用水。专家指出，气候变化、人口增长和过度消耗是导致水位降至历史新低的主要原因。",
+      "source_name": "Carbon Brief",
+      "published_at": "2026-08-17T16:08:27+00:00",
+      "url": "https://www.carbonbrief.org/analysis-the-two-largest-reservoirs-in-the-us-have-hit-record-low-levels"
+    },
+    {
+      "marker_id": "article_dced2f91f806163e_primary",
+      "article_id": "article_dced2f91f806163e",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "绿色港口",
+      "title_zh": "河北秦皇岛：新能源机车助力港口运输绿色转型",
+      "summary_zh": "河北港口集团秦皇岛港股份有限公司持续推进铁路运力绿色转型，通过引入采用磷酸铁锂动力电池组的新能源机车开展货物运输作业，实现了生态保护与降低运营成本的双赢。数据显示，该港每台新能源机车每年可减少二氧化碳排放超330吨，节约综合费用超240万元。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-20T04:30:00+00:00",
+      "url": "https://www.news.cn/photo/20260820/7687e57e59eb470ebab81c3dcb5ebf24/c.html"
+    },
+    {
+      "marker_id": "article_28c34ac56dd3a211_primary",
+      "article_id": "article_28c34ac56dd3a211",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "极端天气与水资源管理",
+      "title_zh": "雷暴预警虽已到期，但降雨继续给英国带来洪水风险",
+      "summary_zh": "英国强降雨和雷暴天气持续蔓延，气象局发布黄色预警并提醒防范道路积水与交通受阻。尽管长期干旱后迎来了降雨，但英国国家干旱小组表示，由于干旱仍在加剧，将把会议频率从每月一次调整为每周一次，并指出需要持续降雨才能恢复水资源储备。",
+      "source_name": "BBC Science & Environment",
+      "published_at": "2026-08-20T15:02:16+00:00",
+      "url": "https://www.bbc.co.uk/weather/articles/cevm32j9pp3o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "marker_id": "article_8574d8a022c4cc3c_primary",
+      "article_id": "article_8574d8a022c4cc3c",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "气候资金",
+      "title_zh": "特朗普被勒令释放原本面向黑人社区的数十亿美元气候补助金",
+      "summary_zh": "在联邦法院作出裁决后，美国环保署被勒令恢复分发总计超过22亿美元、原本旨在帮助黑人及低收入等弱势社区应对气候与环境挑战的专项资金。此前，相关行政当局曾试图终止或撤回《通胀削减法案》授权的气候投资项目。",
+      "source_name": "Grist",
+      "published_at": "2026-08-23T13:00:00+00:00",
+      "url": "https://grist.org/energy/trump-ordered-to-release-billions-in-climate-grants-meant-for-black-communities"
+    },
+    {
+      "marker_id": "article_ddb9cc8f6bb46950_primary",
+      "article_id": "article_ddb9cc8f6bb46950",
+      "place": "韩国",
+      "lon": 128.0,
+      "lat": 36.0,
+      "theme": "电池制造",
+      "title_zh": "LG 在密歇根州开设美国最大的电池单体工厂之一",
+      "summary_zh": "韩国 LG 新能源在密歇根州兰辛开设了一座大型电池制造厂，投资超 20 亿美元，全面投产后预计每年可生产超过 35 吉瓦时的电池单体。该厂除原计划的电动汽车电池外，还调整部分产能用于生产电网储能系统，内政部长道格·伯格姆出席了开幕仪式并对该项目的能源安全意义表示肯定。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-19T21:00:00+00:00",
+      "url": "https://www.canarymedia.com/articles/batteries/michigan-lg-biggest-battery-cell-factory"
+    },
+    {
+      "marker_id": "article_e3820617516832dc_primary",
+      "article_id": "article_e3820617516832dc",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "干旱与文化遗产",
+      "title_zh": "威尔士干旱将田野炙烤成焦褐色并宛如 X 光透视，显露出无人记录的五千年墓冢、罗马堡垒和一战战壕",
+      "summary_zh": "由于威尔士遭遇严重干旱且降水量极少，航拍图像显露出地面下隐藏数十年至数百年的历史遗迹。这些因土壤水分差异形成的作物标记勾勒出了约五千年前的新石器时代长墓、卡尔亨的罗马建筑遗迹、德甘维高尔夫球场下方的一战练习战壕，以及一处未曾记录的铁器时代或罗马-英国时期农庄。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-17T22:00:00+00:00",
+      "url": "https://www.ecoticias.com/en/the-drought-burned-welsh-fields-brown-and-turned-them-into-an-x-ray-showing-a-5000-year-old-burial-mound-a-roman-fort-and-first-world-war-trenches-that-no-one-had-recorded/35746"
+    },
+    {
+      "marker_id": "article_fab9f5f92aeb6041_primary",
+      "article_id": "article_fab9f5f92aeb6041",
+      "place": "欧洲",
+      "lon": 10.0,
+      "lat": 51.0,
+      "theme": "极端干旱与农业危机",
+      "title_zh": "欧洲农户在遭遇连续热浪后面临“前所未有的危机”",
+      "summary_zh": "由于全欧洲范围内的严重干旱和连续热浪，蔬菜和谷物种植者警告称收成将遭遇“灾难性”打击。法国的蔬菜产量较往年大幅下降，其中西葫芦减产 25%，生菜减产 35%，豌豆减产 40%，西蓝花减产 60%，朝鲜蓟减产 50% 至 100%。玉米和小麦等谷物产量同样受到严重影响，同时畜牧业也因气温过高和冬季牧草短缺而面临牛奶产量下降及家禽死亡率上升的问题。",
+      "source_name": "The Guardian Climate Crisis",
+      "published_at": "2026-08-17T16:01:47+00:00",
+      "url": "https://www.theguardian.com/environment/2026/aug/17/european-farmers-unprecedented-crisis-successive-heatwaves"
+    },
+    {
+      "marker_id": "article_a8cf780e447c63ae_primary",
+      "article_id": "article_a8cf780e447c63ae",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "碳排放计量",
+      "title_zh": "新版指导目录印发 碳排放计量工具箱更新升级",
+      "summary_zh": "市场监管总局、国家发展改革委、生态环境部联合印发《碳排放计量能力建设指导目录（2026版）》，进一步健全全国碳排放计量技术体系。新版目录聚焦钢铁、水泥等传统行业短板，前瞻布局新能源汽车充电设施、温室气体自愿减排项目以及碳捕集利用与封存（CCUS）等前沿领域，通过扩大技术覆盖范围与增加测量仪器设备，为企业碳排放和产品碳足迹精细化核算提供权威技术遵循。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-20T04:30:00+00:00",
+      "url": "https://www.news.cn/tech/20260820/b4162183dda14f47b1feffe5b7c122c0/c.html"
+    },
+    {
+      "marker_id": "article_9951b124cfdb35c5_primary",
+      "article_id": "article_9951b124cfdb35c5",
+      "place": "美国科罗拉多州",
+      "lon": -105.5,
+      "lat": 39.0,
+      "theme": "水资源管理",
+      "title_zh": "科罗拉多州西部斜坡水利区如何适应干旱危机并前瞻构建长期韧性",
+      "summary_zh": "面对历史最低水平的积雪层和极端干旱，科罗拉多州上扬帕水利区组织当地利益相关者和媒体实地考察扬帕河流域。低流量和高温导致河流水资源危机严重影响农业、旅游业和水上娱乐经济，促使当地各方积极寻求适应极端气候与建设长期水资源韧性的管理方法。",
+      "source_name": "GDELT 2.0 DOC API",
+      "published_at": "2026-08-22T02:00:00+00:00",
+      "url": "https://www.vaildaily.com/news/western-slope-colorado-water-district-drought"
+    },
+    {
+      "marker_id": "article_baaac305cf5c93c8_primary",
+      "article_id": "article_baaac305cf5c93c8",
+      "place": "英国",
+      "lon": -2.0,
+      "lat": 54.0,
+      "theme": "极端天气",
+      "title_zh": "暴雨袭击英国引发突发洪水风险",
+      "summary_zh": "强降雨和雷暴天气持续袭击英国大部分地区，气象条件导致多地面临突发洪水的风险。相关气象灾害对部分区域的基础设施和日常出行构成了威胁。",
+      "source_name": "BBC Science & Environment",
+      "published_at": "2026-08-20T14:54:55+00:00",
+      "url": "https://www.bbc.co.uk/news/videos/c2lq4lwy0z0o?at_medium=RSS&at_campaign=rss"
+    },
+    {
+      "marker_id": "article_e3dcab298722d229_primary",
+      "article_id": "article_e3dcab298722d229",
+      "place": "美国佛罗里达州",
+      "lon": -81.5,
+      "lat": 28.0,
+      "theme": "气候教育",
+      "title_zh": "佛罗里达州如何悄然从教科书中删减气候变化内容",
+      "summary_zh": "一项调查显示，在佛罗里达州教育官员的要求下，出版商删减或淡化了高中科学教科书中关于气候危机的影响、温室气体危害以及可再生能源的内容。这些修改并非为符合州科学标准所必需，目前该州正在悄然更新自2008年以来的科学教育标准。",
+      "source_name": "Grist",
+      "published_at": "2026-08-20T08:30:00+00:00",
+      "url": "https://grist.org/politics/how-florida-quietly-removed-climate-change-content-from-textbooks"
+    },
+    {
+      "marker_id": "article_b0b95e1b6cbb9d77_primary",
+      "article_id": "article_b0b95e1b6cbb9d77",
+      "place": "美国",
+      "lon": -100.0,
+      "lat": 39.0,
+      "theme": "地热能商业化",
+      "title_zh": "萨奇地热公司投运首座新一代地热发电厂",
+      "summary_zh": "初创企业萨奇地热公司在得克萨斯州圣安东尼奥附近投运了其首座新一代地热发电厂。这座 3 兆瓦的中试电厂已成功并网运行超过 120 天，成为美国同类项目中投入商业化运行的第三个系统。",
+      "source_name": "Canary Media",
+      "published_at": "2026-08-19T11:00:00+00:00",
+      "url": "https://www.canarymedia.com/articles/geothermal/sage-geosystems-next-gen-geothermal-online"
+    },
+    {
+      "marker_id": "article_5f2e111aa0f6b905_primary",
+      "article_id": "article_5f2e111aa0f6b905",
+      "place": "中国",
+      "lon": 105.0,
+      "lat": 35.0,
+      "theme": "零碳工厂与算力设施",
+      "title_zh": "如何培育国家级零碳工厂和零碳算力设施",
+      "summary_zh": "中国工业和信息化部印发通知，全面推进国家级零碳工厂及零碳算力设施建设，标志着该项工作从顶层设计进入实施阶段。通知设置了单位能耗碳排放、非化石能源消费占比、非化石能源电力消费物理认定量占比三项核心指标，并通过科学算碳、源头减碳、过程脱碳、协同降碳和智能控碳等路径，培育绿色低碳新质生产力。",
+      "source_name": "中国官方气候来源（GDELT定向发现）",
+      "published_at": "2026-08-19T03:00:00+00:00",
+      "url": "https://www.news.cn/tech/20260819/bc3bab40449e4bb9beb305aae7992c9c/c.html"
     }
   ],
   "phrases": [
     {
-      "text": "全球碳治理议题受到关注",
-      "theme": "碳治理",
+      "text": "霍巴特市启动气候就绪宣传活动",
+      "theme": "城市气候适应",
       "weight": 10
     },
     {
-      "text": "全球净零与减排措施受到关注",
-      "theme": "减排",
+      "text": "气候变化双重影响考古研究",
+      "theme": "气候变化影响",
       "weight": 9
     },
     {
-      "text": "全球气候变化议题受到关注",
-      "theme": "气候变化",
+      "text": "美林业局陷严重人手短缺",
+      "theme": "气候危机与消防人力资源",
       "weight": 8
     },
     {
-      "text": "全球气候变化议题受到关注",
-      "theme": "气候变化",
+      "text": "威尔士野火致碳排激增",
+      "theme": "极端野火与碳排放",
       "weight": 7
     },
     {
-      "text": "全球野火风险议题受到关注",
-      "theme": "野火风险",
+      "text": "清洁钢铁补贴转向煤炭",
+      "theme": "气候资金",
       "weight": 6
     },
     {
-      "text": "全球电网压力推高可再生能源韧",
-      "theme": "可再生能源",
+      "text": "拟建伦敦数据中心碳排惊人",
+      "theme": "数据中心碳排放",
       "weight": 5
     },
     {
-      "text": "全球净零与减排措施受到关注",
-      "theme": "减排",
+      "text": "保守党廉价电力报告漏洞百出",
+      "theme": "气候政策与脱碳",
       "weight": 4
     },
     {
-      "text": "南非气候变化议题受到关注",
-      "theme": "气候变化",
+      "text": "多国寻求COP31海洋保护路线图",
+      "theme": "海洋保护与气候峰会",
       "weight": 3
     }
   ],
   "events": [],
   "topics": [
     {
-      "name": "气候适应",
-      "weight": 5
-    },
-    {
       "name": "能源与排放",
       "weight": 4
     },
     {
-      "name": "国家气候承诺",
+      "name": "气候动态",
+      "weight": 3
+    },
+    {
+      "name": "气候适应",
+      "weight": 2
+    },
+    {
+      "name": "国际气候谈判",
       "weight": 1
     },
     {
-      "name": "气候动态",
+      "name": "气候资金",
       "weight": 1
     }
   ],
@@ -1378,121 +1786,121 @@
   "source_health": [
     {
       "source_id": "API001",
-      "status": "failed",
-      "finished_at": "2026-08-15T23:47:46.060525+00:00",
-      "items_seen": 0,
-      "error_message": "resource fetch failed after 3 attempts: HTTP Error 429: Too Many Requests"
+      "status": "success",
+      "finished_at": "2026-08-24T00:45:07.064018+00:00",
+      "items_seen": 25,
+      "error_message": null
     },
     {
       "source_id": "API004",
-      "status": "failed",
-      "finished_at": "2026-08-15T23:48:05.983526+00:00",
-      "items_seen": 0,
-      "error_message": "resource fetch failed after 3 attempts: HTTP Error 503: Service Unavailable"
+      "status": "success",
+      "finished_at": "2026-08-24T00:45:07.480806+00:00",
+      "items_seen": 2,
+      "error_message": null
     },
     {
       "source_id": "API005",
       "status": "failed",
-      "finished_at": "2026-08-15T23:47:07.515274+00:00",
+      "finished_at": "2026-08-24T00:44:51.387352+00:00",
       "items_seen": 0,
       "error_message": "resource fetch failed after 3 attempts: HTTP Error 429: Too Many Requests"
     },
     {
       "source_id": "INT001",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:25.045424+00:00",
+      "finished_at": "2026-08-24T00:44:10.767644+00:00",
       "items_seen": 12,
       "error_message": null
     },
     {
       "source_id": "INT002",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:26.573819+00:00",
+      "finished_at": "2026-08-24T00:44:12.437559+00:00",
       "items_seen": 40,
       "error_message": null
     },
     {
       "source_id": "INT007",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:28.071330+00:00",
+      "finished_at": "2026-08-24T00:44:12.687943+00:00",
       "items_seen": 32,
       "error_message": null
     },
     {
       "source_id": "INT008",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:28.099040+00:00",
+      "finished_at": "2026-08-24T00:44:12.872474+00:00",
       "items_seen": 10,
       "error_message": null
     },
     {
       "source_id": "INT009",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:28.150856+00:00",
+      "finished_at": "2026-08-24T00:44:12.922233+00:00",
       "items_seen": 10,
       "error_message": null
     },
     {
       "source_id": "INT010",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:28.228183+00:00",
+      "finished_at": "2026-08-24T00:44:13.065943+00:00",
       "items_seen": 100,
       "error_message": null
     },
     {
       "source_id": "INT013",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:28.443156+00:00",
+      "finished_at": "2026-08-24T00:44:13.210106+00:00",
       "items_seen": 13,
       "error_message": null
     },
     {
       "source_id": "INT014",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:28.882957+00:00",
-      "items_seen": 39,
+      "finished_at": "2026-08-24T00:44:13.439047+00:00",
+      "items_seen": 36,
       "error_message": null
     },
     {
       "source_id": "INT019",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:29.051136+00:00",
+      "finished_at": "2026-08-24T00:44:13.545085+00:00",
       "items_seen": 32,
       "error_message": null
     },
     {
       "source_id": "INT020",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:29.106241+00:00",
+      "finished_at": "2026-08-24T00:44:13.591940+00:00",
       "items_seen": 20,
       "error_message": null
     },
     {
       "source_id": "OFF001",
       "status": "failed",
-      "finished_at": "2026-08-09T23:59:31.802635+00:00",
+      "finished_at": "2026-08-24T00:44:13.629426+00:00",
       "items_seen": 0,
       "error_message": "not well-formed (invalid token): line 1, column 0"
     },
     {
       "source_id": "OFF006",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:29.513662+00:00",
-      "items_seen": 9,
+      "finished_at": "2026-08-24T00:44:14.275496+00:00",
+      "items_seen": 6,
       "error_message": null
     },
     {
       "source_id": "OFF013",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:30.208914+00:00",
+      "finished_at": "2026-08-24T00:44:14.496492+00:00",
       "items_seen": 10,
       "error_message": null
     },
     {
       "source_id": "OFF014",
       "status": "success",
-      "finished_at": "2026-08-15T23:46:30.260714+00:00",
-      "items_seen": 2,
+      "finished_at": "2026-08-24T00:44:14.539197+00:00",
+      "items_seen": 1,
       "error_message": null
     }
   ],
@@ -1887,17 +2295,18 @@
   ],
   "archive": {
     "dataset_name": "ClimateText-100000",
-    "updated_at": "2026-08-16T01:07:54.978012+00:00",
-    "total": 299,
+    "updated_at": "2026-08-24T02:08:57.625075+00:00",
+    "total": 477,
     "limit": 100000,
     "statistics": {
-      "previous_total": 287,
-      "added": 12,
-      "updated": 0,
-      "rejected": 1,
+      "previous_total": 487,
+      "added": 0,
+      "updated": 6,
+      "rejected": 72,
       "pruned": 0,
-      "tier_a": 32,
-      "tier_b": 203
+      "duplicates_collapsed": 15,
+      "tier_a": 40,
+      "tier_b": 283
     }
   }
 }

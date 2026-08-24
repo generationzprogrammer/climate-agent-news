@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SEED = ROOT / "config" / "energy_reports.seed.json"
 DEFAULT_BULK = ROOT / "config" / "energy_reports.bulk.json"
 DEFAULT_SOURCES = ROOT / "config" / "energy_report_sources.json"
+DEFAULT_DATABASES = ROOT / "config" / "energy_databases.seed.json"
 WORLD_BANK_API = "https://search.worldbank.org/api/v3/wds"
 REPORT_TERMS = (
     "report", "outlook", "review", "statistics", "assessment", "white paper", "roadmap",
@@ -154,6 +155,29 @@ def _merge_records(*groups: list[dict]) -> list[dict]:
     return sorted(merged.values(), key=lambda row: (row["year"], row["published_at"], row["title_zh"]), reverse=True)
 
 
+def _normalise_database_catalogue(payload: dict) -> list[dict]:
+    databases = []
+    for item in payload.get("databases") or []:
+        url = str(item.get("database_url") or "").strip()
+        name_zh = to_simplified(item.get("name_zh"))
+        if not url.startswith("https://") or not is_readable_chinese_title(name_zh):
+            continue
+        databases.append({
+            "database_id": str(item.get("database_id") or "energy_db_" + hashlib.sha1(url.encode("utf-8")).hexdigest()[:12]),
+            "record_type": "能源数据库",
+            "domain": to_simplified(item.get("domain") or "能源综合"),
+            "name_zh": name_zh,
+            "name_original": str(item.get("name_original") or "").strip(),
+            "database_url": url,
+            "maintainer": to_simplified(item.get("maintainer") or "未标注机构"),
+            "core_data": to_simplified(item.get("core_data") or ""),
+            "primary_use": to_simplified(item.get("primary_use") or ""),
+            "coverage": to_simplified(item.get("coverage") or ""),
+            "update_note": to_simplified(item.get("update_note") or ""),
+        })
+    return sorted(databases, key=lambda row: (row["domain"], row["name_zh"]))
+
+
 def _archive_candidates(energy_archive: dict) -> list[dict]:
     candidates = []
     for item in energy_archive.get("records") or []:
@@ -192,10 +216,12 @@ def build_energy_report_database(
     persistent_path: Path,
     seed_path: Path = DEFAULT_SEED,
     bulk_path: Path = DEFAULT_BULK,
+    databases_path: Path = DEFAULT_DATABASES,
 ) -> dict:
     seed = _load_json(seed_path, {"reports": []})
     bulk = _load_json(bulk_path, {"reports": []})
     existing = _load_json(persistent_path, {"reports": []})
+    database_catalogue = _normalise_database_catalogue(_load_json(databases_path, {"databases": []}))
     seed_titles = {str(row.get("title_original") or "").strip().lower() for row in seed.get("reports") or []}
     retained_existing = [
         row for row in (existing.get("reports") or [])
@@ -220,19 +246,21 @@ def build_energy_report_database(
     countries = sorted({row["country_or_region"] for row in reports})
     publishers = sorted({row["publisher"] for row in reports})
     years = sorted({row["year"] for row in reports}, reverse=True)
+    domains = sorted({row["domain"] for row in database_catalogue})
     return {
         "schema_version": "1.0",
         "meta": {
             "updated_at": datetime.now(UTC).isoformat(),
-            "scope_note_zh": "近三年能源技术、产业与转型报告数据库，覆盖政府、国际组织、研究机构、行业智库和专业协会；每日扫描可追溯发布源并增量入库。",
+            "scope_note_zh": "近三年能源技术、产业与转型报告，以及可直接支撑能源研究和产业分析的国际数据库；报告每日增量更新，数据库按来源复核更新。",
             "selection_note_zh": "基础目录与编辑精选分层管理；报告数量反映当前收录范围，不代表各国发布强度，条目均保留原文或正式发布信息入口。",
         },
         "statistics": {
-            "reports": len(reports), "countries_or_regions": len(countries), "publishers": len(publishers), "years": years,
+            "reports": len(reports), "databases": len(database_catalogue), "countries_or_regions": len(countries), "publishers": len(publishers), "years": years,
             "with_abstract": sum(bool(row.get("abstract_original") or row.get("summary_zh")) for row in reports),
         },
-        "filters": {"countries_or_regions": countries, "publishers": publishers, "years": years},
+        "filters": {"countries_or_regions": countries, "publishers": publishers, "years": years, "database_domains": domains},
         "reports": reports,
+        "databases": database_catalogue,
     }
 
 

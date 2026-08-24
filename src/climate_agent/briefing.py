@@ -253,55 +253,26 @@ def select_daily_window(
 ) -> list[dict]:
     """Select the freshest publication-ready Beijing window.
 
-    Early-morning crawls can contain only a few wire-service duplicates from the
-    new calendar day. Publishing those records alone makes the map empty and
-    replaces a complete edition with a partial one. The public edition therefore
-    prefers a complete single day, but when the latest day has several genuine
-    sources it is allowed to lead the edition and borrow high-quality records
-    from the recent archive to keep the briefing useful and visibly current.
+    The newest available Beijing publication day always leads the public queue.
+    When that day contains fewer than the target number of distinct stories, the
+    remaining positions are filled from the preceding six days. This prevents a
+    complete older edition from hiding genuinely newer records while retaining a
+    useful briefing size during low-volume mornings.
     """
     dated = [(item, _published_day(item.get("published_at"))) for item in items]
     latest = max((day for _, day in dated if day), default=None)
     if not latest:
         return []
     first_day = latest - timedelta(days=max(0, lookback_days - 1))
-    candidates: list[tuple[date, list[dict], int, int]] = []
     recent_items = [item for item, day in dated if day and first_day <= day <= latest]
-    for publication_day in sorted(
-        {day for _, day in dated if day and first_day <= day <= latest},
-        reverse=True,
-    ):
-        day_items = _deduplicate_items([item for item, day in dated if day == publication_day])
-        selected = balanced_select(day_items, limit)
-        source_total = len({_source_key(item) for item in selected})
-        mapped_total = sum(bool(item.get("places")) for item in selected)
-        candidates.append((publication_day, selected, source_total, mapped_total))
-        if len(selected) >= min_items and source_total >= min_sources and mapped_total:
-            return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
-        if publication_day == latest and len(selected) >= min_items and mapped_total:
-            return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
-        if (
-            publication_day == latest
-            and len(selected) >= min_fresh_items
-            and source_total >= min_fresh_sources
-            and mapped_total
-        ):
-            fillers = balanced_select(
-                [item for item in recent_items if _published_day(item.get("published_at")) != latest],
-                max(0, limit - len(selected)),
-                already_selected=selected,
-            )
-            blended = selected + fillers
-            if len(blended) >= min_items and len({_source_key(item) for item in blended}) >= min_sources:
-                return sorted(blended, key=lambda item: item.get("published_at") or "", reverse=True)
-
-    if not candidates:
-        return []
-    _, selected, _, _ = max(
-        candidates,
-        key=lambda row: (min(len(row[1]), limit), row[2], row[3], row[0]),
+    latest_items = _deduplicate_items([item for item, day in dated if day == latest])
+    selected = balanced_select(latest_items, limit)
+    fillers = balanced_select(
+        [item for item in recent_items if _published_day(item.get("published_at")) != latest],
+        max(0, limit - len(selected)),
+        already_selected=selected,
     )
-    return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
+    return sorted(selected + fillers, key=lambda item: item.get("published_at") or "", reverse=True)
 
 
 def count_backfilled_items(items: list[dict]) -> int:

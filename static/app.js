@@ -75,6 +75,30 @@ function toast(message) {
   setTimeout(() => element.classList.remove("show"), 3200);
 }
 
+function closeMobileMenu() {
+  const menu = $("mobileMenu");
+  const toggle = $("mobileMenuToggle");
+  if (!menu || !toggle) return;
+  menu.hidden = true;
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.textContent = "菜单";
+}
+
+function setupMobileMenu() {
+  const menu = $("mobileMenu");
+  const toggle = $("mobileMenuToggle");
+  if (!menu || !toggle) return;
+  toggle.addEventListener("click", () => {
+    const opening = menu.hidden;
+    menu.hidden = !opening;
+    toggle.setAttribute("aria-expanded", String(opening));
+    toggle.textContent = opening ? "关闭" : "菜单";
+  });
+  menu.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMobileMenu));
+  document.addEventListener("keydown", event => { if (event.key === "Escape") closeMobileMenu(); });
+  window.addEventListener("resize", () => { if (window.innerWidth > 1100) closeMobileMenu(); });
+}
+
 async function fetchJson(url) {
   const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) throw new Error(`${response.status} ${url}`);
@@ -135,8 +159,7 @@ const MODE_COPY = {
 function applyModeCopy() {
   const copy = MODE_COPY[state.mode] || MODE_COPY.climate;
   document.body.dataset.mode = state.mode;
-  const modeToggle = $("modeToggle");
-  if (modeToggle) modeToggle.textContent = copy.button;
+  [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => { button.textContent = copy.button; });
   ["mapOverline", "mapTitle", "heroOverline", "heroLede", "datasetName", "datasetTitle",
     "todayOverline", "todayTitle", "analyticsTitle", "assistantOverline", "assistantTitle",
     "databaseOverline", "databaseTitle"].forEach(id => {
@@ -149,6 +172,8 @@ function applyModeCopy() {
   if ($("companyNav")) $("companyNav").hidden = !energyMode;
   if ($("energyReports")) $("energyReports").hidden = !energyMode;
   if ($("reportNav")) $("reportNav").hidden = !energyMode;
+  if ($("mobileCompanyNav")) $("mobileCompanyNav").hidden = !energyMode;
+  if ($("mobileReportNav")) $("mobileReportNav").hidden = !energyMode;
   document.querySelectorAll(".quick-prompts button").forEach((button, index) => {
     const prompt = copy.quickPrompts?.[index];
     if (!prompt) return;
@@ -700,7 +725,7 @@ function setupEnergyReports() {
     + (filters.countries_or_regions || []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
   $("energyReportYear").innerHTML = '<option value="">全部年份</option>'
     + (filters.years || []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
-  ["energyReportSearch", "energyReportCountry", "energyReportYear"].forEach(id => {
+  ["energyReportSearch", "energyResourceType", "energyReportCountry", "energyReportYear"].forEach(id => {
     $(id)?.addEventListener(id === "energyReportSearch" ? "input" : "change", () => {
       state.reportVisible = 12;
       applyEnergyReportFilters();
@@ -719,7 +744,7 @@ function renderEnergyReports() {
   $("energyReportScope").textContent = data.meta?.scope_note_zh || "近三年官方能源报告数据库。";
   $("energyReportKpis").innerHTML = [
     ["报告记录", stats.reports || 0],
-    ["国家或组织", stats.countries_or_regions || 0],
+    ["能源数据库", stats.databases || 0],
     ["发布机构", stats.publishers || 0],
     ["含摘要信息", stats.with_abstract || 0],
   ].map(([label, value]) => `<article><span>${esc(label)}</span><b>${esc(value)}</b></article>`).join("");
@@ -730,14 +755,19 @@ function renderEnergyReports() {
 function applyEnergyReportFilters() {
   if (!state.reportData) return;
   const query = $("energyReportSearch")?.value.trim().toLowerCase() || "";
+  const resourceType = $("energyResourceType")?.value || "";
   const country = $("energyReportCountry")?.value || "";
   const year = $("energyReportYear")?.value || "";
-  state.reportFiltered = (state.reportData.reports || []).filter(report => {
+  const reports = (state.reportData.reports || []).map(report => ({ ...report, record_type: "能源报告" }));
+  const databases = (state.reportData.databases || []).map(database => ({ ...database, record_type: "能源数据库" }));
+  state.reportFiltered = [...reports, ...databases].filter(report => {
     const haystack = [report.title_zh, report.title_original, report.summary_zh, report.abstract_original, report.publisher,
-      report.country_or_region, ...(report.topics || [])].join(" ").toLowerCase();
+      report.country_or_region, report.name_zh, report.name_original, report.maintainer, report.domain, report.core_data,
+      report.primary_use, report.coverage, report.update_note, ...(report.topics || [])].join(" ").toLowerCase();
     return (!query || haystack.includes(query))
-      && (!country || report.country_or_region === country)
-      && (!year || String(report.year) === year);
+      && (!resourceType || report.record_type === resourceType)
+      && (!country || (report.record_type === "能源报告" && report.country_or_region === country))
+      && (!year || (report.record_type === "能源报告" && String(report.year) === year));
   });
   renderEnergyReportCards();
 }
@@ -745,14 +775,21 @@ function applyEnergyReportFilters() {
 function renderEnergyReportCards() {
   const shown = state.reportFiltered.slice(0, state.reportVisible);
   $("energyReportResultCount").textContent = state.reportFiltered.length;
-  $("energyReportList").innerHTML = shown.length ? shown.map(report => `<article class="report-card">
+  $("energyReportList").innerHTML = shown.length ? shown.map(report => report.record_type === "能源数据库" ? `<article class="report-card database-card">
+    <div class="report-card-meta"><span>${esc(report.domain)}</span><b>能源数据库</b></div>
+    <h3><a href="${esc(safeUrl(report.database_url))}" target="_blank" rel="noopener noreferrer">${esc(report.name_zh)} →</a></h3>
+    <p class="report-title-original">${esc(report.name_original)}</p>
+    <p class="report-summary">${esc(report.core_data)}</p>
+    <div class="report-tags"><i>${esc(report.primary_use)}</i><i>${esc(report.update_note)}</i></div>
+    <footer><span>${esc(report.maintainer)}</span><small>${esc(report.coverage)}</small></footer>
+  </article>` : `<article class="report-card">
     <div class="report-card-meta"><span>${esc(report.country_or_region)}</span><b>${esc(report.year)}</b></div>
     <h3><a href="${esc(safeUrl(report.report_url))}" target="_blank" rel="noopener noreferrer">${esc(report.title_zh)} ↗</a></h3>
     <p class="report-title-original">${esc(report.title_original)}</p>
     ${substantiveSummary(report.summary_zh) ? `<p class="report-summary">${esc(report.summary_zh)}</p>` : ""}
     <div class="report-tags">${(report.topics || []).map(topic => `<i>${esc(topic)}</i>`).join("")}</div>
     <footer><span>${esc(report.publisher)}</span><small>${esc(report.language)} · ${esc(formatDate(report.published_at))}${report.access_note_zh ? ` · ${esc(report.access_note_zh)}` : ""}</small></footer>
-  </article>`).join("") : '<div class="empty compact"><b>没有匹配报告</b><p>请减少筛选条件或更换检索词。</p></div>';
+  </article>`).join("") : '<div class="empty compact"><b>没有匹配资源</b><p>请减少筛选条件或更换检索词。</p></div>';
   $("energyReportLoadMore").hidden = state.reportVisible >= state.reportFiltered.length;
 }
 
@@ -1015,13 +1052,17 @@ function renderAnalytics() {
 }
 
 function setupSubscribe() {
-  const open = $("subscribeOpen");
+  const openButtons = [...document.querySelectorAll("#subscribeOpen, [data-open-subscribe]")];
   const modal = $("subscribeModal");
   const form = $("subscribeForm");
   const close = $("subscribeClose");
   const unsubscribe = $("unsubscribeSubmit");
-  if (!open || !modal || !form) return;
-  open.addEventListener("click", () => modal.showModal());
+  if (!openButtons.length || !modal || !form) return;
+  openButtons.forEach(button => button.addEventListener("click", () => {
+    closeMobileMenu();
+    modal.showModal();
+    setTimeout(() => $("subscribeEmail")?.focus(), 0);
+  }));
   close?.addEventListener("click", () => modal.close());
   modal.addEventListener("click", event => {
     if (event.target === modal) modal.close();
@@ -1083,11 +1124,12 @@ function setupSubscribe() {
 }
 
 function setupTeam() {
-  const open = $("teamOpen");
+  const openButtons = [...document.querySelectorAll("#teamOpen, [data-open-team]")];
   const modal = $("teamModal");
   const close = $("teamClose");
-  if (!open || !modal) return;
-  open.addEventListener("click", () => {
+  if (!openButtons.length || !modal) return;
+  openButtons.forEach(button => button.addEventListener("click", () => {
+    closeMobileMenu();
     const team = state.team || {};
     $("teamList").innerHTML = (team.members || []).map(member => `<article class="team-card">
       <h3>${esc(member.name)}</h3>
@@ -1096,7 +1138,7 @@ function setupTeam() {
       <small>${esc(member.research)}</small>
     </article>`).join("") || "暂无公开团队信息。";
     modal.showModal();
-  });
+  }));
   close?.addEventListener("click", () => modal.close());
 }
 
@@ -1210,6 +1252,7 @@ async function init() {
     || localStorage.getItem("climateTextMode") === "energy" ? "energy" : "climate";
   setupCompanyIntelligence();
   setupEnergyReports();
+  setupMobileMenu();
   activateMode(requestedMode);
   setupFilters();
   setupAssistant();
@@ -1217,9 +1260,10 @@ async function init() {
   setupTeam();
   renderSiteMetrics();
   setupMapPeriods();
-  $("modeToggle")?.addEventListener("click", () => {
+  [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => button.addEventListener("click", () => {
+    closeMobileMenu();
     activateMode(state.mode === "energy" ? "climate" : "energy");
-  });
+  }));
   try {
     await switchMapPeriod("today");
   } catch (error) {

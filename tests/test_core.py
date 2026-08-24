@@ -343,6 +343,9 @@ class CoreTests(unittest.TestCase):
 
         payload = build_energy_report_database({}, Path(self.temp.name) / "energy-reports-empty.json")
         self.assertGreaterEqual(payload["statistics"]["reports"], 200)
+        self.assertEqual(payload["statistics"]["databases"], 36)
+        self.assertEqual(len(payload["databases"]), 36)
+        self.assertTrue(all(item["database_url"].startswith("https://") for item in payload["databases"]))
         titles = {item["title_zh"] for item in payload["reports"]}
         self.assertTrue(any("全球新型储能产业发展形势" in title for title in titles))
         self.assertIn("《中国工业领域绿色低碳发展技术蓝皮书》", titles)
@@ -446,6 +449,10 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="reportNav"', html)
         self.assertIn('id="energyReports"', html)
         self.assertIn('id="energyReportSearch"', html)
+        self.assertIn('id="energyResourceType"', html)
+        self.assertIn('id="mobileMenuToggle"', html)
+        self.assertIn('data-open-subscribe', html)
+        self.assertIn('data-open-team', html)
         self.assertIn('id="unsubscribeSubmit"', html)
         self.assertIn('data-company-map-period="today"', html)
         self.assertIn('data-company-map-period="week"', html)
@@ -467,6 +474,21 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(second["total"], 1)
         self.assertEqual(second["statistics"]["added"], 0)
         self.assertEqual(validate_public_payload({"intelligence": [item]}, second), [])
+
+    def test_archive_collapses_syndicated_titles_but_retains_observations(self) -> None:
+        self.seed_publishable_article()
+        first = {
+            **dashboard_payload(self.db)["intelligence"][0],
+            "source_id": "API001",
+            "source_name": "GDELT",
+            "title_original": "Climate change is unearthing archaeological discoveries while threatening them",
+        }
+        second = {**first, "article_id": "syndicated-copy", "canonical_url": "https://mirror.example.org/story"}
+        path = Path(self.temp.name) / "news_archive.json"
+        archive = update_archive(path, [first, second], limit=100)
+        self.assertEqual(archive["total"], 1)
+        self.assertEqual(archive["statistics"]["duplicates_collapsed"], 1)
+        self.assertIn("https://mirror.example.org/story", archive["records"][0]["alternate_urls"])
 
     def test_workflow_runs_daily_with_models_and_writeback(self) -> None:
         workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
@@ -496,7 +518,7 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(select_latest_day(rows), [rows[1]])
         self.assertEqual({row["source_id"] for row in select_latest_week(rows)}, {"A", "B"})
 
-    def test_daily_window_skips_partial_day_and_never_mixes_dates(self) -> None:
+    def test_daily_window_keeps_partial_latest_day_and_backfills(self) -> None:
         rows = [
             {
                 "article_id": "latest-a", "source_id": "API", "source_name": "GDELT",
@@ -529,11 +551,10 @@ class CoreTests(unittest.TestCase):
         selected = select_daily_window(rows, limit=10)
         source_counts = Counter(row["source_name"] for row in selected)
         self.assertEqual(len(selected), 10)
-        self.assertNotIn("latest-a", {row["article_id"] for row in selected})
-        self.assertNotIn("latest-b", {row["article_id"] for row in selected})
-        self.assertEqual({date.fromisoformat(row["published_at"][:10]) for row in selected}, {date(2026, 7, 28)})
+        self.assertTrue({"latest-a", "latest-b"} & {row["article_id"] for row in selected})
+        self.assertEqual({date.fromisoformat(row["published_at"][:10]) for row in selected}, {date(2026, 7, 28), date(2026, 7, 29)})
         self.assertLessEqual(max(source_counts.values()), 2)
-        self.assertEqual(sum(bool(row["places"]) for row in selected), 10)
+        self.assertGreaterEqual(sum(bool(row["places"]) for row in selected), 8)
 
     def test_daily_window_uses_fresh_day_and_backfills_when_quality_is_enough(self) -> None:
         rows = []
