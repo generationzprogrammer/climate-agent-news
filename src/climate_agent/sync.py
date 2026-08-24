@@ -22,6 +22,7 @@ GOOGLE_NEWS_SOURCE_IDS = {"API004"}
 GOOGLE_NEWS_EXCLUDE_TERMS = (
     "sesame", "nickalive", "movie", "celebrity", "sports", "football",
     "basketball", "baseball", "golf", "tennis", "horoscope", "recipe",
+    "analyst coverage count",
 )
 
 # Several short searches are more reliable than one long Boolean expression in

@@ -17,6 +17,7 @@ CHINESE_RE = re.compile(r"[\u4e00-\u9fff]")
 LOW_VALUE_NEWS_TERMS = (
     "buck moon", "sesame workshop", "sesame street", "nickalive",
     "movie", "celebrity", "sports", "football", "basketball", "baseball",
+    "analyst coverage count",
 )
 MOJIBAKE_MARKERS = ("锟", "�", "Ã", "Â", "娴嬭瘯", "待翻译")
 CARIBBEAN_PLACE = {"name_zh": "加勒比地区", "lon": -75.0, "lat": 18.0}
