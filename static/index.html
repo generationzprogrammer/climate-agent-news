@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>ClimateText Lab｜国际气候情报与文本数据库</title>
-  <link rel="stylesheet" href="./styles.css?v=20260824-1">
+  <link rel="stylesheet" href="./styles.css?v=20260903-1">
 </head>
 <body>
   <header class="topbar">
@@ -60,7 +60,7 @@
     <section class="section map-section map-section-lead" id="map">
       <div class="section-heading">
         <div><p class="overline" id="mapOverline">GLOBAL CLIMATE SITUATION</p><h1 id="mapTitle">全球气候现场</h1></div>
-        <p id="mapRangeNote">中国位于地图中部偏右。红点表示所选时段内情报明确涉及的国家或地区；点击即可查看中文摘要与原文。</p>
+        <p id="mapRangeNote">今日队列</p>
       </div>
       <div class="map-layout">
         <div class="map-canvas" id="mapCanvas">
@@ -123,13 +123,13 @@
     <section class="section energy-report-section" id="energyReports" hidden>
       <div class="section-heading">
         <div><p class="overline">ENERGY REPORTS &amp; DATA</p><h2>能源报告与数据库</h2></div>
-        <p id="energyReportScope">近三年能源技术、产业与转型报告，以及可用于能源研究、技术筛选和产业分析的国际数据库，均保留正式来源入口。</p>
       </div>
       <div class="report-kpis" id="energyReportKpis"><div class="skeleton small"></div></div>
       <div class="report-search-panel">
         <label class="search-box"><span>检索资源</span><input id="energyReportSearch" type="search" placeholder="报告、数据库、机构或主题，如：电池、核聚变" autocomplete="off"></label>
         <label><span>资源类型</span><select id="energyResourceType"><option value="">全部类型</option><option value="能源报告">能源报告</option><option value="能源数据库">能源数据库</option></select></label>
         <label><span>国家或组织</span><select id="energyReportCountry"><option value="">全部国家或组织</option></select></label>
+        <label><span>国际组织</span><select id="energyReportOrganization"><option value="">全部国际组织</option></select></label>
         <label><span>年份</span><select id="energyReportYear"><option value="">全部年份</option></select></label>
         <div class="result-count"><span>当前结果</span><b id="energyReportResultCount">—</b></div>
       </div>
@@ -164,7 +164,7 @@
     <section class="section" id="today">
       <div class="section-heading">
         <div><p class="overline" id="todayOverline">DAILY SIGNALS</p><h2 id="todayTitle">今日重要气候情报</h2></div>
-        <p id="dataNote">按发布时间和政策相关性整理；涉及重要数字时请点击原文核验。</p>
+        <label class="compact-filter"><span>国际组织</span><select id="todayOrganizationFilter"><option value="">全部国际组织</option></select></label>
       </div>
       <div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
     </section>
@@ -172,7 +172,6 @@
     <section class="section analytics-section" id="analytics">
       <div class="section-heading">
         <div><p class="overline">CORPUS ANALYTICS</p><h2 id="analyticsTitle">语料库统计分析</h2></div>
-        <p>基于三年历史语料库生成的统计图表，展示时间频率、议题结构、国家/地区分布和国家—议题交叉关系；图表反映语料库样本分布，不等同于全球事件真实发生频率。</p>
       </div>
       <div class="analytics-kpis" id="analyticsKpis">
         <div class="skeleton"></div>
@@ -209,7 +208,6 @@
     <section class="section assistant-section" id="assistant">
       <div class="section-heading">
         <div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 id="assistantTitle">气候情报问答</h2></div>
-        <p>先拆解时间、地区和议题，再生成简报、样本比较、时间线或政策含义；每项结论都回到站内证据。</p>
       </div>
       <div class="assistant-shell">
         <aside class="assistant-intro">
@@ -238,7 +236,6 @@
     <section class="section database-section" id="database">
       <div class="section-heading">
         <div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 id="databaseTitle">气候新闻文本数据库</h2></div>
-        <p>滚动保存最多 100000 条中文气候新闻记录，可按关键词、议题或地域检索并回到原始来源。</p>
       </div>
       <div class="search-panel">
         <label class="search-box">
@@ -246,6 +243,8 @@
           <input id="archiveSearch" type="search" placeholder="搜索中文标题、原文、来源、议题或地域" autocomplete="off">
         </label>
         <label><span>议题</span><select id="topicFilter"><option value="">全部议题</option></select></label>
+        <label><span>国际组织</span><select id="organizationFilter"><option value="">全部国际组织</option></select></label>
+        <label><span>国家</span><input id="countryFilter" type="search" list="countryCodeList" placeholder="中国、CN或CHN" autocomplete="off"><datalist id="countryCodeList"></datalist></label>
         <div class="result-count"><span>当前结果</span><b id="resultCount">—</b></div>
       </div>
       <div class="archive-table" role="region" aria-label="气候新闻文本记录">
@@ -265,10 +264,11 @@
       <button class="modal-close" id="subscribeClose" type="button" aria-label="关闭订阅窗口">×</button>
       <p class="overline">WEEKLY BRIEFING</p>
       <h2>订阅每周气候情报周报</h2>
-      <p>请输入邮箱。若站点已配置安全订阅端点，系统会提交订阅请求；若未配置，将自动生成一封订阅申请邮件。邮箱列表不会写入公开源码或 Git 历史。</p>
+      <p>输入邮箱订阅周报。邮箱由独立订阅服务保存，不进入公开源码。</p>
       <label><span>邮箱</span><input id="subscribeEmail" type="email" required placeholder="name@example.com" autocomplete="email"></label>
-      <div class="modal-actions"><button type="submit">提交订阅</button><button class="secondary" id="unsubscribeSubmit" type="button">退订</button><a id="weeklyDownload" href="./data/weekly_report.pdf" target="_blank" rel="noopener">下载本周周报</a></div>
+      <div class="modal-actions"><button id="subscribeSubmit" type="submit">提交订阅</button><button class="secondary" id="unsubscribeSubmit" type="button">退订</button><a id="weeklyDownload" href="./data/weekly_report.pdf" target="_blank" rel="noopener">下载本周周报</a></div>
       <small id="subscribeHint">订阅后每周一北京时间自动发送周报；使用同一邮箱可随时退订。</small>
+      <a class="subscribe-fallback" id="subscribeFallback" href="mailto:yuan-yh21@mails.tsinghua.edu.cn" hidden>联系管理员</a>
     </form>
   </dialog>
   <dialog class="modal" id="teamModal">
@@ -280,6 +280,6 @@
     </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260824-1" defer></script>
+  <script src="./app.js?v=20260903-1" defer></script>
 </body>
 </html>

@@ -6,6 +6,7 @@ const state = {
   siteMetrics: null, subscription: null, team: null,
   companyData: null, companyFiltered: [], companyVisible: 12, companyMapPeriod: "today",
   reportData: null, reportFiltered: [], reportVisible: 12,
+  taxonomy: { organization_groups: [], countries: [] },
 };
 const $ = id => document.getElementById(id);
 const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
@@ -263,6 +264,45 @@ function renderMiniLineChart(id, rows, label) {
   </svg>`;
 }
 
+function organizationOptions() {
+  return (state.taxonomy?.organization_groups || []).map(group => ({
+    label: group.label_zh,
+    items: group.organizations || [],
+  }));
+}
+
+function fillOrganizationSelect(element, allLabel = "全部国际组织") {
+  if (!element) return;
+  element.innerHTML = `<option value="">${esc(allLabel)}</option>` + organizationOptions().map(group =>
+    `<optgroup label="${esc(group.label)}">${group.items.map(item =>
+      `<option value="${esc(item.code)}">${esc(item.name_zh)}（${esc(item.code)}）</option>`
+    ).join("")}</optgroup>`
+  ).join("");
+}
+
+function setupTaxonomyFilters() {
+  [$("todayOrganizationFilter"), $("organizationFilter"), $("energyReportOrganization")]
+    .forEach(element => fillOrganizationSelect(element));
+  const datalist = $("countryCodeList");
+  if (datalist) datalist.innerHTML = (state.taxonomy?.countries || [])
+    .slice().sort((a, b) => String(a.name_zh).localeCompare(String(b.name_zh), "zh-CN"))
+    .map(country => `<option value="${esc(country.name_zh)}">${esc(country.alpha2)} · ${esc(country.alpha3)}</option>`)
+    .join("");
+}
+
+function organizationCodes(record) {
+  return (record?.organization_tags || []).map(tag => typeof tag === "string" ? tag : tag.code).filter(Boolean);
+}
+
+function matchesCountry(record, query) {
+  const needle = String(query || "").trim().toLowerCase();
+  if (!needle) return true;
+  return [
+    ...(record.country_codes || []).flatMap(country => [country.name_zh, country.alpha2, country.alpha3]),
+    ...(record.places || []).map(place => place.name_zh),
+  ].some(value => String(value || "").toLowerCase().includes(needle));
+}
+
 function renderSiteMetrics() {
   const metrics = state.siteMetrics || {};
   renderMiniLineChart("archiveGrowthChart", metrics.archive_cumulative || [], "累计气候文本档案曲线");
@@ -276,14 +316,17 @@ function findArchiveRecord(item) {
 }
 
 function renderToday() {
+  const organization = $("todayOrganizationFilter")?.value || "";
   const items = (state.dashboard.intelligence || [])
-    .filter(item => item.title_zh);
-  $("todayGrid").innerHTML = items.length ? items.slice(0, 10).map((item, index) => {
-    const record = findArchiveRecord(item);
+    .filter(item => item.title_zh)
+    .map(item => ({ item, record: findArchiveRecord(item) }))
+    .filter(({ record }) => !organization || organizationCodes(record).includes(organization));
+  $("todayGrid").innerHTML = items.length ? items.slice(0, 10).map(({ item, record }, index) => {
+    const classification = [...organizationCodes(record), ...(record.event_tags || [])].slice(0, 3);
     return `<article class="signal-card">
       <div class="signal-index">${String(index + 1).padStart(2, "0")}</div>
       <div class="signal-content">
-        <div class="signal-meta"><span class="topic">${esc(item.theme_zh || "气候动态")}</span></div>
+        <div class="signal-meta"><span class="topic">${esc(item.theme_zh || "气候动态")}</span>${classification.map(tag => `<span>${esc(tag)}</span>`).join("")}</div>
         <h3>${esc(item.title_zh)}</h3>
         ${summaryOrAtoms(item)}
         <div class="signal-foot">
@@ -297,10 +340,11 @@ function renderToday() {
 
 function setupFilters() {
   populateTopicFilter();
-  ["archiveSearch", "topicFilter"].forEach(id => $(id).addEventListener(id === "archiveSearch" ? "input" : "change", () => {
+  ["archiveSearch", "topicFilter", "organizationFilter", "countryFilter"].forEach(id => $(id)?.addEventListener(["archiveSearch", "countryFilter"].includes(id) ? "input" : "change", () => {
     state.visible = 18;
     applyFilters();
   }));
+  $("todayOrganizationFilter")?.addEventListener("change", renderToday);
   $("loadMore").addEventListener("click", () => {
     state.visible += 18;
     renderArchiveRows();
@@ -317,14 +361,20 @@ function populateTopicFilter() {
 function applyFilters() {
   const query = $("archiveSearch").value.trim().toLowerCase();
   const topic = $("topicFilter").value;
+  const organization = $("organizationFilter")?.value || "";
+  const country = $("countryFilter")?.value || "";
   state.filtered = state.archive.records.filter(record => {
     const haystack = [
       record.title_zh, record.title_original, record.summary_zh, record.source_name,
       ...(record.topics || []), ...(record.places || []).map(place => place.name_zh),
+      ...organizationCodes(record), ...(record.event_tags || []),
+      ...(record.country_codes || []).flatMap(item => [item.name_zh, item.alpha2, item.alpha3]),
     ].join(" ").toLowerCase();
     return record.quality?.passed !== false
       && (!query || haystack.includes(query))
-      && (!topic || (record.topics || []).includes(topic));
+      && (!topic || (record.topics || []).includes(topic))
+      && (!organization || organizationCodes(record).includes(organization))
+      && matchesCountry(record, country);
   });
   renderArchiveRows();
 }
@@ -336,6 +386,8 @@ function renderArchiveRows() {
     const facts = [
       ...(record.numbers || []).slice(0, 2),
       ...(record.places || []).slice(0, 2).map(place => place.name_zh),
+      ...organizationCodes(record).slice(0, 2),
+      ...(record.event_tags || []).slice(0, 1),
     ];
     return `<article class="archive-row">
       <div class="archive-date"><b>${esc(formatDate(record.published_at))}</b></div>
@@ -511,7 +563,7 @@ async function switchMapPeriod(period) {
     button.setAttribute("aria-pressed", String(active));
   });
   const events = mapEventsFor(period);
-  $("mapRangeNote").textContent = `中国位于地图中部偏右。红点表示${period === "today" ? "今日队列" : "本周"}情报明确涉及的国家或地区；点击即可查看中文摘要与原文。`;
+  $("mapRangeNote").textContent = period === "today" ? "今日队列" : "本周";
   renderMapPlaces(events);
   await renderMap(events);
 }
@@ -725,7 +777,7 @@ function setupEnergyReports() {
     + (filters.countries_or_regions || []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
   $("energyReportYear").innerHTML = '<option value="">全部年份</option>'
     + (filters.years || []).map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("");
-  ["energyReportSearch", "energyResourceType", "energyReportCountry", "energyReportYear"].forEach(id => {
+  ["energyReportSearch", "energyResourceType", "energyReportCountry", "energyReportOrganization", "energyReportYear"].forEach(id => {
     $(id)?.addEventListener(id === "energyReportSearch" ? "input" : "change", () => {
       state.reportVisible = 12;
       applyEnergyReportFilters();
@@ -741,7 +793,6 @@ function renderEnergyReports() {
   const data = state.reportData;
   if (!data) return;
   const stats = data.statistics || {};
-  $("energyReportScope").textContent = data.meta?.scope_note_zh || "近三年官方能源报告数据库。";
   $("energyReportKpis").innerHTML = [
     ["报告记录", stats.reports || 0],
     ["能源数据库", stats.databases || 0],
@@ -752,23 +803,45 @@ function renderEnergyReports() {
   applyEnergyReportFilters();
 }
 
+function balanceReportPublishers(rows) {
+  const buckets = new Map();
+  rows.forEach(row => {
+    const key = row.publisher || "未标注机构";
+    if (!buckets.has(key)) buckets.set(key, []);
+    buckets.get(key).push(row);
+  });
+  const output = [];
+  while ([...buckets.values()].some(bucket => bucket.length)) {
+    [...buckets.values()].forEach(bucket => { if (bucket.length) output.push(bucket.shift()); });
+  }
+  return output;
+}
+
 function applyEnergyReportFilters() {
   if (!state.reportData) return;
   const query = $("energyReportSearch")?.value.trim().toLowerCase() || "";
   const resourceType = $("energyResourceType")?.value || "";
   const country = $("energyReportCountry")?.value || "";
+  const organization = $("energyReportOrganization")?.value || "";
   const year = $("energyReportYear")?.value || "";
   const reports = (state.reportData.reports || []).map(report => ({ ...report, record_type: "能源报告" }));
   const databases = (state.reportData.databases || []).map(database => ({ ...database, record_type: "能源数据库" }));
-  state.reportFiltered = [...reports, ...databases].filter(report => {
+  const filtered = [...reports, ...databases].filter(report => {
     const haystack = [report.title_zh, report.title_original, report.summary_zh, report.abstract_original, report.publisher,
       report.country_or_region, report.name_zh, report.name_original, report.maintainer, report.domain, report.core_data,
-      report.primary_use, report.coverage, report.update_note, ...(report.topics || [])].join(" ").toLowerCase();
+      report.primary_use, report.coverage, report.update_note, ...(report.topics || []),
+      ...organizationCodes(report), ...(report.event_tags || []),
+      ...(report.country_codes || []).flatMap(item => [item.name_zh, item.alpha2, item.alpha3])].join(" ").toLowerCase();
     return (!query || haystack.includes(query))
       && (!resourceType || report.record_type === resourceType)
       && (!country || (report.record_type === "能源报告" && report.country_or_region === country))
+      && (!organization || organizationCodes(report).includes(organization))
       && (!year || (report.record_type === "能源报告" && String(report.year) === year));
   });
+  state.reportFiltered = [
+    ...balanceReportPublishers(filtered.filter(row => row.record_type === "能源报告")),
+    ...filtered.filter(row => row.record_type === "能源数据库"),
+  ];
   renderEnergyReportCards();
 }
 
@@ -780,14 +853,14 @@ function renderEnergyReportCards() {
     <h3><a href="${esc(safeUrl(report.database_url))}" target="_blank" rel="noopener noreferrer">${esc(report.name_zh)} →</a></h3>
     <p class="report-title-original">${esc(report.name_original)}</p>
     <p class="report-summary">${esc(report.core_data)}</p>
-    <div class="report-tags"><i>${esc(report.primary_use)}</i><i>${esc(report.update_note)}</i></div>
+    <div class="report-tags"><i>${esc(report.primary_use)}</i><i>${esc(report.update_note)}</i>${[...organizationCodes(report).slice(0, 2), ...(report.country_codes || []).slice(0, 2).map(item => item.alpha3)].map(tag => `<i>${esc(tag)}</i>`).join("")}</div>
     <footer><span>${esc(report.maintainer)}</span><small>${esc(report.coverage)}</small></footer>
   </article>` : `<article class="report-card">
     <div class="report-card-meta"><span>${esc(report.country_or_region)}</span><b>${esc(report.year)}</b></div>
     <h3><a href="${esc(safeUrl(report.report_url))}" target="_blank" rel="noopener noreferrer">${esc(report.title_zh)} ↗</a></h3>
     <p class="report-title-original">${esc(report.title_original)}</p>
     ${substantiveSummary(report.summary_zh) ? `<p class="report-summary">${esc(report.summary_zh)}</p>` : ""}
-    <div class="report-tags">${(report.topics || []).map(topic => `<i>${esc(topic)}</i>`).join("")}</div>
+    <div class="report-tags">${[...(report.topics || []), ...organizationCodes(report), ...(report.event_tags || []), ...(report.country_codes || []).map(item => item.alpha3)].slice(0, 7).map(topic => `<i>${esc(topic)}</i>`).join("")}</div>
     <footer><span>${esc(report.publisher)}</span><small>${esc(report.language)} · ${esc(formatDate(report.published_at))}${report.access_note_zh ? ` · ${esc(report.access_note_zh)}` : ""}</small></footer>
   </article>`).join("") : '<div class="empty compact"><b>没有匹配资源</b><p>请减少筛选条件或更换检索词。</p></div>';
   $("energyReportLoadMore").hidden = state.reportVisible >= state.reportFiltered.length;
@@ -1051,51 +1124,84 @@ function renderAnalytics() {
   $("analyticsNote").textContent = (analytics.notes || []).join(" ");
 }
 
+function openDialog(modal) {
+  if (!modal) return;
+  if (typeof modal.showModal === "function") {
+    if (!modal.open) modal.showModal();
+  } else {
+    modal.setAttribute("open", "");
+  }
+}
+
+function closeDialog(modal) {
+  if (!modal) return;
+  if (typeof modal.close === "function" && modal.open) modal.close();
+  else modal.removeAttribute("open");
+}
+
+async function subscriptionConfig() {
+  if (state.subscription) return state.subscription;
+  state.subscription = await fetchJson("./data/subscription.json").catch(() => ({}));
+  return state.subscription;
+}
+
 function setupSubscribe() {
   const openButtons = [...document.querySelectorAll("#subscribeOpen, [data-open-subscribe]")];
   const modal = $("subscribeModal");
   const form = $("subscribeForm");
   const close = $("subscribeClose");
   const unsubscribe = $("unsubscribeSubmit");
-  if (!openButtons.length || !modal || !form) return;
+  if (!openButtons.length || !modal || !form || form.dataset.bound === "true") return;
+  form.dataset.bound = "true";
   openButtons.forEach(button => button.addEventListener("click", () => {
     closeMobileMenu();
-    modal.showModal();
+    openDialog(modal);
     setTimeout(() => $("subscribeEmail")?.focus(), 0);
   }));
-  close?.addEventListener("click", () => modal.close());
+  close?.addEventListener("click", () => closeDialog(modal));
   modal.addEventListener("click", event => {
-    if (event.target === modal) modal.close();
+    if (event.target === modal) closeDialog(modal);
   });
   form.addEventListener("submit", async event => {
     event.preventDefault();
+    const submit = $("subscribeSubmit");
+    const hint = $("subscribeHint");
+    const fallback = $("subscribeFallback");
     const email = $("subscribeEmail").value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       toast("请输入有效邮箱。");
       return;
     }
-    const config = state.subscription || {};
-    if (config.endpoint) {
+    if (submit) { submit.disabled = true; submit.textContent = "提交中…"; }
+    if (fallback) fallback.hidden = true;
+    if (hint) hint.textContent = "正在连接订阅服务…";
+    try {
+      const config = await subscriptionConfig();
+      if (!config.endpoint) throw new Error("订阅服务尚未配置");
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
+      let response;
       try {
-        const response = await fetch(config.endpoint, {
+        response = await fetch(config.endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, list: "climate-weekly", source: location.href }),
+          signal: controller.signal,
         });
-        if (!response.ok) throw new Error(String(response.status));
-        modal.close();
-        toast("订阅成功，周报将在每周一发送。");
-        return;
-      } catch (error) {
-        console.error("Subscribe endpoint failed", error);
-        toast("订阅端点暂不可用，已为你准备邮件申请。");
+      } finally {
+        clearTimeout(timeout);
       }
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+      closeDialog(modal);
+      toast("订阅成功，周报将在每周一发送。");
+    } catch (error) {
+      console.error("Subscribe endpoint failed", error);
+      if (hint) hint.textContent = `提交失败：${error.name === "AbortError" ? "连接超时，请稍后重试" : error.message || "请稍后重试"}。`;
+      if (fallback) fallback.hidden = false;
+    } finally {
+      if (submit) { submit.disabled = false; submit.textContent = "提交订阅"; }
     }
-    const contact = config.contact_email || "yuan-yh21@mails.tsinghua.edu.cn";
-    const subject = encodeURIComponent("订阅气候情报周报");
-    const body = encodeURIComponent(`请将 ${email} 加入国际气候情报周报订阅列表。\n\n退订方式：回复“退订气候周报”。`);
-    location.href = `mailto:${contact}?subject=${subject}&body=${body}`;
-    modal.close();
   });
   unsubscribe?.addEventListener("click", async () => {
     const email = $("subscribeEmail").value.trim();
@@ -1103,7 +1209,7 @@ function setupSubscribe() {
       toast("请先输入需要退订的有效邮箱。");
       return;
     }
-    const endpoint = state.subscription?.unsubscribe_endpoint;
+    const endpoint = (await subscriptionConfig()).unsubscribe_endpoint;
     if (!endpoint) {
       toast("退订端点尚未配置，请通过联系邮箱申请退订。");
       return;
@@ -1114,7 +1220,7 @@ function setupSubscribe() {
         body: JSON.stringify({ email, list: "climate-weekly", source: location.href }),
       });
       if (!response.ok) throw new Error(String(response.status));
-      modal.close();
+      closeDialog(modal);
       toast("退订成功，该邮箱将不再接收周报。");
     } catch (error) {
       console.error("Unsubscribe endpoint failed", error);
@@ -1137,9 +1243,9 @@ function setupTeam() {
       <a href="mailto:${esc(member.email)}">${esc(member.email)}</a>
       <small>${esc(member.research)}</small>
     </article>`).join("") || "暂无公开团队信息。";
-    modal.showModal();
+    openDialog(modal);
   }));
-  close?.addEventListener("click", () => modal.close());
+  close?.addEventListener("click", () => closeDialog(modal));
 }
 
 function renderLineChart(id, rows, { x, y }) {
@@ -1226,7 +1332,8 @@ function renderHeatmap(id, matrix) {
 }
 
 async function init() {
-  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData] = await Promise.all([
+  setupSubscribe();
+  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData, taxonomy] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
     fetchJson("./data/corpus_analytics.json").catch(() => null),
@@ -1238,12 +1345,14 @@ async function init() {
     fetchJson("./data/team.json").catch(() => null),
     fetchJson("./data/energy_companies.json").catch(() => null),
     fetchJson("./data/energy_reports.json").catch(() => null),
+    fetchJson("./data/taxonomy.json").catch(() => ({ organization_groups: [], countries: [] })),
   ]);
   state.siteMetrics = siteMetrics;
   state.subscription = subscription;
   state.team = team;
   state.companyData = companyData;
   state.reportData = reportData;
+  state.taxonomy = taxonomy;
   state.datasets.climate = { dashboard, archive, analytics };
   if (energyDashboard && energyArchive) {
     state.datasets.energy = { dashboard: energyDashboard, archive: energyArchive, analytics: energyAnalytics };
@@ -1251,12 +1360,12 @@ async function init() {
   const requestedMode = new URLSearchParams(location.search).get("mode") === "energy"
     || localStorage.getItem("climateTextMode") === "energy" ? "energy" : "climate";
   setupCompanyIntelligence();
+  setupTaxonomyFilters();
   setupEnergyReports();
   setupMobileMenu();
   activateMode(requestedMode);
   setupFilters();
   setupAssistant();
-  setupSubscribe();
   setupTeam();
   renderSiteMetrics();
   setupMapPeriods();

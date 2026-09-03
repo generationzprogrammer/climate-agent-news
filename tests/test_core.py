@@ -25,6 +25,7 @@ from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
 from climate_agent.site_metrics import update_cloudflare_visitor_history
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
+from climate_agent.taxonomy import country_codes_for, event_tags_for, organization_tags_for, public_taxonomy
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
@@ -171,8 +172,9 @@ class CoreTests(unittest.TestCase):
         self.assertIn("climate", url.lower())
         self.assertNotIn("{query}", url)
         urls = _google_news_urls(endpoint)
-        self.assertEqual(len(urls), 4)
+        self.assertEqual(len(urls), 6)
         self.assertTrue(all("when%3A1d" in item for item in urls))
+        self.assertTrue(any("Kazakhstan" in item for item in urls))
         climate = NormalizedArticle(
             article_id="g", source_id="API004", source_url="https://news.google.com/rss",
             canonical_url="https://example.org/climate", title="Climate summit calls for faster clean energy finance",
@@ -371,6 +373,37 @@ class CoreTests(unittest.TestCase):
         self.assertTrue(any("全球新型储能产业发展形势" in title for title in titles))
         self.assertIn("《中国工业领域绿色低碳发展技术蓝皮书》", titles)
 
+    def test_energy_report_gate_rejects_navigation_and_missing_intro(self) -> None:
+        from climate_agent.energy_reports import _merge_records, _report_title_in_scope
+
+        self.assertFalse(_report_title_in_scope("Skip to page content"))
+        self.assertFalse(_report_title_in_scope("All projections reports"))
+        rows = _merge_records([{
+            "title_original": "Annual Energy Outlook 2026",
+            "title_zh": "2026年能源展望",
+            "summary_zh": "",
+            "publisher": "测试机构",
+            "report_url": "https://example.org/report-2026",
+            "published_at": "2026-08-30",
+            "discovery_method": "official_listing_daily_scan",
+        }])
+        self.assertEqual(rows, [])
+
+    def test_energy_report_sources_are_not_single_publisher_dependent(self) -> None:
+        payload = json.loads((ROOT / "config" / "energy_report_sources.json").read_text(encoding="utf-8"))
+        publishers = {item["publisher"] for item in payload["sources"]}
+        self.assertGreaterEqual(len(publishers), 15)
+        self.assertTrue({"国际原子能机构", "亚洲开发银行", "韩国能源经济研究院", "联合国欧洲经济委员会"}.issubset(publishers))
+
+    def test_public_taxonomy_uses_iso_country_codes_and_dynamic_cop_tags(self) -> None:
+        taxonomy = public_taxonomy()
+        self.assertEqual(taxonomy["country_standard"], "ISO 3166-1")
+        self.assertEqual(len(taxonomy["countries"]), 249)
+        china = country_codes_for("China and the United States announced a climate dialogue")
+        self.assertEqual({item["alpha3"] for item in china}, {"CHN", "USA"})
+        self.assertEqual(event_tags_for("Preparations for COP42 continue"), ["COP42"])
+        self.assertIn("IEA", organization_tags_for("International Energy Agency report"))
+
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()
         static_dir = Path(self.temp.name) / "static-cloudflare"
@@ -471,6 +504,10 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="energyReports"', html)
         self.assertIn('id="energyReportSearch"', html)
         self.assertIn('id="energyResourceType"', html)
+        self.assertIn('id="todayOrganizationFilter"', html)
+        self.assertIn('id="organizationFilter"', html)
+        self.assertIn('id="countryFilter"', html)
+        self.assertIn('id="energyReportOrganization"', html)
         self.assertIn('id="mobileMenuToggle"', html)
         self.assertIn('data-open-subscribe', html)
         self.assertIn('data-open-team', html)
@@ -483,6 +520,9 @@ class CoreTests(unittest.TestCase):
         self.assertLess(html.index('id="map"'), html.index('class="hero"'))
         self.assertIn("function renderEnergyReports", app)
         self.assertIn("function companyProfileHtml", app)
+        self.assertNotIn("location.href = `mailto:", app)
+        self.assertNotIn("中国位于地图中部偏右", html)
+        self.assertNotIn("先拆解时间、地区和议题", html)
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
         self.seed_publishable_article()
@@ -727,7 +767,7 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(item["translation_status"], "model_retry_required")
 
     def test_article_extractor_prefers_public_article_body(self) -> None:
-        html = """<html><head><meta name="description" content="Short description."></head><body>
+        html = """<html><head><title>Official Energy Review 2026</title><meta property="article:published_time" content="2026-08-30T09:00:00Z"><meta name="description" content="Short description."></head><body>
         <nav>Navigation text must not be used.</nav><article>
         <p>The government approved a 2.4 billion dollar climate resilience programme covering coastal infrastructure and early-warning systems.</p>
         <p>The first projects will begin in 2027 and prioritise communities exposed to flooding.</p>
@@ -736,6 +776,8 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(result["basis"], "article_paragraphs")
         self.assertIn("2.4 billion", result["text"])
         self.assertNotIn("Navigation", result["text"])
+        self.assertEqual(result["title"], "Official Energy Review 2026")
+        self.assertEqual(result["published_at"], "2026-08-30T09:00:00Z")
 
     def test_translation_uses_page_excerpt_and_records_model_basis(self) -> None:
         row = {

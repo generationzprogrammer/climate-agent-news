@@ -13,6 +13,7 @@ from .collector import parse_feed
 from .db import Database
 from .sync import _analyse, _source_scope_match
 from .translation import detect_places
+from .taxonomy import country_codes_for, event_tags_for, organization_tags_for
 
 
 HISTORICAL_SOURCE_ID = "HIST_GDELT"
@@ -277,7 +278,8 @@ def _country_tags_from_text(text: str) -> list[str]:
             if re.search(pattern, haystack):
                 tags.append(COUNTRY_LABEL_ZH.get(country, country))
                 break
-    return list(dict.fromkeys(tags))
+    standard = [tag["name_zh"] for tag in country_codes_for(text)]
+    return list(dict.fromkeys(standard + tags))
 
 
 def _continent_tags_from_countries(country_tags: list[str]) -> list[str]:
@@ -307,6 +309,7 @@ def article_to_historical_record(article: NormalizedArticle, *, fetched_at: str,
         if source_label:
             domain = f"google:{source_label.lower()}"
     country_tags = list(dict.fromkeys([place.get("name_zh") for place in places if place.get("name_zh")] + _country_tags_from_text(text))) or ["未标注"]
+    country_codes = country_codes_for(text, places=places, country_tags=country_tags)
     source_name = HISTORICAL_SOURCE_NAME
     if article.source_id == "API004":
         source_name = _google_source_label(article.title) or "Google News RSS historical fallback"
@@ -329,6 +332,9 @@ def article_to_historical_record(article: NormalizedArticle, *, fetched_at: str,
         "numbers": analysis["numbers"],
         "places": places,
         "country_tags": country_tags,
+        "country_codes": country_codes,
+        "organization_tags": organization_tags_for(text),
+        "event_tags": event_tags_for(text),
         "continent_tags": _continent_from_places(places) if places else _continent_tags_from_countries(country_tags),
         "quality_flags": {
             "metadata_only": True,
@@ -358,6 +364,7 @@ def archive_item_to_historical_record(item: dict, *, fetched_at: str) -> dict | 
     domain = (urlparse(item["canonical_url"]).hostname or "").lower()
     text = f"{item.get('title_original') or ''} {item.get('summary_source') or ''} {item.get('summary_zh') or ''}"
     country_tags = list(dict.fromkeys([place.get("name_zh") for place in places if place.get("name_zh")] + _country_tags_from_text(text))) or ["未标注"]
+    country_codes = country_codes_for(text, places=places, country_tags=country_tags)
     return {
         "record_id": item.get("article_id") or item.get("record_id"),
         "canonical_url": item["canonical_url"],
@@ -377,6 +384,9 @@ def archive_item_to_historical_record(item: dict, *, fetched_at: str) -> dict | 
         "numbers": list(item.get("numbers") or []),
         "places": places,
         "country_tags": country_tags,
+        "country_codes": country_codes,
+        "organization_tags": organization_tags_for(text),
+        "event_tags": event_tags_for(text),
         "continent_tags": _continent_from_places(places) if places else _continent_tags_from_countries(country_tags),
         "quality_flags": {
             "metadata_only": True,
@@ -680,7 +690,7 @@ def backfill_history(
         "jsonl": export,
         "provider_windows": dict(provider_counts),
         "errors": errors[:20],
-        "tags": ["published_date", "year", "month", "quarter", "topics", "country_tags", "continent_tags", "source_domain", "numbers"],
+        "tags": ["published_date", "year", "month", "quarter", "topics", "country_tags", "country_codes", "continent_tags", "organization_tags", "event_tags", "source_domain", "numbers"],
     }
     manifest_path = (output_jsonl or db.path.parent / "climate_text_corpus.jsonl").with_suffix(".manifest.json")
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")

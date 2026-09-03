@@ -9,10 +9,12 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlencode, urljoin, urlparse
 
+from .article_content import fetch_article_text
 from .collector import fetch_resource
 from .chinese_text import is_readable_chinese_title, to_simplified
 from .providers import OpenAICompatibleModel
-from .summary_utils import is_generic_summary, is_generic_title
+from .summary_utils import is_generic_summary, is_generic_title, sanitize_summary
+from .taxonomy import country_codes_for, event_tags_for, organization_tags_for
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -39,11 +41,16 @@ REPORT_TITLE_EXCLUDES = (
     "contract award", "project appraisal document", "project information document",
     "disclosable version of the isr", "audited financial statement", "project introduction",
     "frequently asked questions",
+    "skip to page content", "skip to sub-navigation", "most popular", "search by tag",
+    "all reports", "all projections reports", "congressional & other requests",
+    "independent statistics and analysis", "view all", "read more", "learn more",
 )
 OFFICIAL_REPORT_HOSTS = (
     "iea.org", "irena.org", "eia.gov", "energy.gov", "energy.gov.au", "gov.uk",
     "europa.eu", "ec.europa.eu", "meti.go.jp", "nea.gov.cn", "mospi.gov.in",
     "epe.gov.br", "nrcan.gc.ca", "natural-resources.canada.ca", "un.org", "worldbank.org",
+    "oecd.org", "iaea.org", "unece.org", "opec.org", "adb.org", "keei.re.kr",
+    "energy.gov.za", "energyinst.org",
 )
 TOPIC_TERMS = {
     "能源安全": ("energy security", "security of supply", "能源安全"),
@@ -112,6 +119,11 @@ def _normalise_record(record: dict, *, added_at: str) -> dict | None:
     summary = to_simplified(record.get("summary_zh"))
     if summary and is_generic_summary(summary):
         summary = ""
+    discovery_method = str(record.get("discovery_method") or "curated_official_source")
+    if discovery_method == "official_listing_daily_scan" and (
+        not _report_title_in_scope(original) or not summary
+    ):
+        return None
     year_match = re.search(r"\b(202[3-9])\b", " ".join((original, url, str(record.get("year") or ""))))
     year = int(record.get("year") or (year_match.group(1) if year_match else datetime.now(UTC).year))
     topics = record.get("topics") or _topics_for(f"{original} {chinese} {summary}")
@@ -132,6 +144,13 @@ def _normalise_record(record: dict, *, added_at: str) -> dict | None:
         "discovery_method": str(record.get("discovery_method") or "curated_official_source"),
         "added_at": str(record.get("added_at") or added_at),
     }
+    taxonomy_text = f"{original} {chinese} {summary} {normalised['publisher']}"
+    normalised["country_codes"] = country_codes_for(
+        taxonomy_text,
+        country_tags=[normalised["country_or_region"]],
+    )
+    normalised["organization_tags"] = organization_tags_for(taxonomy_text)
+    normalised["event_tags"] = event_tags_for(taxonomy_text)
     for key in ("abstract_original", "translation_method", "source_tier", "access_note_zh"):
         if record.get(key):
             normalised[key] = to_simplified(record[key]) if key != "abstract_original" else record[key]
@@ -162,7 +181,7 @@ def _normalise_database_catalogue(payload: dict) -> list[dict]:
         name_zh = to_simplified(item.get("name_zh"))
         if not url.startswith("https://") or not is_readable_chinese_title(name_zh):
             continue
-        databases.append({
+        database = {
             "database_id": str(item.get("database_id") or "energy_db_" + hashlib.sha1(url.encode("utf-8")).hexdigest()[:12]),
             "record_type": "能源数据库",
             "domain": to_simplified(item.get("domain") or "能源综合"),
@@ -174,7 +193,12 @@ def _normalise_database_catalogue(payload: dict) -> list[dict]:
             "primary_use": to_simplified(item.get("primary_use") or ""),
             "coverage": to_simplified(item.get("coverage") or ""),
             "update_note": to_simplified(item.get("update_note") or ""),
-        })
+        }
+        taxonomy_text = f"{database['name_zh']} {database['name_original']} {database['maintainer']} {database['domain']}"
+        database["country_codes"] = country_codes_for(taxonomy_text)
+        database["organization_tags"] = organization_tags_for(taxonomy_text)
+        database["event_tags"] = event_tags_for(taxonomy_text)
+        databases.append(database)
     return sorted(databases, key=lambda row: (row["domain"], row["name_zh"]))
 
 
@@ -247,6 +271,10 @@ def build_energy_report_database(
     publishers = sorted({row["publisher"] for row in reports})
     years = sorted({row["year"] for row in reports}, reverse=True)
     domains = sorted({row["domain"] for row in database_catalogue})
+    organizations = sorted({
+        tag for row in [*reports, *database_catalogue]
+        for tag in row.get("organization_tags") or [] if tag
+    })
     return {
         "schema_version": "1.0",
         "meta": {
@@ -258,7 +286,7 @@ def build_energy_report_database(
             "reports": len(reports), "databases": len(database_catalogue), "countries_or_regions": len(countries), "publishers": len(publishers), "years": years,
             "with_abstract": sum(bool(row.get("abstract_original") or row.get("summary_zh")) for row in reports),
         },
-        "filters": {"countries_or_regions": countries, "publishers": publishers, "years": years, "database_domains": domains},
+        "filters": {"countries_or_regions": countries, "publishers": publishers, "years": years, "database_domains": domains, "organizations": organizations},
         "reports": reports,
         "databases": database_catalogue,
     }
@@ -285,11 +313,17 @@ def _api_text(value) -> str:
 
 
 def _report_title_in_scope(title: str) -> bool:
-    lowered = title.lower()
-    return any(term in lowered for term in ENERGY_SCOPE_TERMS) and not any(term in lowered for term in REPORT_TITLE_EXCLUDES)
+    lowered = re.sub(r"\s+", " ", title).strip().lower()
+    if not 12 <= len(lowered) <= 220:
+        return False
+    if any(term == lowered or term in lowered for term in REPORT_TITLE_EXCLUDES):
+        return False
+    if re.search(r"(.)\1{5,}", lowered):
+        return False
+    return any(term in lowered for term in ENERGY_SCOPE_TERMS) and any(term in lowered for term in REPORT_TERMS)
 
 
-def _world_bank_daily_candidates(existing: list[dict], max_new: int) -> list[dict]:
+def _world_bank_daily_candidates(existing: list[dict], max_new: int = 2) -> list[dict]:
     cutoff = (datetime.now(UTC).date() - timedelta(days=21)).isoformat()
     query = urlencode({
         "format": "json", "qterm": "energy", "strdate": cutoff,
@@ -335,6 +369,87 @@ def _world_bank_daily_candidates(existing: list[dict], max_new: int) -> list[dic
     return output
 
 
+def _candidate_detail(item: dict) -> dict | None:
+    """Resolve a listing link to a dated report page with enough text to summarise."""
+    detail = fetch_article_text(str(item.get("report_url") or ""))
+    detail_title = re.sub(r"\s+", " ", str(detail.get("title") or "")).strip()
+    title = detail_title if _report_title_in_scope(detail_title) else str(item.get("title_original") or "").strip()
+    if not _report_title_in_scope(title):
+        return None
+    abstract = re.sub(r"\s+", " ", str(detail.get("text") or "")).strip()[:1600]
+    if len(abstract) < 80:
+        return None
+    published_raw = str(detail.get("published_at") or "")
+    date_match = re.search(r"(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})", published_raw)
+    year_match = re.search(r"\b(202[3-9])\b", f"{published_raw} {title} {item.get('report_url', '')}")
+    if not year_match:
+        return None
+    year = int(year_match.group(1))
+    if year < datetime.now(UTC).year - 3:
+        return None
+    published_at = (
+        f"{date_match.group(1)}-{int(date_match.group(2)):02d}-{int(date_match.group(3)):02d}"
+        if date_match else f"{year}-01-01"
+    )
+    return {
+        **item,
+        "title_original": title,
+        "abstract_original": abstract,
+        "year": year,
+        "published_at": published_at,
+    }
+
+
+def _round_robin_publishers(rows: list[dict], limit: int) -> list[dict]:
+    buckets: dict[str, list[dict]] = {}
+    for row in rows:
+        buckets.setdefault(str(row.get("publisher") or "未标注机构"), []).append(row)
+    selected: list[dict] = []
+    while len(selected) < limit and any(buckets.values()):
+        for publisher in sorted(buckets):
+            if buckets[publisher]:
+                selected.append(buckets[publisher].pop(0))
+            if len(selected) >= limit:
+                break
+    return selected
+
+
+def _translate_report_rows(model: OpenAICompatibleModel, rows: list[dict]) -> list[dict]:
+    translated: list[dict] = []
+    system = (
+        "你是能源报告目录编辑。逐义忠实翻译报告标题；依据原文摘要或公开报告页摘录，写一段60至120字中文简介，"
+        "说明报告研究对象、覆盖范围和可核验的主要内容。不得虚构数字、结论或日期，不写‘本报告聚焦’‘值得关注’等套话。"
+        "标题或摘要证据不足时不要输出该条。只返回JSON对象，键为reports。"
+    )
+    for start in range(0, len(rows), 6):
+        batch = rows[start:start + 6]
+        result = model.complete_json(system, {"reports": [{
+            "index": index,
+            "title": item["title_original"],
+            "publisher": item["publisher"],
+            "abstract": str(item.get("abstract_original") or "")[:1400],
+        } for index, item in enumerate(batch)]})
+        by_index = {
+            int(item.get("index")): item
+            for item in result.get("reports") or []
+            if str(item.get("index", "")).isdigit()
+        }
+        for index, item in enumerate(batch):
+            translation = by_index.get(index, {})
+            title_zh = to_simplified(translation.get("title_zh"))
+            summary_zh = sanitize_summary(to_simplified(translation.get("summary_zh")))
+            if (
+                not is_readable_chinese_title(title_zh)
+                or is_generic_title(title_zh)
+                or not summary_zh
+                or is_generic_summary(summary_zh)
+                or len(re.findall(r"[\u3400-\u9fff]", summary_zh)) < 25
+            ):
+                continue
+            translated.append({**item, "title_zh": title_zh, "summary_zh": summary_zh})
+    return translated
+
+
 def discover_official_reports(
     persistent_path: Path,
     *,
@@ -349,11 +464,17 @@ def discover_official_reports(
     found: list[dict] = []
     failures: list[dict] = []
     try:
-        found.extend(_world_bank_daily_candidates(current.get("reports") or [], max_new))
+        found.extend(_world_bank_daily_candidates(current.get("reports") or [], min(2, max_new)))
     except Exception as exc:
         failures.append({"publisher": "世界银行", "error": type(exc).__name__})
+    # Rotate the first scanned source by day so a temporarily slow page cannot
+    # monopolise the fixed daily budget. Each publisher contributes at most two.
+    if sources:
+        offset = datetime.now(UTC).date().toordinal() % len(sources)
+        sources = sources[offset:] + sources[:offset]
+    per_publisher: dict[str, int] = {}
     for source in sources:
-        if len(found) >= max_new:
+        if len(found) >= max_new * 2:
             break
         try:
             response = fetch_resource(str(source["listing_url"]), max_bytes=2_000_000, accept="text/html,application/xhtml+xml")
@@ -366,49 +487,58 @@ def discover_official_reports(
                 host = (urlparse(url).hostname or "").lower()
                 if allowed_hosts and not any(host == allowed or host.endswith("." + allowed) for allowed in allowed_hosts):
                     continue
-                if not title or len(title) < 8 or not any(term in f"{title} {url}".lower() for term in REPORT_TERMS):
+                if not _report_title_in_scope(title):
                     continue
                 if _record_key({"report_url": url}) in existing_urls or any(item.get("report_url") == url for item in found):
                     continue
-                year_match = re.search(r"\b(202[3-9])\b", f"{title} {url}")
-                if year_match and int(year_match.group(1)) < datetime.now(UTC).year - 3:
+                if per_publisher.get(str(source["publisher"]), 0) >= 2:
                     continue
-                found.append({
+                candidate = _candidate_detail({
                     "title_original": title,
                     "publisher": source["publisher"],
                     "publisher_type": source.get("publisher_type", "政府或国际组织"),
                     "country_or_region": source.get("country_or_region", "国际组织"),
-                    "year": int(year_match.group(1)) if year_match else datetime.now(UTC).year,
-                    "published_at": f"{year_match.group(1)}-01-01" if year_match else datetime.now(UTC).date().isoformat(),
                     "language": source.get("language", "English"),
                     "topics": _topics_for(title),
                     "report_url": url,
                     "source_url": source["listing_url"],
                     "discovery_method": "official_listing_daily_scan",
                 })
-                if len(found) >= max_new:
+                if not candidate:
+                    continue
+                found.append(candidate)
+                per_publisher[str(source["publisher"])] = per_publisher.get(str(source["publisher"]), 0) + 1
+                if per_publisher[str(source["publisher"])] >= 2:
                     break
         except Exception as exc:
             failures.append({"publisher": source.get("publisher"), "error": type(exc).__name__})
-        if len(found) >= max_new:
-            break
-
     translated: list[dict] = []
-    if found and model:
-        result = model.complete_json(
-            "你是能源报告目录编辑。逐义忠实翻译英文报告标题；如提供原文摘要，再将摘要压缩为一段60至120字中文概括。不得虚构数字、结论或发布日期；没有摘要时summary_zh留空。只返回JSON对象，键为reports。",
-            {"reports": [{
-                "index": index, "title": item["title_original"], "publisher": item["publisher"],
-                "abstract": str(item.get("abstract_original") or "")[:1200],
-            } for index, item in enumerate(found[:max_new])]},
-        )
-        by_index = {int(item.get("index")): item for item in result.get("reports") or [] if str(item.get("index", "")).isdigit()}
-        for index, item in enumerate(found[:max_new]):
-            translation = by_index.get(index, {})
-            title_zh = str(translation.get("title_zh") or "").strip()
-            if not title_zh or is_generic_title(title_zh):
-                continue
-            translated.append({**item, "title_zh": title_zh, "summary_zh": str(translation.get("summary_zh") or "").strip()})
+    repaired = 0
+    if model:
+        repair_pool = _round_robin_publishers([
+            item for item in current.get("reports") or []
+            if not item.get("summary_zh") and is_readable_chinese_title(item.get("title_zh"))
+        ], max_new * 3)
+        repair_candidates = []
+        for item in repair_pool:
+            candidate = item
+            if len(str(item.get("abstract_original") or "")) < 80:
+                try:
+                    candidate = _candidate_detail(item)
+                except Exception as exc:
+                    failures.append({"publisher": item.get("publisher"), "error": type(exc).__name__})
+                    candidate = None
+            if candidate:
+                repair_candidates.append(candidate)
+            if len(repair_candidates) >= max_new:
+                break
+        work = repair_candidates + _round_robin_publishers(found, max_new)
+        try:
+            translated = _translate_report_rows(model, work)
+            repair_keys = {_record_key(item) for item in repair_candidates}
+            repaired = sum(_record_key(item) in repair_keys for item in translated)
+        except Exception as exc:
+            failures.append({"publisher": "模型编译", "error": type(exc).__name__})
 
     merged = _merge_records(current.get("reports") or [], translated)
     current.update({
@@ -418,4 +548,10 @@ def discover_official_reports(
     })
     persistent_path.parent.mkdir(parents=True, exist_ok=True)
     persistent_path.write_text(json.dumps(current, ensure_ascii=False, indent=2), encoding="utf-8")
-    return {"status": "ok", "discovered": len(found), "added": len(translated), "failures": failures}
+    return {
+        "status": "ok",
+        "discovered": len(found),
+        "added": max(0, len(translated) - repaired),
+        "summaries_repaired": repaired,
+        "failures": failures,
+    }

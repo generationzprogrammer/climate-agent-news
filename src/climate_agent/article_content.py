@@ -42,6 +42,10 @@ class _ArticleParser(HTMLParser):
         self.article_paragraphs: list[str] = []
         self.page_paragraphs: list[str] = []
         self.descriptions: list[str] = []
+        self.titles: list[str] = []
+        self.published_dates: list[str] = []
+        self.title_depth = 0
+        self.title_parts: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
@@ -56,11 +60,26 @@ class _ArticleParser(HTMLParser):
                 text = _clean_text(attr.get("content", ""))
                 if text:
                     self.descriptions.append(text)
+            if key in {"og:title", "twitter:title"}:
+                text = _clean_text(attr.get("content", ""))
+                if text:
+                    self.titles.append(text)
+            if key in {"article:published_time", "date", "datepublished", "pubdate", "dc.date", "date.created", "date.issued", "parsely-pub-date"}:
+                value = _clean_text(attr.get("content", ""))
+                if value:
+                    self.published_dates.append(value)
+        if tag == "time" and attr.get("datetime"):
+            self.published_dates.append(_clean_text(attr["datetime"]))
+        if tag == "title":
+            self.title_depth += 1
+            self.title_parts = []
         if tag == "p" and not self.ignore_depth:
             self.paragraph_depth += 1
             self.paragraph_parts = []
 
     def handle_data(self, data: str) -> None:
+        if self.title_depth:
+            self.title_parts.append(data)
         if self.paragraph_depth and not self.ignore_depth:
             self.paragraph_parts.append(data)
 
@@ -74,6 +93,12 @@ class _ArticleParser(HTMLParser):
                     self.article_paragraphs.append(text)
             self.paragraph_depth = max(0, self.paragraph_depth - 1)
             self.paragraph_parts = []
+        if tag == "title" and self.title_depth:
+            text = _clean_text(" ".join(self.title_parts))
+            if text:
+                self.titles.append(text)
+            self.title_depth = max(0, self.title_depth - 1)
+            self.title_parts = []
         if tag == "article" and self.article_depth:
             self.article_depth -= 1
         if tag in self._ignored and self.ignore_depth:
@@ -85,12 +110,18 @@ def extract_article_text(html: str, *, limit: int = MAX_EXCERPT_CHARS) -> dict:
     parser = _ArticleParser()
     parser.feed(html)
     body_match = re.search(r'"articleBody"\s*:\s*("(?:\\.|[^"\\])*")', html, re.IGNORECASE)
+    date_match = re.search(r'"datePublished"\s*:\s*("(?:\\.|[^"\\])*")', html, re.IGNORECASE)
     article_body = ""
     if body_match:
         try:
             article_body = _clean_text(json.loads(body_match.group(1)))
         except (json.JSONDecodeError, TypeError):
             article_body = ""
+    if date_match and not parser.published_dates:
+        try:
+            parser.published_dates.append(_clean_text(json.loads(date_match.group(1))))
+        except (json.JSONDecodeError, TypeError):
+            pass
     candidates = []
     if article_body:
         candidates.append(("jsonld_article_body", article_body))
@@ -101,9 +132,18 @@ def extract_article_text(html: str, *, limit: int = MAX_EXCERPT_CHARS) -> dict:
     if parser.descriptions:
         candidates.append(("page_description", parser.descriptions[0]))
     if not candidates:
-        return {"text": "", "basis": "none"}
+        return {
+            "text": "", "basis": "none",
+            "title": parser.titles[0] if parser.titles else "",
+            "published_at": parser.published_dates[0] if parser.published_dates else "",
+        }
     basis, text = max(candidates, key=lambda pair: len(pair[1]))
-    return {"text": text[:limit].strip(), "basis": basis}
+    return {
+        "text": text[:limit].strip(),
+        "basis": basis,
+        "title": parser.titles[0] if parser.titles else "",
+        "published_at": parser.published_dates[0] if parser.published_dates else "",
+    }
 
 
 @lru_cache(maxsize=64)

@@ -5,6 +5,29 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from .historical_backfill import archive_item_to_historical_record
+from .taxonomy import country_codes_for, event_tags_for, organization_tags_for
+
+
+def _enrich_taxonomy(record: dict) -> tuple[dict, bool]:
+    """Apply the current controlled vocabularies to historical rows in place."""
+    text = " ".join(str(record.get(key) or "") for key in (
+        "title_original", "summary_source", "title_zh", "summary_zh", "source_name",
+    ))
+    metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
+    text = f"{text} {metadata.get('title_zh', '')} {metadata.get('summary_zh', '')}"
+    expected = {
+        "country_codes": country_codes_for(
+            text,
+            places=list(record.get("places") or []),
+            country_tags=list(record.get("country_tags") or []),
+        ),
+        "organization_tags": organization_tags_for(text),
+        "event_tags": event_tags_for(text),
+    }
+    changed = any(record.get(key) != value for key, value in expected.items())
+    if changed:
+        record = {**record, **expected}
+    return record, changed
 
 
 def merge_archive_into_corpus(
@@ -17,6 +40,7 @@ def merge_archive_into_corpus(
     """Incrementally merge quality-gated daily records into the historical corpus."""
     rows: list[dict] = []
     existing_keys: set[str] = set()
+    taxonomy_updated = 0
     if corpus_path.exists():
         for line in corpus_path.read_text(encoding="utf-8").splitlines():
             if not line.strip():
@@ -25,6 +49,8 @@ def merge_archive_into_corpus(
                 record = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            record, changed = _enrich_taxonomy(record)
+            taxonomy_updated += int(changed)
             key = str(record.get("canonical_url") or record.get("record_id") or "").strip()
             if key:
                 rows.append(record)
@@ -77,9 +103,9 @@ def merge_archive_into_corpus(
         "updated_at": now,
         "incremental_archive_merge": {
             "added": added,
-            "updated": 0,
+            "updated": taxonomy_updated,
             "archive_records_seen": len(archive.get("records") or []),
         },
     })
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-    return {"records": len(rows), "added": added, "updated": 0, "updated_at": now}
+    return {"records": len(rows), "added": added, "updated": taxonomy_updated, "updated_at": now}

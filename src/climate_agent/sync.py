@@ -24,6 +24,7 @@ GOOGLE_NEWS_EXCLUDE_TERMS = (
     "basketball", "baseball", "golf", "tennis", "horoscope", "recipe",
     "analyst coverage count",
 )
+CURRENT_COP_TERM = f"COP{max(1, datetime.now(UTC).year - 1995)}"
 
 # Several short searches are more reliable than one long Boolean expression in
 # Google News RSS.  They also make the daily recall less dependent on GDELT,
@@ -35,8 +36,12 @@ GOOGLE_NEWS_QUERIES = (
     '(policy OR project OR investment OR technology) when:1d',
     '(China OR "United States" OR Africa OR "Latin America" OR Australia) '
     '("climate change" OR "energy transition" OR "clean energy") when:1d',
+    '(Russia OR Ukraine OR Poland OR Kazakhstan OR Uzbekistan OR Egypt OR Morocco OR Japan OR "South Korea") '
+    '(climate OR energy OR electricity OR oil OR gas OR renewable) when:1d',
+    f'(G20 OR G7 OR BRICS OR APEC OR ASEAN OR UNFCCC OR {CURRENT_COP_TERM} OR IEA OR IRENA OR OECD '
+    'OR "Shanghai Cooperation Organisation" OR "African Union") '
+    '(climate OR energy OR emissions OR technology) when:1d',
 )
-
 GDELT_PROFILES = {
     "API001": {
         "query": '("climate change" OR UNFCCC OR "climate finance" OR NDC)',
@@ -74,7 +79,7 @@ CHINA_DISCOVERY_DOMAINS = (
 )
 
 TOPIC_RULES = {
-    "国际气候谈判": ("unfccc", "cop30", "cop31", "climate talks", "climate summit", "negotiat"),
+    "国际气候谈判": ("unfccc", "cop30", "cop31", CURRENT_COP_TERM.lower(), "climate talks", "climate summit", "negotiat"),
     "国家气候承诺": ("ndc", "nationally determined", "climate target", "2035 target"),
     "气候资金": ("climate finance", "green climate fund", "loss and damage", "adaptation fund", "finance goal"),
     "能源与排放": (
@@ -91,7 +96,7 @@ TOPIC_RULES = {
 }
 
 CLIMATE_SIGNAL_TERMS = (
-    "climate", "unfccc", "cop30", "cop31", "ndc", "emission", "carbon",
+    "climate", "unfccc", "cop30", "cop31", CURRENT_COP_TERM.lower(), "ndc", "emission", "carbon",
     "net zero", "renewable", "fossil fuel", "methane", "energy transition",
     "climate finance", "loss and damage", "adaptation", "resilience",
     "heat wave", "heatwave", "extreme heat", "wildfire", "wildfires", "drought",
@@ -102,6 +107,13 @@ CLIMATE_SIGNAL_TERMS = (
     "energy startup", "energy company", "clean technology", "fusion energy",
     "气候", "碳", "排放", "可再生能源", "净零", "低碳", "绿色转型",
     "高温", "热浪", "野火", "干旱", "洪水", "风暴", "飓风",
+)
+
+UNDERCOVERED_GEO_TERMS = (
+    "russia", "russian", "ukraine", "poland", "romania", "czech", "eastern europe",
+    "kazakhstan", "uzbekistan", "kyrgyzstan", "tajikistan", "turkmenistan", "central asia",
+    "egypt", "morocco", "algeria", "tunisia", "libya", "north africa",
+    "japan", "japanese", "south korea", "korean",
 )
 
 NUMBER_PATTERN = re.compile(
@@ -122,6 +134,8 @@ def _analyse(article: NormalizedArticle, authority: int) -> dict:
         score = min(score, 38)
     if any(term in haystack for term in ("china", "chinese", "beijing")):
         score = min(100, score + 12)
+    if any(term in haystack for term in UNDERCOVERED_GEO_TERMS):
+        score = min(100, score + 6)
     if article.source_id in {"OFF001", "OFF006"}:
         score = min(100, score + 8)
     if "国际气候谈判" in topics or "国家气候承诺" in topics:

@@ -162,6 +162,9 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
   text-align: right;
 }
 .section-heading .team-link { margin-left: 14px; vertical-align: middle; }
+.compact-filter { display: grid; min-width: 230px; gap: 7px; }
+.compact-filter span { color: #626d7c; font: 11px var(--mono); letter-spacing: .08em; }
+.compact-filter select { height: 42px; padding: 0 12px; border: 1px solid #c4cbd6; background: #fff; color: var(--ink); font: 14px var(--sans); }
 
 .metrics-strip {
   display: grid;
@@ -379,7 +382,7 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 .report-kpis b { display: block; }
 .report-kpis span { color: #687485; font: 750 11px var(--mono); letter-spacing: .06em; }
 .report-kpis b { margin-top: 7px; color: var(--blue); font: 700 22px var(--mono); }
-.report-search-panel { display: grid; grid-template-columns: minmax(260px, 1.35fr) minmax(150px, .55fr) minmax(170px, .6fr) 125px 120px; gap: 12px; margin-bottom: 18px; padding: 18px; border: 1px solid var(--line); background: var(--soft); }
+.report-search-panel { display: grid; grid-template-columns: minmax(240px, 1.25fr) minmax(135px, .5fr) minmax(150px, .55fr) minmax(145px, .55fr) 105px 105px; gap: 12px; margin-bottom: 18px; padding: 18px; border: 1px solid var(--line); background: var(--soft); }
 .report-search-panel label,
 .report-search-panel .result-count { display: flex; flex-direction: column; gap: 8px; }
 .report-search-panel label > span { color: #626d7c; font: 11px var(--mono); letter-spacing: .08em; }
@@ -431,6 +434,7 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 .signal-content { display: flex; flex-direction: column; padding: 27px 29px; }
 .signal-meta { display: flex; align-items: center; gap: 9px; }
 .topic { color: var(--blue); font-size: 13px; font-weight: 750; }
+.signal-meta span:not(.topic) { padding: 3px 6px; background: #eef2f7; color: #586577; font: 700 11px var(--mono); }
 .signal-card h3 { margin: 19px 0 12px; font: 600 25px/1.42 var(--serif); }
 .signal-card p { margin: 0; color: #46515f; font-size: 16px; line-height: 1.8; }
 .signal-atoms { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 4px; }
@@ -633,7 +637,7 @@ main { width: min(1520px, 100%); margin: 0 auto; padding: 0 clamp(20px, 4vw, 60p
 .chat-form button:hover { background: var(--blue-dark); }
 
 .database-section { padding-top: 112px; }
-.search-panel { display: grid; grid-template-columns: minmax(320px, 1.6fr) minmax(190px, .6fr) 150px; gap: 14px; margin-bottom: 16px; padding: 19px; border: 1px solid var(--line); background: var(--soft); }
+.search-panel { display: grid; grid-template-columns: minmax(260px, 1.3fr) minmax(160px, .55fr) minmax(160px, .55fr) minmax(155px, .5fr) 120px; gap: 12px; margin-bottom: 16px; padding: 19px; border: 1px solid var(--line); background: var(--soft); }
 .search-panel label,
 .result-count { display: flex; flex-direction: column; gap: 8px; }
 .search-panel label > span,
@@ -716,6 +720,10 @@ footer a:hover { color: var(--blue); }
 }
 .modal-actions a { background: #eef3f9; color: var(--blue); }
 .modal-actions button.secondary { background: #eef3f9; color: #344153; }
+.modal-actions button { min-height: 46px; touch-action: manipulation; }
+.modal-actions button:disabled { cursor: wait; opacity: .62; }
+.subscribe-fallback { display: inline-block; margin-top: 12px; color: var(--blue); font-size: 13px; }
+.subscribe-fallback[hidden] { display: none; }
 .modal-close {
   position: absolute;
   top: 14px;

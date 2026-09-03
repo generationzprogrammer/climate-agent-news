@@ -16,6 +16,7 @@ from .energy_view import write_energy_view
 from .energy_reports import write_energy_report_database
 from .pdf_brief import write_daily_brief_pdf, write_weekly_report_pdf
 from .site_metrics import write_site_metrics
+from .taxonomy import public_taxonomy
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -68,6 +69,9 @@ def export_static_site(
     dashboard_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     (data_dir / "news_archive.json").write_text(
         json.dumps(archive, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    (data_dir / "taxonomy.json").write_text(
+        json.dumps(public_taxonomy(), ensure_ascii=False, indent=2), encoding="utf-8"
     )
     (data_dir / "daily_brief.md").write_text(render_markdown(payload), encoding="utf-8")
     pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief.pdf")

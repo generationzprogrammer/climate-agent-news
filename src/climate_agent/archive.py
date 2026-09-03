@@ -9,6 +9,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from .summary_utils import intelligence_keywords, is_generic_summary, is_generic_title
+from .taxonomy import country_codes_for, event_tags_for, organization_tags_for
 
 
 ARCHIVE_VERSION = "1.0"
@@ -205,6 +206,14 @@ def _record(item: dict, now: str, previous: dict | None = None) -> dict:
     topics = list(dict.fromkeys(item.get("topics") or []))[:6]
     numbers = list(dict.fromkeys(item.get("numbers") or []))[:6]
     places = _repair_places(item)
+    taxonomy_text = " ".join(str(item.get(key) or "") for key in (
+        "title_original", "title_zh", "summary_source", "summary_zh", "source_name",
+    ))
+    country_codes = country_codes_for(
+        taxonomy_text, places=places, country_tags=list(item.get("country_tags") or [])
+    )
+    organization_tags = organization_tags_for(taxonomy_text)
+    event_tags = event_tags_for(taxonomy_text)
     return {
         "record_id": item.get("article_id"),
         "article_id": item.get("article_id"),
@@ -227,6 +236,9 @@ def _record(item: dict, now: str, previous: dict | None = None) -> dict:
         "topics": topics,
         "numbers": numbers,
         "places": places,
+        "country_codes": country_codes,
+        "organization_tags": organization_tags,
+        "event_tags": event_tags,
         "translation_status": item.get("translation_status"),
         "fact_status": item.get("fact_status"),
         "content_hash": item.get("content_hash"),
@@ -250,6 +262,9 @@ def _record(item: dict, now: str, previous: dict | None = None) -> dict:
             "topic_atoms": topics,
             "number_atoms": numbers,
             "geo_atoms": [place.get("name_zh") for place in places if place.get("name_zh")],
+            "country_code_atoms": [tag["alpha3"] for tag in country_codes],
+            "organization_atoms": organization_tags,
+            "event_atoms": event_tags,
             "decision_atom": item.get("why_zh"),
         },
         "first_archived_at": (previous or {}).get("first_archived_at", now),
@@ -293,11 +308,26 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
         # deterministic migration value and remains above the public gate.
         record.setdefault("relevance_score", int(record.get("quality", {}).get("score") or 45))
         record["places"] = _repair_places(record)
+        taxonomy_text = " ".join(str(record.get(key) or "") for key in (
+            "title_original", "title_zh", "summary_source", "summary_zh", "source_name",
+        ))
+        record["country_codes"] = country_codes_for(
+            taxonomy_text,
+            places=record["places"],
+            country_tags=list(record.get("country_tags") or []),
+        )
+        record["organization_tags"] = organization_tags_for(taxonomy_text)
+        record["event_tags"] = event_tags_for(taxonomy_text)
         record["quality"] = quality_result(record)
         if record.get("molecule"):
             record["molecule"]["geo_atoms"] = [
                 place.get("name_zh") for place in record["places"] if place.get("name_zh")
             ]
+            record["molecule"]["country_code_atoms"] = [
+                tag["alpha3"] for tag in record["country_codes"]
+            ]
+            record["molecule"]["organization_atoms"] = record["organization_tags"]
+            record["molecule"]["event_atoms"] = record["event_tags"]
     before = len(existing.get("records", []))
     added = updated = rejected = 0
     now = datetime.now(UTC).isoformat()

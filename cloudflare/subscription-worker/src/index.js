@@ -20,9 +20,10 @@ async function keyFor(email) {
 }
 
 function allowedOrigin(request, env) {
-  const configured = String(env.CLIMATE_ALLOWED_ORIGIN || "https://generationzprogrammer.github.io").replace(/\/$/, "");
+  const configured = String(env.CLIMATE_ALLOWED_ORIGIN || "https://generationzprogrammer.github.io")
+    .split(",").map(value => value.trim().replace(/\/$/, "")).filter(Boolean);
   const origin = String(request.headers.get("origin") || "").replace(/\/$/, "");
-  return origin === configured ? configured : "";
+  return configured.includes(origin) ? origin : "";
 }
 
 export default {
