@@ -24,6 +24,7 @@ from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
 from climate_agent.source_health import source_is_due, update_source_health
 from climate_agent.site_metrics import update_cloudflare_visitor_history
+from climate_agent.spotlights import build_spotlights
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
 from climate_agent.taxonomy import country_codes_for, event_tags_for, organization_tags_for, public_taxonomy
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
@@ -172,9 +173,11 @@ class CoreTests(unittest.TestCase):
         self.assertIn("climate", url.lower())
         self.assertNotIn("{query}", url)
         urls = _google_news_urls(endpoint)
-        self.assertEqual(len(urls), 6)
+        self.assertEqual(len(urls), 8)
         self.assertTrue(all("when%3A1d" in item for item in urls))
         self.assertTrue(any("Kazakhstan" in item for item in urls))
+        self.assertTrue(any("nccs.gov.sg" in item for item in urls))
+        self.assertTrue(any("product+carbon+footprint" in item for item in urls))
         climate = NormalizedArticle(
             article_id="g", source_id="API004", source_url="https://news.google.com/rss",
             canonical_url="https://example.org/climate", title="Climate summit calls for faster clean energy finance",
@@ -520,9 +523,22 @@ class CoreTests(unittest.TestCase):
         self.assertLess(html.index('id="map"'), html.index('class="hero"'))
         self.assertIn("function renderEnergyReports", app)
         self.assertIn("function companyProfileHtml", app)
+        self.assertIn("function renderSpotlights", app)
+        self.assertIn('id="chinaCarbon"', html)
+        self.assertIn('id="singapore"', html)
+        self.assertIn('id="languageToggle"', html)
         self.assertNotIn("location.href = `mailto:", app)
         self.assertNotIn("中国位于地图中部偏右", html)
         self.assertNotIn("先拆解时间、地区和议题", html)
+
+    def test_spotlights_include_reviewed_official_material(self) -> None:
+        payload = build_spotlights(
+            {"records": []}, ROOT / "config" / "climate_spotlights.json"
+        )
+        self.assertGreaterEqual(len(payload["china_carbon_market"]["records"]), 7)
+        self.assertGreaterEqual(len(payload["singapore"]["records"]), 7)
+        self.assertEqual(len(payload["singapore"]["agencies"]), 6)
+        self.assertTrue(all(item["url"].startswith("https://") for item in payload["singapore"]["records"]))
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
         self.seed_publishable_article()

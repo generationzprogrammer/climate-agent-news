@@ -16,6 +16,7 @@ from .energy_view import write_energy_view
 from .energy_reports import write_energy_report_database
 from .pdf_brief import write_daily_brief_pdf, write_weekly_report_pdf
 from .site_metrics import write_site_metrics
+from .spotlights import write_spotlights
 from .taxonomy import public_taxonomy
 
 
@@ -103,6 +104,11 @@ def export_static_site(
         ],
     }
     (data_dir / "team.json").write_text(json.dumps(team, ensure_ascii=False, indent=2), encoding="utf-8")
+    spotlights = write_spotlights(
+        archive,
+        Path(__file__).resolve().parents[2] / "config" / "climate_spotlights.json",
+        data_dir / "climate_spotlights.json",
+    )
     energy_view = write_energy_view(payload, archive, data_dir, limit=archive_limit)
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"
@@ -160,6 +166,8 @@ def export_static_site(
         "corpus_analytics_records": (analytics or {}).get("records", 0),
         "site_metrics_points": len(site_metrics.get("archive_cumulative", [])),
         "analytics_beacon": analytics_beacon,
+        "china_carbon_spotlight": len(spotlights["china_carbon_market"]["records"]),
+        "singapore_spotlight": len(spotlights["singapore"]["records"]),
         "quality_gate": "passed",
         "generated_at": payload["meta"]["generated_at"],
     }

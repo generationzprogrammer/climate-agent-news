@@ -6,34 +6,36 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>ClimateText Lab｜国际气候情报与文本数据库</title>
-  <link rel="stylesheet" href="./styles.css?v=20260903-1">
+  <link rel="stylesheet" href="./styles.css?v=20260906-2">
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="返回顶部">
       <span class="brand-symbol" aria-hidden="true">CT</span>
-      <span><b>ClimateText Lab</b><small>国际气候情报与文本数据库</small></span>
+      <span><b>ClimateText Lab</b><small data-i18n="siteSubtitle">国际气候情报与文本数据库</small></span>
     </a>
     <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="打开页面导航">菜单</button>
     <nav aria-label="页面导航">
-      <a href="#map">全球现场</a>
-      <a href="#today">今日情报</a>
-      <a href="#analytics">语料分析</a>
-      <a href="#assistant">情报问答</a>
-      <a href="#database">文本数据库</a>
+      <a href="#map" data-i18n="navMap">全球现场</a>
+      <a href="#today" data-i18n="navToday">今日情报</a>
+      <details class="climate-only-nav topic-nav"><summary data-i18n="navFocus">专题</summary><div><a href="#chinaCarbon" data-i18n="navChinaCarbon">中国碳市场</a><a href="#singapore" data-i18n="navSingapore">新加坡</a></div></details>
+      <a href="#analytics" data-i18n="navAnalytics">语料分析</a>
+      <a href="#assistant" data-i18n="navAssistant">情报问答</a>
+      <a href="#database" data-i18n="navDatabase">文本数据库</a>
       <a class="energy-only-nav" id="companyNav" href="#companies" hidden>企业情报</a>
       <a class="energy-only-nav" id="reportNav" href="#energyReports" hidden>能源报告与数据库</a>
-      <button class="team-link nav-team-link" id="teamOpen" type="button">团队信息</button>
+      <button class="team-link nav-team-link" id="teamOpen" type="button" data-i18n="team">团队信息</button>
     </nav>
+    <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">EN</button>
     <button class="mode-toggle" id="modeToggle" type="button">切换到能源技术</button>
     <div class="brief-actions">
-      <a class="data-download" id="briefDownload" href="./data/daily_brief.pdf" download>下载今日简报</a>
-      <button class="subscribe-button" id="subscribeOpen" type="button">订阅</button>
+      <a class="data-download" id="briefDownload" href="./data/daily_brief.pdf" download data-i18n="download">下载今日简报</a>
+      <button class="subscribe-button" id="subscribeOpen" type="button" data-i18n="subscribe">订阅</button>
     </div>
   </header>
   <aside class="mobile-menu" id="mobileMenu" hidden aria-label="移动端页面导航">
     <nav>
-      <a href="#map">全球现场</a><a href="#today">今日情报</a><a href="#analytics">语料分析</a><a href="#assistant">情报问答</a><a href="#database">文本数据库</a>
+      <a href="#map" data-i18n="navMap">全球现场</a><a href="#today" data-i18n="navToday">今日情报</a><a class="climate-only-nav" href="#chinaCarbon" data-i18n="navChinaCarbon">中国碳市场</a><a class="climate-only-nav" href="#singapore" data-i18n="navSingapore">新加坡</a><a href="#analytics" data-i18n="navAnalytics">语料分析</a><a href="#assistant" data-i18n="navAssistant">情报问答</a><a href="#database" data-i18n="navDatabase">文本数据库</a>
       <a class="energy-only-nav" id="mobileCompanyNav" href="#companies" hidden>企业情报</a>
       <a class="energy-only-nav" id="mobileReportNav" href="#energyReports" hidden>能源报告与数据库</a>
     </nav>
@@ -41,6 +43,7 @@
       <button class="team-link" data-open-team type="button">团队信息</button>
       <button class="subscribe-button" data-open-subscribe type="button">订阅周报</button>
       <button class="mode-toggle" id="mobileModeToggle" type="button">切换到能源技术</button>
+      <button class="language-toggle" id="mobileLanguageToggle" type="button">English</button>
       <a class="data-download" href="./data/daily_brief.pdf" download>下载今日简报</a>
     </div>
   </aside>
@@ -48,11 +51,11 @@
   <main id="top">
     <section class="metrics-strip" aria-label="站点更新曲线">
       <article class="mini-chart-card">
-        <div><span>TEXT ARCHIVE</span><h2>累计气候文本档案</h2></div>
+        <div><span>TEXT ARCHIVE</span><h2 data-i18n="archiveChart">累计气候文本档案</h2></div>
         <div class="mini-chart" id="archiveGrowthChart"><div class="skeleton small"></div></div>
       </article>
       <article class="mini-chart-card">
-        <div><span>SITE TRAFFIC</span><h2>累计访客/访问量</h2></div>
+        <div><span>SITE TRAFFIC</span><h2 data-i18n="visitorChart">累计访客/访问量</h2></div>
         <div class="mini-chart" id="visitorGrowthChart"><div class="skeleton small"></div></div>
       </article>
     </section>
@@ -65,8 +68,8 @@
       <div class="map-layout">
         <div class="map-canvas" id="mapCanvas">
           <div class="map-period-toggle" role="group" aria-label="地图情报时段">
-            <button class="active" type="button" data-map-period="today">今日队列 <span id="todayMapCount">0</span></button>
-            <button type="button" data-map-period="week">本周 <span id="weekMapCount">0</span></button>
+            <button class="active" type="button" data-map-period="today"><i data-i18n="todayQueue">今日队列</i> <span id="todayMapCount">0</span></button>
+            <button type="button" data-map-period="week"><i data-i18n="thisWeek">本周</i> <span id="weekMapCount">0</span></button>
           </div>
           <svg id="worldMap" viewBox="0 0 1000 500" role="img" aria-label="全球气候事件地图">
             <rect width="1000" height="500" class="map-base"></rect>
@@ -78,6 +81,24 @@
         <aside class="map-detail" id="mapDetail"><span>选择红点或地点</span><h2>查看对应气候情报</h2><p>这里将显示中文标题、概要、来源、日期和原文入口。</p></aside>
       </div>
       <div class="map-place-list" id="mapPlaceList" aria-label="地图地点快捷入口"></div>
+    </section>
+
+    <section class="section spotlight-section climate-only-section" id="chinaCarbon">
+      <div class="section-heading">
+        <div><p class="overline">CHINA CARBON MARKET</p><h2 data-i18n="chinaCarbonTitle">中国碳市场</h2></div>
+      </div>
+      <div class="spotlight-tabs" id="carbonTopicTabs" role="group" aria-label="中国碳市场分类"></div>
+      <div class="spotlight-grid" id="carbonSpotlightList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section spotlight-section climate-only-section" id="singapore">
+      <div class="section-heading">
+        <div><p class="overline">SINGAPORE CLIMATE DESK</p><h2 data-i18n="singaporeTitle">新加坡气候政策与行动</h2></div>
+        <p id="singaporeCoverage"></p>
+      </div>
+      <div class="agency-grid" id="singaporeAgencies"><div class="skeleton small"></div></div>
+      <div class="spotlight-tabs" id="singaporeAgencyTabs" role="group" aria-label="新加坡机构分类"></div>
+      <div class="spotlight-grid" id="singaporeSpotlightList"><div class="skeleton"></div></div>
     </section>
 
     <section class="section company-section" id="companies" hidden>
@@ -280,6 +301,6 @@
     </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260903-1" defer></script>
+  <script src="./app.js?v=20260906-2" defer></script>
 </body>
 </html>

@@ -1,14 +1,37 @@
 const state = {
-  mode: "climate", datasets: {},
+  mode: "climate", language: "zh", datasets: {},
   dashboard: null, archive: null, analytics: null, filtered: [], visible: 18,
   mapPeriod: "today", mapTopology: null,
   assistant: { lastRecords: [], lastPlan: null },
   siteMetrics: null, subscription: null, team: null,
   companyData: null, companyFiltered: [], companyVisible: 12, companyMapPeriod: "today",
   reportData: null, reportFiltered: [], reportVisible: 12,
+  spotlights: null, carbonTopic: "", singaporeAgency: "",
   taxonomy: { organization_groups: [], countries: [] },
 };
 const $ = id => document.getElementById(id);
+const UI_TEXT = {
+  zh: {
+    navMap: "全球现场", navToday: "今日情报", navFocus: "专题", navChinaCarbon: "中国碳市场",
+    navSingapore: "新加坡", navAnalytics: "语料分析", navAssistant: "情报问答", navDatabase: "文本数据库",
+    chinaCarbonTitle: "中国碳市场", singaporeTitle: "新加坡气候政策与行动", all: "全部", source: "查看原文 ↗",
+    archive: "站内新增", agencyAll: "全部机构", coverage: "官方机构 · 近一年", siteSubtitle: "国际气候情报与文本数据库",
+    team: "团队信息", subscribe: "订阅", download: "下载今日简报", archiveChart: "累计气候文本档案", visitorChart: "累计访客/访问量",
+    todayQueue: "今日队列", thisWeek: "本周",
+  },
+  en: {
+    navMap: "Global desk", navToday: "Today", navFocus: "Focus", navChinaCarbon: "China carbon market",
+    navSingapore: "Singapore", navAnalytics: "Corpus", navAssistant: "Q&A", navDatabase: "Text database",
+    chinaCarbonTitle: "China carbon market", singaporeTitle: "Singapore climate policy and action", all: "All", source: "Open source ↗",
+    archive: "New from archive", agencyAll: "All agencies", coverage: "Official institutions · past 12 months", siteSubtitle: "International climate intelligence and text database",
+    team: "Team", subscribe: "Subscribe", download: "Download today's brief", archiveChart: "Cumulative climate text archive", visitorChart: "Cumulative visits / page views",
+    todayQueue: "Today", thisWeek: "This week",
+  },
+};
+const tr = key => UI_TEXT[state.language]?.[key] || UI_TEXT.zh[key] || key;
+const field = (item, zhKey, enKey) => state.language === "en"
+  ? (item?.[enKey] || item?.title_original || item?.[zhKey] || "")
+  : (item?.[zhKey] || item?.[enKey] || "");
 const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;",
 }[character]));
@@ -41,7 +64,9 @@ function intelligenceAtoms(item, limit = 5) {
 }
 
 function summaryOrAtoms(item) {
-  if (substantiveSummary(item.summary_zh)) return `<p>${esc(item.summary_zh)}</p>`;
+  const summary = state.language === "en" ? item.summary_source : item.summary_zh;
+  if (substantiveSummary(summary)) return `<p>${esc(summary)}</p>`;
+  if (state.language === "en") return "";
   const atoms = intelligenceAtoms(item);
   return atoms.length
     ? `<p>${esc([item.title_zh || item.title_original, atoms.join("、")].filter(Boolean).join("；"))}。</p>`
@@ -52,7 +77,7 @@ function formatDate(value, withTime = false) {
   if (!value) return "时间待核";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleString("zh-CN", withTime
+  return date.toLocaleString(state.language === "en" ? "en-GB" : "zh-CN", withTime
     ? { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false }
     : { year: "numeric", month: "2-digit", day: "2-digit" });
 }
@@ -157,9 +182,41 @@ const MODE_COPY = {
   },
 };
 
+const MODE_COPY_EN = {
+  climate: {
+    button: "Switch to energy technology", mapOverline: "GLOBAL CLIMATE SITUATION", mapTitle: "Global climate desk",
+    heroOverline: "DAILY CLIMATE TEXT INTELLIGENCE", heroTitle: "Understand global climate change every day<br><span>Priority intelligence and text database</span>",
+    heroLede: "Selected developments from international organisations, governments and specialist media, with source text, topics, locations, figures and links.",
+    datasetName: "CLIMATETEXT-100000", datasetTitle: "Daily climate text archive", todayOverline: "DAILY SIGNALS", todayTitle: "Today's priority climate intelligence",
+    analyticsTitle: "Corpus analytics", assistantOverline: "GROUNDED CLIMATE Q&A", assistantTitle: "Climate intelligence Q&A",
+    databaseOverline: "TEXT DATABASE", databaseTitle: "Climate news text database", downloadName: "Daily-climate-intelligence-brief",
+    quickPrompts: [["Today's brief", "Please provide today's climate briefing"], ["This week", "What climate intelligence matters this week?"], ["China and US", "Compare China and US climate intelligence this week"], ["Climate finance", "What recent climate-finance developments are in the archive?"]],
+  },
+  energy: {
+    button: "Switch to climate intelligence", mapOverline: "GLOBAL ENERGY TECHNOLOGY SITUATION", mapTitle: "Global energy technology desk",
+    heroOverline: "DAILY ENERGY TECHNOLOGY INTELLIGENCE", heroTitle: "Track energy transition and technology<br><span>Dynamic intelligence and text database</span>",
+    heroLede: "A source-linked view of energy transition, technology, digital energy, power systems, storage, wind, solar and hydrogen.",
+    datasetName: "ENERGYTECH-100000", datasetTitle: "Energy technology text archive", todayOverline: "ENERGY TECH SIGNALS", todayTitle: "Today's energy technology intelligence",
+    analyticsTitle: "Energy corpus analytics", assistantOverline: "GROUNDED ENERGY TECH Q&A", assistantTitle: "Energy technology Q&A",
+    databaseOverline: "ENERGY TEXT DATABASE", databaseTitle: "Energy technology text database", downloadName: "Daily-energy-technology-brief",
+    quickPrompts: [["Today's energy", "Please provide today's energy technology briefing"], ["Weekly trends", "What energy technology trends matter this week?"], ["China and US", "Compare China and US energy technology this week"], ["Digital grids", "What recent digital-energy, storage or grid developments are in the archive?"]],
+  },
+};
+
+function modeCopy() {
+  const table = state.language === "en" ? MODE_COPY_EN : MODE_COPY;
+  return table[state.mode] || table.climate;
+}
+
 function applyModeCopy() {
-  const copy = MODE_COPY[state.mode] || MODE_COPY.climate;
+  const copy = modeCopy();
   document.body.dataset.mode = state.mode;
+  document.body.dataset.language = state.language;
+  document.documentElement.lang = state.language === "en" ? "en" : "zh-CN";
+  document.querySelectorAll("[data-i18n]").forEach(element => { element.textContent = tr(element.dataset.i18n); });
+  [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => {
+    button.textContent = state.language === "en" ? "中文" : "EN";
+  });
   [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => { button.textContent = copy.button; });
   ["mapOverline", "mapTitle", "heroOverline", "heroLede", "datasetName", "datasetTitle",
     "todayOverline", "todayTitle", "analyticsTitle", "assistantOverline", "assistantTitle",
@@ -169,6 +226,7 @@ function applyModeCopy() {
   });
   if ($("heroTitle")) $("heroTitle").innerHTML = copy.heroTitle;
   const energyMode = state.mode === "energy";
+  document.querySelectorAll(".climate-only-nav, .climate-only-section").forEach(element => { element.hidden = energyMode; });
   if ($("companies")) $("companies").hidden = !energyMode;
   if ($("companyNav")) $("companyNav").hidden = !energyMode;
   if ($("energyReports")) $("energyReports").hidden = !energyMode;
@@ -219,9 +277,9 @@ function renderMeta() {
   $("todayTotal").textContent = (dashboard.intelligence || []).length;
   $("mapPlaceTotal").textContent = uniquePlaces.size;
   $("datasetVersion").textContent = formatDate(archive.updated_at, true);
-  $("generatedAt").textContent = `最近生成：${formatDate(dashboard.meta?.generated_at, true)}`;
+  $("generatedAt").textContent = `${state.language === "en" ? "Generated: " : "最近生成："}${formatDate(dashboard.meta?.generated_at, true)}`;
   const briefLink = $("briefDownload");
-  if (briefLink) briefLink.download = `${MODE_COPY[state.mode].downloadName}-${dashboard.meta?.date || "latest"}.pdf`;
+  if (briefLink) briefLink.download = `${modeCopy().downloadName}-${dashboard.meta?.date || "latest"}.pdf`;
 }
 
 function renderMiniLineChart(id, rows, label) {
@@ -250,7 +308,9 @@ function renderMiniLineChart(id, rows, label) {
   const tickIndexes = [...new Set(Array.from({ length: 5 }, (_, index) => Math.round(span * index / 4)))];
   const dateLabel = value => {
     const parts = String(value || "").split("-");
-    return parts.length === 3 ? `${Number(parts[1])}月${Number(parts[2])}日` : value;
+    if (parts.length !== 3) return value;
+    if (state.language === "en") return new Date(`${value}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    return `${Number(parts[1])}月${Number(parts[2])}日`;
   };
   element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}">
     ${yTicks.map(value => {
@@ -290,6 +350,52 @@ function setupTaxonomyFilters() {
     .join("");
 }
 
+function spotlightCard(item, label) {
+  const title = field(item, "title_zh", "title_en");
+  const summary = field(item, "summary_zh", "summary_en");
+  const source = field(item, "source_zh", "source_en") || item.source_name || "";
+  return `<article class="spotlight-card">
+    <div class="spotlight-card-meta"><span>${esc(label)}</span><span>${esc(formatDate(item.published_at))}</span></div>
+    <h3>${esc(title)}</h3>${summary ? `<p>${esc(summary)}</p>` : ""}
+    <div class="spotlight-card-foot"><span>${esc(source)}</span><a href="${esc(safeUrl(item.url || item.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
+  </article>`;
+}
+
+function renderSpotlights() {
+  const data = state.spotlights;
+  if (!data || !$('carbonSpotlightList')) return;
+  const carbon = data.china_carbon_market || { topics: [], records: [] };
+  const topics = [{ id: "", label_zh: "全部", label_en: "All" }, ...(carbon.topics || [])];
+  $('carbonTopicTabs').innerHTML = topics.map(topic => `<button class="${state.carbonTopic === topic.id ? "active" : ""}" type="button" data-carbon-topic="${esc(topic.id)}">${esc(field(topic, "label_zh", "label_en"))}</button>`).join("");
+  const englishReady = item => /[A-Za-z]{4}/.test(String(item.title_en || "")) && /[A-Za-z]{8}/.test(String(item.summary_en || ""));
+  const carbonRows = (carbon.records || [])
+    .filter(item => !state.carbonTopic || item.topic === state.carbonTopic)
+    .filter(item => state.language !== "en" || englishReady(item));
+  $('carbonSpotlightList').innerHTML = carbonRows.length ? carbonRows.map(item => {
+    const topic = (carbon.topics || []).find(value => value.id === item.topic);
+    return spotlightCard(item, item.dynamic ? tr("archive") : field(topic || {}, "label_zh", "label_en") || tr("archive"));
+  }).join("") : '<div class="empty compact"><b>No matching records</b></div>';
+  document.querySelectorAll('[data-carbon-topic]').forEach(button => button.addEventListener('click', () => {
+    state.carbonTopic = button.dataset.carbonTopic || ""; renderSpotlights();
+  }));
+
+  const singapore = data.singapore || { agencies: [], records: [] };
+  $('singaporeCoverage').textContent = tr("coverage");
+  $('singaporeAgencies').innerHTML = (singapore.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><span>${esc(field(agency, "parent_zh", "parent_en"))}</span><i>${esc(agency.id)} ↗</i></a>`).join("");
+  const agencies = [{ id: "", name_zh: "全部机构", name_en: "All agencies" }, ...(singapore.agencies || [])];
+  $('singaporeAgencyTabs').innerHTML = agencies.map(agency => `<button class="${state.singaporeAgency === agency.id ? "active" : ""}" type="button" data-singapore-agency="${esc(agency.id)}">${esc(field(agency, "name_zh", "name_en"))}</button>`).join("");
+  const singaporeRows = (singapore.records || [])
+    .filter(item => !state.singaporeAgency || item.agency === state.singaporeAgency)
+    .filter(item => state.language !== "en" || englishReady(item));
+  $('singaporeSpotlightList').innerHTML = singaporeRows.length ? singaporeRows.map(item => {
+    const agency = (singapore.agencies || []).find(value => value.id === item.agency);
+    return spotlightCard(item, item.dynamic ? tr("archive") : (agency?.id || item.agency));
+  }).join("") : '<div class="empty compact"><b>No matching records</b></div>';
+  document.querySelectorAll('[data-singapore-agency]').forEach(button => button.addEventListener('click', () => {
+    state.singaporeAgency = button.dataset.singaporeAgency || ""; renderSpotlights();
+  }));
+}
+
 function organizationCodes(record) {
   return (record?.organization_tags || []).map(tag => typeof tag === "string" ? tag : tag.code).filter(Boolean);
 }
@@ -327,11 +433,11 @@ function renderToday() {
       <div class="signal-index">${String(index + 1).padStart(2, "0")}</div>
       <div class="signal-content">
         <div class="signal-meta"><span class="topic">${esc(item.theme_zh || "气候动态")}</span>${classification.map(tag => `<span>${esc(tag)}</span>`).join("")}</div>
-        <h3>${esc(item.title_zh)}</h3>
+        <h3>${esc(field(item, "title_zh", "title_original"))}</h3>
         ${summaryOrAtoms(item)}
         <div class="signal-foot">
           <span>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</span>
-          <a href="${esc(safeUrl(record.canonical_url || item.url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>
+          <a href="${esc(safeUrl(record.canonical_url || item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a>
         </div>
       </div>
     </article>`;
@@ -391,9 +497,9 @@ function renderArchiveRows() {
     ];
     return `<article class="archive-row">
       <div class="archive-date"><b>${esc(formatDate(record.published_at))}</b></div>
-      <div class="archive-title"><h3>${esc(record.title_zh)}</h3><p>${esc(record.title_original)}</p></div>
+      <div class="archive-title"><h3>${esc(field(record, "title_zh", "title_original"))}</h3><p>${esc(state.language === "en" ? record.title_zh : record.title_original)}</p></div>
       <div class="archive-source"><b>${esc(record.source_name)}</b><span>${esc((record.topics || []).slice(0, 2).join(" · ") || "气候动态")}</span></div>
-      <div class="archive-atoms">${facts.length ? facts.map(fact => `<i>${esc(fact)}</i>`).join("") : "<i>暂无独立数字或地点</i>"}<a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a></div>
+      <div class="archive-atoms">${facts.length ? facts.map(fact => `<i>${esc(fact)}</i>`).join("") : ""}<a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
     </article>`;
   }).join("") : '<div class="empty compact"><b>没有匹配记录</b><p>请减少筛选条件或更换关键词。</p></div>';
   $("loadMore").hidden = state.visible >= state.filtered.length;
@@ -496,7 +602,7 @@ async function renderMap(events) {
     class: "china-anchor",
   }));
   const chinaLabel = svgEl("text", { x: chinaX + 11, y: chinaY + 5, class: "china-label" });
-  chinaLabel.textContent = "中国";
+  chinaLabel.textContent = state.language === "en" ? "China" : "中国";
   svg.appendChild(chinaLabel);
 
   spreadMarkerPositions(events).forEach(({ item, x, y, originX, originY }, index) => {
@@ -508,7 +614,7 @@ async function renderMap(events) {
     }
     const pin = svgEl("g", {
       class: "event-pin", tabindex: "0", role: "button", "data-marker": item.marker_id,
-      "aria-label": `${item.place}：${item.title_zh}`,
+      "aria-label": `${item.place}：${field(item, "title_zh", "title_original")}`,
     });
     pin.append(
       svgEl("circle", { cx: x, cy: y, r: 13, class: "event-halo" }),
@@ -530,14 +636,14 @@ async function renderMap(events) {
 function showMapTooltip(event, item) {
   const tooltip = $("mapTooltip");
   const bounds = $("mapCanvas").getBoundingClientRect();
-  tooltip.innerHTML = `<b>${esc(item.place)} · ${esc(item.theme)}</b><span>${esc(item.title_zh)}</span>`;
+  tooltip.innerHTML = `<b>${esc(item.place)} · ${esc(item.theme)}</b><span>${esc(field(item, "title_zh", "title_original"))}</span>`;
   tooltip.style.left = `${Math.min(bounds.width - 280, Math.max(12, event.clientX - bounds.left + 12))}px`;
   tooltip.style.top = `${Math.max(12, event.clientY - bounds.top - 80)}px`;
   tooltip.classList.add("show");
 }
 
 function selectMapEvent(item) {
-  $("mapDetail").innerHTML = `<span>${esc(item.place)} · ${esc(item.theme)}</span><h2>${esc(item.title_zh)}</h2>${summaryOrAtoms(item)}<small>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>`;
+  $("mapDetail").innerHTML = `<span>${esc(item.place)} · ${esc(item.theme)}</span><h2>${esc(field(item, "title_zh", "title_original"))}</h2>${summaryOrAtoms(item)}<small>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a>`;
 }
 
 function renderMapPlaces(events) {
@@ -563,7 +669,7 @@ async function switchMapPeriod(period) {
     button.setAttribute("aria-pressed", String(active));
   });
   const events = mapEventsFor(period);
-  $("mapRangeNote").textContent = period === "today" ? "今日队列" : "本周";
+  $("mapRangeNote").textContent = period === "today" ? tr("todayQueue") : tr("thisWeek");
   renderMapPlaces(events);
   await renderMap(events);
 }
@@ -615,6 +721,7 @@ function setupCompanyIntelligence() {
       toast("企业地图切换失败，请稍后重试。");
     }));
   });
+  renderSpotlights();
 }
 
 function renderCompanyIntelligence() {
@@ -1333,7 +1440,7 @@ function renderHeatmap(id, matrix) {
 
 async function init() {
   setupSubscribe();
-  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData, taxonomy] = await Promise.all([
+  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData, taxonomy, spotlights] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
     fetchJson("./data/corpus_analytics.json").catch(() => null),
@@ -1346,6 +1453,7 @@ async function init() {
     fetchJson("./data/energy_companies.json").catch(() => null),
     fetchJson("./data/energy_reports.json").catch(() => null),
     fetchJson("./data/taxonomy.json").catch(() => ({ organization_groups: [], countries: [] })),
+    fetchJson("./data/climate_spotlights.json").catch(() => null),
   ]);
   state.siteMetrics = siteMetrics;
   state.subscription = subscription;
@@ -1353,12 +1461,15 @@ async function init() {
   state.companyData = companyData;
   state.reportData = reportData;
   state.taxonomy = taxonomy;
+  state.spotlights = spotlights;
   state.datasets.climate = { dashboard, archive, analytics };
   if (energyDashboard && energyArchive) {
     state.datasets.energy = { dashboard: energyDashboard, archive: energyArchive, analytics: energyAnalytics };
   }
   const requestedMode = new URLSearchParams(location.search).get("mode") === "energy"
     || localStorage.getItem("climateTextMode") === "energy" ? "energy" : "climate";
+  const requestedLanguage = new URLSearchParams(location.search).get("lang");
+  state.language = requestedLanguage === "en" || (!requestedLanguage && localStorage.getItem("climateTextLanguage") === "en") ? "en" : "zh";
   setupCompanyIntelligence();
   setupTaxonomyFilters();
   setupEnergyReports();
@@ -1372,6 +1483,12 @@ async function init() {
   [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => button.addEventListener("click", () => {
     closeMobileMenu();
     activateMode(state.mode === "energy" ? "climate" : "energy");
+  }));
+  [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => button.addEventListener("click", () => {
+    state.language = state.language === "en" ? "zh" : "en";
+    localStorage.setItem("climateTextLanguage", state.language);
+    closeMobileMenu();
+    activateMode(state.mode);
   }));
   try {
     await switchMapPeriod("today");

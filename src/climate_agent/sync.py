@@ -41,6 +41,10 @@ GOOGLE_NEWS_QUERIES = (
     f'(G20 OR G7 OR BRICS OR APEC OR ASEAN OR UNFCCC OR {CURRENT_COP_TERM} OR IEA OR IRENA OR OECD '
     'OR "Shanghai Cooperation Organisation" OR "African Union") '
     '(climate OR energy OR emissions OR technology) when:1d',
+    '(China OR Chinese) ("carbon market" OR "emissions trading" OR ETS OR CCER OR "Article 6" OR MRV '
+    'OR "product carbon footprint") when:1d',
+    '(site:nccs.gov.sg OR site:pmo.gov.sg OR site:mse.gov.sg OR site:nea.gov.sg OR site:mti.gov.sg '
+    'OR site:ema.gov.sg) (climate OR carbon OR emissions OR decarbonisation OR adaptation) when:1d',
 )
 GDELT_PROFILES = {
     "API001": {
