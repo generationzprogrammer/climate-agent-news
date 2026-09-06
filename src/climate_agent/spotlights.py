@@ -71,7 +71,12 @@ def build_spotlights(archive: dict[str, Any], config_path: Path) -> dict[str, An
                 "dynamic": True,
             })
             seen.add(key)
-        payload[section]["records"] = additions[:40] + payload[section].get("records", [])
+        combined = additions[:40] + payload[section].get("records", [])
+        payload[section]["records"] = sorted(
+            combined,
+            key=lambda item: str(item.get("published_at") or ""),
+            reverse=True,
+        )
     payload["generated_at"] = datetime.now(UTC).isoformat()
     payload["coverage"] = {
         "singapore_since": cutoff.date().isoformat(),

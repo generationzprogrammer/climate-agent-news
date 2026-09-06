@@ -535,8 +535,8 @@ class CoreTests(unittest.TestCase):
         payload = build_spotlights(
             {"records": []}, ROOT / "config" / "climate_spotlights.json"
         )
-        self.assertGreaterEqual(len(payload["china_carbon_market"]["records"]), 7)
-        self.assertGreaterEqual(len(payload["singapore"]["records"]), 7)
+        self.assertGreaterEqual(len(payload["china_carbon_market"]["records"]), 19)
+        self.assertGreaterEqual(len(payload["singapore"]["records"]), 21)
         self.assertEqual(len(payload["singapore"]["agencies"]), 6)
         self.assertTrue(all(item["url"].startswith("https://") for item in payload["singapore"]["records"]))
 
