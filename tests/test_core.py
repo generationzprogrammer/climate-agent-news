@@ -306,6 +306,7 @@ class CoreTests(unittest.TestCase):
         self.assertTrue((output_dir / "data" / "energy_corpus_analytics.json").exists())
         self.assertTrue((output_dir / "data" / "energy_companies.json").exists())
         self.assertTrue((output_dir / "data" / "energy_reports.json").exists())
+        self.assertTrue((output_dir / "data" / "national_carbon_market_entities.json").exists())
         reports = json.loads((output_dir / "data" / "energy_reports.json").read_text(encoding="utf-8"))
         self.assertGreaterEqual(reports["statistics"]["reports"], 50)
         self.assertEqual(result["energy_reports"], reports["statistics"]["reports"])
@@ -528,7 +529,11 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="singapore"', html)
         self.assertIn('id="languageToggle"', html)
         self.assertIn('id="projectIntroOpen"', html)
-        self.assertIn('id="nationalCarbonSectors"', html)
+        self.assertIn('id="carbonProvinceFilter"', html)
+        self.assertIn('id="carbonIndustryFilter"', html)
+        self.assertIn('id="carbonEntityList"', html)
+        self.assertNotIn("北京地方碳市场公开明细", html)
+        self.assertNotIn('id="carbonDistrictFilter"', html)
         self.assertIn("green-logo-mark.png", html)
         self.assertNotIn("ClimateText Lab", html)
         self.assertNotIn("location.href = `mailto:", app)
@@ -544,6 +549,14 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(len(payload["singapore"]["agencies"]), 6)
         self.assertEqual(len(payload["china_carbon_market"]["agencies"]), 9)
         self.assertTrue(all(item["url"].startswith("https://") for item in payload["singapore"]["records"]))
+
+    def test_national_carbon_registry_has_entity_level_filters(self) -> None:
+        payload = json.loads((ROOT / "data" / "national_carbon_market_entities.json").read_text(encoding="utf-8"))
+        entities = payload["entities"]
+        self.assertGreaterEqual(len(entities), 2200)
+        self.assertGreaterEqual(len({item["province"] for item in entities}), 30)
+        self.assertEqual({"发电", "钢铁", "水泥", "铝冶炼"}, {item["industry"] for item in entities})
+        self.assertTrue(all(item["name"] and item["uscc"] and item["source_url"] for item in entities))
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
         self.seed_publishable_article()

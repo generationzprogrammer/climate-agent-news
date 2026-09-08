@@ -7,6 +7,7 @@ const state = {
   companyData: null, companyFiltered: [], companyVisible: 12, companyMapPeriod: "today",
   reportData: null, reportFiltered: [], reportVisible: 12,
   spotlights: null, carbonTopic: "", singaporeAgency: "",
+  carbonRegistry: null, carbonRegistryFiltered: [], carbonRegistryVisible: 24,
   taxonomy: { organization_groups: [], countries: [] },
 };
 const $ = id => document.getElementById(id);
@@ -21,9 +22,9 @@ const UI_TEXT = {
     navCompany: "企业情报", navEnergyReports: "能源报告与数据库", companyIntelligence: "企业情报",
     companyScope: "持续扩展的全球能源企业名录，以及从站内新闻中识别的重大项目、初创企业和企业合作。",
     energyReportsTitle: "能源报告与数据库", footerSubtitle: "国际气候与能源信息智能分析支持系统",
-    carbonCompanyTitle: "全国重点排放单位名录", searchEntity: "检索单位", carbonCompanyPlaceholder: "单位名称、所属区或行业",
+    carbonCompanyTitle: "全国重点排放单位名录", searchEntity: "检索单位", carbonCompanyPlaceholder: "单位名称或统一社会信用代码",
     entityType: "单位类别", allEntities: "全部单位", keyEmitter: "重点碳排放单位", generalReporting: "一般报告单位",
-    industry: "行业", allIndustries: "全部行业", district: "所属区", allDistricts: "全部地区", results: "当前结果",
+    province: "省份", allProvinces: "全部省份", industry: "行业", allIndustries: "全部行业", district: "所属区", allDistricts: "全部地区", results: "当前结果",
     showMoreEntities: "显示更多单位", officialRegister: "查看官方名录 ↗", nationalMarketSource: "查看全国碳市场官方数据 ↗",
     companyDatabaseTitle: "能源公司数据库", companyDatabaseNote: "按企业名称、国家和业务方向检索；企业动态均可返回原文。",
     searchCompany: "检索企业", companyPlaceholder: "企业名称、国家或业务，如：储能、氢能", companyType: "企业类型",
@@ -56,9 +57,9 @@ const UI_TEXT = {
     navCompany: "Companies", navEnergyReports: "Energy reports & data", companyIntelligence: "Company intelligence",
     companyScope: "A growing directory of global energy companies, projects, start-ups and corporate partnerships identified in the archive.",
     energyReportsTitle: "Energy reports and databases", footerSubtitle: "Intelligent analysis for international climate and energy information",
-    carbonCompanyTitle: "National key-emitter register", searchEntity: "Search entities", carbonCompanyPlaceholder: "Entity, district or industry",
+    carbonCompanyTitle: "National key-emitter register", searchEntity: "Search entities", carbonCompanyPlaceholder: "Entity name or unified social credit code",
     entityType: "Entity type", allEntities: "All entities", keyEmitter: "Key emitters", generalReporting: "General reporting entities",
-    industry: "Industry", allIndustries: "All industries", district: "District", allDistricts: "All districts", results: "Results",
+    province: "Province", allProvinces: "All provinces", industry: "Industry", allIndustries: "All industries", district: "District", allDistricts: "All districts", results: "Results",
     showMoreEntities: "Show more entities", officialRegister: "Official register ↗", nationalMarketSource: "Official national ETS data ↗",
     companyDatabaseTitle: "Energy company database", companyDatabaseNote: "Search by company, country or business area; every intelligence item links to its source.",
     searchCompany: "Search companies", companyPlaceholder: "Company, country or business area", companyType: "Company type",
@@ -275,6 +276,7 @@ function applyModeCopy() {
   if ($("footerBrand")) $("footerBrand").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
   const firstOptionLabels = {
     companyCountryFilter: "allCountries", energyReportCountry: "allCountryOrganizations", energyReportYear: "allYears",
+    carbonProvinceFilter: "allProvinces", carbonIndustryFilter: "allIndustries",
   };
   Object.entries(firstOptionLabels).forEach(([id, key]) => { if ($(id)?.options?.[0]) $(id).options[0].textContent = tr(key); });
   [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => {
@@ -320,6 +322,7 @@ function activateMode(mode) {
   if (state.mode === "energy" && state.companyData) renderCompanyIntelligence();
   if (state.mode === "energy" && state.reportData) renderEnergyReports();
   if (state.spotlights) renderSpotlights();
+  if (state.carbonRegistry) renderCarbonRegistry();
   renderProjectIntro();
   renderMeta();
   renderToday();
@@ -431,10 +434,6 @@ function renderSpotlights() {
   const data = state.spotlights;
   if (!data || !$('carbonSpotlightList')) return;
   const carbon = data.china_carbon_market || { topics: [], records: [] };
-  const registry = carbon.national_registry || {};
-  if ($("carbonCompanyKpis")) $("carbonCompanyKpis").innerHTML = [[state.language === "en" ? `Key emitters (${registry.year || ""})` : `重点排放单位（${registry.year || ""}）`, registry.total || 0], ...(registry.sectors || []).map(item => [field(item, "label_zh", "label_en"), item.count])].map(([label, value]) => `<article><span>${esc(label)}</span><b>${Number(value || 0).toLocaleString(state.language === "en" ? "en-GB" : "zh-CN")}</b></article>`).join("");
-  if ($("nationalCarbonSectors")) $("nationalCarbonSectors").innerHTML = (registry.sectors || []).map(item => `<article><b>${esc(field(item, "label_zh", "label_en"))}</b><span>${Number(item.count || 0).toLocaleString(state.language === "en" ? "en-GB" : "zh-CN")}</span></article>`).join("");
-  if ($("nationalCarbonSource")) $("nationalCarbonSource").href = safeUrl(registry.source_url);
   if ($('carbonAgencies')) $('carbonAgencies').innerHTML = (carbon.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><span>${esc(field(agency, "role_zh", "role_en"))}</span><i>${esc(agency.id)} ↗</i></a>`).join("");
   const topics = [{ id: "", label_zh: "全部", label_en: "All" }, ...(carbon.topics || [])];
   $('carbonTopicTabs').innerHTML = topics.map(topic => `<button class="${state.carbonTopic === topic.id ? "active" : ""}" type="button" data-carbon-topic="${esc(topic.id)}">${esc(field(topic, "label_zh", "label_en"))}</button>`).join("");
@@ -465,6 +464,67 @@ function renderSpotlights() {
   document.querySelectorAll('[data-singapore-agency]').forEach(button => button.addEventListener('click', () => {
     state.singaporeAgency = button.dataset.singaporeAgency || ""; renderSpotlights();
   }));
+}
+
+function setupCarbonRegistry() {
+  const data = state.carbonRegistry;
+  if (!data || !$("carbonEntityList")) return;
+  const entities = data.entities || [];
+  const provinces = [...new Set(entities.map(item => item.province).filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+  const industries = [...new Set(entities.map(item => item.industry).filter(Boolean))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+  $("carbonProvinceFilter").innerHTML = `<option value="">${esc(tr("allProvinces"))}</option>${provinces.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("")}`;
+  $("carbonIndustryFilter").innerHTML = `<option value="">${esc(tr("allIndustries"))}</option>${industries.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join("")}`;
+  ["carbonEntitySearch", "carbonProvinceFilter", "carbonIndustryFilter"].forEach(id => {
+    const element = $(id);
+    if (!element || element.dataset.bound) return;
+    element.dataset.bound = "true";
+    element.addEventListener(id === "carbonEntitySearch" ? "input" : "change", () => {
+      state.carbonRegistryVisible = 24;
+      applyCarbonRegistryFilters();
+    });
+  });
+  if ($("carbonEntityLoadMore") && !$("carbonEntityLoadMore").dataset.bound) {
+    $("carbonEntityLoadMore").dataset.bound = "true";
+    $("carbonEntityLoadMore").addEventListener("click", () => {
+      state.carbonRegistryVisible += 24;
+      renderCarbonRegistry();
+    });
+  }
+  applyCarbonRegistryFilters();
+}
+
+function applyCarbonRegistryFilters() {
+  const query = $("carbonEntitySearch")?.value.trim().toLowerCase() || "";
+  const province = $("carbonProvinceFilter")?.value || "";
+  const industry = $("carbonIndustryFilter")?.value || "";
+  state.carbonRegistryFiltered = (state.carbonRegistry?.entities || []).filter(item => {
+    const haystack = `${item.name || ""} ${item.uscc || ""}`.toLowerCase();
+    return (!query || haystack.includes(query)) && (!province || item.province === province) && (!industry || item.industry === industry);
+  });
+  renderCarbonRegistry();
+}
+
+function renderCarbonRegistry() {
+  if (!state.carbonRegistry || !$("carbonEntityList")) return;
+  const metadata = state.carbonRegistry.metadata || {};
+  const entities = state.carbonRegistry.entities || [];
+  const kpis = state.language === "en" ? [
+    ["Searchable entities", entities.length], ["Provinces", metadata.province_count || 0],
+    ["Industries", (metadata.industries || []).length], ["Latest register", metadata.latest_registry_year || "—"],
+  ] : [
+    ["可检索单位", entities.length], ["覆盖省份", metadata.province_count || 0],
+    ["行业", (metadata.industries || []).length], ["最新名录", metadata.latest_registry_year || "—"],
+  ];
+  $("carbonCompanyKpis").innerHTML = kpis.map(([label, value], index) => `<article><span>${esc(label)}</span><b>${index === 3 ? esc(value) : Number(value).toLocaleString(state.language === "en" ? "en-GB" : "zh-CN")}</b></article>`).join("");
+  $("carbonEntityResultCount").textContent = state.carbonRegistryFiltered.length.toLocaleString(state.language === "en" ? "en-GB" : "zh-CN");
+  const shown = state.carbonRegistryFiltered.slice(0, state.carbonRegistryVisible);
+  $("carbonEntityList").innerHTML = shown.length ? shown.map(item => `<article class="carbon-register-card">
+    <div><span>${esc(item.province)}</span><i>${esc(item.industry)}</i><i>${esc(item.registry_year)}</i></div>
+    <h4>${esc(item.name)}</h4>
+    <code>${esc(item.uscc)}</code>
+    <a href="${esc(safeUrl(item.source_url))}" target="_blank" rel="noopener noreferrer">${state.language === "en" ? "Official source ↗" : "官方来源 ↗"}</a>
+  </article>`).join("") : `<div class="empty compact"><b>${state.language === "en" ? "No matching entities" : "没有匹配单位"}</b></div>`;
+  $("carbonEntityLoadMore").hidden = state.carbonRegistryVisible >= state.carbonRegistryFiltered.length;
 }
 
 const PROJECT_INTRO = {
@@ -1582,7 +1642,7 @@ function renderHeatmap(id, matrix) {
 
 async function init() {
   setupSubscribe();
-  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData, taxonomy, spotlights] = await Promise.all([
+  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData, taxonomy, spotlights, carbonRegistry] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
     fetchJson("./data/corpus_analytics.json").catch(() => null),
@@ -1596,6 +1656,7 @@ async function init() {
     fetchJson("./data/energy_reports.json").catch(() => null),
     fetchJson("./data/taxonomy.json").catch(() => ({ organization_groups: [], countries: [] })),
     fetchJson("./data/climate_spotlights.json").catch(() => null),
+    fetchJson("./data/national_carbon_market_entities.json").catch(() => null),
   ]);
   state.siteMetrics = siteMetrics;
   state.subscription = subscription;
@@ -1604,6 +1665,7 @@ async function init() {
   state.reportData = reportData;
   state.taxonomy = taxonomy;
   state.spotlights = spotlights;
+  state.carbonRegistry = carbonRegistry;
   state.datasets.climate = { dashboard, archive, analytics };
   if (energyDashboard && energyArchive) {
     state.datasets.energy = { dashboard: energyDashboard, archive: energyArchive, analytics: energyAnalytics };
@@ -1613,6 +1675,7 @@ async function init() {
   const requestedLanguage = new URLSearchParams(location.search).get("lang");
   state.language = requestedLanguage === "en" || (!requestedLanguage && localStorage.getItem("climateTextLanguage") === "en") ? "en" : "zh";
   setupCompanyIntelligence();
+  setupCarbonRegistry();
   setupTaxonomyFilters();
   setupEnergyReports();
   setupMobileMenu();

@@ -84,6 +84,17 @@ a { color: inherit; }
 }
 .topbar nav .nav-team-link:hover { color: var(--blue); }
 .carbon-company-database { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
+.carbon-company-database .company-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.carbon-register-filters { margin-bottom: 18px; }
+.carbon-register-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.carbon-register-card { min-width: 0; padding: 17px 18px; border: 1px solid var(--line); border-left: 3px solid var(--blue); background: #fff; }
+.carbon-register-card > div { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.carbon-register-card > div span,
+.carbon-register-card > div i { padding: 4px 7px; background: #edf2f7; color: #465365; font: normal 11px var(--sans); }
+.carbon-register-card > div span { background: #e8f0fb; color: var(--blue); font-weight: 700; }
+.carbon-register-card h4 { margin: 13px 0 10px; font: 650 18px/1.45 var(--serif); }
+.carbon-register-card code { display: block; color: #596678; font: 12px var(--mono); word-break: break-all; }
+.carbon-register-card a { display: inline-block; margin-top: 12px; color: var(--blue); font-size: 12px; font-weight: 700; text-decoration: none; }
 .national-sector-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 18px; border: 1px solid var(--line); }
 .national-sector-list article { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 16px; border-right: 1px solid var(--line); }
 .national-sector-list article:last-child { border-right: 0; }
@@ -854,7 +865,8 @@ footer a:hover { color: var(--blue); }
   .subsection-heading p { text-align: left; }
   .company-kpis,
   .company-grid,
-  .company-search-panel { grid-template-columns: 1fr; }
+  .company-search-panel,
+  .carbon-register-grid { grid-template-columns: 1fr; }
   .report-kpis,
   .report-grid,
   .report-search-panel { grid-template-columns: 1fr; }
