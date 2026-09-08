@@ -17,6 +17,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
+  padding-top: 72px;
   background: var(--white);
   color: var(--ink);
   font-family: var(--sans);
@@ -34,8 +35,10 @@ a { color: inherit; }
 [hidden] { display: none !important; }
 
 .topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 30;
   display: flex;
   align-items: center;
@@ -50,21 +53,17 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 260px;
+  min-width: 222px;
   text-decoration: none;
 }
-.brand-symbol {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-bottom: 4px solid var(--red);
-  background: var(--ink);
-  color: #fff;
-  font: 800 13px var(--mono);
-}
+.brand-mark { width: 46px; height: 46px; object-fit: contain; }
+.brand-wordmark > span { display: flex; align-items: baseline; gap: 4px; color: #178451; font-size: 10px; line-height: 1; }
+.brand-wordmark > span strong { font-size: 12px; letter-spacing: .02em; }
+.brand-wordmark > span i { color: #111; font-style: normal; font-weight: 750; }
 .brand b { display: block; font-size: 16px; }
-.brand small { display: block; margin-top: 2px; color: #667080; font-size: 12px; }
+.brand small { display: block; margin-top: 2px; color: #178451; font-size: 9px; letter-spacing: .04em; }
+.project-intro-link { padding: 0; border: 0; background: transparent; color: #414a57; font: 400 14px var(--sans); white-space: nowrap; cursor: pointer; }
+.project-intro-link:hover { color: var(--blue); }
 .topbar nav { display: flex; gap: 18px; margin: auto; }
 .topbar nav a { color: #414a57; font-size: 14px; text-decoration: none; }
 .topbar nav a:hover { color: var(--blue); }
@@ -84,6 +83,26 @@ a { color: inherit; }
   white-space: nowrap;
 }
 .topbar nav .nav-team-link:hover { color: var(--blue); }
+.carbon-company-database { margin-top: 34px; padding-top: 30px; border-top: 1px solid var(--line); }
+.carbon-company-search { display: grid; grid-template-columns: 1.3fr repeat(3, minmax(140px, .7fr)) auto; gap: 12px; align-items: end; margin: 20px 0; padding: 18px; border: 1px solid var(--line); background: #f8fafc; }
+.carbon-company-search label { display: grid; gap: 7px; color: var(--muted); font-size: 12px; }
+.carbon-company-search input, .carbon-company-search select { width: 100%; min-height: 42px; padding: 9px 10px; border: 1px solid #b8c1ce; background: #fff; color: var(--ink); font: 14px var(--sans); }
+.carbon-company-table { border: 1px solid var(--line); }
+.carbon-company-head, .carbon-company-table article { display: grid; grid-template-columns: minmax(260px, 1.4fr) minmax(150px, .7fr) minmax(100px, .45fr) minmax(180px, .8fr); align-items: center; }
+.carbon-company-head { background: #edf1f5; color: #536071; font-size: 12px; font-weight: 750; }
+.carbon-company-head span, .carbon-company-table article > * { min-width: 0; padding: 11px 13px; border-right: 1px solid var(--line); overflow-wrap: anywhere; }
+.carbon-company-table article { border-top: 1px solid var(--line); font-size: 14px; }
+.carbon-company-table article b { font-weight: 700; }
+.carbon-company-table article span { color: #576273; }
+.source-note { margin: 12px 0 0; text-align: right; }
+.source-note a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.project-intro-card { width: min(980px, 100%); }
+.project-intro-text { display: grid; gap: 10px; margin-top: 18px; }
+.project-intro-text p { margin: 0; color: #344153; font-size: 16px; line-height: 1.85; }
+.project-quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+.project-quotes blockquote { margin: 0; padding: 18px; border-left: 3px solid #178451; background: #f4f8f6; }
+.project-quotes p { margin: 0; font: 600 16px/1.7 var(--serif); }
+.project-quotes cite { display: block; margin-top: 10px; color: #637064; font-size: 12px; font-style: normal; line-height: 1.5; }
 .mobile-menu-toggle {
   display: none;
   padding: 9px 12px;
@@ -780,6 +799,7 @@ footer a:hover { color: var(--blue); }
   .topbar nav { display: none; }
   .mobile-menu-toggle { display: block; }
   .brand { min-width: 0; margin-right: auto; }
+  .topbar > .project-intro-link { display: none; }
   .map-layout { grid-template-columns: minmax(0, 1fr) 340px; }
   .hero { grid-template-columns: 1fr .62fr; gap: 44px; }
   .analytics-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -801,8 +821,9 @@ footer a:hover { color: var(--blue); }
 }
 
 @media (max-width: 760px) {
+  body { padding-top: 64px; }
   .topbar { height: 64px; padding: 0 15px; }
-  .brand-symbol { width: 34px; height: 34px; }
+  .brand-mark { width: 38px; height: 38px; }
   .brand b { font-size: 14px; }
   .brand small { display: none; }
   .brand { flex: 1 1 auto; max-width: calc(100% - 72px); }
@@ -841,6 +862,11 @@ footer a:hover { color: var(--blue); }
   .report-kpis,
   .report-grid,
   .report-search-panel { grid-template-columns: 1fr; }
+  .carbon-company-search { grid-template-columns: 1fr; }
+  .carbon-company-head { display: none; }
+  .carbon-company-table article { grid-template-columns: 1fr; padding: 13px; }
+  .carbon-company-table article > * { padding: 5px 0; border: 0; }
+  .project-quotes { grid-template-columns: 1fr; }
   .report-kpis article { border-right: 0; border-bottom: 1px solid var(--line); }
   .report-card { min-height: 0; }
   .company-kpis article { border-right: 0; border-bottom: 1px solid var(--line); }

@@ -109,6 +109,9 @@ def export_static_site(
         Path(__file__).resolve().parents[2] / "config" / "climate_spotlights.json",
         data_dir / "climate_spotlights.json",
     )
+    carbon_company_path = db.path.parent / "beijing_carbon_market_companies.json"
+    if carbon_company_path.exists():
+        shutil.copy2(carbon_company_path, data_dir / carbon_company_path.name)
     energy_view = write_energy_view(payload, archive, data_dir, limit=archive_limit)
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"
