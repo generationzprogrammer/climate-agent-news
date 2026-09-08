@@ -98,7 +98,9 @@ a { color: inherit; }
 .source-note a { color: var(--blue); font-weight: 700; text-decoration: none; }
 .project-intro-card { width: min(980px, 100%); }
 .project-intro-text { display: grid; gap: 10px; margin-top: 18px; }
-.project-intro-text p { margin: 0; color: #344153; font-size: 16px; line-height: 1.85; }
+.project-intro-text p { margin: 0; color: #344153; font-size: 16px; line-height: 1.85; text-indent: 2em; }
+.registry-detail-title { margin: 26px 0 10px; font: 650 20px var(--serif); }
+.source-note { display: flex; justify-content: flex-end; gap: 20px; }
 .project-quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
 .project-quotes blockquote { margin: 0; padding: 18px; border-left: 3px solid #178451; background: #f4f8f6; }
 .project-quotes p { margin: 0; font: 600 16px/1.7 var(--serif); }

@@ -25,7 +25,7 @@ const UI_TEXT = {
     carbonCompanyTitle: "碳排放单位名录", searchEntity: "检索单位", carbonCompanyPlaceholder: "单位名称、所属区或行业",
     entityType: "单位类别", allEntities: "全部单位", keyEmitter: "重点碳排放单位", generalReporting: "一般报告单位",
     industry: "行业", allIndustries: "全部行业", district: "所属区", allDistricts: "全部地区", results: "当前结果",
-    showMoreEntities: "显示更多单位", officialRegister: "查看官方名录 ↗",
+    showMoreEntities: "显示更多单位", officialRegister: "查看官方名录 ↗", beijingRegisterDetail: "北京地方碳市场公开明细", nationalMarketSource: "全国数据来源 ↗", beijingRegisterSource: "北京明细来源 ↗",
     companyDatabaseTitle: "能源公司数据库", companyDatabaseNote: "按企业名称、国家和业务方向检索；企业动态均可返回原文。",
     searchCompany: "检索企业", companyPlaceholder: "企业名称、国家或业务，如：储能、氢能", companyType: "企业类型",
     allCompanies: "全部企业", energyMajors: "能源巨头与龙头企业", energyStartups: "能源初创企业", identifiedCompanies: "动态识别企业",
@@ -60,7 +60,7 @@ const UI_TEXT = {
     carbonCompanyTitle: "Carbon-emitting entity register", searchEntity: "Search entities", carbonCompanyPlaceholder: "Entity, district or industry",
     entityType: "Entity type", allEntities: "All entities", keyEmitter: "Key emitters", generalReporting: "General reporting entities",
     industry: "Industry", allIndustries: "All industries", district: "District", allDistricts: "All districts", results: "Results",
-    showMoreEntities: "Show more entities", officialRegister: "Official register ↗",
+    showMoreEntities: "Show more entities", officialRegister: "Official register ↗", beijingRegisterDetail: "Beijing local carbon-market register", nationalMarketSource: "National figures ↗", beijingRegisterSource: "Beijing register source ↗",
     companyDatabaseTitle: "Energy company database", companyDatabaseNote: "Search by company, country or business area; every intelligence item links to its source.",
     searchCompany: "Search companies", companyPlaceholder: "Company, country or business area", companyType: "Company type",
     allCompanies: "All companies", energyMajors: "Energy majors and leaders", energyStartups: "Energy start-ups", identifiedCompanies: "Companies identified in news",
@@ -492,15 +492,19 @@ function renderCarbonCompanies() {
   const data = state.carbonCompanyData;
   if (!data || !$("carbonCompanyList")) return;
   const stats = data.statistics || {};
+  const national = data.national_statistics || {};
   $("carbonCompanyKpis").innerHTML = [
-    [state.language === "en" ? "Entities" : "名录单位", stats.total || 0],
-    [tr("keyEmitter"), stats.key_emitters || 0],
-    [tr("generalReporting"), stats.general_reporting || 0],
-    [state.language === "en" ? "Industries" : "行业分类", stats.industries || 0],
+    [state.language === "en" ? "National entities (2025)" : "全国重点排放单位（2025）", national.total || stats.total || 0],
+    [state.language === "en" ? "Power" : "发电", national.power || 0],
+    [state.language === "en" ? "Steel" : "钢铁", national.steel || 0],
+    [state.language === "en" ? "Cement" : "水泥", national.cement || 0],
+    [state.language === "en" ? "Aluminium" : "铝冶炼", national.aluminium || 0],
   ].map(([label, value]) => `<article><span>${esc(label)}</span><b>${Number(value).toLocaleString(state.language === "en" ? "en-GB" : "zh-CN")}</b></article>`).join("");
-  $("carbonCompanyDefinition").textContent = field(data.meta, "definitions_zh", "definitions_en");
+  $("carbonCompanyDefinition").textContent = field(data.meta, "coverage_zh", "coverage_en");
   const source = $("carbonCompanySource");
   if (source) source.href = safeUrl(data.meta?.source_page);
+  const nationalSource = $("nationalCarbonSource");
+  if (nationalSource) nationalSource.href = safeUrl(data.meta?.national_source_page);
   const query = $("carbonCompanySearch")?.value.trim().toLowerCase() || "";
   const type = $("carbonCompanyType")?.value || "";
   const industry = $("carbonCompanyIndustry")?.value || "";
