@@ -183,7 +183,7 @@
         <p class="hero-lede" id="heroLede">从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。</p>
         <div class="update-line">
           <span class="live-dot" aria-hidden="true"></span>
-          <b>每日 06:30 自动更新</b>
+          <b data-i18n="dailyUpdate">每日 06:30 自动更新</b>
           <span id="generatedAt">正在读取数据版本…</span>
         </div>
       </div>
@@ -191,9 +191,9 @@
         <p id="datasetName">CLIMATETEXT-100000</p>
         <h2 id="datasetTitle">每日气候文本档案</h2>
         <dl>
-          <div><dt>已归档文本</dt><dd><strong id="archiveTotal">—</strong><small>/ 100000</small></dd></div>
-          <div><dt>今日重点情报</dt><dd><strong id="todayTotal">—</strong><small>条</small></dd></div>
-          <div><dt>今日涉及地点</dt><dd><strong id="mapPlaceTotal">—</strong><small>个</small></dd></div>
+          <div><dt data-i18n="archivedTexts">已归档文本</dt><dd><strong id="archiveTotal">—</strong><small>/ 100000</small></dd></div>
+          <div><dt data-i18n="todaySignals">今日重点情报</dt><dd><strong id="todayTotal">—</strong><small data-i18n="itemsUnit">条</small></dd></div>
+          <div><dt data-i18n="todayPlaces">今日涉及地点</dt><dd><strong id="mapPlaceTotal">—</strong><small data-i18n="placesUnit">个</small></dd></div>
         </dl>
         <p class="dataset-version">最近数据版本 <span id="datasetVersion">—</span></p>
       </aside>
@@ -202,7 +202,7 @@
     <section class="section" id="today">
       <div class="section-heading">
         <div><p class="overline" id="todayOverline">DAILY SIGNALS</p><h2 id="todayTitle">今日重要气候情报</h2></div>
-        <label class="compact-filter"><span>国际组织</span><select id="todayOrganizationFilter"><option value="">全部国际组织</option></select></label>
+        <label class="compact-filter"><span data-i18n="internationalOrganization">国际组织</span><select id="todayOrganizationFilter"><option value="">全部国际组织</option></select></label>
       </div>
       <div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
     </section>
@@ -216,27 +216,27 @@
       </div>
       <div class="analytics-grid">
         <article class="chart-card wide">
-          <div class="chart-heading"><span>MONTHLY FREQUENCY</span><h3>月度文本频率</h3><p>按发布时间聚合；用于观察议题热度和采集覆盖的时间变化。</p></div>
+          <div class="chart-heading"><span>MONTHLY FREQUENCY</span><h3 data-i18n="monthlyFrequency">月度文本频率</h3><p data-i18n="monthlyFrequencyNote">按发布时间聚合；用于观察议题热度和采集覆盖的时间变化。</p></div>
           <div class="chart-box" id="monthlyTrendChart"></div>
         </article>
         <article class="chart-card">
-          <div class="chart-heading"><span>TOPIC MIX</span><h3>高频主题</h3><p>按记录主题标签计数，一条文本可对应多个主题。</p></div>
+          <div class="chart-heading"><span>TOPIC MIX</span><h3 data-i18n="topicMix">高频主题</h3><p data-i18n="topicMixNote">按记录主题标签计数，一条文本可对应多个主题。</p></div>
           <div class="chart-box" id="topicBarChart"></div>
         </article>
         <article class="chart-card">
-          <div class="chart-heading"><span>COUNTRY TAGS</span><h3>国家/地区分布</h3><p>仅统计文本或地点字段明确出现的国家/地区。</p></div>
+          <div class="chart-heading"><span>COUNTRY TAGS</span><h3 data-i18n="countryDistribution">国家/地区分布</h3><p data-i18n="countryDistributionNote">仅统计文本或地点字段明确出现的国家/地区。</p></div>
           <div class="chart-box" id="countryBarChart"></div>
         </article>
         <article class="chart-card">
-          <div class="chart-heading"><span>REGIONAL STRUCTURE</span><h3>洲别结构</h3><p>按国家/地区标签映射到洲别；全球性文本保留未标注。</p></div>
+          <div class="chart-heading"><span>REGIONAL STRUCTURE</span><h3 data-i18n="regionalStructure">洲别结构</h3><p data-i18n="regionalStructureNote">按国家/地区标签映射到洲别；全球性文本保留未标注。</p></div>
           <div class="chart-box" id="continentBarChart"></div>
         </article>
         <article class="chart-card">
-          <div class="chart-heading"><span>SOURCE MIX</span><h3>主要来源</h3><p>用于识别语料来源集中度和后续补源方向。</p></div>
+          <div class="chart-heading"><span>SOURCE MIX</span><h3 data-i18n="sourceMix">主要来源</h3><p data-i18n="sourceMixNote">用于识别语料来源集中度和后续补源方向。</p></div>
           <div class="chart-box" id="sourceBarChart"></div>
         </article>
         <article class="chart-card wide">
-          <div class="chart-heading"><span>COUNTRY × TOPIC</span><h3>国家—主题热力矩阵</h3><p>显示主要国家/地区与高频主题的共现关系，便于后续分类和趋势建模。</p></div>
+          <div class="chart-heading"><span>COUNTRY × TOPIC</span><h3 data-i18n="countryTopic">国家—主题热力矩阵</h3><p data-i18n="countryTopicNote">显示主要国家/地区与高频主题的共现关系，便于后续分类和趋势建模。</p></div>
           <div class="chart-box heatmap-box" id="countryTopicHeatmap"></div>
         </article>
       </div>
@@ -249,9 +249,9 @@
       </div>
       <div class="assistant-shell">
         <aside class="assistant-intro">
-          <span class="assistant-status"><i></i> 零费用站内证据检索</span>
-          <h3>从问题到证据，而不只是列标题</h3>
-          <p>可要求比较国家、梳理时间线、提取政策含义，也可继续追问上一轮证据。若档案不足，系统会明确说明。</p>
+          <span class="assistant-status"><i></i> <em data-i18n="evidenceSearch">零费用站内证据检索</em></span>
+          <h3 data-i18n="assistantIntroTitle">从问题到证据，而不只是列标题</h3>
+          <p data-i18n="assistantIntroNote">可要求比较国家、梳理时间线、提取政策含义，也可继续追问上一轮证据。若档案不足，系统会明确说明。</p>
           <div class="quick-prompts" aria-label="常用问题">
             <button type="button" data-prompt="请给出今日简报">今日简报</button>
             <button type="button" data-prompt="本周有哪些值得关注的气候情报？">本周重点</button>
@@ -261,11 +261,11 @@
         </aside>
         <div class="chat-panel">
           <div class="chat-log" id="chatLog" aria-live="polite">
-            <article class="chat-message assistant"><span>情报助手</span><p>您好。我可以基于本站最多 100000 条中文气候情报，规划检索并生成简报、国家比较、时间线和政策含义；回答均附原文证据。</p></article>
+            <article class="chat-message assistant"><span data-i18n="assistantName">情报助手</span><p data-i18n="assistantGreeting">您好。我可以基于本站最多 100000 条中文气候情报，规划检索并生成简报、国家比较、时间线和政策含义；回答均附原文证据。</p></article>
           </div>
           <form class="chat-form" id="chatForm">
-            <label for="chatInput">向气候情报库提问</label>
-            <div><input id="chatInput" autocomplete="off" maxlength="120" placeholder="例如：本周拉丁美洲有哪些重要动态？"><button type="submit">发送</button></div>
+            <label for="chatInput" data-i18n="askDatabase">向气候情报库提问</label>
+            <div><input id="chatInput" autocomplete="off" maxlength="120" data-i18n-placeholder="chatPlaceholder" placeholder="例如：本周拉丁美洲有哪些重要动态？"><button type="submit" data-i18n="send">发送</button></div>
           </form>
         </div>
       </div>
@@ -277,19 +277,19 @@
       </div>
       <div class="search-panel">
         <label class="search-box">
-          <span>检索</span>
-          <input id="archiveSearch" type="search" placeholder="搜索中文标题、原文、来源、议题或地域" autocomplete="off">
+          <span data-i18n="search">检索</span>
+          <input id="archiveSearch" type="search" data-i18n-placeholder="archivePlaceholder" placeholder="搜索中文标题、原文、来源、议题或地域" autocomplete="off">
         </label>
-        <label><span>议题</span><select id="topicFilter"><option value="">全部议题</option></select></label>
-        <label><span>国际组织</span><select id="organizationFilter"><option value="">全部国际组织</option></select></label>
-        <label><span>国家</span><input id="countryFilter" type="search" list="countryCodeList" placeholder="中国、CN或CHN" autocomplete="off"><datalist id="countryCodeList"></datalist></label>
-        <div class="result-count"><span>当前结果</span><b id="resultCount">—</b></div>
+        <label><span data-i18n="topic">议题</span><select id="topicFilter"><option value="">全部议题</option></select></label>
+        <label><span data-i18n="internationalOrganization">国际组织</span><select id="organizationFilter"><option value="">全部国际组织</option></select></label>
+        <label><span data-i18n="country">国家</span><input id="countryFilter" type="search" list="countryCodeList" data-i18n-placeholder="countryPlaceholder" placeholder="中国、CN或CHN" autocomplete="off"><datalist id="countryCodeList"></datalist></label>
+        <div class="result-count"><span data-i18n="results">当前结果</span><b id="resultCount">—</b></div>
       </div>
       <div class="archive-table" role="region" aria-label="气候新闻文本记录">
-        <div class="archive-head"><span>日期</span><span>文本记录</span><span>来源 / 议题</span><span>关键数字 / 地域</span></div>
+        <div class="archive-head"><span data-i18n="date">日期</span><span data-i18n="textRecord">文本记录</span><span data-i18n="sourceTopic">来源 / 议题</span><span data-i18n="figuresPlaces">关键数字 / 地域</span></div>
         <div id="archiveList"></div>
       </div>
-      <button class="load-more" id="loadMore" type="button">显示更多记录</button>
+      <button class="load-more" id="loadMore" type="button" data-i18n="showMoreRecords">显示更多记录</button>
     </section>
   </main>
 

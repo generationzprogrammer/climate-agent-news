@@ -35,6 +35,17 @@ const UI_TEXT = {
     allTypes: "全部类型", energyReport: "能源报告", energyDatabase: "能源数据库", countryOrganization: "国家或组织",
     allCountryOrganizations: "全部国家或组织", internationalOrganization: "国际组织", allInternationalOrganizations: "全部国际组织",
     year: "年份", allYears: "全部年份", showMoreResources: "显示更多资源",
+    dailyUpdate: "每日 06:30 自动更新", archivedTexts: "已归档文本", todaySignals: "今日重点情报", todayPlaces: "今日涉及地点", itemsUnit: "条", placesUnit: "个",
+    monthlyFrequency: "月度文本频率", monthlyFrequencyNote: "按发布时间聚合；用于观察议题热度和采集覆盖的时间变化。",
+    topicMix: "高频主题", topicMixNote: "按记录主题标签计数，一条文本可对应多个主题。", countryDistribution: "国家/地区分布",
+    countryDistributionNote: "仅统计文本或地点字段明确出现的国家/地区。", regionalStructure: "洲别结构", regionalStructureNote: "按国家/地区标签映射到洲别；全球性文本保留未标注。",
+    sourceMix: "主要来源", sourceMixNote: "用于识别语料来源集中度和后续补源方向。", countryTopic: "国家—主题热力矩阵",
+    countryTopicNote: "显示主要国家/地区与高频主题的共现关系，便于后续分类和趋势建模。", evidenceSearch: "零费用站内证据检索",
+    assistantIntroTitle: "从问题到证据，而不只是列标题", assistantIntroNote: "可要求比较国家、梳理时间线、提取政策含义，也可继续追问上一轮证据。若档案不足，系统会明确说明。",
+    assistantName: "情报助手", assistantGreeting: "您好。我可以基于本站档案生成简报、国家比较、时间线和政策含义；回答均附原文证据。",
+    askDatabase: "向情报库提问", chatPlaceholder: "例如：本周拉丁美洲有哪些重要动态？", send: "发送", search: "检索",
+    archivePlaceholder: "搜索中文标题、原文、来源、议题或地域", topic: "议题", countryPlaceholder: "中国、CN或CHN", date: "日期",
+    textRecord: "文本记录", sourceTopic: "来源 / 议题", figuresPlaces: "关键数字 / 地域", showMoreRecords: "显示更多记录",
   },
   en: {
     navMap: "Global desk", navToday: "Today", navFocus: "Focus", navChinaCarbon: "China carbon market",
@@ -59,6 +70,17 @@ const UI_TEXT = {
     allTypes: "All types", energyReport: "Energy report", energyDatabase: "Energy database", countryOrganization: "Country or organisation",
     allCountryOrganizations: "All countries and organisations", internationalOrganization: "International organisation", allInternationalOrganizations: "All international organisations",
     year: "Year", allYears: "All years", showMoreResources: "Show more resources",
+    dailyUpdate: "Updated daily at 06:30 Beijing time", archivedTexts: "Archived texts", todaySignals: "Priority signals", todayPlaces: "Mapped locations", itemsUnit: "items", placesUnit: "places",
+    monthlyFrequency: "Monthly text frequency", monthlyFrequencyNote: "Grouped by publication date to show changes in topic attention and collection coverage.",
+    topicMix: "Leading topics", topicMixNote: "Counts archive tags; one text may carry several topics.", countryDistribution: "Country and region distribution",
+    countryDistributionNote: "Counts only countries and regions explicitly identified in text or location fields.", regionalStructure: "Continental structure", regionalStructureNote: "Maps country tags to continents; global records remain unassigned.",
+    sourceMix: "Leading sources", sourceMixNote: "Shows source concentration and where coverage may need expansion.", countryTopic: "Country–topic matrix",
+    countryTopicNote: "Shows co-occurrence between leading countries or regions and frequent topics.", evidenceSearch: "On-site evidence search · no usage fee",
+    assistantIntroTitle: "From questions to evidence", assistantIntroNote: "Compare countries, construct timelines and examine policy implications. The system states when evidence is insufficient.",
+    assistantName: "Intelligence assistant", assistantGreeting: "I can search the archive and produce briefings, country comparisons, timelines and policy implications, with links to source evidence.",
+    askDatabase: "Ask the intelligence archive", chatPlaceholder: "For example: what mattered in Latin America this week?", send: "Send", search: "Search",
+    archivePlaceholder: "Search titles, source text, publishers, topics or places", topic: "Topic", countryPlaceholder: "China, CN or CHN", date: "Date",
+    textRecord: "Text record", sourceTopic: "Source / topic", figuresPlaces: "Figures / places", showMoreRecords: "Show more records",
   },
 };
 const tr = key => UI_TEXT[state.language]?.[key] || UI_TEXT.zh[key] || key;
@@ -574,7 +596,7 @@ function renderToday() {
     return `<article class="signal-card">
       <div class="signal-index">${String(index + 1).padStart(2, "0")}</div>
       <div class="signal-content">
-        <div class="signal-meta"><span class="topic">${esc(item.theme_zh || "气候动态")}</span>${classification.map(tag => `<span>${esc(tag)}</span>`).join("")}</div>
+        <div class="signal-meta"><span class="topic">${esc(state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : (item.theme_zh || "气候动态"))}</span>${classification.map(tag => `<span>${esc(tag)}</span>`).join("")}</div>
         <h3>${esc(field(item, "title_zh", "title_original"))}</h3>
         ${summaryOrAtoms(item)}
         <div class="signal-foot">
@@ -583,7 +605,7 @@ function renderToday() {
         </div>
       </div>
     </article>`;
-  }).join("") : '<div class="empty"><b>今日暂无新增重点情报</b><p>网站仍保留历史文本数据库，待下一次有效数据更新后自动补充。</p></div>';
+  }).join("") : `<div class="empty"><b>${state.language === "en" ? "No new priority intelligence today" : "今日暂无新增重点情报"}</b><p>${state.language === "en" ? "The historical archive remains available and will update after the next valid collection run." : "网站仍保留历史文本数据库，待下一次有效数据更新后自动补充。"}</p></div>`;
 }
 
 function setupFilters() {
@@ -602,7 +624,7 @@ function setupFilters() {
 function populateTopicFilter() {
   const topics = [...new Set(state.archive.records.flatMap(record => record.topics || []))]
     .sort((left, right) => left.localeCompare(right, "zh-CN"));
-  $("topicFilter").innerHTML = '<option value="">全部议题</option>'
+  $("topicFilter").innerHTML = `<option value="">${state.language === "en" ? "All topics" : "全部议题"}</option>`
     + topics.map(topic => `<option value="${esc(topic)}">${esc(topic)}</option>`).join("");
 }
 
@@ -633,17 +655,17 @@ function renderArchiveRows() {
   $("archiveList").innerHTML = shown.length ? shown.map(record => {
     const facts = [
       ...(record.numbers || []).slice(0, 2),
-      ...(record.places || []).slice(0, 2).map(place => place.name_zh),
+      ...(state.language === "en" ? (record.country_codes || []).slice(0, 2).map(country => country.alpha3) : (record.places || []).slice(0, 2).map(place => place.name_zh)),
       ...organizationCodes(record).slice(0, 2),
       ...(record.event_tags || []).slice(0, 1),
     ];
     return `<article class="archive-row">
       <div class="archive-date"><b>${esc(formatDate(record.published_at))}</b></div>
-      <div class="archive-title"><h3>${esc(field(record, "title_zh", "title_original"))}</h3><p>${esc(state.language === "en" ? record.title_zh : record.title_original)}</p></div>
-      <div class="archive-source"><b>${esc(record.source_name)}</b><span>${esc((record.topics || []).slice(0, 2).join(" · ") || "气候动态")}</span></div>
+      <div class="archive-title"><h3>${esc(field(record, "title_zh", "title_original"))}</h3>${state.language === "en" ? "" : `<p>${esc(record.title_original)}</p>`}</div>
+      <div class="archive-source"><b>${esc(record.source_name)}</b><span>${esc(state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : ((record.topics || []).slice(0, 2).join(" · ") || "气候动态"))}</span></div>
       <div class="archive-atoms">${facts.length ? facts.map(fact => `<i>${esc(fact)}</i>`).join("") : ""}<a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
     </article>`;
-  }).join("") : '<div class="empty compact"><b>没有匹配记录</b><p>请减少筛选条件或更换关键词。</p></div>';
+  }).join("") : `<div class="empty compact"><b>${state.language === "en" ? "No matching records" : "没有匹配记录"}</b><p>${state.language === "en" ? "Try fewer filters or a different search term." : "请减少筛选条件或更换关键词。"}</p></div>`;
   $("loadMore").hidden = state.visible >= state.filtered.length;
 }
 
@@ -778,14 +800,19 @@ async function renderMap(events) {
 function showMapTooltip(event, item) {
   const tooltip = $("mapTooltip");
   const bounds = $("mapCanvas").getBoundingClientRect();
-  tooltip.innerHTML = `<b>${esc(item.place)} · ${esc(item.theme)}</b><span>${esc(field(item, "title_zh", "title_original"))}</span>`;
+  const record = findArchiveRecord(item);
+  const place = state.language === "en" ? ((record.country_codes || []).map(country => country.alpha3).join(" · ") || "Global") : item.place;
+  tooltip.innerHTML = `<b>${esc(place)} · ${esc(state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : item.theme)}</b><span>${esc(field(record, "title_zh", "title_original"))}</span>`;
   tooltip.style.left = `${Math.min(bounds.width - 280, Math.max(12, event.clientX - bounds.left + 12))}px`;
   tooltip.style.top = `${Math.max(12, event.clientY - bounds.top - 80)}px`;
   tooltip.classList.add("show");
 }
 
 function selectMapEvent(item) {
-  $("mapDetail").innerHTML = `<span>${esc(item.place)} · ${esc(item.theme)}</span><h2>${esc(field(item, "title_zh", "title_original"))}</h2>${summaryOrAtoms(item)}<small>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a>`;
+  const record = findArchiveRecord(item);
+  const place = state.language === "en" ? ((record.country_codes || []).map(country => country.alpha3).join(" · ") || "Global") : item.place;
+  const theme = state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : item.theme;
+  $("mapDetail").innerHTML = `<span>${esc(place)} · ${esc(theme)}</span><h2>${esc(field(record, "title_zh", "title_original"))}</h2>${summaryOrAtoms(record)}<small>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a>`;
 }
 
 function renderMapPlaces(events) {
@@ -965,16 +992,20 @@ function companyMapEvents(period) {
 }
 
 function selectCompanyMapEvent(item) {
-  $("companyMapDetail").innerHTML = `<span>${esc(item.place)} · ${esc(item.theme)}</span><h2>${esc(item.title_zh)}</h2>
-    <p class="company-event-companies">涉及企业：${esc((item.companies || []).join("、"))}</p>
-    ${summaryOrAtoms(item)}<small>${esc(item.location_basis_zh || "新闻明确地点")} · ${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small>
-    <a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">阅读原文 ↗</a>`;
+  const record = findArchiveRecord(item);
+  const place = state.language === "en" ? ((record.country_codes || []).map(country => country.alpha3).join(" · ") || "Global") : item.place;
+  $("companyMapDetail").innerHTML = `<span>${esc(place)} · ${esc(state.language === "en" ? "Company intelligence" : item.theme)}</span><h2>${esc(field(record, "title_zh", "title_original"))}</h2>
+    <p class="company-event-companies">${state.language === "en" ? "Companies" : "涉及企业"}：${esc((item.companies || []).join("、"))}</p>
+    ${summaryOrAtoms(record)}<small>${state.language === "en" ? "Source-linked location" : esc(item.location_basis_zh || "新闻明确地点")} · ${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small>
+    <a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a>`;
 }
 
 function showCompanyMapTooltip(event, item) {
   const tooltip = $("companyMapTooltip");
   const bounds = $("companyMapCanvas").getBoundingClientRect();
-  tooltip.innerHTML = `<b>${esc(item.place)} · ${esc((item.companies || []).join("、"))}</b><span>${esc(item.title_zh)}</span>`;
+  const record = findArchiveRecord(item);
+  const place = state.language === "en" ? ((record.country_codes || []).map(country => country.alpha3).join(" · ") || "Global") : item.place;
+  tooltip.innerHTML = `<b>${esc(place)} · ${esc((item.companies || []).join("、"))}</b><span>${esc(field(record, "title_zh", "title_original"))}</span>`;
   tooltip.style.left = `${Math.min(bounds.width - 280, Math.max(12, event.clientX - bounds.left + 12))}px`;
   tooltip.style.top = `${Math.max(12, event.clientY - bounds.top - 80)}px`;
   tooltip.classList.add("show");
@@ -1357,32 +1388,38 @@ function setupAssistant() {
 }
 
 function formatCount(value) {
-  return new Intl.NumberFormat("zh-CN").format(Number(value || 0));
+  return new Intl.NumberFormat(state.language === "en" ? "en-GB" : "zh-CN").format(Number(value || 0));
 }
 
 function renderAnalytics() {
   const analytics = state.analytics;
   const container = $("analyticsKpis");
   if (!analytics || !analytics.records) {
-    container.innerHTML = '<div class="empty compact"><b>语料库统计暂未生成</b><p>下一次静态导出会自动写入 corpus_analytics.json。</p></div>';
-    $("analyticsNote").textContent = "未读取到可用统计文件。";
+    container.innerHTML = state.language === "en" ? '<div class="empty compact"><b>Corpus statistics are not available</b></div>' : '<div class="empty compact"><b>语料库统计暂未生成</b><p>下一次静态导出会自动写入 corpus_analytics.json。</p></div>';
+    $("analyticsNote").textContent = state.language === "en" ? "No valid analytics file was found." : "未读取到可用统计文件。";
     return;
   }
   const taggedRate = `${Math.round((analytics.country_tagged_rate || 0) * 100)}%`;
-  container.innerHTML = [
+  container.innerHTML = (state.language === "en" ? [
+    ["Records", formatCount(analytics.records), `${analytics.date_start || "?"} to ${analytics.date_end || "?"}`],
+    ["Days covered", formatCount(analytics.days_covered), `${analytics.avg_per_day || 0} records per day`],
+    ["Topic tags", formatCount(analytics.topic_count), "Frequency and attention analysis"],
+    ["Countries / regions", formatCount(analytics.country_count), `${taggedRate} explicitly geotagged`],
+    ["Sources", formatCount(analytics.source_count), "Source concentration"],
+  ] : [
     ["记录总量", formatCount(analytics.records), `${analytics.date_start || "?"} 至 ${analytics.date_end || "?"}`],
     ["覆盖天数", formatCount(analytics.days_covered), `日均 ${analytics.avg_per_day || 0} 条`],
     ["主题标签", formatCount(analytics.topic_count), "支持主题频率与热度分析"],
     ["国家/地区", formatCount(analytics.country_count), `明确地理标签覆盖 ${taggedRate}`],
     ["来源数量", formatCount(analytics.source_count), "用于评估来源集中度"],
-  ].map(([label, value, note]) => `<article class="analytics-kpi"><span>${esc(label)}</span><b>${esc(value)}</b><small>${esc(note)}</small></article>`).join("");
+  ]).map(([label, value, note]) => `<article class="analytics-kpi"><span>${esc(label)}</span><b>${esc(value)}</b><small>${esc(note)}</small></article>`).join("");
   renderLineChart("monthlyTrendChart", analytics.monthly_records || [], { x: "month", y: "count" });
   renderBarChart("topicBarChart", analytics.top_topics || [], { limit: 8, colorClass: "bar-fill" });
   renderBarChart("countryBarChart", analytics.top_countries || [], { limit: 10, colorClass: "bar-fill" });
   renderBarChart("continentBarChart", analytics.continents || [], { limit: 8, colorClass: "bar-fill alt" });
   renderBarChart("sourceBarChart", analytics.top_sources || [], { limit: 8, colorClass: "bar-fill alt" });
   renderHeatmap("countryTopicHeatmap", analytics.country_topic_matrix || {});
-  $("analyticsNote").textContent = (analytics.notes || []).join(" ");
+  $("analyticsNote").textContent = state.language === "en" ? "Descriptive statistics of the current archive; collection frequency is not a direct measure of real-world event frequency." : (analytics.notes || []).join(" ");
 }
 
 function openDialog(modal) {
