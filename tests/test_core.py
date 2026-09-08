@@ -528,7 +528,7 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="singapore"', html)
         self.assertIn('id="languageToggle"', html)
         self.assertIn('id="projectIntroOpen"', html)
-        self.assertIn('id="carbonCompanySearch"', html)
+        self.assertIn('id="nationalCarbonSectors"', html)
         self.assertIn("green-logo-mark.png", html)
         self.assertNotIn("ClimateText Lab", html)
         self.assertNotIn("location.href = `mailto:", app)
@@ -544,15 +544,6 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(len(payload["singapore"]["agencies"]), 6)
         self.assertEqual(len(payload["china_carbon_market"]["agencies"]), 9)
         self.assertTrue(all(item["url"].startswith("https://") for item in payload["singapore"]["records"]))
-
-    def test_beijing_carbon_market_register_is_complete_and_unique(self) -> None:
-        payload = json.loads((ROOT / "data" / "beijing_carbon_market_companies.json").read_text(encoding="utf-8"))
-        companies = payload["companies"]
-        self.assertEqual(payload["statistics"]["total"], 1291)
-        self.assertEqual(payload["statistics"]["key_emitters"], 882)
-        self.assertEqual(payload["statistics"]["general_reporting"], 409)
-        self.assertEqual(len(companies), len({item["id"] for item in companies}))
-        self.assertTrue(payload["meta"]["source_page"].startswith("https://sthjj.beijing.gov.cn/"))
 
     def test_archive_gate_deduplicates_and_enforces_limit(self) -> None:
         self.seed_publishable_article()
