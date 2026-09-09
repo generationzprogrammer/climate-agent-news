@@ -1454,6 +1454,34 @@ async function subscriptionConfig() {
   return state.subscription;
 }
 
+function subscriptionPayload(email) {
+  return JSON.stringify({ email, list: "climate-weekly", source: location.href });
+}
+
+async function postSubscription(endpoint, email, timeoutMs = 30000) {
+  const controller = typeof AbortController === "function" ? new AbortController() : null;
+  const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+  try {
+    return await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      body: subscriptionPayload(email),
+      cache: "no-store",
+      credentials: "omit",
+      keepalive: true,
+      ...(controller ? { signal: controller.signal } : {}),
+    });
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
+function queueSubscription(endpoint, email) {
+  if (typeof navigator.sendBeacon !== "function") return false;
+  const body = new Blob([subscriptionPayload(email)], { type: "text/plain;charset=UTF-8" });
+  return navigator.sendBeacon(endpoint, body);
+}
+
 function setupSubscribe() {
   const openButtons = [...document.querySelectorAll("#subscribeOpen, [data-open-subscribe]")];
   const modal = $("subscribeModal");
@@ -1487,27 +1515,21 @@ function setupSubscribe() {
     try {
       const config = await subscriptionConfig();
       if (!config.endpoint) throw new Error("订阅服务尚未配置");
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 12000);
-      let response;
-      try {
-        response = await fetch(config.endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, list: "climate-weekly", source: location.href }),
-          signal: controller.signal,
-        });
-      } finally {
-        clearTimeout(timeout);
-      }
+      const response = await postSubscription(config.endpoint, email);
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
       closeDialog(modal);
       toast("订阅成功，周报将在每周一发送。");
     } catch (error) {
       console.error("Subscribe endpoint failed", error);
-      if (hint) hint.textContent = `提交失败：${error.name === "AbortError" ? "连接超时，请稍后重试" : error.message || "请稍后重试"}。`;
-      if (fallback) fallback.hidden = false;
+      const config = await subscriptionConfig();
+      if (config.endpoint && queueSubscription(config.endpoint, email)) {
+        closeDialog(modal);
+        toast("订阅请求已提交，使用同一邮箱重复提交不会重复订阅。");
+      } else {
+        if (hint) hint.textContent = "提交失败：当前网络无法连接订阅服务，请更换浏览器或网络后重试。";
+        if (fallback) fallback.hidden = false;
+      }
     } finally {
       if (submit) { submit.disabled = false; submit.textContent = "提交订阅"; }
     }
@@ -1524,10 +1546,7 @@ function setupSubscribe() {
       return;
     }
     try {
-      const response = await fetch(endpoint, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, list: "climate-weekly", source: location.href }),
-      });
+      const response = await postSubscription(endpoint, email);
       if (!response.ok) throw new Error(String(response.status));
       closeDialog(modal);
       toast("退订成功，该邮箱将不再接收周报。");

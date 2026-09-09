@@ -537,6 +537,9 @@ class CoreTests(unittest.TestCase):
         self.assertIn("green-logo-mark.png", html)
         self.assertNotIn("ClimateText Lab", html)
         self.assertNotIn("location.href = `mailto:", app)
+        self.assertIn('"Content-Type": "text/plain;charset=UTF-8"', app)
+        self.assertIn("navigator.sendBeacon", app)
+        self.assertNotIn("controller.abort(), 12000", app)
         self.assertNotIn("中国位于地图中部偏右", html)
         self.assertNotIn("先拆解时间、地区和议题", html)
 
