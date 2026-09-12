@@ -522,6 +522,74 @@ function renderTopicDesks() {
   }));
 }
 
+function setupStickyNavigation() {
+  const header = document.querySelector(".topbar");
+  const navLinks = [...document.querySelectorAll('nav a[href^="#"]')]
+    .filter(link => link.getAttribute("href") !== "#top");
+  let ticking = false;
+  const headerOffset = () => (header?.getBoundingClientRect().height || 0) + 16;
+  const targetFor = link => {
+    const hash = link.getAttribute("href") || "";
+    if (!hash.startsWith("#") || hash.length < 2) return null;
+    try { return document.getElementById(decodeURIComponent(hash.slice(1))); }
+    catch (_error) { return null; }
+  };
+  const update = () => {
+    ticking = false;
+    header?.classList.toggle("is-scrolled", window.scrollY > 8);
+    const visible = [...new Map(navLinks.map(link => {
+      const target = targetFor(link);
+      return [target?.id, target];
+    })).values()].filter(target => target && !target.hidden && target.getClientRects().length);
+    const threshold = headerOffset() + 36;
+    const passed = visible.map(target => ({ target, top: target.getBoundingClientRect().top }))
+      .filter(item => item.top <= threshold)
+      .sort((left, right) => right.top - left.top);
+    const current = passed[0]?.target.id || visible[0]?.id || "";
+    navLinks.forEach(link => {
+      const active = targetFor(link)?.id === current;
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+  const scheduleUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+  document.addEventListener("click", event => {
+    const link = event.target.closest('a[href^="#"]');
+    const target = link && targetFor(link);
+    if (!target) return;
+    event.preventDefault();
+    closeMobileMenu();
+    document.querySelectorAll(".topic-nav[open]").forEach(menu => menu.removeAttribute("open"));
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerOffset());
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const behavior = reducedMotion || Math.abs(top - window.scrollY) > 1800 ? "auto" : "smooth";
+    window.scrollTo({ top, behavior });
+    history.pushState(null, "", `#${encodeURIComponent(target.id)}`);
+    scheduleUpdate();
+    setTimeout(scheduleUpdate, behavior === "auto" ? 0 : 450);
+  });
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate);
+  window.addEventListener("hashchange", () => {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!target) return;
+    window.scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerOffset()), behavior: "auto" });
+    scheduleUpdate();
+  });
+  requestAnimationFrame(() => {
+    if (location.hash) {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target) window.scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerOffset()), behavior: "auto" });
+    }
+    update();
+  });
+}
+
 function setupCarbonRegistry() {
   const data = state.carbonRegistry;
   if (!data || !$("carbonEntityList")) return;
@@ -1761,6 +1829,7 @@ async function init() {
   setupMobileMenu();
   setupProjectIntro();
   activateMode(requestedMode);
+  setupStickyNavigation();
   setupFilters();
   setupAssistant();
   setupTeam();
