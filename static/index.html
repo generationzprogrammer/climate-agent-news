@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>格润｜国际气候与能源信息智能分析支持系统</title>
-  <link rel="stylesheet" href="./styles.css?v=20260908-1">
+  <link rel="stylesheet" href="./styles.css?v=20260912-1">
 </head>
 <body>
   <header class="topbar">
@@ -19,7 +19,7 @@
     <nav aria-label="页面导航">
       <a href="#map" data-i18n="navMap">全球现场</a>
       <a href="#today" data-i18n="navToday">今日情报</a>
-      <details class="climate-only-nav topic-nav"><summary data-i18n="navFocus">专题</summary><div><a href="#chinaCarbon" data-i18n="navChinaCarbon">中国碳市场</a><a href="#singapore" data-i18n="navSingapore">新加坡</a></div></details>
+      <details class="topic-nav"><summary data-i18n="navFocus">专题</summary><div><a class="climate-only-nav" href="#chinaCarbon" data-i18n="navChinaCarbon">中国碳市场</a><a class="climate-only-nav" href="#singapore" data-i18n="navSingapore">新加坡</a><a class="climate-only-nav" href="#bth_green_transition" data-i18n="navBth">京津冀绿色转型</a><a class="energy-only-nav" href="#renewable_energy" data-i18n="navRenewable">新能源</a><a class="energy-only-nav" href="#energy_storage" data-i18n="navStorage">储能技术</a><a class="energy-only-nav" href="#aidc" data-i18n="navAidc">人工智能数据中心</a></div></details>
       <a href="#analytics" data-i18n="navAnalytics">语料分析</a>
       <a href="#assistant" data-i18n="navAssistant">情报问答</a>
       <a href="#database" data-i18n="navDatabase">文本数据库</a>
@@ -36,7 +36,7 @@
   </header>
   <aside class="mobile-menu" id="mobileMenu" hidden aria-label="移动端页面导航">
     <nav>
-      <a href="#map" data-i18n="navMap">全球现场</a><a href="#today" data-i18n="navToday">今日情报</a><a class="climate-only-nav" href="#chinaCarbon" data-i18n="navChinaCarbon">中国碳市场</a><a class="climate-only-nav" href="#singapore" data-i18n="navSingapore">新加坡</a><a href="#analytics" data-i18n="navAnalytics">语料分析</a><a href="#assistant" data-i18n="navAssistant">情报问答</a><a href="#database" data-i18n="navDatabase">文本数据库</a>
+      <a href="#map" data-i18n="navMap">全球现场</a><a href="#today" data-i18n="navToday">今日情报</a><a class="climate-only-nav" href="#chinaCarbon" data-i18n="navChinaCarbon">中国碳市场</a><a class="climate-only-nav" href="#singapore" data-i18n="navSingapore">新加坡</a><a class="climate-only-nav" href="#bth_green_transition" data-i18n="navBth">京津冀绿色转型</a><a class="energy-only-nav" href="#renewable_energy" data-i18n="navRenewable">新能源</a><a class="energy-only-nav" href="#energy_storage" data-i18n="navStorage">储能技术</a><a class="energy-only-nav" href="#aidc" data-i18n="navAidc">人工智能数据中心</a><a href="#analytics" data-i18n="navAnalytics">语料分析</a><a href="#assistant" data-i18n="navAssistant">情报问答</a><a href="#database" data-i18n="navDatabase">文本数据库</a>
       <a class="energy-only-nav" id="mobileCompanyNav" href="#companies" hidden data-i18n="navCompany">企业情报</a>
       <a class="energy-only-nav" id="mobileReportNav" href="#energyReports" hidden data-i18n="navEnergyReports">能源报告与数据库</a>
     </nav>
@@ -103,6 +103,7 @@
         </div>
         <div class="carbon-register-grid" id="carbonEntityList"><div class="skeleton"></div></div>
         <button class="load-more" id="carbonEntityLoadMore" type="button" data-i18n="showMoreEntities">显示更多单位</button>
+        <a class="registry-source-link" id="carbonRegistrySource" href="https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202504/t20250415_1114934.html" target="_blank" rel="noopener noreferrer" data-i18n="officialRegister">查看官方名录 ↗</a>
       </section>
     </section>
 
@@ -115,6 +116,8 @@
       <div class="spotlight-tabs" id="singaporeAgencyTabs" role="group" aria-label="新加坡机构分类"></div>
       <div class="spotlight-grid" id="singaporeSpotlightList"><div class="skeleton"></div></div>
     </section>
+
+    <div id="topicDeskList"></div>
 
     <section class="section company-section" id="companies" hidden>
       <div class="section-heading">
@@ -203,6 +206,19 @@
         <label class="compact-filter"><span data-i18n="internationalOrganization">国际组织</span><select id="todayOrganizationFilter"><option value="">全部国际组织</option></select></label>
       </div>
       <div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section cognition-section" id="cognition">
+      <div class="section-heading"><div><p class="overline">INTELLIGENCE MAP</p><h2 data-i18n="cognitionTitle">情报认知地图</h2></div></div>
+      <div class="cognition-grid">
+        <article class="chart-card"><div class="chart-heading"><span>COUNTRY × TOPIC</span><h3 data-i18n="knowledgeGraph">国家—议题知识图谱</h3></div><div class="chart-box cognition-graph" id="knowledgeGraph"></div></article>
+        <article class="chart-card"><div class="chart-heading"><span>DAILY TERMS</span><h3 data-i18n="todayWordCloud">今日情报关键词</h3></div><div class="word-cloud" id="todayWordCloud"></div></article>
+      </div>
+    </section>
+
+    <section class="section transition-section energy-only-section" id="transitionTracker" hidden>
+      <div class="section-heading"><div><p class="overline">TRANSITION SIGNAL TRACKER</p><h2 data-i18n="transitionTracker">能源转型进程信号追踪</h2></div></div>
+      <div class="transition-grid"><div class="transition-country-list" id="transitionCountryList"></div><article class="chart-card"><div class="chart-heading"><span>FIVE DIMENSIONS</span><h3 id="transitionCountryTitle">—</h3></div><div class="chart-box" id="transitionRadar"></div></article></div>
     </section>
 
     <section class="section analytics-section" id="analytics">
@@ -324,6 +340,6 @@
     </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="./app.js?v=20260908-1" defer></script>
+  <script src="./app.js?v=20260912-1" defer></script>
 </body>
 </html>

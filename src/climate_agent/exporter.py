@@ -18,6 +18,8 @@ from .pdf_brief import write_daily_brief_pdf, write_weekly_report_pdf
 from .site_metrics import write_site_metrics
 from .spotlights import write_spotlights
 from .taxonomy import public_taxonomy
+from .topic_desks import write_topic_desks
+from .transition_tracker import write_transition_tracker
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -113,6 +115,15 @@ def export_static_site(
     if registry_path.exists():
         shutil.copyfile(registry_path, data_dir / registry_path.name)
     energy_view = write_energy_view(payload, archive, data_dir, limit=archive_limit)
+    topic_desks = write_topic_desks(
+        archive,
+        energy_view["archive"],
+        Path(__file__).resolve().parents[2] / "config" / "topic_desks.json",
+        data_dir / "topic_desks.json",
+    )
+    transition_tracker = write_transition_tracker(
+        data_dir / "energy_transition_tracker.json", archive, energy_view["archive"]
+    )
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"
     )

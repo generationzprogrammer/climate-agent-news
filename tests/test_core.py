@@ -27,6 +27,8 @@ from climate_agent.site_metrics import update_cloudflare_visitor_history
 from climate_agent.spotlights import build_spotlights
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
 from climate_agent.taxonomy import country_codes_for, event_tags_for, organization_tags_for, public_taxonomy
+from climate_agent.topic_desks import build_topic_desks
+from climate_agent.transition_tracker import build_transition_tracker
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
@@ -403,10 +405,25 @@ class CoreTests(unittest.TestCase):
         taxonomy = public_taxonomy()
         self.assertEqual(taxonomy["country_standard"], "ISO 3166-1")
         self.assertEqual(len(taxonomy["countries"]), 249)
+        self.assertIn("BRI", {item["code"] for group in taxonomy["organization_groups"] for item in group["organizations"]})
+        self.assertIn("BRI", organization_tags_for("Belt and Road Initiative clean-energy cooperation"))
         china = country_codes_for("China and the United States announced a climate dialogue")
         self.assertEqual({item["alpha3"] for item in china}, {"CHN", "USA"})
         self.assertEqual(event_tags_for("Preparations for COP42 continue"), ["COP42"])
         self.assertIn("IEA", organization_tags_for("International Energy Agency report"))
+
+    def test_topic_desks_and_transition_tracker_are_source_backed(self) -> None:
+        desks = build_topic_desks(
+            {"records": []}, {"records": []}, ROOT / "config" / "topic_desks.json"
+        )
+        self.assertEqual(
+            {desk["id"] for desk in desks["desks"]},
+            {"bth_green_transition", "renewable_energy", "energy_storage", "aidc"},
+        )
+        self.assertTrue(all(desk["records"] and desk["agencies"] for desk in desks["desks"]))
+        tracker = build_transition_tracker({"records": []})
+        self.assertEqual(len(tracker["dimensions"]), 5)
+        self.assertTrue(all(item["label_en"] for item in tracker["dimensions"]))
 
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()

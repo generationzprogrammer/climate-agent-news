@@ -31,6 +31,7 @@ ORGANIZATION_GROUPS = (
     {
         "group": "区域合作机制",
         "items": (
+            ("BRI", "一带一路", (r"\bbelt and road initiative\b", r"\bbri\b", r"一带一路", r"丝绸之路经济带")),
             ("APEC", "亚太经济合作组织", (r"\bapec\b", r"亚太经济合作组织")),
             ("ASEAN", "东南亚国家联盟", (r"\basean\b", r"东南亚国家联盟", r"东盟")),
             ("SCO", "上海合作组织", (r"\bshanghai cooperation organi[sz]ation\b", r"\bsco\b", r"上海合作组织", r"上合组织")),
