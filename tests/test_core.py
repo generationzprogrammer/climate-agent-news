@@ -28,7 +28,6 @@ from climate_agent.spotlights import build_spotlights
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
 from climate_agent.taxonomy import country_codes_for, event_tags_for, organization_tags_for, public_taxonomy
 from climate_agent.topic_desks import build_topic_desks
-from climate_agent.transition_tracker import build_transition_tracker
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
@@ -175,11 +174,13 @@ class CoreTests(unittest.TestCase):
         self.assertIn("climate", url.lower())
         self.assertNotIn("{query}", url)
         urls = _google_news_urls(endpoint)
-        self.assertEqual(len(urls), 8)
+        self.assertEqual(len(urls), 10)
         self.assertTrue(all("when%3A1d" in item for item in urls))
         self.assertTrue(any("Kazakhstan" in item for item in urls))
         self.assertTrue(any("nccs.gov.sg" in item for item in urls))
         self.assertTrue(any("product+carbon+footprint" in item for item in urls))
+        self.assertTrue(any("Jing-Jin-Ji" in item for item in urls))
+        self.assertTrue(any("AI+data+center" in item for item in urls))
         climate = NormalizedArticle(
             article_id="g", source_id="API004", source_url="https://news.google.com/rss",
             canonical_url="https://example.org/climate", title="Climate summit calls for faster clean energy finance",
@@ -412,7 +413,7 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(event_tags_for("Preparations for COP42 continue"), ["COP42"])
         self.assertIn("IEA", organization_tags_for("International Energy Agency report"))
 
-    def test_topic_desks_and_transition_tracker_are_source_backed(self) -> None:
+    def test_topic_desks_are_classified_and_source_backed(self) -> None:
         desks = build_topic_desks(
             {"records": []}, {"records": []}, ROOT / "config" / "topic_desks.json"
         )
@@ -421,9 +422,8 @@ class CoreTests(unittest.TestCase):
             {"bth_green_transition", "renewable_energy", "energy_storage", "aidc"},
         )
         self.assertTrue(all(desk["records"] and desk["agencies"] for desk in desks["desks"]))
-        tracker = build_transition_tracker({"records": []})
-        self.assertEqual(len(tracker["dimensions"]), 5)
-        self.assertTrue(all(item["label_en"] for item in tracker["dimensions"]))
+        self.assertTrue(all(len(desk["categories"]) >= 5 for desk in desks["desks"]))
+        self.assertTrue(all("statistics" in desk and "category_counts" in desk for desk in desks["desks"]))
 
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()
@@ -494,6 +494,8 @@ class CoreTests(unittest.TestCase):
         self.assertIn('id="analytics"', html)
         self.assertIn('id="archiveGrowthChart"', html)
         self.assertIn('id="visitorGrowthChart"', html)
+        self.assertNotIn('id="knowledgeGraph"', html)
+        self.assertNotIn('id="transitionTracker"', html)
         self.assertIn('id="monthlyTrendChart"', html)
         self.assertIn('id="countryTopicHeatmap"', html)
         self.assertIn('id="modeToggle"', html)
@@ -542,6 +544,8 @@ class CoreTests(unittest.TestCase):
         self.assertIn("function renderEnergyReports", app)
         self.assertIn("function companyProfileHtml", app)
         self.assertIn("function renderSpotlights", app)
+        self.assertIn("topic-metrics", app)
+        self.assertNotIn("function renderTransitionTracker", app)
         self.assertIn('id="chinaCarbon"', html)
         self.assertIn('id="singapore"', html)
         self.assertIn('id="languageToggle"', html)

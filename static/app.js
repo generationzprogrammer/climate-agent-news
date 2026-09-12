@@ -7,7 +7,7 @@ const state = {
   companyData: null, companyFiltered: [], companyVisible: 12, companyMapPeriod: "today",
   reportData: null, reportFiltered: [], reportVisible: 12,
   spotlights: null, carbonTopic: "", singaporeAgency: "",
-  topicDesks: null, transitionTracker: null, transitionCountry: "",
+  topicDesks: null, topicDeskFilters: {}, topicDeskVisible: {},
   carbonRegistry: null, carbonRegistryFiltered: [], carbonRegistryVisible: 24,
   taxonomy: { organization_groups: [], countries: [] },
 };
@@ -37,7 +37,7 @@ const UI_TEXT = {
     allTypes: "全部类型", energyReport: "能源报告", energyDatabase: "能源数据库", countryOrganization: "国家或组织",
     allCountryOrganizations: "全部国家或组织", internationalOrganization: "国际组织", allInternationalOrganizations: "全部国际组织",
     year: "年份", allYears: "全部年份", showMoreResources: "显示更多资源",
-    cognitionTitle: "情报认知地图", knowledgeGraph: "国家—议题知识图谱", todayWordCloud: "今日情报关键词", transitionTracker: "能源转型进程信号追踪",
+    evidenceRecords: "三年证据", recent30: "近30日", sourceDiversity: "独立来源", officialShare: "官方来源", showMoreEvidence: "显示更多证据", showLessEvidence: "收起",
     dailyUpdate: "每日 06:30 自动更新", archivedTexts: "已归档文本", todaySignals: "今日重点情报", todayPlaces: "今日涉及地点", itemsUnit: "条", placesUnit: "个",
     monthlyFrequency: "月度文本频率", monthlyFrequencyNote: "按发布时间聚合；用于观察议题热度和采集覆盖的时间变化。",
     topicMix: "高频主题", topicMixNote: "按记录主题标签计数，一条文本可对应多个主题。", countryDistribution: "国家/地区分布",
@@ -55,7 +55,7 @@ const UI_TEXT = {
     navSingapore: "Singapore", navAnalytics: "Corpus", navAssistant: "Q&A", navDatabase: "Text database",
     chinaCarbonTitle: "China carbon market", singaporeTitle: "Singapore climate policy and action", all: "All", source: "Open source ↗",
     navBth: "BTH green transition", navRenewable: "New energy", navStorage: "Energy storage", navAidc: "AI data centres",
-    cognitionTitle: "Intelligence map", knowledgeGraph: "Country–topic knowledge graph", todayWordCloud: "Today's intelligence terms", transitionTracker: "Energy-transition signal tracker",
+    evidenceRecords: "Three-year evidence", recent30: "Last 30 days", sourceDiversity: "Distinct sources", officialShare: "Official sources", showMoreEvidence: "Show more evidence", showLessEvidence: "Show less",
     archive: "New from archive", agencyAll: "All agencies", coverage: "Official institutions · past 12 months", siteSubtitle: "International climate intelligence and text database",
     team: "Team", subscribe: "Subscribe", download: "Download today's brief", archiveChart: "Cumulative climate text archive", visitorChart: "Cumulative visits / page views",
     todayQueue: "Today", thisWeek: "This week", projectIntro: "About", projectIntroTitle: "About the project",
@@ -331,8 +331,6 @@ function activateMode(mode) {
   if (state.spotlights) renderSpotlights();
   if (state.carbonRegistry) renderCarbonRegistry();
   renderTopicDesks();
-  renderCognition();
-  renderTransitionTracker();
   renderProjectIntro();
   renderMeta();
   renderToday();
@@ -480,67 +478,48 @@ function renderTopicDesks() {
   const root = $("topicDeskList");
   if (!root) return;
   const desks = (state.topicDesks?.desks || []).filter(desk => desk.mode === state.mode);
-  root.innerHTML = desks.map(desk => `<section class="section spotlight-section topic-desk" id="${esc(desk.id)}">
-    <div class="section-heading"><div><p class="overline">FOCUS DESK</p><h2>${esc(field(desk, "title_zh", "title_en"))}</h2></div></div>
-    <div class="agency-grid">${(desk.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><i>↗</i></a>`).join("")}</div>
-    <div class="spotlight-grid">${(desk.records || []).slice(0, 12).map(item => spotlightCard(item, item.dynamic ? tr("archive") : "FOCUS")).join("") || '<div class="empty compact"><b>暂无匹配记录</b></div>'}</div>
-  </section>`).join("");
-}
-
-function renderCognition() {
-  renderKnowledgeGraph();
-  const cloud = $("todayWordCloud");
-  if (!cloud) return;
-  const counts = new Map();
-  (state.dashboard?.intelligence || []).forEach(item => {
-    const values = [...(item.topics || []), ...(item.keywords || []), item.topic].filter(Boolean);
-    values.forEach(value => counts.set(String(value), (counts.get(String(value)) || 0) + 1));
-  });
-  const rows = [...counts].sort((a, b) => b[1] - a[1]).slice(0, 24);
-  const max = Math.max(1, ...rows.map(row => row[1]));
-  cloud.innerHTML = rows.length ? rows.map(([name, count], index) => `<span style="--term-size:${(16 + count / max * 22).toFixed(1)}px;--term-tone:${index % 3}" title="${esc(name)}：${count}">${esc(name)}</span>`).join("") : '<div class="empty compact"><b>暂无关键词</b></div>';
-}
-
-function renderKnowledgeGraph() {
-  const element = $("knowledgeGraph");
-  const matrix = state.analytics?.country_topic_matrix || {};
-  const countries = (matrix.countries || []).slice(0, 6);
-  const topics = (matrix.topics || []).slice(0, 6);
-  if (!countries.length || !topics.length) {
-    if (element) element.innerHTML = '<div class="empty compact"><b>暂无共现数据</b></div>';
-    return;
-  }
-  const cells = matrix.cells || [];
-  const max = Math.max(1, ...cells.map(cell => Number(cell.count || 0)));
-  const countryPos = new Map(countries.map((name, i) => [name, [110, 45 + i * 45]]));
-  const topicPos = new Map(topics.map((name, i) => [name, [490, 45 + i * 45]]));
-  const edges = cells.filter(cell => countryPos.has(cell.country) && topicPos.has(cell.topic) && cell.count).map(cell => {
-    const [x1, y1] = countryPos.get(cell.country), [x2, y2] = topicPos.get(cell.topic);
-    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" style="stroke-opacity:${(.12 + .58 * cell.count / max).toFixed(2)}"><title>${esc(cell.country)} × ${esc(cell.topic)}：${cell.count}</title></line>`;
+  root.innerHTML = desks.map(desk => {
+    const categories = desk.categories || [];
+    const active = state.topicDeskFilters[desk.id] || "";
+    const visible = state.topicDeskVisible[desk.id] || 12;
+    const rows = (desk.records || []).filter(item => !active || (item.category_ids || []).includes(active));
+    const stats = desk.statistics || {};
+    const change = stats.change_percent;
+    const changeLabel = change === null || change === undefined
+      ? (state.language === "en" ? "No prior-period base" : "前期无可比基数")
+      : `${change > 0 ? "+" : ""}${change}% ${state.language === "en" ? "vs prior 30 days" : "较前30日"}`;
+    const maxCategory = Math.max(1, ...categories.map(category => Number(desk.category_counts?.[category.id] || 0)));
+    const categoryLabel = id => field(categories.find(category => category.id === id) || {}, "label_zh", "label_en") || tr("archive");
+    return `<section class="section spotlight-section topic-desk" id="${esc(desk.id)}">
+      <div class="section-heading"><div><p class="overline">FOCUS DESK</p><h2>${esc(field(desk, "title_zh", "title_en"))}</h2></div></div>
+      <div class="topic-metrics">
+        <article><span>${esc(tr("evidenceRecords"))}</span><b>${stats.evidence_records || 0}</b><small>${stats.lookback_days || 1095} ${state.language === "en" ? "days" : "天"}</small></article>
+        <article><span>${esc(tr("recent30"))}</span><b>${stats.latest_30_days || 0}</b><small>${esc(changeLabel)}</small></article>
+        <article><span>${esc(tr("sourceDiversity"))}</span><b>${stats.source_count || 0}</b><small>${state.language === "en" ? "publishers" : "个发布来源"}</small></article>
+        <article><span>${esc(tr("officialShare"))}</span><b>${stats.official_share || 0}%</b><small>${stats.official_records || 0} / ${stats.evidence_records || 0}</small></article>
+      </div>
+      <div class="topic-evidence-layout">
+        <div class="topic-category-bars">${categories.map(category => { const count=Number(desk.category_counts?.[category.id] || 0); return `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}"><span>${esc(field(category, "label_zh", "label_en"))}</span><i><em style="width:${Math.max(2, count / maxCategory * 100).toFixed(1)}%"></em></i><b>${count}</b></button>`; }).join("")}</div>
+        <div class="agency-grid">${(desk.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><i>↗</i></a>`).join("")}</div>
+      </div>
+      <div class="spotlight-tabs topic-filter-tabs"><button type="button" data-topic-filter="" data-topic-desk="${esc(desk.id)}" class="${active ? "" : "active"}">${esc(tr("all"))} · ${desk.records?.length || 0}</button>${categories.map(category => `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}">${esc(field(category, "label_zh", "label_en"))}</button>`).join("")}</div>
+      <div class="spotlight-grid">${rows.slice(0, visible).map(item => spotlightCard(item, categoryLabel((item.category_ids || [])[0]))).join("") || `<div class="empty compact"><b>${state.language === "en" ? "No matching evidence" : "暂无匹配证据"}</b></div>`}</div>
+      ${rows.length > 12 ? `<button class="load-more topic-load-more" type="button" data-topic-more="${esc(desk.id)}">${esc(visible < rows.length ? tr("showMoreEvidence") : tr("showLessEvidence"))}</button>` : ""}
+    </section>`;
   }).join("");
-  element.innerHTML = `<svg class="knowledge-svg" viewBox="0 0 600 320" role="img" aria-label="国家与议题共现网络">${edges}
-    ${countries.map(name => { const [x,y]=countryPos.get(name); return `<g><circle cx="${x}" cy="${y}" r="7"></circle><text x="${x+14}" y="${y+4}">${esc(name)}</text></g>`; }).join("")}
-    ${topics.map(name => { const [x,y]=topicPos.get(name); return `<g class="topic-node"><circle cx="${x}" cy="${y}" r="7"></circle><text x="${x+14}" y="${y+4}">${esc(name)}</text></g>`; }).join("")}</svg>`;
-}
-
-function renderTransitionTracker() {
-  const section = $("transitionTracker");
-  if (!section || state.mode !== "energy") return;
-  const data = state.transitionTracker;
-  const countries = data?.countries || [];
-  if (!countries.length) return;
-  if (!state.transitionCountry || !countries.some(item => item.alpha2 === state.transitionCountry)) state.transitionCountry = countries[0].alpha2;
-  const englishNames = typeof Intl.DisplayNames === "function" ? new Intl.DisplayNames(["en"], { type: "region" }) : null;
-  const countryName = item => state.language === "en" ? (englishNames?.of(item.alpha2) || item.alpha2) : item.name_zh;
-  $("transitionCountryList").innerHTML = countries.map(item => `<button type="button" class="${item.alpha2 === state.transitionCountry ? "active" : ""}" data-transition-country="${esc(item.alpha2)}"><b>${esc(countryName(item))}</b><span>${esc(state.language === "en" ? item.signal_en : item.signal)}</span><i>${item.evidence_count}</i></button>`).join("");
-  const country = countries.find(item => item.alpha2 === state.transitionCountry);
-  $("transitionCountryTitle").textContent = countryName(country);
-  const dimensions = data.dimensions || [], centre = 160, radius = 105, n = dimensions.length;
-  const polar = (index, value) => { const angle = -Math.PI / 2 + index * Math.PI * 2 / n; return [centre + Math.cos(angle) * radius * value, centre + Math.sin(angle) * radius * value]; };
-  const rings = [0.25,0.5,0.75,1].map(level => `<polygon points="${dimensions.map((_,i)=>polar(i,level).join(',')).join(' ')}"></polygon>`).join("");
-  const points = dimensions.map((dimension, index) => polar(index, Number(country.scores?.[dimension.id] || 0) / 100));
-  $("transitionRadar").innerHTML = `<svg class="radar-svg" viewBox="0 0 420 330" role="img" aria-label="${esc(countryName(country))}">${rings}${dimensions.map((dimension,i)=>{const [x,y]=polar(i,1);const label=state.language === "en" ? dimension.label_en : dimension.label_zh;return `<line x1="${centre}" y1="${centre}" x2="${x}" y2="${y}"></line><text x="${x}" y="${y}" text-anchor="middle">${esc(label)}</text>`;}).join('')}<polygon class="radar-value" points="${points.map(p=>p.join(',')).join(' ')}"></polygon>${points.map((p,i)=>{const label=state.language === "en" ? dimensions[i].label_en : dimensions[i].label_zh;return `<circle class="radar-point" cx="${p[0]}" cy="${p[1]}" r="4"><title>${esc(label)}：${country.scores[dimensions[i].id]}</title></circle>`;}).join('')}</svg>`;
-  document.querySelectorAll("[data-transition-country]").forEach(button => button.addEventListener("click", () => { state.transitionCountry = button.dataset.transitionCountry; renderTransitionTracker(); }));
+  document.querySelectorAll("[data-topic-filter]").forEach(button => button.addEventListener("click", () => {
+    state.topicDeskFilters[button.dataset.topicDesk] = button.dataset.topicFilter || "";
+    state.topicDeskVisible[button.dataset.topicDesk] = 12;
+    renderTopicDesks();
+  }));
+  document.querySelectorAll("[data-topic-more]").forEach(button => button.addEventListener("click", () => {
+    const id = button.dataset.topicMore;
+    const desk = desks.find(item => item.id === id);
+    const active = state.topicDeskFilters[id] || "";
+    const total = (desk?.records || []).filter(item => !active || (item.category_ids || []).includes(active)).length;
+    state.topicDeskVisible[id] = (state.topicDeskVisible[id] || 12) < total ? total : 12;
+    renderTopicDesks();
+  }));
 }
 
 function setupCarbonRegistry() {
@@ -1741,7 +1720,7 @@ function renderHeatmap(id, matrix) {
 
 async function init() {
   setupSubscribe();
-  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData, taxonomy, spotlights, carbonRegistry, topicDesks, transitionTracker] = await Promise.all([
+  const [dashboard, archive, analytics, energyDashboard, energyArchive, energyAnalytics, siteMetrics, subscription, team, companyData, reportData, taxonomy, spotlights, carbonRegistry, topicDesks] = await Promise.all([
     fetchJson("./data/dashboard.json"),
     fetchJson("./data/news_archive.json"),
     fetchJson("./data/corpus_analytics.json").catch(() => null),
@@ -1757,7 +1736,6 @@ async function init() {
     fetchJson("./data/climate_spotlights.json").catch(() => null),
     fetchJson("./data/national_carbon_market_entities.json").catch(() => null),
     fetchJson("./data/topic_desks.json").catch(() => null),
-    fetchJson("./data/energy_transition_tracker.json").catch(() => null),
   ]);
   state.siteMetrics = siteMetrics;
   state.subscription = subscription;
@@ -1768,7 +1746,6 @@ async function init() {
   state.spotlights = spotlights;
   state.carbonRegistry = carbonRegistry;
   state.topicDesks = topicDesks;
-  state.transitionTracker = transitionTracker;
   state.datasets.climate = { dashboard, archive, analytics };
   if (energyDashboard && energyArchive) {
     state.datasets.energy = { dashboard: energyDashboard, archive: energyArchive, analytics: energyAnalytics };

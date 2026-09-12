@@ -45,6 +45,10 @@ GOOGLE_NEWS_QUERIES = (
     'OR "product carbon footprint") when:1d',
     '(site:nccs.gov.sg OR site:pmo.gov.sg OR site:mse.gov.sg OR site:nea.gov.sg OR site:mti.gov.sg '
     'OR site:ema.gov.sg) (climate OR carbon OR emissions OR decarbonisation OR adaptation) when:1d',
+    '("Beijing-Tianjin-Hebei" OR Jing-Jin-Ji OR 京津冀) '
+    '(green OR low-carbon OR energy OR emissions OR air quality) when:1d',
+    '("AI data centre" OR "AI data center" OR AIDC) '
+    '(electricity OR energy OR grid OR cooling OR water OR emissions) when:1d',
 )
 GDELT_PROFILES = {
     "API001": {

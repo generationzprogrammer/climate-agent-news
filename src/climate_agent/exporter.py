@@ -19,7 +19,6 @@ from .site_metrics import write_site_metrics
 from .spotlights import write_spotlights
 from .taxonomy import public_taxonomy
 from .topic_desks import write_topic_desks
-from .transition_tracker import write_transition_tracker
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -115,14 +114,13 @@ def export_static_site(
     if registry_path.exists():
         shutil.copyfile(registry_path, data_dir / registry_path.name)
     energy_view = write_energy_view(payload, archive, data_dir, limit=archive_limit)
-    topic_desks = write_topic_desks(
+    corpus_path = db.path.parent / "climate_text_corpus.jsonl"
+    write_topic_desks(
         archive,
         energy_view["archive"],
         Path(__file__).resolve().parents[2] / "config" / "topic_desks.json",
         data_dir / "topic_desks.json",
-    )
-    transition_tracker = write_transition_tracker(
-        data_dir / "energy_transition_tracker.json", archive, energy_view["archive"]
+        corpus_path=corpus_path,
     )
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"
@@ -130,7 +128,6 @@ def export_static_site(
     energy_reports = write_energy_report_database(
         energy_view["archive"], db.path.parent / "energy_reports.json", data_dir / "energy_reports.json"
     )
-    corpus_path = db.path.parent / "climate_text_corpus.jsonl"
     manifest_path = db.path.parent / "climate_text_corpus.manifest.json"
     corpus_merge = merge_archive_into_corpus(
         corpus_path, manifest_path, archive, limit=archive_limit

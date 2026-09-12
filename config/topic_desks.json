@@ -2,57 +2,115 @@
   "updated_at": "2026-09-12",
   "desks": [
     {
-      "id": "bth_green_transition", "mode": "climate",
-      "title_zh": "京津冀绿色转型", "title_en": "Beijing–Tianjin–Hebei green transition",
-      "keywords": ["京津冀", "北京", "天津", "河北", "Beijing", "Tianjin", "Hebei"],
+      "id": "bth_green_transition",
+      "mode": "climate",
+      "title_zh": "京津冀绿色转型",
+      "title_en": "Beijing–Tianjin–Hebei green transition",
+      "match": {
+        "all_groups": [
+          ["京津冀", "天津", "河北", "Beijing-Tianjin-Hebei", "Jing-Jin-Ji", "Tianjin", "Hebei"],
+          ["绿色转型", "低碳", "碳排放", "清洁能源", "可再生能源", "空气质量", "污染", "节能", "green transition", "low-carbon", "emission", "renewable", "clean energy", "air quality", "pollution"]
+        ]
+      },
+      "categories": [
+        {"id": "governance", "label_zh": "协同治理", "label_en": "Regional governance", "keywords": ["协同", "联防联控", "一体化", "政策", "规划", "governance", "coordination", "policy", "plan"]},
+        {"id": "industry_energy", "label_zh": "产业与能源", "label_en": "Industry and energy", "keywords": ["产业", "工业", "能源", "煤", "电力", "钢铁", "industry", "energy", "coal", "power", "steel"]},
+        {"id": "transport_buildings", "label_zh": "交通与建筑", "label_en": "Transport and buildings", "keywords": ["交通", "车辆", "建筑", "供热", "transport", "vehicle", "building", "heating"]},
+        {"id": "air_carbon", "label_zh": "减污降碳", "label_en": "Air and carbon", "keywords": ["空气质量", "污染", "细颗粒物", "碳排放", "PM2.5", "air quality", "pollution", "carbon emission"]},
+        {"id": "finance_projects", "label_zh": "项目与绿色金融", "label_en": "Projects and finance", "keywords": ["项目", "投资", "金融", "贷款", "project", "investment", "finance", "loan"]}
+      ],
       "agencies": [
-        {"name_zh": "生态环境部", "name_en": "Ministry of Ecology and Environment", "url": "https://www.mee.gov.cn/"},
-        {"name_zh": "北京市生态环境局", "name_en": "Beijing Municipal Ecology and Environment Bureau", "url": "https://sthjj.beijing.gov.cn/"},
-        {"name_zh": "天津市生态环境局", "name_en": "Tianjin Municipal Ecology and Environment Bureau", "url": "https://sthj.tj.gov.cn/"},
+        {"name_zh": "生态环境部京津冀协同发展专题", "name_en": "MEE regional coordination", "url": "https://www.mee.gov.cn/ywgz/zcghtjdd/sthjzc/"},
+        {"name_zh": "北京市生态环境局", "name_en": "Beijing Ecology and Environment Bureau", "url": "https://sthjj.beijing.gov.cn/"},
+        {"name_zh": "天津市生态环境局", "name_en": "Tianjin Ecology and Environment Bureau", "url": "https://sthj.tj.gov.cn/"},
         {"name_zh": "河北省生态环境厅", "name_en": "Hebei Department of Ecology and Environment", "url": "https://hbepb.hebei.gov.cn/hbhjt/"}
       ],
       "records": [
-        {"id": "bth-2025-action", "published_at": "2025-12-27", "title_zh": "七部门部署京津冀美丽中国先行区建设", "title_en": "Seven departments issue an action plan for the Beijing–Tianjin–Hebei Beautiful China pilot zone", "summary_zh": "行动方案提出绿色低碳转型等六方面二十二项任务，到2027年区域细颗粒物年均浓度降至33微克每立方米，主要污染物排放和碳排放强度继续下降。", "summary_en": "The plan sets 22 tasks across six areas including green and low-carbon transition. By 2027 it targets annual average PM2.5 of 33 micrograms per cubic metre alongside continued declines in major pollutants and carbon intensity.", "source_zh": "生态环境部", "source_en": "Ministry of Ecology and Environment", "url": "https://www.mee.gov.cn/ywgz/zcghtjdd/sthjzc/202512/t20251227_1139114.shtml"}
+        {"id": "bth-2025-action", "published_at": "2025-12-27", "title_zh": "七部门部署京津冀美丽中国先行区建设", "title_en": "Seven departments issue an action plan for the Beijing–Tianjin–Hebei Beautiful China pilot zone", "summary_zh": "行动方案提出绿色低碳转型等六方面二十二项任务，到2027年区域细颗粒物年均浓度降至33微克每立方米，主要污染物排放和碳排放强度继续下降。", "summary_en": "The plan sets 22 tasks across six areas including green and low-carbon transition. By 2027 it targets annual average PM2.5 of 33 micrograms per cubic metre alongside continued declines in major pollutants and carbon intensity.", "source_zh": "生态环境部", "source_en": "Ministry of Ecology and Environment", "url": "https://www.mee.gov.cn/ywgz/zcghtjdd/sthjzc/202512/t20251227_1139114.shtml", "category_ids": ["governance", "air_carbon"]},
+        {"id": "bth-2025-response", "published_at": "2025-07-18", "title_zh": "生态环境部披露京津冀生态协同治理进展", "title_en": "MEE reports progress in coordinated ecological governance across Beijing, Tianjin and Hebei", "summary_zh": "2024年京津冀细颗粒物年均浓度为36.8微克每立方米，比2014年下降58.7%；三地累计压减钢铁产能超过1亿吨，并形成跨省流域生态补偿和重污染天气联动机制。", "summary_en": "Average PM2.5 in the region fell to 36.8 micrograms per cubic metre in 2024, 58.7% below 2014, alongside steel-capacity cuts, cross-provincial ecological compensation and joint pollution-response mechanisms.", "source_zh": "生态环境部", "source_en": "Ministry of Ecology and Environment", "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk13/202511/t20251120_1134447_wh.html", "category_ids": ["governance", "industry_energy", "air_carbon"]},
+        {"id": "bth-2025-forum", "published_at": "2025-09-11", "title_zh": "京津冀发布清洁空气与低碳转型阶段性数据", "title_en": "Beijing, Tianjin and Hebei present new evidence on clean air and low-carbon transition", "summary_zh": "北京优质能源占比达到99.5%，天津建成零碳港区，河北累计压减退出炼钢产能1.1亿吨；三地2024年细颗粒物年均浓度较2013年均下降超过六成。", "summary_en": "Beijing reported a 99.5% share of high-quality energy, Tianjin a zero-carbon port area, and Hebei 110 million tonnes of retired steelmaking capacity; PM2.5 fell by more than 60% across all three jurisdictions from 2013 to 2024.", "source_zh": "北京市生态环境局", "source_en": "Beijing Municipal Ecology and Environment Bureau", "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/ywdt28/xwfb/743765388/index.html", "category_ids": ["industry_energy", "transport_buildings", "air_carbon"]},
+        {"id": "bth-2025-air", "published_at": "2025-02-24", "title_zh": "生态环境部部署京津冀大气污染治理强化措施", "title_en": "MEE plans stronger air-pollution measures for Beijing, Tianjin, Hebei and surrounding areas", "summary_zh": "2024年京津冀及周边地区细颗粒物平均浓度较2017年下降33.8%，但13个城市仍处于全国后20位；下一阶段将聚焦产业、能源和交通结构调整及区域联防联控。", "summary_en": "Regional PM2.5 fell 33.8% from 2017 to 2024, although 13 cities remained among the national bottom 20; the next phase targets industrial, energy and transport restructuring and coordinated controls.", "source_zh": "生态环境部", "source_en": "Ministry of Ecology and Environment", "url": "https://www.mee.gov.cn/ywdt/xwfb/202502/t20250224_1102786.shtml", "category_ids": ["governance", "industry_energy", "transport_buildings", "air_carbon"]},
+        {"id": "bth-2025-review", "published_at": "2025-02-20", "title_zh": "京津冀生态协同机制与绿色转型成效发布", "title_en": "Beijing, Tianjin and Hebei publish results from coordinated ecological governance", "summary_zh": "三地已建立空气、水环境、执法与统一标准等协作机制，并共同实施区域低碳出行碳普惠核算标准；天津港清洁能源机械占比超过70%，河北55家在产钢铁企业全部达到A级环保绩效。", "summary_en": "The region has built joint mechanisms for air, water, enforcement and standards, and adopted a common low-carbon travel accounting standard; clean-energy machinery exceeds 70% at Tianjin Port and all 55 operating Hebei steelmakers achieved top-tier environmental performance.", "source_zh": "北京市生态环境局", "source_en": "Beijing Municipal Ecology and Environment Bureau", "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/ywdt28/xwfb/543539478/index.html", "category_ids": ["governance", "industry_energy", "transport_buildings", "air_carbon"]},
+        {"id": "bth-2024-adaptation", "published_at": "2024-02-22", "title_zh": "北京发布气候变化适应行动方案", "title_en": "Beijing issues its climate change adaptation action plan", "summary_zh": "方案提出加强京津冀气候监测预警、风险评估和防灾减灾协同，到2035年建设气候适应型宜居城市群，并提升水资源、能源、建筑、交通和公共健康韧性。", "summary_en": "The plan calls for joint regional monitoring, risk assessment and disaster preparedness, aiming for a climate-resilient urban cluster by 2035 with stronger water, energy, building, transport and public-health resilience.", "source_zh": "北京市生态环境局", "source_en": "Beijing Municipal Ecology and Environment Bureau", "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/zcfb/2024bzcwj/543352535/index.html", "category_ids": ["governance", "transport_buildings"]},
+        {"id": "bth-2024-travel-standard", "published_at": "2024-07-10", "title_zh": "京津冀实施统一的低碳出行碳普惠核算规范", "title_en": "Beijing, Tianjin and Hebei adopt a common low-carbon travel carbon-accounting standard", "summary_zh": "三地共同制定的地方标准明确低碳出行项目边界、减排量计算、监测数据和存档要求，为步行、骑行、公共交通及合乘产生的减排量提供统一核算依据。", "summary_en": "The joint standard defines project boundaries, emissions-reduction calculations, monitoring data and archiving rules for walking, cycling, public transport and ride-sharing activities.", "source_zh": "北京市生态环境局", "source_en": "Beijing Municipal Ecology and Environment Bureau", "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/zcfb/dfbz87/543356664/2024071011234084400.pdf", "category_ids": ["governance", "transport_buildings"]}
       ]
     },
     {
-      "id": "renewable_energy", "mode": "energy",
-      "title_zh": "新能源", "title_en": "New energy",
-      "keywords": ["新能源", "renewable energy", "solar", "wind power", "photovoltaic", "绿电"],
+      "id": "renewable_energy",
+      "mode": "energy",
+      "title_zh": "新能源",
+      "title_en": "New energy",
+      "match": {"all_groups": [["新能源", "可再生能源", "太阳能", "光伏", "风电", "风能", "氢能", "地热", "生物质", "renewable energy", "solar", "photovoltaic", "wind power", "wind energy", "hydrogen", "geothermal", "bioenergy"]]},
+      "categories": [
+        {"id": "solar", "label_zh": "太阳能与光伏", "label_en": "Solar PV", "keywords": ["太阳能", "光伏", "solar", "photovoltaic", "PV"]},
+        {"id": "wind", "label_zh": "风电", "label_en": "Wind", "keywords": ["风电", "风能", "海上风", "wind power", "wind energy", "offshore wind"]},
+        {"id": "hydrogen_other", "label_zh": "氢能及其他", "label_en": "Hydrogen and other", "keywords": ["氢能", "地热", "生物质", "hydrogen", "geothermal", "bioenergy"]},
+        {"id": "policy_market", "label_zh": "政策与市场", "label_en": "Policy and markets", "keywords": ["政策", "规划", "目标", "补贴", "招标", "电价", "policy", "plan", "target", "subsid", "auction", "tariff"]},
+        {"id": "manufacturing", "label_zh": "制造与供应链", "label_en": "Manufacturing and supply chains", "keywords": ["制造", "产能", "供应链", "组件", "涡轮机", "manufactur", "supply chain", "module", "turbine"]},
+        {"id": "integration", "label_zh": "并网与消纳", "label_en": "Grid integration", "keywords": ["并网", "消纳", "电网", "弃风", "弃光", "grid", "curtailment", "integration"]}
+      ],
       "agencies": [
-        {"name_zh": "国家能源局", "name_en": "National Energy Administration", "url": "https://www.nea.gov.cn/"},
-        {"name_zh": "国际可再生能源署", "name_en": "International Renewable Energy Agency", "url": "https://www.irena.org/"},
-        {"name_zh": "国际能源署", "name_en": "International Energy Agency", "url": "https://www.iea.org/topics/renewables"}
+        {"name_zh": "国家能源局新能源和可再生能源司", "name_en": "NEA New and Renewable Energy Department", "url": "https://www.nea.gov.cn/sjzz/xny/"},
+        {"name_zh": "国际可再生能源署", "name_en": "International Renewable Energy Agency", "url": "https://www.irena.org/Data"},
+        {"name_zh": "国际能源署可再生能源专题", "name_en": "IEA Renewables", "url": "https://www.iea.org/topics/renewables"}
       ],
       "records": [
-        {"id": "renewable-cn-15fyp", "published_at": "2026-06-25", "title_zh": "新型能源体系建设“十五五”规划发布", "title_en": "China issues its 15th Five-Year Plan for a new energy system", "summary_zh": "规划统筹新能源规模化发展、电力系统调节能力、能源安全与绿色低碳转型，是观察中国未来五年能源结构和技术部署的核心政策文件。", "summary_en": "The plan coordinates large-scale new-energy development, power-system flexibility, energy security and low-carbon transition, making it a central policy document for China's next five years of energy-system development.", "source_zh": "国家能源局", "source_en": "National Energy Administration", "url": "https://www.nea.gov.cn/20260625/0ccfdc1674e84868b49480edf584eb5f/c.html"}
+        {"id": "renewable-cn-15fyp", "published_at": "2026-06-25", "title_zh": "新型能源体系建设“十五五”规划发布", "title_en": "China issues its 15th Five-Year Plan for a new energy system", "summary_zh": "规划统筹新能源规模化发展、电力系统调节能力、能源安全与绿色低碳转型，是观察中国未来五年能源结构和技术部署的核心政策文件。", "summary_en": "The plan coordinates large-scale new-energy development, power-system flexibility, energy security and low-carbon transition, making it a central policy document for China's next five years of energy-system development.", "source_zh": "国家能源局", "source_en": "National Energy Administration", "url": "https://www.nea.gov.cn/20260625/0ccfdc1674e84868b49480edf584eb5f/c.html", "category_ids": ["policy_market", "integration"]}
       ]
     },
     {
-      "id": "energy_storage", "mode": "energy",
-      "title_zh": "储能技术", "title_en": "Energy storage technology",
-      "keywords": ["储能", "energy storage", "battery storage", "long-duration storage", "pumped storage"],
+      "id": "energy_storage",
+      "mode": "energy",
+      "title_zh": "储能技术",
+      "title_en": "Energy storage technology",
+      "match": {"all_groups": [["储能", "抽水蓄能", "电池储能", "长时储能", "energy storage", "battery storage", "long-duration storage", "pumped storage"]]},
+      "categories": [
+        {"id": "lithium", "label_zh": "锂离子与钠离子", "label_en": "Lithium and sodium ion", "keywords": ["锂离子", "磷酸铁锂", "钠离子", "lithium-ion", "LFP", "sodium-ion"]},
+        {"id": "long_duration", "label_zh": "长时储能", "label_en": "Long-duration storage", "keywords": ["长时储能", "液流电池", "压缩空气", "重力储能", "long-duration", "flow battery", "compressed air", "gravity storage"]},
+        {"id": "pumped_thermal", "label_zh": "抽水与热储能", "label_en": "Pumped and thermal storage", "keywords": ["抽水蓄能", "热储能", "熔盐", "pumped storage", "thermal storage", "molten salt"]},
+        {"id": "grid_services", "label_zh": "电网服务与项目", "label_en": "Grid services and projects", "keywords": ["调频", "容量市场", "电网", "并网", "项目", "grid", "frequency", "capacity market", "project"]},
+        {"id": "safety_recycling", "label_zh": "安全与回收", "label_en": "Safety and recycling", "keywords": ["安全", "火灾", "热失控", "回收", "safety", "fire", "thermal runaway", "recycling"]},
+        {"id": "cost_policy", "label_zh": "成本与政策", "label_en": "Costs and policy", "keywords": ["成本", "价格", "政策", "补贴", "cost", "price", "policy", "subsid"]}
+      ],
       "agencies": [
-        {"name_zh": "国际能源署", "name_en": "International Energy Agency", "url": "https://www.iea.org/energy-system/electricity/grid-scale-storage"},
-        {"name_zh": "美国能源部储能办公室", "name_en": "US Department of Energy Office of Electricity", "url": "https://www.energy.gov/oe/energy-storage"},
+        {"name_zh": "国际能源署电网级储能专题", "name_en": "IEA Grid-scale Storage", "url": "https://www.iea.org/energy-system/electricity/grid-scale-storage"},
+        {"name_zh": "美国能源部储能办公室", "name_en": "US DOE Office of Electricity — Storage", "url": "https://www.energy.gov/oe/energy-storage"},
+        {"name_zh": "欧盟委员会能源储存专题", "name_en": "European Commission Energy Storage", "url": "https://energy.ec.europa.eu/topics/research-and-technology/energy-storage_en"},
         {"name_zh": "国家能源局", "name_en": "National Energy Administration", "url": "https://www.nea.gov.cn/"}
       ],
       "records": [
-        {"id": "storage-iea-2026", "published_at": "2026-04-15", "title_zh": "2025年全球新增电池储能装机108吉瓦", "title_en": "Global battery storage additions reached 108 GW in 2025", "summary_zh": "国际能源署统计显示，2025年全球新增电池储能装机同比增长40%，磷酸铁锂约占部署量的90%，储能成为增长最快的电力技术。", "summary_en": "IEA data show that global battery storage additions rose 40% in 2025 to 108 GW. Lithium iron phosphate supplied about 90% of deployments, making storage the fastest-growing power technology.", "source_zh": "国际能源署", "source_en": "International Energy Agency", "url": "https://www.iea.org/reports/global-energy-review-2026/technology-battery-storage"}
+        {"id": "storage-iea-2026", "published_at": "2026-04-15", "title_zh": "2025年全球新增电池储能装机108吉瓦", "title_en": "Global battery storage additions reached 108 GW in 2025", "summary_zh": "国际能源署统计显示，2025年全球新增电池储能装机同比增长40%，磷酸铁锂约占部署量的90%，储能成为增长最快的电力技术。", "summary_en": "IEA data show that global battery storage additions rose 40% in 2025 to 108 GW. Lithium iron phosphate supplied about 90% of deployments, making storage the fastest-growing power technology.", "source_zh": "国际能源署", "source_en": "International Energy Agency", "url": "https://www.iea.org/reports/global-energy-review-2026/technology-battery-storage", "category_ids": ["lithium", "grid_services"]}
       ]
     },
     {
-      "id": "aidc", "mode": "energy",
-      "title_zh": "人工智能数据中心（AIDC）", "title_en": "AI data centres (AIDC)",
-      "keywords": ["AIDC", "人工智能数据中心", "AI data centre", "AI data center", "data centre electricity", "data center power"],
+      "id": "aidc",
+      "mode": "energy",
+      "title_zh": "人工智能数据中心（AIDC）",
+      "title_en": "AI data centres (AIDC)",
+      "match": {
+        "all_groups": [
+          ["人工智能数据中心", "AI数据中心", "数据中心", "AIDC", "AI data centre", "AI data center", "datacentre", "datacenter"],
+          ["电力", "电网", "能源", "能效", "碳排放", "可再生能源", "储能", "发电机", "冷却", "用水", "electricity", "power", "grid", "energy", "efficiency", "emission", "renewable", "storage", "generator", "cooling", "water"]
+        ]
+      },
+      "categories": [
+        {"id": "demand_grid", "label_zh": "电力需求与并网", "label_en": "Demand and grid connection", "keywords": ["用电", "电力需求", "并网", "电网接入", "electricity demand", "power demand", "grid connection", "interconnection"]},
+        {"id": "efficiency_water", "label_zh": "能效、冷却与水耗", "label_en": "Efficiency, cooling and water", "keywords": ["能效", "PUE", "WUE", "冷却", "用水", "efficiency", "cooling", "water"]},
+        {"id": "clean_power", "label_zh": "清洁电力采购", "label_en": "Clean-power procurement", "keywords": ["清洁电力", "可再生能源", "购电协议", "核电", "clean power", "renewable", "PPA", "nuclear"]},
+        {"id": "backup_storage", "label_zh": "储能与备用电源", "label_en": "Storage and backup power", "keywords": ["储能", "电池", "备用电源", "发电机", "微电网", "storage", "battery", "backup power", "generator", "microgrid"]},
+        {"id": "siting_regulation", "label_zh": "选址、许可与监管", "label_en": "Siting and regulation", "keywords": ["选址", "许可", "监管", "排放", "siting", "permit", "regulation", "emission"]},
+        {"id": "investment_projects", "label_zh": "投资与项目", "label_en": "Investment and projects", "keywords": ["投资", "项目", "建设", "容量", "investment", "project", "construction", "capacity"]}
+      ],
       "agencies": [
-               {"name_zh": "国际能源署", "name_en": "International Energy Agency", "url": "https://www.iea.org/reports/energy-and-ai"},
-        {"name_zh": "美国能源部", "name_en": "US Department of Energy", "url": "https://www.energy.gov/"},
-        {"name_zh": "国家发展改革委", "name_en": "National Development and Reform Commission", "url": "https://www.ndrc.gov.cn/"}
+        {"name_zh": "国际能源署《能源与人工智能》", "name_en": "IEA Energy and AI", "url": "https://www.iea.org/reports/energy-and-ai"},
+        {"name_zh": "工业和信息化部国家绿色数据中心", "name_en": "MIIT National Green Data Centres", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2025/art_d7bfc06fa7c24c41a176fa02919a830d.html"},
+        {"name_zh": "美国劳伦斯伯克利国家实验室", "name_en": "Lawrence Berkeley National Laboratory", "url": "https://eta-publications.lbl.gov/publications/united-states-data-center-energy-2025"},
+        {"name_zh": "欧盟数据中心能源绩效", "name_en": "EU Data Centre Energy Performance", "url": "https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficiency-targets-directive-and-rules/energy-efficiency-directive/energy-performance-data-centres_en"},
+        {"name_zh": "新加坡绿色数据中心路线图", "name_en": "Singapore Green Data Centre Roadmap", "url": "https://www.imda.gov.sg/how-we-can-help/green-dc-roadmap"}
       ],
       "records": [
-        {"id": "aidc-iea-2026", "published_at": "2026-04-16", "title_zh": "2025年全球数据中心用电量增长17%", "title_en": "Global data-centre electricity use rose 17% in 2025", "summary_zh": "国际能源署指出，人工智能专用数据中心用电量在2025年增长50%；电网接入、供电可靠性、能效和储能配置成为数据中心扩张的关键约束。", "summary_en": "The IEA reports that electricity use by AI-focused data centres rose 50% in 2025. Grid connections, reliable supply, efficiency and storage are becoming critical constraints on expansion.", "source_zh": "国际能源署", "source_en": "International Energy Agency", "url": "https://www.iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions"},
-        {"id": "aidc-iea-2025", "published_at": "2025-04-10", "title_zh": "国际能源署发布《能源与人工智能》报告", "title_en": "IEA publishes Energy and AI", "summary_zh": "报告建立全球和区域数据中心电力需求模型，分析人工智能对能源安全、排放、创新和可负担性的影响，并讨论供电、能源与电网配置。", "summary_en": "The report models global and regional data-centre electricity demand and assesses implications for energy security, emissions, innovation and affordability, including options for power supply and grids.", "source_zh": "国际能源署", "source_en": "International Energy Agency", "url": "https://www.iea.org/reports/energy-and-ai"}
+        {"id": "aidc-iea-2026", "published_at": "2026-04-16", "title_zh": "2025年全球数据中心用电量增长17%", "title_en": "Global data-centre electricity use rose 17% in 2025", "summary_zh": "国际能源署指出，人工智能专用数据中心用电量在2025年增长50%；电网接入、供电可靠性、能效和储能配置成为数据中心扩张的关键约束。", "summary_en": "The IEA reports that electricity use by AI-focused data centres rose 50% in 2025. Grid connections, reliable supply, efficiency and storage are becoming critical constraints on expansion.", "source_zh": "国际能源署", "source_en": "International Energy Agency", "url": "https://www.iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions", "category_ids": ["demand_grid", "efficiency_water"]},
+        {"id": "aidc-iea-2025", "published_at": "2025-04-10", "title_zh": "国际能源署发布《能源与人工智能》报告", "title_en": "IEA publishes Energy and AI", "summary_zh": "报告建立全球和区域数据中心电力需求模型，分析人工智能对能源安全、排放、创新和可负担性的影响，并讨论供电、能源与电网配置。", "summary_en": "The report models global and regional data-centre electricity demand and assesses implications for energy security, emissions, innovation and affordability, including options for power supply and grids.", "source_zh": "国际能源署", "source_en": "International Energy Agency", "url": "https://www.iea.org/reports/energy-and-ai", "category_ids": ["demand_grid", "clean_power"]}
       ]
     }
   ]
