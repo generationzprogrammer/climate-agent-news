@@ -50,6 +50,18 @@ GOOGLE_NEWS_QUERIES = (
     '("AI data centre" OR "AI data center" OR AIDC) '
     '(electricity OR energy OR grid OR cooling OR water OR emissions) when:1d',
 )
+GOOGLE_NEWS_LOCALES = (
+    ("en-US", "US", "US:en"),
+    ("en-GB", "GB", "GB:en"),
+    ("en-AU", "AU", "AU:en"),
+    ("en-SG", "SG", "SG:en"),
+    ("en-GB", "GB", "GB:en"),
+    ("en-GB", "GB", "GB:en"),
+    ("zh-CN", "CN", "CN:zh-Hans"),
+    ("en-SG", "SG", "SG:en"),
+    ("zh-CN", "CN", "CN:zh-Hans"),
+    ("en-SG", "SG", "SG:en"),
+)
 GDELT_PROFILES = {
     "API001": {
         "query": '("climate change" OR UNFCCC OR "climate finance" OR NDC)',
@@ -238,9 +250,14 @@ def _gdelt_url(endpoint: str, source_id: str) -> str:
     return f"{endpoint}?{urlencode(params)}"
 
 
-def _google_news_url(endpoint: str, query: str | None = None) -> str:
+def _google_news_url(
+    endpoint: str,
+    query: str | None = None,
+    locale: tuple[str, str, str] | None = None,
+) -> str:
     query = query or GOOGLE_NEWS_QUERIES[0]
-    params = {"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"}
+    hl, gl, ceid = locale or GOOGLE_NEWS_LOCALES[0]
+    params = {"q": query, "hl": hl, "gl": gl, "ceid": ceid}
     return endpoint.format(
         query=urlencode({"q": query})[2:],
         hl=params["hl"],
@@ -250,7 +267,10 @@ def _google_news_url(endpoint: str, query: str | None = None) -> str:
 
 
 def _google_news_urls(endpoint: str) -> list[str]:
-    return [_google_news_url(endpoint, query) for query in GOOGLE_NEWS_QUERIES]
+    return [
+        _google_news_url(endpoint, query, locale)
+        for query, locale in zip(GOOGLE_NEWS_QUERIES, GOOGLE_NEWS_LOCALES)
+    ]
 
 
 def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:

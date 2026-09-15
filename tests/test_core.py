@@ -11,7 +11,7 @@ from unittest.mock import patch
 
 from climate_agent.archive import quality_result, update_archive, validate_public_payload
 from climate_agent.article_content import extract_article_text
-from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_window, select_latest_day, select_latest_week, weekly_report_payload
+from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_map_window, select_daily_window, select_latest_day, select_latest_week, weekly_report_payload
 from climate_agent.cli import ROOT, bootstrap
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
 from climate_agent.company_intelligence import build_company_intelligence, load_company_catalogue
@@ -704,6 +704,35 @@ class CoreTests(unittest.TestCase):
         self.assertTrue({"fresh-0", "fresh-1", "fresh-2", "fresh-3"}.issubset(selected_ids))
         self.assertEqual(len(selected), 4)
         self.assertEqual({date.fromisoformat(row["published_at"][:10]) for row in selected}, {date(2026, 8, 2)})
+
+    def test_daily_map_window_uses_broader_same_day_pool_and_limits_country_concentration(self) -> None:
+        rows = []
+        countries = [
+            ("US", -100, 39), ("US", -101, 40), ("US", -99, 38), ("US", -98, 37),
+            ("CN", 105, 35), ("IN", 78, 22), ("DE", 10, 51), ("NG", 8, 9),
+            ("BR", -52, -10), ("AU", 134, -25), ("JP", 138, 37), ("CA", -106, 56),
+        ]
+        for index, (code, lon, lat) in enumerate(countries):
+            rows.append({
+                "article_id": f"map-{index}",
+                "source_id": f"S{index}",
+                "source_name": f"Source {index}",
+                "title_original": f"Distinct climate policy development {index}",
+                "published_at": "2026-09-15T04:00:00+00:00",
+                "relevance_score": 100 - index,
+                "country_codes": [{"alpha2": code}],
+                "places": [{"name_zh": code, "lon": lon, "lat": lat}],
+            })
+        rows.append({
+            "article_id": "older", "source_id": "OLD", "source_name": "Old source",
+            "title_original": "Older climate event", "published_at": "2026-09-14T04:00:00+00:00",
+            "relevance_score": 100, "country_codes": [{"alpha2": "FR"}],
+            "places": [{"name_zh": "FR", "lon": 2, "lat": 46}],
+        })
+        selected = select_daily_map_window(rows, limit=10)
+        self.assertEqual(len(selected), 10)
+        self.assertLessEqual(Counter((row.get("country_codes") or [{}])[0].get("alpha2") for row in selected)["US"], 2)
+        self.assertNotIn("older", {row["article_id"] for row in selected})
 
     def test_place_detection_uses_boundaries_and_caribbean(self) -> None:
         places = detect_places("Caribbean countries face £43 billion in climate disaster losses")

@@ -130,6 +130,13 @@ def _ensure_places(item: dict) -> dict:
         ))
         places = detect_places(text)
     if not places:
+        for country in item.get("country_codes") or []:
+            if not isinstance(country, dict):
+                continue
+            places = detect_places(str(country.get("name_zh") or ""))
+            if places:
+                break
+    if not places:
         for country in item.get("country_tags") or []:
             mapped = COUNTRY_PLACE_MAP.get(str(country))
             if mapped:
@@ -264,6 +271,81 @@ def select_daily_window(
         return []
     latest_items = _deduplicate_items([item for item, day in dated if day == latest])
     selected = balanced_select(latest_items, limit)
+    return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
+
+
+def _country_key(item: dict) -> str:
+    for country in item.get("country_codes") or []:
+        if isinstance(country, dict):
+            code = str(country.get("alpha2") or country.get("alpha3") or "").strip().upper()
+            if code:
+                return code
+    tags = item.get("country_tags") or []
+    if tags:
+        return str(tags[0])
+    places = item.get("places") or []
+    return str(places[0].get("name_zh") or "") if places else ""
+
+
+def select_daily_map_window(items: list[dict], *, limit: int = 10) -> list[dict]:
+    """Select a geographically balanced map queue from the newest day only."""
+    dated = [(item, _published_day(item.get("published_at"))) for item in items]
+    latest = max((day for _, day in dated if day), default=None)
+    if not latest:
+        return []
+    pool = []
+    for item, day in dated:
+        if day != latest:
+            continue
+        prepared = _prepare_public_item(dict(item))
+        if prepared.get("places"):
+            pool.append(prepared)
+    pool = _deduplicate_items(pool)
+    selected: list[dict] = []
+    country_counts: Counter[str] = Counter()
+    continent_counts: Counter[str] = Counter()
+    source_counts: Counter[str] = Counter()
+
+    def take(*, country_cap: int, continent_cap: int, source_cap: int) -> None:
+        while pool and len(selected) < limit:
+            eligible = [
+                item for item in pool
+                if country_counts[_country_key(item)] < country_cap
+                and continent_counts[_continent(item)] < continent_cap
+                and source_counts[_source_key(item)] < source_cap
+            ]
+            if not eligible:
+                return
+
+            def adjusted(item: dict) -> tuple[float, str]:
+                country = _country_key(item)
+                continent = _continent(item)
+                source = _source_key(item)
+                score = float(item.get("relevance_score") or 0) + min(8, float(item.get("authority") or 0))
+                if not continent_counts[continent]:
+                    score += 22
+                if not country_counts[country]:
+                    score += 14
+                if not source_counts[source]:
+                    score += 5
+                score -= continent_counts[continent] * 10
+                score -= country_counts[country] * 14
+                return score, item.get("published_at") or ""
+
+            choice = max(eligible, key=adjusted)
+            pool.remove(choice)
+            selected.append(choice)
+            country_counts[_country_key(choice)] += 1
+            continent_counts[_continent(choice)] += 1
+            source_counts[_source_key(choice)] += 1
+
+    # Ten markers should normally cover several regions. Relax only enough to
+    # reach the 8-item floor when the same-day candidate pool is unusually thin.
+    take(country_cap=2, continent_cap=3, source_cap=2)
+    if len(selected) < min(8, limit):
+        take(country_cap=2, continent_cap=4, source_cap=3)
+    if len(selected) < min(8, limit):
+        take(country_cap=3, continent_cap=4, source_cap=3)
     return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
 
 
@@ -450,7 +532,8 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
     )
     publication_day = datetime.now(BEIJING_TZ).date()
     payload["intelligence"] = today_items
-    payload["map_events_today"] = _map_events(today_items)
+    map_today_items = select_daily_map_window(records, limit=10)
+    payload["map_events_today"] = _map_events(map_today_items, max_events=10)
     payload["map_events_week"] = _map_events(week_items)
     payload["map_events"] = payload["map_events_today"]
     payload["meta"]["date"] = publication_day.isoformat()
@@ -507,7 +590,7 @@ def dashboard_payload(db: Database) -> dict:
     """)}
     official = _official_data(db)
     live = bool(intelligence)
-    map_events_today = _map_events(intelligence)
+    map_events_today = _map_events(select_daily_map_window(candidates, limit=10), max_events=10)
     map_events_week = _map_events(weekly_intelligence)
     intelligence_days = [_published_day(item.get("published_at")) for item in intelligence]
     intelligence_days = [day for day in intelligence_days if day]
