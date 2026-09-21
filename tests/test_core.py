@@ -415,7 +415,10 @@ class CoreTests(unittest.TestCase):
 
     def test_topic_desks_are_classified_and_source_backed(self) -> None:
         desks = build_topic_desks(
-            {"records": []}, {"records": []}, ROOT / "config" / "topic_desks.json"
+            {"records": []},
+            {"records": []},
+            ROOT / "config" / "topic_desks.json",
+            carbon_registry=json.loads((ROOT / "data" / "national_carbon_market_entities.json").read_text(encoding="utf-8")),
         )
         self.assertEqual(
             {desk["id"] for desk in desks["desks"]},
@@ -424,6 +427,14 @@ class CoreTests(unittest.TestCase):
         self.assertTrue(all(desk["records"] and desk["agencies"] for desk in desks["desks"]))
         self.assertTrue(all(len(desk["categories"]) >= 5 for desk in desks["desks"]))
         self.assertTrue(all("statistics" in desk and "category_counts" in desk for desk in desks["desks"]))
+        bth = next(desk for desk in desks["desks"] if desk["id"] == "bth_green_transition")
+        self.assertGreaterEqual(len(bth["target_indicators"]), 4)
+        self.assertGreaterEqual(len(bth["policy_tools"]), 12)
+        self.assertEqual(
+            {item["jurisdiction"] for item in bth["regional_tracker"]["carbon_entities"]},
+            {"beijing", "tianjin", "hebei"},
+        )
+        self.assertGreater(sum(item["record_count"] for item in bth["regional_tracker"]["carbon_entities"]), 0)
 
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()

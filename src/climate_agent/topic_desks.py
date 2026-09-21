@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections import Counter
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
@@ -12,6 +13,12 @@ PUBLIC_RECORD_LIMIT = 120
 GENERIC_OFFICIAL_DOMAINS = (
     ".gov.cn", ".gov.sg", ".gov", ".europa.eu", "iea.org", "irena.org", "lbl.gov",
 )
+
+BTH_PROVINCES = {
+    "beijing": "北京市",
+    "tianjin": "天津市",
+    "hebei": "河北省",
+}
 
 
 def _value(record: dict, key: str) -> str:
@@ -113,11 +120,84 @@ def load_historical_records(path: Path | None) -> list[dict]:
     return records
 
 
+def load_carbon_registry(path: Path | None) -> dict:
+    if not path or not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _bth_jurisdiction(text: str) -> str:
+    if re.search(r"京津冀|Beijing[-–— ]Tianjin[-–— ]Hebei|Jing[-–— ]Jin[-–— ]Ji", text, re.I):
+        return "regional"
+    for key, terms in {
+        "beijing": ("北京市", "北京", "Beijing"),
+        "tianjin": ("天津市", "天津", "Tianjin"),
+        "hebei": ("河北省", "河北", "Hebei"),
+    }.items():
+        if _contains_any(text, list(terms)):
+            return key
+    return "regional"
+
+
+def _registry_year_key(value: str) -> int:
+    years = re.findall(r"20\d{2}", str(value))
+    return max((int(year) for year in years), default=0)
+
+
+def _build_bth_tracker(evidence: list[tuple[dict, datetime, list[str], bool]], registry: dict) -> dict:
+    years = [datetime.now(UTC).year - offset for offset in (2, 1, 0)]
+    timeline = []
+    for year in years:
+        counts = Counter(
+            _bth_jurisdiction(_text(row))
+            for row, moment, _categories, _curated in evidence
+            if moment.year == year
+        )
+        timeline.append({"year": year, **{key: counts.get(key, 0) for key in ("regional", *BTH_PROVINCES)}})
+
+    latest_entities: dict[str, dict] = {}
+    for item in registry.get("entities", []):
+        if item.get("province") not in BTH_PROVINCES.values():
+            continue
+        key = str(item.get("uscc") or item.get("name") or "").strip()
+        if not key:
+            continue
+        previous = latest_entities.get(key)
+        if previous is None or _registry_year_key(item.get("registry_year", "")) >= _registry_year_key(previous.get("registry_year", "")):
+            latest_entities[key] = item
+
+    entities = []
+    for key, province in BTH_PROVINCES.items():
+        rows = [item for item in latest_entities.values() if item.get("province") == province]
+        industries = Counter(str(item.get("industry") or "其他") for item in rows)
+        years_present = sorted({str(item.get("registry_year") or "") for item in rows if item.get("registry_year")})
+        entities.append({
+            "jurisdiction": key,
+            "province_zh": province,
+            "record_count": len(rows),
+            "industries": dict(sorted(industries.items(), key=lambda pair: (-pair[1], pair[0]))),
+            "registry_years": years_present,
+        })
+
+    metadata = registry.get("metadata") if isinstance(registry.get("metadata"), dict) else {}
+    return {
+        "evidence_timeline": timeline,
+        "carbon_entities": entities,
+        "registry_source_url": metadata.get("source_url", ""),
+        "registry_latest_year": metadata.get("latest_registry_year", ""),
+    }
+
+
 def build_topic_desks(
     climate_archive: dict,
     energy_archive: dict,
     config_path: Path,
     historical_records: list[dict] | None = None,
+    carbon_registry: dict | None = None,
 ) -> dict:
     payload = json.loads(config_path.read_text(encoding="utf-8"))
     now = datetime.now(UTC)
@@ -177,6 +257,8 @@ def build_topic_desks(
         }
         desk["category_counts"] = category_counts
         desk["dynamic_records"] = sum(bool(item.get("dynamic")) for item in public_records)
+        if desk.get("id") == "bth_green_transition":
+            desk["regional_tracker"] = _build_bth_tracker(evidence, carbon_registry or {})
     payload["generated_at"] = now.isoformat()
     payload["method"] = "Three-year source-linked evidence; 30-day comparison uses publication dates. Counts describe corpus coverage, not real-world event frequency."
     return payload
@@ -189,12 +271,14 @@ def write_topic_desks(
     output_path: Path,
     *,
     corpus_path: Path | None = None,
+    carbon_registry_path: Path | None = None,
 ) -> dict:
     payload = build_topic_desks(
         climate_archive,
         energy_archive,
         config_path,
         load_historical_records(corpus_path),
+        load_carbon_registry(carbon_registry_path),
     )
     output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return payload

@@ -121,6 +121,7 @@ def export_static_site(
         Path(__file__).resolve().parents[2] / "config" / "topic_desks.json",
         data_dir / "topic_desks.json",
         corpus_path=corpus_path,
+        carbon_registry_path=registry_path,
     )
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"

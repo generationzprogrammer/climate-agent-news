@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-12",
+  "updated_at": "2026-09-21",
   "desks": [
     {
       "id": "bth_green_transition",
@@ -15,7 +15,10 @@
             "Beijing-Tianjin-Hebei",
             "Jing-Jin-Ji",
             "Tianjin",
-            "Hebei"
+            "Hebei",
+            "北京",
+            "北京市",
+            "Beijing"
           ],
           [
             "绿色转型",
@@ -115,6 +118,39 @@
             "finance",
             "loan"
           ]
+        },
+        {
+          "id": "carbon_market",
+          "label_zh": "碳市场与履约",
+          "label_en": "Carbon markets and compliance",
+          "keywords": [
+            "碳市场",
+            "碳排放权",
+            "配额",
+            "履约",
+            "清缴",
+            "抵销",
+            "carbon market",
+            "allowance",
+            "compliance",
+            "offset"
+          ]
+        },
+        {
+          "id": "accounting_mrv",
+          "label_zh": "核算、报告与核查",
+          "label_en": "Accounting and MRV",
+          "keywords": [
+            "碳核算",
+            "排放报告",
+            "数据质量",
+            "核查",
+            "碳足迹",
+            "MRV",
+            "accounting",
+            "verification",
+            "carbon footprint"
+          ]
         }
       ],
       "agencies": [
@@ -137,9 +173,39 @@
           "name_zh": "河北省生态环境厅",
           "name_en": "Hebei Department of Ecology and Environment",
           "url": "https://hbepb.hebei.gov.cn/hbhjt/"
+        },
+        {
+          "name_zh": "北京市发展和改革委员会",
+          "name_en": "Beijing Development and Reform Commission",
+          "url": "https://fgw.beijing.gov.cn/"
+        },
+        {
+          "name_zh": "天津市发展和改革委员会",
+          "name_en": "Tianjin Development and Reform Commission",
+          "url": "https://fzgg.tj.gov.cn/"
+        },
+        {
+          "name_zh": "河北省发展和改革委员会",
+          "name_en": "Hebei Development and Reform Commission",
+          "url": "https://hbdrc.hebei.gov.cn/"
         }
       ],
       "records": [
+        {
+          "id": "article_d724b961d4670872",
+          "published_at": "2026-09-05T05:30:00+00:00",
+          "title_zh": "访谈：澳中光伏合作为世界提供动力——澳大利亚太阳能先驱访谈",
+          "title_en": "Interview : Australia - China PV collaboration powers world : Australian solar pioneer - Xinhua",
+          "summary_zh": "澳大利亚新南威尔士大学教授马丁·格林在接受新华社采访时表示，中澳在光伏领域的长期合作极大地推动了全球绿色转型。他指出，中国强大的制造规模与澳大利亚的技术创新相结合，使光伏成为全球最便宜的电力来源之一。格林近期刚在北京被授予 2025 年度中国国际科学技术合作奖，并回顾了自 1981 年起培养中国光伏科研人才及助力中国光伏产业建立的历程。",
+          "summary_en": "",
+          "source_zh": "中国官方气候来源（GDELT定向发现）",
+          "source_en": "中国官方气候来源（GDELT定向发现）",
+          "url": "https://english.news.cn/asiapacific/20260905/5c9c7dd9c914415eb5cec83d78724bd7/c.html",
+          "category_ids": [
+            "industry_energy"
+          ],
+          "dynamic": true
+        },
         {
           "id": "article_dced2f91f806163e",
           "published_at": "2026-08-20T04:30:00+00:00",
@@ -272,26 +338,461 @@
           "dynamic": false
         }
       ],
+      "description_zh": "追踪京津冀碳排放治理、目标、市场机制与重点行业转型。",
+      "description_en": "Tracking carbon governance, targets, market instruments and sectoral transition across Beijing, Tianjin and Hebei.",
+      "target_indicators": [
+        {
+          "jurisdiction": "regional",
+          "label_zh": "区域细颗粒物年均浓度",
+          "label_en": "Regional annual PM2.5",
+          "value": "33",
+          "unit_zh": "微克/立方米",
+          "unit_en": "μg/m³",
+          "target_year": "2027",
+          "basis_zh": "京津冀美丽中国先行区建设行动方案",
+          "basis_en": "Action plan for the Beijing–Tianjin–Hebei Beautiful China pilot zone",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202512/W020251226710348629883.pdf"
+        },
+        {
+          "jurisdiction": "beijing",
+          "label_zh": "单位地区生产总值二氧化碳排放",
+          "label_en": "CO2 intensity per unit of GDP",
+          "value": "-48%",
+          "unit_zh": "较2012年",
+          "unit_en": "vs 2012",
+          "target_year": "2021实绩",
+          "basis_zh": "《北京市碳达峰实施方案》政策解读",
+          "basis_en": "Policy interpretation of Beijing's carbon-peaking plan",
+          "url": "https://www.beijing.gov.cn/zhengce/zcjd/202210/t20221017_2837231.html"
+        },
+        {
+          "jurisdiction": "tianjin",
+          "label_zh": "非化石能源消费比重",
+          "label_en": "Non-fossil energy share",
+          "value": "16%",
+          "unit_zh": "力争达到",
+          "unit_en": "target",
+          "target_year": "2030",
+          "basis_zh": "天津市碳达峰实施方案",
+          "basis_en": "Tianjin carbon-peaking implementation plan",
+          "url": "https://www.tj.gov.cn/zwgk/szfwj/tjsrmzf/202209/t20220914_5987984.html"
+        },
+        {
+          "jurisdiction": "hebei",
+          "label_zh": "单位地区生产总值二氧化碳排放",
+          "label_en": "CO2 intensity per unit of GDP",
+          "value": "-19%",
+          "unit_zh": "较2020年",
+          "unit_en": "vs 2020",
+          "target_year": "2025目标",
+          "basis_zh": "河北省建立健全绿色低碳循环发展经济体系实施意见",
+          "basis_en": "Hebei implementation opinion on a green, low-carbon and circular economy",
+          "url": "https://gxt.hebei.gov.cn/hbgyhxxht/zcfg30/snzc/2025042121481998468/index.html"
+        }
+      ],
+      "policy_dimensions": {
+        "jurisdictions": [
+          {
+            "id": "regional",
+            "label_zh": "京津冀协同",
+            "label_en": "Regional"
+          },
+          {
+            "id": "beijing",
+            "label_zh": "北京",
+            "label_en": "Beijing"
+          },
+          {
+            "id": "tianjin",
+            "label_zh": "天津",
+            "label_en": "Tianjin"
+          },
+          {
+            "id": "hebei",
+            "label_zh": "河北",
+            "label_en": "Hebei"
+          }
+        ],
+        "instruments": [
+          {
+            "id": "plan",
+            "label_zh": "规划与行动方案",
+            "label_en": "Plans and action programmes"
+          },
+          {
+            "id": "market",
+            "label_zh": "市场机制",
+            "label_en": "Market instruments"
+          },
+          {
+            "id": "standard",
+            "label_zh": "核算与标准",
+            "label_en": "Accounting and standards"
+          },
+          {
+            "id": "regulation",
+            "label_zh": "监管与履约",
+            "label_en": "Regulation and compliance"
+          },
+          {
+            "id": "finance",
+            "label_zh": "财政与金融",
+            "label_en": "Fiscal and finance"
+          }
+        ],
+        "sectors": [
+          {
+            "id": "economy",
+            "label_zh": "综合",
+            "label_en": "Economy-wide"
+          },
+          {
+            "id": "energy",
+            "label_zh": "能源电力",
+            "label_en": "Energy and power"
+          },
+          {
+            "id": "industry",
+            "label_zh": "工业",
+            "label_en": "Industry"
+          },
+          {
+            "id": "transport",
+            "label_zh": "交通",
+            "label_en": "Transport"
+          },
+          {
+            "id": "buildings",
+            "label_zh": "建筑",
+            "label_en": "Buildings"
+          },
+          {
+            "id": "carbon_market",
+            "label_zh": "碳市场",
+            "label_en": "Carbon market"
+          }
+        ]
+      },
+      "policy_tools": [
+        {
+          "id": "bth-beautiful-china-2025",
+          "jurisdiction": "regional",
+          "instrument": "plan",
+          "sector_ids": [
+            "economy",
+            "energy",
+            "industry",
+            "transport"
+          ],
+          "published_at": "2025-12-26",
+          "status_zh": "实施中",
+          "status_en": "In force",
+          "title_zh": "京津冀美丽中国先行区建设行动方案",
+          "title_en": "Action plan for the Beijing–Tianjin–Hebei Beautiful China pilot zone",
+          "summary_zh": "围绕绿色低碳转型、环境质量、生态修复和协同创新部署22项任务，并设置2027年区域目标。",
+          "summary_en": "Sets 22 tasks on low-carbon transition, environmental quality, restoration and regional innovation, with targets for 2027.",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202512/W020251226710348629883.pdf"
+        },
+        {
+          "id": "bth-travel-standard-2024",
+          "jurisdiction": "regional",
+          "instrument": "standard",
+          "sector_ids": [
+            "transport",
+            "carbon_market"
+          ],
+          "published_at": "2024-07-10",
+          "status_zh": "现行",
+          "status_en": "Current",
+          "title_zh": "京津冀低碳出行碳普惠核算规范",
+          "title_en": "Joint accounting standard for low-carbon travel",
+          "summary_zh": "统一步行、骑行、公共交通和合乘项目的边界、减排量计算、监测与存档要求。",
+          "summary_en": "Aligns project boundaries, emission-reduction calculations, monitoring and archiving for low-carbon travel.",
+          "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/zcfb/dfbz87/543356664/2024071011234084400.pdf"
+        },
+        {
+          "id": "beijing-peak-plan-2022",
+          "jurisdiction": "beijing",
+          "instrument": "plan",
+          "sector_ids": [
+            "economy",
+            "energy",
+            "industry",
+            "transport",
+            "buildings"
+          ],
+          "published_at": "2022-10-14",
+          "status_zh": "实施中",
+          "status_en": "In force",
+          "title_zh": "北京市碳达峰实施方案",
+          "title_en": "Beijing carbon-peaking implementation plan",
+          "summary_zh": "以效率引领、科技支撑和机制创新为主线，部署能源、建筑、交通、产业和市场机制等行动。",
+          "summary_en": "Organises actions across energy, buildings, transport, industry and market mechanisms.",
+          "url": "https://www.beijing.gov.cn/zhengce/zcjd/202210/t20221017_2837231.html"
+        },
+        {
+          "id": "beijing-ets-rules-2024",
+          "jurisdiction": "beijing",
+          "instrument": "regulation",
+          "sector_ids": [
+            "carbon_market"
+          ],
+          "published_at": "2024-03-12",
+          "status_zh": "现行有效",
+          "status_en": "Current",
+          "title_zh": "北京市碳排放权交易管理办法",
+          "title_en": "Beijing emissions-trading management measures",
+          "summary_zh": "规定年度名单、配额、交易、核查、履约和监督管理，并明确重点排放单位纳入与退出条件。",
+          "summary_en": "Defines annual lists, allowances, trading, verification, compliance and supervision.",
+          "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/zcfb/2024bzcjd/543352873/index.html"
+        },
+        {
+          "id": "beijing-offset-rules-2024",
+          "jurisdiction": "beijing",
+          "instrument": "market",
+          "sector_ids": [
+            "carbon_market"
+          ],
+          "published_at": "2024-10-09",
+          "status_zh": "现行有效",
+          "status_en": "Current",
+          "title_zh": "北京市碳市场碳排放量抵销管理办法",
+          "title_en": "Beijing carbon-market offset management measures",
+          "summary_zh": "允许重点碳排放单位使用符合条件的减排量抵销年度排放量，抵销比例上限为5%。",
+          "summary_en": "Allows eligible reductions to offset up to 5% of a covered entity's annual emissions.",
+          "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/zcfb/543377609/543425947/index.html"
+        },
+        {
+          "id": "beijing-eia-carbon-2023",
+          "jurisdiction": "beijing",
+          "instrument": "standard",
+          "sector_ids": [
+            "industry",
+            "buildings"
+          ],
+          "published_at": "2023-03-20",
+          "status_zh": "试行",
+          "status_en": "Pilot",
+          "title_zh": "建设项目环境影响评价碳排放核算评价试点",
+          "title_en": "Pilot carbon accounting in environmental impact assessment",
+          "summary_zh": "在重点行业建设项目环境影响评价中纳入碳排放核算，并分析项目排放对所属单位的影响。",
+          "summary_en": "Adds carbon accounting to environmental impact assessment for selected projects and sectors.",
+          "url": "https://sthjj.beijing.gov.cn/bjhrb/index/xxgk69/zfxxgk43/fdzdgknr2/zcfb/543377609/543370917/index.html"
+        },
+        {
+          "id": "tianjin-peak-plan-2022",
+          "jurisdiction": "tianjin",
+          "instrument": "plan",
+          "sector_ids": [
+            "economy",
+            "energy",
+            "industry",
+            "transport",
+            "buildings"
+          ],
+          "published_at": "2022-09-14",
+          "status_zh": "实施中",
+          "status_en": "In force",
+          "title_zh": "天津市碳达峰实施方案",
+          "title_en": "Tianjin carbon-peaking implementation plan",
+          "summary_zh": "提出能源、工业、城乡建设、交通、循环经济、科技和市场机制等十大行动。",
+          "summary_en": "Sets ten action areas covering energy, industry, buildings, transport, circular economy, technology and markets.",
+          "url": "https://www.tj.gov.cn/zwgk/szfwj/tjsrmzf/202209/t20220914_5987984.html"
+        },
+        {
+          "id": "tianjin-allowance-2024",
+          "jurisdiction": "tianjin",
+          "instrument": "market",
+          "sector_ids": [
+            "carbon_market"
+          ],
+          "published_at": "2024-09-24",
+          "status_zh": "年度执行",
+          "status_en": "Annual implementation",
+          "title_zh": "天津市2024年度碳排放配额分配方案",
+          "title_en": "Tianjin 2024 carbon allowance allocation plan",
+          "summary_zh": "更新地方碳市场重点排放单位名录，规定配额总量、政府储备和历史强度法、历史排放法等分配方式。",
+          "summary_en": "Updates the local covered-entity list and defines allowance totals, reserves and allocation methods.",
+          "url": "https://sthj.tj.gov.cn/ZWGK4828/ZCWJ6738/sthjjwj/202409/W020240924613632276083.pdf"
+        },
+        {
+          "id": "tianjin-market-plan-2025",
+          "jurisdiction": "tianjin",
+          "instrument": "market",
+          "sector_ids": [
+            "carbon_market",
+            "transport"
+          ],
+          "published_at": "2025-05-22",
+          "status_zh": "征求意见稿",
+          "status_en": "Consultation draft",
+          "title_zh": "天津市深化地方碳排放权交易市场建设工作方案（2025—2027年）",
+          "title_en": "Tianjin plan to deepen its local carbon market for 2025–2027",
+          "summary_zh": "拟扩大市场覆盖、丰富交易品种，并推进航运、氢燃料汽车、碳普惠、气候投融资和产品碳足迹工具。",
+          "summary_en": "Proposes wider coverage and new tools for shipping, hydrogen vehicles, carbon inclusion, climate finance and product footprints.",
+          "url": "https://sthj.tj.gov.cn/ZWXX808/TZGG6419/202505/W020250522623521095977.pdf"
+        },
+        {
+          "id": "hebei-industrial-peak-2023",
+          "jurisdiction": "hebei",
+          "instrument": "plan",
+          "sector_ids": [
+            "industry",
+            "energy"
+          ],
+          "published_at": "2023-06-25",
+          "status_zh": "实施中",
+          "status_en": "In force",
+          "title_zh": "河北省工业领域碳达峰实施方案",
+          "title_en": "Hebei industrial carbon-peaking implementation plan",
+          "summary_zh": "以钢铁、建材、石化和化工为重点，推进能效提升、能源替代、绿色制造和低碳技术示范。",
+          "summary_en": "Targets steel, building materials, petrochemicals and chemicals through efficiency, fuel switching and low-carbon technology.",
+          "url": "https://gxt.hebei.gov.cn/sme/zc/zxzc/2025042122105668875/index.html"
+        },
+        {
+          "id": "hebei-green-economy-2021",
+          "jurisdiction": "hebei",
+          "instrument": "plan",
+          "sector_ids": [
+            "economy",
+            "energy",
+            "industry",
+            "transport"
+          ],
+          "published_at": "2021-07-16",
+          "status_zh": "实施中",
+          "status_en": "In force",
+          "title_zh": "河北省建立健全绿色低碳循环发展经济体系实施意见",
+          "title_en": "Hebei implementation opinion on a green, low-carbon and circular economy",
+          "summary_zh": "设置2025年能耗强度、二氧化碳排放强度、非化石能源占比和绿色产业等综合目标。",
+          "summary_en": "Sets 2025 targets for energy intensity, carbon intensity, non-fossil energy and green industry.",
+          "url": "https://gxt.hebei.gov.cn/hbgyhxxht/zcfg30/snzc/2025042121481998468/index.html"
+        },
+        {
+          "id": "hebei-air-energy-2024",
+          "jurisdiction": "hebei",
+          "instrument": "plan",
+          "sector_ids": [
+            "energy",
+            "industry",
+            "transport"
+          ],
+          "published_at": "2024-04-26",
+          "status_zh": "实施中",
+          "status_en": "In force",
+          "title_zh": "河北省空气质量持续改善行动计划实施方案",
+          "title_en": "Hebei action plan for sustained air-quality improvement",
+          "summary_zh": "以产业、能源和运输结构调整协同减污降碳，设置可再生能源装机、非化石能源消费和短流程炼钢目标。",
+          "summary_en": "Links air-quality and carbon action through industrial, energy and transport restructuring with quantitative targets.",
+          "url": "https://hbepb.hebei.gov.cn/zycms/ewebeditor/uploadfile/20240426160903905.pdf"
+        },
+        {
+          "id": "hebei-carbon-enforcement-2024",
+          "jurisdiction": "hebei",
+          "instrument": "regulation",
+          "sector_ids": [
+            "carbon_market",
+            "industry"
+          ],
+          "published_at": "2024-08-15",
+          "status_zh": "现行",
+          "status_en": "Current",
+          "title_zh": "河北省生态环境行政处罚裁量规则（碳排放相关条款）",
+          "title_en": "Hebei environmental penalty discretion rules for carbon-emissions compliance",
+          "summary_zh": "细化未按规定核算、报告和履约等行为的裁量要素及处罚尺度。",
+          "summary_en": "Specifies enforcement factors and penalties for failures in accounting, reporting and compliance.",
+          "url": "https://hbepb.hebei.gov.cn/zycms/ewebeditor/uploadfile/20240815084920856.pdf"
+        }
+      ],
       "statistics": {
-        "evidence_records": 9,
-        "public_records": 8,
+        "evidence_records": 13,
+        "public_records": 9,
         "latest_30_days": 1,
-        "prior_30_days": 0,
-        "change_percent": null,
-        "source_count": 4,
+        "prior_30_days": 1,
+        "change_percent": 0,
+        "source_count": 6,
         "official_records": 7,
-        "official_share": 77.8,
+        "official_share": 53.8,
         "lookback_days": 1095
       },
       "category_counts": {
         "governance": 4,
-        "industry_energy": 6,
+        "industry_energy": 7,
         "transport_buildings": 3,
-        "air_carbon": 6,
+        "air_carbon": 8,
         "finance_projects": 1,
-        "overview": 0
+        "carbon_market": 0,
+        "accounting_mrv": 0,
+        "overview": 1
       },
-      "dynamic_records": 1
+      "dynamic_records": 2,
+      "regional_tracker": {
+        "evidence_timeline": [
+          {
+            "year": 2024,
+            "regional": 3,
+            "beijing": 1,
+            "tianjin": 0,
+            "hebei": 0
+          },
+          {
+            "year": 2025,
+            "regional": 5,
+            "beijing": 2,
+            "tianjin": 0,
+            "hebei": 0
+          },
+          {
+            "year": 2026,
+            "regional": 0,
+            "beijing": 1,
+            "tianjin": 0,
+            "hebei": 1
+          }
+        ],
+        "carbon_entities": [
+          {
+            "jurisdiction": "beijing",
+            "province_zh": "北京市",
+            "record_count": 15,
+            "industries": {
+              "发电": 13,
+              "水泥": 2
+            },
+            "registry_years": [
+              "2019-2020",
+              "2025"
+            ]
+          },
+          {
+            "jurisdiction": "tianjin",
+            "province_zh": "天津市",
+            "record_count": 24,
+            "industries": {
+              "发电": 24
+            },
+            "registry_years": [
+              "2019-2020"
+            ]
+          },
+          {
+            "jurisdiction": "hebei",
+            "province_zh": "河北省",
+            "record_count": 187,
+            "industries": {
+              "发电": 86,
+              "水泥": 54,
+              "钢铁": 47
+            },
+            "registry_years": [
+              "2019-2020",
+              "2025"
+            ]
+          }
+        ],
+        "registry_source_url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202504/t20250415_1114934.html",
+        "registry_latest_year": "2025"
+      }
     },
     {
       "id": "renewable_energy",
@@ -476,6 +977,22 @@
           "dynamic": true
         },
         {
+          "id": "article_ce06c4ca42335310",
+          "published_at": "2026-09-11T20:41:17+00:00",
+          "title_zh": "CFE将在南下加利福尼亚州开发太阳能与氢能项目",
+          "title_en": "CFE to Develop Solar, Hydrogen Project in Baja California Sur - Mexico Business News",
+          "summary_zh": "墨西哥联邦电力委员会（CFE）计划在南下加利福尼亚州推进一项涵盖太阳能与氢能的开发项目，旨在当地拓展清洁能源与低碳技术应用，进一步推动区域能源基础设施建设与低碳转型进程。",
+          "summary_en": "CFE to Develop Solar, Hydrogen Project in Baja California Sur Mexico Business News",
+          "source_zh": "Mexico Business News",
+          "source_en": "Mexico Business News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPNmZlOXBONWFNTVNPZmdJcm5vU2NDc2FHRFl0QnlHV0Z5d3M4MzNyZDU5a3FRcldkSHgtSkdDSTRZOWZPd1B6TThiMEYxbVF6UkhsVWcxbE1wa29TY0FwTGMxR29KQjJjQWxqcVpLTG4wMkNtRm1Rcm1KSDVhTWFsb1gwQ25uT092VmFLNUNMaUxtbmxsMjYwNERWb251ZUtvMWc3Xw?oc=5",
+          "category_ids": [
+            "solar",
+            "hydrogen_other"
+          ],
+          "dynamic": true
+        },
+        {
           "id": "article_803520fd0303871d",
           "published_at": "2026-09-11T19:25:33+00:00",
           "title_zh": "罗德岛能源公司瞄准缅因州陆上风电场以增加可再生电力供应",
@@ -521,6 +1038,36 @@
           "dynamic": true
         },
         {
+          "id": "article_3866b018d2bd42c2",
+          "published_at": "2026-09-11T15:31:36+00:00",
+          "title_zh": "气候政策批评：绿党呼吁更快从化石燃料转向可再生能源",
+          "title_en": "Climate policy criticism: The Greens call for faster switch from fossil fuels to renewables - RTL Today",
+          "summary_zh": "针对当前的气候政策批评，绿党公开呼吁加快能源转型步伐，要求更迅速地从化石燃料过渡到可再生能源。这一诉求旨在推动更积极的减排行动，以应对日益紧迫的全球气候挑战。",
+          "summary_en": "Climate policy criticism: The Greens call for faster switch from fossil fuels to renewables RTL Today",
+          "source_zh": "RTL Today",
+          "source_en": "RTL Today",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNMlFJLUpza0FwN01YWWl3TzBkRl9nN3UtNEpLenJUUkx0RkdtbEc4Q0RKVzdOd1JXeFhST1NlcDd0cEx5ZEdTZkFsbV9OTlJjZW9KT0l6ZEdmWU9ma1pjdUNmYVdfV0RwTGFUc3NaQk53YzhkcjhqYkptd21kSFc2dXZLZlBnSElHRHg5U1Z4Y3dhTzN0WnNueUdIMmxUdVBOSkxyLVZJWmNTT2lxYVZkQTdlMA?oc=5",
+          "category_ids": [
+            "policy_market"
+          ],
+          "dynamic": true
+        },
+        {
+          "id": "article_2bb531e64aef17a2",
+          "published_at": "2026-09-11T13:19:45+00:00",
+          "title_zh": "特拉华州推进 16 兆瓦社区太阳能项目",
+          "title_en": "Delaware advances 16 MW of community solar projects - Solar Power World",
+          "summary_zh": "特拉华州正在推进总容量达 16 兆瓦的社区太阳能项目。这一进展涉及该州分布式可再生能源基础设施的建设与推广，旨在扩大当地清洁能源的接入规模并提升太阳能项目的开发水平。",
+          "summary_en": "Delaware advances 16 MW of community solar projects Solar Power World",
+          "source_zh": "Solar Power World",
+          "source_en": "Solar Power World",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPQkVvcmVoS1BzMnBuYzZMem44cU1Oa0tDRk82aDF5WDBnUXI4Z3hPeVVXNDRiLUtpZjllR0tGejBrdkY4dmc4SXNYZ09zeXZ5TUI5ckNvc0VmODR5M1pRNlVTTTVFMzdIdFlsNUtZMTRLbVBDaFJJNzFCTzhTT1d1eWJkNGxmUGtPY3NjSDlMRno0anpiSGlXU2FLelNTbnc?oc=5",
+          "category_ids": [
+            "solar"
+          ],
+          "dynamic": true
+        },
+        {
           "id": "article_b0ad159aa92fd331",
           "published_at": "2026-09-11T13:00:00+00:00",
           "title_zh": "尼日利亚制造：从零开始打造非洲太阳能产业的竞赛",
@@ -534,6 +1081,36 @@
             "solar",
             "manufacturing",
             "integration"
+          ],
+          "dynamic": true
+        },
+        {
+          "id": "article_47c01742bd7e66e9",
+          "published_at": "2026-09-11T12:00:00+00:00",
+          "title_zh": "Metlen 同意剥离智利 165 兆瓦太阳能项目及 725 兆瓦时电池储能系统",
+          "title_en": "Metlen agrees to divest 165 MW solar project with 725 MWh BESS in Chile - enerdata.net",
+          "summary_zh": "Metlen 公司已达成协议，将剥离其位于智利的一个 165 兆瓦太阳能发电项目以及配套的 725 兆瓦时电池储能系统（BESS）。此次资产剥离涉及重要的可再生能源与储能容量，体现了相关企业在智利清洁能源市场的资产布局调整。",
+          "summary_en": "Metlen agrees to divest 165 MW solar project with 725 MWh BESS in Chile enerdata.net",
+          "source_zh": "enerdata.net",
+          "source_en": "enerdata.net",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQYS04MmhJTzdwU0pjZlJSWWdRbE9QVnVVYWZkMXpfSGtzeU5NY2t6M1Zwdzl4dm5zNzV0RW5qeVdXX2JEZ0tBNHMzNms0R0E1alRBSlNYVnJ1T1UyeUo1ZzFfb3RZYnNRRTBCMS1hRHVaZkZaMjFaMWlCV0tSYWFHR0dIUDNZbEJxdUFMcDk0VmI0V3d6eGNrVXJtUkF5ZENTWF9FeHVRcjAyWWlmQ3VmUWtZbE10SjRxTVZnS0RR?oc=5",
+          "category_ids": [
+            "solar"
+          ],
+          "dynamic": true
+        },
+        {
+          "id": "article_f806fa053dd3c89b",
+          "published_at": "2026-09-11T11:12:18+00:00",
+          "title_zh": "沃巴什县卫生委员会推进太阳能项目开发",
+          "title_en": "Wabash County Health Board Moves Forward With Solar Project Development - WSJD 100.5",
+          "summary_zh": "沃巴什县卫生委员会正在推进太阳能项目的开发工作。该项目聚焦地方清洁能源建设与应用，具体进展与后续实施细节有待进一步公开。",
+          "summary_en": "Wabash County Health Board Moves Forward With Solar Project Development WSJD 100.5",
+          "source_zh": "WSJD 100.5",
+          "source_en": "WSJD 100.5",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQRmdfZ3lHLVlPR01qcVdRWVZaVnJTcUVYRUFJNzRodG5BVkEtNmxoTXJpQTBhSkc3T0staGp2NUFHaFFxTnJCaGkzQzFJZHo4VDc0MFBmMFJzOHI5Y1gxcDFRTmNlNU1HWFhGem5IN1BLZjR4NWl5a2dvcVNvVWktZ2xHY3hXM3dKQzkxQ2xvNUNsVk0yaUpGUWRiRXBYMGtaelhURFA0ZW5WVE9N?oc=5",
+          "category_ids": [
+            "solar"
           ],
           "dynamic": true
         },
@@ -2217,103 +2794,27 @@
             "solar"
           ],
           "dynamic": true
-        },
-        {
-          "id": "article_c6f4d6f997d76422",
-          "published_at": "2026-08-31T07:30:00+00:00",
-          "title_zh": "加里市大面积断电凸显了取消“全民太阳能”计划的利害关系",
-          "title_en": "Gary power outage underscores stakes of Solar for All cancellation",
-          "summary_zh": "美国印第安纳州加里市在强风暴和龙卷风袭击后遭遇长达两周的断电。当地官员原本计划利用联邦“全民太阳能”计划的资金推进屋顶太阳能和微电网建设以提升社区韧性，但该计划已被取消，导致分布式清洁能源项目受阻。",
-          "summary_en": "Stephen Mays was left without power for 12 days after violent storms and tornadoes struck northwest Indiana this month. Lori Latham for 13. Thousands of other residents of Gary, Indiana, where both Mays and Latham live and work, went without power for as long as two full weeks following the storms, in what has become…",
-          "source_zh": "Canary Media",
-          "source_en": "Canary Media",
-          "url": "https://www.canarymedia.com/articles/climate-crisis/gary-power-outage-solar-for-all",
-          "category_ids": [
-            "solar",
-            "integration"
-          ],
-          "dynamic": true
-        },
-        {
-          "id": "article_031f1d0b032a9d08",
-          "published_at": "2026-08-31T07:30:00+00:00",
-          "title_zh": "弗吉尼亚州推出全国首个集中采购项目以降低屋顶太阳能成本",
-          "title_en": "Virginia to cut rooftop solar costs with nation-first bulk-buy program",
-          "summary_zh": "弗吉尼亚州启动了美国首个全州范围的屋顶太阳能集中采购活动“Switch Together”，旨在通过批量采购降低居民安装太阳能面板的成本。该项目由非营利组织Solar United Neighbors运营，不使用州财政资金，预计可为参与家庭节省20%至30%的安装费用并削减年度电费开支。截至目前，已有数千名居民和企业登记了解详情并有部分签署合同。",
-          "summary_en": "Last month, Virginia became the first state in the country to launch a bulk-purchasing campaign for rooftop solar — a move that promises to bring down the cost of installing panels for households across Old Dominion. The idea behind the program, called Switch Together , is simple: Solar panels come cheaper by the…",
-          "source_zh": "Canary Media",
-          "source_en": "Canary Media",
-          "url": "https://www.canarymedia.com/articles/solar/virginia-rooftop-solar-bulk-buy-program",
-          "category_ids": [
-            "solar"
-          ],
-          "dynamic": true
-        },
-        {
-          "id": "article_dba0c95e8a040f73",
-          "published_at": "2026-08-31T02:00:00+00:00",
-          "title_zh": "可再生能源继续降低澳大利亚的排放量",
-          "title_en": "Renewables continue to lower Australia’s emissions - Utility Magazine",
-          "summary_zh": "澳大利亚的可再生能源发电比例持续上升，在推动国家温室气体排放量下降方面发挥了重要作用，相关进展体现于清洁能源对传统化石能源发电的持续替代效应。",
-          "summary_en": "Renewables continue to lower Australia’s emissions Utility Magazine",
-          "source_zh": "Utility Magazine",
-          "source_en": "Utility Magazine",
-          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdnRYM19oN1lfYVFxOWVkazNhTHBSR2VtOTlCUTJxOVo3VmtJTklFNU1PQXZyYzhnbFJaMzZYRTNIVVAtUnhCV1dYRmxZY0dycm5XV045cGtCUHZDT1pQa0dSYjlrOHBqd1hqbzhHOU1qNkEzZmNSMHFRT2QyWHJMbXUwMnY4ZmVu?oc=5",
-          "category_ids": [
-            "overview"
-          ],
-          "dynamic": true
-        },
-        {
-          "id": "article_77ae9ffb9c2a43fc",
-          "published_at": "2026-08-31T01:49:00+00:00",
-          "title_zh": "马里兰州敲定为期 20 年的光伏协议，官员称可节省 3 万万美元",
-          "title_en": "Maryland locks in 20-year solar deal officials say could save $300 million - Yahoo",
-          "summary_zh": "马里兰州官员表示，该州已敲定一项为期 20 年的太阳能协议，预计能够节省 3 亿美元的资金。这一长期光伏协议将对当地能源成本和可再生能源布局产生影响，但具体合同细节和实施步骤仍有待进一步披露。",
-          "summary_en": "Maryland locks in 20-year solar deal officials say could save $300 million Yahoo",
-          "source_zh": "Yahoo",
-          "source_en": "Yahoo",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQUl8yTV9PclBweFYyVVJwbTNaVXJUaVIycGhTSldQMjk0OWFWMkhSTjRHT2hHV3A1VXhaRVk5aVJIcFMxQV85clI1bEVJSVdROUFHRVhwR3NuY1FJdzRYU0ZQWkc1SWtXaWx2MGlJWnIya3hBeDJxdmNWMi1VSjl5RUgxQlRGUlJBUmc?oc=5",
-          "category_ids": [
-            "solar"
-          ],
-          "dynamic": true
-        },
-        {
-          "id": "article_57455daf82306e92",
-          "published_at": "2026-08-31T01:46:43+00:00",
-          "title_zh": "达灵顿县居民集会抗议拟议占地 417 英亩的光伏电站",
-          "title_en": "Darlington County neighbors rally against proposed 417-acre solar farm - WPDE",
-          "summary_zh": "美国达灵顿县的当地居民举行集会，公开反对一项拟议建设占地 417 英亩的大型光伏发电厂项目。该项目引发了周边社区的抗议和关注。",
-          "summary_en": "Darlington County neighbors rally against proposed 417-acre solar farm WPDE",
-          "source_zh": "WPDE",
-          "source_en": "WPDE",
-          "url": "https://news.google.com/rss/articles/CBMisgJBVV95cUxNMGF0NnpUcE9IdHE4RFZydFhRMDA0aWh2U3FwRF96blo5bktLdUlpLUhQTC1DX1dwa2YxZUdjbVZhOTlSZ3huMDNCRUdIeFdoQU40MWgtTGxESW5WNDFrRHhPcFZrRFJuVGZySmItbGtTYkhtekl5SVRuVGpPcFVmUHYzekgyMDZTemwtRklxOHB6dVhQczF5NW9KLTlTYkcwalVoQVVoLVdYcXZOVE0zcDI3Q0NzV3ViLXdkemFvMHRsNGhmOHA3ZXpXVVVPQlVtdVBNNTBXcDNyQjRuMWo3TnpHRmlHMkxCd0VLb2dYZ2x6NWpTTm9rWHoybE9lYThpWHFWNGFHRjZPNmZhdl9uMDh1dl9qQTNmZktXVUllbUlsQjZwbmpXbDQ3ckJ3T0J3dUE?oc=5",
-          "category_ids": [
-            "solar"
-          ],
-          "dynamic": true
         }
       ],
       "statistics": {
-        "evidence_records": 1248,
+        "evidence_records": 1240,
         "public_records": 120,
-        "latest_30_days": 207,
-        "prior_30_days": 95,
-        "change_percent": 118,
-        "source_count": 573,
+        "latest_30_days": 162,
+        "prior_30_days": 129,
+        "change_percent": 26,
+        "source_count": 572,
         "official_records": 3,
         "official_share": 0.2,
         "lookback_days": 1095
       },
       "category_counts": {
-        "solar": 232,
+        "solar": 235,
         "wind": 42,
-        "hydrogen_other": 30,
-        "policy_market": 192,
+        "hydrogen_other": 31,
+        "policy_market": 190,
         "manufacturing": 35,
         "integration": 71,
-        "overview": 797
+        "overview": 788
       },
       "dynamic_records": 120
     },
@@ -2458,6 +2959,21 @@
           "source_zh": "Canary Media",
           "source_en": "Canary Media",
           "url": "https://www.canarymedia.com/articles/batteries/xai-massive-battery-memphis-data-center",
+          "category_ids": [
+            "grid_services"
+          ],
+          "dynamic": true
+        },
+        {
+          "id": "article_47c01742bd7e66e9",
+          "published_at": "2026-09-11T12:00:00+00:00",
+          "title_zh": "Metlen 同意剥离智利 165 兆瓦太阳能项目及 725 兆瓦时电池储能系统",
+          "title_en": "Metlen agrees to divest 165 MW solar project with 725 MWh BESS in Chile - enerdata.net",
+          "summary_zh": "Metlen 公司已达成协议，将剥离其位于智利的一个 165 兆瓦太阳能发电项目以及配套的 725 兆瓦时电池储能系统（BESS）。此次资产剥离涉及重要的可再生能源与储能容量，体现了相关企业在智利清洁能源市场的资产布局调整。",
+          "summary_en": "Metlen agrees to divest 165 MW solar project with 725 MWh BESS in Chile enerdata.net",
+          "source_zh": "enerdata.net",
+          "source_en": "enerdata.net",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQYS04MmhJTzdwU0pjZlJSWWdRbE9QVnVVYWZkMXpfSGtzeU5NY2t6M1Zwdzl4dm5zNzV0RW5qeVdXX2JEZ0tBNHMzNms0R0E1alRBSlNYVnJ1T1UyeUo1ZzFfb3RZYnNRRTBCMS1hRHVaZkZaMjFaMWlCV0tSYWFHR0dIUDNZbEJxdUFMcDk0VmI0V3d6eGNrVXJtUkF5ZENTWF9FeHVRcjAyWWlmQ3VmUWtZbE10SjRxTVZnS0RR?oc=5",
           "category_ids": [
             "grid_services"
           ],
@@ -3113,10 +3629,10 @@
       ],
       "statistics": {
         "evidence_records": 64,
-        "public_records": 43,
-        "latest_30_days": 39,
-        "prior_30_days": 4,
-        "change_percent": 875,
+        "public_records": 44,
+        "latest_30_days": 33,
+        "prior_30_days": 10,
+        "change_percent": 230,
         "source_count": 45,
         "official_records": 2,
         "official_share": 3.1,
@@ -3126,12 +3642,12 @@
         "lithium": 5,
         "long_duration": 4,
         "pumped_thermal": 3,
-        "grid_services": 37,
+        "grid_services": 38,
         "safety_recycling": 2,
-        "cost_policy": 11,
+        "cost_policy": 10,
         "overview": 19
       },
-      "dynamic_records": 42
+      "dynamic_records": 43
     },
     {
       "id": "aidc",
@@ -3720,9 +4236,9 @@
       "statistics": {
         "evidence_records": 40,
         "public_records": 26,
-        "latest_30_days": 24,
-        "prior_30_days": 0,
-        "change_percent": null,
+        "latest_30_days": 20,
+        "prior_30_days": 4,
+        "change_percent": 400,
         "source_count": 20,
         "official_records": 2,
         "official_share": 5.0,
@@ -3740,6 +4256,6 @@
       "dynamic_records": 24
     }
   ],
-  "generated_at": "2026-09-12T05:45:11.727539+00:00",
+  "generated_at": "2026-09-21T01:44:20.993625+00:00",
   "method": "Three-year source-linked evidence; 30-day comparison uses publication dates. Counts describe corpus coverage, not real-world event frequency."
 }
