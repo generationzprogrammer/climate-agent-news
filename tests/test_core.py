@@ -12,7 +12,7 @@ from unittest.mock import patch
 from climate_agent.archive import quality_result, update_archive, validate_public_payload
 from climate_agent.article_content import extract_article_text
 from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_map_window, select_daily_window, select_latest_day, select_latest_week, weekly_report_payload
-from climate_agent.cli import ROOT, bootstrap
+from climate_agent.cli import ROOT, bootstrap, main as cli_main
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
 from climate_agent.company_intelligence import build_company_intelligence, load_company_catalogue
 from climate_agent.corpus_analytics import build_corpus_analytics
@@ -543,6 +543,8 @@ class CoreTests(unittest.TestCase):
         self.assertIn("function comparisonHtml", app)
         self.assertNotIn("function answerRecords", app)
         self.assertNotIn("function latestDayItems", app)
+        self.assertNotIn("全国碳市场名录可检索单位", app)
+        self.assertNotIn("三年专题证据趋势", app)
         self.assertIn("items.slice(0, 10)", app)
         self.assertIn("下载今日简报", html)
         self.assertIn('id="subscribeOpen"', html)
@@ -661,6 +663,30 @@ class CoreTests(unittest.TestCase):
         self.assertIn("deliver-weekly", workflow)
         self.assertIn("CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT", workflow)
         self.assertIn("CLIMATE_SUBSCRIBER_ADMIN_TOKEN", workflow)
+
+    def test_bth_recovery_reuses_completed_batches(self) -> None:
+        workflow = (ROOT / ".github" / "workflows" / "bth-policy-recover-20260923.yml").read_text(encoding="utf-8")
+        self.assertIn("run-id: 35810665165", workflow)
+        self.assertIn("pattern: bth-policy-*", workflow)
+        self.assertIn("merge-bth-policies", workflow)
+
+    def test_bth_merge_does_not_bootstrap_sqlite(self) -> None:
+        work = Path(self.temp.name)
+        input_dir = work / "batches"
+        input_dir.mkdir()
+        db_path = work / "unused.db"
+        output = work / "archive.json"
+        with patch("climate_agent.cli.bootstrap") as mocked_bootstrap, patch(
+            "climate_agent.cli.merge_batches",
+            return_value={"total": 13, "source_status": []},
+        ):
+            result = cli_main([
+                "--db", str(db_path), "merge-bth-policies",
+                "--input-dir", str(input_dir), "--output", str(output),
+            ])
+        self.assertEqual(result, 0)
+        mocked_bootstrap.assert_not_called()
+        self.assertFalse(db_path.exists())
 
     def test_latest_day_and_week_use_beijing_calendar(self) -> None:
         rows = [

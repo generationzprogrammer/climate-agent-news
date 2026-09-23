@@ -113,7 +113,10 @@ def parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     db = Database(args.db)
-    sources, events = bootstrap(db)
+    if args.command in {"collect-bth-policies", "merge-bth-policies"}:
+        sources, events = 0, 0
+    else:
+        sources, events = bootstrap(db)
     if args.command == "init":
         print(json.dumps({"status": "ok", "sources": sources, "demo_events": events, "database": str(args.db)}, ensure_ascii=False))
     elif args.command == "serve":
