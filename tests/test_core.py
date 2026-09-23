@@ -664,12 +664,6 @@ class CoreTests(unittest.TestCase):
         self.assertIn("CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT", workflow)
         self.assertIn("CLIMATE_SUBSCRIBER_ADMIN_TOKEN", workflow)
 
-    def test_bth_recovery_reuses_completed_batches(self) -> None:
-        workflow = (ROOT / ".github" / "workflows" / "bth-policy-recover-20260923.yml").read_text(encoding="utf-8")
-        self.assertIn("run-id: 35810665165", workflow)
-        self.assertIn("pattern: bth-policy-*", workflow)
-        self.assertIn("merge-bth-policies", workflow)
-
     def test_bth_merge_does_not_bootstrap_sqlite(self) -> None:
         work = Path(self.temp.name)
         input_dir = work / "batches"
