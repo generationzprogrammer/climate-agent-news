@@ -276,10 +276,11 @@ section[id] { scroll-margin-top: calc(var(--header-height) + var(--anchor-gap));
 .bth-evidence-chart span:nth-child(4) i { background: #9bc9c5; }
 .bth-evidence-chart em { padding-top: 5px; font: 700 11px var(--mono); font-style: normal; }
 .bth-evidence-chart small { overflow: hidden; color: #626e7e; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
-.bth-policy-filters { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)) 68px; align-items: end; gap: 12px; margin-bottom: 18px; }
+.bth-policy-filters { display: grid; grid-template-columns: minmax(180px,1.35fr) repeat(4,minmax(125px,1fr)) 68px; align-items: end; gap: 12px; margin-bottom: 18px; }
 .bth-policy-filters label { display: grid; gap: 6px; }
 .bth-policy-filters label span { color: #626d7c; font: 11px var(--mono); letter-spacing: .06em; }
-.bth-policy-filters select { height: 42px; padding: 0 11px; border: 1px solid #c4cbd6; background: #fff; color: var(--ink); font: 14px var(--sans); }
+.bth-policy-filters select,
+.bth-policy-filters input { width: 100%; height: 42px; min-width: 0; padding: 0 11px; border: 1px solid #c4cbd6; background: #fff; color: var(--ink); font: 14px var(--sans); }
 .bth-policy-filters > strong { display: grid; height: 42px; place-items: center; border: 1px solid var(--navy); color: var(--navy); font: 700 14px var(--mono); }
 .bth-policy-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .bth-policy-card { display: flex; min-width: 0; min-height: 260px; flex-direction: column; padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -288,8 +289,10 @@ section[id] { scroll-margin-top: calc(var(--header-height) + var(--anchor-gap));
 .bth-policy-card > div time { margin-left: auto; }
 .bth-policy-card h4 { margin: 18px 0 10px; font: 600 20px/1.4 var(--serif); }
 .bth-policy-card p { margin: 0; color: #46515f; font-size: 14px; line-height: 1.7; }
+.bth-policy-card .bth-policy-source { color: #536174; font-size: 13px; }
 .bth-policy-card footer { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-top: auto; padding-top: 18px; }
 .bth-policy-card footer span { color: #657184; font-size: 11px; line-height: 1.5; }
+.bth-policy-card footer span i { display: inline-block; margin: 3px 6px 0 0; padding: 4px 7px; background: #edf3f8; color: #36516e; font-style: normal; }
 .bth-policy-card footer a { flex: 0 0 auto; color: var(--blue); font-size: 12px; text-decoration: none; }
 .agency-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
 .agency-card { display: grid; min-height: 118px; padding: 17px; border: 1px solid var(--line); background: #f8fafc; text-decoration: none; }
@@ -902,6 +905,7 @@ footer a:hover { color: var(--blue); }
   .bth-target-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bth-data-grid,
   .bth-policy-grid { grid-template-columns: 1fr; }
+  .bth-policy-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .chart-card.wide { grid-column: auto; }
   .archive-head,
   .archive-row { grid-template-columns: 130px minmax(0, 1.4fr) minmax(180px, .65fr); }

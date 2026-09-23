@@ -1,0 +1,81 @@
+name: 京津冀绿色转型政策库
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "config/bth_policy_sources.json"
+      - "src/climate_agent/bth_policies.py"
+      - ".github/workflows/bth-policies.yml"
+  schedule:
+    # 每周一北京时间 02:20 扫描官方来源；本地电脑无需运行。
+    - cron: "20 18 * * 0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bth-policy-backfill
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        batch: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        window: ${{ fromJSON(github.event_name == 'schedule' && '[0]' || '[0,1,2,3]') }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -e .
+      - name: 扫描本批官方来源
+        env:
+          PYTHONPATH: src
+        run: >-
+          python -m climate_agent.cli collect-bth-policies
+          --batch ${{ matrix.batch }}
+          --batch-count 10
+          --max-pages-per-source ${{ github.event_name == 'schedule' && '45' || '100' }}
+          --page-window ${{ matrix.window }}
+          --output policy-batches/batch-${{ matrix.batch }}-window-${{ matrix.window }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bth-policy-${{ matrix.batch }}-${{ matrix.window }}
+          path: policy-batches/batch-${{ matrix.batch }}-window-${{ matrix.window }}.json
+          retention-days: 7
+
+  merge:
+    runs-on: ubuntu-latest
+    needs: collect
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -e .
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: bth-policy-*
+          path: policy-batches
+          merge-multiple: true
+      - name: 合并、去重与质量门禁
+        env:
+          PYTHONPATH: src
+        run: python -m climate_agent.cli merge-bth-policies --input-dir policy-batches --output data/bth_policy_archive.json
+      - name: 保存政策库
+        shell: bash
+        run: |
+          git config user.name "climate-text-bot"
+          git config user.email "climate-text-bot@users.noreply.github.com"
+          git add data/bth_policy_archive.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: update BTH green-transition policy archive"
+            git pull --rebase origin main
+            git push origin main
+          fi

@@ -8,6 +8,7 @@ from pathlib import Path
 
 from .archive import DEFAULT_ARCHIVE_LIMIT, load_archive, update_archive, validate_public_payload
 from .briefing import dashboard_payload, publishable_intelligence, render_weekly_markdown, save_brief, weekly_report_payload
+from .bth_policies import merge_batches, write_batch
 from .collector import fetch_feed, parse_feed
 from .db import Database
 from .delivery import build_push_message, build_weekly_message
@@ -74,6 +75,15 @@ def parser() -> argparse.ArgumentParser:
     refresh_tags.add_argument("--output-jsonl", type=Path, default=ROOT / "data" / "climate_text_corpus.jsonl")
     refresh_tags.add_argument("--limit", type=int, default=HISTORY_LIMIT)
     refresh_tags.add_argument("--target-per-day", type=int, default=8)
+    bth_collect = sub.add_parser("collect-bth-policies", help="分批采集京津冀近三年官方绿色转型政策")
+    bth_collect.add_argument("--batch", type=int, required=True)
+    bth_collect.add_argument("--batch-count", type=int, default=10)
+    bth_collect.add_argument("--max-pages-per-source", type=int, default=80)
+    bth_collect.add_argument("--page-window", type=int, default=0)
+    bth_collect.add_argument("--output", type=Path, required=True)
+    bth_merge = sub.add_parser("merge-bth-policies", help="合并京津冀政策采集批次并执行质量门禁")
+    bth_merge.add_argument("--input-dir", type=Path, required=True)
+    bth_merge.add_argument("--output", type=Path, default=ROOT / "data" / "bth_policy_archive.json")
     export = sub.add_parser("export-web", help="导出无需 Python 服务的静态网站")
     export.add_argument("--output", type=Path, default=ROOT / "dist")
     export.add_argument("--archive-limit", type=int, default=int(os.getenv("CLIMATE_ARCHIVE_LIMIT", str(DEFAULT_ARCHIVE_LIMIT))))
@@ -218,6 +228,18 @@ def main(argv: list[str] | None = None) -> int:
         manifest["jsonl"] = export
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps({"status": "ok", "tagging": tagging, "jsonl": export}, ensure_ascii=False, indent=2))
+    elif args.command == "collect-bth-policies":
+        result = write_batch(
+            args.output,
+            batch=args.batch,
+            batch_count=args.batch_count,
+            max_pages_per_source=args.max_pages_per_source,
+            page_window=args.page_window,
+        )
+        print(json.dumps({"status": "ok", "batch": args.batch, "records": len(result["records"]), "sources": len(result["source_status"])}, ensure_ascii=False))
+    elif args.command == "merge-bth-policies":
+        result = merge_batches(args.input_dir, args.output)
+        print(json.dumps({"status": "ok", "total": result["total"], "sources_checked": len(result["source_status"])}, ensure_ascii=False))
     elif args.command == "export-web":
         result = export_static_site(db, ROOT / "static", args.output, archive_limit=args.archive_limit)
         print(json.dumps({"status": "ok", **result}, ensure_ascii=False, indent=2))

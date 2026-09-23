@@ -8,7 +8,8 @@ const state = {
   reportData: null, reportFiltered: [], reportVisible: 12,
   spotlights: null, carbonTopic: "", singaporeAgency: "",
   topicDesks: null, topicDeskFilters: {}, topicDeskVisible: {},
-  bthPolicyFilters: { jurisdiction: "", instrument: "", sector: "" },
+  bthPolicyFilters: { query: "", province: "", region: "", keyword: "", year: "" },
+  bthPolicyVisible: 60,
   carbonRegistry: null, carbonRegistryFiltered: [], carbonRegistryVisible: 24,
   taxonomy: { organization_groups: [], countries: [] },
 };
@@ -522,8 +523,20 @@ function renderTopicDesks() {
     state.topicDeskVisible[id] = (state.topicDeskVisible[id] || 12) < total ? total : 12;
     renderTopicDesks();
   }));
-  document.querySelectorAll("[data-bth-policy-filter]").forEach(select => select.addEventListener("change", () => {
-    state.bthPolicyFilters[select.dataset.bthPolicyFilter] = select.value || "";
+  document.querySelectorAll("[data-bth-policy-filter]").forEach(control => {
+    const update = () => {
+      state.bthPolicyFilters[control.dataset.bthPolicyFilter] = control.value || "";
+      if (control.dataset.bthPolicyFilter === "province") state.bthPolicyFilters.region = "";
+      state.bthPolicyVisible = 60;
+      renderTopicDesks();
+    };
+    control.addEventListener("change", update);
+    if (control.tagName === "INPUT") control.addEventListener("keydown", event => {
+      if (event.key === "Enter") update();
+    });
+  });
+  document.querySelectorAll("[data-bth-policy-more]").forEach(button => button.addEventListener("click", () => {
+    state.bthPolicyVisible = Number(button.dataset.bthPolicyMore || 60);
     renderTopicDesks();
   }));
 }
@@ -534,14 +547,21 @@ function renderBthRegionalTools(desk) {
   const filters = state.bthPolicyFilters;
   const language = state.language;
   const jurisdictionLabel = id => field((dimensions.jurisdictions || []).find(item => item.id === id) || {}, "label_zh", "label_en") || id;
-  const instrumentLabel = id => field((dimensions.instruments || []).find(item => item.id === id) || {}, "label_zh", "label_en") || id;
-  const sectorLabel = id => field((dimensions.sectors || []).find(item => item.id === id) || {}, "label_zh", "label_en") || id;
   const optionHtml = (items, active, emptyLabel) => `<option value="">${esc(emptyLabel)}</option>${items.map(item => `<option value="${esc(item.id)}" ${active === item.id ? "selected" : ""}>${esc(field(item, "label_zh", "label_en"))}</option>`).join("")}`;
-  const policies = (desk.policy_tools || []).filter(item =>
-    (!filters.jurisdiction || item.jurisdiction === filters.jurisdiction) &&
-    (!filters.instrument || item.instrument === filters.instrument) &&
-    (!filters.sector || (item.sector_ids || []).includes(filters.sector))
-  );
+  const libraryRecords = desk.policy_library?.records || [];
+  const usingLibrary = libraryRecords.length > 0;
+  const provinceOptions = [...new Set(libraryRecords.map(item => item.province).filter(Boolean))].sort().map(value => ({ id: value, label_zh: value, label_en: value }));
+  const regionOptions = [...new Map(libraryRecords.filter(item => !filters.province || item.province === filters.province).map(item => [item.region_id, { id: item.region_id, label_zh: item.region, label_en: item.region }])).values()].sort((a, b) => a.label_zh.localeCompare(b.label_zh, "zh-CN"));
+  const keywordOptions = [...new Set(libraryRecords.flatMap(item => item.keywords || []))].sort().map(value => ({ id: value, label_zh: value, label_en: value }));
+  const yearOptions = [...new Set(libraryRecords.map(item => String(item.published_at || "").slice(0, 4)).filter(Boolean))].sort().reverse().map(value => ({ id: value, label_zh: value, label_en: value }));
+  const query = String(filters.query || "").trim().toLowerCase();
+  const policies = usingLibrary ? libraryRecords.filter(item =>
+    (!filters.province || item.province === filters.province) &&
+    (!filters.region || item.region_id === filters.region) &&
+    (!filters.keyword || (item.keywords || []).includes(filters.keyword)) &&
+    (!filters.year || String(item.published_at || "").startsWith(filters.year)) &&
+    (!query || `${item.title || ""} ${item.source || ""} ${(item.keywords || []).join(" ")}`.toLowerCase().includes(query))
+  ) : (desk.policy_tools || []);
   const evidence = tracker.evidence_timeline || [];
   const evidenceMax = Math.max(1, ...evidence.flatMap(item => [item.regional, item.beijing, item.tianjin, item.hebei].map(Number)));
   const industries = language === "en"
@@ -560,11 +580,16 @@ function renderBthRegionalTools(desk) {
     return `<article><div><b>${esc(jurisdictionLabel(item.jurisdiction))}</b><strong>${Number(item.record_count || 0)}</strong></div><div class="bth-stacked-bar">${bars}</div><p>${esc(detail)}</p><small>${esc((item.registry_years || []).join("、"))}</small></article>`;
   }).join("");
   const timeline = evidence.map(item => `<article><b>${esc(item.year)}</b><div>${["regional", "beijing", "tianjin", "hebei"].map(key => `<span><i style="height:${Math.max(4, Number(item[key] || 0) * 100 / evidenceMax).toFixed(1)}%"></i><em>${Number(item[key] || 0)}</em><small>${esc(jurisdictionLabel(key))}</small></span>`).join("")}</div></article>`).join("");
-  const policyCards = policies.map(item => `<article class="bth-policy-card">
-    <div><span>${esc(jurisdictionLabel(item.jurisdiction))}</span><span>${esc(instrumentLabel(item.instrument))}</span><time>${esc(formatDate(item.published_at))}</time></div>
+  const policyCards = policies.slice(0, state.bthPolicyVisible).map(item => usingLibrary ? `<article class="bth-policy-card">
+    <div><span>${esc(item.region)}</span><span>${esc(item.policy_type || "政策文件")}</span><time>${esc(formatDate(item.published_at))}</time></div>
+    <h4>${esc(item.title)}</h4>
+    <p class="bth-policy-source">${esc(item.source)}</p>
+    <footer><span>${(item.keywords || []).map(value => `<i>${esc(value)}</i>`).join("")}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></footer>
+  </article>` : `<article class="bth-policy-card">
+    <div><span>${esc(jurisdictionLabel(item.jurisdiction))}</span><time>${esc(formatDate(item.published_at))}</time></div>
     <h4>${esc(field(item, "title_zh", "title_en"))}</h4>
     <p>${esc(field(item, "summary_zh", "summary_en"))}</p>
-    <footer><span>${esc(field(item, "status_zh", "status_en"))} · ${(item.sector_ids || []).map(sectorLabel).map(esc).join(" / ")}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></footer>
+    <footer><span>${esc(field(item, "status_zh", "status_en"))}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></footer>
   </article>`).join("");
   return `<div class="bth-tools">
     <section><div class="bth-tool-heading"><p class="overline">TARGET TRACKER</p><h3>${language === "en" ? "Regional targets" : "区域目标追踪"}</h3></div><div class="bth-target-grid">${targetCards}</div></section>
@@ -572,14 +597,17 @@ function renderBthRegionalTools(desk) {
       <section><div class="bth-tool-heading"><p class="overline">ETS COVERAGE</p><h3>${language === "en" ? "Searchable entities in the national ETS registry" : "全国碳市场名录可检索单位"}</h3></div><div class="bth-entity-grid">${entityRows}</div>${tracker.registry_source_url ? `<a class="bth-source-link" href="${esc(safeUrl(tracker.registry_source_url))}" target="_blank" rel="noopener noreferrer">${language === "en" ? "Official registry" : "官方名录"} ↗</a>` : ""}</section>
       <section><div class="bth-tool-heading"><p class="overline">EVIDENCE TREND</p><h3>${language === "en" ? "Three-year evidence trend" : "三年专题证据趋势"}</h3></div><div class="bth-evidence-chart">${timeline}</div></section>
     </div>
-    <section><div class="bth-tool-heading"><p class="overline">POLICY TOOL</p><h3>${language === "en" ? "Policy instruments" : "政策工具"}</h3></div>
+    <section><div class="bth-tool-heading"><p class="overline">POLICY DATABASE</p><h3>${language === "en" ? "Green-transition policy database" : "京津冀绿色转型政策库"}</h3></div>
       <div class="bth-policy-filters">
-        <label><span>${language === "en" ? "Jurisdiction" : "地区"}</span><select data-bth-policy-filter="jurisdiction">${optionHtml(dimensions.jurisdictions || [], filters.jurisdiction, language === "en" ? "All" : "全部")}</select></label>
-        <label><span>${language === "en" ? "Instrument" : "工具类型"}</span><select data-bth-policy-filter="instrument">${optionHtml(dimensions.instruments || [], filters.instrument, language === "en" ? "All" : "全部")}</select></label>
-        <label><span>${language === "en" ? "Sector" : "重点领域"}</span><select data-bth-policy-filter="sector">${optionHtml(dimensions.sectors || [], filters.sector, language === "en" ? "All" : "全部")}</select></label>
+        <label><span>${language === "en" ? "Search" : "检索"}</span><input data-bth-policy-filter="query" value="${esc(filters.query)}" placeholder="${language === "en" ? "Title, agency or tag" : "标题、来源或关键词"}"></label>
+        <label><span>${language === "en" ? "Province" : "省级地区"}</span><select data-bth-policy-filter="province">${optionHtml(provinceOptions, filters.province, language === "en" ? "All" : "全部")}</select></label>
+        <label><span>${language === "en" ? "City / district" : "城市或区"}</span><select data-bth-policy-filter="region">${optionHtml(regionOptions, filters.region, language === "en" ? "All" : "全部")}</select></label>
+        <label><span>${language === "en" ? "Keyword" : "关键词"}</span><select data-bth-policy-filter="keyword">${optionHtml(keywordOptions, filters.keyword, language === "en" ? "All" : "全部")}</select></label>
+        <label><span>${language === "en" ? "Year" : "年份"}</span><select data-bth-policy-filter="year">${optionHtml(yearOptions, filters.year, language === "en" ? "All" : "全部")}</select></label>
         <strong>${policies.length}</strong>
       </div>
       <div class="bth-policy-grid">${policyCards || `<div class="empty compact"><b>${language === "en" ? "No matching policies" : "暂无匹配政策"}</b></div>`}</div>
+      ${policies.length > state.bthPolicyVisible ? `<button class="load-more" type="button" data-bth-policy-more="${Math.min(policies.length, state.bthPolicyVisible + 60)}">${language === "en" ? "Show more policies" : "加载更多政策"}</button>` : ""}
     </section>
   </div>`;
 }

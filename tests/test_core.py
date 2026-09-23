@@ -28,6 +28,7 @@ from climate_agent.spotlights import build_spotlights
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
 from climate_agent.taxonomy import country_codes_for, event_tags_for, organization_tags_for, public_taxonomy
 from climate_agent.topic_desks import build_topic_desks
+from climate_agent.bth_policies import _record as build_bth_policy_record
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
@@ -435,6 +436,23 @@ class CoreTests(unittest.TestCase):
             {"beijing", "tianjin", "hebei"},
         )
         self.assertGreater(sum(item["record_count"] for item in bth["regional_tracker"]["carbon_entities"]), 0)
+
+    def test_bth_policy_registry_has_complete_city_level_scope(self) -> None:
+        config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(config["jurisdictions"]), 50)
+        self.assertEqual(sum(item["province"] == "北京市" and item["level"] == "district" for item in config["jurisdictions"]), 16)
+        self.assertEqual(sum(item["province"] == "天津市" and item["level"] == "district" for item in config["jurisdictions"]), 16)
+        self.assertTrue({"石家庄市", "唐山市", "定州市", "辛集市", "雄安新区"}.issubset({item["name"] for item in config["jurisdictions"]}))
+
+    def test_bth_policy_gate_normalises_required_fields(self) -> None:
+        config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
+        jurisdiction = next(item for item in config["jurisdictions"] if item["id"] == "bj-chaoyang")
+        html = """<html><head><title>朝阳区绿色低碳发展实施方案</title></head><body><h1>朝阳区绿色低碳发展实施方案</h1><p>发布日期：2025-06-18 来源：北京市朝阳区发展和改革委员会</p><p>推进节能、绿色建筑和碳排放管理。</p></body></html>"""
+        record = build_bth_policy_record("https://www.bjchy.gov.cn/zhengce/202506/test.html", html, jurisdiction, config, date(2023, 9, 23))
+        self.assertEqual(record["region"], "朝阳区")
+        self.assertEqual(record["admin_code"], "110105")
+        self.assertEqual(record["published_at"], "2025-06-18")
+        self.assertIn("能源转型", record["keywords"])
 
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()

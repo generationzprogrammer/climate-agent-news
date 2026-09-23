@@ -130,6 +130,16 @@ def load_carbon_registry(path: Path | None) -> dict:
     return payload if isinstance(payload, dict) else {}
 
 
+def load_policy_archive(path: Path | None) -> dict:
+    if not path or not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
 def _bth_jurisdiction(text: str) -> str:
     if re.search(r"京津冀|Beijing[-–— ]Tianjin[-–— ]Hebei|Jing[-–— ]Jin[-–— ]Ji", text, re.I):
         return "regional"
@@ -198,6 +208,7 @@ def build_topic_desks(
     config_path: Path,
     historical_records: list[dict] | None = None,
     carbon_registry: dict | None = None,
+    bth_policy_archive: dict | None = None,
 ) -> dict:
     payload = json.loads(config_path.read_text(encoding="utf-8"))
     now = datetime.now(UTC)
@@ -259,6 +270,16 @@ def build_topic_desks(
         desk["dynamic_records"] = sum(bool(item.get("dynamic")) for item in public_records)
         if desk.get("id") == "bth_green_transition":
             desk["regional_tracker"] = _build_bth_tracker(evidence, carbon_registry or {})
+            archive = bth_policy_archive or {}
+            desk["policy_library"] = {
+                "updated_at": archive.get("updated_at", ""),
+                "coverage_start": archive.get("coverage_start", ""),
+                "jurisdiction_total": archive.get("jurisdiction_total", 0),
+                "source_total": archive.get("source_total", 0),
+                "source_status": archive.get("source_status", []),
+                "records": archive.get("records", []),
+                "total": len(archive.get("records", [])),
+            }
     payload["generated_at"] = now.isoformat()
     payload["method"] = "Three-year source-linked evidence; 30-day comparison uses publication dates. Counts describe corpus coverage, not real-world event frequency."
     return payload
@@ -272,6 +293,7 @@ def write_topic_desks(
     *,
     corpus_path: Path | None = None,
     carbon_registry_path: Path | None = None,
+    bth_policy_archive_path: Path | None = None,
 ) -> dict:
     payload = build_topic_desks(
         climate_archive,
@@ -279,6 +301,7 @@ def write_topic_desks(
         config_path,
         load_historical_records(corpus_path),
         load_carbon_registry(carbon_registry_path),
+        load_policy_archive(bth_policy_archive_path),
     )
     output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return payload

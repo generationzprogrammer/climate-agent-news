@@ -122,7 +122,11 @@ def export_static_site(
         data_dir / "topic_desks.json",
         corpus_path=corpus_path,
         carbon_registry_path=registry_path,
+        bth_policy_archive_path=Path(__file__).resolve().parents[2] / "data" / "bth_policy_archive.json",
     )
+    bth_policy_path = Path(__file__).resolve().parents[2] / "data" / "bth_policy_archive.json"
+    if bth_policy_path.exists():
+        shutil.copyfile(bth_policy_path, data_dir / bth_policy_path.name)
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"
     )
