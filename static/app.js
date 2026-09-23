@@ -542,7 +542,6 @@ function renderTopicDesks() {
 }
 
 function renderBthRegionalTools(desk) {
-  const tracker = desk.regional_tracker || {};
   const dimensions = desk.policy_dimensions || {};
   const filters = state.bthPolicyFilters;
   const language = state.language;
@@ -562,24 +561,12 @@ function renderBthRegionalTools(desk) {
     (!filters.year || String(item.published_at || "").startsWith(filters.year)) &&
     (!query || `${item.title || ""} ${item.source || ""} ${(item.keywords || []).join(" ")}`.toLowerCase().includes(query))
   ) : (desk.policy_tools || []);
-  const evidence = tracker.evidence_timeline || [];
-  const evidenceMax = Math.max(1, ...evidence.flatMap(item => [item.regional, item.beijing, item.tianjin, item.hebei].map(Number)));
-  const industries = language === "en"
-    ? { "发电": "Power", "钢铁": "Steel", "水泥": "Cement", "铝冶炼": "Aluminium", "其他": "Other" }
-    : {};
   const targetCards = (desk.target_indicators || []).map(item => `<article class="bth-target-card">
     <div><span>${esc(jurisdictionLabel(item.jurisdiction))}</span><b>${esc(item.target_year)}</b></div>
     <h4>${esc(field(item, "label_zh", "label_en"))}</h4>
     <strong>${esc(item.value)} <small>${esc(field(item, "unit_zh", "unit_en"))}</small></strong>
     <a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(field(item, "basis_zh", "basis_en"))} ↗</a>
   </article>`).join("");
-  const entityRows = (tracker.carbon_entities || []).map(item => {
-    const total = Math.max(1, Number(item.record_count || 0));
-    const bars = Object.entries(item.industries || {}).map(([industry, count]) => `<span style="width:${(Number(count) * 100 / total).toFixed(1)}%" title="${esc(industries[industry] || industry)} ${Number(count)}"></span>`).join("");
-    const detail = Object.entries(item.industries || {}).map(([industry, count]) => `${industries[industry] || industry} ${Number(count)}`).join(" · ");
-    return `<article><div><b>${esc(jurisdictionLabel(item.jurisdiction))}</b><strong>${Number(item.record_count || 0)}</strong></div><div class="bth-stacked-bar">${bars}</div><p>${esc(detail)}</p><small>${esc((item.registry_years || []).join("、"))}</small></article>`;
-  }).join("");
-  const timeline = evidence.map(item => `<article><b>${esc(item.year)}</b><div>${["regional", "beijing", "tianjin", "hebei"].map(key => `<span><i style="height:${Math.max(4, Number(item[key] || 0) * 100 / evidenceMax).toFixed(1)}%"></i><em>${Number(item[key] || 0)}</em><small>${esc(jurisdictionLabel(key))}</small></span>`).join("")}</div></article>`).join("");
   const policyCards = policies.slice(0, state.bthPolicyVisible).map(item => usingLibrary ? `<article class="bth-policy-card">
     <div><span>${esc(item.region)}</span><span>${esc(item.policy_type || "政策文件")}</span><time>${esc(formatDate(item.published_at))}</time></div>
     <h4>${esc(item.title)}</h4>
@@ -593,10 +580,6 @@ function renderBthRegionalTools(desk) {
   </article>`).join("");
   return `<div class="bth-tools">
     <section><div class="bth-tool-heading"><p class="overline">TARGET TRACKER</p><h3>${language === "en" ? "Regional targets" : "区域目标追踪"}</h3></div><div class="bth-target-grid">${targetCards}</div></section>
-    <div class="bth-data-grid">
-      <section><div class="bth-tool-heading"><p class="overline">ETS COVERAGE</p><h3>${language === "en" ? "Searchable entities in the national ETS registry" : "全国碳市场名录可检索单位"}</h3></div><div class="bth-entity-grid">${entityRows}</div>${tracker.registry_source_url ? `<a class="bth-source-link" href="${esc(safeUrl(tracker.registry_source_url))}" target="_blank" rel="noopener noreferrer">${language === "en" ? "Official registry" : "官方名录"} ↗</a>` : ""}</section>
-      <section><div class="bth-tool-heading"><p class="overline">EVIDENCE TREND</p><h3>${language === "en" ? "Three-year evidence trend" : "三年专题证据趋势"}</h3></div><div class="bth-evidence-chart">${timeline}</div></section>
-    </div>
     <section><div class="bth-tool-heading"><p class="overline">POLICY DATABASE</p><h3>${language === "en" ? "Green-transition policy database" : "京津冀绿色转型政策库"}</h3></div>
       <div class="bth-policy-filters">
         <label><span>${language === "en" ? "Search" : "检索"}</span><input data-bth-policy-filter="query" value="${esc(filters.query)}" placeholder="${language === "en" ? "Title, agency or tag" : "标题、来源或关键词"}"></label>
