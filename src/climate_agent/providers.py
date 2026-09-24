@@ -8,8 +8,10 @@ import time
 import urllib.error
 import urllib.request
 from urllib.parse import urlparse
+from collections import Counter
 from dataclasses import dataclass
 from email.message import EmailMessage
+from email.utils import formatdate, make_msgid
 from pathlib import Path
 
 
@@ -126,6 +128,12 @@ def publish_email(markdown: str, recipient: str, *, subject: str = "国际气候
     message["Subject"] = subject
     message["From"] = sender
     message["To"] = recipient
+    message["Date"] = formatdate(localtime=False)
+    message["Message-ID"] = make_msgid(domain=sender.rsplit("@", 1)[-1] if "@" in sender else None)
+    message["Reply-To"] = sender
+    message["Auto-Submitted"] = "auto-generated"
+    message["Precedence"] = "bulk"
+    message["List-Unsubscribe"] = f"<mailto:{sender}?subject=unsubscribe>"
     message.set_content(markdown)
     security = os.getenv("CLIMATE_SMTP_SECURITY", "ssl" if port == 465 else "starttls").lower()
     if security == "ssl":
@@ -138,6 +146,27 @@ def publish_email(markdown: str, recipient: str, *, subject: str = "国际气候
         if username:
             client.login(username, password)
         client.send_message(message)
+
+
+def publish_email_batch(markdown: str, recipients: list[str], *, subject: str, retries: int = 1) -> dict:
+    """Deliver to every recipient without exposing addresses or stopping at the first failure."""
+    sent = 0
+    failures: Counter[str] = Counter()
+    for recipient in recipients:
+        for attempt in range(retries + 1):
+            try:
+                publish_email(markdown, recipient, subject=subject)
+                sent += 1
+                break
+            except (OSError, smtplib.SMTPException) as exc:
+                if attempt >= retries:
+                    failures[type(exc).__name__] += 1
+                else:
+                    time.sleep(2 * (attempt + 1))
+            except Exception as exc:
+                failures[type(exc).__name__] += 1
+                break
+    return {"sent": sent, "failed": sum(failures.values()), "failure_types": dict(failures)}
 
 
 def fetch_subscribers(endpoint: str, admin_token: str, *, timeout: int = 20) -> list[str]:
@@ -155,11 +184,24 @@ def fetch_subscribers(endpoint: str, admin_token: str, *, timeout: int = 20) -> 
             "User-Agent": "ClimateText-Lab/1.0",
         },
     )
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        payload = response.read(1_000_001)
-        if len(payload) > 1_000_000:
-            raise ValueError("订阅者接口响应过大")
-    result = json.loads(payload)
+    result = None
+    last_error: Exception | None = None
+    for attempt, delay in enumerate((0, 2, 5)):
+        if delay:
+            time.sleep(delay)
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                payload = response.read(1_000_001)
+                if len(payload) > 1_000_000:
+                    raise ValueError("订阅者接口响应过大")
+            result = json.loads(payload)
+            break
+        except (OSError, urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError) as exc:
+            last_error = exc
+            if attempt == 2:
+                raise
+    if not isinstance(result, dict) or not isinstance(result.get("subscribers"), list):
+        raise ValueError(f"订阅者接口未返回有效名单: {type(last_error).__name__ if last_error else 'invalid_schema'}")
     subscribers = []
     for value in result.get("subscribers") or []:
         email = str(value or "").strip().lower()

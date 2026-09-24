@@ -25,7 +25,7 @@ const UI_TEXT = {
     todayQueue: "今日队列", thisWeek: "本周", projectIntro: "项目介绍", projectIntroTitle: "项目介绍",
     navCompany: "企业情报", navEnergyReports: "能源报告与数据库", companyIntelligence: "企业情报",
     companyScope: "持续扩展的全球能源企业名录，以及从站内新闻中识别的重大项目、初创企业和企业合作。",
-    energyReportsTitle: "能源报告与数据库", footerSubtitle: "国际气候与能源信息智能分析支持系统",
+    energyReportsTitle: "能源报告与数据库", footerSubtitle: "全球气候与能源信息智能分析支持系统",
     carbonCompanyTitle: "全国重点排放单位名录", searchEntity: "检索单位", carbonCompanyPlaceholder: "单位名称或统一社会信用代码",
     entityType: "单位类别", allEntities: "全部单位", keyEmitter: "重点碳排放单位", generalReporting: "一般报告单位",
     province: "省份", allProvinces: "全部省份", industry: "行业", allIndustries: "全部行业", district: "所属区", allDistricts: "全部地区", results: "当前结果",
@@ -63,7 +63,7 @@ const UI_TEXT = {
     todayQueue: "Today", thisWeek: "This week", projectIntro: "About", projectIntroTitle: "About the project",
     navCompany: "Companies", navEnergyReports: "Energy reports & data", companyIntelligence: "Company intelligence",
     companyScope: "A growing directory of global energy companies, projects, start-ups and corporate partnerships identified in the archive.",
-    energyReportsTitle: "Energy reports and databases", footerSubtitle: "Intelligent analysis for international climate and energy information",
+    energyReportsTitle: "Energy reports and databases", footerSubtitle: "Global climate and energy intelligence platform",
     carbonCompanyTitle: "National key-emitter register", searchEntity: "Search entities", carbonCompanyPlaceholder: "Entity name or unified social credit code",
     entityType: "Entity type", allEntities: "All entities", keyEmitter: "Key emitters", generalReporting: "General reporting entities",
     province: "Province", allProvinces: "All provinces", industry: "Industry", allIndustries: "All industries", district: "District", allDistricts: "All districts", results: "Results",
@@ -490,18 +490,27 @@ function renderTopicDesks() {
     const changeLabel = change === null || change === undefined
       ? (state.language === "en" ? "No prior-period base" : "前期无可比基数")
       : `${change > 0 ? "+" : ""}${change}% ${state.language === "en" ? "vs prior 30 days" : "较前30日"}`;
-    const maxCategory = Math.max(1, ...categories.map(category => Number(desk.category_counts?.[category.id] || 0)));
+    const isBth = desk.id === "bth_green_transition";
+    const policyStats = desk.policy_statistics || {};
+    const categoryCounts = isBth ? (desk.policy_category_counts || {}) : (desk.category_counts || {});
+    const maxCategory = Math.max(1, ...categories.map(category => Number(categoryCounts[category.id] || 0)));
     const categoryLabel = id => field(categories.find(category => category.id === id) || {}, "label_zh", "label_en") || tr("archive");
-    return `<section class="section spotlight-section topic-desk" id="${esc(desk.id)}">
-      <div class="section-heading"><div><p class="overline">FOCUS DESK</p><h2>${esc(field(desk, "title_zh", "title_en"))}</h2></div></div>
-      <div class="topic-metrics">
+    const metricsHtml = isBth ? `<div class="topic-metrics">
+        <article><span>${state.language === "en" ? "POLICY DOCUMENTS" : "政策文件"}</span><b>${Number(policyStats.policy_records || 0)}</b><small>${esc(policyStats.coverage_start || "—")} — ${esc(policyStats.latest_date || "—")}</small></article>
+        <article><span>${state.language === "en" ? "AREAS COVERED" : "已覆盖地区"}</span><b>${Number(policyStats.region_count || 0)}</b><small>${state.language === "en" ? `of ${Number(policyStats.jurisdiction_total || 0)} configured` : `已配置 ${Number(policyStats.jurisdiction_total || 0)} 个地区`}</small></article>
+        <article><span>${state.language === "en" ? "PUBLISHING BODIES" : "发布机构"}</span><b>${Number(policyStats.source_count || 0)}</b><small>${state.language === "en" ? "distinct official bodies" : "个独立官方发布主体"}</small></article>
+        <article><span>${state.language === "en" ? "OFFICIAL DOMAINS" : "官方域名"}</span><b>${Number(policyStats.domain_count || 0)}</b><small>${state.language === "en" ? "source domains" : "个来源域名"}</small></article>
+      </div>` : `<div class="topic-metrics">
         <article><span>${esc(tr("evidenceRecords"))}</span><b>${stats.evidence_records || 0}</b><small>${stats.lookback_days || 1095} ${state.language === "en" ? "days" : "天"}</small></article>
         <article><span>${esc(tr("recent30"))}</span><b>${stats.latest_30_days || 0}</b><small>${esc(changeLabel)}</small></article>
         <article><span>${esc(tr("sourceDiversity"))}</span><b>${stats.source_count || 0}</b><small>${state.language === "en" ? "publishers" : "个发布来源"}</small></article>
         <article><span>${esc(tr("officialShare"))}</span><b>${stats.official_share || 0}%</b><small>${stats.official_records || 0} / ${stats.evidence_records || 0}</small></article>
-      </div>
+      </div>`;
+    return `<section class="section spotlight-section topic-desk" id="${esc(desk.id)}">
+      <div class="section-heading"><div><p class="overline">FOCUS DESK</p><h2>${esc(field(desk, "title_zh", "title_en"))}</h2></div></div>
+      ${metricsHtml}
       <div class="topic-evidence-layout">
-        <div class="topic-category-bars">${categories.map(category => { const count=Number(desk.category_counts?.[category.id] || 0); return `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}"><span>${esc(field(category, "label_zh", "label_en"))}</span><i><em style="width:${Math.max(2, count / maxCategory * 100).toFixed(1)}%"></em></i><b>${count}</b></button>`; }).join("")}</div>
+        <div class="topic-category-bars">${categories.map(category => { const count=Number(categoryCounts[category.id] || 0); return `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}"><span>${esc(field(category, "label_zh", "label_en"))}</span><i><em style="width:${Math.max(2, count / maxCategory * 100).toFixed(1)}%"></em></i><b>${count}</b></button>`; }).join("")}</div>
         <div class="agency-grid">${(desk.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><i>↗</i></a>`).join("")}</div>
       </div>
       ${desk.id === "bth_green_transition" ? renderBthRegionalTools(desk) : ""}
@@ -561,12 +570,6 @@ function renderBthRegionalTools(desk) {
     (!filters.year || String(item.published_at || "").startsWith(filters.year)) &&
     (!query || `${item.title || ""} ${item.source || ""} ${(item.keywords || []).join(" ")}`.toLowerCase().includes(query))
   ) : (desk.policy_tools || []);
-  const targetCards = (desk.target_indicators || []).map(item => `<article class="bth-target-card">
-    <div><span>${esc(jurisdictionLabel(item.jurisdiction))}</span><b>${esc(item.target_year)}</b></div>
-    <h4>${esc(field(item, "label_zh", "label_en"))}</h4>
-    <strong>${esc(item.value)} <small>${esc(field(item, "unit_zh", "unit_en"))}</small></strong>
-    <a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(field(item, "basis_zh", "basis_en"))} ↗</a>
-  </article>`).join("");
   const policyCards = policies.slice(0, state.bthPolicyVisible).map(item => usingLibrary ? `<article class="bth-policy-card">
     <div><span>${esc(item.region)}</span><span>${esc(item.policy_type || "政策文件")}</span><time>${esc(formatDate(item.published_at))}</time></div>
     <h4>${esc(item.title)}</h4>
@@ -579,7 +582,6 @@ function renderBthRegionalTools(desk) {
     <footer><span>${esc(field(item, "status_zh", "status_en"))}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></footer>
   </article>`).join("");
   return `<div class="bth-tools">
-    <section><div class="bth-tool-heading"><p class="overline">TARGET TRACKER</p><h3>${language === "en" ? "Regional targets" : "区域目标追踪"}</h3></div><div class="bth-target-grid">${targetCards}</div></section>
     <section><div class="bth-tool-heading"><p class="overline">POLICY DATABASE</p><h3>${language === "en" ? "Green-transition policy database" : "京津冀绿色转型政策库"}</h3></div>
       <div class="bth-policy-filters">
         <label><span>${language === "en" ? "Search" : "检索"}</span><input data-bth-policy-filter="query" value="${esc(filters.query)}" placeholder="${language === "en" ? "Title, agency or tag" : "标题、来源或关键词"}"></label>
@@ -1676,10 +1678,20 @@ async function postSubscription(endpoint, email, timeoutMs = 30000) {
   }
 }
 
-function queueSubscription(endpoint, email) {
-  if (typeof navigator.sendBeacon !== "function") return false;
-  const body = new Blob([subscriptionPayload(email)], { type: "text/plain;charset=UTF-8" });
-  return navigator.sendBeacon(endpoint, body);
+async function submitSubscription(endpoint, email) {
+  let lastError;
+  for (const delay of [0, 900]) {
+    if (delay) await new Promise(resolve => setTimeout(resolve, delay));
+    try {
+      const response = await postSubscription(endpoint, email);
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+      return result;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error("subscription_failed");
 }
 
 function setupSubscribe() {
@@ -1715,21 +1727,13 @@ function setupSubscribe() {
     try {
       const config = await subscriptionConfig();
       if (!config.endpoint) throw new Error("订阅服务尚未配置");
-      const response = await postSubscription(config.endpoint, email);
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+      await submitSubscription(config.endpoint, email);
       closeDialog(modal);
       toast("订阅成功，周报将在每周一发送。");
     } catch (error) {
       console.error("Subscribe endpoint failed", error);
-      const config = await subscriptionConfig();
-      if (config.endpoint && queueSubscription(config.endpoint, email)) {
-        closeDialog(modal);
-        toast("订阅请求已提交，使用同一邮箱重复提交不会重复订阅。");
-      } else {
-        if (hint) hint.textContent = "提交失败：当前网络无法连接订阅服务，请更换浏览器或网络后重试。";
-        if (fallback) fallback.hidden = false;
-      }
+      if (hint) hint.textContent = "提交失败：订阅服务未确认写入，请稍后重试或联系管理员。";
+      if (fallback) fallback.hidden = false;
     } finally {
       if (submit) { submit.disabled = false; submit.textContent = "提交订阅"; }
     }

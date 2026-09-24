@@ -105,4 +105,4 @@ https://climate-news-subscriptions.<你的子域>.workers.dev/health
 4. 再次运行同一工作流，勾选“部署成功后发送周报邮件”。
 5. 确认测试邮箱收到周报，并检查邮件中的退订入口。
 
-如果订阅和退订成功但收不到邮件，优先检查六项 `CLIMATE_SMTP_*`；KV 只负责保存订阅邮箱，不负责发信。
+如果订阅和退订成功但收不到邮件，先在周一工作流的 `weekly_notify` 输出中核对 `active_subscribers`、`recipients`、`sent` 和 `failed`。`subscriber_endpoint` 必须为 `ok`；名单读取失败时任务会直接失败，不再静默只发送固定邮箱。KV 只负责保存订阅邮箱，邮件仍由六项 `CLIMATE_SMTP_*` 配置发送。

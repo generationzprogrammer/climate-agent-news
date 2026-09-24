@@ -35,6 +35,13 @@ def _text(record: dict) -> str:
     ))
 
 
+def _policy_text(record: dict) -> str:
+    return " ".join(str(value or "") for value in (
+        record.get("title"), record.get("source"), record.get("policy_type"),
+        " ".join(record.get("keywords") or []),
+    ))
+
+
 def _moment(record: dict) -> datetime | None:
     raw = record.get("published_at") or record.get("published_at_utc") or record.get("published_date")
     if not raw:
@@ -271,15 +278,34 @@ def build_topic_desks(
         if desk.get("id") == "bth_green_transition":
             desk["regional_tracker"] = _build_bth_tracker(evidence, carbon_registry or {})
             archive = bth_policy_archive or {}
+            policy_records = archive.get("records", [])
+            policy_sources = {str(item.get("source") or "").strip() for item in policy_records if item.get("source")}
+            policy_domains = {str(item.get("official_domain") or "").strip() for item in policy_records if item.get("official_domain")}
+            policy_regions = {str(item.get("region_id") or "").strip() for item in policy_records if item.get("region_id")}
+            policy_dates = sorted(str(item.get("published_at") or "") for item in policy_records if item.get("published_at"))
+            policy_category_counts = {category["id"]: 0 for category in desk.get("categories", [])}
+            for item in policy_records:
+                for category_id in _category_ids(_policy_text(item), desk):
+                    policy_category_counts[category_id] = policy_category_counts.get(category_id, 0) + 1
             desk["policy_library"] = {
                 "updated_at": archive.get("updated_at", ""),
                 "coverage_start": archive.get("coverage_start", ""),
                 "jurisdiction_total": archive.get("jurisdiction_total", 0),
                 "source_total": archive.get("source_total", 0),
                 "source_status": archive.get("source_status", []),
-                "records": archive.get("records", []),
-                "total": len(archive.get("records", [])),
+                "records": policy_records,
+                "total": len(policy_records),
             }
+            desk["policy_statistics"] = {
+                "policy_records": len(policy_records),
+                "source_count": len(policy_sources),
+                "domain_count": len(policy_domains),
+                "region_count": len(policy_regions),
+                "jurisdiction_total": archive.get("jurisdiction_total", 0),
+                "coverage_start": policy_dates[0] if policy_dates else archive.get("coverage_start", ""),
+                "latest_date": policy_dates[-1] if policy_dates else "",
+            }
+            desk["policy_category_counts"] = policy_category_counts
     payload["generated_at"] = now.isoformat()
     payload["method"] = "Three-year source-linked evidence; 30-day comparison uses publication dates. Counts describe corpus coverage, not real-world event frequency."
     return payload

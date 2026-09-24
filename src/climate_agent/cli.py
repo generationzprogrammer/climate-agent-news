@@ -9,6 +9,7 @@ from pathlib import Path
 from .archive import DEFAULT_ARCHIVE_LIMIT, load_archive, update_archive, validate_public_payload
 from .briefing import dashboard_payload, publishable_intelligence, render_weekly_markdown, save_brief, weekly_report_payload
 from .bth_policies import merge_batches, write_batch
+from .bth_profiles import write_city_profiles
 from .collector import fetch_feed, parse_feed
 from .db import Database
 from .delivery import build_push_message, build_weekly_message
@@ -17,7 +18,7 @@ from .energy_reports import discover_official_reports
 from .exporter import export_static_site
 from .historical_backfill import DEFAULT_ARCHIVE_LIMIT as HISTORY_LIMIT, backfill_history, export_historical_jsonl, refresh_historical_tags
 from .official_data import import_curated_unfccc, import_ndcs
-from .providers import OpenAICompatibleModel, fetch_subscribers, publish_email, publish_file, publish_wecom
+from .providers import OpenAICompatibleModel, fetch_subscribers, publish_email, publish_email_batch, publish_file, publish_wecom
 from .regional_seed import import_regional_seed
 from .sync import P0_SOURCE_IDS, sync_p0
 from .source_health import load_source_health, save_source_health, source_is_due, update_source_health
@@ -84,6 +85,11 @@ def parser() -> argparse.ArgumentParser:
     bth_merge = sub.add_parser("merge-bth-policies", help="合并京津冀政策采集批次并执行质量门禁")
     bth_merge.add_argument("--input-dir", type=Path, required=True)
     bth_merge.add_argument("--output", type=Path, default=ROOT / "data" / "bth_policy_archive.json")
+    bth_profiles = sub.add_parser("build-bth-profiles", help="生成不公开的京津冀城市画像与短报告")
+    bth_profiles.add_argument("--archive", type=Path, default=ROOT / "data" / "bth_policy_archive.json")
+    bth_profiles.add_argument("--config", type=Path, default=ROOT / "config" / "bth_policy_sources.json")
+    bth_profiles.add_argument("--output", type=Path, default=ROOT / "analysis" / "bth_city_profiles.json")
+    bth_profiles.add_argument("--report", type=Path, default=ROOT / "analysis" / "bth_city_profiles_report.md")
     export = sub.add_parser("export-web", help="导出无需 Python 服务的静态网站")
     export.add_argument("--output", type=Path, default=ROOT / "dist")
     export.add_argument("--archive-limit", type=int, default=int(os.getenv("CLIMATE_ARCHIVE_LIMIT", str(DEFAULT_ARCHIVE_LIMIT))))
@@ -113,7 +119,7 @@ def parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     db = Database(args.db)
-    if args.command in {"collect-bth-policies", "merge-bth-policies"}:
+    if args.command in {"collect-bth-policies", "merge-bth-policies", "build-bth-profiles"}:
         sources, events = 0, 0
     else:
         sources, events = bootstrap(db)
@@ -243,6 +249,13 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "merge-bth-policies":
         result = merge_batches(args.input_dir, args.output)
         print(json.dumps({"status": "ok", "total": result["total"], "sources_checked": len(result["source_status"])}, ensure_ascii=False))
+    elif args.command == "build-bth-profiles":
+        result = write_city_profiles(args.archive, args.config, args.output, args.report)
+        print(json.dumps({
+            "status": "ok", "profiles": len(result["profiles"]),
+            "covered": result["coverage"]["covered_jurisdictions"],
+            "output": str(args.output), "report": str(args.report),
+        }, ensure_ascii=False))
     elif args.command == "export-web":
         result = export_static_site(db, ROOT / "static", args.output, archive_limit=args.archive_limit)
         print(json.dumps({"status": "ok", **result}, ensure_ascii=False, indent=2))
@@ -314,18 +327,31 @@ def main(argv: list[str] | None = None) -> int:
         ]
         subscriber_endpoint = os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT", "")
         subscriber_token = os.getenv("CLIMATE_SUBSCRIBER_ADMIN_TOKEN", "")
+        require_subscriber_endpoint = os.getenv("CLIMATE_REQUIRE_SUBSCRIBER_ENDPOINT", "").lower() in {"1", "true", "yes"}
+        if bool(subscriber_endpoint) != bool(subscriber_token):
+            raise SystemExit("订阅者接口地址与管理令牌必须同时配置")
         if subscriber_endpoint and subscriber_token:
             try:
-                recipients.extend(fetch_subscribers(subscriber_endpoint, subscriber_token))
+                fetched = fetch_subscribers(subscriber_endpoint, subscriber_token, timeout=30)
             except Exception as exc:
-                print(json.dumps({"subscriber_endpoint": "failed", "error": type(exc).__name__}, ensure_ascii=False))
+                raise SystemExit(f"订阅者名单读取失败: {type(exc).__name__}") from exc
+            print(json.dumps({"subscriber_endpoint": "ok", "active_subscribers": len(fetched)}, ensure_ascii=False))
+            recipients.extend(fetched)
+        elif require_subscriber_endpoint:
+            raise SystemExit("缺少 CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT 或 CLIMATE_SUBSCRIBER_ADMIN_TOKEN")
         recipients = list(dict.fromkeys(recipient.strip().lower() for recipient in recipients if recipient.strip()))
         if not recipients:
             print(json.dumps({"status": "skipped", "reason": "no_weekly_subscribers"}, ensure_ascii=False))
             return 0
-        for recipient in recipients:
-            publish_email(message, recipient, subject=report.get("meta", {}).get("title", "国际气候情报周报"))
-        print(json.dumps({"status": "sent", "channels": [f"email:{len(recipients)}"]}, ensure_ascii=False))
+        delivery = publish_email_batch(
+            message,
+            recipients,
+            subject=report.get("meta", {}).get("title", "国际气候情报周报"),
+            retries=1,
+        )
+        print(json.dumps({"status": "sent" if not delivery["failed"] else "partial", "recipients": len(recipients), **delivery}, ensure_ascii=False))
+        if delivery["failed"]:
+            raise SystemExit(f"周报邮件部分投递失败: sent={delivery['sent']} failed={delivery['failed']}")
     elif args.command == "update-visitors":
         cloudflare_names = (
             "CLOUDFLARE_ACCOUNT_ID",

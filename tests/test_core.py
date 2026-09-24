@@ -13,6 +13,7 @@ from climate_agent.archive import quality_result, update_archive, validate_publi
 from climate_agent.article_content import extract_article_text
 from climate_agent.briefing import _map_events, dashboard_payload, render_markdown, save_brief, select_daily_map_window, select_daily_window, select_latest_day, select_latest_week, weekly_report_payload
 from climate_agent.cli import ROOT, bootstrap, main as cli_main
+from climate_agent.bth_profiles import build_city_profiles
 from climate_agent.collector import NormalizedArticle, parse_feed, parse_gdelt
 from climate_agent.company_intelligence import build_company_intelligence, load_company_catalogue
 from climate_agent.corpus_analytics import build_corpus_analytics
@@ -22,6 +23,7 @@ from climate_agent.exporter import export_static_site
 from climate_agent.historical_backfill import article_to_historical_record, upsert_historical_records
 from climate_agent.official_data import parse_ndc_csv
 from climate_agent.pipeline import event_priority, normalize_url
+from climate_agent.providers import publish_email_batch
 from climate_agent.source_health import source_is_due, update_source_health
 from climate_agent.site_metrics import update_cloudflare_visitor_history
 from climate_agent.spotlights import build_spotlights
@@ -454,6 +456,34 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(record["published_at"], "2025-06-18")
         self.assertIn("能源转型", record["keywords"])
 
+    def test_bth_policy_metrics_use_policy_archive_not_news_evidence(self) -> None:
+        archive = json.loads((ROOT / "data" / "bth_policy_archive.json").read_text(encoding="utf-8"))
+        desks = build_topic_desks(
+            {"records": []}, {"records": []}, ROOT / "config" / "topic_desks.json",
+            bth_policy_archive=archive,
+        )
+        bth = next(item for item in desks["desks"] if item["id"] == "bth_green_transition")
+        self.assertEqual(bth["policy_statistics"]["policy_records"], len(archive["records"]))
+        self.assertGreater(bth["policy_statistics"]["source_count"], 6)
+        self.assertGreater(bth["policy_statistics"]["domain_count"], 6)
+
+    def test_bth_city_profiles_are_evidence_linked_and_not_public_site_data(self) -> None:
+        archive = json.loads((ROOT / "data" / "bth_policy_archive.json").read_text(encoding="utf-8"))
+        config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
+        payload = build_city_profiles(archive, config, today=date(2026, 9, 24))
+        self.assertEqual(len(payload["profiles"]), 50)
+        self.assertLess(payload["profile_evidence_total"], payload["source_policy_total"])
+        covered = [item for item in payload["profiles"] if item["evidence_count"]]
+        self.assertTrue(all(item["summary"] and item["latest_policies"] for item in covered))
+        self.assertNotIn("bth_city_profiles.json", (ROOT / "src" / "climate_agent" / "exporter.py").read_text(encoding="utf-8"))
+
+    def test_weekly_email_batch_continues_after_one_recipient_failure(self) -> None:
+        with patch("climate_agent.providers.publish_email", side_effect=[OSError("temporary"), OSError("failed"), None]) as sender, patch("climate_agent.providers.time.sleep"):
+            result = publish_email_batch("brief", ["failed@example.com", "sent@example.com"], subject="weekly", retries=1)
+        self.assertEqual(result["sent"], 1)
+        self.assertEqual(result["failed"], 1)
+        self.assertEqual(sender.call_count, 3)
+
     def test_static_export_injects_only_public_cloudflare_site_token(self) -> None:
         self.seed_publishable_article()
         static_dir = Path(self.temp.name) / "static-cloudflare"
@@ -545,6 +575,9 @@ class CoreTests(unittest.TestCase):
         self.assertNotIn("function latestDayItems", app)
         self.assertNotIn("全国碳市场名录可检索单位", app)
         self.assertNotIn("三年专题证据趋势", app)
+        self.assertNotIn("区域目标追踪", app)
+        self.assertIn("submitSubscription", app)
+        self.assertNotIn("queueSubscription", app)
         self.assertIn("items.slice(0, 10)", app)
         self.assertIn("下载今日简报", html)
         self.assertIn('id="subscribeOpen"', html)
@@ -578,6 +611,7 @@ class CoreTests(unittest.TestCase):
         self.assertIn("topic-metrics", app)
         self.assertNotIn("function renderTransitionTracker", app)
         styles = (ROOT / "static" / "styles.css").read_text(encoding="utf-8")
+        self.assertIn(".map-tooltip { display: none !important; }", styles)
         self.assertIn("function setupStickyNavigation", app)
         self.assertIn("scroll-padding-top", styles)
         self.assertIn(".topbar.is-scrolled", styles)
@@ -594,7 +628,7 @@ class CoreTests(unittest.TestCase):
         self.assertNotIn("ClimateText Lab", html)
         self.assertNotIn("location.href = `mailto:", app)
         self.assertIn('"Content-Type": "text/plain;charset=UTF-8"', app)
-        self.assertIn("navigator.sendBeacon", app)
+        self.assertNotIn("navigator.sendBeacon", app)
         self.assertNotIn("controller.abort(), 12000", app)
         self.assertNotIn("中国位于地图中部偏右", html)
         self.assertNotIn("先拆解时间、地区和议题", html)
