@@ -30,7 +30,7 @@ from climate_agent.spotlights import build_spotlights
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
 from climate_agent.taxonomy import country_codes_for, event_tags_for, organization_tags_for, public_taxonomy
 from climate_agent.topic_desks import build_topic_desks
-from climate_agent.bth_policies import _record as build_bth_policy_record
+from climate_agent.bth_policies import _pager_urls as bth_pager_urls, _record as build_bth_policy_record
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
@@ -463,6 +463,13 @@ class CoreTests(unittest.TestCase):
         listing = """<html><head><title>通知公告</title></head><body><h1>通知公告</h1><p>2026年9月21日</p><a>节能降碳实施方案</a></body></html>"""
         self.assertIsNone(build_bth_policy_record("https://www.tj.gov.cn/zwgk/pension.html", pension, jurisdiction, config, date(2023, 9, 23)))
         self.assertIsNone(build_bth_policy_record("https://jxj.beijing.gov.cn/jxdt/tzgg/", listing, jurisdiction, config, date(2023, 9, 23)))
+
+    def test_bth_policy_collector_expands_script_generated_listing_pages(self) -> None:
+        html = """<script>Pager({size:50, current:0, prefix:'index',suffix:'html'});</script>"""
+        urls = bth_pager_urls("https://jxj.beijing.gov.cn/jxdt/tzgg/", html)
+        self.assertEqual(len(urls), 50)
+        self.assertEqual(urls[0], "https://jxj.beijing.gov.cn/jxdt/tzgg/index.html")
+        self.assertEqual(urls[49], "https://jxj.beijing.gov.cn/jxdt/tzgg/index_49.html")
 
     def test_bth_policy_metrics_use_policy_archive_not_news_evidence(self) -> None:
         archive = json.loads((ROOT / "data" / "bth_policy_archive.json").read_text(encoding="utf-8"))

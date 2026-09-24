@@ -30,6 +30,7 @@ GENERIC_TITLES = {
     "公告公示", "部门文件", "政府文件", "市政府文件", "区政府文件", "法定主动公开内容",
 }
 BASELINE_TERMS = ("碳达峰实施方案", "十四五", "绿色低碳循环发展", "应对气候变化规划")
+PAGINATION_WINDOW_SIZE = 15
 
 
 class _PageParser(HTMLParser):
@@ -40,13 +41,16 @@ class _PageParser(HTMLParser):
         self.title: list[str] = []
         self.text: list[str] = []
         self._href = ""
+        self._link_title = ""
         self._link_text: list[str] = []
         self._tag = ""
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         self._tag = tag.lower()
         if self._tag == "a":
-            self._href = dict(attrs).get("href") or ""
+            values = dict(attrs)
+            self._href = values.get("href") or ""
+            self._link_title = values.get("title") or ""
             self._link_text = []
 
     def handle_data(self, value: str) -> None:
@@ -63,8 +67,10 @@ class _PageParser(HTMLParser):
 
     def handle_endtag(self, tag: str) -> None:
         if tag.lower() == "a" and self._href:
-            self.links.append((self._href, " ".join(self._link_text).strip()))
+            label = self._link_title.strip() or " ".join(self._link_text).strip()
+            self.links.append((self._href, label))
             self._href = ""
+            self._link_title = ""
             self._link_text = []
         self._tag = ""
 
@@ -212,6 +218,25 @@ def _sitemap_urls(base: str, domains: list[str], limit: int) -> list[str]:
     return sorted(set(found), reverse=True)[: limit * 4]
 
 
+def _pager_urls(page_url: str, html: str) -> list[str]:
+    """Expand government-list Pager({size,prefix,suffix}) scripts into concrete URLs."""
+    match = re.search(r"Pager\s*\(\s*\{(?P<body>.*?)\}\s*\)", html, re.I | re.S)
+    if not match:
+        return []
+    body = match.group("body")
+    size_match = re.search(r"\bsize\s*:\s*(\d+)", body, re.I)
+    prefix_match = re.search(r"\bprefix\s*:\s*['\"]([^'\"]+)['\"]", body, re.I)
+    suffix_match = re.search(r"\bsuffix\s*:\s*['\"]([^'\"]+)['\"]", body, re.I)
+    if not (size_match and prefix_match and suffix_match):
+        return []
+    size = min(int(size_match.group(1)), 500)
+    prefix, suffix = prefix_match.group(1), suffix_match.group(1)
+    return [
+        _canonical(urljoin(page_url, f"{prefix}{'' if index == 0 else '_' + str(index)}.{suffix}"))
+        for index in range(size)
+    ]
+
+
 def collect_batch(
     config_path: Path = DEFAULT_CONFIG,
     *,
@@ -259,6 +284,13 @@ def collect_batch(
                 records[item["policy_id"]] = item
                 accepted += 1
             _title, _text, links = _page(html)
+            pager_urls = _pager_urls(response.final_url, html)
+            if pager_urls:
+                window_start = max(0, page_window) * PAGINATION_WINDOW_SIZE
+                window_end = window_start + PAGINATION_WINDOW_SIZE
+                for page_link in reversed(pager_urls[window_start:window_end]):
+                    if page_link and page_link not in seen and _host_allowed(page_link, [domain]):
+                        queue.appendleft(page_link)
             for href, label in links:
                 link = _canonical(urljoin(response.final_url, href))
                 marker = f"{label} {link}".lower()
