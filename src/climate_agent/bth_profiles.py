@@ -8,6 +8,8 @@ from pathlib import Path
 
 THEME_LABELS = {
     "污染碳协同": "减污降碳协同",
+    "减污降碳协同": "减污降碳协同",
+    "生态环境治理": "生态环境治理",
     "能源转型": "能源转型",
     "工业绿色化": "工业绿色化",
     "绿色交通": "绿色交通",
@@ -16,14 +18,9 @@ THEME_LABELS = {
     "碳目标与治理": "碳目标与治理",
     "碳市场与绿色金融": "碳市场与绿色金融",
     "绿色转型": "综合绿色转型",
+    "综合绿色转型": "综合绿色转型",
 }
 
-PROFILE_TITLE_TERMS = (
-    "碳达峰", "碳排放", "碳市场", "碳足迹", "碳核算", "低碳", "绿色转型", "绿色低碳",
-    "绿色发展", "绿色建筑", "绿色交通", "绿色制造", "节能降碳", "节能", "能源转型",
-    "清洁能源", "可再生能源", "能效", "新能源", "循环经济", "动力电池", "废旧电池",
-    "气候变化", "温室气体", "污染防治", "大气污染", "空气质量", "减污降碳",
-)
 PROFILE_EXCLUDE_TERMS = (
     "社会保险", "科普基地", "文化产业", "外国投资者", "视听系统", "内部比选", "结果公示",
     "信息公开指南", "规划专栏", "意见征集", "通知公告",
@@ -31,31 +28,25 @@ PROFILE_EXCLUDE_TERMS = (
 
 
 def _profile_eligible(record: dict) -> bool:
-    if record.get("curated"):
-        return True
     title = str(record.get("title") or "").strip()
     return (
         len(title) >= 8
-        and any(term in title for term in PROFILE_TITLE_TERMS)
+        and bool(record.get("keywords"))
         and not any(term in title for term in PROFILE_EXCLUDE_TERMS)
     )
 
 
-def _summary(name: str, records: list[dict], themes: Counter[str], sources: Counter[str]) -> str:
+def _summary(name: str, records: list[dict], themes: Counter[str], sources: Counter[str], recent: int) -> str:
     if not records:
-        return f"当前政策库尚未检出{name}近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。"
-    dates = sorted(str(item.get("published_at") or "") for item in records if item.get("published_at"))
-    theme_text = "、".join(value for value, _count in themes.most_common(3)) or "综合绿色转型"
-    source_text = "、".join(value for value, _count in sources.most_common(2)) or "当地政府部门"
-    if len(records) < 5:
-        return (
-            f"{name}现有{len(records)}份可追溯政策，时间覆盖{dates[0]}至{dates[-1]}，"
-            f"主要涉及{theme_text}，发布主体包括{source_text}。样本量较小，目前仅适合用于政策线索核验。"
-        )
+        return ""
+    theme_text = "、".join(f"{value}{count}件" for value, count in themes.most_common(3))
+    lead_source, lead_count = sources.most_common(1)[0]
+    latest = records[0]
+    if len(records) == 1:
+        return f"{latest['published_at']}，{lead_source}发布《{latest['title']}》，当前可核验重点为{theme_text}。"
     return (
-        f"{name}现有{len(records)}份可追溯政策，时间覆盖{dates[0]}至{dates[-1]}。"
-        f"政策供给主要集中于{theme_text}，主要发布主体为{source_text}；"
-        "该画像描述政策发布结构，不直接等同于减排成效或转型绩效。"
+        f"{name}的政策组合以{theme_text}为主；近12个月发布{recent}件。"
+        f"{lead_source}发布{lead_count}件，为主要发布主体；最新动作为{latest['published_at']}发布的《{latest['title']}》。"
     )
 
 
@@ -92,7 +83,18 @@ def build_city_profiles(archive: dict, config: dict, *, today: date | None = Non
             "source_count": len(sources),
             "official_domain_count": len(domains),
             "themes": [{"name": name, "count": count} for name, count in themes.most_common()],
-            "summary": _summary(str(jurisdiction.get("name") or "该地区"), rows, themes, sources),
+            "profile": {
+                "primary_focus": themes.most_common(1)[0][0] if themes else "",
+                "policy_mix": [{"theme": name, "count": count} for name, count in themes.most_common(5)],
+                "activity_last_12_months": recent,
+                "lead_publisher": sources.most_common(1)[0][0] if sources else "",
+                "latest_action": {
+                    "date": rows[0].get("published_at"), "title": rows[0].get("title"),
+                    "source": rows[0].get("source"), "url": rows[0].get("url"),
+                } if rows else {},
+                "evidence_strength": "较强" if len(rows) >= 8 else "中等" if len(rows) >= 3 else "初步",
+            },
+            "summary": _summary(str(jurisdiction.get("name") or "该地区"), rows, themes, sources, recent),
             "latest_policies": [
                 {
                     "published_at": item.get("published_at"),
@@ -131,7 +133,7 @@ def build_city_profiles(archive: dict, config: dict, *, today: date | None = Non
         "source_policy_total": len(raw_records),
         "profile_evidence_total": len(records),
         "screened_out_total": len(raw_records) - len(records),
-        "method": "先按标题中的绿色低碳实质性术语排除栏目页和明显无关文件，再按标准行政区代码聚合，并统计时间、主题、来源和近一年更新；所有判断均可回溯到政策原文链接。",
+        "method": "仅使用标题明确涉及绿色低碳议题的具体政策文件，按标准行政区代码聚合政策组合、近12个月活跃度、主要发布主体和最新动作；所有判断均可回溯到政策原文链接。",
         "scope_note": "本文件用于内部研究，未接入公开网站。画像反映政策文本供给，不代表实际排放或转型绩效。",
         "coverage": {
             "configured_jurisdictions": len(profiles),
@@ -162,13 +164,23 @@ def write_city_profiles(archive_path: Path, config_path: Path, output_path: Path
         "## 城市与区级画像",
         "",
     ]
-    for item in payload["profiles"]:
+    for item in (profile for profile in payload["profiles"] if profile["evidence_count"]):
+        dimensions = item["profile"]
+        policy_mix = "、".join(f"{entry['theme']}（{entry['count']}件）" for entry in dimensions["policy_mix"][:3])
+        latest = dimensions["latest_action"]
         lines.extend([
             f"### {item['name']}",
             "",
-            item["summary"],
+            f"- 政策重点：{policy_mix}",
+            f"- 近12个月：{dimensions['activity_last_12_months']}件",
+            f"- 主要发布主体：{dimensions['lead_publisher']}",
+            f"- 最新动作：{latest.get('date', '')}《{latest.get('title', '')}》",
+            f"- 画像判断：{item['summary']}",
             "",
         ])
+    missing = [item["name"] for item in payload["profiles"] if not item["evidence_count"]]
+    if missing:
+        lines.extend(["## 待补充证据地区", "", "、".join(missing), ""])
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text("\n".join(lines), encoding="utf-8")
     return payload

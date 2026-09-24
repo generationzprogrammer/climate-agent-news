@@ -574,12 +574,12 @@ function renderBthRegionalTools(desk) {
     <div><span>${esc(item.region)}</span><span>${esc(item.policy_type || "政策文件")}</span><time>${esc(formatDate(item.published_at))}</time></div>
     <h4>${esc(item.title)}</h4>
     <p class="bth-policy-source">${esc(item.source)}</p>
-    <footer><span>${(item.keywords || []).map(value => `<i>${esc(value)}</i>`).join("")}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></footer>
+    <div class="bth-policy-actions"><span>${(item.keywords || []).map(value => `<i>${esc(value)}</i>`).join("")}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
   </article>` : `<article class="bth-policy-card">
     <div><span>${esc(jurisdictionLabel(item.jurisdiction))}</span><time>${esc(formatDate(item.published_at))}</time></div>
     <h4>${esc(field(item, "title_zh", "title_en"))}</h4>
     <p>${esc(field(item, "summary_zh", "summary_en"))}</p>
-    <footer><span>${esc(field(item, "status_zh", "status_en"))}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></footer>
+    <div class="bth-policy-actions"><span>${esc(field(item, "status_zh", "status_en"))}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
   </article>`).join("");
   return `<div class="bth-tools">
     <section><div class="bth-tool-heading"><p class="overline">POLICY DATABASE</p><h3>${language === "en" ? "Green-transition policy database" : "京津冀绿色转型政策库"}</h3></div>

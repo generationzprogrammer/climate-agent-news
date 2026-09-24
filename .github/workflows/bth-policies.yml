@@ -67,13 +67,15 @@ jobs:
       - name: 合并、去重与质量门禁
         env:
           PYTHONPATH: src
-        run: python -m climate_agent.cli merge-bth-policies --input-dir policy-batches --output data/bth_policy_archive.json
+        run: |
+          python -m climate_agent.cli merge-bth-policies --input-dir policy-batches --output data/bth_policy_archive.json
+          python -m climate_agent.cli build-bth-profiles
       - name: 保存政策库
         shell: bash
         run: |
           git config user.name "climate-text-bot"
           git config user.email "climate-text-bot@users.noreply.github.com"
-          git add data/bth_policy_archive.json
+          git add data/bth_policy_archive.json analysis/bth_city_profiles.json analysis/bth_city_profiles_report.md
           if ! git diff --cached --quiet; then
             git commit -m "data: update BTH green-transition policy archive"
             git pull --rebase origin main

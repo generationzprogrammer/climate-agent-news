@@ -454,7 +454,15 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(record["region"], "朝阳区")
         self.assertEqual(record["admin_code"], "110105")
         self.assertEqual(record["published_at"], "2025-06-18")
-        self.assertIn("能源转型", record["keywords"])
+        self.assertEqual(record["keywords"], ["综合绿色转型"])
+
+    def test_bth_policy_gate_rejects_navigation_and_pagewide_keyword_leakage(self) -> None:
+        config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
+        jurisdiction = next(item for item in config["jurisdictions"] if item["id"] == "tj")
+        pension = """<html><head><title>天津市人民政府关于养老服务体系建设十五五规划的批复</title></head><body><h1>天津市人民政府关于养老服务体系建设十五五规划的批复</h1><p>2026年9月11日</p><nav>新能源 节能 绿色建筑 生态环境</nav></body></html>"""
+        listing = """<html><head><title>通知公告</title></head><body><h1>通知公告</h1><p>2026年9月21日</p><a>节能降碳实施方案</a></body></html>"""
+        self.assertIsNone(build_bth_policy_record("https://www.tj.gov.cn/zwgk/pension.html", pension, jurisdiction, config, date(2023, 9, 23)))
+        self.assertIsNone(build_bth_policy_record("https://jxj.beijing.gov.cn/jxdt/tzgg/", listing, jurisdiction, config, date(2023, 9, 23)))
 
     def test_bth_policy_metrics_use_policy_archive_not_news_evidence(self) -> None:
         archive = json.loads((ROOT / "data" / "bth_policy_archive.json").read_text(encoding="utf-8"))
@@ -472,9 +480,10 @@ class CoreTests(unittest.TestCase):
         config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
         payload = build_city_profiles(archive, config, today=date(2026, 9, 24))
         self.assertEqual(len(payload["profiles"]), 50)
-        self.assertLess(payload["profile_evidence_total"], payload["source_policy_total"])
+        self.assertLessEqual(payload["profile_evidence_total"], payload["source_policy_total"])
         covered = [item for item in payload["profiles"] if item["evidence_count"]]
         self.assertTrue(all(item["summary"] and item["latest_policies"] for item in covered))
+        self.assertTrue(all(not item["summary"] for item in payload["profiles"] if not item["evidence_count"]))
         self.assertNotIn("bth_city_profiles.json", (ROOT / "src" / "climate_agent" / "exporter.py").read_text(encoding="utf-8"))
 
     def test_weekly_email_batch_continues_after_one_recipient_failure(self) -> None:
@@ -609,8 +618,10 @@ class CoreTests(unittest.TestCase):
         self.assertIn("function companyProfileHtml", app)
         self.assertIn("function renderSpotlights", app)
         self.assertIn("topic-metrics", app)
+        self.assertIn("bth-policy-actions", app)
         self.assertNotIn("function renderTransitionTracker", app)
         styles = (ROOT / "static" / "styles.css").read_text(encoding="utf-8")
+        self.assertNotIn(".bth-policy-card footer", styles)
         self.assertIn(".map-tooltip { display: none !important; }", styles)
         self.assertIn("function setupStickyNavigation", app)
         self.assertIn("scroll-padding-top", styles)

@@ -20,7 +20,15 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / "config" / "bth_policy_sources.json"
 DEFAULT_ARCHIVE = ROOT / "data" / "bth_policy_archive.json"
 FOLLOW_TERMS = ("政策", "政府信息公开", "政务公开", "规范性文件", "规划计划", "通知公告", "法规", "文件", "zcwj", "zwgk", "gongkai", "policy")
-EXCLUDE_TITLE_TERMS = ("政策解读", "图解", "新闻发布", "答记者问", "访谈", "会议召开", "工作动态", "一图读懂")
+EXCLUDE_TITLE_TERMS = (
+    "政策解读", "图解", "新闻发布", "答记者问", "访谈", "会议召开", "工作动态", "一图读懂",
+    "结果公示", "中标公告", "成交公告", "采购公告", "招标公告", "内部比选", "招聘公告",
+    "信息公开指南", "信息公开目录", "基层政务公开标准目录",
+)
+GENERIC_TITLES = {
+    "通知公告", "规划计划", "政策文件", "规范性文件", "政府信息公开", "政务公开",
+    "公告公示", "部门文件", "政府文件", "市政府文件", "区政府文件", "法定主动公开内容",
+}
 BASELINE_TERMS = ("碳达峰实施方案", "十四五", "绿色低碳循环发展", "应对气候变化规划")
 
 
@@ -95,7 +103,7 @@ def _page(html: str) -> tuple[str, str, list[tuple[str, str]]]:
     except Exception:
         pass
     title = " ".join(parser.h1).strip() or " ".join(parser.title).strip()
-    title = re.split(r"[_|—-]\s*(?:北京市|天津市|河北省|人民政府|政府门户)", title)[0].strip()
+    title = re.split(r"[_|—-]\s*(?:北京市|天津市|河北省|人民政府|政府门户|通知公告|政策文件|政务公开)", title)[0].strip()
     return to_simplified(title), to_simplified(" ".join(parser.text)), parser.links
 
 
@@ -127,17 +135,23 @@ def _keywords(text: str, taxonomy: dict[str, list[str]]) -> list[str]:
     return [label for label, terms in taxonomy.items() if any(term.lower() in text.lower() for term in terms)]
 
 
+def _specific_policy_title(title: str, config: dict) -> bool:
+    """Keep concrete policy documents; reject navigation pages and page-wide keyword leakage."""
+    compact = re.sub(r"\s+", "", title or "").strip("_-|—– ")
+    return (
+        len(compact) >= 8
+        and compact not in GENERIC_TITLES
+        and not any(term in compact for term in EXCLUDE_TITLE_TERMS)
+        and any(term.lower() in compact.lower() for term in config["topic_terms"])
+        and any(term in compact for term in config["policy_terms"])
+    )
+
+
 def _record(url: str, html: str, jurisdiction: dict, config: dict, start: date) -> dict | None:
     title, text, _links = _page(html)
-    if not title or any(term in title for term in EXCLUDE_TITLE_TERMS):
+    if not _specific_policy_title(title, config):
         return None
-    combined = f"{title} {text[:16000]}"
-    topic_terms = config["topic_terms"]
     policy_terms = config["policy_terms"]
-    if not any(term.lower() in combined.lower() for term in topic_terms):
-        return None
-    if not any(term in title for term in policy_terms):
-        return None
     published = _published(f"{text[:5000]} {url}")
     if not published:
         return None
@@ -147,7 +161,9 @@ def _record(url: str, html: str, jurisdiction: dict, config: dict, start: date) 
         return None
     if moment > date.today():
         return None
-    labels = _keywords(combined, config["keyword_taxonomy"])
+    # Labels deliberately use the document title only. Government navigation and
+    # footer text often contain unrelated sector words and must not affect tags.
+    labels = _keywords(title, config["keyword_taxonomy"])
     if not labels:
         return None
     canonical = _canonical(url)
@@ -274,11 +290,23 @@ def write_batch(path: Path, **kwargs) -> dict:
     return payload
 
 
-def _valid(record: dict, config: dict) -> bool:
+def _normalise_record(record: dict, config: dict) -> dict | None:
     required = ("published_at", "source", "title", "province", "region", "admin_code", "keywords", "url")
     domains = {domain for item in config["jurisdictions"] for domain in item["domains"]}
     host = (urlparse(str(record.get("url") or "")).hostname or "").lower()
-    return all(record.get(key) for key in required) and any(host == domain or host.endswith("." + domain) for domain in domains)
+    if not all(record.get(key) for key in required) or not any(host == domain or host.endswith("." + domain) for domain in domains):
+        return None
+    title = str(record.get("title") or "").strip()
+    if not _specific_policy_title(title, config):
+        return None
+    labels = _keywords(title, config["keyword_taxonomy"])
+    if not labels:
+        return None
+    cleaned = dict(record)
+    cleaned["keywords"] = labels
+    cleaned["policy_type"] = _policy_type(title, config["policy_terms"])
+    cleaned["official_domain"] = host
+    return cleaned
 
 
 def _curated_records(config: dict) -> list[dict]:
@@ -323,11 +351,19 @@ def _curated_records(config: dict) -> list[dict]:
 
 def merge_batches(input_dir: Path, archive_path: Path = DEFAULT_ARCHIVE, config_path: Path = DEFAULT_CONFIG) -> dict:
     config = json.loads(config_path.read_text(encoding="utf-8"))
-    existing = {item["policy_id"]: item for item in _curated_records(config)}
+    existing = {
+        item["policy_id"]: cleaned
+        for item in _curated_records(config)
+        if (cleaned := _normalise_record(item, config))
+    }
     statuses: dict[tuple[str, str, int], dict] = {}
     if archive_path.exists():
         prior = json.loads(archive_path.read_text(encoding="utf-8"))
-        existing.update({item["policy_id"]: item for item in prior.get("records", []) if item.get("policy_id")})
+        existing.update({
+            item["policy_id"]: cleaned
+            for item in prior.get("records", [])
+            if item.get("policy_id") and (cleaned := _normalise_record(item, config))
+        })
         statuses = {(item["jurisdiction_id"], item["domain"], int(item.get("page_window", 0))): item for item in prior.get("source_status", [])}
     for path in sorted(input_dir.glob("*.json")):
         try:
@@ -335,8 +371,9 @@ def merge_batches(input_dir: Path, archive_path: Path = DEFAULT_ARCHIVE, config_
         except (OSError, json.JSONDecodeError):
             continue
         for record in payload.get("records", []):
-            if _valid(record, config):
-                existing[record["policy_id"]] = record
+            cleaned = _normalise_record(record, config)
+            if cleaned:
+                existing[cleaned["policy_id"]] = cleaned
         for item in payload.get("source_status", []):
             statuses[(item["jurisdiction_id"], item["domain"], int(item.get("page_window", 0)))] = item
     records = sorted(existing.values(), key=lambda item: (item["published_at"], item["title"]), reverse=True)

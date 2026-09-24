@@ -2,30 +2,30 @@
   "schema_version": "1.0",
   "dataset_name": "京津冀绿色转型城市画像与短报告",
   "generated_on": "2026-09-24",
-  "source_archive_updated_at": "2026-09-23T08:48:36.925748+00:00",
-  "source_policy_total": 165,
-  "profile_evidence_total": 52,
-  "screened_out_total": 113,
-  "method": "先按标题中的绿色低碳实质性术语排除栏目页和明显无关文件，再按标准行政区代码聚合，并统计时间、主题、来源和近一年更新；所有判断均可回溯到政策原文链接。",
+  "source_archive_updated_at": "2026-09-24T07:57:56.855225+00:00",
+  "source_policy_total": 97,
+  "profile_evidence_total": 96,
+  "screened_out_total": 1,
+  "method": "仅使用标题明确涉及绿色低碳议题的具体政策文件，按标准行政区代码聚合政策组合、近12个月活跃度、主要发布主体和最新动作；所有判断均可回溯到政策原文链接。",
   "scope_note": "本文件用于内部研究，未接入公开网站。画像反映政策文本供给，不代表实际排放或转型绩效。",
   "coverage": {
     "configured_jurisdictions": 50,
-    "covered_jurisdictions": 9,
-    "coverage_rate": 18.0,
-    "publishing_bodies": 11,
-    "official_domains": 15,
+    "covered_jurisdictions": 13,
+    "coverage_rate": 26.0,
+    "publishing_bodies": 20,
+    "official_domains": 19,
     "province_record_counts": {
-      "北京市": 42,
+      "河北省": 36,
+      "北京市": 55,
       "京津冀": 2,
-      "天津市": 3,
-      "河北省": 5
+      "天津市": 3
     }
   },
   "brief_report": [
-    "政策库原始记录165份；经标题相关性筛查后，52份用于城市画像，覆盖9个行政单元；配置清单共50个行政单元。",
-    "现有记录来自11个发布主体和15个官方域名。",
-    "政策数量较多的地区为北京市（33份）、河北省（4份）、通州区（3份）、密云区（3份）、天津市（3份）。",
-    "高频议题为能源转型（41份）、绿色建筑（33份）、工业绿色化（25份）、绿色交通（23份）、污染与碳协同（16份）。",
+    "政策库原始记录97份；经标题相关性筛查后，96份用于城市画像，覆盖13个行政单元；配置清单共50个行政单元。",
+    "现有记录来自20个发布主体和19个官方域名。",
+    "政策数量较多的地区为北京市（31份）、石家庄市（27份）、门头沟区（9份）、密云区（7份）、河北省（4份）。",
+    "高频议题为生态环境治理（55份）、能源转型（22份）、绿色建筑（17份）、碳目标与核算（12份）、综合绿色转型（6份）。",
     "地区间记录数量差异主要反映当前公开检索覆盖和网站可访问性，不能直接用于比较地方绿色转型绩效。"
   ],
   "profiles": [
@@ -44,27 +44,45 @@
       "official_domain_count": 2,
       "themes": [
         {
-          "name": "绿色交通",
-          "count": 2
-        },
-        {
           "name": "综合绿色转型",
-          "count": 1
-        },
-        {
-          "name": "能源转型",
-          "count": 1
-        },
-        {
-          "name": "工业绿色化",
-          "count": 1
+          "count": 2
         },
         {
           "name": "碳市场与绿色金融",
           "count": 1
+        },
+        {
+          "name": "绿色交通",
+          "count": 1
         }
       ],
-      "summary": "京津冀现有2份可追溯政策，时间覆盖2024-07-10至2025-12-26，主要涉及绿色交通、综合绿色转型、能源转型，发布主体包括生态环境部、北京市人民政府。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "综合绿色转型",
+        "policy_mix": [
+          {
+            "theme": "综合绿色转型",
+            "count": 2
+          },
+          {
+            "theme": "碳市场与绿色金融",
+            "count": 1
+          },
+          {
+            "theme": "绿色交通",
+            "count": 1
+          }
+        ],
+        "activity_last_12_months": 1,
+        "lead_publisher": "生态环境部",
+        "latest_action": {
+          "date": "2025-12-26",
+          "title": "京津冀美丽中国先行区建设行动方案",
+          "source": "生态环境部",
+          "url": "https://www.mee.gov.cn/xxgk2018/xxgk/xxgk03/202512/W020251226710348629883.pdf"
+        },
+        "evidence_strength": "初步"
+      },
+      "summary": "京津冀的政策组合以综合绿色转型2件、碳市场与绿色金融1件、绿色交通1件为主；近12个月发布1件。生态环境部发布1件，为主要发布主体；最新动作为2025-12-26发布的《京津冀美丽中国先行区建设行动方案》。",
       "latest_policies": [
         {
           "published_at": "2025-12-26",
@@ -91,8 +109,8 @@
       "province": "北京市",
       "administrative_level": "province",
       "official_homepage": "https://www.beijing.gov.cn/",
-      "evidence_count": 33,
-      "recent_365_days": 27,
+      "evidence_count": 31,
+      "recent_365_days": 25,
       "date_start": "2022-10-14",
       "date_end": "2026-09-18",
       "source_count": 1,
@@ -100,42 +118,64 @@
       "themes": [
         {
           "name": "能源转型",
-          "count": 27
+          "count": 21
         },
         {
           "name": "绿色建筑",
-          "count": 26
-        },
-        {
-          "name": "工业绿色化",
-          "count": 11
-        },
-        {
-          "name": "绿色交通",
-          "count": 10
-        },
-        {
-          "name": "污染与碳协同",
-          "count": 9
+          "count": 17
         },
         {
           "name": "碳目标与核算",
-          "count": 7
-        },
-        {
-          "name": "循环经济",
           "count": 6
         },
         {
+          "name": "生态环境治理",
+          "count": 2
+        },
+        {
           "name": "碳市场与绿色金融",
-          "count": 4
+          "count": 2
         },
         {
           "name": "综合绿色转型",
           "count": 1
         }
       ],
-      "summary": "北京市现有33份可追溯政策，时间覆盖2022-10-14至2026-09-18。政策供给主要集中于能源转型、绿色建筑、工业绿色化，主要发布主体为北京市人民政府；该画像描述政策发布结构，不直接等同于减排成效或转型绩效。",
+      "profile": {
+        "primary_focus": "能源转型",
+        "policy_mix": [
+          {
+            "theme": "能源转型",
+            "count": 21
+          },
+          {
+            "theme": "绿色建筑",
+            "count": 17
+          },
+          {
+            "theme": "碳目标与核算",
+            "count": 6
+          },
+          {
+            "theme": "生态环境治理",
+            "count": 2
+          },
+          {
+            "theme": "碳市场与绿色金融",
+            "count": 2
+          }
+        ],
+        "activity_last_12_months": 25,
+        "lead_publisher": "北京市人民政府",
+        "latest_action": {
+          "date": "2026-09-18",
+          "title": "北京市发展和改革委员会 北京市经济和信息化局 北京市生态环境局关于印发北京市鼓励废动力电池回收利用企业规范健康发展若干措施的通知-本委其他文件",
+          "source": "北京市人民政府",
+          "url": "https://fgw.beijing.gov.cn/fgwzwgk/2024zcwj/bwqtwj/202609/t20260922_4875565.htm"
+        },
+        "evidence_strength": "较强"
+      },
+      "summary": "北京市的政策组合以能源转型21件、绿色建筑17件、碳目标与核算6件为主；近12个月发布25件。北京市人民政府发布31件，为主要发布主体；最新动作为2026-09-18发布的《北京市发展和改革委员会 北京市经济和信息化局 北京市生态环境局关于印发北京市鼓励废动力电池回收利用企业规范健康发展若干措施的通知-本委其他文件》。",
       "latest_policies": [
         {
           "published_at": "2026-09-18",
@@ -188,16 +228,55 @@
       "province": "北京市",
       "administrative_level": "district",
       "official_homepage": "https://www.bjdch.gov.cn/",
-      "evidence_count": 0,
-      "recent_365_days": 0,
-      "date_start": "",
-      "date_end": "",
-      "source_count": 0,
-      "official_domain_count": 0,
-      "themes": [],
-      "summary": "当前政策库尚未检出东城区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
-      "latest_policies": [],
-      "evidence_policy_ids": []
+      "evidence_count": 2,
+      "recent_365_days": 1,
+      "date_start": "2024-06-21",
+      "date_end": "2026-01-29",
+      "source_count": 2,
+      "official_domain_count": 1,
+      "themes": [
+        {
+          "name": "生态环境治理",
+          "count": 2
+        }
+      ],
+      "profile": {
+        "primary_focus": "生态环境治理",
+        "policy_mix": [
+          {
+            "theme": "生态环境治理",
+            "count": 2
+          }
+        ],
+        "activity_last_12_months": 1,
+        "lead_publisher": "北京市东城区生态环境局",
+        "latest_action": {
+          "date": "2026-01-29",
+          "title": "东城区生态环境局关于对《美丽东城建设2026年行动计划（征求意见稿）》公开征求意见的情况反馈_反馈信息",
+          "source": "北京市东城区生态环境局",
+          "url": "https://www.bjdch.gov.cn/zwgk/zcxwjyjzj/fkxx/202601/t20260129_4474779.html"
+        },
+        "evidence_strength": "初步"
+      },
+      "summary": "东城区的政策组合以生态环境治理2件为主；近12个月发布1件。北京市东城区生态环境局发布1件，为主要发布主体；最新动作为2026-01-29发布的《东城区生态环境局关于对《美丽东城建设2026年行动计划（征求意见稿）》公开征求意见的情况反馈_反馈信息》。",
+      "latest_policies": [
+        {
+          "published_at": "2026-01-29",
+          "title": "东城区生态环境局关于对《美丽东城建设2026年行动计划（征求意见稿）》公开征求意见的情况反馈_反馈信息",
+          "source": "北京市东城区生态环境局",
+          "url": "https://www.bjdch.gov.cn/zwgk/zcxwjyjzj/fkxx/202601/t20260129_4474779.html"
+        },
+        {
+          "published_at": "2024-06-21",
+          "title": "东城区朝阳门街道生态环境保护责任清单_规划计划",
+          "source": "朝阳门街道",
+          "url": "https://www.bjdch.gov.cn/zwgk/ghjh/202406/t20240621_3723311.html"
+        }
+      ],
+      "evidence_policy_ids": [
+        "bth_policy_8803ff762b73af59",
+        "bth_policy_16a8c92cbc41cc9e"
+      ]
     },
     {
       "region_id": "bj-xicheng",
@@ -213,7 +292,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出西城区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -231,7 +318,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出朝阳区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -250,27 +345,29 @@
       "official_domain_count": 1,
       "themes": [
         {
-          "name": "能源转型",
-          "count": 2
-        },
-        {
-          "name": "工业绿色化",
-          "count": 2
-        },
-        {
-          "name": "绿色建筑",
-          "count": 2
-        },
-        {
-          "name": "绿色交通",
-          "count": 2
-        },
-        {
-          "name": "污染与碳协同",
+          "name": "生态环境治理",
           "count": 2
         }
       ],
-      "summary": "丰台区现有2份可追溯政策，时间覆盖2024-04-17至2025-04-15，主要涉及能源转型、工业绿色化、绿色建筑，发布主体包括丰台区人民政府。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "生态环境治理",
+        "policy_mix": [
+          {
+            "theme": "生态环境治理",
+            "count": 2
+          }
+        ],
+        "activity_last_12_months": 0,
+        "lead_publisher": "丰台区人民政府",
+        "latest_action": {
+          "date": "2025-04-15",
+          "title": "北京市丰台区人民政府办公室关于印发《推进美丽丰台建设 持续深入打好污染防治攻坚战2025年行动计划》的通知",
+          "source": "丰台区人民政府",
+          "url": "https://www.bjft.gov.cn/ftq/ftzfbwj/202504/79befa1909134f3f9d11f62ba66b0645.shtml"
+        },
+        "evidence_strength": "初步"
+      },
+      "summary": "丰台区的政策组合以生态环境治理2件为主；近12个月发布0件。丰台区人民政府发布2件，为主要发布主体；最新动作为2025-04-15发布的《北京市丰台区人民政府办公室关于印发《推进美丽丰台建设 持续深入打好污染防治攻坚战2025年行动计划》的通知》。",
       "latest_policies": [
         {
           "published_at": "2025-04-15",
@@ -304,7 +401,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出石景山区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -322,7 +427,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出海淀区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -333,16 +446,80 @@
       "province": "北京市",
       "administrative_level": "district",
       "official_homepage": "https://www.bjmtg.gov.cn/",
-      "evidence_count": 0,
-      "recent_365_days": 0,
-      "date_start": "",
-      "date_end": "",
-      "source_count": 0,
-      "official_domain_count": 0,
-      "themes": [],
-      "summary": "当前政策库尚未检出门头沟区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
-      "latest_policies": [],
-      "evidence_policy_ids": []
+      "evidence_count": 9,
+      "recent_365_days": 8,
+      "date_start": "2022-04-19",
+      "date_end": "2026-08-31",
+      "source_count": 1,
+      "official_domain_count": 1,
+      "themes": [
+        {
+          "name": "生态环境治理",
+          "count": 9
+        }
+      ],
+      "profile": {
+        "primary_focus": "生态环境治理",
+        "policy_mix": [
+          {
+            "theme": "生态环境治理",
+            "count": 9
+          }
+        ],
+        "activity_last_12_months": 8,
+        "lead_publisher": "门头沟区人民政府",
+        "latest_action": {
+          "date": "2026-08-31",
+          "title": "北京市门头沟区生态环境局行政处罚决定书 门环境罚〔2026〕13号_行政处罚公示",
+          "source": "门头沟区人民政府",
+          "url": "https://www.bjmtg.gov.cn/mtg11J027/xzcfgs/202608/947c6d96ce554f9d8b09e4a29fc50ae7.shtml"
+        },
+        "evidence_strength": "较强"
+      },
+      "summary": "门头沟区的政策组合以生态环境治理9件为主；近12个月发布8件。门头沟区人民政府发布9件，为主要发布主体；最新动作为2026-08-31发布的《北京市门头沟区生态环境局行政处罚决定书 门环境罚〔2026〕13号_行政处罚公示》。",
+      "latest_policies": [
+        {
+          "published_at": "2026-08-31",
+          "title": "北京市门头沟区生态环境局行政处罚决定书 门环境罚〔2026〕13号_行政处罚公示",
+          "source": "门头沟区人民政府",
+          "url": "https://www.bjmtg.gov.cn/mtg11J027/xzcfgs/202608/947c6d96ce554f9d8b09e4a29fc50ae7.shtml"
+        },
+        {
+          "published_at": "2026-08-31",
+          "title": "北京市门头沟区生态环境局行政处罚决定书 门环境罚〔2026〕12号_行政处罚公示",
+          "source": "门头沟区人民政府",
+          "url": "https://www.bjmtg.gov.cn/mtg11J027/xzcfgs/202608/ec960c3bdfe142d9b66508e2e26f3a59.shtml"
+        },
+        {
+          "published_at": "2026-08-27",
+          "title": "门头沟区生态环境局政府信息主动公开全清单_政府信息主动公开全清单",
+          "source": "门头沟区人民政府",
+          "url": "https://www.bjmtg.gov.cn/mtg11J027/zfxxgkbz/202408/2e010955264943f98cc785dd0598e0f2.shtml"
+        },
+        {
+          "published_at": "2026-08-03",
+          "title": "北京市门头沟区生态环境局行政处罚决定书 门环境罚〔2026〕20号_行政处罚公示",
+          "source": "门头沟区人民政府",
+          "url": "https://www.bjmtg.gov.cn/mtg11J027/xzcfgs/202608/2c9448302fa847b384ee61245706cc0f.shtml"
+        },
+        {
+          "published_at": "2026-07-31",
+          "title": "北京市门头沟区生态环境局行政处罚决定书 门环境罚〔2026〕16号_行政处罚公示",
+          "source": "门头沟区人民政府",
+          "url": "https://www.bjmtg.gov.cn/mtg11J027/xzcfgs/202608/3770e1390adb41bab29854d41cc47aca.shtml"
+        }
+      ],
+      "evidence_policy_ids": [
+        "bth_policy_973ea891d6266394",
+        "bth_policy_074a6a304abf2e1b",
+        "bth_policy_ddf1ef046511665f",
+        "bth_policy_851182295aa3f318",
+        "bth_policy_4686c461c14b9cfb",
+        "bth_policy_b3ce1bcf982f8322",
+        "bth_policy_4644ac86610f59f5",
+        "bth_policy_42d8e9f294385a6f",
+        "bth_policy_d56d82edad352662"
+      ]
     },
     {
       "region_id": "bj-fangshan",
@@ -358,7 +535,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出房山区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -377,11 +562,7 @@
       "official_domain_count": 1,
       "themes": [
         {
-          "name": "碳目标与核算",
-          "count": 2
-        },
-        {
-          "name": "能源转型",
+          "name": "综合绿色转型",
           "count": 2
         },
         {
@@ -389,19 +570,37 @@
           "count": 2
         },
         {
-          "name": "碳市场与绿色金融",
-          "count": 1
-        },
-        {
-          "name": "绿色交通",
-          "count": 1
-        },
-        {
-          "name": "污染与碳协同",
+          "name": "生态环境治理",
           "count": 1
         }
       ],
-      "summary": "通州区现有3份可追溯政策，时间覆盖2025-02-24至2026-08-31，主要涉及碳目标与核算、能源转型、工业绿色化，发布主体包括通州区人民政府。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "综合绿色转型",
+        "policy_mix": [
+          {
+            "theme": "综合绿色转型",
+            "count": 2
+          },
+          {
+            "theme": "工业绿色化",
+            "count": 2
+          },
+          {
+            "theme": "生态环境治理",
+            "count": 1
+          }
+        ],
+        "activity_last_12_months": 2,
+        "lead_publisher": "通州区人民政府",
+        "latest_action": {
+          "date": "2026-08-31",
+          "title": "北京市通州区经济和信息化局《关于北京城市副中心支持工业和软件信息服务业绿色低碳转型发展的实施指南》的通知",
+          "source": "通州区人民政府",
+          "url": "https://www.bjtzh.gov.cn/bjtz/zwgk/zcwj/bmwj/2026083109551140186/index.shtml"
+        },
+        "evidence_strength": "中等"
+      },
+      "summary": "通州区的政策组合以综合绿色转型2件、工业绿色化2件、生态环境治理1件为主；近12个月发布2件。通州区人民政府发布3件，为主要发布主体；最新动作为2026-08-31发布的《北京市通州区经济和信息化局《关于北京城市副中心支持工业和软件信息服务业绿色低碳转型发展的实施指南》的通知》。",
       "latest_policies": [
         {
           "published_at": "2026-08-31",
@@ -442,7 +641,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出顺义区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -460,7 +667,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出昌平区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -478,7 +693,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出大兴区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -496,7 +719,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出怀柔区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -523,7 +754,29 @@
           "count": 1
         }
       ],
-      "summary": "平谷区现有1份可追溯政策，时间覆盖2019-09-23至2019-09-23，主要涉及能源转型、循环经济，发布主体包括平谷区人民政府。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "能源转型",
+        "policy_mix": [
+          {
+            "theme": "能源转型",
+            "count": 1
+          },
+          {
+            "theme": "循环经济",
+            "count": 1
+          }
+        ],
+        "activity_last_12_months": 0,
+        "lead_publisher": "平谷区人民政府",
+        "latest_action": {
+          "date": "2019-09-23",
+          "title": "区发展改革委牵头开展“十四五”时期节能和循环经济专项规划研究",
+          "source": "平谷区人民政府",
+          "url": "https://www.bjpg.gov.cn/pgqrmzf/zwxx0/ghjhgb/zfwj/572277/index.html"
+        },
+        "evidence_strength": "初步"
+      },
+      "summary": "2019-09-23，平谷区人民政府发布《区发展改革委牵头开展“十四五”时期节能和循环经济专项规划研究》，当前可核验重点为能源转型1件、循环经济1件。",
       "latest_policies": [
         {
           "published_at": "2019-09-23",
@@ -543,68 +796,82 @@
       "province": "北京市",
       "administrative_level": "district",
       "official_homepage": "https://www.bjmy.gov.cn/",
-      "evidence_count": 3,
-      "recent_365_days": 0,
+      "evidence_count": 7,
+      "recent_365_days": 4,
       "date_start": "2024-03-26",
-      "date_end": "2025-03-05",
-      "source_count": 2,
+      "date_end": "2026-09-18",
+      "source_count": 5,
       "official_domain_count": 1,
       "themes": [
         {
+          "name": "生态环境治理",
+          "count": 6
+        },
+        {
           "name": "碳目标与核算",
-          "count": 3
-        },
-        {
-          "name": "碳市场与绿色金融",
-          "count": 3
-        },
-        {
-          "name": "能源转型",
-          "count": 3
-        },
-        {
-          "name": "工业绿色化",
-          "count": 3
-        },
-        {
-          "name": "绿色建筑",
-          "count": 3
-        },
-        {
-          "name": "绿色交通",
-          "count": 3
-        },
-        {
-          "name": "循环经济",
-          "count": 3
-        },
-        {
-          "name": "污染与碳协同",
-          "count": 3
+          "count": 1
         }
       ],
-      "summary": "密云区现有3份可追溯政策，时间覆盖2024-03-26至2025-03-05，主要涉及碳目标与核算、碳市场与绿色金融、能源转型，发布主体包括北京市密云区人民政府办公室、北京市密云区人民政府。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "生态环境治理",
+        "policy_mix": [
+          {
+            "theme": "生态环境治理",
+            "count": 6
+          },
+          {
+            "theme": "碳目标与核算",
+            "count": 1
+          }
+        ],
+        "activity_last_12_months": 4,
+        "lead_publisher": "北京市密云区司法局",
+        "latest_action": {
+          "date": "2026-09-18",
+          "title": "北京市密云区生态环境局关于修改生态环境法典涉及部门规范性文件的决定_政策文件",
+          "source": "北京市密云区生态环境局",
+          "url": "https://www.bjmy.gov.cn/zwgk/zcwj/202609/t20260921_553133.html"
+        },
+        "evidence_strength": "中等"
+      },
+      "summary": "密云区的政策组合以生态环境治理6件、碳目标与核算1件为主；近12个月发布4件。北京市密云区司法局发布2件，为主要发布主体；最新动作为2026-09-18发布的《北京市密云区生态环境局关于修改生态环境法典涉及部门规范性文件的决定_政策文件》。",
       "latest_policies": [
+        {
+          "published_at": "2026-09-18",
+          "title": "北京市密云区生态环境局关于修改生态环境法典涉及部门规范性文件的决定_政策文件",
+          "source": "北京市密云区生态环境局",
+          "url": "https://www.bjmy.gov.cn/zwgk/zcwj/202609/t20260921_553133.html"
+        },
+        {
+          "published_at": "2026-09-15",
+          "title": "北京市密云区文化和旅游局 北京市密云区生态环境局关于印发《密云区生态旅游规范管理办法(试行)》的通知_政策文件",
+          "source": "北京市密云区文化和旅游局",
+          "url": "https://www.bjmy.gov.cn/zwgk/zcwj/202609/t20260915_552631.html"
+        },
+        {
+          "published_at": "2026-08-31",
+          "title": "关于对《北京市密云区人民政府关于修改生态环境法典涉及行政规范性文件的决定 （征求意见稿）》公开征集意见的反馈_最新反馈",
+          "source": "北京市密云区司法局",
+          "url": "https://www.bjmy.gov.cn/zwgk/zcxwjyjzj/zqyj/zxfk/202608/t20260831_551259.html"
+        },
+        {
+          "published_at": "2026-08-24",
+          "title": "【已结束】关于对《北京市密云区人民政府关于修改生态环境法典涉及行政规范性文件的决定 （征求意见稿）》公开征集意见的公告_最新征集",
+          "source": "北京市密云区司法局",
+          "url": "https://www.bjmy.gov.cn/zwgk/zcxwjyjzj/zqyj/zxzj/202608/t20260824_550795.html"
+        },
         {
           "published_at": "2025-03-05",
           "title": "北京市密云区人民政府办公室关于印发《北京市密云区深入打好污染防治攻坚战2025年系列行动计划》的通知_政策文件",
           "source": "北京市密云区人民政府办公室",
           "url": "https://www.bjmy.gov.cn/zwgk/zcwj/202503/t20250307_483028.html"
-        },
-        {
-          "published_at": "2024-11-01",
-          "title": "北京市密云区人民政府关于印发 《北京市密云区碳达峰实施方案》的通知_政策文件",
-          "source": "北京市密云区人民政府",
-          "url": "https://www.bjmy.gov.cn/zwgk/zcwj/202411/t20241101_451087.html"
-        },
-        {
-          "published_at": "2024-03-26",
-          "title": "北京市密云区人民政府办公室关于印发 《北京市密云区深入打好污染防治攻坚战2024年系列行动计划》的通知_政策文件",
-          "source": "北京市密云区人民政府办公室",
-          "url": "https://www.bjmy.gov.cn/zwgk/zcwj/202405/t20240516_418891.html"
         }
       ],
       "evidence_policy_ids": [
+        "bth_policy_1493bf603b4a2d5e",
+        "bth_policy_6908d9e78b6ffdaa",
+        "bth_policy_b34066e25a261f8e",
+        "bth_policy_a56e4c848956c43b",
         "bth_policy_7e7c1f93bbb1bf12",
         "bth_policy_2edb79f93892148a",
         "bth_policy_692e07289a631b72"
@@ -624,7 +891,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出延庆区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -643,31 +918,37 @@
       "official_domain_count": 2,
       "themes": [
         {
+          "name": "碳目标与核算",
+          "count": 3
+        },
+        {
           "name": "碳市场与绿色金融",
           "count": 2
-        },
-        {
-          "name": "绿色交通",
-          "count": 2
-        },
-        {
-          "name": "综合绿色转型",
-          "count": 1
-        },
-        {
-          "name": "能源转型",
-          "count": 1
-        },
-        {
-          "name": "工业绿色化",
-          "count": 1
-        },
-        {
-          "name": "绿色建筑",
-          "count": 1
         }
       ],
-      "summary": "天津市现有3份可追溯政策，时间覆盖2022-09-14至2025-05-22，主要涉及碳市场与绿色金融、绿色交通、综合绿色转型，发布主体包括天津市人民政府。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "碳目标与核算",
+        "policy_mix": [
+          {
+            "theme": "碳目标与核算",
+            "count": 3
+          },
+          {
+            "theme": "碳市场与绿色金融",
+            "count": 2
+          }
+        ],
+        "activity_last_12_months": 0,
+        "lead_publisher": "天津市人民政府",
+        "latest_action": {
+          "date": "2025-05-22",
+          "title": "天津市深化地方碳排放权交易市场建设工作方案（2025—2027年）",
+          "source": "天津市人民政府",
+          "url": "https://sthj.tj.gov.cn/ZWXX808/TZGG6419/202505/W020250522623521095977.pdf"
+        },
+        "evidence_strength": "中等"
+      },
+      "summary": "天津市的政策组合以碳目标与核算3件、碳市场与绿色金融2件为主；近12个月发布0件。天津市人民政府发布3件，为主要发布主体；最新动作为2025-05-22发布的《天津市深化地方碳排放权交易市场建设工作方案（2025—2027年）》。",
       "latest_policies": [
         {
           "published_at": "2025-05-22",
@@ -708,7 +989,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出和平区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -726,7 +1015,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出河东区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -744,7 +1041,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出河西区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -762,7 +1067,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出南开区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -780,7 +1093,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出河北区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -798,7 +1119,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出红桥区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -816,7 +1145,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出东丽区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -834,7 +1171,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出西青区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -852,7 +1197,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出津南区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -870,7 +1223,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出北辰区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -888,7 +1249,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出武清区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -906,7 +1275,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出宝坻区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -924,7 +1301,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出滨海新区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -942,7 +1327,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出宁河区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -960,7 +1353,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出静海区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -978,7 +1379,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出蓟州区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -997,19 +1406,15 @@
       "official_domain_count": 2,
       "themes": [
         {
-          "name": "工业绿色化",
-          "count": 4
-        },
-        {
-          "name": "能源转型",
-          "count": 3
-        },
-        {
-          "name": "绿色交通",
+          "name": "碳目标与核算",
           "count": 2
         },
         {
-          "name": "碳市场与绿色金融",
+          "name": "生态环境治理",
+          "count": 2
+        },
+        {
+          "name": "工业绿色化",
           "count": 1
         },
         {
@@ -1017,7 +1422,37 @@
           "count": 1
         }
       ],
-      "summary": "河北省现有4份可追溯政策，时间覆盖2021-07-16至2024-08-15，主要涉及工业绿色化、能源转型、绿色交通，发布主体包括河北省生态环境厅、河北省工业和信息化厅。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "碳目标与核算",
+        "policy_mix": [
+          {
+            "theme": "碳目标与核算",
+            "count": 2
+          },
+          {
+            "theme": "生态环境治理",
+            "count": 2
+          },
+          {
+            "theme": "工业绿色化",
+            "count": 1
+          },
+          {
+            "theme": "综合绿色转型",
+            "count": 1
+          }
+        ],
+        "activity_last_12_months": 0,
+        "lead_publisher": "河北省生态环境厅",
+        "latest_action": {
+          "date": "2024-08-15",
+          "title": "河北省生态环境行政处罚裁量规则（碳排放相关条款）",
+          "source": "河北省生态环境厅",
+          "url": "https://hbepb.hebei.gov.cn/zycms/ewebeditor/uploadfile/20240815084920856.pdf"
+        },
+        "evidence_strength": "中等"
+      },
+      "summary": "河北省的政策组合以碳目标与核算2件、生态环境治理2件、工业绿色化1件为主；近12个月发布0件。河北省生态环境厅发布2件，为主要发布主体；最新动作为2024-08-15发布的《河北省生态环境行政处罚裁量规则（碳排放相关条款）》。",
       "latest_policies": [
         {
           "published_at": "2024-08-15",
@@ -1058,16 +1493,81 @@
       "province": "河北省",
       "administrative_level": "city",
       "official_homepage": "https://www.sjz.gov.cn/",
-      "evidence_count": 0,
-      "recent_365_days": 0,
-      "date_start": "",
-      "date_end": "",
-      "source_count": 0,
-      "official_domain_count": 0,
-      "themes": [],
-      "summary": "当前政策库尚未检出石家庄市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
-      "latest_policies": [],
-      "evidence_policy_ids": []
+      "evidence_count": 27,
+      "recent_365_days": 10,
+      "date_start": "2024-07-31",
+      "date_end": "2026-09-15",
+      "source_count": 1,
+      "official_domain_count": 1,
+      "themes": [
+        {
+          "name": "生态环境治理",
+          "count": 27
+        }
+      ],
+      "profile": {
+        "primary_focus": "生态环境治理",
+        "policy_mix": [
+          {
+            "theme": "生态环境治理",
+            "count": 27
+          }
+        ],
+        "activity_last_12_months": 10,
+        "lead_publisher": "石家庄市人民政府",
+        "latest_action": {
+          "date": "2026-09-15",
+          "title": "2026年生态环境监督执法正面清单（8月份） 2026年生态环境监督执法正面清单（8月份）",
+          "source": "石家庄市人民政府",
+          "url": "https://sthjj.sjz.gov.cn/columns/959402a0-f36c-4c63-b3bd-ba051a3f0daa/202609/15/1c585149-e9b5-4aa4-b40b-44778900125f.html"
+        },
+        "evidence_strength": "较强"
+      },
+      "summary": "石家庄市的政策组合以生态环境治理27件为主；近12个月发布10件。石家庄市人民政府发布27件，为主要发布主体；最新动作为2026-09-15发布的《2026年生态环境监督执法正面清单（8月份） 2026年生态环境监督执法正面清单（8月份）》。",
+      "latest_policies": [
+        {
+          "published_at": "2026-09-15",
+          "title": "2026年生态环境监督执法正面清单（8月份） 2026年生态环境监督执法正面清单（8月份）",
+          "source": "石家庄市人民政府",
+          "url": "https://sthjj.sjz.gov.cn/columns/959402a0-f36c-4c63-b3bd-ba051a3f0daa/202609/15/1c585149-e9b5-4aa4-b40b-44778900125f.html"
+        },
+        {
+          "published_at": "2026-08-21",
+          "title": "2026年生态环境监督执法正面清单（7月份） 2026年生态环境监督执法正面清单（7月份）",
+          "source": "石家庄市人民政府",
+          "url": "https://sthjj.sjz.gov.cn/columns/959402a0-f36c-4c63-b3bd-ba051a3f0daa/202609/15/6345fbe9-c4a7-44ef-a517-184ff1b4f9ea.html"
+        },
+        {
+          "published_at": "2026-07-15",
+          "title": "2026年生态环境监督执法正面清单（6月份） 2026年生态环境监督执法正面清单（6月份）",
+          "source": "石家庄市人民政府",
+          "url": "https://sthjj.sjz.gov.cn/columns/959402a0-f36c-4c63-b3bd-ba051a3f0daa/202609/15/f62e1d44-d2e1-4e45-8916-d7b9ef2cfab7.html"
+        },
+        {
+          "published_at": "2026-06-22",
+          "title": "2026年生态环境监督执法正面清单（5月份） 2026年生态环境监督执法正面清单（5月份）",
+          "source": "石家庄市人民政府",
+          "url": "https://sthjj.sjz.gov.cn/columns/959402a0-f36c-4c63-b3bd-ba051a3f0daa/202609/09/ed75fc97-ee87-47fc-89d9-c8b141410002.html"
+        },
+        {
+          "published_at": "2026-05-26",
+          "title": "2026年生态环境监督执法正面清单（4月份） 2026年生态环境监督执法正面清单（4月份）",
+          "source": "石家庄市人民政府",
+          "url": "https://sthjj.sjz.gov.cn/columns/959402a0-f36c-4c63-b3bd-ba051a3f0daa/202606/04/0f81e7e4-145d-4069-bf2c-e9c199f0f13f.html"
+        }
+      ],
+      "evidence_policy_ids": [
+        "bth_policy_cf0191a6a8d67fd0",
+        "bth_policy_d77eacad7e27f70a",
+        "bth_policy_fe63d27e731bca08",
+        "bth_policy_e9a114b7222e3178",
+        "bth_policy_2a380e2a1ff1d9d6",
+        "bth_policy_14c62d09ba122e0a",
+        "bth_policy_65ea94eb10eda0db",
+        "bth_policy_448de3ae997dbf8e",
+        "bth_policy_7612751b5e84bf58",
+        "bth_policy_0ade507aab9cdcba"
+      ]
     },
     {
       "region_id": "hb-tangshan",
@@ -1083,7 +1583,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出唐山市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1101,7 +1609,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出秦皇岛市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1119,7 +1635,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出邯郸市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1137,7 +1661,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出邢台市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1155,7 +1687,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出保定市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1173,7 +1713,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出张家口市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1191,7 +1739,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出承德市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1209,7 +1765,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出沧州市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1220,48 +1784,64 @@
       "province": "河北省",
       "administrative_level": "city",
       "official_homepage": "https://www.lf.gov.cn/",
-      "evidence_count": 1,
+      "evidence_count": 4,
       "recent_365_days": 0,
       "date_start": "2022-06-02",
-      "date_end": "2022-06-02",
-      "source_count": 1,
+      "date_end": "2023-10-30",
+      "source_count": 2,
       "official_domain_count": 1,
       "themes": [
         {
-          "name": "碳目标与核算",
-          "count": 1
-        },
-        {
-          "name": "碳市场与绿色金融",
-          "count": 1
-        },
-        {
-          "name": "能源转型",
-          "count": 1
-        },
-        {
-          "name": "工业绿色化",
-          "count": 1
-        },
-        {
-          "name": "绿色建筑",
-          "count": 1
-        },
-        {
-          "name": "绿色交通",
-          "count": 1
+          "name": "生态环境治理",
+          "count": 3
         },
         {
           "name": "循环经济",
           "count": 1
-        },
-        {
-          "name": "污染与碳协同",
-          "count": 1
         }
       ],
-      "summary": "廊坊市现有1份可追溯政策，时间覆盖2022-06-02至2022-06-02，主要涉及碳目标与核算、碳市场与绿色金融、能源转型，发布主体包括廊坊市发展和改革委员会。样本量较小，目前仅适合用于政策线索核验。",
+      "profile": {
+        "primary_focus": "生态环境治理",
+        "policy_mix": [
+          {
+            "theme": "生态环境治理",
+            "count": 3
+          },
+          {
+            "theme": "循环经济",
+            "count": 1
+          }
+        ],
+        "activity_last_12_months": 0,
+        "lead_publisher": "廊坊市政府信息公开平台",
+        "latest_action": {
+          "date": "2023-10-30",
+          "title": "关于印发《廊坊市水生态环境保护规划》的通知 - 廊坊市人民政府 无标题文档",
+          "source": "廊坊市政府信息公开平台",
+          "url": "https://www.lf.gov.cn/Item/134221.aspx"
+        },
+        "evidence_strength": "中等"
+      },
+      "summary": "廊坊市的政策组合以生态环境治理3件、循环经济1件为主；近12个月发布0件。廊坊市政府信息公开平台发布3件，为主要发布主体；最新动作为2023-10-30发布的《关于印发《廊坊市水生态环境保护规划》的通知 - 廊坊市人民政府 无标题文档》。",
       "latest_policies": [
+        {
+          "published_at": "2023-10-30",
+          "title": "关于印发《廊坊市水生态环境保护规划》的通知 - 廊坊市人民政府 无标题文档",
+          "source": "廊坊市政府信息公开平台",
+          "url": "https://www.lf.gov.cn/Item/134221.aspx"
+        },
+        {
+          "published_at": "2023-10-30",
+          "title": "关于印发《廊坊市水生态环境保护规划》的通知 - 廊坊市人民政府 无标题文档",
+          "source": "廊坊市政府信息公开平台",
+          "url": "https://www.lf.gov.cn/Item/134220.aspx"
+        },
+        {
+          "published_at": "2023-01-30",
+          "title": "廊坊市“十四五”生态环境保护规划 - 廊坊市人民政府 无标题文档",
+          "source": "廊坊市政府信息公开平台",
+          "url": "https://www.lf.gov.cn/Item/126826.aspx"
+        },
         {
           "published_at": "2022-06-02",
           "title": "廊坊市“十四五”循环经济发展规划 - 廊坊市人民政府 无标题文档",
@@ -1270,6 +1850,9 @@
         }
       ],
       "evidence_policy_ids": [
+        "bth_policy_621a8fd24fb9289d",
+        "bth_policy_aa0e1e9853af94a7",
+        "bth_policy_44d7618f9a002970",
         "bth_policy_e4b4b339e4019ac7"
       ]
     },
@@ -1287,7 +1870,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出衡水市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1305,7 +1896,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出定州市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1323,7 +1922,15 @@
       "source_count": 0,
       "official_domain_count": 0,
       "themes": [],
-      "summary": "当前政策库尚未检出辛集市近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
+      "profile": {
+        "primary_focus": "",
+        "policy_mix": [],
+        "activity_last_12_months": 0,
+        "lead_publisher": "",
+        "latest_action": {},
+        "evidence_strength": "初步"
+      },
+      "summary": "",
       "latest_policies": [],
       "evidence_policy_ids": []
     },
@@ -1334,16 +1941,48 @@
       "province": "河北省",
       "administrative_level": "new_area",
       "official_homepage": "https://www.xiongan.gov.cn/",
-      "evidence_count": 0,
-      "recent_365_days": 0,
-      "date_start": "",
-      "date_end": "",
-      "source_count": 0,
-      "official_domain_count": 0,
-      "themes": [],
-      "summary": "当前政策库尚未检出雄安新区近三年的可核验绿色转型政策；该结果表示公开检索覆盖不足，不表示当地没有相关政策。",
-      "latest_policies": [],
-      "evidence_policy_ids": []
+      "evidence_count": 1,
+      "recent_365_days": 1,
+      "date_start": "2026-09-20",
+      "date_end": "2026-09-20",
+      "source_count": 1,
+      "official_domain_count": 1,
+      "themes": [
+        {
+          "name": "生态环境治理",
+          "count": 1
+        }
+      ],
+      "profile": {
+        "primary_focus": "生态环境治理",
+        "policy_mix": [
+          {
+            "theme": "生态环境治理",
+            "count": 1
+          }
+        ],
+        "activity_last_12_months": 1,
+        "lead_publisher": "雄安新区生态环境局",
+        "latest_action": {
+          "date": "2026-09-20",
+          "title": "河北雄安新区生态环境局生态环境违法行为举报奖励办法（试行）",
+          "source": "雄安新区生态环境局",
+          "url": "https://www.xiongan.gov.cn/20260920/d7a9467be0c04573b56dfc38bf5dcf60/c.html"
+        },
+        "evidence_strength": "初步"
+      },
+      "summary": "2026-09-20，雄安新区生态环境局发布《河北雄安新区生态环境局生态环境违法行为举报奖励办法（试行）》，当前可核验重点为生态环境治理1件。",
+      "latest_policies": [
+        {
+          "published_at": "2026-09-20",
+          "title": "河北雄安新区生态环境局生态环境违法行为举报奖励办法（试行）",
+          "source": "雄安新区生态环境局",
+          "url": "https://www.xiongan.gov.cn/20260920/d7a9467be0c04573b56dfc38bf5dcf60/c.html"
+        }
+      ],
+      "evidence_policy_ids": [
+        "bth_policy_e890c54af10425d0"
+      ]
     }
   ]
 }
