@@ -5,7 +5,7 @@ import json
 import re
 import time
 from collections import deque
-from datetime import UTC, date, datetime
+from datetime import UTC, date, datetime, timedelta
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
@@ -14,6 +14,7 @@ from xml.etree import ElementTree
 
 from .chinese_text import to_simplified
 from .collector import fetch_resource
+from .article_content import extract_article_text
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,7 +31,16 @@ GENERIC_TITLES = {
     "公告公示", "部门文件", "政府文件", "市政府文件", "区政府文件", "法定主动公开内容",
 }
 BASELINE_TERMS = ("碳达峰实施方案", "十四五", "绿色低碳循环发展", "应对气候变化规划")
-PAGINATION_WINDOW_SIZE = 15
+PAGINATION_WINDOW_SIZE = 5
+BODY_SIGNAL_TERMS = {
+    "碳达峰", "碳中和", "碳排放", "温室气体", "碳核算", "碳足迹", "碳市场", "碳排放权",
+    "绿色低碳", "绿色转型", "减污降碳", "低碳", "低碳发展", "气候变化", "气候适应",
+    "节能", "节能降碳", "节能改造", "能效提升", "清洁能源", "可再生能源", "新能源", "光伏", "风电",
+    "氢能", "储能", "绿电", "绿色制造", "绿色工厂", "绿色供应链", "清洁生产", "工业节能",
+    "绿色建筑", "超低能耗", "绿色交通", "新能源汽车", "充电", "充换电", "零碳", "近零碳",
+    "循环经济", "资源综合利用", "资源循环利用", "再生资源", "动力电池", "退役动力电池", "无废城市", "绿色金融", "气候投融资",
+    "污染防治", "空气质量", "大气污染", "生态环境", "美丽中国",
+}
 
 
 class _PageParser(HTMLParser):
@@ -141,21 +151,37 @@ def _keywords(text: str, taxonomy: dict[str, list[str]]) -> list[str]:
     return [label for label, terms in taxonomy.items() if any(term.lower() in text.lower() for term in terms)]
 
 
-def _specific_policy_title(title: str, config: dict) -> bool:
+def _specific_policy_title(title: str, config: dict, *, require_topic: bool = True) -> bool:
     """Keep concrete policy documents; reject navigation pages and page-wide keyword leakage."""
     compact = re.sub(r"\s+", "", title or "").strip("_-|—– ")
     return (
         len(compact) >= 8
         and compact not in GENERIC_TITLES
         and not any(term in compact for term in EXCLUDE_TITLE_TERMS)
-        and any(term.lower() in compact.lower() for term in config["topic_terms"])
+        and (not require_topic or any(term.lower() in compact.lower() for term in config["topic_terms"]))
         and any(term in compact for term in config["policy_terms"])
     )
 
 
-def _record(url: str, html: str, jurisdiction: dict, config: dict, start: date) -> dict | None:
+def _body_topic_evidence(text: str, taxonomy: dict[str, list[str]]) -> tuple[list[str], list[str]]:
+    """Classify substantive article text while excluding generic sector words."""
+    compact = text or ""
+    matched = sorted(term for term in BODY_SIGNAL_TERMS if term in compact)
+    if not matched:
+        return [], []
+    labels = []
+    for label, terms in taxonomy.items():
+        if any(term in BODY_SIGNAL_TERMS and term in compact for term in terms):
+            labels.append(label)
+    return labels, matched
+
+
+def _record(
+    url: str, html: str, jurisdiction: dict, config: dict, start: date,
+    *, source_fallback: str = "",
+) -> dict | None:
     title, text, _links = _page(html)
-    if not _specific_policy_title(title, config):
+    if not _specific_policy_title(title, config, require_topic=False):
         return None
     policy_terms = config["policy_terms"]
     published = _published(f"{text[:5000]} {url}")
@@ -167,9 +193,10 @@ def _record(url: str, html: str, jurisdiction: dict, config: dict, start: date) 
         return None
     if moment > date.today():
         return None
-    # Labels deliberately use the document title only. Government navigation and
-    # footer text often contain unrelated sector words and must not affect tags.
-    labels = _keywords(title, config["keyword_taxonomy"])
+    title_labels = _keywords(title, config["keyword_taxonomy"]) if _specific_policy_title(title, config) else []
+    article = extract_article_text(html, limit=16_000)
+    body_labels, matched_terms = _body_topic_evidence(article.get("text", ""), config["keyword_taxonomy"])
+    labels = title_labels or body_labels
     if not labels:
         return None
     canonical = _canonical(url)
@@ -177,7 +204,7 @@ def _record(url: str, html: str, jurisdiction: dict, config: dict, start: date) 
     return {
         "policy_id": f"bth_policy_{digest}",
         "published_at": published,
-        "source": _source(text, jurisdiction["name"] + "人民政府"),
+        "source": _source(text, source_fallback or jurisdiction["name"] + "人民政府"),
         "title": title,
         "province": jurisdiction["province"],
         "region": jurisdiction["name"],
@@ -185,8 +212,11 @@ def _record(url: str, html: str, jurisdiction: dict, config: dict, start: date) 
         "admin_code": jurisdiction["admin_code"],
         "administrative_level": jurisdiction["level"],
         "keywords": labels,
+        "relevance_basis": "title" if title_labels else "article_body",
+        "matched_terms": sorted({term for term in config["topic_terms"] if term in title}) if title_labels else matched_terms,
         "policy_type": _policy_type(title, policy_terms),
         "baseline_policy": baseline,
+        "within_last_year": moment >= date.today() - timedelta(days=365),
         "url": canonical,
         "official_domain": urlparse(canonical).hostname or "",
         "collected_at": datetime.now(UTC).isoformat(),
@@ -247,18 +277,27 @@ def collect_batch(
 ) -> dict:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     start = date.fromisoformat(config["coverage_start"])
+    priority = {
+        (str(item.get("jurisdiction_id") or ""), str(item.get("domain") or "")): item
+        for item in config.get("priority_sources", [])
+    }
     sources = []
     for jurisdiction in config["jurisdictions"]:
         for domain in jurisdiction["domains"]:
-            sources.append((jurisdiction, domain))
+            source = priority.get((jurisdiction["id"], domain), {})
+            seed_urls = [
+                _canonical(url) for url in source.get("seed_urls", [])
+                if _canonical(url) and _host_allowed(url, [domain])
+            ]
+            sources.append((jurisdiction, domain, source.get("name", ""), seed_urls))
     selected = [item for index, item in enumerate(sources) if index % batch_count == batch]
     records: dict[str, dict] = {}
     coverage = []
-    for jurisdiction, domain in selected:
+    for jurisdiction, domain, source_name, seed_urls in selected:
         base = jurisdiction["homepage"] if _host_allowed(jurisdiction["homepage"], [domain]) else f"https://{domain}/"
         sitemap = _sitemap_urls(base, [domain], max_pages_per_source)
         offset = max(0, page_window) * max_pages_per_source
-        queue = deque([base, *sitemap[offset:offset + max_pages_per_source]])
+        queue = deque([base, *seed_urls, *sitemap[offset:offset + max_pages_per_source]])
         seen: set[str] = set()
         fetched = accepted = failed = 0
         consecutive_failures = 0
@@ -279,7 +318,10 @@ def collect_batch(
                 failed += 1
                 consecutive_failures += 1
                 continue
-            item = _record(response.final_url, html, jurisdiction, config, start)
+            item = _record(
+                response.final_url, html, jurisdiction, config, start,
+                source_fallback=source_name,
+            )
             if item:
                 records[item["policy_id"]] = item
                 accepted += 1
@@ -305,6 +347,7 @@ def collect_batch(
         coverage.append({
             "jurisdiction_id": jurisdiction["id"], "jurisdiction": jurisdiction["name"],
             "domain": domain, "fetched": fetched, "accepted": accepted, "failed": failed,
+            "source_name": source_name, "seed_count": len(seed_urls),
             "page_window": page_window,
             "complete": not queue,
             "completed_at": datetime.now(UTC).isoformat(),
@@ -329,15 +372,23 @@ def _normalise_record(record: dict, config: dict) -> dict | None:
     if not all(record.get(key) for key in required) or not any(host == domain or host.endswith("." + domain) for domain in domains):
         return None
     title = str(record.get("title") or "").strip()
-    if not _specific_policy_title(title, config):
+    title_relevant = _specific_policy_title(title, config)
+    if not _specific_policy_title(title, config, require_topic=False):
         return None
-    labels = _keywords(title, config["keyword_taxonomy"])
+    labels = _keywords(title, config["keyword_taxonomy"]) if title_relevant else []
+    if not labels and record.get("relevance_basis") == "article_body" and record.get("matched_terms"):
+        allowed = set(config["keyword_taxonomy"])
+        labels = [value for value in record.get("keywords", []) if value in allowed]
     if not labels:
         return None
     cleaned = dict(record)
     cleaned["keywords"] = labels
     cleaned["policy_type"] = _policy_type(title, config["policy_terms"])
     cleaned["official_domain"] = host
+    try:
+        cleaned["within_last_year"] = date.fromisoformat(str(cleaned["published_at"])[:10]) >= date.today() - timedelta(days=365)
+    except ValueError:
+        return None
     return cleaned
 
 

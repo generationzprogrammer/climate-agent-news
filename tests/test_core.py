@@ -445,6 +445,8 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(sum(item["province"] == "北京市" and item["level"] == "district" for item in config["jurisdictions"]), 16)
         self.assertEqual(sum(item["province"] == "天津市" and item["level"] == "district" for item in config["jurisdictions"]), 16)
         self.assertTrue({"石家庄市", "唐山市", "定州市", "辛集市", "雄安新区"}.issubset({item["name"] for item in config["jurisdictions"]}))
+        self.assertGreaterEqual(len(config["priority_sources"]), 10)
+        self.assertTrue(all(url.startswith("https://") for item in config["priority_sources"] for url in item["seed_urls"]))
 
     def test_bth_policy_gate_normalises_required_fields(self) -> None:
         config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
@@ -463,6 +465,15 @@ class CoreTests(unittest.TestCase):
         listing = """<html><head><title>通知公告</title></head><body><h1>通知公告</h1><p>2026年9月21日</p><a>节能降碳实施方案</a></body></html>"""
         self.assertIsNone(build_bth_policy_record("https://www.tj.gov.cn/zwgk/pension.html", pension, jurisdiction, config, date(2023, 9, 23)))
         self.assertIsNone(build_bth_policy_record("https://jxj.beijing.gov.cn/jxdt/tzgg/", listing, jurisdiction, config, date(2023, 9, 23)))
+
+    def test_bth_policy_gate_accepts_substantive_green_section_in_article_body(self) -> None:
+        config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
+        jurisdiction = next(item for item in config["jurisdictions"] if item["id"] == "tj")
+        html = """<html><head><title>天津市人民政府办公厅关于支持科技型企业高质量发展若干政策措施的通知</title></head><body><h1>天津市人民政府办公厅关于支持科技型企业高质量发展若干政策措施的通知</h1><p>发布时间：2026年4月15日 来源：天津市人民政府办公厅</p><article><p>在绿色低碳领域，支持退役动力电池资源循环利用、绿色氢能和新型储能技术攻关，推进零碳园区、零碳工厂及新型城镇低碳支撑系统示范。</p></article></body></html>"""
+        record = build_bth_policy_record("https://www.tj.gov.cn/zwgk/policy-2026.html", html, jurisdiction, config, date(2023, 9, 23))
+        self.assertEqual(record["relevance_basis"], "article_body")
+        self.assertTrue({"综合绿色转型", "能源转型", "循环经济"}.issubset(record["keywords"]))
+        self.assertTrue(record["within_last_year"])
 
     def test_bth_policy_collector_expands_script_generated_listing_pages(self) -> None:
         html = """<script>Pager({size:50, current:0, prefix:'index',suffix:'html'});</script>"""
