@@ -30,7 +30,7 @@ from climate_agent.spotlights import build_spotlights
 from climate_agent.sync import P0_SOURCE_IDS, _analyse, _google_news_url, _google_news_urls, _source_scope_match
 from climate_agent.taxonomy import country_codes_for, event_tags_for, organization_tags_for, public_taxonomy
 from climate_agent.topic_desks import build_topic_desks
-from climate_agent.bth_policies import _pager_urls as bth_pager_urls, _record as build_bth_policy_record
+from climate_agent.bth_policies import _pager_urls as bth_pager_urls, _record as build_bth_policy_record, _search_record as build_bth_search_record
 from climate_agent.translation import _fallback_translation, detect_places, source_balanced_rows, translate_pending
 
 
@@ -481,6 +481,27 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(len(urls), 50)
         self.assertEqual(urls[0], "https://jxj.beijing.gov.cn/jxdt/tzgg/index.html")
         self.assertEqual(urls[49], "https://jxj.beijing.gov.cn/jxdt/tzgg/index_49.html")
+
+        district_html = """<script>var currentPage=0; var countPage=15;
+        document.write('<a href=\"index_'+(currentPage+1)+'.shtml\">下一页</a>');</script>"""
+        district_urls = bth_pager_urls("https://zyk.bjhd.gov.cn/zwdt/zcwj/", district_html)
+        self.assertEqual(len(district_urls), 15)
+        self.assertEqual(district_urls[14], "https://zyk.bjhd.gov.cn/zwdt/zcwj/index_14.shtml")
+
+    def test_bth_policy_gate_accepts_official_search_record(self) -> None:
+        config = json.loads((ROOT / "config" / "bth_policy_sources.json").read_text(encoding="utf-8"))
+        jurisdiction = next(item for item in config["jurisdictions"] if item["id"] == "bj-haidian")
+        data = {
+            "titleO": "海淀区人民政府办公室关于支持科技企业绿色低碳发展的若干措施",
+            "url": "https://zyk.bjhd.gov.cn/zwdt/zcwj/202605/t20260520_4815592.shtml",
+            "docDate": "2026-05-20",
+            "summary": "支持企业实施节能降碳改造，建设绿色工厂和零碳园区，推广分布式光伏和新型储能。",
+            "siteLabel": {"value": "北京市海淀区人民政府"},
+        }
+        record = build_bth_search_record(data, jurisdiction, config, date(2023, 9, 23), "北京市海淀区人民政府")
+        self.assertEqual(record["region"], "海淀区")
+        self.assertEqual(record["relevance_basis"], "official_search_title")
+        self.assertIn("综合绿色转型", record["keywords"])
 
     def test_bth_policy_metrics_use_policy_archive_not_news_evidence(self) -> None:
         archive = json.loads((ROOT / "data" / "bth_policy_archive.json").read_text(encoding="utf-8"))

@@ -175,9 +175,10 @@ def fetch_resource(
     max_bytes: int = 3_000_000,
     retries: int = 2,
     accept: str = "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, application/json;q=0.8",
+    user_agent: str = USER_AGENT,
 ) -> FetchResponse:
     request = urllib.request.Request(url, headers={
-        "User-Agent": USER_AGENT,
+        "User-Agent": user_agent,
         "Accept": accept,
         "Accept-Encoding": "identity",
         "Connection": "close",
@@ -198,9 +199,15 @@ def fetch_resource(
                     # early even though they already sent complete <item> blocks.
                     # XML can be safely handed to the recovery parser; truncated
                     # JSON must still fail because accepting it could corrupt data.
-                    if len(partial) >= 1024 and b"<item" in partial and (
+                    partial_head = partial[:4096].lower()
+                    recoverable_xml = b"<item" in partial and (
                         "xml" in content_type or content_type.startswith("text/")
-                    ):
+                    )
+                    recoverable_html = (
+                        content_type == "text/html"
+                        and (b"<html" in partial_head or b"<!doctype html" in partial_head)
+                    )
+                    if len(partial) >= 1024 and (recoverable_xml or recoverable_html):
                         payload = partial
                     else:
                         raise http.client.IncompleteRead(partial, exc.expected)
