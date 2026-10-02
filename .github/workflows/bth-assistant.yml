@@ -1,0 +1,38 @@
+name: 部署京津冀研究问答后端
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gruen-bth-assistant-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 检查后端与必需密钥
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.BTH_CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BTH_LLM_API_KEY: ${{ secrets.BTH_LLM_API_KEY }}
+          BTH_TURNSTILE_SECRET_KEY: ${{ secrets.BTH_TURNSTILE_SECRET_KEY }}
+        run: |
+          node --test tests/bth-worker.test.mjs
+          for key in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID BTH_LLM_API_KEY BTH_TURNSTILE_SECRET_KEY; do
+            if [ -z "${!key}" ]; then echo "Missing required secret: $key"; exit 1; fi
+          done
+      - name: 部署独立Worker并更新Secret
+        working-directory: cloudflare/bth-assistant
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.BTH_CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BTH_LLM_API_KEY: ${{ secrets.BTH_LLM_API_KEY }}
+          BTH_TURNSTILE_SECRET_KEY: ${{ secrets.BTH_TURNSTILE_SECRET_KEY }}
+        run: |
+          npm exec --yes --package=wrangler@4 -- wrangler deploy
+          node -e 'process.stdout.write(JSON.stringify({BTH_LLM_API_KEY:process.env.BTH_LLM_API_KEY,BTH_TURNSTILE_SECRET_KEY:process.env.BTH_TURNSTILE_SECRET_KEY}))' | npm exec --yes --package=wrangler@4 -- wrangler secret bulk

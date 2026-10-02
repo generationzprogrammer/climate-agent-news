@@ -981,3 +981,34 @@ footer a:hover { color: var(--blue); }
   footer { flex-direction: column; margin-top: 0; }
   footer a { margin: 0 20px 0 0; }
 }
+/* Research assistant: keep the established restrained colour system. */
+.bth-live-assistant { margin: 24px 0; padding: 24px; border: 1px solid #d8e2df; border-radius: 8px; background: #fff; }
+.bth-chat-heading,.bth-chat-controls,.bth-chat-downloads { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+.bth-chat-heading { justify-content:space-between; margin-bottom:16px; }
+.bth-chat-heading h3 { margin:0; font-size:24px; }
+.bth-chat-messages { max-height:600px; overflow:auto; overscroll-behavior:contain; }
+.bth-chat-message { padding:18px 0; border-bottom:1px solid #e6ece9; }
+.bth-chat-message.user { background:#f6f9f8; padding:14px; }
+.bth-chat-answer { white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.85; font-size:17px; margin-top:10px; }
+.bth-chat-sources { display:grid; gap:8px; margin:14px 0; font-size:14px; overflow-wrap:anywhere; }
+.bth-chat-charts svg { width:100%; height:auto; max-width:960px; }
+.bth-chat-form { display:grid; gap:12px; margin-top:20px; }
+.bth-chat-form textarea { width:100%; min-height:100px; resize:vertical; padding:12px; border:1px solid #bacbc4; border-radius:4px; font:inherit; line-height:1.6; box-sizing:border-box; }
+.bth-chat-controls button,.bth-chat-downloads button,.bth-chat-clear { padding:10px 16px; min-height:44px; cursor:pointer; }
+.bth-chat-send { background:#22665b; color:#fff; border:1px solid #22665b; border-radius:4px; font:inherit; }
+.bth-chat-downloads button,.bth-chat-clear,.bth-chat-stop { background:#f6f9f8; color:#234b43; border:1px solid #bbcfc8; border-radius:4px; font:inherit; }
+.bth-chat-controls button:disabled { opacity:.55; cursor:wait; }
+.bth-chat-status { font-size:14px; }
+.bth-chat-privacy { font-size:14px; line-height:1.7; color:#53615d; }
+.bth-chat-privacy summary { cursor:pointer; }
+.bth-chat-stop[hidden] { display:none; }
+@media (max-width:600px) {
+  .bth-live-assistant { padding:16px; }
+  .bth-chat-heading h3 { font-size:21px; }
+  .bth-chat-answer { font-size:16px; }
+  .bth-chat-controls { align-items:flex-start; }
+  .bth-chat-status { flex-basis:100%; }
+  .bth-chat-messages { max-height:65vh; }
+  .bth-chat-charts { overflow-x:auto; }
+  .bth-chat-charts svg { min-width:800px; }
+}

@@ -513,12 +513,13 @@ function renderTopicDesks() {
         <div class="topic-category-bars">${categories.map(category => { const count=Number(categoryCounts[category.id] || 0); return `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}"><span>${esc(field(category, "label_zh", "label_en"))}</span><i><em style="width:${Math.max(2, count / maxCategory * 100).toFixed(1)}%"></em></i><b>${count}</b></button>`; }).join("")}</div>
         <div class="agency-grid">${(desk.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><i>↗</i></a>`).join("")}</div>
       </div>
-      ${desk.id === "bth_green_transition" ? renderBthRegionalTools(desk) : ""}
+      ${isBth ? '<div id="bthAssistantRoot"></div>' + renderBthRegionalTools(desk) : ""}
       <div class="spotlight-tabs topic-filter-tabs"><button type="button" data-topic-filter="" data-topic-desk="${esc(desk.id)}" class="${active ? "" : "active"}">${esc(tr("all"))} · ${desk.records?.length || 0}</button>${categories.map(category => `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}">${esc(field(category, "label_zh", "label_en"))}</button>`).join("")}</div>
       <div class="spotlight-grid">${rows.slice(0, visible).map(item => spotlightCard(item, categoryLabel((item.category_ids || [])[0]))).join("") || `<div class="empty compact"><b>${state.language === "en" ? "No matching evidence" : "暂无匹配证据"}</b></div>`}</div>
       ${rows.length > 12 ? `<button class="load-more topic-load-more" type="button" data-topic-more="${esc(desk.id)}">${esc(visible < rows.length ? tr("showMoreEvidence") : tr("showLessEvidence"))}</button>` : ""}
     </section>`;
   }).join("");
+  window.GruenBthAssistant?.mount(document.getElementById("bthAssistantRoot"), state.language);
   document.querySelectorAll("[data-topic-filter]").forEach(button => button.addEventListener("click", () => {
     state.topicDeskFilters[button.dataset.topicDesk] = button.dataset.topicFilter || "";
     state.topicDeskVisible[button.dataset.topicDesk] = 12;

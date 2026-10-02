@@ -1,0 +1,24 @@
+name = "gruen-bth-assistant"
+main = "src/index.mjs"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+BTH_LLM_MODEL = "qwen3.5-plus"
+BTH_LLM_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+BTH_DAILY_LIMIT = "50"
+BTH_IP_DAILY_LIMIT = "10"
+BTH_ALLOWED_ORIGIN = "https://generationzprogrammer.github.io"
+BTH_ALLOWED_HOSTNAME = "generationzprogrammer.github.io"
+BTH_KNOWLEDGE_URL = "https://generationzprogrammer.github.io/climate-agent-news/data/bth_assistant_knowledge.json"
+
+[[durable_objects.bindings]]
+name = "BUDGET"
+class_name = "BudgetGuard"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["BudgetGuard"]
+
+[observability]
+enabled = false

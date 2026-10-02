@@ -74,6 +74,8 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_ANALYTICS_API_TOKEN: ${{ secrets.CLOUDFLARE_ANALYTICS_API_TOKEN }}
           CLIMATE_SITE_HOSTNAME: generationzprogrammer.github.io
+          BTH_ASSISTANT_ENDPOINT: ${{ vars.BTH_ASSISTANT_ENDPOINT }}
+          BTH_TURNSTILE_SITE_KEY: ${{ vars.BTH_TURNSTILE_SITE_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
         shell: bash
         run: |

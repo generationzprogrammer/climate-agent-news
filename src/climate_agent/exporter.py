@@ -19,6 +19,7 @@ from .site_metrics import write_site_metrics
 from .spotlights import write_spotlights
 from .taxonomy import public_taxonomy
 from .topic_desks import write_topic_desks
+from .bth_assistant import write_assistant_assets
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -127,6 +128,7 @@ def export_static_site(
     bth_policy_path = Path(__file__).resolve().parents[2] / "data" / "bth_policy_archive.json"
     if bth_policy_path.exists():
         shutil.copyfile(bth_policy_path, data_dir / bth_policy_path.name)
+    write_assistant_assets(Path(__file__).resolve().parents[2], data_dir)
     company_intelligence = write_company_intelligence(
         energy_view["archive"], data_dir / "energy_companies.json"
     )
