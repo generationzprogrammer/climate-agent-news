@@ -96,7 +96,18 @@ jobs:
           fi
           if ! git diff --cached --quiet; then
             git commit -m "data: daily climate text archive [skip ci]"
-            git push
+            # A code push can arrive during collection. Rebase the data-only
+            # commit instead of failing deployment or overwriting newer code.
+            for attempt in 1 2 3; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                echo "::error::Archive merge needs review; no force-push performed."
+                git status --short
+                exit 1
+              fi
+              if git push; then break; fi
+              if [ "$attempt" = "3" ]; then exit 1; fi
+            done
           fi
       - name: 保存本次合格发布快照
         uses: actions/upload-artifact@v4
