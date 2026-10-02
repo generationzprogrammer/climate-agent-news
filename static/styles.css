@@ -990,6 +990,9 @@ footer a:hover { color: var(--blue); }
 .bth-chat-message { padding:18px 0; border-bottom:1px solid #e6ece9; }
 .bth-chat-message.user { background:#f6f9f8; padding:14px; }
 .bth-chat-answer { white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.85; font-size:17px; margin-top:10px; }
+.bth-chat-answer .bth-citation { margin:0 2px; color:#22665b; font-size:.85em; text-decoration:none; white-space:nowrap; }
+.bth-chat-answer .bth-citation:hover { text-decoration:underline; }
+.bth-chat-answer .bth-citation:focus-visible { outline:2px solid #22665b; outline-offset:2px; }
 .bth-chat-sources { display:grid; gap:8px; margin:14px 0; font-size:14px; overflow-wrap:anywhere; }
 .bth-chat-charts svg { width:100%; height:auto; max-width:960px; }
 .bth-chat-form { display:grid; gap:12px; margin-top:20px; }

@@ -3,17 +3,46 @@
   "use strict";
   const utf8 = new TextEncoder();
   const xml = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]));
+  // Keep machine evidence IDs in the response/history, never in visible prose.
+  const citationPattern = /[\[【［]([^\]】］]*)[\]】］]|\b(?:P-bth_policy_[a-zA-Z0-9_]+|D-O\d+)\b/g;
+  const evidenceIds = s => s.match(/[DP]-[a-zA-Z0-9_][a-zA-Z0-9_.:-]*/g) || [];
+  const sourceUrl = value => {try {const url = new URL(value); return ["https:", "http:"].includes(url.protocol) && !url.username && !url.password ? url.href : "";} catch {return "";}};
+  function citationText(value, sources = [], {html = false, streaming = false, language = "zh"} = {}) {
+    const input = String(value ?? ""), references = new Map(sources.map((source, index) => [source.id, {source, number: index + 1}]));
+    const encode = html ? xml : s => s, unverified = language === "en" ? "(source not verified)" : "（来源待核验）";
+    let output = "", offset = 0;
+    // Do not flash an incomplete evidence ID while the JSON answer streams.
+    const content = streaming ? input.replace(/[\[【［]\s*(?:[DP](?:-[^\]】］]*)?|引用无效)$/, "").replace(/\b(?:P-bth_policy_|D-O)[a-zA-Z0-9_]*$/, "") : input;
+    for (const match of content.matchAll(citationPattern)) {
+      output += encode(content.slice(offset, match.index)); offset = match.index + match[0].length;
+      const inside = match[1] ?? match[0];
+      if (!/^\s*(?:[DP]-|引用无效)/.test(inside)) {output += encode(match[0]); continue;}
+      if (streaming) continue;
+      const ids = [...new Set(evidenceIds(inside))];
+      output += ids.map(id => {
+        const reference = references.get(id); if (!reference) return encode(unverified);
+        const number = `[${reference.number}]`, url = sourceUrl(reference.source.url);
+        if (!html || !url) return number;
+        const title = `${language === "en" ? "Reference" : "参考资料"} ${reference.number}：${reference.source.title || reference.source.source || ""}`;
+        return `<a class="bth-citation" href="${xml(url)}" target="_blank" rel="noopener noreferrer" title="${xml(title)}" aria-label="${xml(title)}">${number}</a>`;
+      }).join("") || encode(unverified);
+    }
+    return output + encode(content.slice(offset));
+  }
   const save = (blob, name) => {const url = URL.createObjectURL(blob), a = document.createElement("a"); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 30000);};
-  function chartSvg(chart) {
+  function chartSvg(chart, sources = []) {
     const points = chart.points || [], max = Math.max(1, ...points.map(p => p.value)), min = Math.min(0, ...points.map(p => p.value));
     const scale = v => 240 + (v - min) / (max - min) * 540;
-    const title = chart.title.length > 32 ? chart.title.slice(0, 32) + "…" : chart.title;
-    const sourceLabel = points.slice(0, 5).map(p => `[${p.id}]`).join(" ") + (points.length > 5 ? " 等，详见参考资料" : "");
+    const formattedTitle = citationText(chart.title, sources);
+    const title = formattedTitle.length > 32 ? formattedTitle.slice(0, 32) + "…" : formattedTitle;
+    const references = new Map(sources.map((source, index) => [source.id, index + 1]));
+    const numbers = [...new Set(points.map(p => references.get(p.id)).filter(Boolean))];
+    const sourceLabel = numbers.length ? `来源：${numbers.slice(0, 5).map(n => `[${n}]`).join(" ")}，详见参考资料` : "来源：详见参考资料";
     const height = 150 + points.length * 46;
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 ${height}" role="img" aria-label="${xml(chart.title)}" style="font-family:Arial,'Microsoft YaHei',sans-serif;background:white"><rect width="960" height="${height}" fill="white"/><text x="24" y="36" font-size="24" fill="#111">${xml(title)}</text><text x="24" y="66" font-size="17" fill="#555">单位：${xml(chart.unit)}</text>${points.map((p, i) => `<text x="24" y="${108 + i * 46}" font-size="17">${xml(p.label)}</text><rect x="${scale(Math.min(0, p.value))}" y="${88 + i * 46}" width="${Math.abs(scale(p.value) - scale(0))}" height="26" fill="#267269"/><text x="${scale(Math.max(0, p.value)) + 10}" y="${108 + i * 46}" font-size="17">${xml(p.value)}</text>`).join("")}<text x="24" y="${height - 22}" font-size="15" fill="#555">${xml(sourceLabel)}</text></svg>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 ${height}" role="img" aria-label="${xml(formattedTitle)}" style="font-family:Arial,'Microsoft YaHei',sans-serif;background:white"><rect width="960" height="${height}" fill="white"/><text x="24" y="36" font-size="24" fill="#111">${xml(title)}</text><text x="24" y="66" font-size="17" fill="#555">单位：${xml(chart.unit)}</text>${points.map((p, i) => `<text x="24" y="${108 + i * 46}" font-size="17">${xml(p.label)}</text><rect x="${scale(Math.min(0, p.value))}" y="${88 + i * 46}" width="${Math.abs(scale(p.value) - scale(0))}" height="26" fill="#267269"/><text x="${scale(Math.max(0, p.value)) + 10}" y="${108 + i * 46}" font-size="17">${xml(p.value)}</text>`).join("")}<text x="24" y="${height - 22}" font-size="15" fill="#555">${xml(sourceLabel)}</text></svg>`;
   }
-  async function chartCanvas(chart) {
-    const svg = chartSvg(chart), img = new Image();
+  async function chartCanvas(chart, sources = []) {
+    const svg = chartSvg(chart, sources), img = new Image();
     const url = URL.createObjectURL(new Blob([svg], {type: "image/svg+xml"}));
     try {await new Promise((resolve, reject) => {img.onload = resolve; img.onerror = reject; img.src = url;});
       const canvas = document.createElement("canvas"); canvas.width = 1920; canvas.height = (150 + chart.points.length * 46) * 2;
@@ -21,15 +50,16 @@
     } finally {URL.revokeObjectURL(url);}
   }
   function reportParts(result) {
-    const title = result.report?.title || "京津冀绿色转型分析";
+    const formatted = value => citationText(value, result.sources || []);
+    const title = formatted(result.report?.title || "京津冀绿色转型分析");
     const sections = result.report?.sections?.length ? result.report.sections : [{heading: "分析", paragraphs: result.answer.split(/\n\s*\n/)}];
     const parts = [{text: title, type: "title"}, {text: `日期：${String(result.generated_at || new Date().toISOString()).slice(0, 10)}`, type: "meta"}];
-    sections.forEach(s => {parts.push({text: s.heading, type: "heading"}); s.paragraphs.forEach(p => parts.push({text: p, type: "body"}));});
+    sections.forEach(s => {parts.push({text: formatted(s.heading), type: "heading"}); s.paragraphs.forEach(p => parts.push({text: formatted(p), type: "body"}));});
     result.charts.forEach(c => parts.push({chart: c, type: "chart"}));
     parts.push({text: "参考资料", type: "heading"});
-    result.sources.forEach(s => {
+    result.sources.forEach((s, index) => {
       const numeric = s.kind === "observation" ? `；${s.region}，${s.year}年，${s.value} ${s.unit}；${s.locator || ""}；${s.status || ""}${s.notes ? "；" + s.notes : ""}` : `；${s.region}；${s.date}`;
-      parts.push({text: `[${s.id}] ${s.title}。${s.source}${numeric}。${s.url}`, type: "source"});
+      parts.push({text: `[${index + 1}] ${s.title}。${s.source}${numeric}。${s.url}`, type: "source"});
     });
     return {title, parts};
   }
@@ -53,7 +83,7 @@
     const body = [];
     for (const part of parts) {
       if (part.chart) {
-        const canvas = await chartCanvas(part.chart), blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+        const canvas = await chartCanvas(part.chart, result.sources), blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
         const n = ++imageCount, cx = 5486400, cy = Math.round(cx * canvas.height / canvas.width);
         images[`word/media/chart${n}.png`] = new Uint8Array(await blob.arrayBuffer());
         relationships.push(`<Relationship Id="rId${n}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/chart${n}.png"/>`);
@@ -80,7 +110,7 @@
     function newPage() {canvas = document.createElement("canvas"); canvas.width = width; canvas.height = height; ctx = canvas.getContext("2d"); ctx.fillStyle = "white"; ctx.fillRect(0, 0, width, height); ctx.fillStyle = "black"; y = margin; pages.push(canvas);}
     newPage();
     for (const part of reportParts(result).parts) {
-      if (part.chart) {const image = await chartCanvas(part.chart), h = (width - 2 * margin) * image.height / image.width;
+      if (part.chart) {const image = await chartCanvas(part.chart, result.sources), h = (width - 2 * margin) * image.height / image.width;
         if (y + h > height - margin) newPage(); ctx.drawImage(image, margin, y, width - 2 * margin, h); y += h + 30; continue;}
       const size = part.type === "title" ? 44 : part.type === "heading" ? 34 : part.type === "source" ? 24 : 30, lineHeight = size * 1.65;
       const setFont = () => {ctx.font = `${["title", "heading"].includes(part.type) ? "bold " : ""}${size}px "Times New Roman",SimSun,"Noto Serif CJK SC",serif`;};
@@ -106,9 +136,9 @@
   }
   async function download(result, format, chartIndex = 0) {
     const filename = reportParts(result).title.replace(/[<>:"/\\|?*]/g, "").slice(0, 70) || "京津冀分析";
-    if (format === "png") {const chart = result.charts[chartIndex], canvas = await chartCanvas(chart); save(await new Promise(resolve => canvas.toBlob(resolve, "image/png")), `${chart.title}.png`);}
+    if (format === "png") {const chart = result.charts[chartIndex], canvas = await chartCanvas(chart, result.sources); save(await new Promise(resolve => canvas.toBlob(resolve, "image/png")), `${citationText(chart.title, result.sources)}.png`);}
     else if (format === "docx") save(await docx(result), `${filename}.docx`);
     else if (format === "pdf") save(await pdf(result), `${filename}.pdf`);
   }
-  window.GruenBthReport = {chartSvg, download, docx, pdf, reportParts};
+  window.GruenBthReport = {chartSvg, download, docx, pdf, reportParts, citationText, sourceUrl};
 })();

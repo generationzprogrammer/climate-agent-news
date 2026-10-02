@@ -27,9 +27,17 @@
     return turnstilePromise;
   }
   function status(value) {const node = chat.root?.querySelector(".bth-chat-status"); if (node) node.textContent = value;}
+  function answerHtml(message) {
+    return message.result ? window.GruenBthReport.citationText(message.content, message.result.sources, {html: true, language: chat.language}) : esc(message.content);
+  }
+  function sourceHtml(source, index) {
+    const title = `[${index + 1}] ${source.title} · ${source.source}${source.locator ? ` · ${source.locator}` : ""}`;
+    const url = window.GruenBthReport.sourceUrl(source.url);
+    return url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(title)}</a>` : `<span>${esc(title)}</span>`;
+  }
   function messages() {
     const root = chat.root?.querySelector(".bth-chat-messages"); if (!root) return;
-    root.innerHTML = chat.messages.map((m, index) => `<article class="bth-chat-message ${m.role}"><b>${esc(m.role === "user" ? label("您", "You") : label("研究助手", "Research assistant"))}</b><div class="bth-chat-answer">${esc(m.content)}</div>${m.result ? `<div class="bth-chat-sources">${m.result.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">[${esc(s.id)}] ${esc(s.title)} · ${esc(s.source)}${s.locator ? ` · ${esc(s.locator)}` : ""}</a>`).join("")}</div><div class="bth-chat-charts">${m.result.charts.map(c => window.GruenBthReport.chartSvg(c)).join("")}</div><div class="bth-chat-downloads"><button type="button" data-export="docx" data-answer="${index}">${label("下载Word", "Download Word")}</button><button type="button" data-export="pdf" data-answer="${index}">${label("下载PDF", "Download PDF")}</button>${m.result.charts.map((c, i) => `<button type="button" data-export="png" data-answer="${index}" data-chart="${i}">${label("下载图", "Download chart")} ${i + 1}</button>`).join("")}</div>` : ""}</article>`).join("") + (chat.busy ? `<article class="bth-chat-message assistant streaming"><b>${label("研究助手", "Research assistant")}</b><div class="bth-chat-answer">${esc(chat.pending || label("正在检索与分析…", "Retrieving evidence…"))}</div></article>` : "");
+    root.innerHTML = chat.messages.map((m, index) => `<article class="bth-chat-message ${m.role}"><b>${esc(m.role === "user" ? label("您", "You") : label("研究助手", "Research assistant"))}</b><div class="bth-chat-answer">${answerHtml(m)}</div>${m.result ? `<div class="bth-chat-sources">${m.result.sources.map(sourceHtml).join("")}</div><div class="bth-chat-charts">${m.result.charts.map(c => window.GruenBthReport.chartSvg(c, m.result.sources)).join("")}</div><div class="bth-chat-downloads"><button type="button" data-export="docx" data-answer="${index}">${label("下载Word", "Download Word")}</button><button type="button" data-export="pdf" data-answer="${index}">${label("下载PDF", "Download PDF")}</button>${m.result.charts.map((c, i) => `<button type="button" data-export="png" data-answer="${index}" data-chart="${i}">${label("下载图", "Download chart")} ${i + 1}</button>`).join("")}</div>` : ""}</article>`).join("") + (chat.busy ? `<article class="bth-chat-message assistant streaming"><b>${label("研究助手", "Research assistant")}</b><div class="bth-chat-answer">${esc(window.GruenBthReport.citationText(chat.pending, [], {streaming: true}) || label("正在检索与分析…", "Retrieving evidence…"))}</div></article>` : "");
     root.querySelectorAll("[data-export]").forEach(button => button.addEventListener("click", async () => {
       const result = chat.messages[Number(button.dataset.answer)].result;
       button.disabled = true;
