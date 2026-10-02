@@ -96,6 +96,13 @@ jobs:
           fi
           if ! git diff --cached --quiet; then
             git commit -m "data: daily climate text archive [skip ci]"
+            # export-web updates tracked static/data caches as well as site/.
+            # Retain the validated deployment snapshot in site/, and stash
+            # only generated caches so rebase has a clean tracked worktree.
+            # Do not restore this stash over the snapshot or commit form config.
+            test -f site/data/dashboard.json
+            test -f site/data/news_archive.json
+            git stash push --include-untracked --message ci-generated-static-data -- static/data
             # A code push can arrive during collection. Rebase the data-only
             # commit instead of failing deployment or overwriting newer code.
             for attempt in 1 2 3; do
