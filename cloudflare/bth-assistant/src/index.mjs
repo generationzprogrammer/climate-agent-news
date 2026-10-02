@@ -44,18 +44,23 @@ export function retrieve(records, question, history = []) {
   if (!wanted.length && !/三地|京津冀|全部地区/.test(question)) wanted = regions.filter(x => prior.includes(x));
   let years = question.match(/20\d{2}/g) || [];
   if (!years.length) years = prior.match(/20\d{2}/g) || [];
-  const keywords = [...new Set((question + " " + prior.slice(-1500)).match(/[\p{Script=Han}]{2,}|[A-Za-z]{3,}/gu) || [])];
+  const keywords = [...new Set((question + " " + prior.slice(-1500)).match(/[\u3400-\u9fff]{2,}|[A-Za-z]{3,}/g) || [])];
   const aliases = {"用电": ["用电", "电力消费"], "光伏": ["光伏", "太阳能"], "GDP": ["GDP", "生产总值"], "煤炭": ["煤炭", "原煤", "煤"], "碳排放": ["碳排放", "排放", "低碳"]};
   const tokens = [...keywords];
   for (const [k, terms] of Object.entries(aliases)) if ((question + prior).includes(k)) tokens.push(...terms);
   // Add Chinese bigrams to avoid whole-sentence-only matching.
   for (const word of keywords) if (word.length > 2) for (let i = 0; i < word.length - 1; i++) tokens.push(word.slice(i, i + 2));
+  const searchTokens = [...new Set(tokens)].slice(0, 48);
   const scored = records.filter(r => !wanted.length || wanted.some(x => String(r.region).includes(x) || String(r.province).includes(x))).map(r => {
     const haystack = `${r.title} ${r.metric || ""} ${(r.keywords || []).join(" ")} ${r.category || ""}`.toLowerCase();
-    let score = tokens.reduce((n, token) => n + (haystack.includes(token.toLowerCase()) ? Math.min(6, token.length) : 0), 0);
+    let score = searchTokens.reduce((n, token) => n + (haystack.includes(token.toLowerCase()) ? Math.min(6, token.length) : 0), 0);
     if (years.includes(String(r.year || String(r.date).slice(0, 4)))) score += 5;
     return {r, score};
-  }).sort((a, b) => b.score - a.score || String(b.r.date || b.r.year).localeCompare(String(a.r.date || a.r.year)));
+  }).sort((a, b) => {
+    const difference = b.score - a.score; if (difference) return difference;
+    const first = String(a.r.date || a.r.year), second = String(b.r.date || b.r.year);
+    return first < second ? 1 : first > second ? -1 : 0;
+  });
   const chosen = [], size = {n: 0};
   const add = r => {const n = JSON.stringify(r).length; if (size.n + n <= 18000 && !chosen.some(x => x.id === r.id)) {chosen.push(r); size.n += n;}};
   // Reserve space for each province and both numeric and policy evidence.
