@@ -27,7 +27,7 @@ jobs:
           BTH_LLM_API_KEY: ${{ secrets.BTH_LLM_API_KEY }}
           BTH_TURNSTILE_SECRET_KEY: ${{ secrets.BTH_TURNSTILE_SECRET_KEY }}
         run: |
-          node --test tests/bth-worker.test.mjs
+          node --test tests/bth-worker.test.mjs tests/bth-transport.test.mjs tests/bth-citations.test.mjs
           for key in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID BTH_LLM_API_KEY BTH_TURNSTILE_SECRET_KEY; do
             if [ -z "${!key}" ]; then echo "Missing required secret: $key"; exit 1; fi
           done

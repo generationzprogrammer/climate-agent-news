@@ -10,6 +10,7 @@
     model_key_invalid: "模型密钥配置无效，请联系管理员。", model_quota_or_permission: "模型免费额度已用完或未开通权限。",
     model_rate_limit: "模型服务繁忙，请稍后重试。", model_timeout: "模型响应超时，请缩短请求后重试。", connection_timeout: "连接超时，请检查网络后重试。",
     invalid_model_response: "模型输出不完整，本次未生成文件；请重试或缩短报告。",
+    network_unreachable: "当前网络无法连接问答服务，请更换网络后重试。",
   };
   let configPromise, turnstilePromise;
   async function configuration() {
@@ -72,49 +73,42 @@
     const timer = setTimeout(expire, deadline);
     const progress = setInterval(() => {
       if (Date.now() - started >= deadline) {expire(); return;}
-      status(label(`${phase === "connect" ? "正在连接模型" : phase === "stream" ? "正在生成回答" : "正在分析"}（${Math.floor((Date.now() - started) / 1000)}秒）`, `Working (${Math.floor((Date.now() - started) / 1000)}s)`));
+      status(label(`${phase === "connect" ? "正在连接服务" : phase === "verify" ? "正在验证请求" : phase === "stream" ? "正在生成回答" : "正在分析"}（${Math.floor((Date.now() - started) / 1000)}秒）`, `Working (${Math.floor((Date.now() - started) / 1000)}s)`));
     }, 1000);
     const resumed = () => {if (!document.hidden && Date.now() - started >= deadline) expire();};
     document.addEventListener("visibilitychange", resumed);
     chat.root.querySelector(".bth-chat-send").disabled = true;
     chat.root.querySelector(".bth-chat-stop").hidden = false;
-    let raw = "", gotResult = false, reader;
-    messages(); status(label("正在连接模型…", "Connecting to the model…"));
+    let raw = "";
+    messages(); status(label("正在连接服务…", "Connecting to the service…"));
     try {
       const receive = async () => {
-      const mobile = window.matchMedia?.("(pointer: coarse)").matches || window.innerWidth <= 700;
-      const response = await fetch(chat.config.endpoint.replace(/\/$/, "") + "/chat", {method: "POST", signal: controller.signal, headers: {"Content-Type": "application/json", "Accept": mobile ? "application/json" : "text/event-stream"}, body: JSON.stringify({question, history, token, transport: mobile ? "json" : "stream"})});
-      if (!response.ok) {const error = await response.json().catch(() => ({})); throw new Error(error.error || "service_unavailable");}
-      phase = "analysis";
-      if (response.headers.get("Content-Type")?.includes("application/json")) {
-        const payload = await response.json();
+        // Health check is free of model calls and bounds DNS/CORS/network failures.
+        await window.GruenBthTransport.health(chat.config.endpoint, controller.signal);
+        if (controller.signal.aborted) throw new DOMException("Aborted", "AbortError");
+        const payload = await window.GruenBthTransport.request(chat.config.endpoint.replace(/\/$/, "") + "/chat", {
+          method: "POST", signal: controller.signal, timeout: deadline,
+          payload: {question, history, token, transport: "stream"},
+          onConnected: () => {phase = "verify"; status(label("正在验证请求…", "Verifying the request…"));},
+          onEvent: (name, value) => {
+            if (controller.signal.aborted) return;
+            if (name === "status") {
+              phase = value.phase === "connected" || value.phase === "verification" ? "verify" : "analysis";
+              status(phase === "verify" ? label("正在验证请求…", "Verifying the request…") : label("正在分析…", "Analysing…"));
+            }
+            if (name === "delta") {phase = "stream"; raw += value.text; chat.pending = partialAnswer(raw); messages();}
+          },
+        });
         if (typeof payload.answer !== "string" || !Array.isArray(payload.sources) || !Array.isArray(payload.charts)) throw new Error("invalid_model_response");
         if (controller.signal.aborted) throw new DOMException("Aborted", "AbortError");
-        chat.messages.push({role: "assistant", content: payload.answer, result: payload}); gotResult = true; return;
-      }
-      if (!response.body?.getReader) throw new Error("service_unavailable");
-      reader = response.body.getReader(); const decoder = new TextDecoder(); let buffer = "";
-      while (true) {
-        const {done, value} = await reader.read(); if (controller.signal.aborted) throw new DOMException("Aborted", "AbortError"); if (done) break;
-        buffer += decoder.decode(value, {stream: true});
-        const frames = buffer.split(/\r?\n\r?\n/); buffer = frames.pop();
-        for (const frame of frames) {
-          const name = /^event: (.+)$/m.exec(frame)?.[1], data = /^data: (.+)$/m.exec(frame)?.[1]; if (!data) continue;
-          const payload = JSON.parse(data);
-          if (name === "status") status(label(`已检索 ${payload.evidence_count} 条证据，正在分析…`, `${payload.evidence_count} evidence records retrieved…`));
-          if (name === "delta") {phase = "stream"; raw += payload.text; chat.pending = partialAnswer(raw); messages();}
-          if (name === "error") throw new Error(payload.error);
-          if (name === "result") {chat.messages.push({role: "assistant", content: payload.answer, result: payload}); gotResult = true; status(label("回答完成", "Completed"));}
-        }
-      }
-      if (!gotResult) throw new Error("invalid_model_response");
+        chat.messages.push({role: "assistant", content: payload.answer, result: payload});
       };
       await Promise.race([receive(), timeout, cancelled]);
       status(label("回答完成", "Completed"));
     } catch (e) {status(timedOut ? label(errorLabels.connection_timeout, "Connection timed out. Please check your network and retry.") : e.name === "AbortError" ? label("已停止；未完成的结果不会保存。", "Stopped. Incomplete results are not saved.") : label(errorLabels[e.message] || "连接失败，请检查网络或稍后重试。", `Request failed: ${e.message}`));}
     finally {
       clearTimeout(timer); clearInterval(progress); document.removeEventListener("visibilitychange", resumed);
-      reader?.cancel().catch(() => {}); chat.busy = false; chat.pending = "";
+      controller.abort(); chat.busy = false; chat.pending = "";
       chat.root?.querySelector(".bth-chat-send")?.removeAttribute("disabled");
       const stop = chat.root?.querySelector(".bth-chat-stop"); if (stop) stop.hidden = true;
       if (window.turnstile && chat.widget !== null) window.turnstile.reset(chat.widget);

@@ -1,6 +1,6 @@
 // Isolated local browser QA; mocks external services, never calls a paid model.
 const fs = require("node:fs"), path = require("node:path"), http = require("node:http"), assert = require("node:assert/strict");
-const {chromium} = require("playwright");
+const {chromium, devices} = require("playwright");
 const root = path.resolve(__dirname, ".."), output = path.join(root, "tmp/bth-assistant-qa");
 fs.mkdirSync(output, {recursive: true});
 const server = http.createServer((req, res) => {
@@ -26,6 +26,7 @@ const server = http.createServer((req, res) => {
   const policyResult = {answer: policyAnswer, sources: policySources, report: null, charts: [], generated_at:"2026-10-02T00:00:00Z"};
   let requests = [];
   await page.route("**/data/bth_assistant_config.json", route => route.fulfill({json: {endpoint: base, sitekey:"TEST-PUBLIC-SITE-KEY"}}));
+  await page.route("**/health", route => route.fulfill({json: {ok:true,ready:true}}));
   await page.route("https://challenges.cloudflare.com/**", route => route.fulfill({contentType:"application/javascript", body:"window.turnstile={render:(el,o)=>{window.testVerification=o; o.callback('TEST-TOKEN'); return 1;},reset:()=>window.testVerification.callback('TEST-TOKEN'),remove:()=>{}};"}));
   await page.route("**/chat", async route => {
     requests.push(route.request().postDataJSON());
@@ -58,7 +59,7 @@ const server = http.createServer((req, res) => {
     await page.waitForFunction(() => document.querySelectorAll('[data-export="docx"]').length === 2);
     assert(requests[1].history.length >= 2, "multi-turn history missing");
     const policyMessage = page.locator(".bth-chat-message.assistant:not(.streaming)").last();
-    assert.equal(requests[1].transport,"json","mobile must not depend on streaming response");
+    assert.equal(requests[1].transport,"stream","mobile uses text events, not delayed JSON or Fetch streams");
     assert.equal(await policyMessage.locator(".bth-chat-answer strong").count(),1);
     assert(!(await policyMessage.innerText()).includes("**"),"literal bold markers remain");
     assert.equal(await policyMessage.locator(".bth-citation").count(), policySources.length);
@@ -103,6 +104,71 @@ const server = http.createServer((req, res) => {
     assert(await page.locator(".bth-chat-send").isEnabled());
     await page.locator(".bth-chat-clear").click(); assert.equal(await page.locator(".bth-chat-message").count(),0);
     assert.equal(errors.length,0,errors.join("\n"));
-    console.log(JSON.stringify({status:"passed",mocked_requests:requests.length,mobile_width:width,docx:fs.statSync(path.join(output,"sample.docx")).size,pdf:fs.statSync(path.join(output,"sample.pdf")).size}));
+
+    // Actual cross-origin HTTP, chunked UTF-8 and delayed inference (no route.fulfill).
+    // This catches the mobile/proxy issue which an instant mock response missed.
+    let wireMode = "stream", wireRequests = 0, preflights = 0;
+    const wire = http.createServer((req,res) => {
+      res.setHeader("Access-Control-Allow-Origin",base);
+      res.setHeader("Access-Control-Allow-Methods","GET, POST, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers","Content-Type");
+      res.setHeader("Cache-Control","no-store, no-transform");
+      if (req.method === "OPTIONS") {preflights++; res.writeHead(204).end(); return;}
+      if (req.url === "/health") {res.writeHead(200,{"Content-Type":"application/json"}).end('{"ok":true,"ready":true}'); return;}
+      if (req.url !== "/chat") {res.writeHead(404).end(); return;}
+      let body = ""; req.on("data",chunk=>{body+=chunk;});
+      req.on("end",()=>{
+        assert.equal(JSON.parse(body).transport,"stream");
+        assert.equal(req.headers["content-type"],"text/plain;charset=UTF-8"); wireRequests++;
+        res.writeHead(200,{"Content-Type":"text/event-stream; charset=utf-8"});
+        const frame = (name,value)=>`event: ${name}\ndata: ${JSON.stringify(value)}\n\n`;
+        const raw = JSON.stringify(policyResult);
+        if (wireMode === "buffered") {
+          setTimeout(()=>res.end(frame("status",{phase:"analysis"}) + frame("result",policyResult).trimEnd()),800); return;
+        }
+        res.write(":"+" ".repeat(2048)+"\n\n"+frame("status",{phase:"connected"}));
+        setTimeout(()=>{
+          if (res.destroyed) return;
+          res.write(frame("status",{phase:"analysis"})+frame("delta",{text:raw.slice(0,50)}));
+          // Split a Chinese character's bytes across network writes.
+          const last = Buffer.from(frame("delta",{text:raw.slice(50)})+frame("result",policyResult));
+          const firstChinese = last.findIndex(byte=>byte>=0xe0 && byte<=0xef);
+          res.write(last.subarray(0,firstChinese+1));
+          setTimeout(()=>{if (!res.destroyed) res.write(last.subarray(firstChinese+1));},100);
+          // The frontend must finish on result, not wait for connection closure.
+          setTimeout(()=>res.end(),2500);
+        },800);
+      });
+    });
+    await new Promise(resolve=>wire.listen(0,"127.0.0.1",resolve));
+    const mobileContext = await browser.newContext({...devices["Pixel 7"],acceptDownloads:true});
+    const phone = await mobileContext.newPage(), phoneErrors = [];
+    phone.on("pageerror",error=>phoneErrors.push(error.message));
+    try {
+      await phone.addInitScript(({endpoint})=>{
+        window.turnstile={render:(el,o)=>{window.testVerification=o;o.callback('TEST');return 1;},reset:()=>window.testVerification.callback('TEST'),remove:()=>{}};
+        const original=window.fetch;
+        window.fetch=(url,options)=>{
+          if (String(url).includes("/data/bth_assistant_config.json")) return Promise.resolve(new Response(JSON.stringify({endpoint,sitekey:"TEST-PUBLIC-SITE-KEY"}),{headers:{"Content-Type":"application/json"}}));
+          if (/\/chat$/.test(String(url))) throw new Error("Mobile Fetch streams unavailable");
+          return original(url,options);
+        };
+      },{endpoint:`http://127.0.0.1:${wire.address().port}`});
+      await phone.goto(base); await phone.locator("#bthChatQuestion").waitFor({timeout:20000});
+      await phone.waitForFunction(()=>!!window.testVerification);
+      await phone.locator("#bthChatQuestion").fill("北京气候治理如何？");
+      await phone.locator(".bth-chat-send").click();
+      await phone.waitForFunction(()=>document.querySelector(".bth-chat-status").textContent.includes("验证请求"),{},{timeout:10000});
+      await phone.locator('.bth-chat-downloads [data-export="docx"]').first().waitFor({timeout:10000});
+      assert.equal(await phone.locator(".bth-chat-answer strong").count(),1);
+      assert(await phone.locator(".bth-chat-send").isEnabled());
+      assert.equal(await phone.locator(".streaming").count(),0);
+      wireMode = "buffered";
+      await phone.locator("#bthChatQuestion").fill("再解释天津与河北的差异。"); await phone.locator(".bth-chat-send").click();
+      await phone.waitForFunction(()=>document.querySelectorAll('[data-export="docx"]').length===2);
+      assert.equal(phoneErrors.length,0,phoneErrors.join("\n")); assert.equal(wireRequests,2); assert.equal(preflights,0,"mobile request must not rely on OPTIONS preflight");
+      await phone.locator("#bthAssistantRoot").screenshot({path:path.join(output,"mobile-wire.png")});
+    } finally {await mobileContext.close(); wire.closeAllConnections(); wire.close();}
+    console.log(JSON.stringify({status:"passed",mocked_requests:requests.length,wire_requests:wireRequests,cors_preflights:preflights,mobile_width:width,docx:fs.statSync(path.join(output,"sample.docx")).size,pdf:fs.statSync(path.join(output,"sample.pdf")).size}));
   } finally {await browser.close(); server.close();}
 })().catch(error => {console.error(error.message); server.close(); process.exitCode=1;});

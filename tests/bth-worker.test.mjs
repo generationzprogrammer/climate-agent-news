@@ -40,7 +40,7 @@ test("full route streams validated report and evidence without real API", async 
   try {
     const pending = [], env = {BTH_LLM_API_KEY: "TEST-NOT-A-CREDENTIAL", BTH_TURNSTILE_SECRET_KEY: "TEST-NOT-A-CREDENTIAL", BUDGET: {idFromName: x => x, get: () => ({fetch: async () => new Response('{"ok":true}')})}};
     for (const transport of ["stream", "json"]) {
-      const response = await worker.fetch(new Request("https://worker/chat", {method: "POST", headers: {Origin: "https://generationzprogrammer.github.io", "Content-Type": "application/json"}, body: JSON.stringify({question: "三地光伏比较，生成报告", token: "TEST", transport})}), env, {waitUntil: p => pending.push(p)});
+      const response = await worker.fetch(new Request("https://worker/chat", {method: "POST", headers: {Origin: "https://generationzprogrammer.github.io", "Content-Type": transport === "stream" ? "text/plain;charset=UTF-8" : "application/json"}, body: JSON.stringify({question: "三地光伏比较，生成报告", token: "TEST", transport})}), env, {waitUntil: p => pending.push(p)});
       assert.equal(response.status, 200); const body = await response.text(); await Promise.all(pending);
       assert(body.includes("三地光伏装机比较"));
       if (transport === "stream") assert(body.includes("event: result"));
@@ -66,4 +66,33 @@ test("policy targets cannot become actual-value charts", () => {
   const target = {...rows[0], id:"P-target_bj",kind:"target", value:14.4};
   assert.equal(normalizeResult({answer:"目标分析",charts:[{observation_ids:[target.id,rows[2].id]}]},[target,rows[2]]).charts.length,0);
   assert(retrieve([target,...rows],"北京目标追踪").some(r => r.kind === "target"));
+});
+
+test("mobile gets response headers and connected status before slow verification", async () => {
+  const originalFetch = globalThis.fetch; let release, calls = 0;
+  const stalled = new Promise(resolve => {release = resolve;});
+  globalThis.fetch = async () => {calls++; await stalled; return new Response(JSON.stringify({success:false}));};
+  const pending = [];
+  try {
+    const response = await worker.fetch(new Request("https://worker/chat", {method:"POST",headers:{Origin:"https://generationzprogrammer.github.io","Content-Type":"application/json"},body:JSON.stringify({question:"北京气候治理",token:"TEST",transport:"stream"})}), {BTH_LLM_API_KEY:"TEST",BTH_TURNSTILE_SECRET_KEY:"TEST",BUDGET:{}}, {waitUntil:p=>pending.push(p)});
+    assert.equal(response.status,200); assert(response.headers.get("Cache-Control").includes("no-transform"));
+    const reader = response.body.getReader(), decoder = new TextDecoder();
+    let text = decoder.decode((await reader.read()).value);
+    text += decoder.decode((await reader.read()).value);
+    assert(text.includes('"phase":"connected"'), "must not wait for model or verification");
+    release(); while (true) {const chunk = await reader.read(); if (chunk.done) break; text += decoder.decode(chunk.value);}
+    await Promise.all(pending); assert(text.includes("verification_failed")); assert.equal(calls,1, "verification failure must never call model");
+  } finally {release(); globalThis.fetch = originalFetch;}
+});
+
+test("disconnect before verification completes does not spend model quota", async () => {
+  const originalFetch = globalThis.fetch; let release, calls = 0;
+  const stalled = new Promise(resolve => {release = resolve;});
+  globalThis.fetch = async () => {calls++; await stalled; return new Response(JSON.stringify({success:true,hostname:"generationzprogrammer.github.io",action:"bth_chat"}));};
+  const pending = [];
+  try {
+    const response = await worker.fetch(new Request("https://worker/chat", {method:"POST",headers:{Origin:"https://generationzprogrammer.github.io","Content-Type":"application/json"},body:JSON.stringify({question:"北京气候治理",token:"TEST"})}), {BTH_LLM_API_KEY:"TEST",BTH_TURNSTILE_SECRET_KEY:"TEST",BUDGET:{}}, {waitUntil:p=>pending.push(p)});
+    await response.body.cancel(); release(); await Promise.all(pending);
+    assert.equal(calls,1, "only verification, no model request after cancellation");
+  } finally {release(); globalThis.fetch = originalFetch;}
 });
