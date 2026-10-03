@@ -8,7 +8,7 @@ const state = {
   reportData: null, reportFiltered: [], reportVisible: 12,
   spotlights: null, carbonTopic: "", singaporeAgency: "",
   topicDesks: null, topicDeskFilters: {}, topicDeskVisible: {},
-  bthPolicyFilters: { query: "", province: "", region: "", keyword: "", year: "" },
+  bthPolicyFilters: { query: "", province: "", region: "", keyword: "", year: "", instrument: "" },
   bthPolicyVisible: 60,
   carbonRegistry: null, carbonRegistryFiltered: [], carbonRegistryVisible: 24,
   taxonomy: { organization_groups: [], countries: [] },
@@ -479,6 +479,8 @@ function renderSpotlights() {
 function renderTopicDesks() {
   const root = $("topicDeskList");
   if (!root) return;
+  const previousAssistant = document.getElementById("bthAssistantRoot");
+  const preserveAssistant = previousAssistant && previousAssistant.dataset.language === state.language;
   const desks = (state.topicDesks?.desks || []).filter(desk => desk.mode === state.mode);
   root.innerHTML = desks.map(desk => {
     const categories = desk.categories || [];
@@ -513,13 +515,18 @@ function renderTopicDesks() {
         <div class="topic-category-bars">${categories.map(category => { const count=Number(categoryCounts[category.id] || 0); return `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}"><span>${esc(field(category, "label_zh", "label_en"))}</span><i><em style="width:${Math.max(2, count / maxCategory * 100).toFixed(1)}%"></em></i><b>${count}</b></button>`; }).join("")}</div>
         <div class="agency-grid">${(desk.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><i>↗</i></a>`).join("")}</div>
       </div>
-      ${isBth ? '<div id="bthAssistantRoot"></div>' + renderBthRegionalTools(desk) : ""}
+      ${isBth ? '<div id="bthTargetTrackerRoot"></div><div id="bthAssistantRoot"></div>' + renderBthRegionalTools(desk) : ""}
       <div class="spotlight-tabs topic-filter-tabs"><button type="button" data-topic-filter="" data-topic-desk="${esc(desk.id)}" class="${active ? "" : "active"}">${esc(tr("all"))} · ${desk.records?.length || 0}</button>${categories.map(category => `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}">${esc(field(category, "label_zh", "label_en"))}</button>`).join("")}</div>
       <div class="spotlight-grid">${rows.slice(0, visible).map(item => spotlightCard(item, categoryLabel((item.category_ids || [])[0]))).join("") || `<div class="empty compact"><b>${state.language === "en" ? "No matching evidence" : "暂无匹配证据"}</b></div>`}</div>
       ${rows.length > 12 ? `<button class="load-more topic-load-more" type="button" data-topic-more="${esc(desk.id)}">${esc(visible < rows.length ? tr("showMoreEvidence") : tr("showLessEvidence"))}</button>` : ""}
     </section>`;
   }).join("");
-  window.GruenBthAssistant?.mount(document.getElementById("bthAssistantRoot"), state.language);
+  const assistantRoot = document.getElementById("bthAssistantRoot");
+  if (preserveAssistant && assistantRoot) assistantRoot.replaceWith(previousAssistant);
+  const activeAssistant = document.getElementById("bthAssistantRoot");
+  if (activeAssistant) activeAssistant.dataset.language = state.language;
+  window.GruenBthAssistant?.mount(activeAssistant, state.language);
+  window.GruenBthTracker?.mount(document.getElementById("bthTargetTrackerRoot"), state.language);
   document.querySelectorAll("[data-topic-filter]").forEach(button => button.addEventListener("click", () => {
     state.topicDeskFilters[button.dataset.topicDesk] = button.dataset.topicFilter || "";
     state.topicDeskVisible[button.dataset.topicDesk] = 12;
@@ -563,18 +570,23 @@ function renderBthRegionalTools(desk) {
   const regionOptions = [...new Map(libraryRecords.filter(item => !filters.province || item.province === filters.province).map(item => [item.region_id, { id: item.region_id, label_zh: item.region, label_en: item.region }])).values()].sort((a, b) => a.label_zh.localeCompare(b.label_zh, "zh-CN"));
   const keywordOptions = [...new Set(libraryRecords.flatMap(item => item.keywords || []))].sort().map(value => ({ id: value, label_zh: value, label_en: value }));
   const yearOptions = [...new Set(libraryRecords.map(item => String(item.published_at || "").slice(0, 4)).filter(Boolean))].sort().reverse().map(value => ({ id: value, label_zh: value, label_en: value }));
+  const taxonomy = desk.policy_taxonomy || {};
+  const toolOptions = [...(taxonomy.categories || []), {id:"unclassified",label_zh:"未分类",label_en:"Unclassified"}];
+  const toolLabel = id => field(toolOptions.find(item => item.id === id) || {}, "label_zh", "label_en") || id;
   const query = String(filters.query || "").trim().toLowerCase();
   const policies = usingLibrary ? libraryRecords.filter(item =>
     (!filters.province || item.province === filters.province) &&
     (!filters.region || item.region_id === filters.region) &&
     (!filters.keyword || (item.keywords || []).includes(filters.keyword)) &&
     (!filters.year || String(item.published_at || "").startsWith(filters.year)) &&
+    (!filters.instrument || (filters.instrument === "unclassified" ? !(item.instrument_categories || []).length : (item.instrument_categories || []).includes(filters.instrument))) &&
     (!query || `${item.title || ""} ${item.source || ""} ${(item.keywords || []).join(" ")}`.toLowerCase().includes(query))
   ) : (desk.policy_tools || []);
   const policyCards = policies.slice(0, state.bthPolicyVisible).map(item => usingLibrary ? `<article class="bth-policy-card">
     <div><span>${esc(item.region)}</span><span>${esc(item.policy_type || "政策文件")}</span><time>${esc(formatDate(item.published_at))}</time></div>
     <h4>${esc(item.title)}</h4>
     <p class="bth-policy-source">${esc(item.source)}</p>
+    ${item.instrument_categories?.length ? `<div class="bth-policy-instruments" title="${language === "en" ? "Title-based preclassification" : "依据题名明确关键词预分类"}">${item.instrument_categories.map(id => `<span>${esc(toolLabel(id))}</span>`).join("")}</div>` : ""}
     <div class="bth-policy-actions"><span>${(item.keywords || []).map(value => `<i>${esc(value)}</i>`).join("")}</span><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
   </article>` : `<article class="bth-policy-card">
     <div><span>${esc(jurisdictionLabel(item.jurisdiction))}</span><time>${esc(formatDate(item.published_at))}</time></div>
@@ -590,8 +602,10 @@ function renderBthRegionalTools(desk) {
         <label><span>${language === "en" ? "City / district" : "城市或区"}</span><select data-bth-policy-filter="region">${optionHtml(regionOptions, filters.region, language === "en" ? "All" : "全部")}</select></label>
         <label><span>${language === "en" ? "Keyword" : "关键词"}</span><select data-bth-policy-filter="keyword">${optionHtml(keywordOptions, filters.keyword, language === "en" ? "All" : "全部")}</select></label>
         <label><span>${language === "en" ? "Year" : "年份"}</span><select data-bth-policy-filter="year">${optionHtml(yearOptions, filters.year, language === "en" ? "All" : "全部")}</select></label>
+        <label><span>${language === "en" ? "Instrument category" : "政策工具"}</span><select data-bth-policy-filter="instrument">${optionHtml(toolOptions, filters.instrument, language === "en" ? "All" : "全部")}</select></label>
         <strong>${policies.length}</strong>
       </div>
+      <details class="bth-tracker-method"><summary>${language === "en" ? "Policy classification" : "政策分类体系"}</summary><p>${language === "en" ? "Region, year and topic are separate from instrument mechanism. One document can mention multiple instrument categories. Tags are preclassified from explicit title keywords; unmatched documents remain unclassified. Document counts are not instrument counts or measures of policy effectiveness." : esc(taxonomy.method || "")}</p><div>${(taxonomy.categories || []).map(category => `<p><b>${esc(field(category,"label_zh","label_en"))}</b>：${category.groups.map(group => esc(field(group,"label_zh","label_en"))).join("、")}</p>`).join("")}</div><a href="https://github.com/MGFPKU/CCPID" target="_blank" rel="noopener noreferrer">CCPID · ${language === "en" ? "PKU classification reference" : "北京大学分类参考"}</a></details>
       <div class="bth-policy-grid">${policyCards || `<div class="empty compact"><b>${language === "en" ? "No matching policies" : "暂无匹配政策"}</b></div>`}</div>
       ${policies.length > state.bthPolicyVisible ? `<button class="load-more" type="button" data-bth-policy-more="${Math.min(policies.length, state.bthPolicyVisible + 60)}">${language === "en" ? "Show more policies" : "加载更多政策"}</button>` : ""}
     </section>

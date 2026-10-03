@@ -8,7 +8,7 @@
     service_not_configured: "管理员尚未启用模型服务。", verification_failed: "安全验证已过期，请重新验证后提交。",
     daily_limit: "今日使用额度已满，请明天再试。", slow_down: "提问过于频繁，请稍等10秒。",
     model_key_invalid: "模型密钥配置无效，请联系管理员。", model_quota_or_permission: "模型免费额度已用完或未开通权限。",
-    model_rate_limit: "模型服务繁忙，请稍后重试。", model_timeout: "模型响应超时，请缩短请求后重试。",
+    model_rate_limit: "模型服务繁忙，请稍后重试。", model_timeout: "模型响应超时，请缩短请求后重试。", connection_timeout: "连接超时，请检查网络后重试。",
     invalid_model_response: "模型输出不完整，本次未生成文件；请重试或缩短报告。",
   };
   let configPromise, turnstilePromise;
@@ -64,32 +64,57 @@
     const history = chat.messages.filter(m => m.role !== "error").slice(-6).map(m => ({role: m.role, content: m.content.slice(0, 1000)}));
     chat.messages.push({role: "user", content: question}); input.value = ""; chat.busy = true; chat.pending = "";
     const token = chat.token; chat.token = "";
-    chat.controller = new AbortController(); const timer = setTimeout(() => chat.controller.abort(), 105000);
+    chat.controller = new AbortController();
+    const started = Date.now(), deadline = 120000; let timedOut = false, phase = "connect", expire;
+    const controller = chat.controller;
+    const timeout = new Promise((_, reject) => {expire = () => {timedOut = true; controller.abort(); reject(new Error("connection_timeout"));};});
+    const cancelled = new Promise((_, reject) => controller.signal.addEventListener("abort", () => reject(new DOMException("Aborted", "AbortError")), {once:true}));
+    const timer = setTimeout(expire, deadline);
+    const progress = setInterval(() => {
+      if (Date.now() - started >= deadline) {expire(); return;}
+      status(label(`${phase === "connect" ? "正在连接模型" : phase === "stream" ? "正在生成回答" : "正在分析"}（${Math.floor((Date.now() - started) / 1000)}秒）`, `Working (${Math.floor((Date.now() - started) / 1000)}s)`));
+    }, 1000);
+    const resumed = () => {if (!document.hidden && Date.now() - started >= deadline) expire();};
+    document.addEventListener("visibilitychange", resumed);
     chat.root.querySelector(".bth-chat-send").disabled = true;
     chat.root.querySelector(".bth-chat-stop").hidden = false;
     let raw = "", gotResult = false, reader;
     messages(); status(label("正在连接模型…", "Connecting to the model…"));
     try {
-      const response = await fetch(chat.config.endpoint.replace(/\/$/, "") + "/chat", {method: "POST", signal: chat.controller.signal, headers: {"Content-Type": "application/json"}, body: JSON.stringify({question, history, token})});
+      const receive = async () => {
+      const mobile = window.matchMedia?.("(pointer: coarse)").matches || window.innerWidth <= 700;
+      const response = await fetch(chat.config.endpoint.replace(/\/$/, "") + "/chat", {method: "POST", signal: controller.signal, headers: {"Content-Type": "application/json", "Accept": mobile ? "application/json" : "text/event-stream"}, body: JSON.stringify({question, history, token, transport: mobile ? "json" : "stream"})});
       if (!response.ok) {const error = await response.json().catch(() => ({})); throw new Error(error.error || "service_unavailable");}
+      phase = "analysis";
+      if (response.headers.get("Content-Type")?.includes("application/json")) {
+        const payload = await response.json();
+        if (typeof payload.answer !== "string" || !Array.isArray(payload.sources) || !Array.isArray(payload.charts)) throw new Error("invalid_model_response");
+        if (controller.signal.aborted) throw new DOMException("Aborted", "AbortError");
+        chat.messages.push({role: "assistant", content: payload.answer, result: payload}); gotResult = true; return;
+      }
+      if (!response.body?.getReader) throw new Error("service_unavailable");
       reader = response.body.getReader(); const decoder = new TextDecoder(); let buffer = "";
       while (true) {
-        const {done, value} = await reader.read(); if (done) break;
+        const {done, value} = await reader.read(); if (controller.signal.aborted) throw new DOMException("Aborted", "AbortError"); if (done) break;
         buffer += decoder.decode(value, {stream: true});
         const frames = buffer.split(/\r?\n\r?\n/); buffer = frames.pop();
         for (const frame of frames) {
           const name = /^event: (.+)$/m.exec(frame)?.[1], data = /^data: (.+)$/m.exec(frame)?.[1]; if (!data) continue;
           const payload = JSON.parse(data);
           if (name === "status") status(label(`已检索 ${payload.evidence_count} 条证据，正在分析…`, `${payload.evidence_count} evidence records retrieved…`));
-          if (name === "delta") {raw += payload.text; chat.pending = partialAnswer(raw); messages();}
+          if (name === "delta") {phase = "stream"; raw += payload.text; chat.pending = partialAnswer(raw); messages();}
           if (name === "error") throw new Error(payload.error);
           if (name === "result") {chat.messages.push({role: "assistant", content: payload.answer, result: payload}); gotResult = true; status(label("回答完成", "Completed"));}
         }
       }
       if (!gotResult) throw new Error("invalid_model_response");
-    } catch (e) {status(e.name === "AbortError" ? label("已停止；未完成的结果不会保存。", "Stopped. Incomplete results are not saved.") : label(errorLabels[e.message] || "连接失败，请检查网络或稍后重试。", `Request failed: ${e.message}`));}
+      };
+      await Promise.race([receive(), timeout, cancelled]);
+      status(label("回答完成", "Completed"));
+    } catch (e) {status(timedOut ? label(errorLabels.connection_timeout, "Connection timed out. Please check your network and retry.") : e.name === "AbortError" ? label("已停止；未完成的结果不会保存。", "Stopped. Incomplete results are not saved.") : label(errorLabels[e.message] || "连接失败，请检查网络或稍后重试。", `Request failed: ${e.message}`));}
     finally {
-      clearTimeout(timer); await reader?.cancel().catch(() => {}); chat.busy = false; chat.pending = "";
+      clearTimeout(timer); clearInterval(progress); document.removeEventListener("visibilitychange", resumed);
+      reader?.cancel().catch(() => {}); chat.busy = false; chat.pending = "";
       chat.root?.querySelector(".bth-chat-send")?.removeAttribute("disabled");
       const stop = chat.root?.querySelector(".bth-chat-stop"); if (stop) stop.hidden = true;
       if (window.turnstile && chat.widget !== null) window.turnstile.reset(chat.widget);
@@ -97,6 +122,7 @@
     }
   }
   async function mount(root, language) {
+    if (root && root === chat.root && chat.language === (language || "zh")) return;
     if (window.turnstile && chat.widget !== null) {window.turnstile.remove(chat.widget); chat.widget = null; chat.token = "";}
     chat.root = root; chat.language = language || "zh"; if (!root) return;
     root.innerHTML = `<section class="bth-live-assistant"><div class="bth-chat-heading"><h3>${label("京津冀研究问答", "BTH research assistant")}</h3><button type="button" class="secondary bth-chat-clear">${label("清空对话", "Clear conversation")}</button></div><div class="bth-chat-messages" role="log" aria-label="${label("对话记录", "Conversation")}" aria-live="off"></div><form class="bth-chat-form"><label for="bthChatQuestion">${label("问题", "Question")}</label><textarea id="bthChatQuestion" rows="3" maxlength="2000" required placeholder="${label("例如：比较三地2025年的光伏装机规模，生成图表和简短报告。", "Compare 2025 solar capacity across Beijing, Tianjin and Hebei; generate a chart and a short report.")}"></textarea><div class="bth-turnstile"></div><div class="bth-chat-controls"><button class="bth-chat-send" type="submit" ${chat.busy ? "disabled" : ""}>${label("发送", "Send")}</button><button class="secondary bth-chat-stop" type="button" ${chat.busy ? "" : "hidden"}>${label("停止", "Stop")}</button><span class="bth-chat-status" role="status"></span></div><details class="bth-chat-privacy"><summary>${label("数据与隐私", "Data and privacy")}</summary><p>${label("问题、最近三轮对话和检索到的公开资料会发送至阿里云百炼。本站不保存对话；请勿输入个人隐私或未公开资料。回答中的分析判断不等于官方结论，政策条款请核对原文。", "Your question, the latest three turns and public evidence are sent to Alibaba Cloud Model Studio. This site does not retain chats. Do not enter personal or confidential information. Check original policies before relying on specific provisions.")}</p></details></form></section>`;

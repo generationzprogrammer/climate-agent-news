@@ -1,6 +1,6 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
-import worker, {BudgetGuard, retrieve, normalizeResult} from "../cloudflare/bth-assistant/src/index.mjs";
+import worker, {BudgetGuard, retrieve, normalizeResult, collectModelStream} from "../cloudflare/bth-assistant/src/index.mjs";
 const rows = ["北京市", "天津市", "河北省"].flatMap((region, i) => [
   {id: `D-O${i}`, kind: "observation", title: "光伏装机", metric: "solar", region, year: 2025, value: i * 100 + 1, unit: "万千瓦", url: "https://example.gov.cn/data"},
   {id: `P-${i}`, kind: "policy", title: "可再生能源政策", region, date: "2026-01-01", url: "https://example.gov.cn/policy"},
@@ -33,13 +33,37 @@ test("full route streams validated report and evidence without real API", async 
   globalThis.fetch = async (url, options) => {
     if (String(url).includes("siteverify")) return new Response(JSON.stringify({success: true, hostname: "generationzprogrammer.github.io", action: "bth_chat"}));
     calls++; const payload = JSON.parse(options.body); assert.equal(payload.enable_thinking, false); assert.equal(payload.max_tokens, 4096);
+    assert(payload.messages[0].content.includes("不要以数据库"));
     const data = JSON.stringify({choices: [{delta: {content: JSON.stringify(modelResult)}, finish_reason: "stop"}]});
     return new Response(`data: ${data}\n\ndata: [DONE]\n\n`);
   };
   try {
     const pending = [], env = {BTH_LLM_API_KEY: "TEST-NOT-A-CREDENTIAL", BTH_TURNSTILE_SECRET_KEY: "TEST-NOT-A-CREDENTIAL", BUDGET: {idFromName: x => x, get: () => ({fetch: async () => new Response('{"ok":true}')})}};
-    const response = await worker.fetch(new Request("https://worker/chat", {method: "POST", headers: {Origin: "https://generationzprogrammer.github.io", "Content-Type": "application/json"}, body: JSON.stringify({question: "三地光伏比较，生成报告", token: "TEST"})}), env, {waitUntil: p => pending.push(p)});
-    assert.equal(response.status, 200); const body = await response.text(); await Promise.all(pending);
-    assert(body.includes("event: result")); assert(body.includes("三地光伏装机比较")); assert.equal(calls, 1);
+    for (const transport of ["stream", "json"]) {
+      const response = await worker.fetch(new Request("https://worker/chat", {method: "POST", headers: {Origin: "https://generationzprogrammer.github.io", "Content-Type": "application/json"}, body: JSON.stringify({question: "三地光伏比较，生成报告", token: "TEST", transport})}), env, {waitUntil: p => pending.push(p)});
+      assert.equal(response.status, 200); const body = await response.text(); await Promise.all(pending);
+      assert(body.includes("三地光伏装机比较"));
+      if (transport === "stream") assert(body.includes("event: result"));
+      else {assert(response.headers.get("Content-Type").includes("application/json")); assert.equal(JSON.parse(body).sources.length,2);}
+    }
+    assert.equal(calls, 2, "one provider call per request, no retry");
   } finally {globalThis.fetch = originalFetch; globalThis.caches = originalCaches;}
+});
+
+test("mobile transport decodes split UTF-8 and the final unterminated frame", async () => {
+  const encoded = new TextEncoder().encode('data:' + JSON.stringify({choices:[{delta:{content:JSON.stringify({answer:"北京**绿色治理**",charts:[],source_ids:[]})},finish_reason:"stop"}]}));
+  const stream = new ReadableStream({start(c) {for (let i=0;i<encoded.length;i+=2) c.enqueue(encoded.slice(i,i+2)); c.close();}});
+  assert.equal((await collectModelStream(new Response(stream))).answer, "北京**绿色治理**");
+});
+
+test("truncated or invalid model JSON fails instead of giving an empty mobile answer", async () => {
+  const response = finish => new Response("data: " + JSON.stringify({choices:[{delta:{content:'{"answer":"unfinished'},finish_reason:finish}]}));
+  await assert.rejects(collectModelStream(response("length")), /output_truncated/);
+  await assert.rejects(collectModelStream(response("stop")), SyntaxError);
+});
+
+test("policy targets cannot become actual-value charts", () => {
+  const target = {...rows[0], id:"P-target_bj",kind:"target", value:14.4};
+  assert.equal(normalizeResult({answer:"目标分析",charts:[{observation_ids:[target.id,rows[2].id]}]},[target,rows[2]]).charts.length,0);
+  assert(retrieve([target,...rows],"北京目标追踪").some(r => r.kind === "target"));
 });

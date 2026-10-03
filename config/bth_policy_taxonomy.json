@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "reference": {"name": "北大宏观与绿色金融实验室 CCPID", "url": "https://github.com/MGFPKU/CCPID", "schema_url": "https://github.com/MGFPKU/CCPID/blob/main/rules/schema.yaml", "accessed": "2026-10-03", "data_license": "CC BY 4.0"},
+  "unit": "policy_document",
+  "method": "题名明确提及的工具关键词用于预分类，允许一份文件对应多类；未命中保留未分类。主题、地域、年份与工具机制独立。预分类不等于已核验具体条款，也不计作独立政策工具数量。",
+  "categories": [
+    {"id": "economic", "label_zh": "经济工具", "label_en": "Economic instruments", "groups": [
+      {"id": "tax", "label_zh": "税费与价格", "label_en": "Taxes and pricing", "terms": ["环境保护税", "资源税", "碳税", "差别电价", "阶梯电价", "分时电价", "峰谷电价"]},
+      {"id": "subsidy", "label_zh": "补贴与融资激励", "label_en": "Subsidies and financing", "terms": ["补贴", "奖补", "贴息", "绿色信贷", "绿色债券", "气候投融资", "专项资金"]},
+      {"id": "trading", "label_zh": "配额与交易", "label_en": "Trading systems", "terms": ["碳排放权交易", "碳市场", "碳配额", "用能权交易", "绿电交易", "绿证交易"]}
+    ]},
+    {"id": "regulatory", "label_zh": "规制工具", "label_en": "Regulatory instruments", "groups": [
+      {"id": "standard", "label_zh": "标准与限额", "label_en": "Standards and limits", "terms": ["能耗限额", "排放标准", "节能标准", "建筑节能设计标准", "强制性标准"]},
+      {"id": "requirement", "label_zh": "许可、审查与履约要求", "label_en": "Permits and requirements", "terms": ["节能审查", "排污许可", "碳排放配额清缴", "碳排放配额履约", "禁止", "节能监察"]}
+    ]},
+    {"id": "government", "label_zh": "政府投资与消费", "label_en": "Government investment and consumption", "groups": [
+      {"id": "procurement", "label_zh": "绿色公共采购", "label_en": "Green public procurement", "terms": ["政府绿色采购", "绿色政府采购", "政府采购绿色", "政府采购支持绿色", "政府采购支持绿", "政府采购支持节能"]},
+      {"id": "investment", "label_zh": "公共投资与研发支持", "label_en": "Public investment and research", "terms": ["政府投资", "财政科研", "绿色低碳技术研发专项"]}
+    ]},
+    {"id": "information", "label_zh": "信息工具", "label_en": "Information instruments", "groups": [
+      {"id": "disclosure", "label_zh": "披露、报告与核算", "label_en": "Disclosure and accounting", "terms": ["环境信息依法披露", "环境信息披露", "碳排放报告", "碳排放核算", "碳足迹核算", "碳足迹管理"]},
+      {"id": "label", "label_zh": "标识与信息服务", "label_en": "Labelling and information", "terms": ["能效标识", "碳标识", "节能宣传", "低碳宣传"]}
+    ]},
+    {"id": "voluntary", "label_zh": "自愿措施", "label_en": "Voluntary approaches", "groups": [
+      {"id": "agreement", "label_zh": "自愿协定与承诺", "label_en": "Voluntary agreements", "terms": ["自愿协定", "自愿承诺", "自愿减排"]},
+      {"id": "certification", "label_zh": "自愿认证与交易", "label_en": "Voluntary certification and trading", "terms": ["自愿碳市场", "CCER", "自愿碳中和", "自愿认证"]}
+    ]}
+  ]
+}

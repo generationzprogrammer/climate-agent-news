@@ -278,7 +278,11 @@ def build_topic_desks(
         if desk.get("id") == "bth_green_transition":
             desk["regional_tracker"] = _build_bth_tracker(evidence, carbon_registry or {})
             archive = bth_policy_archive or {}
-            policy_records = archive.get("records", [])
+            from .bth_tracker import classify_policies
+            taxonomy_path = config_path.parent / "bth_policy_taxonomy.json"
+            taxonomy = json.loads(taxonomy_path.read_text(encoding="utf-8")) if taxonomy_path.exists() else {}
+            policy_records = classify_policies(archive.get("records", []), taxonomy)
+            desk["policy_taxonomy"] = taxonomy
             policy_sources = {str(item.get("source") or "").strip() for item in policy_records if item.get("source")}
             policy_domains = {str(item.get("official_domain") or "").strip() for item in policy_records if item.get("official_domain")}
             policy_regions = {str(item.get("region_id") or "").strip() for item in policy_records if item.get("region_id")}

@@ -31,6 +31,18 @@ test("unknown IDs never create invented references", () => {
   assert(!report.citationText("结论[D-fabricated]", sources, {html: true}).includes("<a"));
 });
 
+test("bold text is safe HTML and plain downloads have no Markdown markers", () => {
+  const answer = `**政策作用**需要分析[${id1}]，**<img onerror=alert(1)>**；残留**标记`;
+  const html = report.citationText(answer, sources, {html:true});
+  assert(html.includes("<strong>政策作用</strong>"));
+  assert(html.includes("<strong>&lt;img"));
+  assert(!html.includes("<img")); assert(!html.includes("**"));
+  assert(!report.citationText(answer,sources).includes("**"));
+  assert(!report.citationText("**政策作用**",[],{streaming:true}).includes("**"));
+  const special = [{...sources[0], url:"https://example.gov.cn/**/file"}];
+  assert(report.citationText(`[${id1}]`, special,{html:true}).includes('href="https://example.gov.cn/**/file"'));
+});
+
 test("grouped, full-width and bare evidence citations are normalized", () => {
   assert.equal(report.citationText(`甲【${id1}、${id2}】乙［D-O1234］丙${id1}`, sources), "甲[1][2]乙[3]丙[1]");
   assert.equal(report.citationText(`[${id1}, ${id1}]`, sources), "[1]");

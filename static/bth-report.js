@@ -4,15 +4,15 @@
   const utf8 = new TextEncoder();
   const xml = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"}[c]));
   // Keep machine evidence IDs in the response/history, never in visible prose.
-  const citationPattern = /[\[【［]([^\]】］]*)[\]】］]|\b(?:P-bth_policy_[a-zA-Z0-9_]+|D-O\d+)\b/g;
+  const citationPattern = /[\[【［]([^\]】］]*)[\]】］]|\b(?:P-(?:bth_policy_|target_)[a-zA-Z0-9_]+|D-(?:O\d+|target_[a-zA-Z0-9_]+))\b/g;
   const evidenceIds = s => s.match(/[DP]-[a-zA-Z0-9_][a-zA-Z0-9_.:-]*/g) || [];
   const sourceUrl = value => {try {const url = new URL(value); return ["https:", "http:"].includes(url.protocol) && !url.username && !url.password ? url.href : "";} catch {return "";}};
   function citationText(value, sources = [], {html = false, streaming = false, language = "zh"} = {}) {
     const input = String(value ?? ""), references = new Map(sources.map((source, index) => [source.id, {source, number: index + 1}]));
-    const encode = html ? xml : s => s, unverified = language === "en" ? "(source not verified)" : "（来源待核验）";
+    const encode = html && !streaming ? s => xml(s).replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>").replace(/\*\*/g, "") : s => (html ? xml(s) : s).replace(/\*\*/g, ""), unverified = language === "en" ? "(source not verified)" : "（来源待核验）";
     let output = "", offset = 0;
     // Do not flash an incomplete evidence ID while the JSON answer streams.
-    const content = streaming ? input.replace(/[\[【［]\s*(?:[DP](?:-[^\]】］]*)?|引用无效)$/, "").replace(/\b(?:P-bth_policy_|D-O)[a-zA-Z0-9_]*$/, "") : input;
+    const content = streaming ? input.replace(/[\[【［]\s*(?:[DP](?:-[^\]】］]*)?|引用无效)$/, "").replace(/\b(?:P-bth_policy_|P-target_|D-target_|D-O)[a-zA-Z0-9_]*$/, "") : input;
     for (const match of content.matchAll(citationPattern)) {
       output += encode(content.slice(offset, match.index)); offset = match.index + match[0].length;
       const inside = match[1] ?? match[0];

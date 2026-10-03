@@ -1,5 +1,10 @@
 name: 部署京津冀研究问答后端
 on:
+  push:
+    branches: [main]
+    paths:
+      - "cloudflare/bth-assistant/**"
+      - ".github/workflows/bth-assistant.yml"
   workflow_dispatch:
 permissions:
   contents: read
