@@ -1,0 +1,44 @@
+{
+  "audience": "product stakeholders; academic-policy research readers",
+  "delivery": "portable HTML, canonical report builder",
+  "structure_roles": {
+    "title": "title",
+    "executive_summary": "summary — Chinese localisation: 核心判断",
+    "findings": "structure, interfaces, region, governance, profiles",
+    "next_steps_and_further_questions": "directions",
+    "caveats": "scope plus adjacent finding caveats"
+  },
+  "methodology_share": "scope and brief metric explanation only; main body analyses collaboration mechanisms",
+  "chart_map": [
+    {
+      "id": "actors_chart",
+      "question": "图1　不同技术领域的项目参与机构数量",
+      "type": "bar",
+      "source": "project_sample"
+    },
+    {
+      "id": "funding_chart",
+      "question": "图2　项目资助规模与参与机构数",
+      "type": "scatter",
+      "source": "project_sample"
+    },
+    {
+      "id": "leads_chart",
+      "question": "图3　各领域项目协调方类型",
+      "type": "horizontalStackedBar100",
+      "source": "project_sample"
+    }
+  ],
+  "omissions": {
+    "performance_ranking": "no comparable measured commercial/technical outcomes",
+    "time_trend": "start-year sampling does not measure global innovation activity",
+    "radar_report": "ordinal project profiles kept in website beside raw observations, not treated as measured impact"
+  },
+  "checks": [
+    "official project-ID uniqueness",
+    "source field definitions",
+    "missing not zero",
+    "programme/project grain separated",
+    "maximum contribution not spend"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "projects": 398,
+  "retained_prior_cases": 25,
+  "total_cases": 423,
+  "countries": 54,
+  "coordinators": {
+    "REC": 184,
+    "HES": 112,
+    "PRC": 91,
+    "OTH": 9,
+    "PUB": 2
+  },
+  "actions": {
+    "IA": 157,
+    "RIA": 241
+  },
+  "medians": {
+    "eu_grant_million": 5.049437,
+    "participant_count": 11.0,
+    "country_count": 6.0,
+    "company_count": 6.0,
+    "research_count": 5.0
+  },
+  "action_grant_medians": {
+    "IA": 7.2111804500000005,
+    "RIA": 4.70474705
+  },
+  "grant_total_million": 2474.60919255,
+  "correlation": {
+    "log_pearson": 0.6686791851067846,
+    "without_top_5pct": 0.6535583747608033,
+    "by_action": {
+      "IA": 0.49763253080131326,
+      "RIA": 0.6863108665462719
+    }
+  },
+  "selection_bias": "purposefully selected energy collaborations with company and research participants; EU grant-centred",
+  "analysis_grain": "one official grant ID; 25 frameworks and legacy cases excluded from statistics",
+  "source_snapshot": {
+    "url": "https://cordis.europa.eu/data/cordis-HORIZONprojects-csv.zip",
+    "fetched_at_utc": "2026-10-05T06:21:07.972770+00:00",
+    "sha256": "1496a16ee79649d573a53697781b2fd950c18a5469c6a9f545f35dd5397771a7",
+    "bytes": 36908998,
+    "rights_review": "https://cordis.europa.eu/about/legal",
+    "retry_limit": 0,
+    "cache": "Reuse downloaded snapshot; manual refresh only",
+    "status": "downloaded",
+    "files": [
+      "organization.csv",
+      "euroSciVoc.csv",
+      "webLink.csv",
+      "legalBasis.csv",
+      "project.csv",
+      "information.zip",
+      "topics.csv",
+      "webItem.csv",
+      "policyPriorities.csv"
+    ],
+    "selection": "reviewed energy title and focus; company and research participants; at least two countries",
+    "input_rows": 501,
+    "published_rows": 398
+  }
+}

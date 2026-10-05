@@ -2,6 +2,8 @@
 const {chromium,devices}=require("playwright");
 const http=require("http"),fs=require("fs"),path=require("path"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,"../static"),out=path.resolve(__dirname,"../tmp/innovation-qa");
+const book=JSON.parse(fs.readFileSync(path.join(root,"data/innovation_cases.json"),"utf8"));
+const {filterCases}=require("../static/innovation-cases.js");
 const server=http.createServer((req,res)=>{
   const pathname=decodeURIComponent(new URL(req.url,"http://localhost").pathname);
   const file=path.resolve(root,"."+ (pathname==="/" ? "/index.html":pathname));
@@ -23,24 +25,32 @@ const server=http.createServer((req,res)=>{
       await page.route("**/*cloudflareinsights.com/**",route=>route.abort());
       await page.goto(origin+"?mode=energy#innovationCases",{waitUntil:"domcontentloaded",timeout:60000});
       await page.locator("#innovationCases .ic-card").first().waitFor({timeout:60000});
-      assert.equal(await page.locator("#innovationCases .ic-result").textContent(),"25 个案例");checks++;
+      assert.equal(await page.locator("#innovationCases .ic-result").textContent(),book.cases.length+" 个案例");checks++;
+      assert(book.cases.length>=300);checks++;
       assert.equal(await page.locator("#innovationCases .ic-card").count(),12);checks++;
       if(mobile){
         await page.locator("#mobileMenuToggle").click();
         assert(await page.locator('#mobileMenu a[href="#innovationCases"]').isVisible());checks++;
         await page.locator('#mobileMenu a[href="#innovationCases"]').click();
       }
-      await page.locator('#innovationCases [data-filter="country"]').selectOption("CN");
-      assert.equal(await page.locator("#innovationCases .ic-card").count(),3);checks++;
+      await page.locator('#innovationCases [data-filter="sector"]').selectOption("battery");
+      assert.equal(await page.locator("#innovationCases .ic-card").count(),12);checks++;
+      assert(await page.locator(".ic-compare-help").textContent().then(s=>s.includes("勾选")));checks++;
       await page.locator("#innovationCases [data-select]").nth(0).check();
       await page.locator("#innovationCases [data-select]").nth(1).check();
       await page.locator("#innovationCases .ic-compare").click();
       assert(await page.locator("#innovationCases dialog").isVisible());checks++;
-      assert.equal(await page.locator("#innovationCases .ic-matrix thead th").count(),3);checks++;
-      assert(await page.locator("#innovationCases .ic-matrix").textContent().then(s=>s.includes("可借鉴做法")));checks++;
+      assert.equal(await page.locator("#innovationCases .ic-dialog-body>.ic-matrix-scroll .ic-matrix thead th").count(),3);checks++;
+      assert(await page.locator("#innovationCases .ic-dialog-body").textContent().then(s=>s.includes("已记录的实践")));checks++;
+      assert.equal(await page.locator("#innovationCases [data-radar-axis]").count(),10);checks++;
+      await page.locator("#innovationCases [data-radar-axis]").first().focus();
+      await page.locator("#innovationCases [data-radar-axis]").first().press("Enter");
+      await page.locator("#innovationCases [data-radar-axis]").last().click();
+      assert(await page.locator("#innovationCases .ic-radar-readout").textContent().then(s=>s.includes("/5")));checks++;
       await page.locator("#innovationCases dialog").screenshot({path:path.join(out,mobile?"comparison-mobile.png":"comparison-desktop.png")});
       await page.locator("#innovationCases .ic-close").click();
       assert(!await page.locator("#innovationCases dialog").isVisible());checks++;
+      await page.locator('#innovationCases [data-filter="sector"]').selectOption("");
       await page.locator('#innovationCases [data-filter="country"]').selectOption("SG");
       await page.locator("#innovationCases [data-detail]").first().click();
       assert(await page.locator("#innovationCases .ic-dialog-body").textContent().then(s=>s.includes("适配分析")&&s.includes("原始证据")));checks++;
@@ -49,7 +59,7 @@ const server=http.createServer((req,res)=>{
       await page.locator('#innovationCases [data-filter="country"]').selectOption("");
       await page.locator("#innovationCases .ic-clear").click();
       await page.locator('#innovationCases [data-filter="query"]').fill("电池");
-      assert.equal(await page.locator("#innovationCases .ic-card").count(),2);checks++;
+      assert.equal(await page.locator("#innovationCases .ic-card").count(),Math.min(12,filterCases(book,{query:"电池"}).length));checks++;
       const downloadPromise=page.waitForEvent("download");
       await page.locator("#innovationCases .ic-export").click();
       const download=await downloadPromise;
@@ -60,7 +70,7 @@ const server=http.createServer((req,res)=>{
       if(mobile)await page.locator("#mobileLanguageToggle").click();
       assert.equal(await page.locator("#innovationCases h2").textContent(),"Global science–industry innovation cases");checks++;
       await page.locator('#innovationCases [data-filter="country"]').selectOption("CN");
-      assert(await page.locator("#innovationCases .ic-card").first().textContent().then(s=>s.includes("ITER")));checks++;
+      assert(await page.locator("#innovationCases .ic-card").allTextContents().then(rows=>rows.some(s=>s.includes("ITER"))));checks++;
       const docWidth=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
       assert(docWidth.scroll<=docWidth.width+1,JSON.stringify(docWidth));checks++;
       await page.locator('#innovationCases [data-filter="country"]').selectOption("");

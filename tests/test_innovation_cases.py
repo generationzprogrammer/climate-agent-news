@@ -1,4 +1,5 @@
 import copy
+from collections import Counter
 import json
 import tempfile
 import unittest
@@ -9,6 +10,7 @@ from climate_agent.innovation_cases import (
     FACT_FIELDS, InnovationCaseAgent, link_developments,
     safe_public_url, validate_casebook, write_innovation_cases,
 )
+from climate_agent.innovation_metrics import profile_metrics, validate_profile
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -95,8 +97,43 @@ class InnovationCaseTests(unittest.TestCase):
             second = write_innovation_cases(ROOT, target, [], today=date(2026, 10, 6))
             self.assertEqual(first["statistics"]["developments"], 1)
             self.assertEqual(second["statistics"]["developments"], 1)
-            self.assertEqual(second["cases"][0]["summary"], self.book["cases"][0]["summary"])
-            self.assertTrue(all(c["review_status"] == "reviewed" for c in second["cases"]))
+            source = next(c for c in self.book["cases"] if c["id"] == "oi_iea_tcp")
+            self.assertEqual(next(c for c in second["cases"] if c["id"] == source["id"])["summary"], source["summary"])
+            self.assertTrue(all(c["review_status"] in {"reviewed", "structured_verified"} for c in second["cases"]))
+            self.assertGreaterEqual(len(second["cases"]), 300)
+            self.assertTrue({c["id"] for c in self.book["cases"]}.issubset({c["id"] for c in second["cases"]}))
+
+    def test_scores_are_recomputed_and_missing_is_not_zero(self):
+        self.assertTrue(all(row["score"] is None for row in profile_metrics(None, None).values()))
+        project = {"country_count": 6, "company_count": 2, "research_count": 1, "actor_type_count": 3, "eu_grant_million": 3}
+        scores = profile_metrics(project, "s1")
+        self.assertEqual(scores["crossborder"]["score"], 4)
+        self.assertEqual(scores["funding"]["score"], 2)
+        c = {"id": "sample", "project": project, "profile": scores, "evidence": [{"source_id": "s1"}]}
+        validate_profile(c)
+        c["profile"]["industry"]["score"] = 5
+        with self.assertRaisesRegex(ValueError, "mismatch"):
+            validate_profile(c)
+
+    def test_project_records_have_real_grain_and_no_private_contact_fields(self):
+        extra = json.loads((ROOT / "config/open_innovation_projects.json").read_text(encoding="utf-8"))
+        self.assertGreaterEqual(len(extra["cases"]), 300)
+        self.assertEqual(len({c["project"]["official_id"] for c in extra["cases"]}), len(extra["cases"]))
+        for c in extra["cases"]:
+            validate_profile(c)
+            self.assertGreaterEqual(c["project"]["country_count"], 2)
+            self.assertGreater(c["project"]["company_count"], 0)
+            self.assertGreater(c["project"]["research_count"], 0)
+            self.assertEqual(len(c["participants"]), c["project"]["participant_count"])
+            self.assertEqual(len({p["id"] for p in c["participants"]}), len(c["participants"]))
+            self.assertEqual(len({p["country"] for p in c["participants"]}), c["project"]["country_count"])
+            types = Counter(p["type"] for p in c["participants"])
+            self.assertEqual(types["PRC"], c["project"]["company_count"])
+            self.assertEqual(types["HES"] + types["REC"], c["project"]["research_count"])
+            self.assertEqual(len(types), c["project"]["actor_type_count"])
+            self.assertTrue(all(p["country"] in self.codes for p in c["participants"]))
+            self.assertFalse(any(k in p for p in c["participants"] for k in ("email", "contactForm", "street", "vatNumber")))
+            self.assertEqual(c["project"]["funding_basis"], "maximum_EU_contribution_not_actual_expenditure")
 
     def test_model_draft_is_grounded_and_cannot_publish(self):
         extract = "The partners jointly run an applied research and testing platform."

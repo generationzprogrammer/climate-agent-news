@@ -1,0 +1,26 @@
+/* Narrow fix for native reader's 100vw toolbar with classic scrollbars.
+   Content and charts remain entirely native; no clipping/overflow suppression. */
+.analytics-top-bar { width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
+/* Keep the source affordance available on touch screens and without hover. */
+.viz-card-menu-button[data-artifact-has-source="true"] { opacity: 1 !important; pointer-events: auto !important; transform: none !important; }
+@media print {
+  @page { size: A4; margin: 18mm 16mm; }
+  .analytics-top-bar, .viz-card-actions, .copy-toast { display: none !important; }
+  .dashboard-shell.report-shell { padding: 0; }
+  .report-markdown-editor.markdown-render p, .report-markdown-editor.markdown-render li { font-size: 11pt; line-height: 1.65; }
+  .report-markdown-editor.markdown-render h1 { font-size: 21pt; }
+  .report-markdown-editor.markdown-render h2 { font-size: 15pt; }
+  .report-stack-item-chart { break-inside: avoid; }
+  .portable-chart-data-has-vector, .portable-status, .portable-surface-label { display: none !important; }
+  .portable-chart-summary .portable-table-scroll { display: none !important; }
+  .portable-chart-summary .portable-table-note { display: none !important; }
+  .portable-source-tooltip-content, .portable-source-summary-content { display: none !important; }
+  .portable-chart-summary figcaption::after { content: "数据来源：欧盟 CORDIS 项目登记（2026年10月5日快照）"; display: block; margin-top: 6px; font-size: 9pt; color: #555; }
+  .portable-page-meta > * { display: none !important; }
+  .portable-page-meta::before { content: "2026年10月5日"; }
+  .portable-page-meta { white-space: nowrap; min-width: 86px; }
+  .portable-markdown h2, .portable-markdown h3 { break-after: avoid; }
+  .portable-source-context { display: none !important; }
+  .portable-markdown p, .portable-markdown li { font: 11pt/1.65 "Times New Roman", "SimSun", serif; }
+  .portable-markdown h1, .portable-markdown h2, .portable-page-header h1 { color: #111; font-family: "Times New Roman", "SimSun", serif; }
+}

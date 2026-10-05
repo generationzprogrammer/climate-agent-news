@@ -9,9 +9,10 @@ from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
+from .innovation_metrics import AXES, profile_metrics, validate_profile
 
 FACT_FIELDS = ("summary", "actors", "mechanism", "observed")
-TEXT_FIELDS = ("title", *FACT_FIELDS, "constraints", "transfer")
+TEXT_FIELDS = ("title", *FACT_FIELDS)
 TAG_FIELDS = ("challenges", "modes", "institutions", "factors")
 
 
@@ -61,7 +62,7 @@ def validate_casebook(book: dict, countries: set[str]) -> dict:
         if not title or title in names:
             errors.append(f"duplicate_title:{cid}")
         names.add(title)
-        if case.get("review_status") != "reviewed":
+        if case.get("review_status") not in {"reviewed", "structured_verified"}:
             errors.append(f"unreviewed_case:{cid}")
         for field in TEXT_FIELDS:
             value = case.get(field, {})
@@ -94,6 +95,10 @@ def validate_casebook(book: dict, countries: set[str]) -> dict:
             value = case.get(year)
             if value is not None and (type(value) is not int or not 1900 <= value <= 2100):
                 errors.append(f"invalid_year:{cid}")
+        try:
+            validate_profile(case)
+        except ValueError as exc:
+            errors.append(str(exc))
         if case.get("start_year") and case.get("end_year") and case["end_year"] < case["start_year"]:
             errors.append(f"reversed_period:{cid}")
     for case in book.get("cases", []):
@@ -112,7 +117,7 @@ def _alias_match(text: str, alias: str) -> bool:
     return bool(re.search(r"(?<!\w)" + re.escape(alias.casefold()) + r"(?!\w)", text))
 
 
-def link_developments(case: dict, archives: list[dict], previous: list[dict], today: date) -> list[dict]:
+def link_developments(case: dict, archives: list[dict], previous: list[dict], today: date, prepared: list | None = None) -> list[dict]:
     """Entity mentions are related news, never automatic updates to case facts."""
     linked = {}
     cutoff = today - timedelta(days=90)
@@ -120,30 +125,64 @@ def link_developments(case: dict, archives: list[dict], previous: list[dict], to
         published = str(item.get("published_at", ""))[:10]
         if cutoff.isoformat() <= published <= today.isoformat() and safe_public_url(item.get("url", "")):
             linked[item["url"]] = item
+    if prepared is None:
+        prepared = []
+        for archive in archives:
+            for item in archive.get("records", []):
+                published = str(item.get("published_at") or item.get("published_date") or "")[:10]
+                url = item.get("canonical_url") or item.get("url") or ""
+                if not cutoff.isoformat() <= published <= today.isoformat() or not safe_public_url(url):
+                    continue
+                text = " ".join(str(item.get(field) or "") for field in
+                                ("title", "title_original", "title_zh", "title_en", "summary", "summary_source", "summary_zh", "summary_en", "abstract")).casefold()
+                prepared.append((item, published, url, text))
+    patterns = [(alias, re.compile(r"(?<!\w)" + re.escape(alias.casefold()) + r"(?!\w)"))
+                for alias in case["aliases"]]
+    for item, published, url, text in prepared:
+        aliases = [alias for alias, pattern in patterns if (alias.casefold() in text if re.search(r"[\u4e00-\u9fff]", alias) else pattern.search(text))]
+        if not aliases:
+            continue
+        linked[url] = {
+            "id": "oi_news_" + hashlib.sha256(url.encode()).hexdigest()[:16],
+            "url": url, "published_at": published,
+            "title": {"zh": item.get("title_zh") or item.get("title") or "",
+                      "en": item.get("title_original") or item.get("title_en") or item.get("title") or ""},
+            "source": item.get("source_name") or item.get("source") or urlparse(url).hostname,
+            "matched_aliases": aliases, "linkage": "entity_mention",
+        }
+    return sorted(linked.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)[:12]
+
+
+def prepare_news(archives: list[dict], today: date) -> list:
+    cutoff, rows = (today - timedelta(days=90)).isoformat(), []
     for archive in archives:
         for item in archive.get("records", []):
             published = str(item.get("published_at") or item.get("published_date") or "")[:10]
             url = item.get("canonical_url") or item.get("url") or ""
-            if not cutoff.isoformat() <= published <= today.isoformat() or not safe_public_url(url):
+            if not cutoff <= published <= today.isoformat() or not safe_public_url(url):
                 continue
             text = " ".join(str(item.get(field) or "") for field in
                             ("title", "title_original", "title_zh", "title_en", "summary", "summary_source", "summary_zh", "summary_en", "abstract")).casefold()
-            aliases = [alias for alias in case["aliases"] if _alias_match(text, alias)]
-            if not aliases:
-                continue
-            linked[url] = {
-                "id": "oi_news_" + hashlib.sha256(url.encode()).hexdigest()[:16],
-                "url": url, "published_at": published,
-                "title": {"zh": item.get("title_zh") or item.get("title") or "",
-                          "en": item.get("title_original") or item.get("title_en") or item.get("title") or ""},
-                "source": item.get("source_name") or item.get("source") or urlparse(url).hostname,
-                "matched_aliases": aliases, "linkage": "entity_mention",
-            }
-    return sorted(linked.values(), key=lambda row: (row["published_at"], row["url"]), reverse=True)[:12]
+            rows.append((item, published, url, text))
+    return rows
 
 
 def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, today: date | None = None) -> dict:
     book = json.loads((root / "config/open_innovation_cases.json").read_text(encoding="utf-8"))
+    projects = root / "config/open_innovation_projects.json"
+    if projects.exists():
+        extra = json.loads(projects.read_text(encoding="utf-8"))
+        book["cases"].extend(extra["cases"])
+        book["sources"].extend(extra["sources"])
+        book["sector_taxonomy"] = extra.get("sector_taxonomy", {})
+        book["participant_types"] = extra.get("participant_types", {})
+        book["provenance"] = extra.get("provenance", {})
+    featured = ["oi_cordis_101058359", "oi_cordis_101084251", "oi_cordis_101091777",
+                "oi_artc", "oi_cordis_101122303", "oi_cordis_101103972", "oi_gba",
+                "oi_cordis_101135374", "oi_cordis_101058453", "oi_nedo_lyon",
+                "oi_cordis_101096425", "oi_cordis_101084046"]
+    rank = {cid: index for index, cid in enumerate(featured)}
+    book["cases"].sort(key=lambda c: (rank.get(c["id"], len(rank)), c.get("sector_key", ""), c["id"]))
     country_rows = json.loads((root / "config/country_codes.json").read_text(encoding="utf-8"))["countries"]
     quality = validate_casebook(book, {row["alpha2"] for row in country_rows})
     payload = copy.deepcopy(book)
@@ -154,8 +193,12 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
             old = {case["id"]: case.get("developments", []) for case in json.loads(output.read_text(encoding="utf-8")).get("cases", [])}
         except (ValueError, KeyError, TypeError):
             pass
+    prepared = prepare_news(archives, today)
     for case in payload["cases"]:
-        case["developments"] = link_developments(case, archives, old.get(case["id"], []), today)
+        case["developments"] = link_developments(case, [], old.get(case["id"], []), today, prepared=prepared)
+        if "profile" not in case:
+            case["profile"] = profile_metrics(None, None)
+    payload["profile_axes"] = AXES
     tagged = {code for case in book["cases"] for code in case["countries"]}
     payload["countries"] = [row for row in country_rows if row["alpha2"] in tagged]
     payload["updated_at"] = today.isoformat()
