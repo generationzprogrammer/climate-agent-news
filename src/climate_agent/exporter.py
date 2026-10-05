@@ -14,6 +14,7 @@ from .corpus_analytics import write_corpus_analytics, write_energy_corpus_analyt
 from .db import Database
 from .energy_view import write_energy_view
 from .energy_reports import write_energy_report_database
+from .innovation_cases import write_innovation_cases
 from .pdf_brief import write_daily_brief_pdf, write_weekly_report_pdf
 from .site_metrics import write_site_metrics
 from .spotlights import write_spotlights
@@ -135,6 +136,10 @@ def export_static_site(
     energy_reports = write_energy_report_database(
         energy_view["archive"], db.path.parent / "energy_reports.json", data_dir / "energy_reports.json"
     )
+    innovation_cases = write_innovation_cases(
+        Path(__file__).resolve().parents[2], data_dir / "innovation_cases.json",
+        [archive, energy_view["archive"]],
+    )
     manifest_path = db.path.parent / "climate_text_corpus.manifest.json"
     corpus_merge = merge_archive_into_corpus(
         corpus_path, manifest_path, archive, limit=archive_limit
@@ -180,6 +185,7 @@ def export_static_site(
         "energy_companies": company_intelligence["statistics"].get("companies", 0),
         "company_intelligence": company_intelligence["statistics"].get("intelligence", 0),
         "energy_reports": energy_reports["statistics"].get("reports", 0),
+        "innovation_cases": innovation_cases["statistics"]["cases"],
         "corpus_added": corpus_merge.get("added", 0),
         "corpus_analytics_records": (analytics or {}).get("records", 0),
         "site_metrics_points": len(site_metrics.get("archive_cumulative", [])),

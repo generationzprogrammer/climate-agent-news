@@ -23,7 +23,7 @@ const UI_TEXT = {
     archive: "站内新增", agencyAll: "全部机构", coverage: "官方机构 · 近一年", siteSubtitle: "国际气候情报与文本数据库",
     team: "团队信息", subscribe: "订阅", download: "下载今日简报", archiveChart: "累计气候文本档案", visitorChart: "累计访客/访问量",
     todayQueue: "今日队列", thisWeek: "本周", projectIntro: "项目介绍", projectIntroTitle: "项目介绍",
-    navCompany: "企业情报", navEnergyReports: "能源报告与数据库", companyIntelligence: "企业情报",
+    navCompany: "企业情报", navEnergyReports: "能源报告与数据库", navInnovation: "科产融合", companyIntelligence: "企业情报",
     companyScope: "持续扩展的全球能源企业名录，以及从站内新闻中识别的重大项目、初创企业和企业合作。",
     energyReportsTitle: "能源报告与数据库", footerSubtitle: "全球气候与能源信息智能分析支持系统",
     carbonCompanyTitle: "全国重点排放单位名录", searchEntity: "检索单位", carbonCompanyPlaceholder: "单位名称或统一社会信用代码",
@@ -61,7 +61,7 @@ const UI_TEXT = {
     archive: "New from archive", agencyAll: "All agencies", coverage: "Official institutions · past 12 months", siteSubtitle: "International climate intelligence and text database",
     team: "Team", subscribe: "Subscribe", download: "Download today's brief", archiveChart: "Cumulative climate text archive", visitorChart: "Cumulative visits / page views",
     todayQueue: "Today", thisWeek: "This week", projectIntro: "About", projectIntroTitle: "About the project",
-    navCompany: "Companies", navEnergyReports: "Energy reports & data", companyIntelligence: "Company intelligence",
+    navCompany: "Companies", navEnergyReports: "Energy reports & data", navInnovation: "Open innovation", companyIntelligence: "Company intelligence",
     companyScope: "A growing directory of global energy companies, projects, start-ups and corporate partnerships identified in the archive.",
     energyReportsTitle: "Energy reports and databases", footerSubtitle: "Global climate and energy intelligence platform",
     carbonCompanyTitle: "National key-emitter register", searchEntity: "Search entities", carbonCompanyPlaceholder: "Entity name or unified social credit code",
@@ -330,6 +330,7 @@ function activateMode(mode) {
   setupTaxonomyFilters();
   if (state.mode === "energy" && state.companyData) renderCompanyIntelligence();
   if (state.mode === "energy" && state.reportData) renderEnergyReports();
+  window.GruenInnovationCases?.mount($("innovationCases"), {mode: state.mode, language: state.language});
   if (state.spotlights) renderSpotlights();
   if (state.carbonRegistry) renderCarbonRegistry();
   renderTopicDesks();

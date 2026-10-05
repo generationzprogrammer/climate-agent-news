@@ -7,6 +7,7 @@
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>格润｜国际气候与能源信息智能分析支持系统</title>
   <link rel="stylesheet" href="./styles.css?v=20261003-1">
+  <link rel="stylesheet" href="./innovation-cases.css?v=20261005-1">
 </head>
 <body>
   <header class="topbar">
@@ -25,6 +26,7 @@
       <a href="#database" data-i18n="navDatabase">文本数据库</a>
       <a class="energy-only-nav" id="companyNav" href="#companies" hidden data-i18n="navCompany">企业情报</a>
       <a class="energy-only-nav" id="reportNav" href="#energyReports" hidden data-i18n="navEnergyReports">能源报告与数据库</a>
+      <a class="energy-only-nav" href="#innovationCases" hidden data-i18n="navInnovation">科产融合</a>
       <button class="team-link nav-team-link" id="teamOpen" type="button" data-i18n="team">团队信息</button>
     </nav>
     <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">EN</button>
@@ -39,6 +41,7 @@
       <a href="#map" data-i18n="navMap">全球现场</a><a href="#today" data-i18n="navToday">今日情报</a><a class="climate-only-nav" href="#chinaCarbon" data-i18n="navChinaCarbon">中国碳市场</a><a class="climate-only-nav" href="#singapore" data-i18n="navSingapore">新加坡</a><a class="climate-only-nav" href="#bth_green_transition" data-i18n="navBth">京津冀绿色转型</a><a class="energy-only-nav" href="#renewable_energy" data-i18n="navRenewable">新能源</a><a class="energy-only-nav" href="#energy_storage" data-i18n="navStorage">储能技术</a><a class="energy-only-nav" href="#aidc" data-i18n="navAidc">人工智能数据中心</a><a href="#analytics" data-i18n="navAnalytics">语料分析</a><a href="#assistant" data-i18n="navAssistant">情报问答</a><a href="#database" data-i18n="navDatabase">文本数据库</a>
       <a class="energy-only-nav" id="mobileCompanyNav" href="#companies" hidden data-i18n="navCompany">企业情报</a>
       <a class="energy-only-nav" id="mobileReportNav" href="#energyReports" hidden data-i18n="navEnergyReports">能源报告与数据库</a>
+      <a class="energy-only-nav" href="#innovationCases" hidden data-i18n="navInnovation">科产融合</a>
     </nav>
     <div class="mobile-menu-actions">
       <button class="project-intro-link" data-open-project type="button" data-i18n="projectIntro">项目介绍</button>
@@ -176,6 +179,8 @@
       <button class="load-more" id="energyReportLoadMore" type="button" data-i18n="showMoreResources">显示更多资源</button>
       <p class="analytics-note" id="energyReportNote">报告库每日扫描官方发布页；仅在发现新的、可追溯报告时增量更新。</p>
     </section>
+
+    <section class="section energy-only-section" id="innovationCases" hidden aria-label="科产融合全球案例库"></section>
 
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-copy">
@@ -331,6 +336,7 @@
   <script src="./bth-transport.js?v=20261003-2" defer></script>
   <script src="./bth-assistant.js?v=20261003-2" defer></script>
   <script src="./bth-tracker.js?v=20261003-1" defer></script>
-  <script src="./app.js?v=20261003-1" defer></script>
+  <script src="./innovation-cases.js?v=20261005-1" defer></script>
+  <script src="./app.js?v=20261005-1" defer></script>
 </body>
 </html>
