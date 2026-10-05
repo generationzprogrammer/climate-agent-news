@@ -3,36 +3,54 @@ import argparse
 import concurrent.futures
 import json
 import sys
+import threading
+import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlparse
 from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-book = json.loads((ROOT / "config/open_innovation_cases.json").read_text(encoding="utf-8"))
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--source", action="append", help="Only check specified revised source IDs")
+parser.add_argument("--casebook", type=Path, default=ROOT/"config/open_innovation_cases.json")
+parser.add_argument("--output", type=Path, default=ROOT/"analysis/innovation_source_link_check.json")
 args = parser.parse_args()
+book = json.loads(args.casebook.read_text(encoding="utf-8"))
 checked_at = datetime.now(timezone.utc).isoformat()
+rate_lock = threading.Lock()
+last_request = 0.0
+stopped_hosts = set()
 
 
 def check(source):
+    global last_request
+    host = urlparse(source["url"]).hostname
+    with rate_lock:
+        if host in stopped_hosts:
+            return {"id": source["id"], "url": source["url"], "status": None, "error": "access_policy_stopped"}
+        time.sleep(max(0,1-(time.monotonic()-last_request)))
+        last_request=time.monotonic()
     request = urllib.request.Request(source["url"], method="HEAD",
         headers={"User-Agent": "GruenInnovationCases/1.0 (public-link-check)", "Accept": "*/*"})
     try:
         with urllib.request.urlopen(request, timeout=12) as response:
             return {"id": source["id"], "url": source["url"], "status": response.status, "resolved_url": response.url}
     except urllib.error.HTTPError as error:
+        if error.code in {401,403,429}:
+            with rate_lock:
+                stopped_hosts.add(host)
         return {"id": source["id"], "url": source["url"], "status": error.code, "error": "http"}
     except Exception as error:
         return {"id": source["id"], "url": source["url"], "status": None, "error": type(error).__name__}
 
 
-target = ROOT / "analysis/innovation_source_link_check.json"
+target = args.output
 prior = json.loads(target.read_text(encoding="utf-8")) if target.exists() else {}
 previous = {row["id"]: {**row, "checked_at": row.get("checked_at", prior.get("checked_at"))} for row in prior.get("sources", [])}
 requested = [source for source in book["sources"] if not args.source or source["id"] in args.source]
-with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
     fresh = [{**row, "checked_at": checked_at} for row in pool.map(check, requested)]
 previous.update({row["id"]: row for row in fresh})
 results = [previous[source["id"]] for source in book["sources"] if source["id"] in previous]

@@ -15,12 +15,16 @@ TITLE = "科产融合发展的全球开放创新生态：组织机制与跨区�
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     book = json.loads((ROOT / "static/data/innovation_cases.json").read_text(encoding="utf-8"))
-    projects = [c for c in book["cases"] if c.get("project")]
+    # Keep the report's registered EUR cohort; USD awards and incomplete
+    # partner censuses must never enter these comparative statistics.
+    projects = [c for c in book["cases"] if (c.get("project") or {}).get("funding_basis") ==
+                "maximum_EU_contribution_not_actual_expenditure"]
     n = len(projects)
     p = [c["project"] for c in projects]
     coords = Counter(row["coordinator_type"] for row in p)
     actions = Counter(row["action"] for row in p)
-    sectors = book["sector_taxonomy"]
+    sector_keys = {c["sector_key"] for c in projects}
+    sectors = {k:v for k,v in book["sector_taxonomy"].items() if k in sector_keys}
     actors, leads, points, action_rows = [], [], [], []
     for key, sector in sectors.items():
         subset = [c for c in projects if c["sector_key"] == key]
@@ -104,7 +108,7 @@ def main():
            "coordinators":dict(coords),"actions":dict(actions),"medians":med,"action_grant_medians":action_med,
            "grant_total_million":sum(r["eu_grant_million"] for r in p),"correlation":correlation,
            "selection_bias":"purposefully selected energy collaborations with company and research participants; EU grant-centred",
-           "analysis_grain":"one official grant ID; 25 frameworks and legacy cases excluded from statistics",
+           "analysis_grain":"one official EU grant ID; frameworks, legacy cases and US awards excluded from EUR statistics",
            "source_snapshot":book["provenance"]}
     (OUT/"analysis_results.json").write_text(json.dumps(audit,ensure_ascii=False,indent=2),encoding="utf-8")
     (OUT/"reviewed_chart_rows.json").write_text(json.dumps({"actors":actors,"leads":leads,"projects":points,"actions":action_rows},ensure_ascii=False,indent=2),encoding="utf-8")

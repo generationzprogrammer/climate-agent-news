@@ -51,3 +51,24 @@ test("CSV prevents spreadsheet formula execution",()=>{
   assert.equal(csvCell(" @SUM(1)"),'"\' @SUM(1)"');
   assert.equal(csvCell('a"b'),'"a""b"');
 });
+
+test("US coverage is independent project evidence, not repeated news",()=>{
+  const rows=filterCases(book,{country:"US"}),projects=rows.filter(c=>c.project?.source_type==="ARPAE");
+  assert(rows.length>=155);
+  assert(projects.length>=150);
+  assert.equal(new Set(projects.map(c=>c.project.official_id)).size,projects.length);
+  assert(projects.every(c=>c.countries.length===1&&c.countries[0]==="US"));
+  assert(new Set(projects.map(c=>c.sector_key)).size>=8);
+  const c=projects[0],csv=exportCsv(book,[c],"zh");
+  assert(csv.includes('"award_usd","funding_basis"'));
+  assert(csv.includes('"'+c.project.award_usd+'"'));
+  assert(csv.includes("listed_ARPAE_award_not_actual_expenditure"));
+  assert(!Object.hasOwn(c.project,"eu_grant_eur"));
+});
+
+test("US missing complete partner census never becomes a zero radar score",()=>{
+  const projects=book.cases.filter(c=>c.project?.source_type==="ARPAE");
+  const svg=radarSvg(projects.slice(0,2),book.profile_axes,"zh");
+  assert(!svg.includes("data-radar-axis="));
+  assert(projects.every(c=>Object.values(c.profile).every(v=>v.raw===null&&v.score===null)));
+});

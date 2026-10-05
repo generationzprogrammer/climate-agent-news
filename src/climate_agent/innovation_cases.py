@@ -177,6 +177,13 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book["sector_taxonomy"] = extra.get("sector_taxonomy", {})
         book["participant_types"] = extra.get("participant_types", {})
         book["provenance"] = extra.get("provenance", {})
+    us_projects = root / "config/open_innovation_us_projects.json"
+    if us_projects.exists():
+        extra = json.loads(us_projects.read_text(encoding="utf-8"))
+        book["cases"].extend(extra["cases"])
+        book["sources"].extend(extra["sources"])
+        book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
+        book.setdefault("provenance", {}).update(extra.get("provenance", {}))
     featured = ["oi_cordis_101058359", "oi_cordis_101084251", "oi_cordis_101091777",
                 "oi_artc", "oi_cordis_101122303", "oi_cordis_101103972", "oi_gba",
                 "oi_cordis_101135374", "oi_cordis_101058453", "oi_nedo_lyon",

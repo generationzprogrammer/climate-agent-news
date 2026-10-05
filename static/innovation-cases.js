@@ -29,6 +29,12 @@
   Object.assign(TXT.zh,{sector:"技术领域",compareHelp:"先筛选同一技术领域，勾选两至三个案例，再点击对比。",profile:"合作结构画像",raw:"原始数值",score:"刻度",missing:"未披露",rubric:"查看刻度依据",profileNote:"刻度1–5表示合作规模与结构，不表示技术水平或商业成效。",noProfile:"平台与制度安排不使用项目资助口径评分。",mixed:"所选案例包括不同层级，雷达图仅绘制项目；制度与平台请查阅下方事实表。",participants:"合作机构名录",organization:"机构",actorType:"机构类型",role:"角色",coordinator:"协调方",participant:"参与方",budget:"项目登记",grant:"欧盟最高资助额",cost:"登记总成本",objective:"技术任务",original:"研究目标原文",action:"资助类型",identifier:"官方项目编号",timeline:"项目期",scheme:"项目与制度",source:"来源",planned:"登记目标",showParticipants:"展开合作机构",status:"登记状态",signed:"已签约",closed:"已结项",unit:"单位",fundingNote:"资助额为批准上限，不是实际支出或营收。",originalTitle:"原题",scoringMethod:"合作结构刻度"});
   Object.assign(TXT.en,{sector:"Technology",compareHelp:"Filter by technology, select two or three cases, then compare.",profile:"Collaboration profile",raw:"Observation",score:"Band",missing:"Not disclosed",rubric:"Scale definitions",profileNote:"Bands 1–5 describe collaboration scale and structure, not technical quality or commercial success.",noProfile:"Platforms and institutional arrangements are not scored using project-grant metrics.",mixed:"Selection spans different levels. Radar profiles include projects only; use the fact table for platforms and rules.",participants:"Partner register",organization:"Organisation",actorType:"Actor type",role:"Role",coordinator:"Coordinator",participant:"Participant",budget:"Project register",grant:"Maximum EU contribution",cost:"Registered total cost",objective:"Technical objectives",original:"Original research objectives",action:"Action type",identifier:"Official project ID",timeline:"Project period",scheme:"Project and institutions",source:"Source",planned:"Registered objectives",showParticipants:"Explore partners",status:"Register status",signed:"Grant signed",closed:"Closed",unit:"Unit",fundingNote:"Grant figures are approved ceilings, not expenditure or revenue.",originalTitle:"Original title",scoringMethod:"Collaboration scales"});
   const number = value => typeof value === "number" ? value.toLocaleString(lang==="zh"?"zh-CN":"en-GB",{maximumFractionDigits:2}) : t("missing");
+  Object.assign(TXT.zh,{grant:"登记资助",euGrant:"欧盟最高资助额",usGrant:"ARPA-E登记资助额",programme:"资助计划",active:"进行中",alumni:"历史项目",noProfile:"缺少同口径的完整登记数据，不绘制合作结构评分。"});
+  Object.assign(TXT.en,{grant:"Registered funding",euGrant:"Maximum EU contribution",usGrant:"Listed ARPA-E award",programme:"Funding programme",active:"Active",alumni:"Alumni",noProfile:"No collaboration score is drawn without comparable complete register data."});
+  const registeredPeriod = c => c.project?.start_date&&c.project?.end_date?c.project.start_date+' — '+c.project.end_date:period(c)||t("missing");
+  const registeredGrant = c => !c.project?t("missing"):c.project.source_type==='ARPAE'?
+    (typeof c.project.award_usd==='number'?number(c.project.award_usd)+(lang==='zh'?' 美元':' USD'):t("missing")):
+    (typeof c.project.eu_grant_eur==='number'?number(c.project.eu_grant_eur/1e6)+(lang==='zh'?' 百万欧元':' EUR million'):t("missing"));
   function radarSvg(cases,axes,language="zh") {
     const labels=axes.map(a=>text(a.label,language));
     const point=(index,score)=>{const a=-Math.PI/2+index*Math.PI*2/axes.length;return [310+136*score/5*Math.cos(a),224+136*score/5*Math.sin(a)];};
@@ -69,11 +75,11 @@
   function exportCsv(book, cases, lang) {
     const sourceMap = new Map(book.sources.map(s=>[s.id,s]));
     const keys = ["id","title","countries","scope","sector","challenges","modes","institutions","factors","start_year","end_year",
-      "summary","actors","mechanism","observed","constraints","transfer","source_urls","reviewed_at","official_id","eu_grant_eur","participant_count","country_count"];
+      "summary","actors","mechanism","observed","constraints","transfer","source_urls","reviewed_at","official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis"];
     const value = (c,key) => {
       if (key==="source_urls") return c.evidence.map(ref=>sourceMap.get(ref.source_id)?.url||"").filter(Boolean).join(" | ");
       if (key==="reviewed_at") return book.reviewed_at;
-      if (["official_id","eu_grant_eur","participant_count","country_count"].includes(key)) return c.project?.[key]??"";
+      if (["official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis"].includes(key)) return c.project?.[key]??"";
       if (book.taxonomy[key]) return c[key].map(tag=>text(book.taxonomy[key][tag],lang)).join(" | ");
       if (Array.isArray(c[key])) return c[key].join(" | ");
       return text(c[key],lang);
@@ -105,14 +111,16 @@
   function projectFacts(c) {
     if(!c.project)return "";
     const p=c.project;
-    const rows=[["identifier",p.official_id],["timeline",p.start_date+' — '+p.end_date],["action",p.action==='IA'?(lang==='zh'?'创新行动（IA）':'Innovation action (IA)'):(lang==='zh'?'研究与创新行动（RIA）':'Research and innovation action (RIA)')],
-      ["grant",number(p.eu_grant_eur/1e6)+(lang==='zh'?' 百万欧元':' EUR million')],["cost",number(p.total_cost_eur/1e6)+(lang==='zh'?' 百万欧元':' EUR million')],["status",p.register_status==='CLOSED'?t("closed"):t("signed")]];
+    const rows=p.source_type==='ARPAE'?[["identifier",p.official_id],["timeline",registeredPeriod(c)],["programme",p.programme],["usGrant",registeredGrant(c)],
+      ["status",p.register_status==='Active'?t("active"):t("alumni")]]:
+      [["identifier",p.official_id],["timeline",registeredPeriod(c)],["action",p.action==='IA'?(lang==='zh'?'创新行动（IA）':'Innovation action (IA)'):(lang==='zh'?'研究与创新行动（RIA）':'Research and innovation action (RIA)')],
+      ["euGrant",registeredGrant(c)],["cost",number(p.total_cost_eur/1e6)+(lang==='zh'?' 百万欧元':' EUR million')],["status",p.register_status==='CLOSED'?t("closed"):t("signed")]];
     return '<h3 class="ic-group-title">'+t("budget")+'</h3><dl class="ic-project-facts">'+rows.map(([k,v])=>'<div><dt>'+t(k)+'</dt><dd>'+esc(v)+'</dd></div>').join("")+'</dl><p class="ic-funding-note">'+t("fundingNote")+'</p>';
   }
   function partnerList(c) {
     if(!c.participants?.length)return "";
     return '<details class="ic-partners"><summary>'+t("showParticipants")+' ('+c.participants.length+')</summary><div class="ic-matrix-scroll"><table class="ic-matrix ic-partner-table"><thead><tr>'+["organization","country","actorType","role"].map(k=>'<th>'+t(k)+'</th>').join("")+'</tr></thead><tbody>'+c.participants.map(p=>{
-      const cr=book.countries.find(row=>row.alpha2===p.country);return '<tr><td>'+esc(p.name)+'</td><td>'+esc(cr?cr[lang==='zh'?'name_zh':'name_en']:p.country)+'</td><td>'+esc(local(book.participant_types[p.type]))+'</td><td>'+t(p.role==='coordinator'?'coordinator':'participant')+'</td></tr>';
+      const cr=book.countries.find(row=>row.alpha2===p.country);return '<tr><td>'+esc(p.name)+'</td><td>'+esc(cr?cr[lang==='zh'?'name_zh':'name_en']:p.country||t("missing"))+'</td><td>'+esc(local(book.participant_types[p.type])||t("missing"))+'</td><td>'+t(p.role==='coordinator'?'coordinator':'participant')+'</td></tr>';
     }).join("")+'</tbody></table></div></details>';
   }
   function shell() {
@@ -219,9 +227,10 @@
     if(cases.length<2)return;
     const rows=[
       ["country",c=>countries(c)],["kind",c=>local(c.sector)],
-      ["timeline",c=>c.project?c.project.start_date+' — '+c.project.end_date:period(c)],
-      ["grant",c=>c.project?number(c.project.eu_grant_eur/1e6)+(lang==='zh'?' 百万欧元':' EUR million'):t("missing")],
-      ["participants",c=>c.project?c.project.participant_count+' · '+c.project.company_count+(lang==='zh'?'家企业':' companies'):t("missing")],
+      ["timeline",registeredPeriod],
+      ["grant",registeredGrant],
+      ["participants",c=>c.project?.participant_count!==null&&c.project?.participant_count!==undefined?c.project.participant_count+' · '+c.project.company_count+(lang==='zh'?'家企业':' companies'):
+        c.participants?.length?(lang==='zh'?'公开列名 ':'Named ')+c.participants.length+(lang==='zh'?' 家机构（非完整统计）':' organisations (not a complete census)'):t("missing")],
       ["mode",c=>c.modes.map(key=>label("modes",key)).join(" · ")],
       ["institution",c=>c.institutions.map(key=>label("institutions",key)).join(" · ")],
       ["factors",c=>c.factors.map(key=>label("factors",key)).join(" · ")],

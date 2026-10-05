@@ -1482,5 +1482,33 @@
     "phase": "P0",
     "enable_recommended": true,
     "implementation_note": "首次部署回看7天以修复本周中国样本；以后每日幂等更新并按canonical_url去重。"
+  },
+  {
+    "source_id": "OFF015",
+    "name": "ARPA-E official energy research projects",
+    "source_type": "美国能源部官方研发项目注册信息",
+    "region": "美国",
+    "languages": ["en"],
+    "focus": "能源科产合作项目、技术任务、资助、项目期及命名合作机构",
+    "homepage_url": "https://arpa-e.energy.gov/",
+    "listing_url": "https://arpa-e.energy.gov/programs-and-initiatives/search-all-projects",
+    "machine_url": "https://arpa-e.energy.gov/jsonapi/custom/index/project",
+    "access_method": "官网公开JSON分页接口；显式维护，不进入每日新闻轮询",
+    "api_key_required": false,
+    "access_constraints": "robots与官方使用规则优先；限速、超时、缓存；中断响应只保留完整项目对象",
+    "poll_interval_minutes": 43200,
+    "storage_policy": "官方题名、中文编译、短英文摘录、项目元数据、合作组织及来源快照指纹",
+    "compliance_note": "不发布联系人、邮箱、电话、地址或个人顾问；不复制图片；美元资助不混算欧元；目标不作成果",
+    "status": "2026-10-05已核验公开接口与规则，190例通过显式校编",
+    "evidence_url": "https://www.energy.gov/web-policies",
+    "authority": 5,
+    "climate_relevance": 4,
+    "timeliness": 3,
+    "machine_readability": 4,
+    "geo_language_value": 5,
+    "legal_clarity": 4,
+    "phase": "P1",
+    "enable_recommended": false,
+    "implementation_note": "scripts/collect_arpae_projects.py获取；select_us_innovation_projects.py筛选；import_us_innovation_projects.py仅读取审核清单导入。离线解析测试与analysis/innovation_us_audit.ipynb核验。"
   }
 ]

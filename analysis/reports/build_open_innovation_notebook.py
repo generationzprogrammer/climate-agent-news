@@ -37,9 +37,9 @@ from collections import Counter
 root = next(p for p in (Path.cwd(), *Path.cwd().parents) if (p/'config/open_innovation_projects.json').exists())
 book = json.loads((root/'static/data/innovation_cases.json').read_text(encoding='utf-8'))
 prior = json.loads((root/'config/open_innovation_cases.json').read_text(encoding='utf-8'))
-projects = [c for c in book['cases'] if c.get('project')]
+projects = [c for c in book['cases'] if c.get('project',{}).get('funding_basis')=='maximum_EU_contribution_not_actual_expenditure']
 audit = json.loads((root/'analysis/reports/open_innovation/analysis_results.json').read_text(encoding='utf-8'))
-print({'cases':len(book['cases']), 'projects':len(projects), 'retained':len(prior['cases'])})"""),
+print({'report_snapshot_cases':len(projects)+len(prior['cases']), 'current_catalog_cases':len(book['cases']), 'projects':len(projects), 'retained':len(prior['cases'])})"""),
 md("## 数据检查\n按官方项目编号与机构编号核验粒度，独立复算雷达图的原始量；公开参与方字段采用白名单。"),
 code("""assert len({c['project']['official_id'] for c in projects}) == len(projects)
 published = {c['id']:c for c in book['cases']}

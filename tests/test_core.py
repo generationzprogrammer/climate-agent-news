@@ -62,13 +62,15 @@ class CoreTests(unittest.TestCase):
 
     def test_bootstrap_is_idempotent(self) -> None:
         bootstrap(self.db)
-        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], 53)
+        registered = json.loads((ROOT / "config/sources.master.json").read_text(encoding="utf-8"))
+        self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM sources")[0]["n"], len(registered))
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM events")[0]["n"], 3)
         self.assertEqual(self.db.rows("SELECT COUNT(*) AS n FROM articles WHERE article_id LIKE 'curated_%'")[0]["n"], 8)
 
     def test_dashboard_reconciles_counts_and_uses_latest_day(self) -> None:
         payload = dashboard_payload(self.db)
-        self.assertEqual(payload["metrics"]["source_total"], 53)
+        registered = json.loads((ROOT / "config/sources.master.json").read_text(encoding="utf-8"))
+        self.assertEqual(payload["metrics"]["source_total"], len(registered))
         self.assertEqual(payload["metrics"]["source_enabled"], 33)
         self.assertGreaterEqual(len(payload["intelligence"]), 1)
         self.assertEqual(len(select_latest_day(payload["intelligence"], limit=20)), len(payload["intelligence"]))
