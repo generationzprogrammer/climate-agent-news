@@ -26,7 +26,7 @@ const server=http.createServer((req,res)=>{
       await page.goto(origin+"?mode=energy#innovationCases",{waitUntil:"domcontentloaded",timeout:60000});
       await page.locator("#innovationCases .ic-card").first().waitFor({timeout:60000});
       assert.equal(await page.locator("#innovationCases .ic-result").textContent(),book.cases.length+" 个案例");checks++;
-      assert(book.cases.length>=300);checks++;
+      assert(book.cases.length>=750);checks++;
       assert.equal(await page.locator("#innovationCases .ic-card").count(),12);checks++;
       if(mobile){
         await page.locator("#mobileMenuToggle").click();
@@ -81,6 +81,15 @@ const server=http.createServer((req,res)=>{
       await download.saveAs(path.join(out,mobile?"mobile.csv":"desktop.csv"));
       assert(fs.readFileSync(path.join(out,mobile?"mobile.csv":"desktop.csv"),"utf8").includes("source_urls"));checks++;
       await page.locator('#innovationCases [data-filter="query"]').fill("");
+      await page.locator('#innovationCases [data-filter="province"]').selectOption('CN-XJ');
+      assert.equal(await page.locator('#innovationCases .ic-result').textContent(),filterCases(book,{province:'CN-XJ'}).length+' 个案例');checks++;
+      await page.locator('#innovationCases [data-detail="oi_xinjiang_medicine"]').click();
+      assert((await page.locator('#innovationCases .ic-dialog-body').textContent()).includes('天然植物提取'));checks++;
+      await page.locator('#innovationCases .ic-close').click();
+      await page.locator('#innovationCases [data-filter="province"]').selectOption('');
+      await page.locator('#innovationCases [data-filter="country"]').selectOption('WS');
+      assert.equal(await page.locator('#innovationCases .ic-card').count(),1);checks++;
+      await page.locator('#innovationCases [data-filter="country"]').selectOption('');
       await page.locator(mobile?"#mobileMenuToggle":"#languageToggle").click();
       if(mobile)await page.locator("#mobileLanguageToggle").click();
       assert.equal(await page.locator("#innovationCases h2").textContent(),"Global science–industry innovation cases");checks++;
@@ -111,6 +120,16 @@ const server=http.createServer((req,res)=>{
       await page.locator('#innovationCases [data-model-select="jiangsu_contract"]').check();
       await page.locator('#innovationCases [data-model-select="hubei_photonics"]').check();
       assert((await page.locator('#innovationCases .ic-model-comparison').textContent()).includes('现场性能'));checks++;
+      await page.locator('#innovationCases [data-model-clear]').click();
+      await page.locator('#innovationCases [data-model-select="fujian_joint_pilots"]').check();
+      await page.locator('#innovationCases [data-model-select="western_bioresources"]').check();
+      assert((await page.locator('#innovationCases .ic-model-comparison').textContent()).includes('监管路径不同'));checks++;
+      await page.locator('#innovationCases [data-model-scope]').selectOption('international');
+      await page.locator('#innovationCases [data-model-clear]').click();
+      for(const id of ['african_public_engineering','latin_agri_networks','pacific_adaptation'])await page.locator('#innovationCases [data-model-select="'+id+'"]').check();
+      assert.equal(await page.locator('#innovationCases .ic-model-table thead th').count(),4);checks++;
+      assert((await page.locator('#innovationCases .ic-model-comparison').textContent()).includes('萨摩亚'));checks++;
+      await page.locator('#innovationCases [data-model-scope]').selectOption('all');
       await page.locator('#innovationCases [data-china-compare]').click();
       await page.locator('#innovationCases [data-analysis-panel="models"]').screenshot({path:path.join(out,mobile?'models-mobile.png':'models-desktop.png')});
       await page.locator('#innovationCases [data-explore-province="CN-GD"]').click();

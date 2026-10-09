@@ -76,19 +76,20 @@ class InnovationAnalysisTests(unittest.TestCase):
             self.assertEqual([c["research_annotation"] for c in one["cases"]],[c["research_annotation"] for c in two["cases"]])
 
     def test_additive_coverage_preserves_all_previous_factual_fields(self):
-        previous=json.loads((ROOT/'config/open_innovation_regional_cases.json').read_text(encoding='utf-8'))
         current={c['id']:c for c in self.book['cases']}
         sources={s['id']:s for s in self.book['sources']}
-        for old in previous['cases']:
-            for key in ('title','summary','actors','mechanism','observed','constraints','transfer','countries','evidence'):
-                self.assertEqual(old[key],current[old['id']][key])
-        for source in previous['sources']:self.assertEqual(source,sources[source['id']])
+        for filename in ('open_innovation_regional_cases.json','open_innovation_coverage.json'):
+            previous=json.loads((ROOT/'config'/filename).read_text(encoding='utf-8'))
+            for old in previous['cases']:
+                for key in ('title','summary','actors','mechanism','observed','constraints','transfer','countries','evidence'):
+                    self.assertEqual(old[key],current[old['id']][key])
+            for source in previous['sources']:self.assertEqual(source,sources[source['id']])
 
     def test_undercovered_continents_and_provinces_have_traceable_cases(self):
         extra=json.loads((ROOT/'config/open_innovation_coverage.json').read_text(encoding='utf-8'))
         current={c['id']:c for c in self.book['cases']}
         self.assertEqual(len(extra['cases']),43)
-        self.assertEqual(len(self.book['analysis']['provinces']),21)
+        self.assertEqual(len(self.book['analysis']['provinces']),31)
         expected={'africa':7,'south_america':6,'oceania':6,'asia':23,'north_america':1}
         self.assertEqual(dict(Counter(current[c['id']]['research_annotation']['continent'] for c in extra['cases'])),expected)
         for c in extra['cases']:
@@ -99,6 +100,29 @@ class InnovationAnalysisTests(unittest.TestCase):
         self.assertEqual(economy_group('MX'),'developing')
         self.assertEqual(economy_group('CA'),'developed')
         self.assertEqual(economy_group('MU'),'developing')
+
+    def test_expansion_covers_missing_provinces_without_duplicate_records(self):
+        extra=json.loads((ROOT/'config/open_innovation_expansion.json').read_text(encoding='utf-8'))
+        current={c['id']:c for c in self.book['cases']}
+        self.assertGreaterEqual(len(current),750)
+        self.assertEqual(len(extra['cases']),73)
+        self.assertEqual(len(extra['model_profiles']),10)
+        self.assertEqual(len(self.book['analysis']['profiles']),28)
+        self.assertEqual(dict(Counter(current[c['id']]['research_annotation']['continent'] for c in extra['cases'])),
+                         {'asia':32,'africa':13,'south_america':13,'oceania':15})
+        missing={'CN-'+p for p in ('SX','NM','JL','JX','HI','GZ','YN','XZ','NX','XJ')}
+        self.assertTrue(missing<={c['research_annotation']['province'] for c in extra['cases']})
+        self.assertEqual(len({c['title']['en'].casefold() for c in self.book['cases']}),len(current))
+        sources={s['id']:s for s in self.book['sources']}
+        for c in extra['cases']:
+            a=current[c['id']]['research_annotation']
+            self.assertEqual(a['cohort'],'expansion_review')
+            self.assertNotEqual(a['continent'],'cross_region')
+            self.assertEqual(a['grain'],'platform')
+            if a['province']:self.assertTrue(a['city']);self.assertEqual(a['country'],'CN')
+            for ref in c['evidence']:self.assertEqual(sources[ref['source_id']]['source_role'],'primary')
+        for country in ('BW','RW','UG','TZ','NG','NA','SN','CI','WS','PG'):
+            self.assertEqual(economy_group(country),'developing')
 
     def test_unknown_province_is_rejected_instead_of_silently_dropped(self):
         import copy

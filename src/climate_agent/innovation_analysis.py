@@ -9,10 +9,10 @@ import copy
 REGIONS = {
  "europe": ("欧洲", "Europe", "NO NL RO RU RS PL PT ME LT LU LV MT UA SK SI SE CH DK EE DE CZ AT AL BA BE BG IS IT HU IE FR GB ES FI HR GR"),
  "asia": ("亚洲", "Asia", "PK TR SG CN CY JO IN IL JP KR"),
- "africa": ("非洲", "Africa", "MA ZA TN CD KE EG ET GH MU"),
+ "africa": ("非洲", "Africa", "MA ZA TN CD KE EG ET GH MU BW RW UG TZ NG NA SN CI"),
  "north_america": ("北美洲", "North America", "US CA MX GT BZ HN SV NI CR PA CU HT DO JM BS BB TT AG DM GD KN LC VC"),
  "south_america": ("南美洲", "South America", "AR BO BR CL CO EC GY PY PE SR UY VE"),
- "oceania": ("大洋洲", "Oceania", "NZ AU MH"),
+ "oceania": ("大洋洲", "Oceania", "NZ AU MH WS PG"),
 }
 COUNTRY_REGION = {code:key for key,(_,_,codes) in REGIONS.items() for code in codes.split()}
 DEVELOPED_ASIA_OCEANIA = {"IL", "JP", "KR", "AU", "NZ"}

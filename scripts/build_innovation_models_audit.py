@@ -14,7 +14,7 @@ def main():
         cells.append(dict(cell_type="code",id="models-"+str(len(cells)+1),metadata={},source=text,execution_count=None,outputs=[]))
     md("""# 科产融合模式与区域比较：复算核验
 ## 结论与范围
-2026-10-09第二次扩充保留此前637个案例，补充薄弱大洲和中国省份。平台与资助项目、美元与欧元分别处理，不以样本数或结构评分推断创新绩效。覆盖和模式数量在下列代码中复算。
+2026-10-09第三次扩充保留此前680个案例，优先补充非洲、南美洲、大洋洲和中国薄弱省份。平台与资助项目、美元与欧元分别处理，不以样本数或结构评分推断创新绩效。覆盖和模式数量在下列代码中复算。
 数据：config/open_innovation_*.json、static/data/innovation_cases.json。问题标签保留，但不再作主分类。人工机制编码是解释而非官方评级。此前政策报告保留为第一次扩充的637例研究快照，不自动重写历史结论。""")
     code("""from pathlib import Path
 import json
@@ -25,19 +25,24 @@ b=read('static/data/innovation_cases.json')
 old=sum([read('config/'+n)['cases'] for n in ('open_innovation_cases.json','open_innovation_projects.json','open_innovation_us_projects.json')],[])
 regional=read('config/open_innovation_regional_cases.json')['cases']
 coverage=read('config/open_innovation_coverage.json')['cases']
-new=regional+coverage
+expansion=read('config/open_innovation_expansion.json')['cases']
+new=regional+coverage+expansion
 current={c['id']:c for c in b['cases']}
-assert len(old)==613 and len(regional)==24 and len(coverage)==43
+assert len(old)==613 and len(regional)==24 and len(coverage)==43 and len(expansion)==73
 assert len(current)==len(old)+len(new) and len(current)==len(b['cases'])
-for c in old+regional:
+for c in old+regional+coverage:
     for k in (key for key in c if key!='research_annotation'):
         assert c[k]==current[c['id']][k],(c['id'],k)
-china_added=sum(c['countries']==['CN'] for c in coverage)
-assert china_added==21
-print({'retained':len(old)+len(regional),'added':len(coverage),'total':len(current),'new_China':china_added})""")
+source_index={s['id']:s for s in b['sources']}
+for filename in ('open_innovation_cases.json','open_innovation_projects.json','open_innovation_us_projects.json',
+                 'open_innovation_regional_cases.json','open_innovation_coverage.json','open_innovation_models.json'):
+    for source in read('config/'+filename).get('sources',[]):assert source==source_index[source['id']]
+china_added=sum(c['countries']==['CN'] for c in expansion)
+assert china_added==32
+print({'retained':len(old)+len(regional)+len(coverage),'added':len(expansion),'total':len(current),'new_China':china_added})""")
     md("## 分类、比较分母与证据\n宏观统计按项目协调国或平台明确的单国主体互斥计数；跨国与缺失单列，不累计所有参与国。")
     code("""a=b['analysis']; sources={s['id'] for s in b['sources']}
-assert len(a['archetypes'])==8 and len(a['profiles'])==18
+assert len(a['archetypes'])==8 and len(a['profiles'])==28
 for p in a['profiles']:
     assert set(p['case_ids'])<=current.keys() and set(p['source_ids'])<=sources
     assert all(p[k]['zh'] and p[k]['en'] for k in ('conditions','mechanism','government','boundary','factors'))
@@ -55,10 +60,14 @@ counts=Counter(c['research_annotation'].get('province') for c in new)
 assert counts['CN-GD']==8 and counts['CN-ZJ']==11
 province_counts={p['id']:p['count'] for p in a['provinces']}
 assert sum(province_counts.values())==sum(bool(c['research_annotation'].get('province')) for c in b['cases'])
-assert len(province_counts)==21
+assert len(province_counts)==31
 for c in coverage:
     annotation=current[c['id']]['research_annotation']
     assert annotation['continent']!='cross_region' and annotation['cohort']=='coverage_review'
+assert Counter(current[c['id']]['research_annotation']['continent'] for c in expansion)=={'asia':32,'africa':13,'south_america':13,'oceania':15}
+for c in expansion:
+    annotation=current[c['id']]['research_annotation']
+    assert annotation['cohort']=='expansion_review' and annotation['grain']=='platform'
 continents=Counter(c['research_annotation']['continent'] for c in b['cases'])
 print({'archetypes':len(a['archetypes']),'profiles':len(a['profiles']),'province_cases':province_counts,'continents':dict(continents),'sources_resolved':True})""")
     md("## 图表独立复算\n将报告SQL输出与独立Python计数逐项核对，确认图表分子、分母一致。")
@@ -79,8 +88,8 @@ for row in audit['eu']:
     n=sum(role(c)==row['协调方'] for c in subset)
     assert n==row['项目数'] and len(subset)==row['领域项目数']
     assert abs(n/len(subset)-row['比例'])<1e-12
-result={'status':'passed','cases':len(current),'retained_cases':len(old)+len(regional),
-        'new_cases':len(coverage),'new_China_cases':china_added,'sources':len(sources),
+result={'status':'passed','cases':len(current),'retained_cases':len(old)+len(regional)+len(coverage),
+        'new_cases':len(expansion),'new_China_cases':china_added,'sources':len(sources),
         'models':len(a['profiles']),'archetypes':len(a['archetypes']),
         'Chinese_provinces':len(province_counts),'province_cases':province_counts,
         'continents':dict(continents),'EU_projects':len(eu),'dated_report_SQL_independently_reconciled':True}

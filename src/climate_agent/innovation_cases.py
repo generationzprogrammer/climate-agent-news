@@ -191,15 +191,18 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book["cases"].extend(extra["cases"])
         book["sources"].extend(extra["sources"])
         book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
-    coverage = root / "config/open_innovation_coverage.json"
     coverage_profiles = []
-    if coverage.exists():
-        extra = json.loads(coverage.read_text(encoding="utf-8"))
+    for layer in ("open_innovation_coverage.json", "open_innovation_expansion.json"):
+        layer_path = root / "config" / layer
+        if not layer_path.exists():
+            continue
+        extra = json.loads(layer_path.read_text(encoding="utf-8"))
         book["cases"].extend(extra["cases"])
         book["sources"].extend(extra["sources"])
         book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
         book.setdefault("provenance", {}).update(extra.get("provenance", {}))
-        coverage_profiles = extra.get("model_profiles", [])
+        coverage_profiles.extend(extra.get("model_profiles", []))
+        book["reviewed_at"] = max(book["reviewed_at"], extra.get("reviewed_at", book["reviewed_at"]))
     model_path = root / "config/open_innovation_models.json"
     if model_path.exists():
         model_config = json.loads(model_path.read_text(encoding="utf-8"))
@@ -213,7 +216,9 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
                 "oi_cordis_101135374", "oi_cordis_101058453", "oi_nedo_lyon",
                 "oi_cordis_101096425", "oi_cordis_101084046"]
     rank = {cid: index for index, cid in enumerate(featured)}
-    book["cases"].sort(key=lambda c: (rank.get(c["id"], len(rank)), c.get("sector_key", ""), c["id"]))
+    book["cases"].sort(key=lambda c: (rank.get(c["id"], len(rank)),
+        c.get("research_annotation", {}).get("cohort") == "expansion_review",
+        c.get("sector_key", ""), c["id"]))
     country_rows = json.loads((root / "config/country_codes.json").read_text(encoding="utf-8"))["countries"]
     quality = validate_casebook(book, {row["alpha2"] for row in country_rows})
     payload = copy.deepcopy(book)
