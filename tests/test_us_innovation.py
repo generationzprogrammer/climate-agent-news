@@ -58,10 +58,17 @@ class USInnovationTests(unittest.TestCase):
             output=Path(directory)/'innovation_cases.json'
             first=write_innovation_cases(ROOT,output,[],today=date(2026,10,5))
             second=write_innovation_cases(ROOT,output,[],today=date(2026,10,6))
-        self.assertEqual(first['statistics']['cases'],613)
+            expected=sum(len(json.loads((ROOT/'config'/name).read_text(encoding='utf-8'))['cases'])
+                         for name in ('open_innovation_cases.json','open_innovation_projects.json',
+                                      'open_innovation_us_projects.json','open_innovation_regional_cases.json'))
+            self.assertEqual(first['statistics']['cases'],expected)
         self.assertEqual(first['sources'],second['sources'])
         self.assertEqual(first['cases'],second['cases'])
-        self.assertEqual(sum('US' in c['countries'] for c in second['cases']),195)
+        expected_us=sum('US' in c['countries'] for name in ('open_innovation_cases.json',
+            'open_innovation_projects.json','open_innovation_us_projects.json',
+            'open_innovation_regional_cases.json') for c in
+            json.loads((ROOT/'config'/name).read_text(encoding='utf-8'))['cases'])
+        self.assertEqual(sum('US' in c['countries'] for c in second['cases']),expected_us)
         self.assertEqual(second['updated_at'],'2026-10-06')
 
     def test_research_operator_is_not_misclassified_as_industry(self):

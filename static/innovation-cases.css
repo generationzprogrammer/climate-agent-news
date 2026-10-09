@@ -81,6 +81,36 @@
 #innovationCases .ic-partner-table { min-width:600px; }
 #innovationCases .ic-partner-table td:first-child { min-width:235px; overflow-wrap:anywhere; }
 #innovationCases .ic-partner-table td:not(:first-child) { min-width:95px; }
+#innovationCases [data-analysis-panel][hidden] { display:none !important; }
+#innovationCases .ic-analysis { border-top:1px solid var(--line); padding-top:20px; }
+#innovationCases .ic-analysis>h3 { font:600 24px/1.5 var(--serif); margin:6px 0 14px; }
+#innovationCases .ic-analysis p { font-size:17px; line-height:1.85; max-width:1100px; }
+#innovationCases .ic-model-select { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:20px 0; }
+#innovationCases .ic-model-select label { border:1px solid var(--line); padding:14px; border-radius:5px; line-height:1.6; font-size:16px; display:flex; align-items:flex-start; gap:9px; }
+#innovationCases .ic-model-select input { width:18px; height:18px; margin-top:4px; flex-shrink:0; accent-color:var(--blue); }
+#innovationCases .ic-model-actions,#innovationCases .ic-analysis-filters,#innovationCases .ic-macro-controls { display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin:18px 0; }
+#innovationCases .ic-analysis-filters label,#innovationCases .ic-macro-controls label { display:flex; flex-direction:column; gap:8px; min-width:200px; font-size:15px; }
+#innovationCases .ic-model-actions button,#innovationCases .ic-reset { border:1px solid var(--line); padding:10px 16px; border-radius:4px; background:white; color:var(--blue-dark); }
+#innovationCases .ic-model-status { font-size:15px; color:var(--muted); }
+#innovationCases .ic-model-table { margin:14px 0 28px; }
+#innovationCases .ic-matrix caption { text-align:left; padding:12px 0; font-size:17px; font-weight:500; color:var(--ink); }
+#innovationCases .ic-evidence-case { display:block; text-align:left; background:none; border:0; padding:7px 0; color:var(--blue-dark); font-size:15px; line-height:1.6; }
+#innovationCases .ic-region-cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:20px 0; }
+#innovationCases .ic-region-cards button { border:1px solid var(--line); border-radius:5px; background:white; text-align:left; padding:18px; line-height:1.7; }
+#innovationCases .ic-region-cards strong { font-size:20px; display:block; }
+#innovationCases .ic-region-cards span { font-size:15px; display:block; margin-top:7px; }
+#innovationCases .ic-macro-svg { width:100%; min-width:600px; font-family:var(--sans); }
+#innovationCases .ic-chart-scroll { overflow-x:auto; margin:24px 0 12px; }
+#innovationCases .ic-macro-svg rect[role=button] { cursor:pointer; }
+#innovationCases .ic-macro-svg rect:focus { stroke:#111; stroke-width:3px; outline:none; }
+#innovationCases .ic-composition-legend { display:flex; flex-wrap:wrap; gap:12px 22px; }
+#innovationCases .ic-composition-legend span { display:inline-flex; align-items:center; gap:7px; font-size:15px; }
+#innovationCases .ic-composition-legend i { width:16px; height:16px; display:inline-block; }
+#innovationCases .ic-chart-readout { min-height:30px; }
+#innovationCases .ic-composition-table { min-width:1050px; font-size:14px; }
+#innovationCases .ic-composition-table th,#innovationCases .ic-composition-table td { min-width:90px; padding:12px; }
+@media(max-width:900px) { #innovationCases .ic-model-select,#innovationCases .ic-region-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:600px) { #innovationCases .ic-model-select { grid-template-columns:1fr; } #innovationCases .ic-analysis-filters label { min-width:0; flex:1 1 140px; } #innovationCases .ic-region-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:1100px) {
   #innovationCases .ic-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   #innovationCases .ic-filters { grid-template-columns: repeat(2,minmax(0,1fr)); }

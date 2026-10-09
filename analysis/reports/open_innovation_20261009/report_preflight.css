@@ -1,0 +1,35 @@
+/* Layout/conversion only. All data, charts and provenance use the native reader. */
+.analytics-top-bar { width:100% !important; margin-left:0 !important; margin-right:0 !important; }
+.viz-card-menu-button[data-artifact-has-source="true"] { opacity:1 !important; pointer-events:auto !important; transform:none !important; }
+@media screen and (max-width:600px) {
+ .rich-markdown-table { width:100% !important; min-width:0 !important; table-layout:fixed; }
+ .rich-markdown-table th,.rich-markdown-table td { width:auto !important; min-width:0 !important; white-space:normal !important; overflow-wrap:anywhere; padding:7px !important; }
+ .rich-markdown-table th span,.rich-markdown-table td span { white-space:normal !important; }
+ .recharts-legend-wrapper { max-width:100% !important; width:100% !important; left:0 !important; }
+ .chart-legend { width:100% !important; max-width:100%; flex-wrap:wrap !important; white-space:normal !important; }
+}
+@media print {
+ @page { size:A4; margin:18mm 16mm; }
+ .analytics-top-bar,.viz-card-actions,.copy-toast,.portable-page-meta,.portable-surface-label,.portable-status { display:none !important; }
+ .portable-page-header { margin:0 0 14px; padding:0 0 12px; }
+ .portable-page-header h1 { font: bold 20pt/1.5 "Times New Roman","SimSun",serif; color:#111; }
+ .portable-markdown { max-width:none; }
+ .portable-markdown p,.portable-markdown li { font:11pt/1.7 "Times New Roman","SimSun",serif; }
+ .portable-markdown h1,.portable-markdown h2,.portable-markdown h3 { color:#111; font-family:"Times New Roman","SimSun",serif; break-after:avoid; }
+ .portable-markdown h2 { font-size:15pt; }
+ .portable-markdown h3 { font-size:12pt; }
+ .portable-markdown a { color:#111; text-decoration:none; }
+ .portable-markdown table { table-layout:fixed; font:9.5pt/1.55 "Times New Roman","SimSun",serif; }
+ .portable-markdown th,.portable-markdown td { white-space:normal; overflow-wrap:anywhere; padding:7px; color:#111; }
+ .portable-markdown tr { break-inside:avoid; }
+ [data-artifact-block-id="scope"] .portable-markdown li { font-size:9.5pt; line-height:1.5; margin:0 0 3px; }
+ .portable-table-card { break-inside:avoid; }
+ .portable-table-card table { width:100% !important; table-layout:fixed; font-family:"Times New Roman","SimSun",serif; }
+ .portable-table-card th,.portable-table-card td { padding:7px !important; font-size:9.5pt !important; line-height:1.55 !important; white-space:normal !important; overflow-wrap:anywhere; color:#111 !important; }
+ .portable-table-card .portable-visual-header h2 { font:bold 12pt/1.5 "Times New Roman","SimSun",serif; color:#111; }
+ .portable-chart-summary .portable-table-scroll,.portable-chart-summary .portable-table-note,.portable-chart-data-has-vector { display:none !important; }
+ .portable-source-tooltip-content,.portable-source-summary-content,.portable-source-context { display:none !important; }
+ .portable-chart-summary figcaption::after { display:block; margin-top:6px; font-size:9pt; color:#555; }
+ figure[data-chart-id="eu_chart"] figcaption::after { content:"数据来源：欧盟CORDIS登记，2026年10月9日分析快照。"; }
+ figure[data-chart-id="regional_chart"] figcaption::after { content:"数据来源：官方机构与政府公开材料，经审阅案例，2026年10月9日。"; }
+}

@@ -92,6 +92,34 @@ const server=http.createServer((req,res)=>{
       if(mobile){await page.locator("#mobileMenuToggle").click();await page.locator("#mobileLanguageToggle").click();}
       else await page.locator("#languageToggle").click();
       await page.locator("#innovationCases").screenshot({path:path.join(out,mobile?"library-mobile.png":"library-desktop.png")});
+      await page.locator('#innovationCases [data-case-view="models"]').click();
+      assert(await page.locator('#innovationCases [data-analysis-panel="models"]').isVisible());checks++;
+      const modelText=await page.locator('#innovationCases .ic-model-comparison').textContent();
+      assert(modelText.includes('广东')&&modelText.includes('浙江')&&modelText.includes('适用前提')&&modelText.includes('政府可用工具'));checks++;
+      await page.locator('#innovationCases [data-model-select="germany"]').check();
+      assert.equal(await page.locator('#innovationCases .ic-model-table thead th').count(),4);checks++;
+      assert(await page.locator('#innovationCases [data-model-select="japan"]').isDisabled());checks++;
+      await page.locator('#innovationCases .ic-model-comparison [data-detail="oi_giri"]').click();
+      assert(await page.locator('#innovationCases dialog').isVisible());checks++;
+      await page.locator('#innovationCases .ic-close').click();
+      await page.locator('#innovationCases [data-china-compare]').click();
+      await page.locator('#innovationCases [data-analysis-panel="models"]').screenshot({path:path.join(out,mobile?'models-mobile.png':'models-desktop.png')});
+      await page.locator('#innovationCases [data-explore-province="CN-GD"]').click();
+      assert.equal(await page.locator('#innovationCases .ic-result').textContent(),filterCases(book,{province:'CN-GD'}).length+' 个案例');checks++;
+      await page.locator('#innovationCases [data-case-view="macro"]').click();
+      await page.locator('#innovationCases [data-macro-dimension]').selectOption('economy');
+      assert(await page.locator('#innovationCases .ic-macro-table').textContent().then(s=>s.includes('发展中经济体')&&s.includes('来源渠道')));checks++;
+      await page.locator('#innovationCases [data-macro-grain]').selectOption('project');
+      const segment=page.locator('#innovationCases [data-macro-group]').first();
+      await segment.focus();
+      assert((await page.locator('#innovationCases .ic-chart-readout').textContent()).includes('%'));checks++;
+      await page.locator('#innovationCases [data-analysis-panel="macro"]').screenshot({path:path.join(out,mobile?'macro-mobile.png':'macro-desktop.png')});
+      await segment.press('Enter');
+      assert(await page.locator('#innovationCases [data-analysis-panel="cases"]').isVisible());checks++;
+      await page.locator('#innovationCases .ic-reset').click();
+      assert.equal(await page.locator('#innovationCases .ic-result').textContent(),book.cases.length+' 个案例');checks++;
+      const newWidth=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
+      assert(newWidth.scroll<=newWidth.width+1,JSON.stringify(newWidth));checks++;
       if(mobile){await page.locator("#mobileMenuToggle").click();await page.locator("#mobileModeToggle").click();}
       else await page.locator("#modeToggle").click();
       assert(!await page.locator("#innovationCases").isVisible());checks++;

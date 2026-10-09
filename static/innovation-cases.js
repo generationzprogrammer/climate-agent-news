@@ -60,6 +60,10 @@
   function filterCases(book, filters) {
     const query = String(filters.query || "").trim().toLowerCase();
     return book.cases.filter(c => {
+      for (const key of ["province","continent","economy","grain"]) {
+        if(filters[key]&&c.research_annotation?.[key]!==filters[key])return false;
+      }
+      if(filters.archetype&&c.research_annotation?.primary_model!==filters.archetype)return false;
       if (filters.lens && !c.challenges.includes(filters.lens)) return false;
       if (filters.country === "_global" && !["global","regional"].includes(c.scope)) return false;
       if (filters.country && filters.country !== "_global" && !c.countries.includes(filters.country)) return false;
@@ -75,10 +79,12 @@
   function exportCsv(book, cases, lang) {
     const sourceMap = new Map(book.sources.map(s=>[s.id,s]));
     const keys = ["id","title","countries","scope","sector","challenges","modes","institutions","factors","start_year","end_year",
-      "summary","actors","mechanism","observed","constraints","transfer","source_urls","reviewed_at","official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis"];
+      "summary","actors","mechanism","observed","constraints","transfer","source_urls","reviewed_at","official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis",
+      "primary_model","province","city","continent","economy","grain","cohort"];
     const value = (c,key) => {
       if (key==="source_urls") return c.evidence.map(ref=>sourceMap.get(ref.source_id)?.url||"").filter(Boolean).join(" | ");
       if (key==="reviewed_at") return book.reviewed_at;
+      if (["primary_model","province","city","continent","economy","grain","cohort"].includes(key)) return c.research_annotation?.[key]||"";
       if (["official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis"].includes(key)) return c.project?.[key]??"";
       if (book.taxonomy[key]) return c[key].map(tag=>text(book.taxonomy[key][tag],lang)).join(" | ");
       if (Array.isArray(c[key])) return c[key].join(" | ");
@@ -87,7 +93,8 @@
     return "\uFEFF" + [keys.map(csvCell).join(","), ...cases.map(c=>keys.map(k=>csvCell(value(c,k))).join(","))].join("\r\n");
   }
   let host, book, loadPromise, lang = "zh", visible = 12, selected = new Set(), lastFocus;
-  let filters = {query:"",lens:"",country:"",mode:"",institution:"",sector:""};
+  let filters = {query:"",lens:"",country:"",mode:"",institution:"",sector:"",archetype:"",province:"",continent:"",economy:"",grain:""};
+  let activeView="cases";
   const t = key => TXT[lang][key];
   const local = value => text(value,lang);
   const label = (group,key) => local(book.taxonomy[group][key]);
@@ -96,6 +103,8 @@
     const row=book.countries.find(r=>r.alpha2===code);
     return row ? row[lang==="zh"?"name_zh":"name_en"] : code;
   }).join(lang==="zh"?" · ":" · ") : t("international");
+  const location = c => {const a=c.research_annotation,p=book.analysis?.provinces.find(p=>p.id===a?.province);return p?countries(c)+' · '+local(p.name)+(lang==='zh'&&a.city?' · '+a.city:''):countries(c);};
+  const modelTag = c => {const m=book.analysis?.archetypes.find(m=>m.id===c.research_annotation?.primary_model);return m?'<span>'+esc(local(m.label))+'</span>':'';};
   const tags = (c,group) => c[group].map(tag=>'<span>'+esc(label(group,tag))+'</span>').join("");
   const period = c => c.start_year ? String(c.start_year)+(c.end_year&&c.end_year!==c.start_year?"–"+c.end_year:"") : "";
   const anchor = (href,title) => { const safe=url(href); return safe ? '<a href="'+esc(safe)+'" target="_blank" rel="noopener noreferrer">'+esc(title)+' ↗</a>' : esc(title); };
@@ -125,30 +134,34 @@
   }
   function shell() {
     host.innerHTML = '<div class="section-heading"><div><p class="overline">GLOBAL OPEN INNOVATION</p><h2>'+t("title")+'</h2></div>'+
-      '<div class="ic-top-actions"><a class="ic-report" href="reports/open-innovation.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'研究报告':'Research report')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
+      '<div class="ic-top-actions"><a class="ic-report" href="reports/open-innovation-policy-20261009.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'研究报告':'Research report')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
       '<p class="ic-research-title">'+esc(local(book.research_title))+'</p>'+
       '<div class="ic-summary"><strong>'+book.cases.length+'</strong> '+t("results")+' <span>·</span> <strong>'+book.countries.length+
       '</strong> '+t("countries")+' <span>·</span> <strong>'+book.sources.length+'</strong> '+t("sources")+'</div>'+
-      '<div class="ic-lenses" role="group" aria-label="'+t("title")+'">'+["","factor","adaptation","governance"].map(value=>
-        '<button type="button" data-lens="'+value+'" aria-pressed="'+(value===filters.lens)+'">'+(value?t(value):t("all"))+'</button>').join("")+'</div>'+
+      '<div class="ic-lenses" role="group" aria-label="'+t("title")+'">'+["cases","models","macro"].map(value=>
+        '<button type="button" data-case-view="'+value+'" aria-pressed="'+(value===activeView)+'">'+(lang==='zh'?{cases:'案例检索',models:'国家与区域模式',macro:'宏观对比'}[value]:{cases:'Case explorer',models:'National and regional models',macro:'Macro comparison'}[value])+'</button>').join("")+'</div>'+
+      '<div data-analysis-panel="cases">'+
       '<div class="ic-filters"><label class="ic-search">'+t("search")+'<input type="search" data-filter="query" maxlength="120" placeholder="'+t("placeholder")+'" value="'+esc(filters.query)+'"></label>'+
       '<label>'+t("country")+'<select data-filter="country"><option value="">'+t("all")+'</option><option value="_global">'+t("global")+'</option>'+
         book.countries.slice().sort((a,b)=>a[lang==="zh"?"name_zh":"name_en"].localeCompare(b[lang==="zh"?"name_zh":"name_en"],lang)).map(row=>'<option value="'+row.alpha2+'">'+esc(row[lang==="zh"?"name_zh":"name_en"])+' · '+row.alpha2+'</option>').join("")+'</select></label>'+
         [["mode","modes"],["institution","institutions"]].map(([field,group])=>'<label>'+t(field)+'<select data-filter="'+field+'"><option value="">'+t("all")+'</option>'+
         Object.entries(book.taxonomy[group]).map(([key,value])=>'<option value="'+key+'">'+esc(local(value))+'</option>').join("")+'</select></label>').join("")+
       '<label>'+t("sector")+'<select data-filter="sector"><option value="">'+t("all")+'</option>'+Object.entries(book.sector_taxonomy||{}).map(([key,value])=>'<option value="'+key+'">'+esc(local(value))+'</option>').join("")+'</select></label></div>'+
-      '<p class="ic-compare-help">'+t("compareHelp")+'</p>'+
+      '<div class="ic-analysis-filters"><label>'+(lang==='zh'?'组织模式':'Organisational model')+'<select data-filter="archetype"><option value="">'+t('all')+'</option>'+(book.analysis?.archetypes||[]).map(m=>'<option value="'+m.id+'">'+esc(local(m.label))+'</option>').join('')+'</select></label><label>'+(lang==='zh'?'中国省份':'Chinese province')+'<select data-filter="province"><option value="">'+t('all')+'</option>'+(book.analysis?.provinces||[]).map(p=>'<option value="'+p.id+'">'+esc(local(p.name))+'</option>').join('')+'</select></label><button type="button" class="ic-reset">'+(lang==='zh'?'清除筛选':'Reset filters')+'</button></div>'+
+      '<p class="ic-compare-help">'+(lang==='zh'?'先选同一技术领域，再勾选两至三个案例。对比重点看参与者分工、验证设施和适用条件；只有登记口径一致的项目才绘制合作结构雷达图。':'Filter by technology, then select two or three cases. Compare roles, validation facilities and prerequisites; radar profiles require comparable register data.')+'</p>'+
       '<div class="ic-toolbar"><span class="ic-result" aria-live="polite"></span><div><span class="ic-selected" aria-live="polite"></span>'+
       '<button type="button" class="ic-compare">'+t("compare")+'</button><button type="button" class="ic-clear">'+t("clear")+'</button></div></div>'+
       '<div class="ic-grid"></div><button type="button" class="load-more ic-more">'+t("more")+'</button>'+
-      '<details class="ic-method"><summary>'+t("framework")+'</summary><p>'+t("chain")+'</p><p>'+t("method")+'</p><p>'+t("countNote")+'</p></details>'+
+      '</div>'+(root.GruenInnovationAnalysis?.render(book,lang)||'')+
+      '<details class="ic-method"><summary>'+t("framework")+'</summary><p>'+esc(local(book.analysis?.definition||t('method')))+'</p><p>'+t("method")+'</p><p>'+t("countNote")+'</p></details>'+
       '<dialog class="ic-dialog" aria-label="'+t("detail")+'"><div class="ic-dialog-head"><button type="button" class="ic-close" aria-label="'+t("close")+'">×</button></div><div class="ic-dialog-body"></div></dialog>';
     host.querySelectorAll("select[data-filter]").forEach(el=>el.value=filters[el.dataset.filter]);
-    host.querySelectorAll("[data-lens]").forEach(el=>el.addEventListener("click",()=>{
-      filters.lens=el.dataset.lens;visible=12;
-      host.querySelectorAll("[data-lens]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lens===filters.lens)));
-      renderCards();
-    }));
+    const switchView=value=>{activeView=value;host.querySelectorAll('[data-analysis-panel]').forEach(p=>p.hidden=p.dataset.analysisPanel!==value);host.querySelectorAll('[data-case-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.caseView===value)));};
+    host.querySelectorAll('[data-case-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.caseView)));
+    const resetFilters=()=>{for(const k of Object.keys(filters))filters[k]='';visible=12;host.querySelectorAll('[data-filter]').forEach(el=>el.value='');};
+    host.querySelector('.ic-reset').addEventListener('click',()=>{resetFilters();renderCards();});
+    root.GruenInnovationAnalysis?.attach(host,book,lang,values=>{resetFilters();Object.assign(filters,values);host.querySelectorAll('[data-filter]').forEach(el=>el.value=filters[el.dataset.filter]);switchView('cases');renderCards();},detail);
+    switchView(activeView);
     host.querySelectorAll("[data-filter]").forEach(el=>el.addEventListener(el.tagName==="SELECT"?"change":"input",()=>{
       filters[el.dataset.filter]=el.value;visible=12;renderCards();
     }));
@@ -174,8 +187,8 @@
     host.querySelector(".ic-compare").disabled=selected.size<2;
     host.querySelector(".ic-clear").disabled=!selected.size;
     host.querySelector(".ic-grid").innerHTML=cases.slice(0,visible).map(c=>'<article class="ic-card">'+
-      '<div class="ic-card-meta"><span title="'+esc(countries(c))+'">'+esc(c.countries.length>3?countries(c).split(" · ").slice(0,3).join(" · ")+' +'+(c.countries.length-3):countries(c))+'</span><span>'+esc(period(c))+'</span></div>'+
-      '<h3>'+esc(local(c.title))+'</h3><p>'+esc(local(c.summary).length>190?local(c.summary).slice(0,190)+'…':local(c.summary))+'</p><div class="ic-tags">'+tags(c,"modes")+'</div>'+
+      '<div class="ic-card-meta"><span title="'+esc(location(c))+'">'+esc(c.countries.length>3?countries(c).split(" · ").slice(0,3).join(" · ")+' +'+(c.countries.length-3):location(c))+'</span><span>'+esc(period(c))+'</span></div>'+
+      '<h3>'+esc(local(c.title))+'</h3><p>'+esc(local(c.summary).length>190?local(c.summary).slice(0,190)+'…':local(c.summary))+'</p><div class="ic-tags">'+modelTag(c)+tags(c,"modes")+'</div>'+
       '<div class="ic-card-actions"><button type="button" data-detail="'+c.id+'">'+t("detail")+' →</button>'+
       '<label><input type="checkbox" data-select="'+c.id+'" '+(selected.has(c.id)?"checked":"")+' '+(!selected.has(c.id)&&selected.size>=3?"disabled":"")+'>'+t("compare")+'</label></div></article>').join("") ||
       '<div class="ic-empty">'+t("empty")+'</div>';
@@ -209,8 +222,8 @@
   }
   function detail(id) {
     const c=byId(id);
-    show('<p class="overline">'+esc(countries(c))+(period(c)?" · "+esc(period(c)):"")+'</p><h2>'+esc(local(c.title))+'</h2>'+
-      '<div class="ic-tags">'+tags(c,"challenges")+tags(c,"institutions")+'</div>'+
+    show('<p class="overline">'+esc(location(c))+(period(c)?" · "+esc(period(c)):"")+'</p><h2>'+esc(local(c.title))+'</h2>'+
+      '<div class="ic-tags">'+modelTag(c)+tags(c,"modes")+tags(c,"institutions")+'</div>'+
       '<p class="ic-detail-summary">'+esc(local(c.summary))+'</p>'+projectFacts(c)+
       '<h3 class="ic-group-title">'+t("facts")+'</h3>'+
       ["actors","mechanism","observed"].map(key=>'<section><h4>'+t(key)+'</h4><p>'+esc(local(c[key]))+'</p></section>').join("")+

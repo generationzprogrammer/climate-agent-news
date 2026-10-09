@@ -10,6 +10,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 from .innovation_metrics import AXES, profile_metrics, validate_profile
+from .innovation_analysis import annotate_cases, build_analysis
 
 FACT_FIELDS = ("summary", "actors", "mechanism", "observed")
 TEXT_FIELDS = ("title", *FACT_FIELDS)
@@ -184,6 +185,19 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book["sources"].extend(extra["sources"])
         book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
         book.setdefault("provenance", {}).update(extra.get("provenance", {}))
+    regional = root / "config/open_innovation_regional_cases.json"
+    if regional.exists():
+        extra = json.loads(regional.read_text(encoding="utf-8"))
+        book["cases"].extend(extra["cases"])
+        book["sources"].extend(extra["sources"])
+        book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
+    model_path = root / "config/open_innovation_models.json"
+    if model_path.exists():
+        model_config = json.loads(model_path.read_text(encoding="utf-8"))
+        book["sources"].extend(model_config.get("sources", []))
+        annotate_cases(book["cases"], model_config)
+        book["analysis"] = build_analysis(book["cases"], model_config)
+        book["reviewed_at"] = max(book["reviewed_at"], model_config["reviewed_at"])
     featured = ["oi_cordis_101058359", "oi_cordis_101084251", "oi_cordis_101091777",
                 "oi_artc", "oi_cordis_101122303", "oi_cordis_101103972", "oi_gba",
                 "oi_cordis_101135374", "oi_cordis_101058453", "oi_nedo_lyon",

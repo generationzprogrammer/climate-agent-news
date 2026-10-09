@@ -1,0 +1,1117 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "以专业验证和需求组织贯通科产融合——全球组织模式与中国区域适配",
+    "description": "政府与智库读者；组织机制、区域前提与可操作政策工具。",
+    "generatedAt": "2026-10-09T07:55:31.636570+00:00",
+    "cards": [],
+    "charts": [
+      {
+        "id": "eu_chart",
+        "title": "图1　欧盟能源合作项目的协调方构成",
+        "subtitle": "398个独立项目；协调方不等于技术贡献份额",
+        "showDescription": true,
+        "type": "horizontalStackedBar100",
+        "intent": "composition",
+        "dataset": "eu",
+        "sourceId": "eu_stats",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "技术领域",
+            "type": "nominal",
+            "label": "技术领域"
+          },
+          "y": {
+            "field": "比例",
+            "type": "quantitative",
+            "label": "组内样本比例"
+          },
+          "color": {
+            "field": "协调方",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        }
+      },
+      {
+        "id": "regional_chart",
+        "title": "图2　广东与浙江案例的主要组织机制",
+        "subtitle": "广东8例、浙江11例；有目的选取，不是省级总体调查或绩效评价",
+        "showDescription": true,
+        "type": "horizontalStackedBar100",
+        "intent": "composition",
+        "dataset": "regional",
+        "sourceId": "regional_stats",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "地区",
+            "type": "nominal",
+            "label": "地区"
+          },
+          "y": {
+            "field": "比例",
+            "type": "quantitative",
+            "label": "组内样本比例"
+          },
+          "color": {
+            "field": "组织机制",
+            "type": "nominal"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "prerequisites_table",
+        "title": "表1　组织方式的适用前提与评价边界",
+        "dataset": "prerequisites_table",
+        "sourceId": "prerequisites_table_source",
+        "columns": [
+          {
+            "field": "组织方式",
+            "label": "组织方式"
+          },
+          {
+            "field": "要解决的问题",
+            "label": "要解决的问题"
+          },
+          {
+            "field": "必要条件",
+            "label": "必要条件"
+          },
+          {
+            "field": "不宜替代成效的指标",
+            "label": "不宜替代成效的指标"
+          }
+        ]
+      },
+      {
+        "id": "factors_table",
+        "title": "表2　广东与浙江案例的生产要素解释",
+        "dataset": "factors_table",
+        "sourceId": "factors_table_source",
+        "columns": [
+          {
+            "field": "解释因素",
+            "label": "解释因素"
+          },
+          {
+            "field": "广东案例观察",
+            "label": "广东案例观察"
+          },
+          {
+            "field": "浙江案例观察",
+            "label": "浙江案例观察"
+          },
+          {
+            "field": "需要核验的结果",
+            "label": "需要核验的结果"
+          }
+        ]
+      },
+      {
+        "id": "actions_table",
+        "title": "表3　公共工具、责任与检查证据",
+        "dataset": "actions_table",
+        "sourceId": "actions_table_source",
+        "columns": [
+          {
+            "field": "断点",
+            "label": "断点"
+          },
+          {
+            "field": "公共工具",
+            "label": "公共工具"
+          },
+          {
+            "field": "主要责任主体",
+            "label": "主要责任主体"
+          },
+          {
+            "field": "优先检查证据",
+            "label": "优先检查证据"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "regional_stats",
+        "label": "广东、浙江平台案例的组织机制构成",
+        "path": "config/open_innovation_regional_cases.json",
+        "query": {
+          "engine": "SQLite 3.47.0",
+          "language": "sql",
+          "sql": "WITH totals AS (SELECT province,COUNT(*) n FROM regional_cases GROUP BY province)\n      SELECT CASE c.province WHEN 'CN-GD' THEN '广东' ELSE '浙江' END AS 地区,\n        c.model AS 模式代码,COUNT(*) AS 案例数,t.n AS 地区样本数,\n        COUNT(*)*1.0/t.n AS 比例 FROM regional_cases c JOIN totals t ON c.province=t.province\n      GROUP BY c.province,c.model,t.n ORDER BY c.province,c.model",
+          "executed_at": "2026-10-09T07:55:31.636570+00:00",
+          "tables_used": [
+            "regional_cases"
+          ],
+          "filters": [
+            "实际所在地为广东或浙江",
+            "独立平台，不含资助项目或跨国框架"
+          ],
+          "description": "按主要组织机制互斥编码；分母为该省已收录案例，不是全省机构总数。"
+        }
+      },
+      {
+        "id": "eu_stats",
+        "label": "欧盟能源合作项目协调方结构",
+        "path": "config/open_innovation_projects.json",
+        "query": {
+          "engine": "SQLite 3.47.0",
+          "language": "sql",
+          "sql": "WITH totals AS (SELECT sector,COUNT(*) n FROM eu_projects GROUP BY sector)\n      SELECT p.sector AS 技术领域,CASE WHEN p.coordinator='PRC' THEN '企业'\n        WHEN p.coordinator IN ('REC','HES') THEN '高校与研究机构' ELSE '公共及其他机构' END AS 协调方,\n        COUNT(*) AS 项目数,t.n AS 领域项目数,COUNT(*)*1.0/t.n AS 比例\n      FROM eu_projects p JOIN totals t ON p.sector=t.sector\n      GROUP BY p.sector,协调方,t.n ORDER BY p.sector,协调方",
+          "executed_at": "2026-10-09T07:55:31.636570+00:00",
+          "tables_used": [
+            "eu_projects"
+          ],
+          "filters": [
+            "独立项目编号去重",
+            "能源技术",
+            "有科研主体及企业",
+            "多国合作"
+          ],
+          "description": "协调方不等于贡献份额；分母为本领域样本项目数。"
+        }
+      },
+      {
+        "id": "s_regional_stanford_otl",
+        "label": "斯坦福大学技术许可与创业支持：机构与协同机制",
+        "url": "https://otl.stanford.edu/",
+        "description": "Stanford University；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_startx",
+        "label": "StartX科研创业者互助网络：机构与协同机制",
+        "url": "https://sen.stanford.edu/startx",
+        "description": "Stanford Entrepreneurship Network；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_fraunhofer",
+        "label": "Collaboration with Fraunhofer",
+        "url": "https://www.fraunhofer.de/en/quick-links/companies/collaboration-Fraunhofer.html",
+        "description": "Fraunhofer；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_fraunhofer_global",
+        "label": "Excellence and global engagement",
+        "url": "https://www.fraunhofer.de/en/institutes/international/internationalization-strategy/exzellence-and-global-engagement.html",
+        "description": "Fraunhofer；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_aist_solutions",
+        "label": "日本AIST Solutions产业桥接：机构与协同机制",
+        "url": "https://www.aist-solutions.co.jp/aisol_startup/",
+        "description": "AIST Solutions；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_artc",
+        "label": "Advanced Remanufacturing and Technology Centre",
+        "url": "https://www.a-star.edu.sg/artc/",
+        "description": "A*STAR；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_giri",
+        "label": "广东省智能机器人研究院：机构与协同机制",
+        "url": "https://ssl.dg.gov.cn/dgssh/tzpd/cystq/jqr/content/post_3199035.html",
+        "description": "东莞松山湖管委会；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_gdut_cnc",
+        "label": "广工大数控装备协同创新研究院：机构与协同机制",
+        "url": "https://www.gdut.edu.cn/info/1709/7193.htm",
+        "description": "广东工业大学；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_ssl_factory",
+        "label": "松山湖材料实验室创新样板工厂：机构与协同机制",
+        "url": "https://www.sslab.org.cn/core/factory",
+        "description": "松山湖材料实验室；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_siat",
+        "label": "深圳先进院产业创新协同：机构与协同机制",
+        "url": "https://www.siat.ac.cn/jggl/jgjj/",
+        "description": "中国科学院深圳先进技术研究院；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_scici",
+        "label": "华南协同创新研究院：机构与协同机制",
+        "url": "https://www.scici.cn/about.aspx?AboutCateId=65",
+        "description": "华南协同创新研究院；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_zju_shaoxing",
+        "label": "浙江大学绍兴研究院：机构与协同机制",
+        "url": "https://shaoxing.zju.edu.cn/index.php?a=lists&c=index&catid=19&m=content",
+        "description": "浙江大学绍兴研究院；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_zhejiang_tsinghua",
+        "label": "浙江清华长三角研究院：机构与协同机制",
+        "url": "https://www.tsinghua-zj.edu.cn/institute/introduce",
+        "description": "浙江清华长三角研究院；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_tju_shangyu",
+        "label": "天津大学浙江研究院绍兴化工协同：机构与协同机制",
+        "url": "https://tjuzj.com/ykjj.html",
+        "description": "天津大学浙江研究院（绍兴）；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_sjtu_shaoxing",
+        "label": "上海交大绍兴新能源与分子工程研究院：机构与协同机制",
+        "url": "https://www.sjtu.sx.cn/",
+        "description": "上海交通大学绍兴新能源与分子工程研究院；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_zjut_shengzhou",
+        "label": "浙江工业大学嵊州研究院厨电协同：机构与协同机制",
+        "url": "https://www.most.gov.cn/dfkj/zj/zxdt/202301/t20230128_184396.html",
+        "description": "科学技术部；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_nimte_daishan",
+        "label": "宁波材料所岱山新材料中试基地：机构与协同机制",
+        "url": "https://www.nimte.cas.cn/news/cooperation/202109/t20210930_6218218.html",
+        "description": "中国科学院宁波材料技术与工程研究所；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_graphene_centre",
+        "label": "浙江石墨烯制造业创新中心：机构与协同机制",
+        "url": "https://cnitech.cas.cn/news/cooperation/202107/t20210701_6124804.html",
+        "description": "中国科学院宁波材料技术与工程研究所；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_nimte_poc",
+        "label": "中科新材概念验证中心：机构与协同机制",
+        "url": "https://www.nimte.ac.cn/news/media/202311/t20231116_6933628.html",
+        "description": "中国科学院宁波材料技术与工程研究所；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_zhejiang_lab",
+        "label": "之江实验室智能计算协同与成果转化：机构与协同机制",
+        "url": "https://www.zjsjw.gov.cn/gongzuodongtai/xunshixuncha/202411/t20241125_23060530.shtml",
+        "description": "浙江省纪委省监委；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_ustc_iat",
+        "label": "中国科大先研院技术熟化与联合研发：机构与协同机制",
+        "url": "https://iat.ustc.edu.cn/iat/yfjgjj.html",
+        "description": "中国科学技术大学先进技术研究院；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_regional_tsinghua_eiri",
+        "label": "清华四川能源互联网研究院成果转化：机构与协同机制",
+        "url": "https://www.tsinghua-eiri.org/conversion.aspx?t=80",
+        "description": "清华四川能源互联网研究院；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_gba",
+        "label": "The GBA Battery Passport 2024 Pilots: Overview, Insights and Recommendations",
+        "url": "https://www.globalbattery.org/media/publications/mvp/gba-bp-progressreport-v1rev2sm-002.pdf",
+        "description": "Global Battery Alliance；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_ids",
+        "label": "Global standards for trusted data sharing",
+        "url": "https://internationaldataspaces.org/wp-content/uploads/dlm_uploads/IDSA-Brochure-Global-Standards-for-Trusted-Data-Sharing_Oct-25.pdf",
+        "description": "International Data Spaces Association；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_ids_cert",
+        "label": "White Paper: Certification Scheme",
+        "url": "https://internationaldataspaces.org/wp-content/uploads/dlm_uploads/IDSA-White-Paper-certification-scheme-V.2.pdf",
+        "description": "International Data Spaces Association；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_embrapii",
+        "label": "Sobre a Embrapii",
+        "url": "https://embrapii.org.br/sobre-a-embrapii/",
+        "description": "EMBRAPII；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_embrapii_global",
+        "label": "Cooperação Internacional",
+        "url": "https://embrapii.org.br/sobre-a-embrapii/cooperacao-internacional/",
+        "description": "EMBRAPII；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_kcic",
+        "label": "Kenya Climate Innovation Center",
+        "url": "https://www.kenyacic.org/",
+        "description": "KCIC；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_kcic_partners",
+        "label": "Cleantech Innovation Competition",
+        "url": "https://www.kenyacic.org/programmes/cleantech",
+        "description": "KCIC；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_innoboost",
+        "label": "Green Innoboost",
+        "url": "https://www.iea.org/articles/green-innoboost",
+        "description": "IEA；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_nedo",
+        "label": "Case Studies of Smart Community Demonstration Project",
+        "url": "https://www.nedo.go.jp/english/news/reports_20130222.html",
+        "description": "NEDO；事实摘编，非因果评价"
+      },
+      {
+        "id": "s_nedo_lyon",
+        "label": "Smart Community Demonstration Project in Lyon, France",
+        "url": "https://www.nedo.go.jp/content/100871965.pdf",
+        "description": "NEDO；事实摘编，非因果评价"
+      },
+      {
+        "id": "prerequisites_table_source",
+        "label": "表1　组织方式的适用前提与评价边界",
+        "path": "analysis/reports/build_innovation_policy_report.py",
+        "query": {
+          "engine": "SQLite 3.47.0",
+          "language": "sql",
+          "sql": "SELECT \"组织方式\",\"要解决的问题\",\"必要条件\",\"不宜替代成效的指标\" FROM prerequisites_table ORDER BY rowid",
+          "executed_at": "2026-10-09T07:55:31.636570+00:00",
+          "tables_used": [
+            "prerequisites_table"
+          ],
+          "filters": [
+            "正文案例支持的解释性比较；非实测统计"
+          ],
+          "description": "文字矩阵入表后原样检索；SQL不证明因果关系，事实来源见正文及参考资料。"
+        }
+      },
+      {
+        "id": "factors_table_source",
+        "label": "表2　广东与浙江案例的生产要素解释",
+        "path": "analysis/reports/build_innovation_policy_report.py",
+        "query": {
+          "engine": "SQLite 3.47.0",
+          "language": "sql",
+          "sql": "SELECT \"解释因素\",\"广东案例观察\",\"浙江案例观察\",\"需要核验的结果\" FROM factors_table ORDER BY rowid",
+          "executed_at": "2026-10-09T07:55:31.636570+00:00",
+          "tables_used": [
+            "factors_table"
+          ],
+          "filters": [
+            "正文案例支持的解释性比较；非实测统计"
+          ],
+          "description": "文字矩阵入表后原样检索；SQL不证明因果关系，事实来源见正文及参考资料。"
+        }
+      },
+      {
+        "id": "actions_table_source",
+        "label": "表3　公共工具、责任与检查证据",
+        "path": "analysis/reports/build_innovation_policy_report.py",
+        "query": {
+          "engine": "SQLite 3.47.0",
+          "language": "sql",
+          "sql": "SELECT \"断点\",\"公共工具\",\"主要责任主体\",\"优先检查证据\" FROM actions_table ORDER BY rowid",
+          "executed_at": "2026-10-09T07:55:31.636570+00:00",
+          "tables_used": [
+            "actions_table"
+          ],
+          "filters": [
+            "正文案例支持的解释性比较；非实测统计"
+          ],
+          "description": "文字矩阵入表后原样检索；SQL不证明因果关系，事实来源见正文及参考资料。"
+        }
+      },
+      {
+        "id": "s_arpae_programme_overview",
+        "label": "ARPA-E Program Overview",
+        "url": "https://arpa-e.energy.gov/programs-and-initiatives/program-overview",
+        "description": "US Department of Energy / ARPA-E"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 以专业验证和需求组织贯通科产融合——全球组织模式与中国区域适配\n\n科产融合发展的全球开放创新生态建设研究 · 政策研究报告 · 2026年10月"
+      },
+      {
+        "id": "abstract",
+        "type": "markdown",
+        "body": "## 内容摘要\n\n科产融合的公共政策重点，应由增加合作载体转向打通需求定义、工程验证与市场采用之间的接口。全球案例呈现科研创业网络、任务导向攻关、应用研究中介、跨境联合体和共享验证等互补机制；其适用性取决于企业吸收能力、专业工程服务与可执行的合作规则，而非国家标签。广东案例突出制造需求与研发孵化衔接，浙江案例突出校地网络与专业验证，但两地均存在多种机制，不能作简单优劣排序。中国可优先完善专业转化服务、共享中试、企业联合任务和跨区域验证规则，分类支持公共能力与专有研发，以技术交付、企业重复使用和实际采用评价成效。"
+      },
+      {
+        "id": "problem",
+        "type": "markdown",
+        "body": "## 一　合作载体不是转化链条：先确定断点，再选择组织方式\n\n科技成果走向产业并不是“研究—专利—企业”的自动接续。可发表的实验结果、可重复的工程工艺、符合安全要求的产品和愿意持续付费的客户，分别需要不同的知识与责任主体。若统一以机构挂牌、合作签约或孵化数量评价，容易把中间产物误当成转化成效。以下是案例机制比较形成的判断，不是对各地区转化效率的因果估计。\n\n**科研创业模式的可复制部分，是专业接口而非资本规模。** [斯坦福大学技术许可与创业支持](https://otl.stanford.edu/)提供发明披露、可许可技术目录、创业资源和早期转化支持；[StartX科研创业者互助网络](https://sen.stanford.edu/startx)组织导师、教育与创业者社群，不收费、不取股权。技术权利处置、创业能力建设和商业投资并非同一种服务。后发地区若缺少懂行业、能谈判、能识别客户的专业力量，扩大基金或增加场地未必能补上这个接口。两个机构解释硅谷网络的部分机制，不代表区域成功的充分条件。\n\n**应用研究中介解决的是需求翻译与技术交付。** [德国弗劳恩霍夫应用研究与国际合作](https://www.fraunhofer.de/en/quick-links/companies/collaboration-Fraunhofer.html)通过企业合同和长期合作连接研究与工业；[日本AIST Solutions产业桥接](https://www.aist-solutions.co.jp/aisol_startup/)从工程、市场、商业加速和资本等环节支持研究型初创企业。二者都把科学能力转为可采购、可试验的服务，但客户、风险与周期不同。中国借鉴时应先确定对象：是有研发预算的制造企业，还是缺少工程与市场能力的早期团队，再选择经费和考核方式。\n\n**任务导向攻关不能替代市场采用。** 美国[ARPA-E项目计划](https://arpa-e.energy.gov/programs-and-initiatives/program-overview)体现公共资助组织高风险技术探索的渠道；[日法里昂智慧社区联合示范](https://www.nedo.go.jp/english/news/reports_20130222.html)通过城市运行场景组织建筑、交通与能源系统示范。前者关注技术假设，后者还需检验运营、用户和公共管理接口。探索失败不一定意味着管理失败，示范完成也不等于商业可持续。应保留阶段评审、调整和退出机制，既不按短期营收评价基础探索，也不以科研目标长期掩盖缺乏采用需求。"
+      },
+      {
+        "id": "eu_structure",
+        "type": "markdown",
+        "body": "### 牵头位置与产业贡献不能混同\n\n图1展示398个经筛选欧盟能源合作项目的协调方构成。科研机构或高校牵头并不意味着企业作用较小：协调方承担组织，企业可能负责设备、制造和用户验证。企业牵头同样不自动证明成果已进入市场。明确任务书中的技术接口、工程交付和采用责任，比要求所有项目采用同一种牵头结构更有针对性。图示仅限一个资助渠道，不能外推为欧洲整体结构。",
+        "sourceId": "eu_stats"
+      },
+      {
+        "id": "eu_chart_block",
+        "type": "chart",
+        "chartId": "eu_chart"
+      },
+      {
+        "id": "prerequisites_table_block",
+        "type": "table",
+        "tableId": "prerequisites_table"
+      },
+      {
+        "id": "prerequisites_interpretation",
+        "type": "markdown",
+        "body": "上述条件是机制归纳，不是计量识别的成功阈值。模式可以组合：共享验证平台可承接企业合同与公共任务，创业网络可借助研究中介完成工程验证。预算、责任和成果口径必须分别清楚，不能混为一个综合分数。"
+      },
+      {
+        "id": "china",
+        "type": "markdown",
+        "body": "## 二　广东与浙江：差异在连接方式，而非政府与市场的简单二分\n\n**广东制造案例体现“需求—工程—孵化”的近距离反馈。** [广工大数控装备协同创新研究院](https://www.gdut.edu.cn/info/1709/7193.htm)记录高校团队与运动控制企业在佛山制造集群中的合作；[广东省智能机器人研究院](https://ssl.dg.gov.cn/dgssh/tzpd/cystq/jqr/content/post_3199035.html)把机器人研发、公共试验和投资孵化放入同一组织。企业提出装备或工艺问题，团队组合技术，试验帮助验证，适合产业化的成果再进入应用或孵化。这对制造客户、工程人才和配套供应链有较高要求。其特征不是抽象的“市场强”，而是企业问题能够反复进入研发和验证。\n\n广东并不只有集群模式。[松山湖材料实验室创新样板工厂](https://www.sslab.org.cn/core/factory)将锂电材料、晶硅光伏、锌基电池等方向连接到中试和产业化；[深圳先进院产业创新协同](https://www.siat.ac.cn/jggl/jgjj/)体现专业研究与产业创新中心的衔接。材料中试要解决工艺稳定性，医疗技术还要经过临床和监管验证。不同技术的转化关口不同，不能因同在珠三角就用一套验收指标。\n\n**浙江校地网络把外部学科能力接到本地专业产业问题。** [天津大学浙江研究院绍兴化工协同](https://tjuzj.com/ykjj.html)面向精细化工、新材料建设检测和中试；[上海交大绍兴新能源与分子工程研究院](https://www.sjtu.sx.cn/)配置电池、氢能与分子工程研发；[浙江工业大学嵊州研究院厨电协同](https://www.most.gov.cn/dfkj/zj/zxdt/202301/t20230128_184396.html)与企业改进厨电风机系统。“引入高校”并非同质政策：化工需要安全和放大条件，电化学材料需要测试与工程化，厨电更接近既有制造和用户反馈。有效组织的单位应是产业问题，而非高校名称。\n\n**浙江验证链条具有层级分工。** [中科新材概念验证中心](https://www.nimte.ac.cn/news/media/202311/t20231116_6933628.html)以专项资金、产业调研和技术商业导师支持早期验证；[宁波材料所岱山新材料中试基地](https://www.nimte.cas.cn/news/cooperation/202109/t20210930_6218218.html)聚焦化工新材料工程化；[浙江石墨烯制造业创新中心](https://cnitech.cas.cn/news/cooperation/202107/t20210701_6124804.html)由研究机构、产业链企业和资本共同出资运营。概念验证回答“是否值得继续”，中试回答“能否稳定做出来”，企业试用回答“是否值得采用”。三者不能互相替代。[之江实验室智能计算协同与成果转化](https://www.zjsjw.gov.cn/gongzuodongtai/xunshixuncha/202411/t20241125_23060530.shtml)及北航杭州案例也表明任务导向研究在浙江存在，不能把全省归为唯一模式。"
+      },
+      {
+        "id": "region_stats",
+        "type": "markdown",
+        "body": "### 比较机制组合，而不是省际优劣\n\n图2以广东8个、浙江11个平台案例为分母，按主要组织机制互斥编码。它说明本次收录中哪些连接方式出现，不衡量全省机构总量、技术水平或转化效率。来源、领域和机构关联程度不同，不能用占比估计政策效果。更有意义的比较是：有工程客户却缺少可靠性测试的地区，与有研究平台却缺少企业验收和付费需求的地区，应该补足不同环节。",
+        "sourceId": "regional_stats"
+      },
+      {
+        "id": "regional_chart_block",
+        "type": "chart",
+        "chartId": "regional_chart"
+      },
+      {
+        "id": "factors_table_block",
+        "type": "table",
+        "tableId": "factors_table"
+      },
+      {
+        "id": "factors_interpretation",
+        "type": "markdown",
+        "body": "这是一组有案例依据的解释路径，不是已确认的省际因果关系。同一研究所的多个平台也不是独立自然实验。安徽先研院的定制研发、四川能源互联网研究院的公开许可清单提供补充对照，但不足以归纳两省整体模式。"
+      },
+      {
+        "id": "policy",
+        "type": "markdown",
+        "body": "## 三　政府应组织公共接口，而非指定各地采用同一种模式\n\n**先诊断需求，再决定是否新建载体。** 地方科技、工信部门可与产业链企业将瓶颈区分为知识供给、工程放大、合格评定和采用需求。有企业愿意共同出资、有明确工艺问题的，可组织合同研发或联合团队；只有技术成果、尚无客户的，应先做小额概念验证。立项应明确需求方、验证方与潜在采用方，不把“缺少机构”当成所有问题的起点。\n\n**概念验证、中试与示范分别支持。** 前者采用小额、短周期和允许终止的支持；共性中试支持专业能力和安全运营，但企业专有项目应按成本与权利安排承担费用；示范必须有运行场景、运营责任和可观察的采用结果。宁波概念验证、岱山中试与松山湖样板工厂是不同环节的参照，不能用统一转化率评价。\n\n**降低跨区域验证和合同成本。** 区域合作机制可先建立设施服务目录、测试条件和报告格式，明确异地企业使用资格及结果由谁接受。背景技术、前景成果和数据使用条件可提供范本，由合作方确认具体权利。[全球电池联盟电池护照试点](https://www.globalbattery.org/media/publications/mvp/gba-bp-progressreport-v1rev2sm-002.pdf)明确一轮试点没有检验跨系统互操作，说明“有平台”不等于“已互通”；[国际数据空间可信数据共享](https://internationaldataspaces.org/wp-content/uploads/dlm_uploads/IDSA-Brochure-Global-Standards-for-Trusted-Data-Sharing_Oct-25.pdf)提供按身份与使用条件组织可信共享的思路。应围绕真实交易设计数据边界，而非先集中汇聚全部敏感数据。\n\n**专业服务与投资决策分工。** 公共机构可以支持技术经理人、工程、知识产权和测试服务，但不宜同时评审公共项目、管理投资并自行认定成功。技术合同、成果许可与股权投资分别留痕，关联交易有回避程序。[清华四川能源互联网研究院成果转化](https://www.tsinghua-eiri.org/conversion.aspx?t=80)公开处置方式的实践有助于透明度；是否实现工程采用和回报还需后续核验，不能由签署协议替代。\n\n**按已有能力组合政策。** 广东制造集群可重点补足共性测试、中试安全和跨企业工程服务；浙江校地网络可加强设施共享、持续企业需求及专业运营；企业能力较弱地区，可借鉴[巴西EMBRAPII产业研发与国际合作](https://embrapii.org.br/sobre-a-embrapii/)的研究单元对接，以及[肯尼亚气候创新中心本地创业与国际连接](https://www.kenyacic.org/)、[摩洛哥Green Innoboost绿色创新支持](https://www.iea.org/articles/green-innoboost)的技术与融资准备服务。发展中经济体内部需求不同，不能采用统一的“发展中国家模式”。\n\n**以可观察采用链条评价效果。** 研发项目检查里程碑与验证结果，平台检查企业重复使用、交付周期和服务成本，转化项目检查许可实施、工艺采用及持续采购。高风险任务同时记录终止原因和知识价值，避免单一成功率诱导只挑容易项目。未获得可比结果前，不应用案例数、资助额或雷达面积给国家和省份打综合分。"
+      },
+      {
+        "id": "actions_table_block",
+        "type": "table",
+        "tableId": "actions_table"
+      },
+      {
+        "id": "actions_interpretation",
+        "type": "markdown",
+        "body": "公共支持应服务于可核验的连接任务，而非承诺复制某地的成功。先完成一个有效的技术—产业接口，再判断是否扩展规模，是这些案例对中国的共同启示。"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## 研究范围与参考资料\n\n本报告依据637个案例截至2026年10月9日的快照，采用制度比较和机制归纳，不作因果识别或创新绩效排名。项目与平台分别统计，区域按实际所在地标注。历史报道保留时点，机构自述的设置、计划不视为独立确认的商业成效。要素流动、生态适配和治理缺口是问题维度，不再作为主分类。网站的宏观比较同时显示样本数与来源渠道，不估计全球总体。正文以机制、条件和政府工具为主。\n\n主要参考资料：\n\n1. Stanford University. [斯坦福大学技术许可与创业支持](https://otl.stanford.edu/)[EB/OL]. [2026-10-09].\n2. Stanford Entrepreneurship Network. [StartX科研创业者互助网络](https://sen.stanford.edu/startx)[EB/OL]. [2026-10-09].\n3. Fraunhofer. [德国弗劳恩霍夫应用研究与国际合作](https://www.fraunhofer.de/en/quick-links/companies/collaboration-Fraunhofer.html)[EB/OL]. [2026-10-09].\n4. AIST Solutions. [日本AIST Solutions产业桥接](https://www.aist-solutions.co.jp/aisol_startup/)[EB/OL]. [2026-10-09].\n5. A*STAR. [新加坡先进再制造与技术中心](https://www.a-star.edu.sg/artc/)[EB/OL]. [2026-10-09].\n6. 东莞松山湖管委会. [广东省智能机器人研究院](https://ssl.dg.gov.cn/dgssh/tzpd/cystq/jqr/content/post_3199035.html)[EB/OL]. [2026-10-09].\n7. 广东工业大学. [广工大数控装备协同创新研究院](https://www.gdut.edu.cn/info/1709/7193.htm)[EB/OL]. [2026-10-09].\n8. 松山湖材料实验室. [松山湖材料实验室创新样板工厂](https://www.sslab.org.cn/core/factory)[EB/OL]. [2026-10-09].\n9. 中国科学院深圳先进技术研究院. [深圳先进院产业创新协同](https://www.siat.ac.cn/jggl/jgjj/)[EB/OL]. [2026-10-09].\n10. 华南协同创新研究院. [华南协同创新研究院](https://www.scici.cn/about.aspx?AboutCateId=65)[EB/OL]. [2026-10-09].\n11. 浙江大学绍兴研究院. [浙江大学绍兴研究院](https://shaoxing.zju.edu.cn/index.php?a=lists&c=index&catid=19&m=content)[EB/OL]. [2026-10-09].\n12. 浙江清华长三角研究院. [浙江清华长三角研究院](https://www.tsinghua-zj.edu.cn/institute/introduce)[EB/OL]. [2026-10-09].\n13. 天津大学浙江研究院（绍兴）. [天津大学浙江研究院绍兴化工协同](https://tjuzj.com/ykjj.html)[EB/OL]. [2026-10-09].\n14. 上海交通大学绍兴新能源与分子工程研究院. [上海交大绍兴新能源与分子工程研究院](https://www.sjtu.sx.cn/)[EB/OL]. [2026-10-09].\n15. 科学技术部. [浙江工业大学嵊州研究院厨电协同](https://www.most.gov.cn/dfkj/zj/zxdt/202301/t20230128_184396.html)[EB/OL]. [2026-10-09].\n16. 中国科学院宁波材料技术与工程研究所. [宁波材料所岱山新材料中试基地](https://www.nimte.cas.cn/news/cooperation/202109/t20210930_6218218.html)[EB/OL]. [2026-10-09].\n17. 中国科学院宁波材料技术与工程研究所. [浙江石墨烯制造业创新中心](https://cnitech.cas.cn/news/cooperation/202107/t20210701_6124804.html)[EB/OL]. [2026-10-09].\n18. 中国科学院宁波材料技术与工程研究所. [中科新材概念验证中心](https://www.nimte.ac.cn/news/media/202311/t20231116_6933628.html)[EB/OL]. [2026-10-09].\n19. 浙江省纪委省监委. [之江实验室智能计算协同与成果转化](https://www.zjsjw.gov.cn/gongzuodongtai/xunshixuncha/202411/t20241125_23060530.shtml)[EB/OL]. [2026-10-09].\n20. 中国科学技术大学先进技术研究院. [中国科大先研院技术熟化与联合研发](https://iat.ustc.edu.cn/iat/yfjgjj.html)[EB/OL]. [2026-10-09].\n21. 清华四川能源互联网研究院. [清华四川能源互联网研究院成果转化](https://www.tsinghua-eiri.org/conversion.aspx?t=80)[EB/OL]. [2026-10-09].\n22. Global Battery Alliance. [全球电池联盟电池护照试点](https://www.globalbattery.org/media/publications/mvp/gba-bp-progressreport-v1rev2sm-002.pdf)[EB/OL]. [2026-10-09].\n23. International Data Spaces Association. [国际数据空间可信数据共享](https://internationaldataspaces.org/wp-content/uploads/dlm_uploads/IDSA-Brochure-Global-Standards-for-Trusted-Data-Sharing_Oct-25.pdf)[EB/OL]. [2026-10-09].\n24. EMBRAPII. [巴西EMBRAPII产业研发与国际合作](https://embrapii.org.br/sobre-a-embrapii/)[EB/OL]. [2026-10-09].\n25. KCIC. [肯尼亚气候创新中心本地创业与国际连接](https://www.kenyacic.org/)[EB/OL]. [2026-10-09].\n26. IEA. [摩洛哥Green Innoboost绿色创新支持](https://www.iea.org/articles/green-innoboost)[EB/OL]. [2026-10-09].\n27. NEDO. [日法里昂智慧社区联合示范](https://www.nedo.go.jp/english/news/reports_20130222.html)[EB/OL]. [2026-10-09]."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-10-09T07:55:31.636570+00:00",
+    "status": "ready",
+    "datasets": {
+      "regional": [
+        {
+          "地区": "广东",
+          "模式代码": "cluster",
+          "案例数": 4,
+          "地区样本数": 8,
+          "比例": 0.5,
+          "组织机制": "产业集群需求协同"
+        },
+        {
+          "地区": "广东",
+          "模式代码": "intermediary",
+          "案例数": 3,
+          "地区样本数": 8,
+          "比例": 0.375,
+          "组织机制": "应用研究与专业桥接"
+        },
+        {
+          "地区": "广东",
+          "模式代码": "pilot",
+          "案例数": 1,
+          "地区样本数": 8,
+          "比例": 0.125,
+          "组织机制": "开放中试与共同验证"
+        },
+        {
+          "地区": "浙江",
+          "模式代码": "cluster",
+          "案例数": 3,
+          "地区样本数": 11,
+          "比例": 0.2727272727272727,
+          "组织机制": "产业集群需求协同"
+        },
+        {
+          "地区": "浙江",
+          "模式代码": "intermediary",
+          "案例数": 4,
+          "地区样本数": 11,
+          "比例": 0.36363636363636365,
+          "组织机制": "应用研究与专业桥接"
+        },
+        {
+          "地区": "浙江",
+          "模式代码": "mission",
+          "案例数": 2,
+          "地区样本数": 11,
+          "比例": 0.18181818181818182,
+          "组织机制": "任务导向技术攻关"
+        },
+        {
+          "地区": "浙江",
+          "模式代码": "pilot",
+          "案例数": 2,
+          "地区样本数": 11,
+          "比例": 0.18181818181818182,
+          "组织机制": "开放中试与共同验证"
+        }
+      ],
+      "eu": [
+        {
+          "技术领域": "产业脱碳与生物能源",
+          "协调方": "企业",
+          "项目数": 18,
+          "领域项目数": 65,
+          "比例": 0.27692307692307694
+        },
+        {
+          "技术领域": "产业脱碳与生物能源",
+          "协调方": "公共及其他机构",
+          "项目数": 2,
+          "领域项目数": 65,
+          "比例": 0.03076923076923077
+        },
+        {
+          "技术领域": "产业脱碳与生物能源",
+          "协调方": "高校与研究机构",
+          "项目数": 45,
+          "领域项目数": 65,
+          "比例": 0.6923076923076923
+        },
+        {
+          "技术领域": "太阳能技术",
+          "协调方": "企业",
+          "项目数": 7,
+          "领域项目数": 55,
+          "比例": 0.12727272727272726
+        },
+        {
+          "技术领域": "太阳能技术",
+          "协调方": "公共及其他机构",
+          "项目数": 1,
+          "领域项目数": 55,
+          "比例": 0.01818181818181818
+        },
+        {
+          "技术领域": "太阳能技术",
+          "协调方": "高校与研究机构",
+          "项目数": 47,
+          "领域项目数": 55,
+          "比例": 0.8545454545454545
+        },
+        {
+          "技术领域": "氢能与合成燃料",
+          "协调方": "企业",
+          "项目数": 16,
+          "领域项目数": 64,
+          "比例": 0.25
+        },
+        {
+          "技术领域": "氢能与合成燃料",
+          "协调方": "公共及其他机构",
+          "项目数": 2,
+          "领域项目数": 64,
+          "比例": 0.03125
+        },
+        {
+          "技术领域": "氢能与合成燃料",
+          "协调方": "高校与研究机构",
+          "项目数": 46,
+          "领域项目数": 64,
+          "比例": 0.71875
+        },
+        {
+          "技术领域": "热能与地热",
+          "协调方": "企业",
+          "项目数": 5,
+          "领域项目数": 23,
+          "比例": 0.21739130434782608
+        },
+        {
+          "技术领域": "热能与地热",
+          "协调方": "高校与研究机构",
+          "项目数": 18,
+          "领域项目数": 23,
+          "比例": 0.782608695652174
+        },
+        {
+          "技术领域": "电池与储能",
+          "协调方": "企业",
+          "项目数": 25,
+          "领域项目数": 126,
+          "比例": 0.1984126984126984
+        },
+        {
+          "技术领域": "电池与储能",
+          "协调方": "公共及其他机构",
+          "项目数": 1,
+          "领域项目数": 126,
+          "比例": 0.007936507936507936
+        },
+        {
+          "技术领域": "电池与储能",
+          "协调方": "高校与研究机构",
+          "项目数": 100,
+          "领域项目数": 126,
+          "比例": 0.7936507936507936
+        },
+        {
+          "技术领域": "电网与能源社区",
+          "协调方": "企业",
+          "项目数": 8,
+          "领域项目数": 24,
+          "比例": 0.3333333333333333
+        },
+        {
+          "技术领域": "电网与能源社区",
+          "协调方": "公共及其他机构",
+          "项目数": 1,
+          "领域项目数": 24,
+          "比例": 0.041666666666666664
+        },
+        {
+          "技术领域": "电网与能源社区",
+          "协调方": "高校与研究机构",
+          "项目数": 15,
+          "领域项目数": 24,
+          "比例": 0.625
+        },
+        {
+          "技术领域": "风能与海洋能源",
+          "协调方": "企业",
+          "项目数": 12,
+          "领域项目数": 41,
+          "比例": 0.2926829268292683
+        },
+        {
+          "技术领域": "风能与海洋能源",
+          "协调方": "公共及其他机构",
+          "项目数": 4,
+          "领域项目数": 41,
+          "比例": 0.0975609756097561
+        },
+        {
+          "技术领域": "风能与海洋能源",
+          "协调方": "高校与研究机构",
+          "项目数": 25,
+          "领域项目数": 41,
+          "比例": 0.6097560975609756
+        }
+      ],
+      "prerequisites_table": [
+        {
+          "组织方式": "科研创业网络",
+          "要解决的问题": "缺少许可和创业服务",
+          "必要条件": "可转移知识、专业经理人、创业团队、权利与利益冲突规则",
+          "不宜替代成效的指标": "场地面积、入驻率"
+        },
+        {
+          "组织方式": "任务导向攻关",
+          "要解决的问题": "高风险共性问题难以由单一企业承担",
+          "必要条件": "技术判断、阶段节点、容错与终止机制",
+          "不宜替代成效的指标": "短期营收、承诺数量"
+        },
+        {
+          "组织方式": "应用研究中介",
+          "要解决的问题": "企业问题难以转为研发交付",
+          "必要条件": "合同需求、稳定工程能力、成本和知识产权安排",
+          "不宜替代成效的指标": "机构挂牌数"
+        },
+        {
+          "组织方式": "跨境研发联合体",
+          "要解决的问题": "互补技术和设施分散",
+          "必要条件": "协议、资金周期协调、分工与跨场景验证",
+          "不宜替代成效的指标": "合作国和参与者数量"
+        },
+        {
+          "组织方式": "共享中试与验证",
+          "要解决的问题": "工程设施固定成本难以独立承担",
+          "必要条件": "持续需求、专业运营、安全与结果可接受性",
+          "不宜替代成效的指标": "购置额、建成面积"
+        }
+      ],
+      "factors_table": [
+        {
+          "解释因素": "需求组织",
+          "广东案例观察": "装备与工艺需求进入研发、试验和孵化",
+          "浙江案例观察": "地方行业问题匹配外部高校学科",
+          "需要核验的结果": "谁出题、谁验收、是否再次采购"
+        },
+        {
+          "解释因素": "工程设施",
+          "广东案例观察": "材料中试、装备试验与孵化衔接",
+          "浙江案例观察": "概念验证、专业中试、公共测试分层",
+          "需要核验的结果": "使用强度、批次重复性、安全与客户认可"
+        },
+        {
+          "解释因素": "人才与知识",
+          "广东案例观察": "高校团队与专业机构接入制造需求",
+          "浙江案例观察": "校地研究院引入不同学科团队",
+          "需要核验的结果": "企业工程师参与、交付稳定性"
+        },
+        {
+          "解释因素": "资本与治理",
+          "广东案例观察": "部分机构组合投资与孵化服务",
+          "浙江案例观察": "部分平台由研究机构、企业和资本共同运营",
+          "需要核验的结果": "预算分工、风险与收益承担"
+        }
+      ],
+      "actions_table": [
+        {
+          "断点": "缺少采用需求",
+          "公共工具": "小额概念验证、行业访谈、技术商业导师",
+          "主要责任主体": "科技部门、专业机构、研究团队",
+          "优先检查证据": "客户问题、成本假设、继续或终止理由"
+        },
+        {
+          "断点": "有需求但缺专业研发",
+          "公共工具": "合同研发、联合任务与工程师交流",
+          "主要责任主体": "企业、应用研究机构",
+          "优先检查证据": "企业投入、交付和重复委托"
+        },
+        {
+          "断点": "工程放大成本高",
+          "公共工具": "共享中试、安全服务、透明排期",
+          "主要责任主体": "工信部门、运营方、使用企业",
+          "优先检查证据": "使用、工艺一致性、下游认可"
+        },
+        {
+          "断点": "权利与数据难衔接",
+          "公共工具": "技术清单、成果与数据使用范本",
+          "主要责任主体": "高校、企业、法律及合规服务方",
+          "优先检查证据": "合同履行、可用范围、争议处理"
+        },
+        {
+          "断点": "重建设轻运营",
+          "公共工具": "分类运营支持和独立评价",
+          "主要责任主体": "财政科技部门、平台治理机构",
+          "优先检查证据": "服务成本、持续需求、验收及退出"
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "regional_stats",
+      "label": "广东、浙江平台案例的组织机制构成",
+      "path": "config/open_innovation_regional_cases.json",
+      "query": {
+        "engine": "SQLite 3.47.0",
+        "language": "sql",
+        "sql": "WITH totals AS (SELECT province,COUNT(*) n FROM regional_cases GROUP BY province)\n      SELECT CASE c.province WHEN 'CN-GD' THEN '广东' ELSE '浙江' END AS 地区,\n        c.model AS 模式代码,COUNT(*) AS 案例数,t.n AS 地区样本数,\n        COUNT(*)*1.0/t.n AS 比例 FROM regional_cases c JOIN totals t ON c.province=t.province\n      GROUP BY c.province,c.model,t.n ORDER BY c.province,c.model",
+        "executed_at": "2026-10-09T07:55:31.636570+00:00",
+        "tables_used": [
+          "regional_cases"
+        ],
+        "filters": [
+          "实际所在地为广东或浙江",
+          "独立平台，不含资助项目或跨国框架"
+        ],
+        "description": "按主要组织机制互斥编码；分母为该省已收录案例，不是全省机构总数。"
+      }
+    },
+    {
+      "id": "eu_stats",
+      "label": "欧盟能源合作项目协调方结构",
+      "path": "config/open_innovation_projects.json",
+      "query": {
+        "engine": "SQLite 3.47.0",
+        "language": "sql",
+        "sql": "WITH totals AS (SELECT sector,COUNT(*) n FROM eu_projects GROUP BY sector)\n      SELECT p.sector AS 技术领域,CASE WHEN p.coordinator='PRC' THEN '企业'\n        WHEN p.coordinator IN ('REC','HES') THEN '高校与研究机构' ELSE '公共及其他机构' END AS 协调方,\n        COUNT(*) AS 项目数,t.n AS 领域项目数,COUNT(*)*1.0/t.n AS 比例\n      FROM eu_projects p JOIN totals t ON p.sector=t.sector\n      GROUP BY p.sector,协调方,t.n ORDER BY p.sector,协调方",
+        "executed_at": "2026-10-09T07:55:31.636570+00:00",
+        "tables_used": [
+          "eu_projects"
+        ],
+        "filters": [
+          "独立项目编号去重",
+          "能源技术",
+          "有科研主体及企业",
+          "多国合作"
+        ],
+        "description": "协调方不等于贡献份额；分母为本领域样本项目数。"
+      }
+    },
+    {
+      "id": "s_regional_stanford_otl",
+      "label": "斯坦福大学技术许可与创业支持：机构与协同机制",
+      "url": "https://otl.stanford.edu/",
+      "description": "Stanford University；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_startx",
+      "label": "StartX科研创业者互助网络：机构与协同机制",
+      "url": "https://sen.stanford.edu/startx",
+      "description": "Stanford Entrepreneurship Network；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_fraunhofer",
+      "label": "Collaboration with Fraunhofer",
+      "url": "https://www.fraunhofer.de/en/quick-links/companies/collaboration-Fraunhofer.html",
+      "description": "Fraunhofer；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_fraunhofer_global",
+      "label": "Excellence and global engagement",
+      "url": "https://www.fraunhofer.de/en/institutes/international/internationalization-strategy/exzellence-and-global-engagement.html",
+      "description": "Fraunhofer；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_aist_solutions",
+      "label": "日本AIST Solutions产业桥接：机构与协同机制",
+      "url": "https://www.aist-solutions.co.jp/aisol_startup/",
+      "description": "AIST Solutions；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_artc",
+      "label": "Advanced Remanufacturing and Technology Centre",
+      "url": "https://www.a-star.edu.sg/artc/",
+      "description": "A*STAR；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_giri",
+      "label": "广东省智能机器人研究院：机构与协同机制",
+      "url": "https://ssl.dg.gov.cn/dgssh/tzpd/cystq/jqr/content/post_3199035.html",
+      "description": "东莞松山湖管委会；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_gdut_cnc",
+      "label": "广工大数控装备协同创新研究院：机构与协同机制",
+      "url": "https://www.gdut.edu.cn/info/1709/7193.htm",
+      "description": "广东工业大学；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_ssl_factory",
+      "label": "松山湖材料实验室创新样板工厂：机构与协同机制",
+      "url": "https://www.sslab.org.cn/core/factory",
+      "description": "松山湖材料实验室；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_siat",
+      "label": "深圳先进院产业创新协同：机构与协同机制",
+      "url": "https://www.siat.ac.cn/jggl/jgjj/",
+      "description": "中国科学院深圳先进技术研究院；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_scici",
+      "label": "华南协同创新研究院：机构与协同机制",
+      "url": "https://www.scici.cn/about.aspx?AboutCateId=65",
+      "description": "华南协同创新研究院；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_zju_shaoxing",
+      "label": "浙江大学绍兴研究院：机构与协同机制",
+      "url": "https://shaoxing.zju.edu.cn/index.php?a=lists&c=index&catid=19&m=content",
+      "description": "浙江大学绍兴研究院；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_zhejiang_tsinghua",
+      "label": "浙江清华长三角研究院：机构与协同机制",
+      "url": "https://www.tsinghua-zj.edu.cn/institute/introduce",
+      "description": "浙江清华长三角研究院；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_tju_shangyu",
+      "label": "天津大学浙江研究院绍兴化工协同：机构与协同机制",
+      "url": "https://tjuzj.com/ykjj.html",
+      "description": "天津大学浙江研究院（绍兴）；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_sjtu_shaoxing",
+      "label": "上海交大绍兴新能源与分子工程研究院：机构与协同机制",
+      "url": "https://www.sjtu.sx.cn/",
+      "description": "上海交通大学绍兴新能源与分子工程研究院；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_zjut_shengzhou",
+      "label": "浙江工业大学嵊州研究院厨电协同：机构与协同机制",
+      "url": "https://www.most.gov.cn/dfkj/zj/zxdt/202301/t20230128_184396.html",
+      "description": "科学技术部；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_nimte_daishan",
+      "label": "宁波材料所岱山新材料中试基地：机构与协同机制",
+      "url": "https://www.nimte.cas.cn/news/cooperation/202109/t20210930_6218218.html",
+      "description": "中国科学院宁波材料技术与工程研究所；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_graphene_centre",
+      "label": "浙江石墨烯制造业创新中心：机构与协同机制",
+      "url": "https://cnitech.cas.cn/news/cooperation/202107/t20210701_6124804.html",
+      "description": "中国科学院宁波材料技术与工程研究所；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_nimte_poc",
+      "label": "中科新材概念验证中心：机构与协同机制",
+      "url": "https://www.nimte.ac.cn/news/media/202311/t20231116_6933628.html",
+      "description": "中国科学院宁波材料技术与工程研究所；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_zhejiang_lab",
+      "label": "之江实验室智能计算协同与成果转化：机构与协同机制",
+      "url": "https://www.zjsjw.gov.cn/gongzuodongtai/xunshixuncha/202411/t20241125_23060530.shtml",
+      "description": "浙江省纪委省监委；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_ustc_iat",
+      "label": "中国科大先研院技术熟化与联合研发：机构与协同机制",
+      "url": "https://iat.ustc.edu.cn/iat/yfjgjj.html",
+      "description": "中国科学技术大学先进技术研究院；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_regional_tsinghua_eiri",
+      "label": "清华四川能源互联网研究院成果转化：机构与协同机制",
+      "url": "https://www.tsinghua-eiri.org/conversion.aspx?t=80",
+      "description": "清华四川能源互联网研究院；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_gba",
+      "label": "The GBA Battery Passport 2024 Pilots: Overview, Insights and Recommendations",
+      "url": "https://www.globalbattery.org/media/publications/mvp/gba-bp-progressreport-v1rev2sm-002.pdf",
+      "description": "Global Battery Alliance；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_ids",
+      "label": "Global standards for trusted data sharing",
+      "url": "https://internationaldataspaces.org/wp-content/uploads/dlm_uploads/IDSA-Brochure-Global-Standards-for-Trusted-Data-Sharing_Oct-25.pdf",
+      "description": "International Data Spaces Association；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_ids_cert",
+      "label": "White Paper: Certification Scheme",
+      "url": "https://internationaldataspaces.org/wp-content/uploads/dlm_uploads/IDSA-White-Paper-certification-scheme-V.2.pdf",
+      "description": "International Data Spaces Association；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_embrapii",
+      "label": "Sobre a Embrapii",
+      "url": "https://embrapii.org.br/sobre-a-embrapii/",
+      "description": "EMBRAPII；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_embrapii_global",
+      "label": "Cooperação Internacional",
+      "url": "https://embrapii.org.br/sobre-a-embrapii/cooperacao-internacional/",
+      "description": "EMBRAPII；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_kcic",
+      "label": "Kenya Climate Innovation Center",
+      "url": "https://www.kenyacic.org/",
+      "description": "KCIC；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_kcic_partners",
+      "label": "Cleantech Innovation Competition",
+      "url": "https://www.kenyacic.org/programmes/cleantech",
+      "description": "KCIC；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_innoboost",
+      "label": "Green Innoboost",
+      "url": "https://www.iea.org/articles/green-innoboost",
+      "description": "IEA；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_nedo",
+      "label": "Case Studies of Smart Community Demonstration Project",
+      "url": "https://www.nedo.go.jp/english/news/reports_20130222.html",
+      "description": "NEDO；事实摘编，非因果评价"
+    },
+    {
+      "id": "s_nedo_lyon",
+      "label": "Smart Community Demonstration Project in Lyon, France",
+      "url": "https://www.nedo.go.jp/content/100871965.pdf",
+      "description": "NEDO；事实摘编，非因果评价"
+    },
+    {
+      "id": "prerequisites_table_source",
+      "label": "表1　组织方式的适用前提与评价边界",
+      "path": "analysis/reports/build_innovation_policy_report.py",
+      "query": {
+        "engine": "SQLite 3.47.0",
+        "language": "sql",
+        "sql": "SELECT \"组织方式\",\"要解决的问题\",\"必要条件\",\"不宜替代成效的指标\" FROM prerequisites_table ORDER BY rowid",
+        "executed_at": "2026-10-09T07:55:31.636570+00:00",
+        "tables_used": [
+          "prerequisites_table"
+        ],
+        "filters": [
+          "正文案例支持的解释性比较；非实测统计"
+        ],
+        "description": "文字矩阵入表后原样检索；SQL不证明因果关系，事实来源见正文及参考资料。"
+      }
+    },
+    {
+      "id": "factors_table_source",
+      "label": "表2　广东与浙江案例的生产要素解释",
+      "path": "analysis/reports/build_innovation_policy_report.py",
+      "query": {
+        "engine": "SQLite 3.47.0",
+        "language": "sql",
+        "sql": "SELECT \"解释因素\",\"广东案例观察\",\"浙江案例观察\",\"需要核验的结果\" FROM factors_table ORDER BY rowid",
+        "executed_at": "2026-10-09T07:55:31.636570+00:00",
+        "tables_used": [
+          "factors_table"
+        ],
+        "filters": [
+          "正文案例支持的解释性比较；非实测统计"
+        ],
+        "description": "文字矩阵入表后原样检索；SQL不证明因果关系，事实来源见正文及参考资料。"
+      }
+    },
+    {
+      "id": "actions_table_source",
+      "label": "表3　公共工具、责任与检查证据",
+      "path": "analysis/reports/build_innovation_policy_report.py",
+      "query": {
+        "engine": "SQLite 3.47.0",
+        "language": "sql",
+        "sql": "SELECT \"断点\",\"公共工具\",\"主要责任主体\",\"优先检查证据\" FROM actions_table ORDER BY rowid",
+        "executed_at": "2026-10-09T07:55:31.636570+00:00",
+        "tables_used": [
+          "actions_table"
+        ],
+        "filters": [
+          "正文案例支持的解释性比较；非实测统计"
+        ],
+        "description": "文字矩阵入表后原样检索；SQL不证明因果关系，事实来源见正文及参考资料。"
+      }
+    },
+    {
+      "id": "s_arpae_programme_overview",
+      "label": "ARPA-E Program Overview",
+      "url": "https://arpa-e.energy.gov/programs-and-initiatives/program-overview",
+      "description": "US Department of Energy / ARPA-E"
+    }
+  ]
+}
