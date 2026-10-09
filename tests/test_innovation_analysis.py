@@ -75,4 +75,37 @@ class InnovationAnalysisTests(unittest.TestCase):
             self.assertEqual(one["analysis"],two["analysis"])
             self.assertEqual([c["research_annotation"] for c in one["cases"]],[c["research_annotation"] for c in two["cases"]])
 
+    def test_additive_coverage_preserves_all_previous_factual_fields(self):
+        previous=json.loads((ROOT/'config/open_innovation_regional_cases.json').read_text(encoding='utf-8'))
+        current={c['id']:c for c in self.book['cases']}
+        sources={s['id']:s for s in self.book['sources']}
+        for old in previous['cases']:
+            for key in ('title','summary','actors','mechanism','observed','constraints','transfer','countries','evidence'):
+                self.assertEqual(old[key],current[old['id']][key])
+        for source in previous['sources']:self.assertEqual(source,sources[source['id']])
+
+    def test_undercovered_continents_and_provinces_have_traceable_cases(self):
+        extra=json.loads((ROOT/'config/open_innovation_coverage.json').read_text(encoding='utf-8'))
+        current={c['id']:c for c in self.book['cases']}
+        self.assertEqual(len(extra['cases']),43)
+        self.assertEqual(len(self.book['analysis']['provinces']),21)
+        expected={'africa':7,'south_america':6,'oceania':6,'asia':23,'north_america':1}
+        self.assertEqual(dict(Counter(current[c['id']]['research_annotation']['continent'] for c in extra['cases'])),expected)
+        for c in extra['cases']:
+            a=current[c['id']]['research_annotation']
+            self.assertEqual(a['cohort'],'coverage_review')
+            if a['province']:self.assertEqual(a['country'],'CN');self.assertTrue(a['city'])
+            self.assertTrue(c['evidence'])
+        self.assertEqual(economy_group('MX'),'developing')
+        self.assertEqual(economy_group('CA'),'developed')
+        self.assertEqual(economy_group('MU'),'developing')
+
+    def test_unknown_province_is_rejected_instead_of_silently_dropped(self):
+        import copy
+        config=json.loads((ROOT/'config/open_innovation_models.json').read_text(encoding='utf-8'))
+        c=copy.deepcopy(next(c for c in self.book['cases'] if c['research_annotation'].get('province')))
+        c['research_annotation']['province']='CN-BAD'
+        with self.assertRaisesRegex(ValueError,'invalid_innovation_province'):
+            annotate_cases([c],config)
+
 if __name__=="__main__":unittest.main()

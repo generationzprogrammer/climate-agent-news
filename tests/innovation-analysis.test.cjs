@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 const b=JSON.parse(fs.readFileSync('static/data/innovation_cases.json','utf8'));
 const {filterCases,exportCsv}=require('../static/innovation-cases.js');
-const {render,comparison,macroRows,macroChart}=require('../static/innovation-analysis.js');
+const {render,comparison,macroRows,macroChart,profileScope}=require('../static/innovation-analysis.js');
 test('regional filters use location and survive CSV export',()=>{
  const c=filterCases(b,{province:'CN-ZJ',archetype:'pilot'});assert(c.length>=2);assert(c.every(c=>c.research_annotation.province==='CN-ZJ'));
  const csv=exportCsv(b,c,'zh');assert(csv.includes('primary_model'));assert(csv.includes('CN-ZJ'));assert(!csv.includes('[object Object]'));
@@ -16,4 +16,16 @@ test('macro profiles do not mix projects with platforms',()=>{
 });
 test('Chinese and English panels have model and macro controls',()=>{
  for(const lang of ['zh','en']){const h=render(b,lang);assert(h.includes('data-model-compare'));assert(h.includes('data-macro-dimension'));assert(h.includes('CN-GD'));assert(!h.includes('undefined'));}
+});
+test('new geographic models remain discoverable and source-backed',()=>{
+ assert.equal(b.analysis.profiles.length,18);assert.equal(b.analysis.provinces.length,21);
+ assert.equal(profileScope(b,b.analysis.profiles.find(p=>p.id==='resource_pilots')),'china');
+ assert.equal(profileScope(b,b.analysis.profiles.find(p=>p.id==='australia_crc')),'international');
+ for(const lang of ['zh','en']){
+  const h=render(b,lang);assert(h.includes('data-model-scope'));assert(h.includes('CN-QH'));
+  const c=comparison(b,['australia_crc','latin_america_services','africa_capability'],lang);
+  for(const id of ['oi_hilt_crc','oi_inti_transfer','oi_tia_stations'])assert(c.includes('data-detail="'+id+'"'));
+  assert(!/undefined|NaN/.test(c));
+ }
+ for(const province of b.analysis.provinces)assert.equal(filterCases(b,{province:province.id}).length,province.count);
 });

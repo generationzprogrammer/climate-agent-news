@@ -191,9 +191,19 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book["cases"].extend(extra["cases"])
         book["sources"].extend(extra["sources"])
         book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
+    coverage = root / "config/open_innovation_coverage.json"
+    coverage_profiles = []
+    if coverage.exists():
+        extra = json.loads(coverage.read_text(encoding="utf-8"))
+        book["cases"].extend(extra["cases"])
+        book["sources"].extend(extra["sources"])
+        book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
+        book.setdefault("provenance", {}).update(extra.get("provenance", {}))
+        coverage_profiles = extra.get("model_profiles", [])
     model_path = root / "config/open_innovation_models.json"
     if model_path.exists():
         model_config = json.loads(model_path.read_text(encoding="utf-8"))
+        model_config["profiles"].extend(coverage_profiles)
         book["sources"].extend(model_config.get("sources", []))
         annotate_cases(book["cases"], model_config)
         book["analysis"] = build_analysis(book["cases"], model_config)

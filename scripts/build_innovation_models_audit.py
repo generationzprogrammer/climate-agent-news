@@ -14,8 +14,8 @@ def main():
         cells.append(dict(cell_type="code",id="models-"+str(len(cells)+1),metadata={},source=text,execution_count=None,outputs=[]))
     md("""# 科产融合模式与区域比较：复算核验
 ## 结论与范围
-2026-10-09快照保留613个原案例，新增24个机构案例，其中中国21个。广东8个、浙江11个平台案例用于机制比较，不构成省级普查。平台与资助项目、美元与欧元分别处理，不以样本数或结构评分推断创新绩效。
-数据：config/open_innovation_*.json、static/data/innovation_cases.json；报告统计为执行后的SQLite结果。问题标签保留，但不再作主分类。人工机制编码是解释而非官方评级。""")
+2026-10-09第二次扩充保留此前637个案例，补充薄弱大洲和中国省份。平台与资助项目、美元与欧元分别处理，不以样本数或结构评分推断创新绩效。覆盖和模式数量在下列代码中复算。
+数据：config/open_innovation_*.json、static/data/innovation_cases.json。问题标签保留，但不再作主分类。人工机制编码是解释而非官方评级。此前政策报告保留为第一次扩充的637例研究快照，不自动重写历史结论。""")
     code("""from pathlib import Path
 import json
 from collections import Counter
@@ -23,17 +23,21 @@ root=next(p for p in (Path.cwd(),*Path.cwd().parents) if (p/'config/open_innovat
 read=lambda p:json.loads((root/p).read_text(encoding='utf-8'))
 b=read('static/data/innovation_cases.json')
 old=sum([read('config/'+n)['cases'] for n in ('open_innovation_cases.json','open_innovation_projects.json','open_innovation_us_projects.json')],[])
-new=read('config/open_innovation_regional_cases.json')['cases']
+regional=read('config/open_innovation_regional_cases.json')['cases']
+coverage=read('config/open_innovation_coverage.json')['cases']
+new=regional+coverage
 current={c['id']:c for c in b['cases']}
-assert len(old)==613 and len(new)==24 and len(current)==637
-for c in old:
-    for k in ('title','summary','observed','countries','evidence'):
+assert len(old)==613 and len(regional)==24 and len(coverage)==43
+assert len(current)==len(old)+len(new) and len(current)==len(b['cases'])
+for c in old+regional:
+    for k in (key for key in c if key!='research_annotation'):
         assert c[k]==current[c['id']][k],(c['id'],k)
-assert sum(c['countries']==['CN'] for c in new)==21
-print({'retained':len(old),'added':len(new),'total':len(current),'new_China':21})""")
+china_added=sum(c['countries']==['CN'] for c in coverage)
+assert china_added==21
+print({'retained':len(old)+len(regional),'added':len(coverage),'total':len(current),'new_China':china_added})""")
     md("## 分类、比较分母与证据\n宏观统计按项目协调国或平台明确的单国主体互斥计数；跨国与缺失单列，不累计所有参与国。")
     code("""a=b['analysis']; sources={s['id'] for s in b['sources']}
-assert len(a['archetypes'])==8 and len(a['profiles'])==9
+assert len(a['archetypes'])==8 and len(a['profiles'])==18
 for p in a['profiles']:
     assert set(p['case_ids'])<=current.keys() and set(p['source_ids'])<=sources
     assert all(p[k]['zh'] and p[k]['en'] for k in ('conditions','mechanism','government','boundary','factors'))
@@ -49,7 +53,14 @@ for grain in ('platform','project'):
             assert abs(sum(r['share'] for r in rows)-1)<1e-12 if n else all(r['share'] is None for r in rows)
 counts=Counter(c['research_annotation'].get('province') for c in new)
 assert counts['CN-GD']==8 and counts['CN-ZJ']==11
-print({'archetypes':8,'profiles':9,'province_cases':dict(counts),'sources_resolved':True})""")
+province_counts={p['id']:p['count'] for p in a['provinces']}
+assert sum(province_counts.values())==sum(bool(c['research_annotation'].get('province')) for c in b['cases'])
+assert len(province_counts)==21
+for c in coverage:
+    annotation=current[c['id']]['research_annotation']
+    assert annotation['continent']!='cross_region' and annotation['cohort']=='coverage_review'
+continents=Counter(c['research_annotation']['continent'] for c in b['cases'])
+print({'archetypes':len(a['archetypes']),'profiles':len(a['profiles']),'province_cases':province_counts,'continents':dict(continents),'sources_resolved':True})""")
     md("## 图表独立复算\n将报告SQL输出与独立Python计数逐项核对，确认图表分子、分母一致。")
     code("""audit=read('analysis/reports/open_innovation_20261009/统计核验.json')
 for row in audit['regional']:
@@ -68,8 +79,11 @@ for row in audit['eu']:
     n=sum(role(c)==row['协调方'] for c in subset)
     assert n==row['项目数'] and len(subset)==row['领域项目数']
     assert abs(n/len(subset)-row['比例'])<1e-12
-result={'status':'passed','cases':637,'retained_cases':613,'new_cases':24,'new_China_cases':21,
-        'models':9,'archetypes':8,'Guangdong':8,'Zhejiang':11,'EU_projects':398,'SQL_independently_reconciled':True}
+result={'status':'passed','cases':len(current),'retained_cases':len(old)+len(regional),
+        'new_cases':len(coverage),'new_China_cases':china_added,'sources':len(sources),
+        'models':len(a['profiles']),'archetypes':len(a['archetypes']),
+        'Chinese_provinces':len(province_counts),'province_cases':province_counts,
+        'continents':dict(continents),'EU_projects':len(eu),'dated_report_SQL_independently_reconciled':True}
 print(json.dumps(result,ensure_ascii=False))""")
     md("""## 使用边界
 来源渠道并不均衡。宏观比例说明本库构成，不估计全球总体；项目登记目标不等于成果。UNCTAD分组不是收入等级，塞浦路斯、土耳其待完整名单复核。机构事实与适配解释分别保存。链接自动检测受403、TLS和HEAD支持限制，不将检测失败直接判为资料虚假。此报告为注明日期的研究快照；日常导出持续保留已复核案例，不自动重写结论。""")

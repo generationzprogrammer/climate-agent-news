@@ -9,22 +9,33 @@ import copy
 REGIONS = {
  "europe": ("欧洲", "Europe", "NO NL RO RU RS PL PT ME LT LU LV MT UA SK SI SE CH DK EE DE CZ AT AL BA BE BG IS IT HU IE FR GB ES FI HR GR"),
  "asia": ("亚洲", "Asia", "PK TR SG CN CY JO IN IL JP KR"),
- "africa": ("非洲", "Africa", "MA ZA TN CD KE EG ET GH"),
- "north_america": ("北美洲", "Northern America", "US CA"),
- "south_america": ("南美洲", "South America", "BR"),
+ "africa": ("非洲", "Africa", "MA ZA TN CD KE EG ET GH MU"),
+ "north_america": ("北美洲", "North America", "US CA MX GT BZ HN SV NI CR PA CU HT DO JM BS BB TT AG DM GD KN LC VC"),
+ "south_america": ("南美洲", "South America", "AR BO BR CL CO EC GY PY PE SR UY VE"),
  "oceania": ("大洋洲", "Oceania", "NZ AU MH"),
 }
 COUNTRY_REGION = {code:key for key,(_,_,codes) in REGIONS.items() for code in codes.split()}
 DEVELOPED_ASIA_OCEANIA = {"IL", "JP", "KR", "AU", "NZ"}
-PROVINCES = {"CN-GD": {"zh":"广东省","en":"Guangdong"}, "CN-ZJ":{"zh":"浙江省","en":"Zhejiang"},
-             "CN-AH":{"zh":"安徽省","en":"Anhui"},"CN-SC":{"zh":"四川省","en":"Sichuan"}}
+PROVINCES = {"CN-"+code:{"zh":zh,"en":en} for code,zh,en in (
+ ("BJ","北京市","Beijing"),("TJ","天津市","Tianjin"),("HE","河北省","Hebei"),
+ ("SX","山西省","Shanxi"),("NM","内蒙古自治区","Inner Mongolia"),
+ ("LN","辽宁省","Liaoning"),("JL","吉林省","Jilin"),("HL","黑龙江省","Heilongjiang"),
+ ("SH","上海市","Shanghai"),("JS","江苏省","Jiangsu"),("ZJ","浙江省","Zhejiang"),
+ ("AH","安徽省","Anhui"),("FJ","福建省","Fujian"),("JX","江西省","Jiangxi"),
+ ("SD","山东省","Shandong"),("HA","河南省","Henan"),("HB","湖北省","Hubei"),
+ ("HN","湖南省","Hunan"),("GD","广东省","Guangdong"),("GX","广西壮族自治区","Guangxi"),
+ ("HI","海南省","Hainan"),("CQ","重庆市","Chongqing"),("SC","四川省","Sichuan"),
+ ("GZ","贵州省","Guizhou"),("YN","云南省","Yunnan"),("XZ","西藏自治区","Tibet"),
+ ("SN","陕西省","Shaanxi"),("GS","甘肃省","Gansu"),("QH","青海省","Qinghai"),
+ ("NX","宁夏回族自治区","Ningxia"),("XJ","新疆维吾尔自治区","Xinjiang"),
+ ("HK","香港特别行政区","Hong Kong"),("MO","澳门特别行政区","Macao"),("TW","台湾省","Taiwan"))}
 
 def economy_group(country):
     # The full UNCTAD list is access-blocked; do not guess individual exceptions.
     if country in {"CY","TR"}: return "unclassified"
     region = COUNTRY_REGION.get(country)
     if not region: return "unclassified"
-    return "developed" if region in {"europe","north_america"} or country in DEVELOPED_ASIA_OCEANIA else "developing"
+    return "developed" if region=="europe" or country in {"US","CA"}|DEVELOPED_ASIA_OCEANIA else "developing"
 
 def annotate_cases(cases, config):
     ids={row["id"] for row in config["archetypes"]}
@@ -38,11 +49,13 @@ def annotate_cases(cases, config):
         else:
             model=a.get("primary_model") or config["legacy_assignments"].get(c["id"])
             country=a.get("country") or (c["countries"][0] if len(c["countries"])==1 else None)
-            cohort="regional_review" if c.get("id","").removeprefix("oi_") in {
+            cohort=a.get("cohort") or ("regional_review" if c.get("id","").removeprefix("oi_") in {
               "ssl_factory","giri","siat","scici","gdut_cnc","icost","tsinghua_sz_storage","songshan_medeng",
               "zju_shaoxing","zhejiang_tsinghua","zhejiang_lab","sjtu_shaoxing","tju_idim","tju_shangyu","zjut_shengzhou",
               "buaa_hangzhou","nimte_daishan","graphene_centre","nimte_poc","ustc_iat","tsinghua_eiri",
-              "stanford_otl","startx","aist_solutions"} else "legacy_review"
+              "stanford_otl","startx","aist_solutions"} else "legacy_review")
+        if a.get("province") and (country!="CN" or a["province"] not in PROVINCES or not a.get("city")):
+            raise ValueError("invalid_innovation_province:"+c["id"])
         if model not in ids: raise ValueError("unclassified_innovation_model:"+c["id"])
         if country and country not in c["countries"]: raise ValueError("focus_not_in_country_tags:"+c["id"])
         a.update(primary_model=model,country=country,cohort=cohort,
@@ -79,6 +92,7 @@ def build_analysis(cases, config):
     province_rows=[]
     for code,name in PROVINCES.items():
         subset=[c for c in cases if c["research_annotation"].get("province")==code]
+        if not subset: continue
         province_rows.append({"id":code,"name":name,"count":len(subset),
           "cities":sorted({c["research_annotation"]["city"] for c in subset}),
           "models":dict(Counter(c["research_annotation"]["primary_model"] for c in subset)),

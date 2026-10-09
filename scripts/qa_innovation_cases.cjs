@@ -103,6 +103,15 @@ const server=http.createServer((req,res)=>{
       assert(await page.locator('#innovationCases dialog').isVisible());checks++;
       await page.locator('#innovationCases .ic-close').click();
       await page.locator('#innovationCases [data-china-compare]').click();
+      await page.locator('#innovationCases [data-model-scope]').selectOption('international');
+      assert(await page.locator('#innovationCases [data-model-select="australia_crc"]').isVisible());checks++;
+      assert(!await page.locator('#innovationCases [data-model-select="jiangsu_contract"]').isVisible());checks++;
+      await page.locator('#innovationCases [data-model-scope]').selectOption('china');
+      await page.locator('#innovationCases [data-model-clear]').click();
+      await page.locator('#innovationCases [data-model-select="jiangsu_contract"]').check();
+      await page.locator('#innovationCases [data-model-select="hubei_photonics"]').check();
+      assert((await page.locator('#innovationCases .ic-model-comparison').textContent()).includes('现场性能'));checks++;
+      await page.locator('#innovationCases [data-china-compare]').click();
       await page.locator('#innovationCases [data-analysis-panel="models"]').screenshot({path:path.join(out,mobile?'models-mobile.png':'models-desktop.png')});
       await page.locator('#innovationCases [data-explore-province="CN-GD"]').click();
       assert.equal(await page.locator('#innovationCases .ic-result').textContent(),filterCases(book,{province:'CN-GD'}).length+' 个案例');checks++;

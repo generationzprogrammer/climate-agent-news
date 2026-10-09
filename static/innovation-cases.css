@@ -88,6 +88,7 @@
 #innovationCases .ic-model-select { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:20px 0; }
 #innovationCases .ic-model-select label { border:1px solid var(--line); padding:14px; border-radius:5px; line-height:1.6; font-size:16px; display:flex; align-items:flex-start; gap:9px; }
 #innovationCases .ic-model-select input { width:18px; height:18px; margin-top:4px; flex-shrink:0; accent-color:var(--blue); }
+#innovationCases .ic-model-select label[hidden] { display:none !important; }
 #innovationCases .ic-model-actions,#innovationCases .ic-analysis-filters,#innovationCases .ic-macro-controls { display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin:18px 0; }
 #innovationCases .ic-analysis-filters label,#innovationCases .ic-macro-controls label { display:flex; flex-direction:column; gap:8px; min-width:200px; font-size:15px; }
 #innovationCases .ic-model-actions button,#innovationCases .ic-reset { border:1px solid var(--line); padding:10px 16px; border-radius:4px; background:white; color:var(--blue-dark); }
