@@ -1,0 +1,52 @@
+name: 京津冀能源统计每周更新
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/climate_agent/bth_energy_update.py"
+      - "config/bth_energy_monitor.json"
+      - ".github/workflows/bth-energy.yml"
+  schedule:
+    # Monday 07:10 Beijing; bounded official-page checks, no model calls.
+    - cron: "10 23 * * 0"
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: bth-energy-weekly
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -e .
+      - name: 官方发布增量核查
+        run: python -m climate_agent.bth_energy_update
+      - name: 检验结构与历史保留
+        run: python -m unittest discover -s tests -p 'test_bth_energy.py' -v
+      - name: 保存增量并触发网站重建
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          git config user.name "climate-text-bot"
+          git config user.email "climate-text-bot@users.noreply.github.com"
+          git add data/bth_energy_updates.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: weekly BTH energy observations [skip ci]"
+            git fetch origin main
+            if ! git rebase origin/main; then
+              echo "::error::Energy supplement conflict; no overwrite performed."
+              exit 1
+            fi
+            git push
+          fi
+          # GITHUB_TOKEN pushes do not trigger another push workflow.
+          # Explicit dispatch rebuilds the monitor from the persisted supplement.
+          gh workflow run pages.yml --ref main

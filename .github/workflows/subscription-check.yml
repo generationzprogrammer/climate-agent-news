@@ -1,0 +1,28 @@
+name: 检查周报订阅链路
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/climate_agent/providers.py"
+      - "src/climate_agent/cli.py"
+      - ".github/workflows/subscription-check.yml"
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 核对线上表单与受保护名单
+        env:
+          PYTHONPATH: src
+          CLIMATE_SUBSCRIBE_ENDPOINT: ${{ secrets.CLIMATE_SUBSCRIBE_ENDPOINT }}
+          CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT: ${{ secrets.CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT }}
+          CLIMATE_SUBSCRIBER_ADMIN_TOKEN: ${{ secrets.CLIMATE_SUBSCRIBER_ADMIN_TOKEN }}
+          CLIMATE_WEEKLY_SUBSCRIBERS: ${{ secrets.CLIMATE_WEEKLY_SUBSCRIBERS }}
+        run: python scripts/check_weekly_subscription.py

@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "cadence": "weekly",
+  "sources": [
+    {"id":"bj_stats","region":"北京市","publisher":"北京市统计局","list_url":"https://tjj.beijing.gov.cn/zxfbu/","seeds":["https://jxj.beijing.gov.cn/jxsj/jjyx/202609/t20260921_4873283.html","https://www.beijing.gov.cn/renwen/bjgk/202607/t20260710_4756991.html"],"hosts":["tjj.beijing.gov.cn","www.beijing.gov.cn","jxj.beijing.gov.cn"]},
+    {"id":"tj_stats","region":"天津市","publisher":"天津市人民政府（统计公报）","list_url":"https://www.tj.gov.cn/sq/tjgb/","seeds":["https://www.tj.gov.cn/sq/tjgb/202603/t20260327_7271193.html"],"hosts":["www.tj.gov.cn"]},
+    {"id":"hb_stats","region":"河北省","publisher":"河北省统计局","list_url":"https://tjj.hebei.gov.cn/","seeds":["https://www.hbshgzb.gov.cn/2026-04/13/content_9499919.htm"],"hosts":["tjj.hebei.gov.cn","www.hbshgzb.gov.cn"]}
+  ],
+  "compliance": "仅访问公开官方网页，遵守robots和访问限制；每周每来源最多4个具体发布页，遇401、403、429停止该域名。不使用大模型或付费数据接口；新值保留来源与摘句，冲突值待审核。"
+}

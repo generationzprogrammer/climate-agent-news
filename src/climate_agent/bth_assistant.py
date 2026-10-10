@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 from urllib.parse import urlsplit
 from .bth_tracker import write_target_tracker
+from .bth_energy import write_energy_assets
 
 
 def public_url(value: str, *, allow_http: bool = False) -> str:
@@ -31,6 +32,8 @@ def build_knowledge(energy: dict, policies: dict, targets: dict | None = None) -
             "year": row["year"], "title": row["label"], "metric": row["metric"],
             "value": value, "unit": row["unit"], "category": row["category"],
             "notes": row.get("notes", ""), "status": row.get("status", ""),
+            "scope": row.get("scope"), "period": row.get("period",str(row["year"])),
+            "frequency": row.get("frequency","annual"), "date": row.get("published_at"),
             "locator": row.get("locator", ""), "extraction_method": row.get("extraction_method", ""),
             "source": source["publisher"], "source_title": source["title"],
             "url": public_url(source["url"]), "content_scope": "published_numeric_observation",
@@ -83,12 +86,18 @@ def write_assistant_assets(root: Path, data_dir: Path) -> dict:
     policy_path = root / "data" / "bth_policy_archive.json"
     policies = json.loads(policy_path.read_text(encoding="utf-8")) if policy_path.exists() else {}
     targets = write_target_tracker(root, data_dir)
+    energy_database = write_energy_assets(root, data_dir, targets)
+    # Use exactly the same public observations as the monitor and database.
+    energy = {"snapshot_date": energy_database["snapshot_date"],
+              "observations": energy_database["records"],
+              "sources": list({r["source_id"]: r["source"] for r in energy_database["records"]}.values())}
     bundle = build_knowledge(energy, policies, targets)
     data_dir.mkdir(parents=True, exist_ok=True)
     (data_dir / "bth_assistant_knowledge.json").write_text(json.dumps(bundle, ensure_ascii=False), encoding="utf-8")
     endpoint = os.getenv("BTH_ASSISTANT_ENDPOINT", "").strip().rstrip("/")
     if endpoint:
         public_url(endpoint)
-    config = {"endpoint": endpoint, "sitekey": os.getenv("BTH_TURNSTILE_SITE_KEY", "").strip()}
+    config = {"endpoint": endpoint, "sitekey": os.getenv("BTH_TURNSTILE_SITE_KEY", "").strip(),
+              "verification": os.getenv("BTH_VERIFICATION_MODE", "off").strip()}
     (data_dir / "bth_assistant_config.json").write_text(json.dumps(config), encoding="utf-8")
-    return {"evidence_count": len(bundle["records"]), "configured": bool(endpoint and config["sitekey"])}
+    return {"evidence_count": len(bundle["records"]), "configured": bool(endpoint and (config["verification"] == "off" or config["sitekey"]))}

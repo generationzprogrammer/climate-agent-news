@@ -60,8 +60,8 @@
   async function submit(event) {
     event.preventDefault(); if (chat.busy) return;
     const input = chat.root.querySelector("textarea"), question = input.value.trim(); if (!question) return;
-    if (!chat.config?.endpoint || !chat.config?.sitekey) {status(label("实时服务待管理员启用。", "Live service awaits administrator setup.")); return;}
-    if (!chat.token) {status(label("请先完成安全验证；若无法加载，请检查网络。", "Complete the security check first.")); return;}
+    if (!chat.config?.endpoint) {status(label("实时服务待管理员启用。", "Live service awaits administrator setup.")); return;}
+    if (chat.config.verification !== "off" && !chat.token) {status(label("请先完成安全验证。", "Complete the security check first.")); return;}
     const history = chat.messages.filter(m => m.role !== "error").slice(-6).map(m => ({role: m.role, content: m.content.slice(0, 1000)}));
     chat.messages.push({role: "user", content: question}); input.value = ""; chat.busy = true; chat.pending = "";
     const token = chat.token; chat.token = "";
@@ -84,16 +84,17 @@
     try {
       const receive = async () => {
         // Health check is free of model calls and bounds DNS/CORS/network failures.
-        await window.GruenBthTransport.health(chat.config.endpoint, controller.signal);
+        // A second mandatory GET can be blocked while POST works on embedded
+        // browsers. Submit directly; the backend checks configuration and limits.
         if (controller.signal.aborted) throw new DOMException("Aborted", "AbortError");
         const payload = await window.GruenBthTransport.request(chat.config.endpoint.replace(/\/$/, "") + "/chat", {
           method: "POST", signal: controller.signal, timeout: deadline,
           payload: {question, history, token, transport: "stream"},
-          onConnected: () => {phase = "verify"; status(label("正在验证请求…", "Verifying the request…"));},
+          onConnected: () => {phase = "analysis"; status(label("正在检索与分析…", "Retrieving and analysing…"));},
           onEvent: (name, value) => {
             if (controller.signal.aborted) return;
             if (name === "status") {
-              phase = value.phase === "connected" || value.phase === "verification" ? "verify" : "analysis";
+              phase = value.phase === "verification" ? "verify" : "analysis";
               status(phase === "verify" ? label("正在验证请求…", "Verifying the request…") : label("正在分析…", "Analysing…"));
             }
             if (name === "delta") {phase = "stream"; raw += value.text; chat.pending = partialAnswer(raw); messages();}
@@ -126,7 +127,9 @@
     messages();
     try {
       chat.config = await configuration(); if (!root.isConnected || root !== chat.root) return;
-      if (!chat.config.endpoint || !chat.config.sitekey) {status(label("实时服务待管理员启用。", "Live service awaits administrator setup.")); return;}
+      if (!chat.config.endpoint) {status(label("实时服务待管理员启用。", "Live service awaits administrator setup.")); return;}
+      if (chat.config.verification === "off") return;
+      if (!chat.config.sitekey) {status(label("安全验证尚未配置。", "Security verification is not configured.")); return;}
       await turnstileScript(); if (!root.isConnected || root !== chat.root) return;
       chat.widget = window.turnstile.render(root.querySelector(".bth-turnstile"), {sitekey: chat.config.sitekey, action: "bth_chat", callback: token => {chat.token = token;}, "expired-callback": () => {chat.token = "";}, "error-callback": () => {chat.token = ""; status(label("安全验证暂不可用，请检查网络。", "Security verification is unavailable."));}});
     } catch {status(label("实时服务配置或安全验证加载失败。", "Could not load service configuration or verification."));}

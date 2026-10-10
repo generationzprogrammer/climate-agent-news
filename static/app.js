@@ -17,7 +17,7 @@ const $ = id => document.getElementById(id);
 const UI_TEXT = {
   zh: {
     navMap: "全球现场", navToday: "今日情报", navFocus: "专题", navChinaCarbon: "中国碳市场",
-    navSingapore: "新加坡", navBth: "京津冀绿色转型", navRenewable: "新能源", navStorage: "储能技术", navAidc: "人工智能数据中心",
+    navSingapore: "新加坡", navBth: "京津冀能源统计数据库", navRenewable: "新能源", navStorage: "储能技术", navAidc: "人工智能数据中心",
     navAnalytics: "语料分析", navAssistant: "情报问答", navDatabase: "文本数据库",
     chinaCarbonTitle: "中国碳市场", singaporeTitle: "新加坡气候政策与行动", all: "全部", source: "查看原文 ↗",
     archive: "站内新增", agencyAll: "全部机构", coverage: "官方机构 · 近一年", siteSubtitle: "国际气候情报与文本数据库",
@@ -56,7 +56,7 @@ const UI_TEXT = {
     navMap: "Global desk", navToday: "Today", navFocus: "Focus", navChinaCarbon: "China carbon market",
     navSingapore: "Singapore", navAnalytics: "Corpus", navAssistant: "Q&A", navDatabase: "Text database",
     chinaCarbonTitle: "China carbon market", singaporeTitle: "Singapore climate policy and action", all: "All", source: "Open source ↗",
-    navBth: "BTH green transition", navRenewable: "New energy", navStorage: "Energy storage", navAidc: "AI data centres",
+    navBth: "BTH energy statistics", navRenewable: "New energy", navStorage: "Energy storage", navAidc: "AI data centres",
     evidenceRecords: "Three-year evidence", recent30: "Last 30 days", sourceDiversity: "Distinct sources", officialShare: "Official sources", showMoreEvidence: "Show more evidence", showLessEvidence: "Show less",
     archive: "New from archive", agencyAll: "All agencies", coverage: "Official institutions · past 12 months", siteSubtitle: "International climate intelligence and text database",
     team: "Team", subscribe: "Subscribe", download: "Download today's brief", archiveChart: "Cumulative climate text archive", visitorChart: "Cumulative visits / page views",
@@ -510,13 +510,14 @@ function renderTopicDesks() {
         <article><span>${esc(tr("officialShare"))}</span><b>${stats.official_share || 0}%</b><small>${stats.official_records || 0} / ${stats.evidence_records || 0}</small></article>
       </div>`;
     return `<section class="section spotlight-section topic-desk" id="${esc(desk.id)}">
-      <div class="section-heading"><div><p class="overline">FOCUS DESK</p><h2>${esc(field(desk, "title_zh", "title_en"))}</h2></div></div>
+      <div class="section-heading"><div><p class="overline">FOCUS DESK</p><h2>${esc(isBth ? (state.language === "en" ? "BTH energy statistics database" : "京津冀能源统计数据库") : field(desk, "title_zh", "title_en"))}</h2></div></div>
+      ${isBth ? '<div id="bthEnergyRoot"></div><details class="bth-policy-overview"><summary>' + (state.language === "en" ? 'Policy tools and institutions' : '政策工具与机构') + '</summary>' : ""}
       ${metricsHtml}
       <div class="topic-evidence-layout">
         <div class="topic-category-bars">${categories.map(category => { const count=Number(categoryCounts[category.id] || 0); return `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}"><span>${esc(field(category, "label_zh", "label_en"))}</span><i><em style="width:${Math.max(2, count / maxCategory * 100).toFixed(1)}%"></em></i><b>${count}</b></button>`; }).join("")}</div>
         <div class="agency-grid">${(desk.agencies || []).map(agency => `<a class="agency-card" href="${esc(safeUrl(agency.url))}" target="_blank" rel="noopener noreferrer"><b>${esc(field(agency, "name_zh", "name_en"))}</b><i>↗</i></a>`).join("")}</div>
       </div>
-      ${isBth ? '<div id="bthTargetTrackerRoot"></div><div id="bthAssistantRoot"></div>' + renderBthRegionalTools(desk) : ""}
+      ${isBth ? '</details><div id="bthTargetTrackerRoot"></div><div id="bthAssistantRoot"></div>' + renderBthRegionalTools(desk) : ""}
       <div class="spotlight-tabs topic-filter-tabs"><button type="button" data-topic-filter="" data-topic-desk="${esc(desk.id)}" class="${active ? "" : "active"}">${esc(tr("all"))} · ${desk.records?.length || 0}</button>${categories.map(category => `<button type="button" data-topic-filter="${esc(category.id)}" data-topic-desk="${esc(desk.id)}" class="${active === category.id ? "active" : ""}">${esc(field(category, "label_zh", "label_en"))}</button>`).join("")}</div>
       <div class="spotlight-grid">${rows.slice(0, visible).map(item => spotlightCard(item, categoryLabel((item.category_ids || [])[0]))).join("") || `<div class="empty compact"><b>${state.language === "en" ? "No matching evidence" : "暂无匹配证据"}</b></div>`}</div>
       ${rows.length > 12 ? `<button class="load-more topic-load-more" type="button" data-topic-more="${esc(desk.id)}">${esc(visible < rows.length ? tr("showMoreEvidence") : tr("showLessEvidence"))}</button>` : ""}
@@ -528,6 +529,7 @@ function renderTopicDesks() {
   if (activeAssistant) activeAssistant.dataset.language = state.language;
   window.GruenBthAssistant?.mount(activeAssistant, state.language);
   window.GruenBthTracker?.mount(document.getElementById("bthTargetTrackerRoot"), state.language);
+  window.GruenBthEnergy?.mount(document.getElementById("bthEnergyRoot"), state.language);
   document.querySelectorAll("[data-topic-filter]").forEach(button => button.addEventListener("click", () => {
     state.topicDeskFilters[button.dataset.topicDesk] = button.dataset.topicFilter || "";
     state.topicDeskVisible[button.dataset.topicDesk] = 12;
@@ -1676,22 +1678,12 @@ function subscriptionPayload(email) {
   return JSON.stringify({ email, list: "climate-weekly", source: location.href });
 }
 
-async function postSubscription(endpoint, email, timeoutMs = 30000) {
-  const controller = typeof AbortController === "function" ? new AbortController() : null;
-  const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
-  try {
-    return await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=UTF-8" },
-      body: subscriptionPayload(email),
-      cache: "no-store",
-      credentials: "omit",
-      keepalive: true,
-      ...(controller ? { signal: controller.signal } : {}),
-    });
-  } finally {
-    if (timer) clearTimeout(timer);
-  }
+async function postSubscription(endpoint, email, timeoutMs = 12000) {
+  // Bound the entire response (including JSON body) and avoid embedded-browser
+  // keepalive/Fetch incompatibilities. No email is placed in a URL or log.
+  return window.GruenBthTransport.request(endpoint, {
+    method: "POST", payload: {email, list:"climate-weekly"}, timeout: timeoutMs,
+  });
 }
 
 async function submitSubscription(endpoint, email) {
@@ -1699,15 +1691,31 @@ async function submitSubscription(endpoint, email) {
   for (const delay of [0, 900]) {
     if (delay) await new Promise(resolve => setTimeout(resolve, delay));
     try {
-      const response = await postSubscription(endpoint, email);
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+      const result = await postSubscription(endpoint, email);
+      if (result.ok !== true || result.status !== "subscribed") throw new Error("subscription_not_confirmed");
       return result;
     } catch (error) {
       lastError = error;
     }
   }
   throw lastError || new Error("subscription_failed");
+}
+
+async function subscriptionWithFallback(config, email, unsubscribe = false) {
+  const action = unsubscribe ? "unsubscribe" : "subscribe";
+  const primary = unsubscribe ? config.unsubscribe_endpoint : config.endpoint;
+  let error;
+  const submit = async endpoint => {
+    if (!unsubscribe) return submitSubscription(endpoint, email);
+    const result = await postSubscription(endpoint,email,15000);
+    if (result.ok !== true || result.status !== "unsubscribed") throw new Error("unsubscribe_not_confirmed");
+    return result;
+  };
+  if (primary) try {return await submit(primary);} catch (e) {error=e;}
+  // This relay stores in the SAME KV as the primary route, not a second list.
+  const assistant = await fetchJson("./data/bth_assistant_config.json").catch(()=>({}));
+  if (assistant.endpoint) return submit(assistant.endpoint.replace(/\/$/,"") + "/subscriptions/" + action);
+  throw error || new Error("subscription_not_configured");
 }
 
 function setupSubscribe() {
@@ -1742,8 +1750,7 @@ function setupSubscribe() {
     if (hint) hint.textContent = "正在连接订阅服务…";
     try {
       const config = await subscriptionConfig();
-      if (!config.endpoint) throw new Error("订阅服务尚未配置");
-      await submitSubscription(config.endpoint, email);
+      await subscriptionWithFallback(config, email);
       closeDialog(modal);
       toast("订阅成功，周报将在每周一发送。");
     } catch (error) {
@@ -1760,14 +1767,8 @@ function setupSubscribe() {
       toast("请先输入需要退订的有效邮箱。");
       return;
     }
-    const endpoint = (await subscriptionConfig()).unsubscribe_endpoint;
-    if (!endpoint) {
-      toast("退订端点尚未配置，请通过联系邮箱申请退订。");
-      return;
-    }
     try {
-      const response = await postSubscription(endpoint, email);
-      if (!response.ok) throw new Error(String(response.status));
+      await subscriptionWithFallback(await subscriptionConfig(),email,true);
       closeDialog(modal);
       toast("退订成功，该邮箱将不再接收周报。");
     } catch (error) {
@@ -1830,7 +1831,7 @@ function renderLineChart(id, rows, { x, y }) {
   </svg>`;
 }
 
-function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill" } = {}) {
+function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill", valueFormat = formatCount, ariaLabel = "分类频率条形图" } = {}) {
   const element = $(id);
   if (!element) return;
   const shown = rows.slice(0, limit);
@@ -1841,14 +1842,14 @@ function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill" } = {}) {
   const width = 520, rowHeight = 34, left = 120, right = 54, top = 12;
   const height = top * 2 + shown.length * rowHeight;
   const maxValue = Math.max(1, ...shown.map(row => Number(row.count || 0)));
-  element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="分类频率条形图">
+  element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(ariaLabel)}">
     ${shown.map((row, index) => {
       const y = top + index * rowHeight + 7;
       const barWidth = (width - left - right) * Number(row.count || 0) / maxValue;
       return `<text class="chart-label" x="${left - 10}" y="${y + 13}" text-anchor="end">${esc(row.name)}</text>
         <rect class="bar-track" x="${left}" y="${y}" width="${width - left - right}" height="16"></rect>
         <rect class="${colorClass}" x="${left}" y="${y}" width="${barWidth}" height="16"></rect>
-        <text class="chart-value" x="${left + barWidth + 7}" y="${y + 12}">${formatCount(row.count)}</text>`;
+        <text class="chart-value" x="${left + barWidth + 7}" y="${y + 12}">${esc(valueFormat(row.count))}</text>`;
     }).join("")}
   </svg>`;
 }

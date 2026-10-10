@@ -7,7 +7,7 @@ import ssl
 import time
 import urllib.error
 import urllib.request
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlsplit, urlunsplit
 from collections import Counter
 from dataclasses import dataclass
 from email.message import EmailMessage
@@ -167,6 +167,16 @@ def publish_email_batch(markdown: str, recipients: list[str], *, subject: str, r
                 failures[type(exc).__name__] += 1
                 break
     return {"sent": sent, "failed": sum(failures.values()), "failure_types": dict(failures)}
+
+
+def resolve_subscriber_endpoint(form_endpoint: str, configured_endpoint: str = "") -> str:
+    """Keep the protected weekly reader on the same service as the public form."""
+    if not form_endpoint:
+        return configured_endpoint
+    parts = urlsplit(form_endpoint.strip())
+    if parts.scheme != "https" or not parts.hostname or parts.username or parts.password or parts.query or parts.fragment or not parts.path.endswith("/subscribe"):
+        raise ValueError("订阅表单接口必须是公开 HTTPS /subscribe 地址")
+    return urlunsplit((parts.scheme,parts.netloc,parts.path[:-len("subscribe")]+"subscribers","",""))
 
 
 def fetch_subscribers(endpoint: str, admin_token: str, *, timeout: int = 20) -> list[str]:

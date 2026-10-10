@@ -4,6 +4,25 @@ const text = (s, n = 1500) => String(s || "").slice(0, n);
 const headers = origin => ({"Access-Control-Allow-Origin": origin, "Vary": "Origin", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"});
 const json = (body, status, origin) => new Response(JSON.stringify(body), {status, headers: {...headers(origin), "Content-Type": "application/json; charset=utf-8"}});
 const positiveInt = (v, fallback, cap) => Math.max(1, Math.min(cap, Number.parseInt(v, 10) || fallback));
+// Explicit server-side policy. A client cannot disable a required challenge.
+const verificationRequired = env => env.BTH_VERIFICATION_MODE !== "off";
+const SUBSCRIPTION_BASE = "https://climate-news-subscriptions.1090697345.workers.dev";
+
+async function subscriptionRelay(request, origin, action) {
+  // Fixed destination and public operations only. No arbitrary proxy or admin API.
+  const raw = await limitedBody(request);
+  if (raw === null || raw.length > 2048) return json({error:"request_too_large"},413,origin);
+  let body;
+  try {body=JSON.parse(raw);} catch {return json({error:"invalid_json"},400,origin);}
+  const email = String(body.email || "").trim().toLowerCase();
+  if (!/^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/.test(email)) return json({error:"invalid_email"},400,origin);
+  try {
+    const response = await fetch(`${SUBSCRIPTION_BASE}/${action}`,{method:"POST",headers:{"Content-Type":"application/json","Origin":origin},body:JSON.stringify({email}),signal:AbortSignal.timeout(15000),redirect:"error"});
+    const payload=await response.json();
+    if (!response.ok || payload.ok !== true || payload.status !== (action === "subscribe" ? "subscribed" : "unsubscribed")) return json({error:"subscription_not_confirmed"},502,origin);
+    return json({ok:true,status:payload.status},200,origin);
+  } catch {return json({error:"subscription_unavailable"},502,origin);}
+}
 async function limitedBody(request) {
   if (Number(request.headers.get("Content-Length")) > 65536) return null;
   if (!request.body) return "";
@@ -145,10 +164,12 @@ const errorCode = error => error instanceof ServiceError ? error.message :
   ["AbortError", "TimeoutError"].includes(error.name) ? "connection_timeout" : "request_failed";
 
 async function answerRequest(request, env, body, signal, emit) {
-  emit("status", {phase: "verification"});
-  const verification = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {method: "POST", signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]), headers: {"Content-Type": "application/json"}, body: JSON.stringify({secret: env.BTH_TURNSTILE_SECRET_KEY, response: text(body.token, 2048), remoteip: request.headers.get("CF-Connecting-IP")})});
-  const challenge = await verification.json();
-  if (!challenge.success || challenge.hostname !== (env.BTH_ALLOWED_HOSTNAME || "generationzprogrammer.github.io") || challenge.action !== "bth_chat") throw new ServiceError("verification_failed", 403);
+  if (verificationRequired(env)) {
+    emit("status", {phase: "verification"});
+    const verification = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {method: "POST", signal: AbortSignal.any([signal, AbortSignal.timeout(10000)]), headers: {"Content-Type": "application/json"}, body: JSON.stringify({secret: env.BTH_TURNSTILE_SECRET_KEY, response: text(body.token, 2048), remoteip: request.headers.get("CF-Connecting-IP")})});
+    const challenge = await verification.json();
+    if (!challenge.success || challenge.hostname !== (env.BTH_ALLOWED_HOSTNAME || "generationzprogrammer.github.io") || challenge.action !== "bth_chat") throw new ServiceError("verification_failed", 403);
+  }
   signal.throwIfAborted();
   const day = new Date().toISOString().slice(0, 10);
   const salt = await crypto.subtle.importKey("raw", new TextEncoder().encode(env.BTH_LLM_API_KEY), {name: "HMAC", hash: "SHA-256"}, false, ["sign"]);
@@ -233,11 +254,12 @@ export default {
     const origin = request.headers.get("Origin") || "";
     const allowed = env.BTH_ALLOWED_ORIGIN || "https://generationzprogrammer.github.io";
     const path = new URL(request.url).pathname;
-    if (path === "/health" && request.method === "GET") return json({ok: true, ready: !!(env.BTH_LLM_API_KEY && env.BTH_TURNSTILE_SECRET_KEY && env.BUDGET), model: env.BTH_LLM_MODEL || "qwen3.5-plus", version: "20261003-2", transports: ["stream", "json"]}, 200, origin === allowed ? origin : "null");
+    if (path === "/health" && request.method === "GET") return json({ok: true, ready: !!(env.BTH_LLM_API_KEY && (!verificationRequired(env) || env.BTH_TURNSTILE_SECRET_KEY) && env.BUDGET), verification: verificationRequired(env) ? "required" : "off", model: env.BTH_LLM_MODEL || "qwen3.5-plus", version: "20261010-1", transports: ["stream", "json"]}, 200, origin === allowed ? origin : "null");
     if (origin !== allowed) return json({error: "origin_not_allowed"}, 403, "null");
     if (request.method === "OPTIONS") return new Response(null, {status: 204, headers: {...headers(origin), "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Max-Age": "600"}});
+    if (["/subscriptions/subscribe","/subscriptions/unsubscribe"].includes(path) && request.method === "POST") return subscriptionRelay(request, origin, path.split("/").pop());
     if (path !== "/chat" || request.method !== "POST") return json({error: "not_found"}, 404, origin);
-    if (!env.BTH_LLM_API_KEY || !env.BTH_TURNSTILE_SECRET_KEY || !env.BUDGET) return json({error: "service_not_configured"}, 503, origin);
+    if (!env.BTH_LLM_API_KEY || (verificationRequired(env) && !env.BTH_TURNSTILE_SECRET_KEY) || !env.BUDGET) return json({error: "service_not_configured"}, 503, origin);
     try {
       const contentType = (request.headers.get("Content-Type") || "").split(";")[0].trim().toLowerCase();
       if (!["application/json", "text/plain"].includes(contentType)) return json({error: "invalid_content_type"}, 415, origin);

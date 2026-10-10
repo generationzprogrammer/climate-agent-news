@@ -76,12 +76,12 @@ const server = http.createServer((req, res) => {
     assert(requests[2].history.some(m => m.role === "assistant" && m.content.includes(policySources[0].id)), "internal IDs must remain in follow-up context");
     assert.equal((await page.evaluate(() => window.referenceLeaks)).length, 0, "raw citation leaked during streaming");
     await page.locator("#bthTargetTrackerRoot table").waitFor();
-    assert.equal(await page.locator("[data-target-id]").count(),19);
+    assert.equal(await page.locator("[data-target-id]").count(),39);
     await page.locator('[data-target-filter="region"]').selectOption("天津市");
-    assert.equal(await page.locator("[data-target-id]").count(),3);
+    assert.equal(await page.locator("[data-target-id]").count(),13);
     await page.locator('[data-target-filter="year"]').selectOption("2025");
-    assert.equal(await page.locator("[data-target-id]").count(),1);
-    assert((await page.locator("[data-target-id]").innerText()).includes("实绩待核验"));
+    assert.equal(await page.locator("[data-target-id]").count(),9);
+    assert((await page.locator("[data-target-id]").first().innerText()).includes("实绩待核验"));
     await page.locator('[data-target-filter="region"]').selectOption("");
     await page.locator('[data-target-filter="year"]').selectOption("");
     await page.locator('[data-bth-policy-filter="instrument"]').selectOption("economic");
@@ -158,7 +158,7 @@ const server = http.createServer((req, res) => {
       await phone.waitForFunction(()=>!!window.testVerification);
       await phone.locator("#bthChatQuestion").fill("北京气候治理如何？");
       await phone.locator(".bth-chat-send").click();
-      await phone.waitForFunction(()=>document.querySelector(".bth-chat-status").textContent.includes("验证请求"),{},{timeout:10000});
+      await phone.waitForFunction(()=>/正在分析|检索与分析|正在生成|回答完成/.test(document.querySelector(".bth-chat-status").textContent),{},{timeout:10000});
       await phone.locator('.bth-chat-downloads [data-export="docx"]').first().waitFor({timeout:10000});
       assert.equal(await phone.locator(".bth-chat-answer strong").count(),1);
       assert(await phone.locator(".bth-chat-send").isEnabled());

@@ -1,0 +1,151 @@
+{
+  "sources": [
+    {
+      "id": "weekly_0bbc8645fe699833",
+      "region": "北京市",
+      "year": 2025,
+      "title": "北京市2025年国民经济和社会发展统计公报_北京概况_首都之窗_北京市人民政府门户网站",
+      "publisher": "北京市统计局",
+      "url": "https://www.beijing.gov.cn/renwen/bjgk/202607/t20260710_4756991.html",
+      "type": "官方统计公报",
+      "published_at": "2026-03-26"
+    },
+    {
+      "id": "weekly_de4960b9e97ab245",
+      "region": "天津市",
+      "year": 2025,
+      "title": "2025年天津市国民经济和社会发展统计公报_统计公报_天津政务网",
+      "publisher": "天津市人民政府（统计公报）",
+      "url": "https://www.tj.gov.cn/sq/tjgb/202603/t20260327_7271193.html",
+      "type": "官方统计公报",
+      "published_at": "2026-03-27"
+    },
+    {
+      "id": "weekly_0d2eb98f4588b96c",
+      "region": "北京市",
+      "year": 2026,
+      "title": "2026年1-8月北京规模以上工业运行情况",
+      "publisher": "北京市统计局",
+      "url": "https://tjj.beijing.gov.cn/zxfbu/202609/t20260916_4865782.html",
+      "type": "官方统计公报",
+      "published_at": "2026-09-16"
+    },
+    {
+      "id": "weekly_20adfb1c7305bfd5",
+      "region": "北京市",
+      "year": 2026,
+      "title": "2026年1-8月北京规模以上工业运行情况_经济运行_北京市经济和信息化局",
+      "publisher": "北京市统计局",
+      "url": "https://jxj.beijing.gov.cn/jxsj/jjyx/202609/t20260921_4873283.html",
+      "type": "官方统计公报",
+      "published_at": "2026-09-21"
+    },
+    {
+      "id": "weekly_0c3b3a51c5868352",
+      "region": "河北省",
+      "year": 2025,
+      "title": "河北省2025年国民经济和社会发展统计公报_中共河北省委社会工作部",
+      "publisher": "河北省统计局",
+      "url": "https://www.hbshgzb.gov.cn/2026-04/13/content_9499919.htm",
+      "type": "官方统计公报",
+      "published_at": null
+    }
+  ],
+  "observations": [
+    {
+      "id": "W-weekly_0d2eb98f4588b96c-nev_output_ytd",
+      "region": "北京市",
+      "year": 2026,
+      "period": "2026-08",
+      "frequency": "year_to_date",
+      "metric": "nev_output_ytd",
+      "label": "新能源汽车累计产量",
+      "value": 41.7,
+      "unit": "万辆",
+      "category": "能源",
+      "source_id": "weekly_0d2eb98f4588b96c",
+      "selected": true,
+      "status": "官方月度累计统计",
+      "locator": "网页具体指标段落",
+      "excerpt": "降19.1%；运动型多用途乘用车（SUV）32.2万辆，增长9.6%；新能源汽车41.7万辆，增长11.3%。生产手机5875.8万台，下降31.3%;生产集成电路234.6亿块，增",
+      "access_date": "2026-10-10",
+      "published_at": "2026-09-16",
+      "extraction_method": "explicit_label_unit_rule.v1",
+      "notes": "当年1月至期末累计产量；规模以上工业口径，不能与全年保有量比较"
+    }
+  ],
+  "review_queue": [],
+  "schema_version": 1,
+  "last_attempt_at": "2026-10-10T06:21:55.891265+00:00",
+  "cadence": "weekly",
+  "health": [
+    {
+      "id": "bj_stats",
+      "region": "北京市",
+      "checked_at": "2026-10-10T06:21:55.891265+00:00",
+      "successful_pages": 3,
+      "failed_pages": 2,
+      "status": "checked",
+      "blocked_hosts": []
+    },
+    {
+      "id": "tj_stats",
+      "region": "天津市",
+      "checked_at": "2026-10-10T06:21:55.891265+00:00",
+      "successful_pages": 1,
+      "failed_pages": 0,
+      "status": "checked",
+      "blocked_hosts": []
+    },
+    {
+      "id": "hb_stats",
+      "region": "河北省",
+      "checked_at": "2026-10-10T06:21:55.891265+00:00",
+      "successful_pages": 1,
+      "failed_pages": 1,
+      "status": "checked",
+      "blocked_hosts": [
+        "tjj.hebei.gov.cn"
+      ]
+    }
+  ],
+  "releases": [
+    {
+      "region": "北京市",
+      "title": "2026年1-8月北京规模以上工业运行情况_经济运行_北京市经济和信息化局",
+      "url": "https://jxj.beijing.gov.cn/jxsj/jjyx/202609/t20260921_4873283.html",
+      "published_at": "2026-09-21",
+      "source": "北京市统计局"
+    },
+    {
+      "region": "北京市",
+      "title": "2026年1-8月北京经济运行情况",
+      "url": "https://tjj.beijing.gov.cn/zxfbu/202609/t20260916_4865755.html",
+      "published_at": "2026-09-16",
+      "source": "北京市统计局"
+    },
+    {
+      "region": "北京市",
+      "title": "2026年1-8月北京规模以上工业运行情况",
+      "url": "https://tjj.beijing.gov.cn/zxfbu/202609/t20260916_4865782.html",
+      "published_at": "2026-09-16",
+      "source": "北京市统计局"
+    },
+    {
+      "region": "天津市",
+      "title": "2025年天津市国民经济和社会发展统计公报_统计公报_天津政务网",
+      "url": "https://www.tj.gov.cn/sq/tjgb/202603/t20260327_7271193.html",
+      "published_at": "2026-03-27",
+      "source": "天津市人民政府（统计公报）"
+    },
+    {
+      "region": "北京市",
+      "title": "北京市2025年国民经济和社会发展统计公报_北京概况_首都之窗_北京市人民政府门户网站",
+      "url": "https://www.beijing.gov.cn/renwen/bjgk/202607/t20260710_4756991.html",
+      "published_at": "2026-03-26",
+      "source": "北京市统计局"
+    }
+  ],
+  "last_successful_check_at": "2026-10-10T06:21:55.891265+00:00",
+  "last_data_change_at": "2026-10-10T06:21:55.891265+00:00"
+}

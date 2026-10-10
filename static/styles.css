@@ -1013,6 +1013,57 @@ footer a:hover { color: var(--blue); }
   footer { flex-direction: column; margin-top: 0; }
   footer a { margin: 0 20px 0 0; }
 }
+/* Evidence-based BTH monitor; reuse the site's native bar-chart renderer. */
+.bth-energy-monitor,.bth-energy-database { margin:24px 0; border-top:2px solid var(--ink); padding:22px 0; }
+.bth-energy-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.bth-energy-heading h3,.bth-energy-database h3 { margin:4px 0 16px; font-size:25px; }
+.bth-energy-tabs { display:flex; flex-wrap:wrap; gap:6px; margin:16px 0 22px; border-bottom:1px solid var(--line); }
+.bth-energy-tabs button { padding:12px 20px; background:#fff; color:var(--ink); border:0; border-bottom:3px solid transparent; font:inherit; cursor:pointer; }
+.bth-energy-tabs button.active { border-color:var(--blue); color:var(--blue); font-weight:600; }
+.bth-energy-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 30px; }
+.bth-energy-cards article { border-bottom:1px solid var(--line); padding:0 0 18px; }
+.bth-energy-cards h4,.bth-energy-goals h4 { font-size:18px; margin:0 0 12px; }
+.bth-energy-value { display:grid; grid-template-columns:90px 1fr auto; gap:10px; align-items:center; padding:9px 0; }
+.bth-energy-value strong { font-size:22px; font-variant-numeric:tabular-nums; }
+.bth-energy-value time,.bth-energy-table time,.bth-energy-table td>span { display:block; color:var(--muted); font-size:14px; margin-top:4px; }
+.bth-energy-value small { font-size:13px; font-weight:400; margin-left:6px; }
+.bth-energy-record-link { border:0; padding:8px 3px; background:transparent; color:var(--blue); font:inherit; font-size:13px; cursor:pointer; }
+.bth-energy-refresh { margin:20px 0 0; font-size:14px; color:var(--muted); line-height:1.7; }
+.bth-energy-refresh summary,.bth-energy-database>summary { cursor:pointer; }
+.bth-energy-database>summary { display:flex; gap:16px; align-items:center; justify-content:space-between; }
+.bth-energy-database>summary span { font-size:14px; }
+.bth-energy-filters { display:grid; grid-template-columns:2fr 1fr 1fr 1fr auto; gap:12px; align-items:center; margin:16px 0; }
+.bth-policy-overview>summary { cursor:pointer; padding:14px 0; font-size:18px; font-weight:600; }
+.bth-energy-heading select,.bth-energy-filters input,.bth-energy-filters select,.bth-energy-history select { max-width:100%; min-height:44px; padding:9px; border:1px solid var(--line); background:#fff; color:var(--ink); font:inherit; }
+.bth-energy-table-wrap { overflow-x:auto; }
+.bth-energy-table { border-collapse:collapse; width:100%; min-width:680px; text-align:left; font-size:15px; }
+.bth-energy-table th { background:var(--soft); font-weight:600; }
+.bth-energy-table td,.bth-energy-table th { padding:14px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+.bth-energy-table td:first-child { min-width:110px; }
+.bth-energy-table td:nth-child(2) { width:32%; }
+.bth-energy-table details { color:var(--muted); font-size:13px; line-height:1.7; margin-top:8px; overflow-wrap:anywhere; }
+.bth-energy-number { font-variant-numeric:tabular-nums; white-space:nowrap; font-size:18px; }
+.bth-energy-history { max-width:950px; }
+.bth-energy-history label { display:flex; gap:16px; align-items:center; }
+.bth-energy-chart svg { width:100%; max-height:640px; }
+.bth-energy-history-links { display:flex; flex-wrap:wrap; gap:8px 24px; font-size:13px; }
+.bth-energy-goals { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.bth-energy-goals article { border-bottom:1px solid var(--line); padding-bottom:16px; }
+.bth-energy-goals article>div { font-size:14px; color:var(--muted); margin-bottom:10px; }
+.bth-energy-goals strong { display:block; font-size:20px; margin:10px 0; }
+.bth-energy-goals a { font-size:13px; }
+@media(max-width:700px) {
+  .bth-energy-cards,.bth-energy-goals { grid-template-columns:1fr; }
+  .bth-energy-filters { grid-template-columns:1fr 1fr; }
+  .bth-energy-filters input { grid-column:1/-1; }
+  .bth-energy-heading { align-items:flex-start; flex-direction:column; gap:0; }
+  .bth-energy-heading h3,.bth-energy-database h3 { font-size:22px; }
+  .bth-energy-database>summary { align-items:flex-start; flex-direction:column; gap:0; }
+  .bth-energy-value { grid-template-columns:75px 1fr auto; gap:5px; }
+  .bth-energy-value strong { font-size:20px; }
+  .bth-energy-chart { overflow-x:auto; }
+  .bth-energy-chart svg { min-width:520px; }
+}
 /* Research assistant: keep the established restrained colour system. */
 .bth-live-assistant { margin: 24px 0; padding: 24px; border: 1px solid #d8e2df; border-radius: 8px; background: #fff; }
 .bth-chat-heading,.bth-chat-controls,.bth-chat-downloads { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }

@@ -20,7 +20,7 @@ class BthTrackerTests(unittest.TestCase):
 
     def test_goals_cover_three_regions_and_preserve_baseline(self):
         rows = self.tracker()["records"]
-        self.assertEqual(len(rows), 19)
+        self.assertEqual(len(rows), 39)
         self.assertEqual({r["region"] for r in rows}, {"北京市", "天津市", "河北省"})
         self.assertEqual(next(r for r in rows if r["id"] == "tj_carbonintensity_2030")["baseline_year"], 2005)
         self.assertTrue(all(r["source"]["url"].startswith("https://") and r["excerpt"] and r["scope"] for r in rows))
@@ -59,7 +59,7 @@ class BthTrackerTests(unittest.TestCase):
 
     def test_target_evidence_is_not_an_observation_and_actual_is_deduplicated(self):
         rows = build_knowledge({}, {}, self.tracker())["records"]
-        self.assertEqual(sum(r["kind"] == "target" for r in rows), 19)
+        self.assertEqual(sum(r["kind"] == "target" for r in rows), 39)
         self.assertEqual(sum(r["kind"] == "observation" for r in rows), 1)
         self.assertTrue(all(r["content_scope"] == "verified_policy_target_excerpt" for r in rows if r["kind"] == "target"))
 

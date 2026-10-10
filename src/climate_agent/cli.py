@@ -18,7 +18,7 @@ from .energy_reports import discover_official_reports
 from .exporter import export_static_site
 from .historical_backfill import DEFAULT_ARCHIVE_LIMIT as HISTORY_LIMIT, backfill_history, export_historical_jsonl, refresh_historical_tags
 from .official_data import import_curated_unfccc, import_ndcs
-from .providers import OpenAICompatibleModel, fetch_subscribers, publish_email, publish_email_batch, publish_file, publish_wecom
+from .providers import OpenAICompatibleModel, fetch_subscribers, publish_email, publish_email_batch, publish_file, publish_wecom, resolve_subscriber_endpoint
 from .regional_seed import import_regional_seed
 from .sync import P0_SOURCE_IDS, sync_p0
 from .source_health import load_source_health, save_source_health, source_is_due, update_source_health
@@ -326,6 +326,14 @@ def main(argv: list[str] | None = None) -> int:
             item.strip() for item in os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS", "").split(",") if item.strip()
         ]
         subscriber_endpoint = os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT", "")
+        # The deployed form and weekly sender must read the same service / KV.
+        # Derive the private list URL from this very deployment's public form.
+        public_form_endpoint = os.getenv("CLIMATE_SUBSCRIBE_ENDPOINT", "").strip()
+        if public_form_endpoint:
+            derived = resolve_subscriber_endpoint(public_form_endpoint, subscriber_endpoint)
+            if subscriber_endpoint and subscriber_endpoint.rstrip("/") != derived:
+                print(json.dumps({"subscriber_endpoint_config": "aligned_with_published_form"}))
+            subscriber_endpoint = derived
         subscriber_token = os.getenv("CLIMATE_SUBSCRIBER_ADMIN_TOKEN", "")
         require_subscriber_endpoint = os.getenv("CLIMATE_REQUIRE_SUBSCRIBER_ENDPOINT", "").lower() in {"1", "true", "yes"}
         if bool(subscriber_endpoint) != bool(subscriber_token):

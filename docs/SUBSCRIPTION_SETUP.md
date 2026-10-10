@@ -105,4 +105,13 @@ https://climate-news-subscriptions.<你的子域>.workers.dev/health
 4. 再次运行同一工作流，勾选“部署成功后发送周报邮件”。
 5. 确认测试邮箱收到周报，并检查邮件中的退订入口。
 
-如果订阅和退订成功但收不到邮件，先在周一工作流的 `weekly_notify` 输出中核对 `active_subscribers`、`recipients`、`sent` 和 `failed`。`subscriber_endpoint` 必须为 `ok`；名单读取失败时任务会直接失败，不再静默只发送固定邮箱。KV 只负责保存订阅邮箱，邮件仍由六项 `CLIMATE_SMTP_*` 配置发送。
+如果订阅和退订成功但收不到邮件，先在周一工作流的 `weekly_notify` 输出中核对 `active_subscribers`、`recipients`、`sent` 和 `failed`。`subscriber_endpoint` 必须为 `ok`；名单读取失败时任务会直接失败，不再静默只发送固定邮箱。KV 只负责保存订阅邮箱，邮件仍由六项 `CLIMATE_SMTP_*` 配置发送。`sent`表示SMTP服务器接受，不代表对方收件箱已确认收到；之后仍可能退信或进入垃圾邮件。
+
+## 2026年10月10日链路修复
+
+- 最近一次周一作业（2026年10月5日）的实际输出为有效订阅者2、发送2、失败0。不能据此声称其他订阅者的邮件也发出。
+- 网页只接受明确的`ok:true`与`status:subscribed`响应，HTML验证页、空JSON和错误状态不再被当作成功。移动端使用限时XHR，超时覆盖整个响应体。
+- 主要端点失败时，通过已部署的京津冀问答Worker固定转发到原订阅Worker，仅允许subscribe与unsubscribe，不代理管理接口，不产生第二份名单。不需要重建原KV或订阅管理令牌。
+- 周报从同一`CLIMATE_SUBSCRIBE_ENDPOINT`推导受保护的`/subscribers`，避免表单与发送任务指向不同Worker。原管理Token仍从Secret读取，接口读取失败不得只向固定邮箱发送。
+- 可运行Actions中的“检查周报订阅链路”。它核对已发布表单与发送端是否一致，仅输出有效人数和固定名单以外的人数，不发邮件，不显示任何邮箱或密钥。
+- 过去没有真正写入KV的邮箱无法恢复，也不能代替他人猜测或添加邮箱。请相关订阅者在新版本重新提交一次，再执行上述检查确认有效人数增加。

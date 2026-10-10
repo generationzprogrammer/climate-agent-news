@@ -5,6 +5,39 @@ const rows = ["北京市", "天津市", "河北省"].flatMap((region, i) => [
   {id: `D-O${i}`, kind: "observation", title: "光伏装机", metric: "solar", region, year: 2025, value: i * 100 + 1, unit: "万千瓦", url: "https://example.gov.cn/data"},
   {id: `P-${i}`, kind: "policy", title: "可再生能源政策", region, date: "2026-01-01", url: "https://example.gov.cn/policy"},
 ]);
+
+test("challenge-free mode reports readiness without a Turnstile secret", async () => {
+  const response=await worker.fetch(new Request("https://worker/health"),{BTH_VERIFICATION_MODE:"off",BTH_LLM_API_KEY:"TEST",BUDGET:{}},{});
+  const payload=await response.json(); assert.equal(payload.ready,true); assert.equal(payload.verification,"off");
+});
+
+test("challenge-free requests still reserve the server budget before model calls", async () => {
+  const original=globalThis.fetch; let calls=0;
+  globalThis.fetch=async()=>{calls++;throw Error("must not call any upstream");};
+  try {
+    const response=await worker.fetch(new Request("https://worker/chat",{method:"POST",headers:{Origin:"https://generationzprogrammer.github.io","Content-Type":"text/plain"},body:JSON.stringify({question:"北京能源",transport:"json",verification:"off"})}),{BTH_VERIFICATION_MODE:"off",BTH_LLM_API_KEY:"TEST",BUDGET:{idFromName:x=>x,get:()=>({fetch:async()=>new Response('{"error":"daily_limit"}',{status:429})})}},{});
+    assert.equal(response.status,429); assert.equal((await response.json()).error,"daily_limit"); assert.equal(calls,0);
+  } finally {globalThis.fetch=original;}
+});
+
+test("client cannot disable required server verification", async () => {
+  const response=await worker.fetch(new Request("https://worker/chat",{method:"POST",headers:{Origin:"https://generationzprogrammer.github.io"},body:JSON.stringify({question:"北京",verification:"off"})}),{BTH_LLM_API_KEY:"TEST",BUDGET:{}},{});
+  assert.equal(response.status,503);
+});
+
+test("subscription relay has fixed public routes and requires explicit acknowledgement", async () => {
+  const original=globalThis.fetch; let destination;
+  globalThis.fetch=async(url,init)=>{destination=String(url);assert.equal(init.headers.Origin,"https://generationzprogrammer.github.io");return new Response('{"ok":true,"status":"subscribed"}');};
+  const request=()=>new Request("https://worker/subscriptions/subscribe",{method:"POST",headers:{Origin:"https://generationzprogrammer.github.io"},body:JSON.stringify({email:"test@example.com",url:"https://attacker.example"})});
+  try {
+    assert.equal((await worker.fetch(request(),{},{})).status,200);
+    assert.equal(destination,"https://climate-news-subscriptions.1090697345.workers.dev/subscribe");
+    globalThis.fetch=async()=>new Response('<html>Verifying...</html>');
+    assert.equal((await worker.fetch(request(),{},{})).status,502);
+    const denied=await worker.fetch(new Request("https://worker/subscriptions/subscribers",{headers:{Origin:"https://generationzprogrammer.github.io"}}),{},{});
+    assert.equal(denied.status,404);
+  } finally {globalThis.fetch=original;}
+});
 test("retrieval keeps all three provinces", () => {const selected = retrieve(rows, "比较三地光伏装机2025年"); assert.equal(new Set(selected.filter(r => r.kind === "observation").map(r => r.region)).size, 3);});
 test("follow-up inherits region", () => {assert(retrieve(rows, "生成报告", [{role: "user", content: "北京光伏"}]).every(r => r.region === "北京市"));});
 test("invalid references and fabricated charts cannot enter artifact", () => {

@@ -46,13 +46,13 @@ def build_target_tracker(config: dict, *, today: date | None = None) -> dict:
             raise ValueError("target must be regional")
         if isinstance(row["value"], bool) or not isinstance(row["value"], (int, float)) or not math.isfinite(row["value"]):
             raise ValueError("invalid target value")
-        if row["comparator"] not in {"ge", "le", "approx"} or not row["scope"] or not row["excerpt"]:
+        if row["comparator"] not in {"ge", "le", "gt", "lt", "approx"} or not row["scope"] or not row["excerpt"]:
             raise ValueError("missing target definition")
         source = sources[row["source_id"]]
         if urlsplit(source["url"]).scheme != "https":
             raise ValueError("target requires HTTPS official evidence")
         row["source"] = source
-        row["reviewed_at"] = config.get("reviewed_at")
+        row["reviewed_at"] = row.get("reviewed_at") or config.get("reviewed_at")
         row["period_status"] = "past_deadline" if row["year"] < today.year else "active"
         candidates = [o for o in config.get("observations", [])
                       if o["region"] == row["region"] and o["metric"] == row["metric"]
@@ -69,7 +69,8 @@ def build_target_tracker(config: dict, *, today: date | None = None) -> dict:
             row["observation"] = observation
             row["assessment"] = "tracking"
             if observation["year"] == row["year"] and row["comparator"] != "approx":
-                met = observation["value"] >= row["value"] if row["comparator"] == "ge" else observation["value"] <= row["value"]
+                met = {"ge": observation["value"] >= row["value"], "le": observation["value"] <= row["value"],
+                       "gt": observation["value"] > row["value"], "lt": observation["value"] < row["value"]}[row["comparator"]]
                 row["assessment"] = ("preliminary_met" if met else "preliminary_below") if observation.get("status") == "preliminary" else ("met" if met else "below")
             if row["unit"] == "%" and row["comparator"] != "approx":
                 row["gap_percentage_points"] = round(observation["value"] - row["value"], 4)
