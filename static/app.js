@@ -1674,48 +1674,13 @@ async function subscriptionConfig() {
   return state.subscription;
 }
 
-function subscriptionPayload(email) {
-  return JSON.stringify({ email, list: "climate-weekly", source: location.href });
-}
-
-async function postSubscription(endpoint, email, timeoutMs = 12000) {
-  // Bound the entire response (including JSON body) and avoid embedded-browser
-  // keepalive/Fetch incompatibilities. No email is placed in a URL or log.
-  return window.GruenBthTransport.request(endpoint, {
-    method: "POST", payload: {email, list:"climate-weekly"}, timeout: timeoutMs,
-  });
-}
-
-async function submitSubscription(endpoint, email) {
-  let lastError;
-  for (const delay of [0, 900]) {
-    if (delay) await new Promise(resolve => setTimeout(resolve, delay));
-    try {
-      const result = await postSubscription(endpoint, email);
-      if (result.ok !== true || result.status !== "subscribed") throw new Error("subscription_not_confirmed");
-      return result;
-    } catch (error) {
-      lastError = error;
-    }
-  }
-  throw lastError || new Error("subscription_failed");
-}
-
 async function subscriptionWithFallback(config, email, unsubscribe = false) {
   const action = unsubscribe ? "unsubscribe" : "subscribe";
   const primary = unsubscribe ? config.unsubscribe_endpoint : config.endpoint;
-  let error;
-  const submit = async endpoint => {
-    if (!unsubscribe) return submitSubscription(endpoint, email);
-    const result = await postSubscription(endpoint,email,15000);
-    if (result.ok !== true || result.status !== "unsubscribed") throw new Error("unsubscribe_not_confirmed");
-    return result;
-  };
-  if (primary) try {return await submit(primary);} catch (e) {error=e;}
   // This relay stores in the SAME KV as the primary route, not a second list.
   const assistant = await fetchJson("./data/bth_assistant_config.json").catch(()=>({}));
-  if (assistant.endpoint) return submit(assistant.endpoint.replace(/\/$/,"") + "/subscriptions/" + action);
-  throw error || new Error("subscription_not_configured");
+  const relay=assistant.endpoint?assistant.endpoint.replace(/\/$/,"") + "/subscriptions/" + action:"";
+  return window.GruenSubscriptions.submit([primary,relay],email,action);
 }
 
 function setupSubscribe() {
@@ -1747,18 +1712,20 @@ function setupSubscribe() {
     }
     if (submit) { submit.disabled = true; submit.textContent = "提交中…"; }
     if (fallback) fallback.hidden = true;
-    if (hint) hint.textContent = "正在连接订阅服务…";
+    if (unsubscribe) unsubscribe.disabled = true;
+    if (hint) {hint.textContent = "正在连接订阅服务…";hint.dataset.status="pending";}
     try {
       const config = await subscriptionConfig();
       await subscriptionWithFallback(config, email);
-      closeDialog(modal);
-      toast("订阅成功，周报将在每周一发送。");
+      if (hint) {hint.textContent = "订阅已登记。每周一北京时间 08:00 发送周报；如未收到，请检查垃圾邮件。";hint.dataset.status="success";}
+      toast("订阅成功，邮箱已登记。");
     } catch (error) {
-      console.error("Subscribe endpoint failed", error);
-      if (hint) hint.textContent = "提交失败：订阅服务未确认写入，请稍后重试或联系管理员。";
+      const codes={network_unreachable:"网络未能连接订阅入口",connection_timeout:"订阅入口响应超时",subscription_not_confirmed:"服务未确认登记",service_unavailable:"服务返回了非订阅响应"};
+      if (hint) {hint.textContent = `本次未确认订阅成功：${codes[error.message]||"订阅服务暂不可用"}。可重试，或通过邮件联系管理员代为登记。`;hint.dataset.status="error";}
       if (fallback) fallback.hidden = false;
     } finally {
       if (submit) { submit.disabled = false; submit.textContent = "提交订阅"; }
+      if (unsubscribe) unsubscribe.disabled = false;
     }
   });
   unsubscribe?.addEventListener("click", async () => {
@@ -1767,13 +1734,16 @@ function setupSubscribe() {
       toast("请先输入需要退订的有效邮箱。");
       return;
     }
+    const submit=$("subscribeSubmit");
+    unsubscribe.disabled=true;if(submit)submit.disabled=true;
     try {
       await subscriptionWithFallback(await subscriptionConfig(),email,true);
       closeDialog(modal);
       toast("退订成功，该邮箱将不再接收周报。");
     } catch (error) {
-      console.error("Unsubscribe endpoint failed", error);
       toast("退订失败，请稍后重试或通过联系邮箱处理。");
+    } finally {
+      unsubscribe.disabled=false;if(submit)submit.disabled=false;
     }
   });
 }

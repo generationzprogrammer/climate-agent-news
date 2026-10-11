@@ -22,7 +22,7 @@
       if (final && buffer.trim()) {frame(buffer); buffer = "";}
     };
   }
-  function request(url, {method = "GET", payload, signal, timeout = 120000, onEvent = () => {}, onConnected = () => {}} = {}) {
+  function request(url, {method = "GET", payload, signal, accept, timeout = 120000, onEvent = () => {}, onConnected = () => {}} = {}) {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest(); let settled = false, offset = 0, connected = false;
       const finish = (error, value) => {
@@ -54,7 +54,7 @@
       if (signal?.aborted) {abort(); return;}
       signal?.addEventListener("abort", abort, {once: true});
       xhr.open(method, url, true); xhr.timeout = timeout;
-      xhr.setRequestHeader("Accept", method === "GET" ? "application/json" : "text/event-stream");
+      xhr.setRequestHeader("Accept", accept || (method === "GET" ? "application/json" : "text/event-stream"));
       // JSON encoded as CORS-safelisted text avoids an extra mobile preflight.
       // Origin, Turnstile and limits are still checked by the backend.
       if (payload !== undefined) xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");

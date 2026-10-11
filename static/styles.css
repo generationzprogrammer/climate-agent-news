@@ -1046,6 +1046,37 @@ footer a:hover { color: var(--blue); }
 .bth-energy-history { max-width:950px; }
 .bth-energy-history label { display:flex; gap:16px; align-items:center; }
 .bth-energy-chart svg { width:100%; max-height:640px; }
+.bth-energy-visual-controls { display:flex; flex-wrap:wrap; gap:16px 24px; margin:0 0 20px; }
+.bth-energy-visual-controls label { display:flex; align-items:center; gap:10px; }
+.bth-energy-visual-controls select { max-width:100%; min-height:44px; padding:9px; border:1px solid var(--line); background:#fff; color:var(--ink); font:inherit; }
+.bth-energy-visual-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.bth-energy-visual { min-width:0; border:1px solid var(--line); padding:20px; background:#fff; }
+.bth-energy-visual h4 { margin:0 0 8px; font-size:19px; }
+.bth-energy-axis-label { margin:0 0 18px; font-size:14px; color:var(--muted); }
+.bth-energy-compare-row { display:grid; grid-template-columns:64px 1fr; align-items:center; column-gap:10px; margin:20px 0; }
+.bth-energy-compare-row strong { grid-column:2; font-size:23px; font-variant-numeric:tabular-nums; margin-top:4px; }
+.bth-energy-compare-row button { grid-column:2; justify-self:start; padding:3px 0; }
+.bth-energy-meter { height:15px; background:#f1f3f5; }
+.bth-energy-meter>span { display:block; height:100%; }
+.bth-energy-missing { color:var(--muted); font-size:14px; }
+.bth-energy-observations svg { width:100%; display:block; overflow:visible; }
+.bth-energy-observations [data-energy-point] { cursor:pointer; }
+.bth-energy-observations [data-energy-point]:focus { outline:2px solid var(--blue); }
+.bth-energy-legend { display:flex; flex-wrap:wrap; gap:12px; font-size:14px; }
+.bth-energy-legend i { display:inline-block; width:9px; height:9px; margin-right:6px; }
+.bth-energy-point-detail { display:block; min-height:64px; font-size:14px; line-height:1.7; margin-top:12px; }
+.bth-energy-key-values { margin:22px 0; }
+.bth-energy-key-values>summary { cursor:pointer; margin-bottom:18px; }
+#subscribeHint { line-height:1.7; font-size:15px; }
+#subscribeHint[data-status="success"] { color:#24583d; font-weight:600; }
+#subscribeHint[data-status="error"] { color:#8a3428; }
+.bth-energy-bulletin { display:grid; grid-template-columns:1fr 1.5fr; gap:24px; border-top:1px solid var(--line); padding:20px 0; }
+.bth-energy-bulletin h4 { margin:0 0 8px; }
+.bth-energy-bulletin strong { display:block; font-size:28px; margin:12px 0 2px; }
+.bth-energy-bulletin small { font-size:16px; font-weight:400; }
+.bth-energy-bulletin ul { list-style:none; padding:0; margin:0; }
+.bth-energy-bulletin li { display:grid; grid-template-columns:90px 1fr; gap:4px 12px; padding:0 0 12px; font-size:14px; }
+.bth-energy-bulletin li>span { grid-column:2; color:var(--muted); }
 .bth-energy-history-links { display:flex; flex-wrap:wrap; gap:8px 24px; font-size:13px; }
 .bth-energy-goals { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
 .bth-energy-goals article { border-bottom:1px solid var(--line); padding-bottom:16px; }
@@ -1053,6 +1084,11 @@ footer a:hover { color: var(--blue); }
 .bth-energy-goals strong { display:block; font-size:20px; margin:10px 0; }
 .bth-energy-goals a { font-size:13px; }
 @media(max-width:700px) {
+  .bth-energy-visual-grid,.bth-energy-bulletin { grid-template-columns:1fr; }
+  .bth-energy-visual { padding:16px; }
+  .bth-energy-visual-controls { display:grid; grid-template-columns:1fr; }
+  .bth-energy-visual-controls label { display:grid; grid-template-columns:72px minmax(0,1fr); }
+  .bth-energy-point-detail { min-height:48px; }
   .bth-energy-cards,.bth-energy-goals { grid-template-columns:1fr; }
   .bth-energy-filters { grid-template-columns:1fr 1fr; }
   .bth-energy-filters input { grid-column:1/-1; }

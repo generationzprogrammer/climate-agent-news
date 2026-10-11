@@ -203,6 +203,8 @@ tests/                  离线单元与集成测试
 更完整的定位与边界见 [产品策略](docs/PRODUCT_STRATEGY.md)、[系统设计](docs/SYSTEM_DESIGN.md) 和 [合规清单](docs/COMPLIANCE_CHECKLIST.md)。
 面向软著申请和正式交付的操作说明见 [用户说明手册](docs/USER_MANUAL.md)。
 
+2026-10-11 增加京津冀同期比较与历史观测点、统计快报及订阅确认改进，见[更新记录](docs/UPDATE_20261011.md)。两份对外推文及阿里云部署教程位于 `analysis/reports/platform_publication_20261011/`。
+
 ## 三年历史文本数据库回填
 
 目标库名为 **Global Climate Change Key Intelligence Text Database**，用于后续国家分类、主题分类、时间热度趋势和来源分布分析。它与“今日简报”分开维护：今日简报面向展示，历史库面向统计。

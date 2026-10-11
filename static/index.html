@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>格润｜国际气候与能源信息智能分析支持系统</title>
-  <link rel="stylesheet" href="./styles.css?v=20261010-1">
+  <link rel="stylesheet" href="./styles.css?v=20261011-1">
   <link rel="stylesheet" href="./innovation-cases.css?v=20261009-2">
 </head>
 <body>
@@ -311,7 +311,7 @@
       <p>输入邮箱订阅周报。邮箱由独立订阅服务保存，不进入公开源码。</p>
       <label><span>邮箱</span><input id="subscribeEmail" type="email" required placeholder="name@example.com" autocomplete="email"></label>
       <div class="modal-actions"><button id="subscribeSubmit" type="submit">提交订阅</button><button class="secondary" id="unsubscribeSubmit" type="button">退订</button><a id="weeklyDownload" href="./data/weekly_report.pdf" target="_blank" rel="noopener">下载本周周报</a></div>
-      <small id="subscribeHint">订阅后每周一北京时间自动发送周报；使用同一邮箱可随时退订。</small>
+      <p id="subscribeHint" role="status" aria-live="polite">订阅后每周一北京时间 08:00 发送周报；使用同一邮箱可随时退订。</p>
       <a class="subscribe-fallback" id="subscribeFallback" href="mailto:yuan-yh21@mails.tsinghua.edu.cn" hidden>联系管理员</a>
     </form>
   </dialog>
@@ -333,12 +333,13 @@
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="./bth-report.js?v=20261003-1" defer></script>
-  <script src="./bth-transport.js?v=20261003-2" defer></script>
+  <script src="./bth-transport.js?v=20261011-1" defer></script>
   <script src="./bth-assistant.js?v=20261010-1" defer></script>
-  <script src="./bth-energy.js?v=20261010-1" defer></script>
+  <script src="./bth-energy.js?v=20261011-1" defer></script>
+  <script src="./subscriptions.js?v=20261011-1" defer></script>
   <script src="./bth-tracker.js?v=20261003-1" defer></script>
   <script src="./innovation-analysis.js?v=20261009-3" defer></script>
   <script src="./innovation-cases.js?v=20261009-2" defer></script>
-  <script src="./app.js?v=20261010-1" defer></script>
+  <script src="./app.js?v=20261011-1" defer></script>
 </body>
 </html>
