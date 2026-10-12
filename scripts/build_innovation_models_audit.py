@@ -26,20 +26,23 @@ old=sum([read('config/'+n)['cases'] for n in ('open_innovation_cases.json','open
 regional=read('config/open_innovation_regional_cases.json')['cases']
 coverage=read('config/open_innovation_coverage.json')['cases']
 expansion=read('config/open_innovation_expansion.json')['cases']
+additions=read('config/open_innovation_additions.json')['cases']
 new=regional+coverage+expansion
 current={c['id']:c for c in b['cases']}
 assert len(old)==613 and len(regional)==24 and len(coverage)==43 and len(expansion)==73
-assert len(current)==len(old)+len(new) and len(current)==len(b['cases'])
-for c in old+regional+coverage:
+assert len(current)==len(old)+len(new)+len(additions) and len(current)==len(b['cases'])
+for c in old+regional+coverage+expansion+additions:
     for k in (key for key in c if key!='research_annotation'):
         assert c[k]==current[c['id']][k],(c['id'],k)
 source_index={s['id']:s for s in b['sources']}
 for filename in ('open_innovation_cases.json','open_innovation_projects.json','open_innovation_us_projects.json',
-                 'open_innovation_regional_cases.json','open_innovation_coverage.json','open_innovation_models.json'):
+                 'open_innovation_regional_cases.json','open_innovation_coverage.json','open_innovation_expansion.json',
+                 'open_innovation_additions.json','open_innovation_models.json'):
     for source in read('config/'+filename).get('sources',[]):assert source==source_index[source['id']]
 china_added=sum(c['countries']==['CN'] for c in expansion)
 assert china_added==32
-print({'retained':len(old)+len(regional)+len(coverage),'added':len(expansion),'total':len(current),'new_China':china_added})""")
+print({'retained':len(old)+len(regional)+len(coverage),'regional_expansion':len(expansion),
+       'curated_additions':len(additions),'total':len(current),'new_China':china_added})""")
     md("## 分类、比较分母与证据\n宏观统计按项目协调国或平台明确的单国主体互斥计数；跨国与缺失单列，不累计所有参与国。")
     code("""a=b['analysis']; sources={s['id'] for s in b['sources']}
 assert len(a['archetypes'])==8 and len(a['profiles'])==28
@@ -89,7 +92,8 @@ for row in audit['eu']:
     assert n==row['项目数'] and len(subset)==row['领域项目数']
     assert abs(n/len(subset)-row['比例'])<1e-12
 result={'status':'passed','cases':len(current),'retained_cases':len(old)+len(regional)+len(coverage),
-        'new_cases':len(expansion),'new_China_cases':china_added,'sources':len(sources),
+        'new_cases':len(expansion)+len(additions),'curated_additions':len(additions),
+        'new_China_cases':china_added,'sources':len(sources),
         'models':len(a['profiles']),'archetypes':len(a['archetypes']),
         'Chinese_provinces':len(province_counts),'province_cases':province_counts,
         'continents':dict(continents),'EU_projects':len(eu),'dated_report_SQL_independently_reconciled':True}

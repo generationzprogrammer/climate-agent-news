@@ -103,6 +103,33 @@ class InnovationCaseTests(unittest.TestCase):
             self.assertGreaterEqual(len(second["cases"]), 300)
             self.assertTrue({c["id"] for c in self.book["cases"]}.issubset({c["id"] for c in second["cases"]}))
 
+    def test_cnest_is_source_grounded_and_retained_by_daily_rebuilds(self):
+        additions = json.loads((ROOT / "config/open_innovation_additions.json").read_text(encoding="utf-8"))
+        case = next(c for c in additions["cases"] if c["id"] == "oi_cnest")
+        self.assertEqual(case["start_year"], 2023)
+        self.assertIn("培育项目", case["summary"]["zh"])
+        self.assertEqual(case["scope"], "multilateral")
+        self.assertNotIn("project", case)
+        self.assertEqual(set(case["countries"]), {"CN", "US", "GB", "SG", "DE", "JP"})
+        evidence_ids = {e["source_id"] for e in case["evidence"]}
+        sources = {s["id"]: s for s in additions["sources"]}
+        self.assertEqual(len(evidence_ids), 6)
+        for source_id in evidence_ids:
+            self.assertTrue(sources[source_id]["url"].startswith("https://cnest.tsinghua.edu.cn/"))
+            self.assertEqual(sources[source_id]["source_role"], "primary")
+        with tempfile.TemporaryDirectory() as temp:
+            target = Path(temp) / "innovation_cases.json"
+            first = write_innovation_cases(ROOT, target, [], today=date(2026, 10, 12))
+            second = write_innovation_cases(ROOT, target, [], today=date(2026, 10, 13))
+            self.assertEqual(len(first["cases"]), len(second["cases"]))
+            self.assertGreaterEqual(len(second["cases"]), 754)
+            published = next(c for c in second["cases"] if c["id"] == case["id"])
+            for field in (*FACT_FIELDS, "title", "countries", "evidence", "reviewed_at"):
+                self.assertEqual(published[field], case[field])
+            self.assertTrue(all(item["score"] is None for item in published["profile"].values()))
+            self.assertIn("energy_systems", second["sector_taxonomy"])
+            self.assertGreaterEqual(second["reviewed_at"], case["reviewed_at"])
+
     def test_scores_are_recomputed_and_missing_is_not_zero(self):
         self.assertTrue(all(row["score"] is None for row in profile_metrics(None, None).values()))
         project = {"country_count": 6, "company_count": 2, "research_count": 1, "actor_type_count": 3, "eu_grant_million": 3}

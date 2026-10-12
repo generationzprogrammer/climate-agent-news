@@ -192,7 +192,7 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book["sources"].extend(extra["sources"])
         book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
     coverage_profiles = []
-    for layer in ("open_innovation_coverage.json", "open_innovation_expansion.json"):
+    for layer in ("open_innovation_coverage.json", "open_innovation_expansion.json", "open_innovation_additions.json"):
         layer_path = root / "config" / layer
         if not layer_path.exists():
             continue

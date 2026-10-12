@@ -28,6 +28,16 @@ const server=http.createServer((req,res)=>{
       assert.equal(await page.locator("#innovationCases .ic-result").textContent(),book.cases.length+" 个案例");checks++;
       assert(book.cases.length>=750);checks++;
       assert.equal(await page.locator("#innovationCases .ic-card").count(),12);checks++;
+      await page.locator('#innovationCases [data-filter="query"]').fill("CNEST");
+      await page.locator('#innovationCases [data-detail="oi_cnest"]').waitFor();
+      assert.equal(await page.locator("#innovationCases .ic-card").count(),1);checks++;
+      await page.locator('#innovationCases [data-detail="oi_cnest"]').click();
+      const cnestBody=await page.locator("#innovationCases .ic-dialog-body").textContent();
+      assert(cnestBody.includes("培育项目")&&cnestBody.includes("19个国家")&&cnestBody.includes("2026年4月3日"));checks++;
+      assert.equal(await page.locator('#innovationCases .ic-dialog-body a[href^="https://cnest.tsinghua.edu.cn/"]').count(),6);checks++;
+      await page.locator("#innovationCases .ic-close").click();
+      await page.locator('#innovationCases [data-filter="query"]').fill("");
+      await page.waitForFunction(()=>document.querySelectorAll("#innovationCases .ic-card").length===12);
       if(mobile){
         await page.locator("#mobileMenuToggle").click();
         assert(await page.locator('#mobileMenu a[href="#innovationCases"]').isVisible());checks++;

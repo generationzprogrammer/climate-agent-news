@@ -15,6 +15,18 @@ test("Chinese and English search use country names and original titles",()=>{
   assert(filterCases(book,{query:"Singapore"}).some(c=>c.id==="oi_artc"));
   assert.equal(filterCases(book,{query:"不存在的案例"}).length,0);
 });
+test("CNEST is searchable in both languages and exports official evidence",()=>{
+  for(const query of ["CNEST","碳中和与能源智联","Carbon Neutrality and Energy System Transformation"]){
+    assert(filterCases(book,{query}).some(c=>c.id==="oi_cnest"));
+  }
+  const rows=filterCases(book,{country:"CN",mode:"network",sector:"energy_systems"});
+  const c=rows.find(c=>c.id==="oi_cnest");
+  assert(c);
+  assert(c.summary.zh.includes("培育项目"));
+  const csv=exportCsv(book,[c],"zh");
+  assert(csv.includes("https://cnest.tsinghua.edu.cn/zw.htm"));
+  assert(!csv.includes("baike.baidu.com"));
+});
 test("governance is a research lens, not all cases",()=>{
   const rows=filterCases(book,{lens:"governance"});
   assert(rows.length>0&&rows.length<book.cases.length);
