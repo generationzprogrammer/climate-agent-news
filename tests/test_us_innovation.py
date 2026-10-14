@@ -62,14 +62,14 @@ class USInnovationTests(unittest.TestCase):
                          for name in ('open_innovation_cases.json','open_innovation_projects.json',
                                       'open_innovation_us_projects.json','open_innovation_regional_cases.json',
                                       'open_innovation_coverage.json','open_innovation_expansion.json',
-                                      'open_innovation_additions.json','open_innovation_historical_cases.json'))
+                                      'open_innovation_additions.json','open_innovation_historical_cases.json','open_innovation_peer_review.json'))
             self.assertEqual(first['statistics']['cases'],expected)
         self.assertEqual(first['sources'],second['sources'])
         self.assertEqual(first['cases'],second['cases'])
         expected_us=sum('US' in c['countries'] for name in ('open_innovation_cases.json',
             'open_innovation_projects.json','open_innovation_us_projects.json',
             'open_innovation_regional_cases.json','open_innovation_coverage.json','open_innovation_expansion.json',
-            'open_innovation_additions.json','open_innovation_historical_cases.json') for c in
+            'open_innovation_additions.json','open_innovation_historical_cases.json','open_innovation_peer_review.json') for c in
             json.loads((ROOT/'config'/name).read_text(encoding='utf-8'))['cases'])
         self.assertEqual(sum('US' in c['countries'] for c in second['cases']),expected_us)
         self.assertEqual(second['updated_at'],'2026-10-06')

@@ -1,0 +1,175 @@
+{
+  "version": "2026.10.14-r2",
+  "as_of": "2026-10-14",
+  "cases": 769,
+  "sources": 811,
+  "country_tags": 78,
+  "focus_countries": 58,
+  "grains": {
+    "project": 588,
+    "platform": 181
+  },
+  "source_cohorts": [
+    {
+      "cohort": "ARPAE",
+      "count": 190,
+      "dated": 190,
+      "models": {
+        "mission": 190
+      }
+    },
+    {
+      "cohort": "CORDIS",
+      "count": 398,
+      "dated": 398,
+      "models": {
+        "consortium": 398
+      }
+    },
+    {
+      "cohort": "coverage_review",
+      "count": 43,
+      "dated": 7,
+      "models": {
+        "venture": 3,
+        "consortium": 7,
+        "intermediary": 13,
+        "pilot": 7,
+        "cluster": 4,
+        "mission": 3,
+        "capacity": 6
+      }
+    },
+    {
+      "cohort": "expansion_review",
+      "count": 73,
+      "dated": 7,
+      "models": {
+        "pilot": 15,
+        "consortium": 25,
+        "cluster": 4,
+        "intermediary": 17,
+        "mission": 3,
+        "capacity": 7,
+        "venture": 2
+      }
+    },
+    {
+      "cohort": "history_review",
+      "count": 7,
+      "dated": 7,
+      "models": {
+        "venture": 1,
+        "cluster": 3,
+        "intermediary": 3
+      }
+    },
+    {
+      "cohort": "legacy_review",
+      "count": 26,
+      "dated": 5,
+      "models": {
+        "consortium": 8,
+        "intermediary": 3,
+        "pilot": 2,
+        "capacity": 4,
+        "rules": 4,
+        "mission": 4,
+        "venture": 1
+      }
+    },
+    {
+      "cohort": "peer_review",
+      "count": 8,
+      "dated": 8,
+      "models": {
+        "consortium": 3,
+        "pilot": 2,
+        "intermediary": 3
+      }
+    },
+    {
+      "cohort": "regional_review",
+      "count": 24,
+      "dated": 12,
+      "models": {
+        "pilot": 3,
+        "cluster": 7,
+        "intermediary": 10,
+        "mission": 2,
+        "venture": 2
+      }
+    }
+  ],
+  "dated_cases": 634,
+  "china_cases": 79,
+  "dated_china_cases": 22,
+  "chronology_events": 66,
+  "chronology_cases": 46,
+  "origin_year_range": [
+    1932,
+    2026
+  ],
+  "source_mode_uncertainty_reduction": 0.6864119171873904,
+  "platform_models": {
+    "pilot": 29,
+    "rules": 4,
+    "mission": 12,
+    "consortium": 43,
+    "capacity": 17,
+    "venture": 9,
+    "intermediary": 49,
+    "cluster": 18
+  },
+  "project_models": {
+    "consortium": 398,
+    "mission": 190
+  },
+  "checks": {
+    "case_ids_unique": true,
+    "source_ids_unique": true,
+    "source_urls_unique": true,
+    "case_source_foreign_keys_valid": true,
+    "unknown_dates_retained": 135,
+    "previous_754_case_facts": "verified by test_original_facts_preserved",
+    "independent_semantic_validation": "not_performed",
+    "temporal_review": "AI-assisted editorial reading of official statements; no independent human rater"
+  },
+  "field_completeness": {
+    "title": 769,
+    "summary": 769,
+    "actors": 769,
+    "mechanism": 769,
+    "observed": 769,
+    "constraints": 166,
+    "transfer": 166
+  },
+  "interpretive_notes": 166,
+  "review_diagnostics": {
+    "case_count": 769,
+    "platform_count": 181,
+    "project_count": 588,
+    "single_source_cases": 752,
+    "single_source_fraction": 0.9778933680104032,
+    "case_evidence_source_records": 789,
+    "sources_not_linked_to_case_event_or_profile": [],
+    "source_record_count": 811,
+    "distinct_source_domains": 188,
+    "supported_institutional_origins": 46,
+    "institutional_origin_coverage": 0.2541436464088398,
+    "duplicate_normalized_titles": [],
+    "duplicate_official_project_keys": [],
+    "near_duplicate_candidates": [
+      {
+        "first": "oi_tno_history",
+        "second": "oi_vtt_review",
+        "status": "candidate_not_automatically_merged"
+      }
+    ],
+    "independent_semantic_validation": "not_performed",
+    "review_agent": "AI-assisted editorial review; not an independent human reviewer",
+    "historical_model_coding": "current_case_archetype_not_reconstructed_event_level_mechanism",
+    "resource_absence_semantics": "not_coded_does_not_mean_absent",
+    "outcome_variables": "not_harmonised; no causal or performance inference"
+  }
+}

@@ -150,7 +150,7 @@
   }
   function shell() {
     host.innerHTML = '<div class="section-heading"><div><p class="overline">GLOBAL OPEN INNOVATION</p><h2>'+t("title")+'</h2></div>'+
-      '<div class="ic-top-actions"><a class="ic-report" href="innovation/" target="_blank" rel="noopener">'+(lang==='zh'?'独立入口':'Standalone library')+'</a><a class="ic-report" href="reports/innovation-policy-brief-20261014.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'政策简报':'Policy brief')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
+      '<div class="ic-top-actions"><a class="ic-report" href="innovation/" target="_blank" rel="noopener">'+(lang==='zh'?'独立入口':'Standalone library')+'</a><a class="ic-report" href="reports/innovation-policy-brief-20261014-r2.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'政策简报':'Policy brief')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
       '<p class="ic-research-title">'+esc(local(book.research_title))+'</p>'+
       '<div class="ic-summary"><strong>'+book.cases.length+'</strong> '+t("results")+' <span>·</span> <strong>'+book.countries.length+
       '</strong> '+t("countries")+' <span>·</span> <strong>'+book.sources.length+'</strong> '+t("sources")+'</div>'+

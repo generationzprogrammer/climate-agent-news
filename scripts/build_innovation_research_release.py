@@ -4,11 +4,13 @@ import csv
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'analysis/innovation_research_20261014'
+OUT=ROOT/os.environ.get('INNOVATION_RESEARCH_OUTPUT','analysis/innovation_research_20261014')
+ARCHIVE_NAME=os.environ.get('INNOVATION_RESEARCH_ARCHIVE','科产融合研究数据_20261014.zip')
 def write_json(path,value):path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 def table(name,rows,fields=None):
     fields=fields or list(dict.fromkeys(k for r in rows for k in r))
@@ -33,6 +35,8 @@ def main():
         row={'case_id':c['id'],'grain':a['grain'],'source_cohort':a['cohort'],'primary_model':a['primary_model'],'focus_country':a.get('country'),'continent':a['continent'],'economy':a['economy'],'province':a.get('province'),'city':a.get('city'),'origin_year':t['origin_year'],'origin_basis':t['origin_basis'],'origin_period':t['origin_period'],'origin_decade':t['origin_decade'],'legacy_start_year':t['legacy_start_year'],'end_year':c.get('end_year'),'review_status':c['review_status']}
         for field in fields:
             for language in ('zh','en'):row[field+'_'+language]=c.get(field,{}).get(language)
+        row['observation_basis']='registered_project_objectives' if c.get('project') else 'official_institutional_account'
+        row['primary_model_basis']='programme_rule' if c.get('project') else 'editorial_mechanism_code'
         case_rows.append(row)
         for ref in c['evidence']:
             assert ref['source_id'] in sourceids
@@ -46,8 +50,15 @@ def main():
     table('chronology.csv',r['chronology']);table('country_group_associations.csv',memberships);table('temporal_counts.csv',r['temporal']);table('factor_pairs.csv',r['factor_pairs'])
     write_json(OUT/'data/taxonomy.json',{'taxonomy':b['taxonomy'],'sector_taxonomy':b['sector_taxonomy'],'archetypes':b['analysis']['archetypes'],'period_labels':r['period_labels'],'organizations':r['organizations'],'participant_types':b['participant_types'],'profile_axes':b['profile_axes']})
     write_json(OUT/'data/cases_nested.json',b)
+    if r.get('review_diagnostics'):
+        write_json(OUT/'data/review_diagnostics.json',r['review_diagnostics'])
+        review_path=ROOT/'config/innovation_peer_evidence.json'
+        if review_path.exists():write_json(OUT/'data/review_evidence.json',json.loads(review_path.read_text(encoding='utf-8')))
     grains=Counter(c['research_annotation']['grain'] for c in cases)
     summary={'version':r['version'],'as_of':r['as_of'],'cases':len(cases),'sources':len(sources),'country_tags':len({code for c in cases for code in c['countries']}),'focus_countries':len({c['research_annotation'].get('country') for c in cases if c['research_annotation'].get('country')}),'grains':dict(grains),'source_cohorts':r['source_strata'],'dated_cases':r['dated_cases'],'china_cases':r['china_cases'],'dated_china_cases':r['dated_china_cases'],'chronology_events':len(r['chronology']),'chronology_cases':len({e['case_id'] for e in r['chronology']}),'origin_year_range':[min(c['timeline']['origin_year'] for c in cases if c['timeline']['origin_year'] is not None),max(c['timeline']['origin_year'] for c in cases if c['timeline']['origin_year'] is not None)],'source_mode_uncertainty_reduction':r['source_mode_uncertainty_reduction'],'platform_models':dict(Counter(c['research_annotation']['primary_model'] for c in cases if c['research_annotation']['grain']=='platform')),'project_models':dict(Counter(c['research_annotation']['primary_model'] for c in cases if c['research_annotation']['grain']=='project')),'checks':{'case_ids_unique':True,'source_ids_unique':True,'source_urls_unique':True,'case_source_foreign_keys_valid':True,'unknown_dates_retained':sum(c['timeline']['origin_year'] is None for c in cases),'previous_754_case_facts':'verified by test_original_facts_preserved','independent_semantic_validation':'not_performed','temporal_review':'single editorial review of cited official statements; not independently rated'},'field_completeness':{f:sum(all(c.get(f,{}).get(l) for l in ('zh','en')) for c in cases) for f in fields}}
+    summary['interpretive_notes']=sum(bool(c.get('constraints')) and bool(c.get('transfer')) for c in cases)
+    summary['review_diagnostics']=r.get('review_diagnostics',{}).get('audit',{})
+    summary['checks']['temporal_review']='AI-assisted editorial reading of official statements; no independent human rater'
     write_json(OUT/'quality_audit.json',summary)
     manifest={'release':r['version'],'generated_from':'static/data/innovation_cases.json','source_sha256':hashlib.sha256((ROOT/'static/data/innovation_cases.json').read_bytes()).hexdigest(),'encoding':'UTF-8; CSV UTF-8 with BOM','missing_values':'empty CSV values or JSON null denote unknown or not coded, never zero','licensing':'Compilation and third-party source rights require separate review before repository deposit. Source webpages are not redistributed as full text.','semantic_validation':'No independent inter-rater reliability or semantic accuracy estimate is claimed.','files':[]}
     dictionary=OUT/'data_dictionary.csv'
@@ -68,11 +79,11 @@ def main():
             schema[path.name]={'columns':{f:{k:v for k,v in definitions[(path.stem,f)].items() if k not in ('table','field')} for f in fields}}
         write_json(OUT/'data/schema.json',schema)
     manifest['code_hash_normalization']='CRLF converted to LF; no other source transformation'
-    manifest['code_files']=[{'path':name,'sha256':hashlib.sha256((ROOT/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()} for name in ['src/climate_agent/innovation_cases.py','src/climate_agent/innovation_research.py','src/climate_agent/innovation_analysis.py','scripts/build_innovation_chronology.py','scripts/build_innovation_history_cases.py','scripts/build_innovation_research_release.py','scripts/build_innovation_figures.py']]
+    manifest['code_files']=[{'path':name,'sha256':hashlib.sha256((ROOT/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()} for name in ['src/climate_agent/innovation_cases.py','src/climate_agent/innovation_research.py','src/climate_agent/innovation_analysis.py','src/climate_agent/innovation_review.py','scripts/build_innovation_chronology.py','scripts/build_innovation_history_cases.py','scripts/build_innovation_peer_review.py','scripts/build_innovation_research_release.py','scripts/build_innovation_figures.py']]
     manifest['quality_audit_sha256']=hashlib.sha256((OUT/'quality_audit.json').read_bytes()).hexdigest()
     for path in sorted((OUT/'data').iterdir()):manifest['files'].append({'path':'data/'+path.name,'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
     write_json(OUT/'manifest.json',manifest)
-    with zipfile.ZipFile(OUT/'科产融合研究数据_20261014.zip','w',zipfile.ZIP_DEFLATED) as z:
+    with zipfile.ZipFile(OUT/ARCHIVE_NAME,'w',zipfile.ZIP_DEFLATED) as z:
         for path in [*sorted((OUT/'data').iterdir()),OUT/'manifest.json',OUT/'quality_audit.json']:z.write(path,path.relative_to(OUT))
     print(json.dumps(summary,ensure_ascii=False))
 if __name__=='__main__':main()

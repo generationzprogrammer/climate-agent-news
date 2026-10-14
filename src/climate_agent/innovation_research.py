@@ -224,4 +224,6 @@ def build_research(book, root, *, as_of):
     watch_path=root/'data/innovation_watch.json'
     watch=json.loads(watch_path.read_text(encoding='utf-8')) if watch_path.exists() else {}
     book['research']['update_policy']={'cadence':'weekly_source_watch_daily_chart_rebuild','last_watch':watch.get('updated_at'),'pending_candidates':len(watch.get('candidates',[])),'persistent_news_observations':len(watch.get('observations',[])),'promotion':'editorial_review_required','model_api_calls':0}
+    from .innovation_review import diagnostic_tables
+    book['research']['review_diagnostics'] = diagnostic_tables(book)
     book['reviewed_at'] = max(book['reviewed_at'],config['reviewed_at'],history.get('reviewed_at',''))

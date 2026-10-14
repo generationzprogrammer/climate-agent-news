@@ -1,6 +1,7 @@
 """Publication-size figures from the frozen research release; no fitted causal claims."""
 from collections import Counter
 import json
+import os
 from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')
@@ -8,7 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'analysis/innovation_research_20261014/figures'
+OUT=ROOT/os.environ.get('INNOVATION_RESEARCH_OUTPUT','analysis/innovation_research_20261014')/'figures'
 COLORS=['#275679','#56879b','#86aeb9','#b8d4d5','#996d36','#bb9967','#d6c3a5','#767c83']
 def main():
     OUT.mkdir(parents=True,exist_ok=True)
@@ -26,7 +27,7 @@ def main():
         label=lambda value:value[lang]
         # Figure 1: source selection and record level, plus geography with explicit focus-country counting.
         fig,axes=plt.subplots(1,2,figsize=(7.2,3.65),gridspec_kw={'width_ratios':[1,1.25]})
-        cohorts=r['source_strata'];ys=np.arange(len(cohorts));names={'ARPAE':'ARPA-E','CORDIS':'CORDIS','coverage_review':text('Geographic review','区域补充'),'expansion_review':text('Geographic expansion','地域扩充'),'history_review':text('Historical review','历史补充'),'legacy_review':text('Initial institutions','首批机构'),'regional_review':text('Institutional review','机构补充')}
+        cohorts=r['source_strata'];ys=np.arange(len(cohorts));names={'ARPAE':'ARPA-E','CORDIS':'CORDIS','coverage_review':text('Geographic review','区域补充'),'expansion_review':text('Geographic expansion','地域扩充'),'history_review':text('Historical review','历史补充'),'legacy_review':text('Initial institutions','首批机构'),'regional_review':text('Institutional review','机构补充'),'peer_review':text('Reviewer supplement','审阅补充')}
         axes[0].barh(ys,[row['count'] for row in cohorts],color=['#56879b' if row['cohort'] in ('ARPAE','CORDIS') else '#275679' for row in cohorts]);axes[0].set_yticks(ys,[names[row['cohort']] for row in cohorts]);axes[0].invert_yaxis();axes[0].set_xlabel(text('Cases','案例数'));axes[0].set_xlim(0,460)
         for i,row in enumerate(cohorts):axes[0].text(row['count']+6,i,str(row['count']),va='center',fontsize=8)
         groups=['asia','europe','north_america','south_america','africa','oceania','cross_region'];pos=np.arange(len(groups));left=np.zeros(len(groups))
@@ -64,5 +65,31 @@ def main():
             for j in range(len(keys)):
                 if i!=j:ax.text(j,i,f'{mat[i,j]:.2f}\n(n={counts[i,j]})',ha='center',va='center',fontsize=7.5,color='white' if mat[i,j]>.55 else '#1b2730')
         ax.set_title(text('Factor overlap within reviewed institutions','平台机构中的合作要素重叠'),loc='left');fig.colorbar(im,ax=ax,shrink=.7,label='Jaccard');fig.tight_layout();save(fig,'Figure4_factors_'+lang)
+        if r.get('review_diagnostics'):
+            ds=r['review_diagnostics']
+            # Validation figure: missing origin dates by institutional location.
+            fig,axes=plt.subplots(1,2,figsize=(7.2,3.7),gridspec_kw={'width_ratios':[1,1.15]})
+            groups=['asia','europe','north_america','south_america','africa','oceania','cross_region']
+            platforms=[c for c in b['cases'] if c['research_annotation']['grain']=='platform']
+            known=[sum(c['research_annotation']['continent']==g and c['timeline']['origin_year'] is not None for c in platforms) for g in groups]
+            unknown=[sum(c['research_annotation']['continent']==g and c['timeline']['origin_year'] is None for c in platforms) for g in groups]
+            y=np.arange(len(groups));axes[0].barh(y,known,color='#275679',label=text('Supported origin','起始时间有证据'))
+            axes[0].barh(y,unknown,left=known,color='#e1e5e8',edgecolor='#767c83',hatch='///',linewidth=.4,label=text('Unknown origin','起始时间未核验'))
+            axes[0].set_yticks(y,[label(b['analysis']['group_labels'][g]) for g in groups]);axes[0].invert_yaxis();axes[0].set_xlabel(text('Institutional cases','机构案例数'));axes[0].set_title(text('a  Origin-date coverage','a  起始日期覆盖'),loc='left');axes[0].legend(frameon=False,fontsize=7,loc='lower right')
+            model_ids=[m['id'] for m in models];p=ds['model_sensitivity']
+            full=[next(x['share'] for x in p if x['grain']=='all' and x['omitted_cohort']=='none' and x['model']==m) for m in model_ids]
+            inst=[next(x['share'] for x in p if x['grain']=='platform' and x['omitted_cohort']=='none' and x['model']==m) for m in model_ids]
+            y=np.arange(len(models));axes[1].barh(y-.17,np.array(full)*100,height=.3,color='#275679',label=text('All records','全部记录'));axes[1].barh(y+.17,np.array(inst)*100,height=.3,color='#bb9967',label=text('Institutions only','仅机构记录'))
+            axes[1].set_yticks(y,[(short_zh if lang=='zh' else short_en)[m] for m in model_ids]);axes[1].invert_yaxis();axes[1].set_xlim(0,65);axes[1].set_xlabel(text('Within-subset percentage','各自子样本内占比（%）'));axes[1].set_title(text('b  Record-level sensitivity','b  记录层级敏感性'),loc='left');axes[1].legend(frameon=False,fontsize=7)
+            for ax in axes:ax.grid(axis='x',alpha=.15);ax.set_axisbelow(True)
+            fig.tight_layout(w_pad=2);save(fig,'Figure5_validation_'+lang)
+            # Non-universal factors; the interval is sensitivity to acquisition strata.
+            rows=[x for x in ds['factor_sensitivity'] if x['first'] not in ('knowledge','market') and x['second'] not in ('knowledge','market')]
+            fig,ax=plt.subplots(figsize=(7.2,3.6));y=np.arange(len(rows))
+            for i,row in enumerate(rows):
+                ax.plot([row['leave_one_cohort_out_min'],row['leave_one_cohort_out_max']],[i,i],color='#767c83',lw=2)
+                ax.plot(row['jaccard'],i,'o',color='#275679',markersize=5)
+                ax.text(.36,i,'n='+str(row['count']),va='center',fontsize=8)
+            ax.set_yticks(y,[label(b['taxonomy']['factors'][x['first']])+' + '+label(b['taxonomy']['factors'][x['second']]) for x in rows]);ax.invert_yaxis();ax.set_xlim(-.015,.4);ax.set_xticks([0,.1,.2,.3]);ax.set_xlabel(text('Jaccard overlap; bars are leave-one-cohort-out ranges','Jaccard重叠；横线为逐一剔除采集批次的范围'));ax.set_title(text('Institutional resource-code sensitivity','机构要素编码的来源敏感性'),loc='left');ax.grid(axis='x',alpha=.15);ax.set_axisbelow(True);fig.tight_layout();save(fig,'Figure6_sensitivity_'+lang)
     print(json.dumps({'figures':len(list(OUT.glob('*.png'))),'formats':['PNG 450 dpi','SVG','PDF']}))
 if __name__=='__main__':main()
