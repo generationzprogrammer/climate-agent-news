@@ -11,6 +11,19 @@ docs/*.png
 *.log
 analysis/innovation_case_draft*.json
 /tmp/
+/.chart-data-*/
+# Local manuscript review outputs; public tables and website assets are explicit.
+analysis/innovation_research_20261014/*.docx
+analysis/innovation_research_20261014/*.pdf
+analysis/innovation_research_20261014/*.pptx
+analysis/innovation_research_20261014/*.zip
+analysis/innovation_research_20261014/figures/
+analysis/innovation_research_20261014/*说明.txt
+analysis/innovation_research_20261014/投稿前核对单.txt
+scripts/build_innovation_manuscripts.py
+scripts/build_innovation_presentation.mjs
+scripts/qa_innovation_presentation.py
+scripts/render_innovation_documents.py
 analysis/reports/open_innovation/*.verification-failure.png
 analysis/reports/open_innovation_20261009/*.verification-failure.png
 analysis/reports/open_innovation_20261009/*.tmp-*

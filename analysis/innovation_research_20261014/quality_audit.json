@@ -1,0 +1,137 @@
+{
+  "version": "2026.10.14",
+  "as_of": "2026-10-14",
+  "cases": 761,
+  "sources": 795,
+  "country_tags": 78,
+  "focus_countries": 57,
+  "grains": {
+    "project": 588,
+    "platform": 173
+  },
+  "source_cohorts": [
+    {
+      "cohort": "ARPAE",
+      "count": 190,
+      "dated": 190,
+      "models": {
+        "mission": 190
+      }
+    },
+    {
+      "cohort": "CORDIS",
+      "count": 398,
+      "dated": 398,
+      "models": {
+        "consortium": 398
+      }
+    },
+    {
+      "cohort": "coverage_review",
+      "count": 43,
+      "dated": 6,
+      "models": {
+        "venture": 3,
+        "consortium": 7,
+        "intermediary": 13,
+        "pilot": 7,
+        "cluster": 4,
+        "mission": 3,
+        "capacity": 6
+      }
+    },
+    {
+      "cohort": "expansion_review",
+      "count": 73,
+      "dated": 0,
+      "models": {
+        "pilot": 15,
+        "consortium": 25,
+        "cluster": 4,
+        "intermediary": 17,
+        "mission": 3,
+        "capacity": 7,
+        "venture": 2
+      }
+    },
+    {
+      "cohort": "history_review",
+      "count": 7,
+      "dated": 7,
+      "models": {
+        "venture": 1,
+        "cluster": 3,
+        "intermediary": 3
+      }
+    },
+    {
+      "cohort": "legacy_review",
+      "count": 26,
+      "dated": 4,
+      "models": {
+        "consortium": 8,
+        "intermediary": 3,
+        "pilot": 2,
+        "capacity": 4,
+        "rules": 4,
+        "mission": 4,
+        "venture": 1
+      }
+    },
+    {
+      "cohort": "regional_review",
+      "count": 24,
+      "dated": 8,
+      "models": {
+        "pilot": 3,
+        "cluster": 7,
+        "intermediary": 10,
+        "mission": 2,
+        "venture": 2
+      }
+    }
+  ],
+  "dated_cases": 613,
+  "china_cases": 79,
+  "dated_china_cases": 18,
+  "chronology_events": 41,
+  "chronology_cases": 25,
+  "origin_year_range": [
+    1932,
+    2026
+  ],
+  "source_mode_uncertainty_reduction": 0.6901501472387603,
+  "platform_models": {
+    "pilot": 27,
+    "rules": 4,
+    "mission": 12,
+    "consortium": 40,
+    "capacity": 17,
+    "venture": 9,
+    "intermediary": 46,
+    "cluster": 18
+  },
+  "project_models": {
+    "consortium": 398,
+    "mission": 190
+  },
+  "checks": {
+    "case_ids_unique": true,
+    "source_ids_unique": true,
+    "source_urls_unique": true,
+    "case_source_foreign_keys_valid": true,
+    "unknown_dates_retained": 148,
+    "previous_754_case_facts": "verified by test_original_facts_preserved",
+    "independent_semantic_validation": "not_performed",
+    "temporal_review": "single editorial review of cited official statements; not independently rated"
+  },
+  "field_completeness": {
+    "title": 761,
+    "summary": 761,
+    "actors": 761,
+    "mechanism": 761,
+    "observed": 761,
+    "constraints": 166,
+    "transfer": 166
+  }
+}

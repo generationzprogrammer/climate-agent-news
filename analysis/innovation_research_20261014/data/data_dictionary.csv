@@ -1,0 +1,100 @@
+table,field,type,unit_or_allowed_values,definition,missing_meaning
+cases,case_id,string,stable identifier,One institutional arrangement or funded project,not permitted
+cases,grain,category,platform or project,Observation level never pooled for performance,not permitted
+cases,source_cohort,category,ARPAE CORDIS or reviewed cohort,How the case entered the collection,not permitted
+cases,primary_model,category,8 archetype keys,Exclusive structural mechanism coding not an outcome,not permitted
+cases,focus_country,string,ISO alpha2,Coordinator country or documented principal operating location,cross-regional or not assigned
+cases,province,string,China province code,Documented operating location not a university headquarters,not assigned or not applicable
+cases,city,string,documented place name,City of the arrangement when available,not assigned
+cases,origin_year,integer,calendar year,Field-supported establishment or official register start,not verified
+cases,legacy_start_year,integer,calendar year,Preserved earlier value distinct from strictly supported origin,not supplied
+cases,origin_basis,category,reviewed_chronology reviewed_register_start legacy_reviewed_start or not_verified,Basis for origin assignment,not permitted
+cases,origin_period,string,Chinese plan or decade or undated,Derived temporal cohort not continuous activity,undated explicitly retained
+cases,origin_decade,string,decade key,Decade of supported origin including China,not verified
+cases,title_zh and title_en,string,Chinese and English,Substantive case title,not permitted
+cases,summary_zh and summary_en,string,Chinese and English,Compiled factual account with source links,not permitted
+cases,actors_zh and actors_en,string,Chinese and English,Participating roles and institutions,not permitted
+cases,mechanism_zh and mechanism_en,string,Chinese and English,How research and industrial activities are coordinated,not permitted
+cases,observed_zh and observed_en,string,Chinese and English,Reported activity or register objectives not necessarily realised outcomes,not permitted
+cases,constraints_zh and constraints_en,string,Chinese and English,Analytical limitations separate from factual fields,not coded
+cases,transfer_zh and transfer_en,string,Chinese and English,Interpretive transfer considerations not measured effects,not coded
+sources,id,string,stable source identifier,One cited URL record,not permitted
+sources,url,string,public HTTP or HTTPS,Source address no private tokens,not permitted
+sources,published_date,string,ISO date or null,Document publication distinct from event date,unknown
+sources,reviewed_at,string,ISO date,Editorial source review date,not permitted
+case_sources,supported_field,string,factual field key,Source-to-field editorial association not independent entailment ground truth,not permitted
+case_countries,country_alpha2,string,ISO alpha2,Documented participating country or territory,not permitted
+participants,role,string,register role,Coordinator or participant role of named organisation,not supplied
+case_factors,factor,category,knowledge talent capital infrastructure data market,Non-exclusive structural resource code,not permitted
+chronology,date,string,YYYY YYYY-MM or YYYY-MM-DD,Explicit source-supported event time,not permitted
+chronology,date_precision,category,year month or day,Precision actually supported by source,not permitted
+chronology,kind,category,establishment launch expansion institutional_change demonstration documented_activity,Type of dated milestone,not permitted
+chronology,origin_basis,boolean,True or False in CSV and true or false in JSON,Whether this milestone supports the case origin,not permitted
+chronology,source_ids,JSON array,source identifiers,Resolve against sources table,not permitted
+country_group_associations,group_id,category,G20 G7 OECD EU,Contemporary country membership not organisation sponsorship,not permitted
+country_group_associations,scope,category,focus_country or documented_participant_country,Exclusive focus location or non-exclusive participant association,not permitted
+country_group_associations,as_of,string,2026-10-14,Membership verification date not historical membership,not permitted
+temporal_counts,count,integer,cases,Distinct included case IDs matching filters,zero is an observed sample count
+temporal_counts,denominator,integer,cases,All cases of selected grain and geographic scope including unknown origins,not permitted
+factor_pairs,count,integer,cases,Number with both resource tags,zero means no jointly coded case
+factor_pairs,jaccard,number,0 to 1,Intersection divided by union of tagged cases,zero union
+factor_pairs,lift,number,non-negative,Joint support relative to independent marginal occurrence,zero marginal count
+cases,continent,category,6 continents or cross_region,Geographic group of documented focus location,cross-region when focus is not assigned
+cases,economy,category,developed developing unclassified,Conservative development-group crosswalk not an income variable,unclassified retained
+cases,end_year,integer,calendar year,Stated or registered end not proof of completed activity,not stated or not applicable
+cases,review_status,category,reviewed,Editorial publication status not independent validation,not permitted
+sources,title,string,source title,Title retained for evidence retrieval,not permitted
+sources,publisher,string,institution or publication,Publisher of the cited source,not permitted
+sources,language,string,language code,Language of original evidence,not permitted
+sources,access,string,access and reuse description,Public metadata and paraphrase retention policy,not supplied
+sources,source_role,string,evidence role,Primary institutional source or identified republication,not supplied
+sources,bulk_url,string,public URL,Official bulk-data discovery address,not applicable
+sources,snapshot_sha256,string,SHA-256 hexadecimal,Hash of the originally acquired snapshot,not supplied
+sources,source_updated_at,string,source timestamp,Register-reported update time not review time,not supplied
+sources,rights_url,string,public URL,Source reuse conditions,not supplied
+sources,snapshot_url,string,public URL,Address of acquired snapshot when available,not supplied
+sources,fetched_at_utc,string,UTC timestamp,Acquisition timestamp of cached source material,not supplied
+sources,snapshot_parse_basis,string,parsing description,How complete records were recovered from the source,not supplied
+sources,parser_version,string,version identifier,Version of source parsing procedure,not supplied
+sources,review_basis,string,review description,Review register or explicit inclusion basis,not supplied
+case_sources,case_id,string,case identifier,Foreign key to cases,not permitted
+case_sources,source_id,string,source identifier,Foreign key to sources,not permitted
+case_sources,support_type,string,editorial field link,Provenance association not independently tested entailment,not permitted
+case_countries,case_id,string,case identifier,Foreign key to cases,not permitted
+case_countries,is_focus_country,boolean,True or False in CSV,Whether the country equals the focus location,not permitted
+case_factors,case_id,string,case identifier,Foreign key to cases,not permitted
+case_factors,coding_type,string,registry_rule or editorial_structural_code,How a present resource tag was assigned,not permitted
+participants,case_id,string,case identifier,Foreign key to cases,not permitted
+participants,id,string,register identifier,Public organisation identifier not personal contact information,not supplied
+participants,name,string,organisation name,Public name of registered participating institution,not supplied
+participants,country,string,ISO alpha2,Country or territory reported by register,not supplied
+participants,type,category,participant_types in nested JSON,Registered or reviewed institution type,not established
+participants,eu_contribution_eur,number,EUR,Approved contribution attributed to participant not actual expenditure,not disclosed or not applicable
+chronology,id,string,event identifier,Stable hash from case date and event kind,not permitted
+chronology,case_id,string,case identifier,Foreign key to cases,not permitted
+chronology,description,JSON object,zh and en,Source-grounded bilingual milestone description,not permitted
+chronology,review_status,category,reviewed,Editorial status not multi-rater validation,not permitted
+chronology,reviewed_at,string,ISO date,Date of source-grounded milestone review,not permitted
+chronology,coding_basis,string,editorial review method,Record of curation approach,not permitted
+chronology,year,integer,calendar year,Year parsed from explicit date,not permitted
+chronology,decade,string,decade key,Derived ten-year period,not permitted
+chronology,china_plan,string,Chinese plan key,Plan period for China-focus cases,not applicable outside China focus
+country_group_associations,case_id,string,case identifier,Foreign key to cases,not permitted
+temporal_counts,grain,category,platform or project,Selected observation level,not permitted
+temporal_counts,scope,category,china_plans or global_decades,Selected temporal and geographic scope,not permitted
+temporal_counts,basis,category,origin or activity,Founding cohort or explicitly dated milestone activity,not permitted
+temporal_counts,period,string,period key,Planning period decade or undated category,not permitted
+temporal_counts,label,JSON object,zh and en,Bilingual period label,not permitted
+temporal_counts,models,JSON object,archetype to count,Exclusive primary model counts within the group,not permitted
+temporal_counts,case_ids,JSON array,case identifiers,Distinct contributing cases for independent recomputation,not permitted
+temporal_counts,source_cohorts,JSON object,cohort to count,Acquisition-source composition for origin rows,not applicable to some activity rows
+temporal_counts,events,integer,milestones,Number of dated events before distinct-case aggregation,not applicable to origin rows
+temporal_counts,event_ids,JSON array,event identifiers,Contributing reviewed milestones,not applicable to origin rows
+factor_pairs,grain,category,platform or project,Selected observation level,not permitted
+factor_pairs,first,category,factor key,First resource tag in the unordered pair,not permitted
+factor_pairs,second,category,factor key,Second resource tag in the unordered pair,not permitted
+factor_pairs,denominator,integer,cases,All cases of selected observation level,not permitted
+factor_pairs,first_count,integer,cases,Cases coded with the first factor,zero means no code in this sample
+factor_pairs,second_count,integer,cases,Cases coded with the second factor,zero means no code in this sample
+factor_pairs,source_cohorts,JSON object,cohort to count,Source composition of jointly tagged cases,not permitted
+factor_pairs,case_ids,JSON array,case identifiers,Cases with both codes not proven causal cases,not permitted

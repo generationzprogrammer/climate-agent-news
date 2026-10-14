@@ -1,0 +1,112 @@
+{
+  "release": "2026.10.14",
+  "generated_from": "static/data/innovation_cases.json",
+  "source_sha256": "9104baba0ed18cfad4b50bd1e204312d67d326d4fa3b1c0a729d2d4724e27c6f",
+  "encoding": "UTF-8; CSV UTF-8 with BOM",
+  "missing_values": "empty CSV values or JSON null denote unknown or not coded, never zero",
+  "licensing": "Compilation and third-party source rights require separate review before repository deposit. Source webpages are not redistributed as full text.",
+  "semantic_validation": "No independent inter-rater reliability or semantic accuracy estimate is claimed.",
+  "files": [
+    {
+      "path": "data/case_countries.csv",
+      "bytes": 87090,
+      "sha256": "e628a1d035e652e33194ce1e2f5983e8dbacb43e530df25bfcaf296f54e0cd6a"
+    },
+    {
+      "path": "data/case_factors.csv",
+      "bytes": 98521,
+      "sha256": "75548ca54774f25ac1749e4fbc0c11c5b8ba88de85d8055c8eb916f98de6f6c0"
+    },
+    {
+      "path": "data/case_sources.csv",
+      "bytes": 468288,
+      "sha256": "1f0f193aca6047ad7a1c958223c4ce1a48576032a005686c40065240eb5c24b3"
+    },
+    {
+      "path": "data/cases.csv",
+      "bytes": 1347894,
+      "sha256": "ce1bd70e6f8e3f5e4998da151cbde777edcf24351d9f27a688163b08460a28a7"
+    },
+    {
+      "path": "data/cases_nested.json",
+      "bytes": 7741809,
+      "sha256": "9104baba0ed18cfad4b50bd1e204312d67d326d4fa3b1c0a729d2d4724e27c6f"
+    },
+    {
+      "path": "data/chronology.csv",
+      "bytes": 17249,
+      "sha256": "35f5bdffadb124adf8b1e8f5bfdccd5524ae927c1d7f3a061dc609d7a1586be2"
+    },
+    {
+      "path": "data/country_group_associations.csv",
+      "bytes": 232236,
+      "sha256": "08f3f7840e1e982cafe475f666f49bce82cde391d7c27957cdc992fb86d5dc6f"
+    },
+    {
+      "path": "data/data_dictionary.csv",
+      "bytes": 10874,
+      "sha256": "bccf25b6450bf342aa616cf0b977796cc80226071184747b3bd29fb99f181248"
+    },
+    {
+      "path": "data/factor_pairs.csv",
+      "bytes": 54205,
+      "sha256": "3b4e248f84036f7d18aaae97bda06198b6fa23e288c42340dedcf999e7fdd616"
+    },
+    {
+      "path": "data/participants.csv",
+      "bytes": 512401,
+      "sha256": "e65269b9ebd6542d22fd9933b52b55424e0aa81de6ab769020b5a0bf050256cd"
+    },
+    {
+      "path": "data/schema.json",
+      "bytes": 25271,
+      "sha256": "43e1e1ebce8ad22fb467e8755b75e01541fe8b819147d7d84b1b16b5e7abda1c"
+    },
+    {
+      "path": "data/sources.csv",
+      "bytes": 347333,
+      "sha256": "af50df5e807efec040ccb7ba4a1d71131b8f7220d66505cfc7fddc1e23675997"
+    },
+    {
+      "path": "data/taxonomy.json",
+      "bytes": 134031,
+      "sha256": "f9d894efd5b04c2f57f1bdb7471cee0646b95b81fcb0a03f941c08089418e845"
+    },
+    {
+      "path": "data/temporal_counts.csv",
+      "bytes": 28507,
+      "sha256": "3a6a9861894fbc0d76aed0472c76d375c90b115f2373e165956082e5ab8146be"
+    }
+  ],
+  "code_files": [
+    {
+      "path": "src/climate_agent/innovation_cases.py",
+      "sha256": "b97ee6b1dc95c424cf5e79bc54775ad67c601021d59800e01087d5c007944d34"
+    },
+    {
+      "path": "src/climate_agent/innovation_research.py",
+      "sha256": "a57bc662a523bcdc3257072f79da5a845e241f4c8a0ab065b3a95b15cf35c626"
+    },
+    {
+      "path": "src/climate_agent/innovation_analysis.py",
+      "sha256": "570dfea115d4db5f57fa38d9f87caad5e6b46d5103c0bdafc33aafe21f1fc665"
+    },
+    {
+      "path": "scripts/build_innovation_chronology.py",
+      "sha256": "2707ef2ea63c83a3018940bc2321df5420cdf04b336730f1305a32fcb78e0b0f"
+    },
+    {
+      "path": "scripts/build_innovation_history_cases.py",
+      "sha256": "c7f9419a28d861dd6c8881195e3e769047cb6b6b76aa754b76d80976873ac665"
+    },
+    {
+      "path": "scripts/build_innovation_research_release.py",
+      "sha256": "197ec5cfe79c0e961f4b0f302fe660ed25798a46a500497e9ec49e4eb2c3e9f2"
+    },
+    {
+      "path": "scripts/build_innovation_figures.py",
+      "sha256": "9b9ced2c600c9efd100470984c434b6942eac585d924aa670b73fef347e39b64"
+    }
+  ],
+  "quality_audit_sha256": "035b481f5d33234703299837e3cf5e6a00508115b7edc97fd98443602b71d094"
+}

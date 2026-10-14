@@ -26,7 +26,7 @@ old=sum([read('config/'+n)['cases'] for n in ('open_innovation_cases.json','open
 regional=read('config/open_innovation_regional_cases.json')['cases']
 coverage=read('config/open_innovation_coverage.json')['cases']
 expansion=read('config/open_innovation_expansion.json')['cases']
-additions=read('config/open_innovation_additions.json')['cases']
+additions=read('config/open_innovation_additions.json')['cases']+read('config/open_innovation_historical_cases.json')['cases']
 new=regional+coverage+expansion
 current={c['id']:c for c in b['cases']}
 assert len(old)==613 and len(regional)==24 and len(coverage)==43 and len(expansion)==73

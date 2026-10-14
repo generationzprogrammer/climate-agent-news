@@ -1,0 +1,34 @@
+name: 科产融合每周资料更新
+on:
+  workflow_dispatch:
+  schedule:
+    # Sunday 15:20 UTC = Sunday 23:20 Beijing; daily export follows at 06:30.
+    - cron: '20 15 * * 0'
+permissions:
+  contents: write
+concurrency:
+  group: climate-text-pages
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 增量监测官方来源并保存候选资料
+        run: python scripts/update_innovation_watch.py --max-pages 16
+      - name: 保存监测记录
+        shell: bash
+        run: |
+          git config user.name climate-text-bot
+          git config user.email climate-text-bot@users.noreply.github.com
+          git add data/innovation_watch.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: weekly innovation source observations [skip ci]"
+            git fetch origin main
+            git rebase origin/main
+            git push
+          fi

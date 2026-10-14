@@ -34,7 +34,7 @@ const server=http.createServer((req,res)=>{
       await page.locator('#innovationCases [data-detail="oi_cnest"]').click();
       const cnestBody=await page.locator("#innovationCases .ic-dialog-body").textContent();
       assert(cnestBody.includes("培育项目")&&cnestBody.includes("19个国家")&&cnestBody.includes("2026年4月3日"));checks++;
-      assert.equal(await page.locator('#innovationCases .ic-dialog-body a[href^="https://cnest.tsinghua.edu.cn/"]').count(),6);checks++;
+      assert.equal(await page.locator('#innovationCases .ic-sources a[href^="https://cnest.tsinghua.edu.cn/"]').count(),6);checks++;
       await page.locator("#innovationCases .ic-close").click();
       await page.locator('#innovationCases [data-filter="query"]').fill("");
       await page.waitForFunction(()=>document.querySelectorAll("#innovationCases .ic-card").length===12);

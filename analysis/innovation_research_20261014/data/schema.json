@@ -1,0 +1,678 @@
+{
+  "case_countries.csv": {
+    "columns": {
+      "case_id": {
+        "type": "string",
+        "unit_or_allowed_values": "case identifier",
+        "definition": "Foreign key to cases",
+        "missing_meaning": "not permitted"
+      },
+      "country_alpha2": {
+        "type": "string",
+        "unit_or_allowed_values": "ISO alpha2",
+        "definition": "Documented participating country or territory",
+        "missing_meaning": "not permitted"
+      },
+      "is_focus_country": {
+        "type": "boolean",
+        "unit_or_allowed_values": "True or False in CSV",
+        "definition": "Whether the country equals the focus location",
+        "missing_meaning": "not permitted"
+      }
+    }
+  },
+  "case_factors.csv": {
+    "columns": {
+      "case_id": {
+        "type": "string",
+        "unit_or_allowed_values": "case identifier",
+        "definition": "Foreign key to cases",
+        "missing_meaning": "not permitted"
+      },
+      "factor": {
+        "type": "category",
+        "unit_or_allowed_values": "knowledge talent capital infrastructure data market",
+        "definition": "Non-exclusive structural resource code",
+        "missing_meaning": "not permitted"
+      },
+      "coding_type": {
+        "type": "string",
+        "unit_or_allowed_values": "registry_rule or editorial_structural_code",
+        "definition": "How a present resource tag was assigned",
+        "missing_meaning": "not permitted"
+      }
+    }
+  },
+  "case_sources.csv": {
+    "columns": {
+      "case_id": {
+        "type": "string",
+        "unit_or_allowed_values": "case identifier",
+        "definition": "Foreign key to cases",
+        "missing_meaning": "not permitted"
+      },
+      "source_id": {
+        "type": "string",
+        "unit_or_allowed_values": "source identifier",
+        "definition": "Foreign key to sources",
+        "missing_meaning": "not permitted"
+      },
+      "supported_field": {
+        "type": "string",
+        "unit_or_allowed_values": "factual field key",
+        "definition": "Source-to-field editorial association not independent entailment ground truth",
+        "missing_meaning": "not permitted"
+      },
+      "support_type": {
+        "type": "string",
+        "unit_or_allowed_values": "editorial field link",
+        "definition": "Provenance association not independently tested entailment",
+        "missing_meaning": "not permitted"
+      }
+    }
+  },
+  "cases.csv": {
+    "columns": {
+      "case_id": {
+        "type": "string",
+        "unit_or_allowed_values": "stable identifier",
+        "definition": "One institutional arrangement or funded project",
+        "missing_meaning": "not permitted"
+      },
+      "grain": {
+        "type": "category",
+        "unit_or_allowed_values": "platform or project",
+        "definition": "Observation level never pooled for performance",
+        "missing_meaning": "not permitted"
+      },
+      "source_cohort": {
+        "type": "category",
+        "unit_or_allowed_values": "ARPAE CORDIS or reviewed cohort",
+        "definition": "How the case entered the collection",
+        "missing_meaning": "not permitted"
+      },
+      "primary_model": {
+        "type": "category",
+        "unit_or_allowed_values": "8 archetype keys",
+        "definition": "Exclusive structural mechanism coding not an outcome",
+        "missing_meaning": "not permitted"
+      },
+      "focus_country": {
+        "type": "string",
+        "unit_or_allowed_values": "ISO alpha2",
+        "definition": "Coordinator country or documented principal operating location",
+        "missing_meaning": "cross-regional or not assigned"
+      },
+      "continent": {
+        "type": "category",
+        "unit_or_allowed_values": "6 continents or cross_region",
+        "definition": "Geographic group of documented focus location",
+        "missing_meaning": "cross-region when focus is not assigned"
+      },
+      "economy": {
+        "type": "category",
+        "unit_or_allowed_values": "developed developing unclassified",
+        "definition": "Conservative development-group crosswalk not an income variable",
+        "missing_meaning": "unclassified retained"
+      },
+      "province": {
+        "type": "string",
+        "unit_or_allowed_values": "China province code",
+        "definition": "Documented operating location not a university headquarters",
+        "missing_meaning": "not assigned or not applicable"
+      },
+      "city": {
+        "type": "string",
+        "unit_or_allowed_values": "documented place name",
+        "definition": "City of the arrangement when available",
+        "missing_meaning": "not assigned"
+      },
+      "origin_year": {
+        "type": "integer",
+        "unit_or_allowed_values": "calendar year",
+        "definition": "Field-supported establishment or official register start",
+        "missing_meaning": "not verified"
+      },
+      "origin_basis": {
+        "type": "category",
+        "unit_or_allowed_values": "reviewed_chronology reviewed_register_start legacy_reviewed_start or not_verified",
+        "definition": "Basis for origin assignment",
+        "missing_meaning": "not permitted"
+      },
+      "origin_period": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese plan or decade or undated",
+        "definition": "Derived temporal cohort not continuous activity",
+        "missing_meaning": "undated explicitly retained"
+      },
+      "origin_decade": {
+        "type": "string",
+        "unit_or_allowed_values": "decade key",
+        "definition": "Decade of supported origin including China",
+        "missing_meaning": "not verified"
+      },
+      "legacy_start_year": {
+        "type": "integer",
+        "unit_or_allowed_values": "calendar year",
+        "definition": "Preserved earlier value distinct from strictly supported origin",
+        "missing_meaning": "not supplied"
+      },
+      "end_year": {
+        "type": "integer",
+        "unit_or_allowed_values": "calendar year",
+        "definition": "Stated or registered end not proof of completed activity",
+        "missing_meaning": "not stated or not applicable"
+      },
+      "review_status": {
+        "type": "category",
+        "unit_or_allowed_values": "reviewed",
+        "definition": "Editorial publication status not independent validation",
+        "missing_meaning": "not permitted"
+      },
+      "title_zh": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Substantive case title",
+        "missing_meaning": "not permitted"
+      },
+      "title_en": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Substantive case title",
+        "missing_meaning": "not permitted"
+      },
+      "summary_zh": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Compiled factual account with source links",
+        "missing_meaning": "not permitted"
+      },
+      "summary_en": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Compiled factual account with source links",
+        "missing_meaning": "not permitted"
+      },
+      "actors_zh": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Participating roles and institutions",
+        "missing_meaning": "not permitted"
+      },
+      "actors_en": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Participating roles and institutions",
+        "missing_meaning": "not permitted"
+      },
+      "mechanism_zh": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "How research and industrial activities are coordinated",
+        "missing_meaning": "not permitted"
+      },
+      "mechanism_en": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "How research and industrial activities are coordinated",
+        "missing_meaning": "not permitted"
+      },
+      "observed_zh": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Reported activity or register objectives not necessarily realised outcomes",
+        "missing_meaning": "not permitted"
+      },
+      "observed_en": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Reported activity or register objectives not necessarily realised outcomes",
+        "missing_meaning": "not permitted"
+      },
+      "constraints_zh": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Analytical limitations separate from factual fields",
+        "missing_meaning": "not coded"
+      },
+      "constraints_en": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Analytical limitations separate from factual fields",
+        "missing_meaning": "not coded"
+      },
+      "transfer_zh": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Interpretive transfer considerations not measured effects",
+        "missing_meaning": "not coded"
+      },
+      "transfer_en": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese and English",
+        "definition": "Interpretive transfer considerations not measured effects",
+        "missing_meaning": "not coded"
+      }
+    }
+  },
+  "chronology.csv": {
+    "columns": {
+      "id": {
+        "type": "string",
+        "unit_or_allowed_values": "event identifier",
+        "definition": "Stable hash from case date and event kind",
+        "missing_meaning": "not permitted"
+      },
+      "case_id": {
+        "type": "string",
+        "unit_or_allowed_values": "case identifier",
+        "definition": "Foreign key to cases",
+        "missing_meaning": "not permitted"
+      },
+      "date": {
+        "type": "string",
+        "unit_or_allowed_values": "YYYY YYYY-MM or YYYY-MM-DD",
+        "definition": "Explicit source-supported event time",
+        "missing_meaning": "not permitted"
+      },
+      "date_precision": {
+        "type": "category",
+        "unit_or_allowed_values": "year month or day",
+        "definition": "Precision actually supported by source",
+        "missing_meaning": "not permitted"
+      },
+      "kind": {
+        "type": "category",
+        "unit_or_allowed_values": "establishment launch expansion institutional_change demonstration documented_activity",
+        "definition": "Type of dated milestone",
+        "missing_meaning": "not permitted"
+      },
+      "origin_basis": {
+        "type": "boolean",
+        "unit_or_allowed_values": "True or False in CSV and true or false in JSON",
+        "definition": "Whether this milestone supports the case origin",
+        "missing_meaning": "not permitted"
+      },
+      "description": {
+        "type": "JSON object",
+        "unit_or_allowed_values": "zh and en",
+        "definition": "Source-grounded bilingual milestone description",
+        "missing_meaning": "not permitted"
+      },
+      "source_ids": {
+        "type": "JSON array",
+        "unit_or_allowed_values": "source identifiers",
+        "definition": "Resolve against sources table",
+        "missing_meaning": "not permitted"
+      },
+      "review_status": {
+        "type": "category",
+        "unit_or_allowed_values": "reviewed",
+        "definition": "Editorial status not multi-rater validation",
+        "missing_meaning": "not permitted"
+      },
+      "reviewed_at": {
+        "type": "string",
+        "unit_or_allowed_values": "ISO date",
+        "definition": "Date of source-grounded milestone review",
+        "missing_meaning": "not permitted"
+      },
+      "coding_basis": {
+        "type": "string",
+        "unit_or_allowed_values": "editorial review method",
+        "definition": "Record of curation approach",
+        "missing_meaning": "not permitted"
+      },
+      "year": {
+        "type": "integer",
+        "unit_or_allowed_values": "calendar year",
+        "definition": "Year parsed from explicit date",
+        "missing_meaning": "not permitted"
+      },
+      "decade": {
+        "type": "string",
+        "unit_or_allowed_values": "decade key",
+        "definition": "Derived ten-year period",
+        "missing_meaning": "not permitted"
+      },
+      "china_plan": {
+        "type": "string",
+        "unit_or_allowed_values": "Chinese plan key",
+        "definition": "Plan period for China-focus cases",
+        "missing_meaning": "not applicable outside China focus"
+      }
+    }
+  },
+  "country_group_associations.csv": {
+    "columns": {
+      "case_id": {
+        "type": "string",
+        "unit_or_allowed_values": "case identifier",
+        "definition": "Foreign key to cases",
+        "missing_meaning": "not permitted"
+      },
+      "group_id": {
+        "type": "category",
+        "unit_or_allowed_values": "G20 G7 OECD EU",
+        "definition": "Contemporary country membership not organisation sponsorship",
+        "missing_meaning": "not permitted"
+      },
+      "scope": {
+        "type": "category",
+        "unit_or_allowed_values": "focus_country or documented_participant_country",
+        "definition": "Exclusive focus location or non-exclusive participant association",
+        "missing_meaning": "not permitted"
+      },
+      "as_of": {
+        "type": "string",
+        "unit_or_allowed_values": "2026-10-14",
+        "definition": "Membership verification date not historical membership",
+        "missing_meaning": "not permitted"
+      }
+    }
+  },
+  "factor_pairs.csv": {
+    "columns": {
+      "grain": {
+        "type": "category",
+        "unit_or_allowed_values": "platform or project",
+        "definition": "Selected observation level",
+        "missing_meaning": "not permitted"
+      },
+      "first": {
+        "type": "category",
+        "unit_or_allowed_values": "factor key",
+        "definition": "First resource tag in the unordered pair",
+        "missing_meaning": "not permitted"
+      },
+      "second": {
+        "type": "category",
+        "unit_or_allowed_values": "factor key",
+        "definition": "Second resource tag in the unordered pair",
+        "missing_meaning": "not permitted"
+      },
+      "count": {
+        "type": "integer",
+        "unit_or_allowed_values": "cases",
+        "definition": "Number with both resource tags",
+        "missing_meaning": "zero means no jointly coded case"
+      },
+      "denominator": {
+        "type": "integer",
+        "unit_or_allowed_values": "cases",
+        "definition": "All cases of selected observation level",
+        "missing_meaning": "not permitted"
+      },
+      "first_count": {
+        "type": "integer",
+        "unit_or_allowed_values": "cases",
+        "definition": "Cases coded with the first factor",
+        "missing_meaning": "zero means no code in this sample"
+      },
+      "second_count": {
+        "type": "integer",
+        "unit_or_allowed_values": "cases",
+        "definition": "Cases coded with the second factor",
+        "missing_meaning": "zero means no code in this sample"
+      },
+      "jaccard": {
+        "type": "number",
+        "unit_or_allowed_values": "0 to 1",
+        "definition": "Intersection divided by union of tagged cases",
+        "missing_meaning": "zero union"
+      },
+      "lift": {
+        "type": "number",
+        "unit_or_allowed_values": "non-negative",
+        "definition": "Joint support relative to independent marginal occurrence",
+        "missing_meaning": "zero marginal count"
+      },
+      "source_cohorts": {
+        "type": "JSON object",
+        "unit_or_allowed_values": "cohort to count",
+        "definition": "Source composition of jointly tagged cases",
+        "missing_meaning": "not permitted"
+      },
+      "case_ids": {
+        "type": "JSON array",
+        "unit_or_allowed_values": "case identifiers",
+        "definition": "Cases with both codes not proven causal cases",
+        "missing_meaning": "not permitted"
+      }
+    }
+  },
+  "participants.csv": {
+    "columns": {
+      "case_id": {
+        "type": "string",
+        "unit_or_allowed_values": "case identifier",
+        "definition": "Foreign key to cases",
+        "missing_meaning": "not permitted"
+      },
+      "id": {
+        "type": "string",
+        "unit_or_allowed_values": "register identifier",
+        "definition": "Public organisation identifier not personal contact information",
+        "missing_meaning": "not supplied"
+      },
+      "name": {
+        "type": "string",
+        "unit_or_allowed_values": "organisation name",
+        "definition": "Public name of registered participating institution",
+        "missing_meaning": "not supplied"
+      },
+      "country": {
+        "type": "string",
+        "unit_or_allowed_values": "ISO alpha2",
+        "definition": "Country or territory reported by register",
+        "missing_meaning": "not supplied"
+      },
+      "type": {
+        "type": "category",
+        "unit_or_allowed_values": "participant_types in nested JSON",
+        "definition": "Registered or reviewed institution type",
+        "missing_meaning": "not established"
+      },
+      "role": {
+        "type": "string",
+        "unit_or_allowed_values": "register role",
+        "definition": "Coordinator or participant role of named organisation",
+        "missing_meaning": "not supplied"
+      },
+      "eu_contribution_eur": {
+        "type": "number",
+        "unit_or_allowed_values": "EUR",
+        "definition": "Approved contribution attributed to participant not actual expenditure",
+        "missing_meaning": "not disclosed or not applicable"
+      }
+    }
+  },
+  "sources.csv": {
+    "columns": {
+      "id": {
+        "type": "string",
+        "unit_or_allowed_values": "stable source identifier",
+        "definition": "One cited URL record",
+        "missing_meaning": "not permitted"
+      },
+      "url": {
+        "type": "string",
+        "unit_or_allowed_values": "public HTTP or HTTPS",
+        "definition": "Source address no private tokens",
+        "missing_meaning": "not permitted"
+      },
+      "title": {
+        "type": "string",
+        "unit_or_allowed_values": "source title",
+        "definition": "Title retained for evidence retrieval",
+        "missing_meaning": "not permitted"
+      },
+      "publisher": {
+        "type": "string",
+        "unit_or_allowed_values": "institution or publication",
+        "definition": "Publisher of the cited source",
+        "missing_meaning": "not permitted"
+      },
+      "language": {
+        "type": "string",
+        "unit_or_allowed_values": "language code",
+        "definition": "Language of original evidence",
+        "missing_meaning": "not permitted"
+      },
+      "published_date": {
+        "type": "string",
+        "unit_or_allowed_values": "ISO date or null",
+        "definition": "Document publication distinct from event date",
+        "missing_meaning": "unknown"
+      },
+      "reviewed_at": {
+        "type": "string",
+        "unit_or_allowed_values": "ISO date",
+        "definition": "Editorial source review date",
+        "missing_meaning": "not permitted"
+      },
+      "access": {
+        "type": "string",
+        "unit_or_allowed_values": "access and reuse description",
+        "definition": "Public metadata and paraphrase retention policy",
+        "missing_meaning": "not supplied"
+      },
+      "source_role": {
+        "type": "string",
+        "unit_or_allowed_values": "evidence role",
+        "definition": "Primary institutional source or identified republication",
+        "missing_meaning": "not supplied"
+      },
+      "bulk_url": {
+        "type": "string",
+        "unit_or_allowed_values": "public URL",
+        "definition": "Official bulk-data discovery address",
+        "missing_meaning": "not applicable"
+      },
+      "snapshot_sha256": {
+        "type": "string",
+        "unit_or_allowed_values": "SHA-256 hexadecimal",
+        "definition": "Hash of the originally acquired snapshot",
+        "missing_meaning": "not supplied"
+      },
+      "source_updated_at": {
+        "type": "string",
+        "unit_or_allowed_values": "source timestamp",
+        "definition": "Register-reported update time not review time",
+        "missing_meaning": "not supplied"
+      },
+      "rights_url": {
+        "type": "string",
+        "unit_or_allowed_values": "public URL",
+        "definition": "Source reuse conditions",
+        "missing_meaning": "not supplied"
+      },
+      "snapshot_url": {
+        "type": "string",
+        "unit_or_allowed_values": "public URL",
+        "definition": "Address of acquired snapshot when available",
+        "missing_meaning": "not supplied"
+      },
+      "fetched_at_utc": {
+        "type": "string",
+        "unit_or_allowed_values": "UTC timestamp",
+        "definition": "Acquisition timestamp of cached source material",
+        "missing_meaning": "not supplied"
+      },
+      "snapshot_parse_basis": {
+        "type": "string",
+        "unit_or_allowed_values": "parsing description",
+        "definition": "How complete records were recovered from the source",
+        "missing_meaning": "not supplied"
+      },
+      "parser_version": {
+        "type": "string",
+        "unit_or_allowed_values": "version identifier",
+        "definition": "Version of source parsing procedure",
+        "missing_meaning": "not supplied"
+      },
+      "review_basis": {
+        "type": "string",
+        "unit_or_allowed_values": "review description",
+        "definition": "Review register or explicit inclusion basis",
+        "missing_meaning": "not supplied"
+      }
+    }
+  },
+  "temporal_counts.csv": {
+    "columns": {
+      "grain": {
+        "type": "category",
+        "unit_or_allowed_values": "platform or project",
+        "definition": "Selected observation level",
+        "missing_meaning": "not permitted"
+      },
+      "scope": {
+        "type": "category",
+        "unit_or_allowed_values": "china_plans or global_decades",
+        "definition": "Selected temporal and geographic scope",
+        "missing_meaning": "not permitted"
+      },
+      "basis": {
+        "type": "category",
+        "unit_or_allowed_values": "origin or activity",
+        "definition": "Founding cohort or explicitly dated milestone activity",
+        "missing_meaning": "not permitted"
+      },
+      "period": {
+        "type": "string",
+        "unit_or_allowed_values": "period key",
+        "definition": "Planning period decade or undated category",
+        "missing_meaning": "not permitted"
+      },
+      "label": {
+        "type": "JSON object",
+        "unit_or_allowed_values": "zh and en",
+        "definition": "Bilingual period label",
+        "missing_meaning": "not permitted"
+      },
+      "count": {
+        "type": "integer",
+        "unit_or_allowed_values": "cases",
+        "definition": "Distinct included case IDs matching filters",
+        "missing_meaning": "zero is an observed sample count"
+      },
+      "denominator": {
+        "type": "integer",
+        "unit_or_allowed_values": "cases",
+        "definition": "All cases of selected grain and geographic scope including unknown origins",
+        "missing_meaning": "not permitted"
+      },
+      "models": {
+        "type": "JSON object",
+        "unit_or_allowed_values": "archetype to count",
+        "definition": "Exclusive primary model counts within the group",
+        "missing_meaning": "not permitted"
+      },
+      "case_ids": {
+        "type": "JSON array",
+        "unit_or_allowed_values": "case identifiers",
+        "definition": "Distinct contributing cases for independent recomputation",
+        "missing_meaning": "not permitted"
+      },
+      "source_cohorts": {
+        "type": "JSON object",
+        "unit_or_allowed_values": "cohort to count",
+        "definition": "Acquisition-source composition for origin rows",
+        "missing_meaning": "not applicable to some activity rows"
+      },
+      "events": {
+        "type": "integer",
+        "unit_or_allowed_values": "milestones",
+        "definition": "Number of dated events before distinct-case aggregation",
+        "missing_meaning": "not applicable to origin rows"
+      },
+      "event_ids": {
+        "type": "JSON array",
+        "unit_or_allowed_values": "event identifiers",
+        "definition": "Contributing reviewed milestones",
+        "missing_meaning": "not applicable to origin rows"
+      }
+    }
+  }
+}

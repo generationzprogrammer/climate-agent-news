@@ -169,6 +169,7 @@ def prepare_news(archives: list[dict], today: date) -> list:
 
 
 def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, today: date | None = None) -> dict:
+    today = today or datetime.now(timezone(timedelta(hours=8))).date()
     book = json.loads((root / "config/open_innovation_cases.json").read_text(encoding="utf-8"))
     projects = root / "config/open_innovation_projects.json"
     if projects.exists():
@@ -192,7 +193,7 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book["sources"].extend(extra["sources"])
         book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
     coverage_profiles = []
-    for layer in ("open_innovation_coverage.json", "open_innovation_expansion.json", "open_innovation_additions.json"):
+    for layer in ("open_innovation_coverage.json", "open_innovation_expansion.json", "open_innovation_additions.json", "open_innovation_historical_cases.json"):
         layer_path = root / "config" / layer
         if not layer_path.exists():
             continue
@@ -211,6 +212,10 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         annotate_cases(book["cases"], model_config)
         book["analysis"] = build_analysis(book["cases"], model_config)
         book["reviewed_at"] = max(book["reviewed_at"], model_config["reviewed_at"])
+    from .innovation_research import build_research
+    # Review snapshot dates are independent of the news replay date used in tests.
+    research_as_of = max(today, date.fromisoformat(book["reviewed_at"]))
+    build_research(book, root, as_of=research_as_of)
     featured = ["oi_cordis_101058359", "oi_cordis_101084251", "oi_cordis_101091777",
                 "oi_artc", "oi_cordis_101122303", "oi_cordis_101103972", "oi_gba",
                 "oi_cordis_101135374", "oi_cordis_101058453", "oi_nedo_lyon",

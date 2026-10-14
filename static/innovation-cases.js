@@ -70,6 +70,17 @@
       if (filters.mode && !c.modes.includes(filters.mode)) return false;
       if (filters.institution && !c.institutions.includes(filters.institution)) return false;
       if (filters.sector && c.sector_key!==filters.sector) return false;
+      if(filters.focusCountry&&c.research_annotation?.country!==filters.focusCountry)return false;
+      if(filters.organization&&!((filters.organizationScope==='focus'?c.organization_tags:c.organization_participant_tags)||[]).includes(filters.organization))return false;
+      if(filters.period){
+        const timeline=c.timeline||{},scope=filters.timeScope||'case_period',basis=filters.timeBasis||'origin';
+        if(basis==='activity'){
+          if(!(timeline.events||[]).some(e=>(scope==='global_decades'?e.decade:scope==='china_plans'?e.china_plan:(e.china_plan||e.decade))===filters.period))return false;
+        }else{
+          const value=scope==='global_decades'?timeline.origin_decade:scope==='china_plans'?timeline.origin_china_plan:timeline.origin_period;
+          if((value||'undated')!==filters.period)return false;
+        }
+      }
       if (!query) return true;
       const names = c.countries.map(code => book.countries.find(row=>row.alpha2===code)).filter(Boolean);
       const labels = ["challenges","modes","institutions","factors"].flatMap(group=>c[group].map(key=>book.taxonomy[group][key]));
@@ -80,10 +91,13 @@
     const sourceMap = new Map(book.sources.map(s=>[s.id,s]));
     const keys = ["id","title","countries","scope","sector","challenges","modes","institutions","factors","start_year","end_year",
       "summary","actors","mechanism","observed","constraints","transfer","source_urls","reviewed_at","official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis",
-      "primary_model","province","city","continent","economy","grain","cohort"];
+      "primary_model","province","city","continent","economy","grain","cohort","verified_origin_year","origin_period","activity_periods","organization_tags","organization_participant_tags"];
     const value = (c,key) => {
       if (key==="source_urls") return c.evidence.map(ref=>sourceMap.get(ref.source_id)?.url||"").filter(Boolean).join(" | ");
       if (key==="reviewed_at") return book.reviewed_at;
+      if(key==='verified_origin_year')return c.timeline?.origin_year??'';
+      if(key==='origin_period')return c.timeline?.origin_period||'';
+      if(key==='activity_periods')return (c.timeline?.activity_periods||[]).join(' | ');
       if (["primary_model","province","city","continent","economy","grain","cohort"].includes(key)) return c.research_annotation?.[key]||"";
       if (["official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis"].includes(key)) return c.project?.[key]??"";
       if (book.taxonomy[key]) return c[key].map(tag=>text(book.taxonomy[key][tag],lang)).join(" | ");
@@ -92,8 +106,10 @@
     };
     return "\uFEFF" + [keys.map(csvCell).join(","), ...cases.map(c=>keys.map(k=>csvCell(value(c,k))).join(","))].join("\r\n");
   }
+  Object.assign(TXT.zh,{sources:'引用来源',review:'数据版本'});
+  Object.assign(TXT.en,{sources:'Cited sources',review:'Data version'});
   let host, book, loadPromise, lang = "zh", visible = 12, selected = new Set(), lastFocus;
-  let filters = {query:"",lens:"",country:"",mode:"",institution:"",sector:"",archetype:"",province:"",continent:"",economy:"",grain:""};
+  let filters = {query:"",lens:"",country:"",mode:"",institution:"",sector:"",archetype:"",province:"",continent:"",economy:"",grain:"",organization:"",organizationScope:"",period:"",timeBasis:"",timeScope:"",focusCountry:""};
   let activeView="cases";
   const t = key => TXT[lang][key];
   const local = value => text(value,lang);
@@ -106,7 +122,7 @@
   const location = c => {const a=c.research_annotation,p=book.analysis?.provinces.find(p=>p.id===a?.province);return p?countries(c)+' · '+local(p.name)+(lang==='zh'&&a.city?' · '+a.city:''):countries(c);};
   const modelTag = c => {const m=book.analysis?.archetypes.find(m=>m.id===c.research_annotation?.primary_model);return m?'<span>'+esc(local(m.label))+'</span>':'';};
   const tags = (c,group) => c[group].map(tag=>'<span>'+esc(label(group,tag))+'</span>').join("");
-  const period = c => c.start_year ? String(c.start_year)+(c.end_year&&c.end_year!==c.start_year?"–"+c.end_year:"") : "";
+  const period = c => {const y=c.timeline?c.timeline.origin_year:c.start_year;return y?String(y)+(c.end_year&&c.end_year!==y?"–"+c.end_year:""):"";};
   const anchor = (href,title) => { const safe=url(href); return safe ? '<a href="'+esc(safe)+'" target="_blank" rel="noopener noreferrer">'+esc(title)+' ↗</a>' : esc(title); };
   function profile(cases) {
     const axes=book.profile_axes||[];
@@ -134,12 +150,12 @@
   }
   function shell() {
     host.innerHTML = '<div class="section-heading"><div><p class="overline">GLOBAL OPEN INNOVATION</p><h2>'+t("title")+'</h2></div>'+
-      '<div class="ic-top-actions"><a class="ic-report" href="reports/open-innovation-policy-20261009.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'研究报告':'Research report')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
+      '<div class="ic-top-actions"><a class="ic-report" href="innovation/" target="_blank" rel="noopener">'+(lang==='zh'?'独立入口':'Standalone library')+'</a><a class="ic-report" href="reports/innovation-policy-brief-20261014.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'政策简报':'Policy brief')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
       '<p class="ic-research-title">'+esc(local(book.research_title))+'</p>'+
       '<div class="ic-summary"><strong>'+book.cases.length+'</strong> '+t("results")+' <span>·</span> <strong>'+book.countries.length+
       '</strong> '+t("countries")+' <span>·</span> <strong>'+book.sources.length+'</strong> '+t("sources")+'</div>'+
-      '<div class="ic-lenses" role="group" aria-label="'+t("title")+'">'+["cases","models","macro"].map(value=>
-        '<button type="button" data-case-view="'+value+'" aria-pressed="'+(value===activeView)+'">'+(lang==='zh'?{cases:'案例检索',models:'国家与区域模式',macro:'宏观对比'}[value]:{cases:'Case explorer',models:'National and regional models',macro:'Macro comparison'}[value])+'</button>').join("")+'</div>'+
+      '<div class="ic-lenses" role="group" aria-label="'+t("title")+'">'+["cases","models","macro",...(book.research?["insights"]:[])].map(value=>
+        '<button type="button" data-case-view="'+value+'" aria-pressed="'+(value===activeView)+'">'+(lang==='zh'?{cases:'案例检索',models:'国家与区域模式',macro:'宏观对比',insights:'洞察'}[value]:{cases:'Case explorer',models:'National and regional models',macro:'Macro comparison',insights:'Insights'}[value])+'</button>').join("")+'</div>'+
       '<div data-analysis-panel="cases">'+
       '<div class="ic-filters"><label class="ic-search">'+t("search")+'<input type="search" data-filter="query" maxlength="120" placeholder="'+t("placeholder")+'" value="'+esc(filters.query)+'"></label>'+
       '<label>'+t("country")+'<select data-filter="country"><option value="">'+t("all")+'</option><option value="_global">'+t("global")+'</option>'+
@@ -149,21 +165,27 @@
       '<label>'+t("sector")+'<select data-filter="sector"><option value="">'+t("all")+'</option>'+Object.entries(book.sector_taxonomy||{}).map(([key,value])=>'<option value="'+key+'">'+esc(local(value))+'</option>').join("")+'</select></label></div>'+
       '<div class="ic-analysis-filters"><label>'+(lang==='zh'?'组织模式':'Organisational model')+'<select data-filter="archetype"><option value="">'+t('all')+'</option>'+(book.analysis?.archetypes||[]).map(m=>'<option value="'+m.id+'">'+esc(local(m.label))+'</option>').join('')+'</select></label><label>'+(lang==='zh'?'中国省份':'Chinese province')+'<select data-filter="province"><option value="">'+t('all')+'</option>'+(book.analysis?.provinces||[]).map(p=>'<option value="'+p.id+'">'+esc(local(p.name))+'</option>').join('')+'</select></label><button type="button" class="ic-reset">'+(lang==='zh'?'清除筛选':'Reset filters')+'</button></div>'+
       '<p class="ic-compare-help">'+(lang==='zh'?'先选同一技术领域，再勾选两至三个案例。对比重点看参与者分工、验证设施和适用条件；只有登记口径一致的项目才绘制合作结构雷达图。':'Filter by technology, then select two or three cases. Compare roles, validation facilities and prerequisites; radar profiles require comparable register data.')+'</p>'+
+      (book.research?'<details class="ir-advanced" open><summary>'+(lang==='zh'?'发展阶段与国际组织':'Stages and international groups')+'</summary><div class="ic-analysis-filters"><label>'+(lang==='zh'?'时间依据':'Date basis')+'<select data-filter="timeBasis"><option value="">'+(lang==='zh'?'起始阶段':'Origin cohort')+'</option><option value="activity">'+(lang==='zh'?'活动阶段':'Dated activity')+'</option></select></label><label>'+(lang==='zh'?'发展阶段':'Stage')+'<select data-filter="period"><option value="">'+t('all')+'</option>'+Object.entries(book.research.period_labels).filter(([key])=>book.cases.some(c=>c.timeline?.origin_period===key||c.timeline?.activity_periods.includes(key))).map(([key,name])=>'<option value="'+key+'">'+esc(local(name))+'</option>').join('')+'</select></label><label>'+(lang==='zh'?'组织成员国关联':'Country-group association')+'<select data-filter="organization"><option value="">'+t('all')+'</option>'+book.research.organizations.map(o=>'<option value="'+o.id+'">'+esc(local(o.name))+'</option>').join('')+'</select></label><label>'+(lang==='zh'?'关联范围':'Association scope')+'<select data-filter="organizationScope"><option value="">'+(lang==='zh'?'任一已记录参与国':'Any documented participant country')+'</option><option value="focus">'+(lang==='zh'?'牵头或主要所在地':'Coordinator or focus country')+'</option></select></label></div></details>':'')+
       '<div class="ic-toolbar"><span class="ic-result" aria-live="polite"></span><div><span class="ic-selected" aria-live="polite"></span>'+
       '<button type="button" class="ic-compare">'+t("compare")+'</button><button type="button" class="ic-clear">'+t("clear")+'</button></div></div>'+
       '<div class="ic-grid"></div><button type="button" class="load-more ic-more">'+t("more")+'</button>'+
-      '</div>'+(root.GruenInnovationAnalysis?.render(book,lang)||'')+
+      '</div>'+(root.GruenInnovationAnalysis?.render(book,lang)||'')+(root.GruenInnovationResearch?.insightsPanel(book,lang)||'')+
       '<details class="ic-method"><summary>'+t("framework")+'</summary><p>'+esc(local(book.analysis?.definition||t('method')))+'</p><p>'+t("method")+'</p><p>'+t("countNote")+'</p></details>'+
       '<dialog class="ic-dialog" aria-label="'+t("detail")+'"><div class="ic-dialog-head"><button type="button" class="ic-close" aria-label="'+t("close")+'">×</button></div><div class="ic-dialog-body"></div></dialog>';
+    if(book.research){const select=host.querySelector('[data-filter="period"]');for(const [key,name] of Object.entries(book.research.period_labels)){if(![...select.options].some(o=>o.value===key)&&book.cases.some(c=>c.timeline?.origin_decade===key||c.timeline?.events?.some(e=>e.decade===key))){select.add(new Option(local(name),key));}}}
     host.querySelectorAll("select[data-filter]").forEach(el=>el.value=filters[el.dataset.filter]);
     const switchView=value=>{activeView=value;host.querySelectorAll('[data-analysis-panel]').forEach(p=>p.hidden=p.dataset.analysisPanel!==value);host.querySelectorAll('[data-case-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.caseView===value)));};
     host.querySelectorAll('[data-case-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.caseView)));
     const resetFilters=()=>{for(const k of Object.keys(filters))filters[k]='';visible=12;host.querySelectorAll('[data-filter]').forEach(el=>el.value='');};
     host.querySelector('.ic-reset').addEventListener('click',()=>{resetFilters();renderCards();});
     root.GruenInnovationAnalysis?.attach(host,book,lang,values=>{resetFilters();Object.assign(filters,values);host.querySelectorAll('[data-filter]').forEach(el=>el.value=filters[el.dataset.filter]);switchView('cases');renderCards();},detail);
+    root.GruenInnovationResearch?.attach(host,book,lang,values=>{resetFilters();Object.assign(filters,values);host.querySelectorAll('[data-filter]').forEach(el=>el.value=filters[el.dataset.filter]);switchView('cases');renderCards();},detail);
     switchView(activeView);
     host.querySelectorAll("[data-filter]").forEach(el=>el.addEventListener(el.tagName==="SELECT"?"change":"input",()=>{
-      filters[el.dataset.filter]=el.value;visible=12;renderCards();
+      filters[el.dataset.filter]=el.value;
+      if(el.dataset.filter==='period')filters.timeScope=el.value.startsWith('cn_fyp_')||el.value==='pre_1981'?'china_plans':el.value.endsWith('s')?'global_decades':'';
+      if(el.dataset.filter==='country')filters.focusCountry='';
+      visible=12;renderCards();
     }));
     host.querySelector(".ic-more").addEventListener("click",()=>{visible+=12;renderCards();});
     host.querySelector(".ic-clear").addEventListener("click",()=>{selected.clear();renderCards();});
@@ -225,6 +247,7 @@
     show('<p class="overline">'+esc(location(c))+(period(c)?" · "+esc(period(c)):"")+'</p><h2>'+esc(local(c.title))+'</h2>'+
       '<div class="ic-tags">'+modelTag(c)+tags(c,"modes")+tags(c,"institutions")+'</div>'+
       '<p class="ic-detail-summary">'+esc(local(c.summary))+'</p>'+projectFacts(c)+
+      (c.timeline?.events?.length?'<section class="ir-timeline"><h3>'+(lang==='zh'?'历史节点':'Documented milestones')+'</h3><ol>'+c.timeline.events.map(e=>'<li><time>'+esc(e.date)+'</time><p>'+esc(local(e.description))+'</p>'+e.source_ids.map(id=>{const s=book.sources.find(s=>s.id===id);return s?anchor(s.url,lang==='zh'?'来源':'Source'):'';}).join(' ')+'</li>').join('')+'</ol></section>':'')+
       '<h3 class="ic-group-title">'+t("facts")+'</h3>'+
       ["actors","mechanism","observed"].map(key=>'<section><h4>'+t(key)+'</h4><p>'+esc(local(c[key]))+'</p></section>').join("")+
       partnerList(c)+(c.objective_excerpt?'<details class="ic-original"><summary>'+t("original")+'</summary><p lang="en">'+esc(c.objective_excerpt.en)+'</p></details>':"")+profile([c])+
@@ -275,6 +298,6 @@
     catch{loadPromise=null;host.innerHTML='<p role="alert">'+t("failed")+' <button class="ic-retry" type="button">'+t("retry")+'</button></p>';
       host.querySelector(".ic-retry").addEventListener("click",()=>mount(host,options));}
   }
-  root.GruenInnovationCases={mount,filterCases,exportCsv,csvCell,radarSvg};
+  root.GruenInnovationCases={mount,filterCases,exportCsv,csvCell,radarSvg,getSnapshot:()=>book};
   if(typeof module==="object"&&module.exports)module.exports=root.GruenInnovationCases;
 })(typeof window==="undefined"?globalThis:window);
