@@ -17,7 +17,7 @@ def table(name,rows,fields=None):
         for row in rows:writer.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in row.items()})
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--refresh',action='store_true',help='Replace a preparation snapshot explicitly; use a new release directory after publication.');args=ap.parse_args()
-    source_hash=hashlib.sha256((ROOT/'static/data/innovation_cases.json').read_bytes()).hexdigest()
+    source_hash=hashlib.sha256((ROOT/'static/data/innovation_cases.json').read_bytes().replace(b'\r\n',b'\n')).hexdigest()
     old_manifest=OUT/'manifest.json'
     if old_manifest.exists() and json.loads(old_manifest.read_text(encoding='utf-8'))['source_sha256']!=source_hash and not args.refresh:
         raise SystemExit('Frozen snapshot differs: use --refresh only during preparation; published releases require a new version and output directory.')
@@ -51,6 +51,8 @@ def main():
     write_json(OUT/'quality_audit.json',summary)
     manifest={'release':r['version'],'generated_from':'static/data/innovation_cases.json','source_sha256':hashlib.sha256((ROOT/'static/data/innovation_cases.json').read_bytes()).hexdigest(),'encoding':'UTF-8; CSV UTF-8 with BOM','missing_values':'empty CSV values or JSON null denote unknown or not coded, never zero','licensing':'Compilation and third-party source rights require separate review before repository deposit. Source webpages are not redistributed as full text.','semantic_validation':'No independent inter-rater reliability or semantic accuracy estimate is claimed.','files':[]}
     dictionary=OUT/'data_dictionary.csv'
+    manifest['source_sha256']=source_hash
+    manifest['source_hash_normalization']='CRLF converted to LF; no other JSON transformation'
     if dictionary.exists():(OUT/'data/data_dictionary.csv').write_bytes(dictionary.read_bytes())
     if dictionary.exists():
         definitions={}
@@ -65,7 +67,8 @@ def main():
             if missing:raise ValueError('Undocumented fields '+path.stem+':'+str(missing))
             schema[path.name]={'columns':{f:{k:v for k,v in definitions[(path.stem,f)].items() if k not in ('table','field')} for f in fields}}
         write_json(OUT/'data/schema.json',schema)
-    manifest['code_files']=[{'path':name,'sha256':hashlib.sha256((ROOT/name).read_bytes()).hexdigest()} for name in ['src/climate_agent/innovation_cases.py','src/climate_agent/innovation_research.py','src/climate_agent/innovation_analysis.py','scripts/build_innovation_chronology.py','scripts/build_innovation_history_cases.py','scripts/build_innovation_research_release.py','scripts/build_innovation_figures.py']]
+    manifest['code_hash_normalization']='CRLF converted to LF; no other source transformation'
+    manifest['code_files']=[{'path':name,'sha256':hashlib.sha256((ROOT/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()} for name in ['src/climate_agent/innovation_cases.py','src/climate_agent/innovation_research.py','src/climate_agent/innovation_analysis.py','scripts/build_innovation_chronology.py','scripts/build_innovation_history_cases.py','scripts/build_innovation_research_release.py','scripts/build_innovation_figures.py']]
     manifest['quality_audit_sha256']=hashlib.sha256((OUT/'quality_audit.json').read_bytes()).hexdigest()
     for path in sorted((OUT/'data').iterdir()):manifest['files'].append({'path':'data/'+path.name,'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
     write_json(OUT/'manifest.json',manifest)
