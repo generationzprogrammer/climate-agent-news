@@ -1,0 +1,322 @@
+[
+  {
+    "index": 1,
+    "name": "Molwt",
+    "definition": "Molecular weight (g/mol; RDKit MolWt)"
+  },
+  {
+    "index": 2,
+    "name": "#Heavy",
+    "definition": "Heavy-atom count"
+  },
+  {
+    "index": 3,
+    "name": "#C",
+    "definition": "Carbon-atom count"
+  },
+  {
+    "index": 4,
+    "name": "#O",
+    "definition": "Oxygen-atom count"
+  },
+  {
+    "index": 5,
+    "name": "#O/#C",
+    "definition": "Oxygen/carbon count ratio; denominator is #C + 0.001"
+  },
+  {
+    "index": 6,
+    "name": "#Het",
+    "definition": "Heteroatom count"
+  },
+  {
+    "index": 7,
+    "name": "#Het/#C",
+    "definition": "Heteroatom/carbon ratio; denominator is #C + 0.001"
+  },
+  {
+    "index": 8,
+    "name": "#R=R",
+    "definition": "Double-bond symbols in canonical SMILES"
+  },
+  {
+    "index": 9,
+    "name": "#R#R",
+    "definition": "Triple-bond symbols in canonical SMILES"
+  },
+  {
+    "index": 10,
+    "name": "#Donor",
+    "definition": "Hydrogen-bond donor count"
+  },
+  {
+    "index": 11,
+    "name": "#Accept",
+    "definition": "Hydrogen-bond acceptor count"
+  },
+  {
+    "index": 12,
+    "name": "#Rot",
+    "definition": "Rotatable-bond count"
+  },
+  {
+    "index": 13,
+    "name": "#Ring",
+    "definition": "Ring count"
+  },
+  {
+    "index": 14,
+    "name": "#Nring",
+    "definition": "Largest ring size (number of atoms)"
+  },
+  {
+    "index": 15,
+    "name": "#AlCR",
+    "definition": "Aliphatic carbocycle count"
+  },
+  {
+    "index": 16,
+    "name": "#AlHR",
+    "definition": "Aliphatic heterocycle count"
+  },
+  {
+    "index": 17,
+    "name": "#AlR",
+    "definition": "Aliphatic ring count"
+  },
+  {
+    "index": 18,
+    "name": "#ArCR",
+    "definition": "Aromatic carbocycle count"
+  },
+  {
+    "index": 19,
+    "name": "#ArHR",
+    "definition": "Aromatic heterocycle count"
+  },
+  {
+    "index": 20,
+    "name": "#ArR",
+    "definition": "Aromatic ring count"
+  },
+  {
+    "index": 21,
+    "name": "#SCR",
+    "definition": "Saturated carbocycle count"
+  },
+  {
+    "index": 22,
+    "name": "#SHR",
+    "definition": "Saturated heterocycle count"
+  },
+  {
+    "index": 23,
+    "name": "#SR",
+    "definition": "Saturated ring count"
+  },
+  {
+    "index": 24,
+    "name": "#Bran",
+    "definition": "Branch-point count: heavy atoms with more than two heavy-atom neighbors"
+  },
+  {
+    "index": 25,
+    "name": "#OH",
+    "definition": "Total aliphatic + aromatic hydroxyl count"
+  },
+  {
+    "index": 26,
+    "name": "#AlOH",
+    "definition": "Aliphatic hydroxyl count"
+  },
+  {
+    "index": 27,
+    "name": "#ArOH",
+    "definition": "Aromatic hydroxyl count"
+  },
+  {
+    "index": 28,
+    "name": "#COO",
+    "definition": "Carboxylic-acid fragment count (RDKit fr_COO)"
+  },
+  {
+    "index": 29,
+    "name": "#AlCOO",
+    "definition": "Aliphatic carboxylic-acid count"
+  },
+  {
+    "index": 30,
+    "name": "#ArCOO",
+    "definition": "Aromatic carboxylic-acid count"
+  },
+  {
+    "index": 31,
+    "name": "#C=O",
+    "definition": "Carbonyl fragment count"
+  },
+  {
+    "index": 32,
+    "name": "#C=O\\COO",
+    "definition": "Carbonyls excluding carboxylic acids"
+  },
+  {
+    "index": 33,
+    "name": "#Ether",
+    "definition": "Ether fragment count"
+  },
+  {
+    "index": 34,
+    "name": "#Ester",
+    "definition": "Ester fragment count"
+  },
+  {
+    "index": 35,
+    "name": "#Halogen",
+    "definition": "Halogen fragment count"
+  },
+  {
+    "index": 36,
+    "name": "#Benzene",
+    "definition": "Benzene fragment count"
+  },
+  {
+    "index": 37,
+    "name": "#Ar-N",
+    "definition": "Aromatic N atoms (fr_Ar_N)"
+  },
+  {
+    "index": 38,
+    "name": "#ArN",
+    "definition": "Aromatic amine fragments (fr_ArN)"
+  },
+  {
+    "index": 39,
+    "name": "#ArNH",
+    "definition": "Aromatic NH fragments"
+  },
+  {
+    "index": 40,
+    "name": "#Imine",
+    "definition": "Imine fragments"
+  },
+  {
+    "index": 41,
+    "name": "#NH2",
+    "definition": "NH2 fragments"
+  },
+  {
+    "index": 42,
+    "name": "#NH1",
+    "definition": "NH fragments"
+  },
+  {
+    "index": 43,
+    "name": "#NH0",
+    "definition": "Nitrogens with no hydrogen (fr_NH0)"
+  },
+  {
+    "index": 44,
+    "name": "#SH",
+    "definition": "Thiol fragments"
+  },
+  {
+    "index": 45,
+    "name": "#Aldehyde",
+    "definition": "Aldehyde fragments"
+  },
+  {
+    "index": 46,
+    "name": "#Amide",
+    "definition": "Amide fragments"
+  },
+  {
+    "index": 47,
+    "name": "#Aniline",
+    "definition": "Aniline fragments"
+  },
+  {
+    "index": 48,
+    "name": "#Phenol",
+    "definition": "Phenol fragments"
+  },
+  {
+    "index": 49,
+    "name": "#Epoxide",
+    "definition": "Epoxide fragments"
+  },
+  {
+    "index": 50,
+    "name": "#Furan",
+    "definition": "Furan fragments"
+  },
+  {
+    "index": 51,
+    "name": "#Piperdine",
+    "definition": "Piperidine fragments (RDKit fr_piperdine)"
+  },
+  {
+    "index": 52,
+    "name": "#Pyridine",
+    "definition": "Pyridine fragments"
+  },
+  {
+    "index": 53,
+    "name": "#Lactone",
+    "definition": "Lactone fragments"
+  },
+  {
+    "index": 54,
+    "name": "#Ketone",
+    "definition": "Ketone fragments"
+  },
+  {
+    "index": 55,
+    "name": "#Nitrile",
+    "definition": "Nitrile fragments"
+  },
+  {
+    "index": 56,
+    "name": "#Sulfone",
+    "definition": "Sulfone fragments"
+  },
+  {
+    "index": 57,
+    "name": "AvgX",
+    "definition": "Composition-weighted atomic electronegativity; supported-element lookup in chemistry.py"
+  },
+  {
+    "index": 58,
+    "name": "AvgI",
+    "definition": "Composition-weighted atomic ionization energy (eV); supported-element lookup"
+  },
+  {
+    "index": 59,
+    "name": "AvgA",
+    "definition": "Composition-weighted atomic electron affinity (eV); supported-element lookup"
+  },
+  {
+    "index": 60,
+    "name": "MaxAPC",
+    "definition": "Maximum absolute Gasteiger partial charge"
+  },
+  {
+    "index": 61,
+    "name": "MinAPC",
+    "definition": "Minimum absolute Gasteiger partial charge"
+  },
+  {
+    "index": 62,
+    "name": "MaxPC",
+    "definition": "Maximum signed Gasteiger partial charge"
+  },
+  {
+    "index": 63,
+    "name": "MinPC",
+    "definition": "Minimum signed Gasteiger partial charge"
+  },
+  {
+    "index": 64,
+    "name": "ValE",
+    "definition": "Valence-electron count"
+  }
+]
