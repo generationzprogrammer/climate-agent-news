@@ -193,7 +193,7 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book["sources"].extend(extra["sources"])
         book.setdefault("sector_taxonomy", {}).update(extra.get("sector_taxonomy", {}))
     coverage_profiles = []
-    for layer in ("open_innovation_coverage.json", "open_innovation_expansion.json", "open_innovation_additions.json", "open_innovation_historical_cases.json", "open_innovation_peer_review.json"):
+    for layer in ("open_innovation_coverage.json", "open_innovation_expansion.json", "open_innovation_additions.json", "open_innovation_historical_cases.json", "open_innovation_peer_review.json", "open_innovation_registries.json"):
         layer_path = root / "config" / layer
         if not layer_path.exists():
             continue
@@ -208,6 +208,9 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
     if model_path.exists():
         model_config = json.loads(model_path.read_text(encoding="utf-8"))
         model_config["profiles"].extend(coverage_profiles)
+        registry_models=root/"config/innovation_registry_models.json"
+        if registry_models.exists():
+            model_config["profiles"].extend(json.loads(registry_models.read_text(encoding="utf-8"))["profiles"])
         book["sources"].extend(model_config.get("sources", []))
         annotate_cases(book["cases"], model_config)
         book["analysis"] = build_analysis(book["cases"], model_config)

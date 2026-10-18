@@ -1,0 +1,163 @@
+{
+  "release": "2026.10.18",
+  "generated_from": "static/data/innovation_cases.json",
+  "source_sha256": "9a106762548bcf90ed22f330daa145481027c47ea7a49a8dd64e792e03f9f9be",
+  "encoding": "UTF-8; CSV UTF-8 with BOM",
+  "missing_values": "empty CSV values or JSON null denote unknown or not coded, never zero",
+  "licensing": "Compilation and third-party source rights require separate review before repository deposit. Source webpages are not redistributed as full text.",
+  "semantic_validation": "No independent inter-rater reliability or semantic accuracy estimate is claimed.",
+  "files": [
+    {
+      "path": "data/case_countries.csv",
+      "bytes": 105484,
+      "sha256": "11d71e7951fd32546f767cdbc0d2aa7154f3a06cc267f8f218e57ff894911a5e"
+    },
+    {
+      "path": "data/case_factors.csv",
+      "bytes": 148583,
+      "sha256": "4d5795db37f335f3ec2f85a26e939a1ff7bd5f2419331a99293f84e4186325f8"
+    },
+    {
+      "path": "data/case_sources.csv",
+      "bytes": 737114,
+      "sha256": "74df34ac44ae702975d36bd57f7f6c43bdb6bc7de5b2ccb97fc0303999259fb1"
+    },
+    {
+      "path": "data/cases.csv",
+      "bytes": 2252917,
+      "sha256": "46d5f348880f809ab3eb9bece35eb0fdb248651ef79cbe6c64486485adcb589a"
+    },
+    {
+      "path": "data/cases_nested.json",
+      "bytes": 10852551,
+      "sha256": "6af5166c5933a1b4a9325584b49ed87de447bc2c5b9eee8355d3f1f35714d934"
+    },
+    {
+      "path": "data/chronology.csv",
+      "bytes": 50005,
+      "sha256": "9f6db97de91856372d368e38cb7086ef9468a32dd991df2aa36fe76b207e3bb7"
+    },
+    {
+      "path": "data/country_group_associations.csv",
+      "bytes": 339111,
+      "sha256": "577550f79000a64ff8106dfc4012b85359b2ca4217e64fdab95258de018dfdf2"
+    },
+    {
+      "path": "data/data_dictionary.csv",
+      "bytes": 12694,
+      "sha256": "4399703b924b397abf0659ea2227adbf6e60e9f2ba6dfc02be9a1f1b38ed4957"
+    },
+    {
+      "path": "data/factor_pairs.csv",
+      "bytes": 72011,
+      "sha256": "132004547ca6d40bfcf21f7447694497db669dc95ae8fa81c2f48710ae956411"
+    },
+    {
+      "path": "data/innovation_registry_history.json",
+      "bytes": 19168,
+      "sha256": "9d9f53eaddf6a57e8126a28fe01867d7ec5e38de836da33456ae812a33b0e478"
+    },
+    {
+      "path": "data/innovation_registry_update.json",
+      "bytes": 141996,
+      "sha256": "7827d2af32576d2d930f2ef57de362389d4d7243489ebfac82fb03a1ddc85d31"
+    },
+    {
+      "path": "data/participants.csv",
+      "bytes": 512401,
+      "sha256": "e65269b9ebd6542d22fd9933b52b55424e0aa81de6ab769020b5a0bf050256cd"
+    },
+    {
+      "path": "data/registry_records.csv",
+      "bytes": 290300,
+      "sha256": "1fc8c9b990191effa6b46b3154fc8994807f45529dccdead599f426196309605"
+    },
+    {
+      "path": "data/review_diagnostics.json",
+      "bytes": 161876,
+      "sha256": "015864c7caf452ebd916f6ef0ed29c143b59613c0ffcc99c8b9d443e5fa03510"
+    },
+    {
+      "path": "data/review_evidence.json",
+      "bytes": 13357,
+      "sha256": "9fdfb5db0a5bae1d0018166cc95d2cd2bdefe741eb149215a1387eeb56aca867"
+    },
+    {
+      "path": "data/schema.json",
+      "bytes": 28402,
+      "sha256": "46bdcc9f18cdd218baea4772ee0248946ee277c479d302c7c5dee645949bb020"
+    },
+    {
+      "path": "data/sources.csv",
+      "bytes": 358936,
+      "sha256": "0328ab13bea9f61c9b8011a94b9c71cbee689c98dee0b03ee76054aa795e9962"
+    },
+    {
+      "path": "data/taxonomy.json",
+      "bytes": 201349,
+      "sha256": "efbf86b182df15b203c217d3b6ff626e7b9cf724c07b5e95811d3b0d58a575b3"
+    },
+    {
+      "path": "data/temporal_counts.csv",
+      "bytes": 66034,
+      "sha256": "a872294d794d0d863fa991eee332c458fc23b9c06f3f5f433a4a308d54b3e6a9"
+    }
+  ],
+  "source_hash_normalization": "CRLF converted to LF; no other JSON transformation",
+  "code_hash_normalization": "CRLF converted to LF; no other source transformation",
+  "code_files": [
+    {
+      "path": "src/climate_agent/innovation_cases.py",
+      "sha256": "d50aa9af492f683f5daad21be552d36cba2cddd0733730563de5fa070bd1e7d3"
+    },
+    {
+      "path": "src/climate_agent/innovation_research.py",
+      "sha256": "3c39897f7b793df0f80a0101e51f43312e7a99885e66a93c38d7af0cadcd1dca"
+    },
+    {
+      "path": "src/climate_agent/innovation_analysis.py",
+      "sha256": "3c2660a5771a43bea605bca3924259f7b578ad95a4a07b67192faced62e30595"
+    },
+    {
+      "path": "src/climate_agent/innovation_review.py",
+      "sha256": "2e01b9819b6dfab3d2bce6e8a19aee287f975efdce82604fc66db940295f4b76"
+    },
+    {
+      "path": "scripts/build_innovation_chronology.py",
+      "sha256": "2707ef2ea63c83a3018940bc2321df5420cdf04b336730f1305a32fcb78e0b0f"
+    },
+    {
+      "path": "scripts/build_innovation_history_cases.py",
+      "sha256": "c7f9419a28d861dd6c8881195e3e769047cb6b6b76aa754b76d80976873ac665"
+    },
+    {
+      "path": "scripts/build_innovation_peer_review.py",
+      "sha256": "e1786e4bf29dabb8ca9c1d78d8897a767d867eaeeb44b29aab637ba369c186d2"
+    },
+    {
+      "path": "scripts/build_innovation_research_release.py",
+      "sha256": "03f385cede2f6c5e93ba48b9a5bdc34b77586259d36725a09ecc17ebc27df856"
+    },
+    {
+      "path": "scripts/build_innovation_figures.py",
+      "sha256": "9669c953bd8ccaff999fcb057739ac6ed05742266524dffd746a97fcab9be622"
+    },
+    {
+      "path": "scripts/collect_innovation_registries.py",
+      "sha256": "aba94bcb8cf640d466e4170ddfe99e3ea07247d0f4de60f7dfe7a1d8afa6320b"
+    },
+    {
+      "path": "scripts/extract_innovation_registry_candidates.py",
+      "sha256": "5b34fe6d2adc5af939de5eb84ba642cdc1d5c60e1e23e2ce23ef0650102c2661"
+    },
+    {
+      "path": "scripts/update_innovation_registries.py",
+      "sha256": "2afea04ed283c705f3f664cea7d0f44cc13c9ff40fe99fb1df08e5f5b7b65940"
+    },
+    {
+      "path": "scripts/build_innovation_live_figures.py",
+      "sha256": "4e2e560d7945039700971ad7d714d0dacabdcd8b793b4e773f3d8db64beae620"
+    }
+  ],
+  "quality_audit_sha256": "17b378096f3eb160b0edb0ee7c191de0b1915adb18bd6d332802d1c85046af9c"
+}

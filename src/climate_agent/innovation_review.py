@@ -63,7 +63,11 @@ def diagnostic_tables(book):
         for c in cases if c.get('project') and c['project'].get('official_id'))
     near=[]
     for first,second in combinations(platforms,2):
-        a,b=normalized_title(first['title']['en']),normalized_title(second['title']['en'])
+        if first['research_annotation'].get('country')!=second['research_annotation'].get('country'):continue
+        # Programme suffixes are not entity identity; compare the original unit names.
+        a=normalized_title(first.get('registry_record',{}).get('name') or first['title']['en'])
+        b=normalized_title(second.get('registry_record',{}).get('name') or second['title']['en'])
+        if abs(len(a)-len(b))>max(len(a),len(b))*.25:continue
         if a and b and SequenceMatcher(None,a,b).ratio()>=.88:
             near.append({'first':first['id'],'second':second['id'],'status':'candidate_not_automatically_merged'})
     history=book['research']['chronology']

@@ -35,14 +35,14 @@ def main():
         row={'case_id':c['id'],'grain':a['grain'],'source_cohort':a['cohort'],'primary_model':a['primary_model'],'focus_country':a.get('country'),'continent':a['continent'],'economy':a['economy'],'province':a.get('province'),'city':a.get('city'),'origin_year':t['origin_year'],'origin_basis':t['origin_basis'],'origin_period':t['origin_period'],'origin_decade':t['origin_decade'],'legacy_start_year':t['legacy_start_year'],'end_year':c.get('end_year'),'review_status':c['review_status']}
         for field in fields:
             for language in ('zh','en'):row[field+'_'+language]=c.get(field,{}).get(language)
-        row['observation_basis']='registered_project_objectives' if c.get('project') else 'official_institutional_account'
-        row['primary_model_basis']='programme_rule' if c.get('project') else 'editorial_mechanism_code'
+        row['observation_basis']='registered_project_objectives' if c.get('project') else ('official_registry_unit' if c.get('registry_record') else 'official_institutional_account')
+        row['primary_model_basis']='programme_rule' if c.get('project') or c.get('registry_record') else 'editorial_mechanism_code'
         case_rows.append(row)
         for ref in c['evidence']:
             assert ref['source_id'] in sourceids
             for field in ref.get('supports',[]):evidence.append({'case_id':c['id'],'source_id':ref['source_id'],'supported_field':field,'support_type':'editorial_field_link_not_independent_entailment_test'})
         for code in c['countries']:countries.append({'case_id':c['id'],'country_alpha2':code,'is_focus_country':code==a.get('country')})
-        for factor in c['factors']:factors.append({'case_id':c['id'],'factor':factor,'coding_type':'registry_rule' if c.get('project') else 'editorial_structural_code'})
+        for factor in c['factors']:factors.append({'case_id':c['id'],'factor':factor,'coding_type':'registry_rule' if c.get('project') or c.get('registry_record') else 'editorial_structural_code'})
         for item in c.get('participants',[]):participants.append({'case_id':c['id'],**item})
         for org in c['organization_participant_tags']:memberships.append({'case_id':c['id'],'group_id':org,'scope':'documented_participant_country','as_of':'2026-10-14'})
         for org in c['organization_tags']:memberships.append({'case_id':c['id'],'group_id':org,'scope':'focus_country','as_of':'2026-10-14'})
@@ -50,6 +50,11 @@ def main():
     table('chronology.csv',r['chronology']);table('country_group_associations.csv',memberships);table('temporal_counts.csv',r['temporal']);table('factor_pairs.csv',r['factor_pairs'])
     write_json(OUT/'data/taxonomy.json',{'taxonomy':b['taxonomy'],'sector_taxonomy':b['sector_taxonomy'],'archetypes':b['analysis']['archetypes'],'period_labels':r['period_labels'],'organizations':r['organizations'],'participant_types':b['participant_types'],'profile_axes':b['profile_axes']})
     write_json(OUT/'data/cases_nested.json',b)
+    registry_rows=[{'case_id':c['id'],'registry':c['registry_record']['registry'],'source_record_key':c['registry_record']['key'],'original_name':c['registry_record']['name'],'record_json':c['registry_record']} for c in cases if c.get('registry_record')]
+    if registry_rows:table('registry_records.csv',registry_rows)
+    for name in ['innovation_registry_update.json','innovation_registry_history.json']:
+        file=ROOT/'data'/name
+        if file.exists():write_json(OUT/'data'/name,json.loads(file.read_text(encoding='utf-8')))
     if r.get('review_diagnostics'):
         write_json(OUT/'data/review_diagnostics.json',r['review_diagnostics'])
         review_path=ROOT/'config/innovation_peer_evidence.json'
@@ -79,7 +84,7 @@ def main():
             schema[path.name]={'columns':{f:{k:v for k,v in definitions[(path.stem,f)].items() if k not in ('table','field')} for f in fields}}
         write_json(OUT/'data/schema.json',schema)
     manifest['code_hash_normalization']='CRLF converted to LF; no other source transformation'
-    manifest['code_files']=[{'path':name,'sha256':hashlib.sha256((ROOT/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()} for name in ['src/climate_agent/innovation_cases.py','src/climate_agent/innovation_research.py','src/climate_agent/innovation_analysis.py','src/climate_agent/innovation_review.py','scripts/build_innovation_chronology.py','scripts/build_innovation_history_cases.py','scripts/build_innovation_peer_review.py','scripts/build_innovation_research_release.py','scripts/build_innovation_figures.py']]
+    manifest['code_files']=[{'path':name,'sha256':hashlib.sha256((ROOT/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()} for name in ['src/climate_agent/innovation_cases.py','src/climate_agent/innovation_research.py','src/climate_agent/innovation_analysis.py','src/climate_agent/innovation_review.py','scripts/build_innovation_chronology.py','scripts/build_innovation_history_cases.py','scripts/build_innovation_peer_review.py','scripts/build_innovation_research_release.py','scripts/build_innovation_figures.py','scripts/collect_innovation_registries.py','scripts/extract_innovation_registry_candidates.py','scripts/update_innovation_registries.py','scripts/build_innovation_live_figures.py']]
     manifest['quality_audit_sha256']=hashlib.sha256((OUT/'quality_audit.json').read_bytes()).hexdigest()
     for path in sorted((OUT/'data').iterdir()):manifest['files'].append({'path':'data/'+path.name,'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
     write_json(OUT/'manifest.json',manifest)

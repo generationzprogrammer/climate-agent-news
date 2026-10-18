@@ -2,8 +2,23 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const {filterCases, exportCsv, csvCell, radarSvg} = require("../static/innovation-cases.js");
+const {filterCases, facetCounts,FAMILIES,DOMAINS,exportCsv, csvCell, radarSvg} = require("../static/innovation-cases.js");
 const book = JSON.parse(fs.readFileSync(path.join(__dirname,"../static/data/innovation_cases.json"),"utf8"));
+
+test("broad facets partition the cases without dropping unclassified records",()=>{
+  for(const [field,groups] of [['family',FAMILIES],['domain',DOMAINS]]){
+    const selections=Object.keys(groups).map(k=>filterCases(book,{[field]:k}));
+    assert.equal(selections.reduce((s,x)=>s+x.length,0),book.cases.length);
+    assert(selections.every(x=>x.length>0));
+  }
+});
+test("dependent facets contain only positive compatible counts",()=>{
+  const counts=facetCounts(book,{country:'CN'},'family');
+  for(const [family,n] of Object.entries(counts)){
+    assert(n>0);assert.equal(n,filterCases(book,{country:'CN',family}).length);
+  }
+  assert.deepEqual(facetCounts(book,{query:'no-case-can-have-this-title'},'family'),{});
+});
 
 test("country and mechanism filters intersect",()=>{
   const rows=filterCases(book,{country:"CN",institution:"ip"});

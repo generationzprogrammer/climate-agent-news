@@ -8,11 +8,11 @@ import copy
 
 REGIONS = {
  "europe": ("欧洲", "Europe", "NO NL RO RU RS PL PT ME LT LU LV MT UA SK SI SE CH DK EE DE CZ AT AL BA BE BG IS IT HU IE FR GB ES FI HR GR"),
- "asia": ("亚洲", "Asia", "PK TR SG CN CY JO IN IL JP KR"),
- "africa": ("非洲", "Africa", "MA ZA TN CD KE EG ET GH MU BW RW UG TZ NG NA SN CI"),
+ "asia": ("亚洲", "Asia", "AF AM AZ BH BD BT BN KH CN CY GE HK IN ID IR IQ IL JP JO KZ KP KR KW KG LA LB MO MY MV MN MM NP OM PK PH QA SA SG LK SY TW TJ TH TL TR TM AE UZ VN YE PS"),
+ "africa": ("非洲", "Africa", "DZ AO BJ BW BF BI CV CM CF TD KM CG CD CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW RE YT EH SH IO TF"),
  "north_america": ("北美洲", "North America", "US CA MX GT BZ HN SV NI CR PA CU HT DO JM BS BB TT AG DM GD KN LC VC"),
  "south_america": ("南美洲", "South America", "AR BO BR CL CO EC GY PY PE SR UY VE"),
- "oceania": ("大洋洲", "Oceania", "NZ AU MH WS PG"),
+ "oceania": ("大洋洲", "Oceania", "AU NZ FJ PG SB VU NC PF GU KI MH FM NR MP PW WS AS CK NU TK TO TV WF PN NF"),
 }
 COUNTRY_REGION = {code:key for key,(_,_,codes) in REGIONS.items() for code in codes.split()}
 DEVELOPED_ASIA_OCEANIA = {"IL", "JP", "KR", "AU", "NZ"}
@@ -60,13 +60,15 @@ def annotate_cases(cases, config):
         if country and country not in c["countries"]: raise ValueError("focus_not_in_country_tags:"+c["id"])
         a.update(primary_model=model,country=country,cohort=cohort,
                  continent=COUNTRY_REGION.get(country,"cross_region"),economy=economy_group(country),
-                 grain="project" if p else "platform",basis=a.get("basis","editorial_mechanism_coding"),reviewed_at=config["reviewed_at"])
+                 grain="project" if p else "platform",basis=a.get("basis","editorial_mechanism_coding"),reviewed_at=a.get("reviewed_at",config["reviewed_at"]))
     return cases
 
 def build_analysis(cases, config):
     models=copy.deepcopy(config)
     byid={c["id"]:c for c in cases}
     for profile in models["profiles"]:
+        if profile.get("registry_cohorts"):
+            profile["case_ids"]=[c['id'] for c in cases if c['research_annotation']['cohort'] in profile['registry_cohorts']]
         # A cohort representative is a deterministic real project, never a guessed ID.
         if profile.get("cohort"):
             valid=[cid for cid in profile["case_ids"] if cid in byid]

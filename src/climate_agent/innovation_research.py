@@ -179,6 +179,14 @@ def build_research(book, root, *, as_of):
     as_of = max(as_of, date.fromisoformat(config['reviewed_at']))
     history_path = root / 'config/innovation_chronology.json'
     history = json.loads(history_path.read_text(encoding='utf-8')) if history_path.exists() else {'events':[],'sources':[]}
+    # A designation is a dated activity, not the founding of its host university.
+    for case in book['cases']:
+        record=case.get('registry_record',{})
+        if record.get('designation_year'):
+            history['events'].append({'id':case['id']+'_designation','case_id':case['id'],
+                'date':str(record['designation_year']),'date_precision':'year','kind':'documented_activity',
+                'description':{'zh':'教育部科技成果转化和技术转移基地认定','en':'Ministry of Education technology-transfer base designation'},
+                'source_ids':[case['evidence'][0]['source_id']],'review_status':'reviewed','origin_basis':False})
     existing = {s['id']:s for s in book['sources']}
     urls = {s['url']:s['id'] for s in book['sources']}
     for source in history.get('sources',[]):
@@ -223,7 +231,9 @@ def build_research(book, root, *, as_of):
         'en':'Origin cohorts describe establishment dates in this catalogue; activity cohorts require dated evidence. Neither is a historical census. Group filters use contemporary country membership verified in October 2026, overlap, and do not imply sponsorship. Factor co-occurrence is descriptive.'}}
     watch_path=root/'data/innovation_watch.json'
     watch=json.loads(watch_path.read_text(encoding='utf-8')) if watch_path.exists() else {}
-    book['research']['update_policy']={'cadence':'weekly_source_watch_daily_chart_rebuild','last_watch':watch.get('updated_at'),'pending_candidates':len(watch.get('candidates',[])),'persistent_news_observations':len(watch.get('observations',[])),'promotion':'editorial_review_required','model_api_calls':0}
+    update_path=root/'data/innovation_registry_update.json'
+    update=json.loads(update_path.read_text(encoding='utf-8')) if update_path.exists() else {}
+    book['research']['update_policy']={'cadence':'weekly_verified_registry_admission_and_chart_rebuild','last_watch':watch.get('updated_at'),'last_registry_check':update.get('checked_at'),'last_added':update.get('added',0),'pending_candidates':len(watch.get('candidates',[])),'persistent_news_observations':len(watch.get('observations',[])),'promotion':'bounded_structured_registry_rules; free_text_candidates_require_editorial_review','model_api_calls':0}
     from .innovation_review import diagnostic_tables
     book['research']['review_diagnostics'] = diagnostic_tables(book)
     book['reviewed_at'] = max(book['reviewed_at'],config['reviewed_at'],history.get('reviewed_at',''))

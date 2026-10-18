@@ -1,0 +1,233 @@
+{
+  "version": "2026.10.18",
+  "as_of": "2026-10-18",
+  "cases": 1189,
+  "sources": 825,
+  "country_tags": 87,
+  "focus_countries": 68,
+  "grains": {
+    "project": 648,
+    "platform": 541
+  },
+  "source_cohorts": [
+    {
+      "cohort": "ARPAE",
+      "count": 190,
+      "dated": 190,
+      "models": {
+        "mission": 190
+      }
+    },
+    {
+      "cohort": "CORDIS",
+      "count": 398,
+      "dated": 398,
+      "models": {
+        "consortium": 398
+      }
+    },
+    {
+      "cohort": "africa_ace",
+      "count": 36,
+      "dated": 0,
+      "models": {
+        "capacity": 36
+      }
+    },
+    {
+      "cohort": "africa_ace2",
+      "count": 10,
+      "dated": 0,
+      "models": {
+        "capacity": 10
+      }
+    },
+    {
+      "cohort": "australia_crcp",
+      "count": 60,
+      "dated": 60,
+      "models": {
+        "consortium": 60
+      }
+    },
+    {
+      "cohort": "china_moe_first_list",
+      "count": 47,
+      "dated": 0,
+      "models": {
+        "intermediary": 47
+      }
+    },
+    {
+      "cohort": "china_moe_second_list",
+      "count": 24,
+      "dated": 0,
+      "models": {
+        "intermediary": 24
+      }
+    },
+    {
+      "cohort": "coverage_review",
+      "count": 43,
+      "dated": 7,
+      "models": {
+        "venture": 3,
+        "consortium": 7,
+        "intermediary": 13,
+        "pilot": 7,
+        "cluster": 4,
+        "mission": 3,
+        "capacity": 6
+      }
+    },
+    {
+      "cohort": "embrapii_export",
+      "count": 95,
+      "dated": 0,
+      "models": {
+        "intermediary": 95
+      }
+    },
+    {
+      "cohort": "expansion_review",
+      "count": 73,
+      "dated": 7,
+      "models": {
+        "pilot": 15,
+        "consortium": 25,
+        "cluster": 4,
+        "intermediary": 17,
+        "mission": 3,
+        "capacity": 7,
+        "venture": 2
+      }
+    },
+    {
+      "cohort": "history_review",
+      "count": 7,
+      "dated": 7,
+      "models": {
+        "venture": 1,
+        "cluster": 3,
+        "intermediary": 3
+      }
+    },
+    {
+      "cohort": "jst_coinext",
+      "count": 37,
+      "dated": 0,
+      "models": {
+        "consortium": 37
+      }
+    },
+    {
+      "cohort": "legacy_review",
+      "count": 26,
+      "dated": 5,
+      "models": {
+        "consortium": 8,
+        "intermediary": 3,
+        "pilot": 2,
+        "capacity": 4,
+        "rules": 4,
+        "mission": 4,
+        "venture": 1
+      }
+    },
+    {
+      "cohort": "nsf_iucrc",
+      "count": 111,
+      "dated": 111,
+      "models": {
+        "consortium": 111
+      }
+    },
+    {
+      "cohort": "peer_review",
+      "count": 8,
+      "dated": 8,
+      "models": {
+        "consortium": 3,
+        "pilot": 2,
+        "intermediary": 3
+      }
+    },
+    {
+      "cohort": "regional_review",
+      "count": 24,
+      "dated": 12,
+      "models": {
+        "pilot": 3,
+        "cluster": 7,
+        "intermediary": 10,
+        "mission": 2,
+        "venture": 2
+      }
+    }
+  ],
+  "dated_cases": 805,
+  "china_cases": 150,
+  "dated_china_cases": 22,
+  "chronology_events": 137,
+  "chronology_cases": 117,
+  "origin_year_range": [
+    1932,
+    2026
+  ],
+  "source_mode_uncertainty_reduction": 0.8105351565428722,
+  "platform_models": {
+    "pilot": 29,
+    "rules": 4,
+    "mission": 12,
+    "consortium": 191,
+    "capacity": 63,
+    "venture": 9,
+    "intermediary": 215,
+    "cluster": 18
+  },
+  "project_models": {
+    "consortium": 458,
+    "mission": 190
+  },
+  "checks": {
+    "case_ids_unique": true,
+    "source_ids_unique": true,
+    "source_urls_unique": true,
+    "case_source_foreign_keys_valid": true,
+    "unknown_dates_retained": 384,
+    "previous_754_case_facts": "verified by test_original_facts_preserved",
+    "independent_semantic_validation": "not_performed",
+    "temporal_review": "AI-assisted editorial reading of official statements; no independent human rater"
+  },
+  "field_completeness": {
+    "title": 1189,
+    "summary": 1189,
+    "actors": 1189,
+    "mechanism": 1189,
+    "observed": 1189,
+    "constraints": 586,
+    "transfer": 586
+  },
+  "interpretive_notes": 586,
+  "review_diagnostics": {
+    "case_count": 1189,
+    "platform_count": 541,
+    "project_count": 648,
+    "single_source_cases": 815,
+    "single_source_fraction": 0.6854499579478553,
+    "case_evidence_source_records": 803,
+    "sources_not_linked_to_case_event_or_profile": [],
+    "source_record_count": 825,
+    "distinct_source_domains": 194,
+    "supported_institutional_origins": 157,
+    "institutional_origin_coverage": 0.2902033271719039,
+    "duplicate_normalized_titles": [],
+    "duplicate_official_project_keys": [],
+    "near_duplicate_candidates": [],
+    "independent_semantic_validation": "not_performed",
+    "review_agent": "AI-assisted editorial review; not an independent human reviewer",
+    "historical_model_coding": "current_case_archetype_not_reconstructed_event_level_mechanism",
+    "resource_absence_semantics": "not_coded_does_not_mean_absent",
+    "outcome_variables": "not_harmonised; no causal or performance inference"
+  }
+}

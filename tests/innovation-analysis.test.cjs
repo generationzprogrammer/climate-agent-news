@@ -18,7 +18,7 @@ test('Chinese and English panels have model and macro controls',()=>{
  for(const lang of ['zh','en']){const h=render(b,lang);assert(h.includes('data-model-compare'));assert(h.includes('data-macro-dimension'));assert(h.includes('CN-GD'));assert(!h.includes('undefined'));}
 });
 test('new geographic models remain discoverable and source-backed',()=>{
- assert.equal(b.analysis.profiles.length,28);assert.equal(b.analysis.provinces.length,31);
+ assert.equal(b.analysis.profiles.length,31);assert.equal(b.analysis.provinces.length,31);
  assert.equal(profileScope(b,b.analysis.profiles.find(p=>p.id==='resource_pilots')),'china');
  assert.equal(profileScope(b,b.analysis.profiles.find(p=>p.id==='australia_crc')),'international');
  for(const lang of ['zh','en']){

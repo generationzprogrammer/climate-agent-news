@@ -26,9 +26,10 @@ def main():
         text=lambda en,zh:zh if lang=='zh' else en
         label=lambda value:value[lang]
         # Figure 1: source selection and record level, plus geography with explicit focus-country counting.
-        fig,axes=plt.subplots(1,2,figsize=(7.2,3.65),gridspec_kw={'width_ratios':[1,1.25]})
+        fig,axes=plt.subplots(1,2,figsize=(7.2,5.0),gridspec_kw={'width_ratios':[1,1.25]})
         cohorts=r['source_strata'];ys=np.arange(len(cohorts));names={'ARPAE':'ARPA-E','CORDIS':'CORDIS','coverage_review':text('Geographic review','区域补充'),'expansion_review':text('Geographic expansion','地域扩充'),'history_review':text('Historical review','历史补充'),'legacy_review':text('Initial institutions','首批机构'),'regional_review':text('Institutional review','机构补充'),'peer_review':text('Reviewer supplement','审阅补充')}
-        axes[0].barh(ys,[row['count'] for row in cohorts],color=['#56879b' if row['cohort'] in ('ARPAE','CORDIS') else '#275679' for row in cohorts]);axes[0].set_yticks(ys,[names[row['cohort']] for row in cohorts]);axes[0].invert_yaxis();axes[0].set_xlabel(text('Cases','案例数'));axes[0].set_xlim(0,460)
+        names.update(nsf_iucrc='NSF IUCRC',embrapii_export='EMBRAPII',australia_crcp='CRC-P',jst_coinext='JST COI-NEXT',africa_ace='ACE Impact',africa_ace2='ACE II',china_moe_first_list=text('China MOE 2019','中国教育部2019'),china_moe_second_list=text('China MOE 2020','中国教育部2020'))
+        axes[0].barh(ys,[row['count'] for row in cohorts],color=['#56879b' if row['cohort'] in ('ARPAE','CORDIS','australia_crcp') else '#275679' for row in cohorts]);axes[0].set_yticks(ys,[names[row['cohort']] for row in cohorts]);axes[0].invert_yaxis();axes[0].set_xlabel(text('Cases','案例数'));axes[0].set_xlim(0,max(x['count'] for x in cohorts)*1.18)
         for i,row in enumerate(cohorts):axes[0].text(row['count']+6,i,str(row['count']),va='center',fontsize=8)
         groups=['asia','europe','north_america','south_america','africa','oceania','cross_region'];pos=np.arange(len(groups));left=np.zeros(len(groups))
         for grain,color in [('platform','#275679'),('project','#86aeb9')]:
@@ -40,7 +41,7 @@ def main():
         fig.tight_layout(w_pad=2);save(fig,'Figure1_coverage_'+lang)
         # Figure 2: source-by-mode composition makes the register-induced coding visible.
         matrix=np.array([[row['models'].get(m['id'],0) for m in models] for row in cohorts]);shares=matrix/matrix.sum(axis=1,keepdims=True)
-        fig,ax=plt.subplots(figsize=(7.2,3.8));im=ax.imshow(shares,cmap='Blues',vmin=0,vmax=1,aspect='auto')
+        fig,ax=plt.subplots(figsize=(7.2,5.4));im=ax.imshow(shares,cmap='Blues',vmin=0,vmax=1,aspect='auto')
         ax.set_xticks(range(len(models)),[(short_zh if lang=='zh' else short_en)[m['id']] for m in models],rotation=30,ha='right');ax.set_yticks(range(len(cohorts)),[names[x['cohort']] for x in cohorts])
         for i in range(len(cohorts)):
             for j in range(len(models)):ax.text(j,i,str(matrix[i,j]),ha='center',va='center',color='white' if shares[i,j]>.5 else '#1b2730',fontsize=8)

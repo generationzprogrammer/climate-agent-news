@@ -32,7 +32,7 @@
   Object.assign(TXT.zh,{grant:"登记资助",euGrant:"欧盟最高资助额",usGrant:"ARPA-E登记资助额",programme:"资助计划",active:"进行中",alumni:"历史项目",noProfile:"缺少同口径的完整登记数据，不绘制合作结构评分。"});
   Object.assign(TXT.en,{grant:"Registered funding",euGrant:"Maximum EU contribution",usGrant:"Listed ARPA-E award",programme:"Funding programme",active:"Active",alumni:"Alumni",noProfile:"No collaboration score is drawn without comparable complete register data."});
   const registeredPeriod = c => c.project?.start_date&&c.project?.end_date?c.project.start_date+' — '+c.project.end_date:period(c)||t("missing");
-  const registeredGrant = c => !c.project?t("missing"):c.project.source_type==='ARPAE'?
+  const registeredGrant = c => !c.project?t("missing"):c.project.source_type==='AU_CRCP'?number(c.project.registered_grant_aud)+' AUD':c.project.source_type==='ARPAE'?
     (typeof c.project.award_usd==='number'?number(c.project.award_usd)+(lang==='zh'?' 美元':' USD'):t("missing")):
     (typeof c.project.eu_grant_eur==='number'?number(c.project.eu_grant_eur/1e6)+(lang==='zh'?' 百万欧元':' EUR million'):t("missing"));
   function radarSvg(cases,axes,language="zh") {
@@ -57,13 +57,29 @@
     const v = String(value ?? "");
     return '"' + (/^[\s]*[=+\-@]/.test(v) ? "'" + v : v).replace(/"/g, '""') + '"';
   }
-  function filterCases(book, filters) {
+  const FAMILIES={research:{zh:'联合研究',en:'Collaborative research',members:['mission','consortium']},transfer:{zh:'技术转移与验证',en:'Transfer and validation',members:['intermediary','pilot']},enterprise:{zh:'创业与产业集群',en:'Ventures and clusters',members:['venture','cluster']},capacity:{zh:'能力建设',en:'Capacity building',members:['capacity']},governance:{zh:'规则协调',en:'Rule coordination',members:['rules']}};
+  const DOMAINS={energy:{zh:'能源与环境',en:'Energy and environment',members:['battery','grid','heat','hydrogen','industry','solar','wind','nuclear','energy_systems','marine','environment']},engineering:{zh:'制造与材料',en:'Manufacturing and materials',members:['materials','manufacturing','mobility','transport']},digital:{zh:'数字技术',en:'Digital technologies',members:['digital']},bio:{zh:'生命科学与农业',en:'Life sciences and agriculture',members:['biomanufacturing','health']},general:{zh:'综合与未细分',en:'General and unclassified',members:['general','applied_innovation']}};
+  const groupOf=(dictionary,value)=>Object.keys(dictionary).find(k=>dictionary[k].members.includes(value))||(dictionary===DOMAINS?'general':'');
+  function facetCounts(book,filters,field){
+    const loose={...filters,[field]:''};if(field==='country')loose.focusCountry='';
+    const counts={};for(const c of filterCases(book,loose)){
+      const values=field==='country'?[...c.countries,...(['global','regional'].includes(c.scope)?['_global']:[])]:
+        field==='mode'?c.modes:field==='institution'?c.institutions:field==='sector'?[c.sector_key]:
+        field==='family'?[groupOf(FAMILIES,c.research_annotation?.primary_model)]:field==='domain'?[groupOf(DOMAINS,c.sector_key)]:
+        field==='archetype'?[c.research_annotation?.primary_model]:field==='organization'?(filters.organizationScope==='focus'?c.organization_tags:c.organization_participant_tags):
+        field==='period'?(filters.timeBasis==='activity'?(c.timeline?.events||[]).flatMap(e=>[e.decade,e.china_plan]):[c.timeline?.origin_period,c.timeline?.origin_decade,c.timeline?.origin_china_plan]):[c.research_annotation?.[field]];
+      for(const v of new Set(values||[]))if(v)counts[v]=(counts[v]||0)+1;
+    }return counts;
+  }
+  function filterCases(book, filters={}) {
     const query = String(filters.query || "").trim().toLowerCase();
     return book.cases.filter(c => {
       for (const key of ["province","continent","economy","grain"]) {
         if(filters[key]&&c.research_annotation?.[key]!==filters[key])return false;
       }
       if(filters.archetype&&c.research_annotation?.primary_model!==filters.archetype)return false;
+      if(filters.family&&groupOf(FAMILIES,c.research_annotation?.primary_model)!==filters.family)return false;
+      if(filters.domain&&groupOf(DOMAINS,c.sector_key)!==filters.domain)return false;
       if (filters.lens && !c.challenges.includes(filters.lens)) return false;
       if (filters.country === "_global" && !["global","regional"].includes(c.scope)) return false;
       if (filters.country && filters.country !== "_global" && !c.countries.includes(filters.country)) return false;
@@ -109,7 +125,7 @@
   Object.assign(TXT.zh,{sources:'引用来源',review:'数据版本'});
   Object.assign(TXT.en,{sources:'Cited sources',review:'Data version'});
   let host, book, loadPromise, lang = "zh", visible = 12, selected = new Set(), lastFocus;
-  let filters = {query:"",lens:"",country:"",mode:"",institution:"",sector:"",archetype:"",province:"",continent:"",economy:"",grain:"",organization:"",organizationScope:"",period:"",timeBasis:"",timeScope:"",focusCountry:""};
+  let filters = {query:"",lens:"",country:"",family:"",domain:"",mode:"",institution:"",sector:"",archetype:"",province:"",continent:"",economy:"",grain:"",organization:"",organizationScope:"",period:"",timeBasis:"",timeScope:"",focusCountry:""};
   let activeView="cases";
   const t = key => TXT[lang][key];
   const local = value => text(value,lang);
@@ -136,6 +152,7 @@
   function projectFacts(c) {
     if(!c.project)return "";
     const p=c.project;
+    if(p.source_type==='AU_CRCP')return '<h3 class="ic-group-title">'+t('budget')+'</h3><dl class="ic-project-facts"><div><dt>'+t('timeline')+'</dt><dd>'+esc(c.registry_record?.period||period(c))+'</dd></div><div><dt>'+t('grant')+'</dt><dd>'+number(p.registered_grant_aud)+' AUD</dd></div><div><dt>'+t('cost')+'</dt><dd>'+number(p.registered_project_value_aud)+' AUD</dd></div></dl>';
     const rows=p.source_type==='ARPAE'?[["identifier",p.official_id],["timeline",registeredPeriod(c)],["programme",p.programme],["usGrant",registeredGrant(c)],
       ["status",p.register_status==='Active'?t("active"):t("alumni")]]:
       [["identifier",p.official_id],["timeline",registeredPeriod(c)],["action",p.action==='IA'?(lang==='zh'?'创新行动（IA）':'Innovation action (IA)'):(lang==='zh'?'研究与创新行动（RIA）':'Research and innovation action (RIA)')],
@@ -150,7 +167,7 @@
   }
   function shell() {
     host.innerHTML = '<div class="section-heading"><div><p class="overline">GLOBAL OPEN INNOVATION</p><h2>'+t("title")+'</h2></div>'+
-      '<div class="ic-top-actions"><a class="ic-report" href="innovation/" target="_blank" rel="noopener">'+(lang==='zh'?'独立入口':'Standalone library')+'</a><a class="ic-report" href="reports/innovation-policy-brief-20261014-r2.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'政策简报':'Policy brief')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
+      '<div class="ic-top-actions"><a class="ic-report" href="innovation/" target="_blank" rel="noopener">'+(lang==='zh'?'独立入口':'Standalone library')+'</a><a class="ic-report" href="reports/innovation-policy-brief-20261018.pdf" target="_blank" rel="noopener">'+(lang==='zh'?'政策简报':'Policy brief')+'</a><button type="button" class="ic-export">'+t("export")+'</button></div></div>'+
       '<p class="ic-research-title">'+esc(local(book.research_title))+'</p>'+
       '<div class="ic-summary"><strong>'+book.cases.length+'</strong> '+t("results")+' <span>·</span> <strong>'+book.countries.length+
       '</strong> '+t("countries")+' <span>·</span> <strong>'+book.sources.length+'</strong> '+t("sources")+'</div>'+
@@ -173,7 +190,18 @@
       '<details class="ic-method"><summary>'+t("framework")+'</summary><p>'+esc(local(book.analysis?.definition||t('method')))+'</p><p>'+t("method")+'</p><p>'+t("countNote")+'</p></details>'+
       '<dialog class="ic-dialog" aria-label="'+t("detail")+'"><div class="ic-dialog-head"><button type="button" class="ic-close" aria-label="'+t("close")+'">×</button></div><div class="ic-dialog-body"></div></dialog>';
     if(book.research){const select=host.querySelector('[data-filter="period"]');for(const [key,name] of Object.entries(book.research.period_labels)){if(![...select.options].some(o=>o.value===key)&&book.cases.some(c=>c.timeline?.origin_decade===key||c.timeline?.events?.some(e=>e.decade===key))){select.add(new Option(local(name),key));}}}
-    host.querySelectorAll("select[data-filter]").forEach(el=>el.value=filters[el.dataset.filter]);
+    // Five broad entry points; detailed research codes remain available on demand.
+    const primary=host.querySelector('.ic-filters'),advanced=document.createElement('details');
+    advanced.className='ir-advanced';advanced.innerHTML='<summary>'+(lang==='zh'?'详细分类':'Detailed classifications')+'</summary><div class="ic-analysis-filters"></div>';
+    primary.after(advanced);const advancedFields=advanced.querySelector('div');
+    for(const field of ['mode','institution','sector'])advancedFields.append(host.querySelector('[data-filter="'+field+'"]').closest('label'));
+    for(const [field,dictionary,title] of [['family',FAMILIES,lang==='zh'?'合作类型':'Collaboration type'],['domain',DOMAINS,t('sector')]]){
+      const label=document.createElement('label');label.innerHTML=esc(title)+'<select data-filter="'+field+'"><option value="">'+t('all')+'</option>'+Object.entries(dictionary).map(([k,v])=>'<option value="'+k+'">'+esc(local(v))+'</option>').join('')+'</select>';primary.append(label);
+    }
+    const grainLabel=document.createElement('label');grainLabel.innerHTML=(lang==='zh'?'记录类型':'Record level')+'<select data-filter="grain"><option value="">'+t('all')+'</option><option value="platform">'+(lang==='zh'?'机构与合作平台':'Institutions and platforms')+'</option><option value="project">'+(lang==='zh'?'资助项目':'Funded projects')+'</option></select>';primary.append(grainLabel);
+    for(const field of ['archetype','province'])advancedFields.append(host.querySelector('[data-filter="'+field+'"]').closest('label'));
+    host.querySelectorAll('details.ir-advanced').forEach(el=>el.open=false);
+    host.querySelectorAll("select[data-filter]").forEach(el=>{el.value=filters[el.dataset.filter];el._allOptions=[...el.options].map(o=>({value:o.value,label:o.textContent}));});
     const switchView=value=>{activeView=value;host.querySelectorAll('[data-analysis-panel]').forEach(p=>p.hidden=p.dataset.analysisPanel!==value);host.querySelectorAll('[data-case-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.caseView===value)));};
     host.querySelectorAll('[data-case-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.caseView)));
     const resetFilters=()=>{for(const k of Object.keys(filters))filters[k]='';visible=12;host.querySelectorAll('[data-filter]').forEach(el=>el.value='');};
@@ -204,6 +232,13 @@
   }
   function renderCards() {
     const cases=filterCases(book,filters);
+    for(const el of host.querySelectorAll('select[data-filter]')){
+      const field=el.dataset.filter;if(['timeBasis','organizationScope'].includes(field))continue;
+      const counts=facetCounts(book,filters,field),chosen=filters[field];
+      el.replaceChildren(...el._allOptions.filter(o=>!o.value||counts[o.value]>0||o.value===chosen).map(o=>{
+        const option=new Option(o.label+(o.value?' ('+(counts[o.value]||0)+')':''),o.value);option.disabled=!!o.value&&!counts[o.value]&&o.value!==chosen;return option;
+      }));el.value=chosen;
+    }
     host.querySelector(".ic-result").textContent=cases.length+" "+t("results");
     host.querySelector(".ic-selected").textContent=t("selected")+" "+selected.size+"/3";
     host.querySelector(".ic-compare").disabled=selected.size<2;
@@ -298,6 +333,6 @@
     catch{loadPromise=null;host.innerHTML='<p role="alert">'+t("failed")+' <button class="ic-retry" type="button">'+t("retry")+'</button></p>';
       host.querySelector(".ic-retry").addEventListener("click",()=>mount(host,options));}
   }
-  root.GruenInnovationCases={mount,filterCases,exportCsv,csvCell,radarSvg,getSnapshot:()=>book};
+  root.GruenInnovationCases={mount,filterCases,facetCounts,FAMILIES,DOMAINS,exportCsv,csvCell,radarSvg,getSnapshot:()=>book};
   if(typeof module==="object"&&module.exports)module.exports=root.GruenInnovationCases;
 })(typeof window==="undefined"?globalThis:window);

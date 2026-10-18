@@ -107,7 +107,8 @@ class InnovationAnalysisTests(unittest.TestCase):
         self.assertGreaterEqual(len(current),750)
         self.assertEqual(len(extra['cases']),73)
         self.assertEqual(len(extra['model_profiles']),10)
-        self.assertEqual(len(self.book['analysis']['profiles']),28)
+        registry_profiles=json.loads((ROOT/'config/innovation_registry_models.json').read_text(encoding='utf-8'))['profiles']
+        self.assertEqual(len(self.book['analysis']['profiles']),28+len(registry_profiles))
         self.assertEqual(dict(Counter(current[c['id']]['research_annotation']['continent'] for c in extra['cases'])),
                          {'asia':32,'africa':13,'south_america':13,'oceania':15})
         missing={'CN-'+p for p in ('SX','NM','JL','JX','HI','GZ','YN','XZ','NX','XJ')}

@@ -11,7 +11,7 @@
   button.textContent=language==='en'?'中文':'EN';button.setAttribute('aria-label',language==='en'?'切换到中文':'Switch to English');
   await window.GruenInnovationCases.mount(document.getElementById('innovationCases'),{mode:'energy',language});
   const book=window.GruenInnovationCases.getSnapshot();
-  document.getElementById('innovationDataset').textContent=(language==='en'?'Research data ':'研究数据 ')+(book?.research?.version||'');
+  document.getElementById('innovationDataset').textContent=(language==='en'?'Research snapshot ':'研究快照 ')+'2026.10.18';
   document.getElementById('innovationVersion').textContent=(book?.research?.version||'')+' · '+(book?.updated_at||'').slice(0,10);
  }
  button.addEventListener('click',()=>{language=language==='zh'?'en':'zh';const u=new URL(location.href);u.searchParams.set('lang',language);history.replaceState(null,'',u);show();});

@@ -43,6 +43,7 @@ const server=http.createServer((req,res)=>{
         assert(await page.locator('#mobileMenu a[href="#innovationCases"]').isVisible());checks++;
         await page.locator('#mobileMenu a[href="#innovationCases"]').click();
       }
+      await page.locator('#innovationCases .ir-advanced').filter({has:page.locator('[data-filter="sector"]')}).locator('summary').click();
       await page.locator('#innovationCases [data-filter="sector"]').selectOption("battery");
       assert.equal(await page.locator("#innovationCases .ic-card").count(),12);checks++;
       assert(await page.locator(".ic-compare-help").textContent().then(s=>s.includes("勾选")));checks++;
@@ -63,6 +64,7 @@ const server=http.createServer((req,res)=>{
       await page.locator('#innovationCases [data-filter="sector"]').selectOption("");
       await page.locator('#innovationCases [data-filter="country"]').selectOption("US");
       assert.equal(await page.locator("#innovationCases .ic-result").textContent(),filterCases(book,{country:"US"}).length+" 个案例");checks++;
+      await page.locator('#innovationCases [data-filter="query"]').fill(book.cases.find(c=>c.id.startsWith('oi_arpae_')).title.en);
       const usButton=page.locator('#innovationCases [data-detail^="oi_arpae_"]').first();
       const usId=await usButton.getAttribute("data-detail"),usCase=book.cases.find(c=>c.id===usId);
       await usButton.click();
@@ -76,6 +78,7 @@ const server=http.createServer((req,res)=>{
       await page.locator("#innovationCases dialog").screenshot({path:path.join(out,mobile?"us-detail-mobile.png":"us-detail-desktop.png")});
       await page.locator("#innovationCases .ic-close").click();
       assert(!await page.locator("#innovationCases dialog").isVisible());checks++;
+      await page.locator('#innovationCases [data-filter="query"]').fill('');
       await page.locator('#innovationCases [data-filter="country"]').selectOption("SG");
       await page.locator("#innovationCases [data-detail]").first().click();
       assert(await page.locator("#innovationCases .ic-dialog-body").textContent().then(s=>s.includes("适配分析")&&s.includes("原始证据")));checks++;
