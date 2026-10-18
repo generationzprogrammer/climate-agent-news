@@ -161,7 +161,7 @@ def run(initial=False,refresh=False,max_add=36,per_country=12):
         elif r['registry']=='africa_ace' and re.search(r'pedagogy|education|learning|population health|reproductive|infectious|transmissibles|maladies|medicine|sante|santé|medicament|toxicolog|maladies|cell biology|genetic|drug|engineering, \(CoE',r['name'],re.I):reason='outside_documented_industry_scope'
         elif r['registry']=='australia_crcp' and not any(w in r['name'].lower() for w in ['energy','battery','batteries','hydrogen','solar','carbon','recycl','manufactur','mineral','mining','electric','steel','water','wind','bioenergy','copper','nickel','alumina']):reason='outside_selected_technical_scope'
         limit=60 if initial and r['country']=='AU' else (10000 if initial else per_country)
-        if not reason and (len(new)>=max_add or admitted[r['country']]>=limit):reason='eligible_backlog_capacity_limit'
+        if not reason and (len(new)>=max_add or admitted[r['country']]>=limit):reason='deferred_capacity_before_field_validation'
         if not reason:
             try:
                 c=build_case(r,translations)
