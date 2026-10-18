@@ -1,44 +1,23 @@
 {
-  "checked_at": "2026-10-18T02:27:52.527318+00:00",
-  "added": 420,
+  "checked_at": "2026-10-18T03:22:52.819415+00:00",
+  "added": 12,
   "added_by_country": {
-    "DJ": 2,
-    "BJ": 2,
-    "BF": 3,
-    "TG": 3,
-    "NE": 2,
-    "GM": 1,
-    "GN": 1,
-    "MZ": 1,
-    "ZM": 1,
-    "ET": 2,
-    "CI": 4,
-    "SN": 2,
-    "RW": 3,
-    "UG": 1,
-    "TZ": 1,
-    "JP": 37,
-    "GH": 7,
-    "KE": 1,
-    "NG": 9,
-    "BR": 95,
-    "AU": 60,
-    "CN": 71,
-    "US": 111
+    "AU": 12
   },
-  "total_registry_cases": 420,
+  "total_registry_cases": 432,
   "candidate_decisions": {
     "outside_documented_industry_scope": 17,
-    "admitted": 420,
-    "same_institution_already_present_oi_cnpem": 1,
+    "already_present": 349,
     "outside_selected_technical_scope": 207,
-    "rejected_incomplete_project": 2,
-    "eligible_backlog_capacity_limit": 55
+    "rejected_incomplete_project": 4,
+    "admitted": 12,
+    "eligible_backlog_capacity_limit": 41,
+    "same_institution_already_present_oi_cnpem": 1
   },
   "selection": {
-    "max_add": 5000,
+    "max_add": 36,
     "per_country": 12,
-    "initial": true,
+    "initial": false,
     "order": "ascending previously recorded focus-country count, registry, stable key",
     "scope": "STEM industry cooperation; CRC-P energy, resources, manufacturing and environment; Africa non-clinical applied centres"
   },
@@ -51,9 +30,21 @@
         {
           "source": "nsf_iucrc",
           "url": "https://iucrc.nsf.gov/centers/",
-          "fetched_at_utc": "2026-10-18T02:05:22.608045+00:00",
+          "fetched_at_utc": "2026-10-18T03:22:06.724427+00:00",
           "sha256": "040e0309d9f398113f8d196b7fa375833a779a89ea068c842494dfde841c0733",
           "bytes": 2167618,
+          "robots_url": "https://iucrc.nsf.gov/robots.txt",
+          "robots_status": 200,
+          "status": "ok",
+          "parser_version": "2026.10.18",
+          "storage": "private cached HTML; public metadata and factual compilations only"
+        },
+        {
+          "source": "nsf_programme",
+          "url": "https://iucrc.nsf.gov/universities/",
+          "fetched_at_utc": "2026-10-18T03:22:08.079681+00:00",
+          "sha256": "35e2ebb356fc611de23bf4d9043a1a74caff2da2035d8684073a2b5a084db9a3",
+          "bytes": 26287,
           "robots_url": "https://iucrc.nsf.gov/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -70,9 +61,21 @@
         {
           "source": "embrapii_export",
           "url": "https://embrapii.org.br/nossas-unidades/?export_xls=1",
-          "fetched_at_utc": "2026-10-18T02:11:23.495371+00:00",
+          "fetched_at_utc": "2026-10-18T03:22:14.448587+00:00",
           "sha256": "4606710e1476655c4574bc26858d8dcb91177b1f93d15d4c4612b182769c942f",
           "bytes": 47392,
+          "robots_url": "https://embrapii.org.br/robots.txt",
+          "robots_status": 200,
+          "status": "ok",
+          "parser_version": "2026.10.18",
+          "storage": "private cached HTML; public metadata and factual compilations only"
+        },
+        {
+          "source": "embrapii_programme",
+          "url": "https://embrapii.org.br/perguntas-frequentes/",
+          "fetched_at_utc": "2026-10-18T03:22:23.873429+00:00",
+          "sha256": "8bbd36ea87deef1e258d03fb9845a5bdad522d79d32a3a9db12cd9695f8ef89c",
+          "bytes": 165033,
           "robots_url": "https://embrapii.org.br/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -89,9 +92,21 @@
         {
           "source": "australia_crcp",
           "url": "https://business.gov.au/grants-and-programs/cooperative-research-centres-projects-crcp-grants/crc-projects-selection-round-outcomes",
-          "fetched_at_utc": "2026-10-18T02:05:40.963337+00:00",
-          "sha256": "d0697660f669d2fbef6495fea92c80ed73f7ce9dd064a1ec80517eb6d33745ed",
+          "fetched_at_utc": "2026-10-18T03:22:28.670924+00:00",
+          "sha256": "1b37c2831847d6eaf3969f4baf88a8b106efedb0a86aee5f313ddaceff3dac18",
           "bytes": 758522,
+          "robots_url": "https://business.gov.au/robots.txt",
+          "robots_status": 200,
+          "status": "ok",
+          "parser_version": "2026.10.18",
+          "storage": "private cached HTML; public metadata and factual compilations only"
+        },
+        {
+          "source": "au_programme",
+          "url": "https://business.gov.au/grants-and-programs/cooperative-research-centres-projects-crcp-grants",
+          "fetched_at_utc": "2026-10-18T03:22:32.844080+00:00",
+          "sha256": "6b3c54e89e25f2cbe8ce65e24a41f87c5b766a55410462e62d890ba9e901668f",
+          "bytes": 402074,
           "robots_url": "https://business.gov.au/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -108,8 +123,8 @@
         {
           "source": "africa_ace",
           "url": "https://ace.aau.org/ace-impact-centers/",
-          "fetched_at_utc": "2026-10-18T02:05:52.051714+00:00",
-          "sha256": "bdc79669eaf6e7df5ee50713366e19dade6cdf98047d505539dd9c0b32ffbecf",
+          "fetched_at_utc": "2026-10-18T03:22:36.669565+00:00",
+          "sha256": "be9bc9eb3b9b54309ac9f4da0e0e1db88cac10d8ec42e2f851f7ad9a2a8b1c5c",
           "bytes": 167257,
           "robots_url": "https://ace.aau.org/robots.txt",
           "robots_status": 200,
@@ -120,10 +135,22 @@
         {
           "source": "africa_ace2",
           "url": "https://ace2.iucea.org/industry/",
-          "fetched_at_utc": "2026-10-18T02:06:02.117683+00:00",
-          "sha256": "fb460a1715c830fe1f2ff30dd31c797a398278b4be5c2f71287c7444a4e13d3c",
+          "fetched_at_utc": "2026-10-18T03:22:44.414592+00:00",
+          "sha256": "4590c5edeb335d37e824b10df0628413a20abbcaffce7420ee770e3112530b50",
           "bytes": 108581,
           "robots_url": "https://ace2.iucea.org/robots.txt",
+          "robots_status": 200,
+          "status": "ok",
+          "parser_version": "2026.10.18",
+          "storage": "private cached HTML; public metadata and factual compilations only"
+        },
+        {
+          "source": "ace_programme",
+          "url": "https://ace.aau.org/about-ace-impact/",
+          "fetched_at_utc": "2026-10-18T03:22:48.094409+00:00",
+          "sha256": "b8788afd9cd2c65ec5ec8993ea0e032779c8b8e12f42a3616bd6ff8bfe06f015",
+          "bytes": 166999,
+          "robots_url": "https://ace.aau.org/robots.txt",
           "robots_status": 200,
           "status": "ok",
           "parser_version": "2026.10.18",
@@ -139,9 +166,21 @@
         {
           "source": "jst_coinext",
           "url": "https://www.jst.go.jp/pf/platform/site.html",
-          "fetched_at_utc": "2026-10-18T02:05:44.631676+00:00",
+          "fetched_at_utc": "2026-10-18T03:22:50.297088+00:00",
           "sha256": "ffce209a9c0b629e7c7e7bab346974579f9961073a407ecdd0a7f8c72a72a37d",
           "bytes": 29199,
+          "robots_url": "https://www.jst.go.jp/robots.txt",
+          "robots_status": 200,
+          "status": "ok",
+          "parser_version": "2026.10.18",
+          "storage": "private cached HTML; public metadata and factual compilations only"
+        },
+        {
+          "source": "jst_programme",
+          "url": "https://www.jst.go.jp/pf/platform/outline.html",
+          "fetched_at_utc": "2026-10-18T03:22:52.601598+00:00",
+          "sha256": "6ab38522e9d67a9eabdf033a7b39c4e980da6bcfa318e32fbc6b69361406af2d",
+          "bytes": 28701,
           "robots_url": "https://www.jst.go.jp/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -153,34 +192,46 @@
   ],
   "decisions": [
     {
-      "candidate_key": "africa_ace_00522987717e",
+      "candidate_key": "africa_ace_5156210c8175",
       "registry": "africa_ace",
-      "country": "BF",
+      "country": "GN",
       "decision": "outside_documented_industry_scope"
+    },
+    {
+      "candidate_key": "africa_ace_b734a02ddd01",
+      "registry": "africa_ace",
+      "country": "GM",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace_d094cb8a7257",
+      "registry": "africa_ace",
+      "country": "GN",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace2_696d00e09f31",
+      "registry": "africa_ace2",
+      "country": "MZ",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace2_bb729b0ecb8f",
+      "registry": "africa_ace2",
+      "country": "ZM",
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_25f7122c7e4c",
       "registry": "africa_ace",
       "country": "DJ",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace_376e40bf8729",
-      "registry": "africa_ace",
-      "country": "BF",
-      "decision": "outside_documented_industry_scope"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_49e5a1bf4e3f",
       "registry": "africa_ace",
       "country": "BJ",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace_5156210c8175",
-      "registry": "africa_ace",
-      "country": "GN",
-      "decision": "outside_documented_industry_scope"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_59b48b0c044a",
@@ -189,130 +240,100 @@
       "decision": "outside_documented_industry_scope"
     },
     {
-      "candidate_key": "africa_ace_63048acfd51f",
-      "registry": "africa_ace",
-      "country": "BF",
-      "decision": "admitted"
-    },
-    {
       "candidate_key": "africa_ace_6c841cd72bf3",
       "registry": "africa_ace",
       "country": "NE",
       "decision": "outside_documented_industry_scope"
     },
     {
-      "candidate_key": "africa_ace_7bcd6dce8439",
-      "registry": "africa_ace",
-      "country": "TG",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace_81cc97ae4071",
-      "registry": "africa_ace",
-      "country": "TG",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace_844f78a9eb70",
-      "registry": "africa_ace",
-      "country": "BF",
-      "decision": "admitted"
-    },
-    {
       "candidate_key": "africa_ace_90870957240f",
       "registry": "africa_ace",
       "country": "BJ",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace_9f026ca95b2b",
-      "registry": "africa_ace",
-      "country": "TG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_aef42874725b",
       "registry": "africa_ace",
       "country": "DJ",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_b1eb9daf17d8",
       "registry": "africa_ace",
       "country": "NE",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace_b734a02ddd01",
-      "registry": "africa_ace",
-      "country": "GM",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace_d094cb8a7257",
-      "registry": "africa_ace",
-      "country": "GN",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_e91f30bfb9d4",
       "registry": "africa_ace",
       "country": "NE",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
-      "candidate_key": "africa_ace_f6842e6d2e27",
-      "registry": "africa_ace",
-      "country": "BF",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace2_696d00e09f31",
+      "candidate_key": "africa_ace2_9686bf872a4c",
       "registry": "africa_ace2",
-      "country": "MZ",
-      "decision": "admitted"
+      "country": "UG",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "africa_ace2_bb729b0ecb8f",
+      "candidate_key": "africa_ace2_a159ccd1b900",
       "registry": "africa_ace2",
-      "country": "ZM",
-      "decision": "admitted"
+      "country": "TZ",
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace2_c46770536562",
       "registry": "africa_ace2",
       "country": "ET",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace2_e81c8ebefe40",
       "registry": "africa_ace2",
       "country": "ET",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
-      "candidate_key": "africa_ace_027306cfdf1d",
+      "candidate_key": "africa_ace_00522987717e",
       "registry": "africa_ace",
-      "country": "CI",
-      "decision": "admitted"
+      "country": "BF",
+      "decision": "outside_documented_industry_scope"
     },
     {
-      "candidate_key": "africa_ace_074e07cc0d39",
+      "candidate_key": "africa_ace_376e40bf8729",
       "registry": "africa_ace",
-      "country": "CI",
-      "decision": "admitted"
+      "country": "BF",
+      "decision": "outside_documented_industry_scope"
     },
     {
       "candidate_key": "africa_ace_3ac6d9a417b2",
       "registry": "africa_ace",
       "country": "SN",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
-      "candidate_key": "africa_ace_4dc2adb77290",
+      "candidate_key": "africa_ace_63048acfd51f",
       "registry": "africa_ace",
-      "country": "CI",
-      "decision": "admitted"
+      "country": "BF",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace_7bcd6dce8439",
+      "registry": "africa_ace",
+      "country": "TG",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace_81cc97ae4071",
+      "registry": "africa_ace",
+      "country": "TG",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace_844f78a9eb70",
+      "registry": "africa_ace",
+      "country": "BF",
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_9259992fb382",
@@ -321,10 +342,10 @@
       "decision": "outside_documented_industry_scope"
     },
     {
-      "candidate_key": "africa_ace_d8411205dd22",
+      "candidate_key": "africa_ace_9f026ca95b2b",
       "registry": "africa_ace",
-      "country": "CI",
-      "decision": "admitted"
+      "country": "TG",
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_f19f6db09b69",
@@ -336,271 +357,73 @@
       "candidate_key": "africa_ace_f4d088ede75d",
       "registry": "africa_ace",
       "country": "SN",
-      "decision": "admitted"
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace_f6842e6d2e27",
+      "registry": "africa_ace",
+      "country": "BF",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "africa_ace2_cb185ad6a0ed",
+      "registry": "africa_ace2",
+      "country": "KE",
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace2_2cdecca9817d",
       "registry": "africa_ace2",
       "country": "RW",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace2_32f252289f2a",
       "registry": "africa_ace2",
       "country": "RW",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace2_9686bf872a4c",
-      "registry": "africa_ace2",
-      "country": "UG",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace2_a159ccd1b900",
-      "registry": "africa_ace2",
-      "country": "TZ",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace2_a486d945c5ce",
       "registry": "africa_ace2",
       "country": "RW",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
-      "candidate_key": "jst_coinext_02439a4aa2de",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
+      "candidate_key": "africa_ace_027306cfdf1d",
+      "registry": "africa_ace",
+      "country": "CI",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "jst_coinext_0a95974eae09",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
+      "candidate_key": "africa_ace_074e07cc0d39",
+      "registry": "africa_ace",
+      "country": "CI",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "jst_coinext_0ab3fb4b558a",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
+      "candidate_key": "africa_ace_4dc2adb77290",
+      "registry": "africa_ace",
+      "country": "CI",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "jst_coinext_0fb851d70aee",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_1932b09f69b3",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_20d8cf6a0d58",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_21c5b9ed1e48",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_26475d49a9f7",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_33f90b22aa3f",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_34a68278ef31",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_3797ae4e84b7",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_3d44d511995e",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_3e00f93bcefb",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_41e894bef5f0",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_42c60b88a967",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_502433f561c3",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_54353e0b0046",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_563848c3034f",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_5860d0474d94",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_69ec1110817b",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_713de98b8440",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_764b387a465c",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_864758ab5247",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_87a0f28c4e75",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_9d2635a11719",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_a99025b023fb",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_af03ae9e2fba",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_b365db2e5512",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_d4a5ba33df72",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_dcfa547dd9f8",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_dfde855df24b",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_e226bf499b12",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_e436007236c4",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_eaa56943b254",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_eeafbd5f4c65",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_f229f95a8c68",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "jst_coinext_fe37ac0e26d8",
-      "registry": "jst_coinext",
-      "country": "JP",
-      "decision": "admitted"
+      "candidate_key": "africa_ace_d8411205dd22",
+      "registry": "africa_ace",
+      "country": "CI",
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_1325272c17b7",
       "registry": "africa_ace",
       "country": "GH",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_1e7090c59b9d",
       "registry": "africa_ace",
       "country": "GH",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_1efc810a314f",
@@ -612,19 +435,19 @@
       "candidate_key": "africa_ace_281d2715298c",
       "registry": "africa_ace",
       "country": "GH",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_2933845f0dcc",
       "registry": "africa_ace",
       "country": "GH",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_3be54c12f304",
       "registry": "africa_ace",
       "country": "GH",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_76819c1c432d",
@@ -636,19 +459,13 @@
       "candidate_key": "africa_ace_9bb39b6e467f",
       "registry": "africa_ace",
       "country": "GH",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_e6a7de7c1831",
       "registry": "africa_ace",
       "country": "GH",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "africa_ace2_cb185ad6a0ed",
-      "registry": "africa_ace2",
-      "country": "KE",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_03d117c621e8",
@@ -666,7 +483,7 @@
       "candidate_key": "africa_ace_183eab7091d2",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_24fd2e819227",
@@ -678,13 +495,13 @@
       "candidate_key": "africa_ace_25d46832e0d3",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_3bd57a3f81e3",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_3eb48d57a029",
@@ -696,19 +513,19 @@
       "candidate_key": "africa_ace_4180595a8051",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_4d8e64d6de91",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_5a4f64f80896",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_6a610060c153",
@@ -726,7 +543,7 @@
       "candidate_key": "africa_ace_935a5f9c9a4f",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_c48c3528d78f",
@@ -738,7 +555,7 @@
       "candidate_key": "africa_ace_c92c9b2d957b",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "africa_ace_ce9788a20cdd",
@@ -750,583 +567,229 @@
       "candidate_key": "africa_ace_dc359f2ca3ad",
       "registry": "africa_ace",
       "country": "NG",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_0163240f6e51",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_02439a4aa2de",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_02ca4502cd86",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_0a95974eae09",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_05ed5841072b",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_0ab3fb4b558a",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_1028ff946c8b",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_0fb851d70aee",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_13fd9e8d5ca7",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_1932b09f69b3",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_1967cc4bd0b6",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_20d8cf6a0d58",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_1a81984b39af",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_21c5b9ed1e48",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_21f678acc1de",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_26475d49a9f7",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_227efeb30380",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_33f90b22aa3f",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_277c3935817b",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_34a68278ef31",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_305d8cf14244",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_3797ae4e84b7",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_31210837c7df",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_3d44d511995e",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_335c30126ea4",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_3e00f93bcefb",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_3748f4902c61",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_41e894bef5f0",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_3aa8619c3d94",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_42c60b88a967",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_3ba134d63403",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_502433f561c3",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_3d8b48835402",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_54353e0b0046",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_3e122a6c112e",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_563848c3034f",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_3fad239bd0aa",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_5860d0474d94",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_403e882bdd3a",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_69ec1110817b",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_419db85bb6d1",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_713de98b8440",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_485f8ee1ff52",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_764b387a465c",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_49e7a2897463",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_864758ab5247",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_4d428a8c4374",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_87a0f28c4e75",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_54c50569d934",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_9d2635a11719",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_59e1745f76c6",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_a99025b023fb",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_5a13493ab05d",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_af03ae9e2fba",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_5e0df18b0bdc",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_b365db2e5512",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_6297d7b5c843",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_d4a5ba33df72",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_63384c082cb5",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_dcfa547dd9f8",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_63e0e9a15996",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_dfde855df24b",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_66ab6c4693a0",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_e226bf499b12",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_68f168f60744",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_e436007236c4",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_6b0bfe526dcf",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_eaa56943b254",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_6b54c2764c97",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_eeafbd5f4c65",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_6d45910aad73",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_f229f95a8c68",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "embrapii_export_6da537a8c2b8",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_6da88c34ba12",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_6df315648c61",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_705038e9c066",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_7431c27b2193",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_743aef48f745",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_7686b8070e23",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_77c81c725b41",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_7c3136173017",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_7d98c4bcb514",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_7dc5447e29e2",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_81d2ee25390f",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_8449497dd05b",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_8a79a1e9a570",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_8ab470a4a80b",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_8fe9140416d4",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_925934ed69de",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_92a15365af54",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_94f46b7b06c1",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_9d1f4fd8bc46",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_a12ce7545d61",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_a2d679f9053f",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_a5957654372e",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_a7b42daa1fc4",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_aa96ca2bc27c",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_b21db2a2065a",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "same_institution_already_present_oi_cnpem"
-    },
-    {
-      "candidate_key": "embrapii_export_b674977bd29c",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_b89b5aa1a05f",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_bbdd119fa027",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_bd8f48d941d0",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_bdac152a3916",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_c084c3be46f1",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_c398195cb693",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_c574fc99d620",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_c7a4bbad7bd3",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_ca295b40effc",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_ce545039b660",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_d129d180643d",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_d5ea91e9860a",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_d6030521d3ce",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_d6c148595345",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_d7b6ba93c490",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_d8dd56876bba",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_dac2d0dd72a3",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_dc92cbe4112e",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_de3521b5218e",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_dfb3e416385b",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_e08fa65c1c1e",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_e14535f5a631",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_e38086443bfe",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_e683ccbab02c",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_e77e27c0146e",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_ea04da54df1a",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_ebbcb21c0347",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_f0ca0ac44de4",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_f2cd0284c18c",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_f2e323bd4e75",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_f50e30b13bbc",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_f52ec4c0e5f4",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
-    },
-    {
-      "candidate_key": "embrapii_export_feb449daef00",
-      "registry": "embrapii_export",
-      "country": "BR",
-      "decision": "admitted"
+      "candidate_key": "jst_coinext_fe37ac0e26d8",
+      "registry": "jst_coinext",
+      "country": "JP",
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_0017f26a31bc",
@@ -1350,7 +813,7 @@
       "candidate_key": "australia_crcp_026f2c14f1ff",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_0326c8a0a985",
@@ -1368,7 +831,7 @@
       "candidate_key": "australia_crcp_0398abfa9eac",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_05f38ae63395",
@@ -1404,13 +867,13 @@
       "candidate_key": "australia_crcp_0a2e2d186ba5",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_0a9c90a0baa8",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_0b1a5eea3c88",
@@ -1434,7 +897,7 @@
       "candidate_key": "australia_crcp_0d13115c36bd",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_0db493cff4c5",
@@ -1452,7 +915,7 @@
       "candidate_key": "australia_crcp_0fbd7b401a53",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_10ae8cd2c7b1",
@@ -1488,7 +951,7 @@
       "candidate_key": "australia_crcp_1496262bd1d8",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_1516ac171a61",
@@ -1518,13 +981,13 @@
       "candidate_key": "australia_crcp_1750922f267a",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_17fd0c298219",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_1849f4817a64",
@@ -1536,7 +999,7 @@
       "candidate_key": "australia_crcp_1988d0f31916",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_1a3b9ab8a4f5",
@@ -1554,7 +1017,7 @@
       "candidate_key": "australia_crcp_1b590238cee3",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_1c5a4838bb01",
@@ -1602,19 +1065,19 @@
       "candidate_key": "australia_crcp_23f381e256a9",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_25d1d8c52b2d",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_26ef0d167896",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_27d391892bfd",
@@ -1632,7 +1095,7 @@
       "candidate_key": "australia_crcp_28dfa8c7f283",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_29984aed34a9",
@@ -1656,7 +1119,7 @@
       "candidate_key": "australia_crcp_2d7ec496599b",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_2d901ea86b55",
@@ -1680,19 +1143,19 @@
       "candidate_key": "australia_crcp_30924c645f4a",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_30fdbb55360a",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_3234f46aaff3",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_3367c6284b16",
@@ -1704,13 +1167,13 @@
       "candidate_key": "australia_crcp_33e7a62ee1ba",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_345c958d15fb",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_34e1756740fe",
@@ -1728,19 +1191,19 @@
       "candidate_key": "australia_crcp_35a583ed7cac",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_35c93b18e499",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_38483b031758",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_388a68947189",
@@ -1752,13 +1215,13 @@
       "candidate_key": "australia_crcp_3911d9c5cbb4",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_399f964d016a",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_39b971404384",
@@ -1794,7 +1257,7 @@
       "candidate_key": "australia_crcp_3e38a13a8829",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_3ed2cea6cdf5",
@@ -1818,7 +1281,7 @@
       "candidate_key": "australia_crcp_41aa2680cea2",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_429d7d0bf941",
@@ -1830,7 +1293,7 @@
       "candidate_key": "australia_crcp_43f205acecba",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_4411562e5d76",
@@ -1848,7 +1311,7 @@
       "candidate_key": "australia_crcp_45a97b718e62",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_45bcfcf43f95",
@@ -1866,7 +1329,7 @@
       "candidate_key": "australia_crcp_48e87f0eec60",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_49e531d27109",
@@ -1908,7 +1371,7 @@
       "candidate_key": "australia_crcp_4ded2c1c1803",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_4e0bace0e554",
@@ -1932,13 +1395,13 @@
       "candidate_key": "australia_crcp_50b734c85902",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_51f3e6e3f2fb",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_53d4ec57bf78",
@@ -1950,7 +1413,7 @@
       "candidate_key": "australia_crcp_55f82036bf5a",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_56bfc2f5614b",
@@ -1974,7 +1437,7 @@
       "candidate_key": "australia_crcp_5ab91ceb1a75",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_5b3e561c28d4",
@@ -1986,7 +1449,7 @@
       "candidate_key": "australia_crcp_5c2fbfb7810f",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_5c5f106177d1",
@@ -2016,7 +1479,7 @@
       "candidate_key": "australia_crcp_5f63727c8974",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_5f8605833bdf",
@@ -2088,7 +1551,7 @@
       "candidate_key": "australia_crcp_67c5487c469c",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_67cea4a68123",
@@ -2100,7 +1563,7 @@
       "candidate_key": "australia_crcp_69595acd6ebe",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_6b0956890366",
@@ -2112,7 +1575,7 @@
       "candidate_key": "australia_crcp_6c8e51c10435",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_6d8c79e7a4f8",
@@ -2124,7 +1587,7 @@
       "candidate_key": "australia_crcp_6db9622df92a",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_6de5fba012f9",
@@ -2142,13 +1605,13 @@
       "candidate_key": "australia_crcp_6eb53c0abbe0",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_6fd3cc6b3e4c",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_6ffe252d73f0",
@@ -2178,7 +1641,7 @@
       "candidate_key": "australia_crcp_72c9dfae67d5",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_7344161a1903",
@@ -2214,7 +1677,7 @@
       "candidate_key": "australia_crcp_776487f05dd2",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_78abdcc5bc7b",
@@ -2226,7 +1689,7 @@
       "candidate_key": "australia_crcp_794448da139e",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_7b4573b9074d",
@@ -2292,19 +1755,19 @@
       "candidate_key": "australia_crcp_7f6a007225cf",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_804e47ddd869",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_8353dbcf2956",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_845bc0b793e0",
@@ -2316,7 +1779,7 @@
       "candidate_key": "australia_crcp_85ae100e4eff",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_8650c878f5c4",
@@ -2328,31 +1791,31 @@
       "candidate_key": "australia_crcp_86864481fa9b",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_8a649afdc2d0",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_8b68b0d2181b",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_8c4d6750b075",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_8ce6037fd831",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_8d2e5578649a",
@@ -2388,7 +1851,7 @@
       "candidate_key": "australia_crcp_91314288d039",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_914c9220a3dd",
@@ -2400,25 +1863,25 @@
       "candidate_key": "australia_crcp_94418d3cb132",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_947f2de911ac",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_959eed045903",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "australia_crcp_96241f7467cf",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_963a6a97007c",
@@ -2430,7 +1893,7 @@
       "candidate_key": "australia_crcp_97260ab64b77",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_975f98551fee",
@@ -2448,7 +1911,7 @@
       "candidate_key": "australia_crcp_980ddc113e2e",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_984dfe5d1468",
@@ -2466,13 +1929,13 @@
       "candidate_key": "australia_crcp_9911c2b91f05",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_99646f2aacf8",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "rejected_incomplete_project"
     },
     {
       "candidate_key": "australia_crcp_99b2a18ee76a",
@@ -2490,13 +1953,13 @@
       "candidate_key": "australia_crcp_9b58f910a11c",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "rejected_incomplete_project"
     },
     {
       "candidate_key": "australia_crcp_9b9d9e2f6a45",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_9d33c845bf06",
@@ -2526,7 +1989,7 @@
       "candidate_key": "australia_crcp_9de743a2c89b",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_9ebbb3a66a97",
@@ -2556,7 +2019,7 @@
       "candidate_key": "australia_crcp_a196543700b2",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_a1b0cee5f0b9",
@@ -2580,19 +2043,19 @@
       "candidate_key": "australia_crcp_a3e4373f0f01",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_a45052b18579",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_a46aa473d313",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_a4aa4191ebee",
@@ -2634,13 +2097,13 @@
       "candidate_key": "australia_crcp_a8da1c380690",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_a90ee0521bd9",
       "registry": "australia_crcp",
       "country": "AU",
-      "decision": "eligible_backlog_capacity_limit"
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_ab3b90d69da7",
@@ -3273,1518 +2736,1260 @@
       "decision": "outside_selected_technical_scope"
     },
     {
-      "candidate_key": "china_moe_first_list_01e5318c2644",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_0163240f6e51",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_07a6d4925ba8",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_02ca4502cd86",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_0e605ee2183c",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_05ed5841072b",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_169e69d6d3b0",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_1028ff946c8b",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_1fbae2caadf6",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_13fd9e8d5ca7",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_237073fa7b8f",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_1967cc4bd0b6",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_2cea4a512284",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_1a81984b39af",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_2e0fe76efc58",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_21f678acc1de",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_2e740c06f58a",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_227efeb30380",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_342eaffe0a2d",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_277c3935817b",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_3e7d7f1573f5",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_305d8cf14244",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_4da5ba1cd759",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_31210837c7df",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_51e42653e3a7",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_335c30126ea4",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_6171d3961ca1",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_3748f4902c61",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_623686edfaea",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_3aa8619c3d94",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_629f45629442",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_3ba134d63403",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_630f14861c5f",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_3d8b48835402",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_65664474e19d",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_3e122a6c112e",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_6c83f6fbc123",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_3fad239bd0aa",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_786840a80de5",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_403e882bdd3a",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_7bb91620f6bf",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_419db85bb6d1",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_8198cd05bc9a",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_485f8ee1ff52",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_88382491a9f4",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_49e7a2897463",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_88884c0cecea",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_4d428a8c4374",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_8da77b153c08",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_54c50569d934",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_9102e1ed6c58",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_59e1745f76c6",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_9bd07182de28",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_5a13493ab05d",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_a831431afa97",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_5e0df18b0bdc",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_a8ee995fcd40",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_6297d7b5c843",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_a8f200e823c3",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_63384c082cb5",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_aa0c3a6ad5dd",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_63e0e9a15996",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_abd078f665e3",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_66ab6c4693a0",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_ad93f8c58e1a",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_68f168f60744",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_ade9af6481e3",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_6b0bfe526dcf",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_aff25234392c",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_6b54c2764c97",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_b93b4840ca1b",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_6d45910aad73",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_bacb89564c35",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_6da537a8c2b8",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_bcfabd880b80",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_6da88c34ba12",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_c16061f50ba0",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_6df315648c61",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_c7bd0230fd05",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_705038e9c066",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_c8933652e81a",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_7431c27b2193",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_ca130dcb9921",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_743aef48f745",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_cba1cb8800b7",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_7686b8070e23",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_d49a66e303f3",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_77c81c725b41",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_d5929e018014",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_7c3136173017",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_e2fb1df2d851",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_7d98c4bcb514",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_first_list_f22bb9021786",
-      "registry": "china_moe_first_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_7dc5447e29e2",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_0b7a026f0901",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_81d2ee25390f",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_13ee8d59400f",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_8449497dd05b",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_160fc0cf6d3e",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_8a79a1e9a570",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_176670baa520",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_8ab470a4a80b",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_1f44069a5196",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_8fe9140416d4",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_21aa189366ed",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_925934ed69de",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_2755eeda414f",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_92a15365af54",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_2cc58620942c",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_94f46b7b06c1",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_2e827b6a3848",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_9d1f4fd8bc46",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_30d95338e25c",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_a12ce7545d61",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_3cc95660db78",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_a2d679f9053f",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_5e6e62b1f677",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_a5957654372e",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_6c67abc9e7f1",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_a7b42daa1fc4",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_8e8229740e81",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_aa96ca2bc27c",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_9a4827037f9a",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_b21db2a2065a",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "same_institution_already_present_oi_cnpem"
     },
     {
-      "candidate_key": "china_moe_second_list_b74bad947064",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_b674977bd29c",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_b825c807b33c",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_b89b5aa1a05f",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_d9a31781bd1e",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_bbdd119fa027",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_e17db3add609",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_bd8f48d941d0",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_e200c6a3621e",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_bdac152a3916",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_e84b098fe93c",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_c084c3be46f1",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_ef20575cc804",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_c398195cb693",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_f872c612146a",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_c574fc99d620",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
-      "candidate_key": "china_moe_second_list_f90d332cd8a1",
-      "registry": "china_moe_second_list",
-      "country": "CN",
-      "decision": "admitted"
+      "candidate_key": "embrapii_export_c7a4bbad7bd3",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_ca295b40effc",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_ce545039b660",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_d129d180643d",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_d5ea91e9860a",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_d6030521d3ce",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_d6c148595345",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_d7b6ba93c490",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_d8dd56876bba",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_dac2d0dd72a3",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_dc92cbe4112e",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_de3521b5218e",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_dfb3e416385b",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_e08fa65c1c1e",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_e14535f5a631",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_e38086443bfe",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_e683ccbab02c",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_e77e27c0146e",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_ea04da54df1a",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_ebbcb21c0347",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_f0ca0ac44de4",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_f2cd0284c18c",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_f2e323bd4e75",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_f50e30b13bbc",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_f52ec4c0e5f4",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
+    },
+    {
+      "candidate_key": "embrapii_export_feb449daef00",
+      "registry": "embrapii_export",
+      "country": "BR",
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_004a30ab0331",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_0147fde5b07f",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_01c5a10d0f25",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_0207442126b0",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_02e02b95ee86",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_03dd20cabb94",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_059711e98ea6",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_068b48afed40",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_09535fe07825",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_0a26627e0b0b",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_0fe0e0c9cb46",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_101b82bd4241",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_116e4cfaf6c0",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_13822631ab55",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_159e01af8081",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_15bf625785a3",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_1768101e74e9",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_177e11da8c89",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_17b90941cbc5",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_19d695107cb2",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_1db2ef9987ce",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_1dfb55d0c4c7",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_1f407cf4abaa",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_200852b0b550",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_2123ecf70f1c",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_21fd596defe1",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_267fbcee3e44",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_27bbe938f6ac",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_28a494d1273c",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_2a4d82fa4de9",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_2a8970af9305",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_2d475886b6c2",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_2f59e8382b2f",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_34afa63ee127",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_3af7b9ff10c1",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_3d9882e9b13e",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_3ddc11d1c759",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_3e9ce92b5646",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_482548abeb59",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_4d3dc9cc8605",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_4f2318263c42",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_51a753b09fd9",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_51bc1e90654d",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_52cc50bcb500",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_53f42d61ea08",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_5515603f9d10",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_5716b2132646",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_61f6c9f6a4be",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_65501d1d9224",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_66cc2aa2a432",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_69c575fd6c32",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_6ce492cc0986",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_6f1e151b80eb",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_6fb103411667",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_748a648fcfac",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_76d6d7834390",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_78201a17a432",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_795ea081760b",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_7dccc2368e43",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_85ec21d1aa93",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_87c9a8427501",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_884935856b6d",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_8884403e90eb",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_8911d30ba921",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_899c87b7c91e",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_8d18ed66fc13",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_9161892b266c",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_91f560043774",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_93cc42618a43",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_94ff77a7c518",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_96e3cd058d44",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_9733dc68db77",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_9acb7a9fd4f6",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_9c88b4999eb3",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_9ce6933e9037",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_a01cf0a4b4da",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_a61b0ca9c620",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_aa6d258880c4",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_aaba322c29cb",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_b51e7dce0188",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_b615bd760223",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_b8cf0b45d2cc",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_b98ab5859251",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_bdb2cc823b06",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c0a4b360e3de",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c0af22e5478f",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c2082a61895d",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c2b868298648",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c2d032c1585e",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c3184c6943a9",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c41e39e5a714",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_c491ea6444e8",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_cbac2f21f208",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_d048739c3135",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_d294fb1a2fa6",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_d46b0bf3f548",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_d51e058ea674",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_dd2aa2177e64",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_df0773a7bc3c",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_e3976894405c",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_e4c62767889e",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_e520bb463ed0",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_e692c4489bc4",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_e9c7f6b8c7e9",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_f037ae6d5144",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_f0eaa67f452b",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_f2f2c7db7745",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_f3be9400cf4d",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_f6cec949bcbf",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_f79d7b799390",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "nsf_iucrc_fdf15e628901",
       "registry": "nsf_iucrc",
       "country": "US",
-      "decision": "admitted"
+      "decision": "already_present"
     }
   ],
   "added_case_ids": [
-    "oi_reg_africa_ace_25f7122c7e4c",
-    "oi_reg_africa_ace_49e5a1bf4e3f",
-    "oi_reg_africa_ace_63048acfd51f",
-    "oi_reg_africa_ace_7bcd6dce8439",
-    "oi_reg_africa_ace_81cc97ae4071",
-    "oi_reg_africa_ace_844f78a9eb70",
-    "oi_reg_africa_ace_90870957240f",
-    "oi_reg_africa_ace_9f026ca95b2b",
-    "oi_reg_africa_ace_aef42874725b",
-    "oi_reg_africa_ace_b1eb9daf17d8",
-    "oi_reg_africa_ace_b734a02ddd01",
-    "oi_reg_africa_ace_d094cb8a7257",
-    "oi_reg_africa_ace_e91f30bfb9d4",
-    "oi_reg_africa_ace_f6842e6d2e27",
-    "oi_reg_africa_ace2_696d00e09f31",
-    "oi_reg_africa_ace2_bb729b0ecb8f",
-    "oi_reg_africa_ace2_c46770536562",
-    "oi_reg_africa_ace2_e81c8ebefe40",
-    "oi_reg_africa_ace_027306cfdf1d",
-    "oi_reg_africa_ace_074e07cc0d39",
-    "oi_reg_africa_ace_3ac6d9a417b2",
-    "oi_reg_africa_ace_4dc2adb77290",
-    "oi_reg_africa_ace_d8411205dd22",
-    "oi_reg_africa_ace_f4d088ede75d",
-    "oi_reg_africa_ace2_2cdecca9817d",
-    "oi_reg_africa_ace2_32f252289f2a",
-    "oi_reg_africa_ace2_9686bf872a4c",
-    "oi_reg_africa_ace2_a159ccd1b900",
-    "oi_reg_africa_ace2_a486d945c5ce",
-    "oi_reg_jst_coinext_02439a4aa2de",
-    "oi_reg_jst_coinext_0a95974eae09",
-    "oi_reg_jst_coinext_0ab3fb4b558a",
-    "oi_reg_jst_coinext_0fb851d70aee",
-    "oi_reg_jst_coinext_1932b09f69b3",
-    "oi_reg_jst_coinext_20d8cf6a0d58",
-    "oi_reg_jst_coinext_21c5b9ed1e48",
-    "oi_reg_jst_coinext_26475d49a9f7",
-    "oi_reg_jst_coinext_33f90b22aa3f",
-    "oi_reg_jst_coinext_34a68278ef31",
-    "oi_reg_jst_coinext_3797ae4e84b7",
-    "oi_reg_jst_coinext_3d44d511995e",
-    "oi_reg_jst_coinext_3e00f93bcefb",
-    "oi_reg_jst_coinext_41e894bef5f0",
-    "oi_reg_jst_coinext_42c60b88a967",
-    "oi_reg_jst_coinext_502433f561c3",
-    "oi_reg_jst_coinext_54353e0b0046",
-    "oi_reg_jst_coinext_563848c3034f",
-    "oi_reg_jst_coinext_5860d0474d94",
-    "oi_reg_jst_coinext_69ec1110817b",
-    "oi_reg_jst_coinext_713de98b8440",
-    "oi_reg_jst_coinext_764b387a465c",
-    "oi_reg_jst_coinext_864758ab5247",
-    "oi_reg_jst_coinext_87a0f28c4e75",
-    "oi_reg_jst_coinext_9d2635a11719",
-    "oi_reg_jst_coinext_a99025b023fb",
-    "oi_reg_jst_coinext_af03ae9e2fba",
-    "oi_reg_jst_coinext_b365db2e5512",
-    "oi_reg_jst_coinext_d4a5ba33df72",
-    "oi_reg_jst_coinext_dcfa547dd9f8",
-    "oi_reg_jst_coinext_dfde855df24b",
-    "oi_reg_jst_coinext_e226bf499b12",
-    "oi_reg_jst_coinext_e436007236c4",
-    "oi_reg_jst_coinext_eaa56943b254",
-    "oi_reg_jst_coinext_eeafbd5f4c65",
-    "oi_reg_jst_coinext_f229f95a8c68",
-    "oi_reg_jst_coinext_fe37ac0e26d8",
-    "oi_reg_africa_ace_1325272c17b7",
-    "oi_reg_africa_ace_1e7090c59b9d",
-    "oi_reg_africa_ace_281d2715298c",
-    "oi_reg_africa_ace_2933845f0dcc",
-    "oi_reg_africa_ace_3be54c12f304",
-    "oi_reg_africa_ace_9bb39b6e467f",
-    "oi_reg_africa_ace_e6a7de7c1831",
-    "oi_reg_africa_ace2_cb185ad6a0ed",
-    "oi_reg_africa_ace_183eab7091d2",
-    "oi_reg_africa_ace_25d46832e0d3",
-    "oi_reg_africa_ace_3bd57a3f81e3",
-    "oi_reg_africa_ace_4180595a8051",
-    "oi_reg_africa_ace_4d8e64d6de91",
-    "oi_reg_africa_ace_5a4f64f80896",
-    "oi_reg_africa_ace_935a5f9c9a4f",
-    "oi_reg_africa_ace_c92c9b2d957b",
-    "oi_reg_africa_ace_dc359f2ca3ad",
-    "oi_reg_embrapii_export_0163240f6e51",
-    "oi_reg_embrapii_export_02ca4502cd86",
-    "oi_reg_embrapii_export_05ed5841072b",
-    "oi_reg_embrapii_export_1028ff946c8b",
-    "oi_reg_embrapii_export_13fd9e8d5ca7",
-    "oi_reg_embrapii_export_1967cc4bd0b6",
-    "oi_reg_embrapii_export_1a81984b39af",
-    "oi_reg_embrapii_export_21f678acc1de",
-    "oi_reg_embrapii_export_227efeb30380",
-    "oi_reg_embrapii_export_277c3935817b",
-    "oi_reg_embrapii_export_305d8cf14244",
-    "oi_reg_embrapii_export_31210837c7df",
-    "oi_reg_embrapii_export_335c30126ea4",
-    "oi_reg_embrapii_export_3748f4902c61",
-    "oi_reg_embrapii_export_3aa8619c3d94",
-    "oi_reg_embrapii_export_3ba134d63403",
-    "oi_reg_embrapii_export_3d8b48835402",
-    "oi_reg_embrapii_export_3e122a6c112e",
-    "oi_reg_embrapii_export_3fad239bd0aa",
-    "oi_reg_embrapii_export_403e882bdd3a",
-    "oi_reg_embrapii_export_419db85bb6d1",
-    "oi_reg_embrapii_export_485f8ee1ff52",
-    "oi_reg_embrapii_export_49e7a2897463",
-    "oi_reg_embrapii_export_4d428a8c4374",
-    "oi_reg_embrapii_export_54c50569d934",
-    "oi_reg_embrapii_export_59e1745f76c6",
-    "oi_reg_embrapii_export_5a13493ab05d",
-    "oi_reg_embrapii_export_5e0df18b0bdc",
-    "oi_reg_embrapii_export_6297d7b5c843",
-    "oi_reg_embrapii_export_63384c082cb5",
-    "oi_reg_embrapii_export_63e0e9a15996",
-    "oi_reg_embrapii_export_66ab6c4693a0",
-    "oi_reg_embrapii_export_68f168f60744",
-    "oi_reg_embrapii_export_6b0bfe526dcf",
-    "oi_reg_embrapii_export_6b54c2764c97",
-    "oi_reg_embrapii_export_6d45910aad73",
-    "oi_reg_embrapii_export_6da537a8c2b8",
-    "oi_reg_embrapii_export_6da88c34ba12",
-    "oi_reg_embrapii_export_6df315648c61",
-    "oi_reg_embrapii_export_705038e9c066",
-    "oi_reg_embrapii_export_7431c27b2193",
-    "oi_reg_embrapii_export_743aef48f745",
-    "oi_reg_embrapii_export_7686b8070e23",
-    "oi_reg_embrapii_export_77c81c725b41",
-    "oi_reg_embrapii_export_7c3136173017",
-    "oi_reg_embrapii_export_7d98c4bcb514",
-    "oi_reg_embrapii_export_7dc5447e29e2",
-    "oi_reg_embrapii_export_81d2ee25390f",
-    "oi_reg_embrapii_export_8449497dd05b",
-    "oi_reg_embrapii_export_8a79a1e9a570",
-    "oi_reg_embrapii_export_8ab470a4a80b",
-    "oi_reg_embrapii_export_8fe9140416d4",
-    "oi_reg_embrapii_export_925934ed69de",
-    "oi_reg_embrapii_export_92a15365af54",
-    "oi_reg_embrapii_export_94f46b7b06c1",
-    "oi_reg_embrapii_export_9d1f4fd8bc46",
-    "oi_reg_embrapii_export_a12ce7545d61",
-    "oi_reg_embrapii_export_a2d679f9053f",
-    "oi_reg_embrapii_export_a5957654372e",
-    "oi_reg_embrapii_export_a7b42daa1fc4",
-    "oi_reg_embrapii_export_aa96ca2bc27c",
-    "oi_reg_embrapii_export_b674977bd29c",
-    "oi_reg_embrapii_export_b89b5aa1a05f",
-    "oi_reg_embrapii_export_bbdd119fa027",
-    "oi_reg_embrapii_export_bd8f48d941d0",
-    "oi_reg_embrapii_export_bdac152a3916",
-    "oi_reg_embrapii_export_c084c3be46f1",
-    "oi_reg_embrapii_export_c398195cb693",
-    "oi_reg_embrapii_export_c574fc99d620",
-    "oi_reg_embrapii_export_c7a4bbad7bd3",
-    "oi_reg_embrapii_export_ca295b40effc",
-    "oi_reg_embrapii_export_ce545039b660",
-    "oi_reg_embrapii_export_d129d180643d",
-    "oi_reg_embrapii_export_d5ea91e9860a",
-    "oi_reg_embrapii_export_d6030521d3ce",
-    "oi_reg_embrapii_export_d6c148595345",
-    "oi_reg_embrapii_export_d7b6ba93c490",
-    "oi_reg_embrapii_export_d8dd56876bba",
-    "oi_reg_embrapii_export_dac2d0dd72a3",
-    "oi_reg_embrapii_export_dc92cbe4112e",
-    "oi_reg_embrapii_export_de3521b5218e",
-    "oi_reg_embrapii_export_dfb3e416385b",
-    "oi_reg_embrapii_export_e08fa65c1c1e",
-    "oi_reg_embrapii_export_e14535f5a631",
-    "oi_reg_embrapii_export_e38086443bfe",
-    "oi_reg_embrapii_export_e683ccbab02c",
-    "oi_reg_embrapii_export_e77e27c0146e",
-    "oi_reg_embrapii_export_ea04da54df1a",
-    "oi_reg_embrapii_export_ebbcb21c0347",
-    "oi_reg_embrapii_export_f0ca0ac44de4",
-    "oi_reg_embrapii_export_f2cd0284c18c",
-    "oi_reg_embrapii_export_f2e323bd4e75",
-    "oi_reg_embrapii_export_f50e30b13bbc",
-    "oi_reg_embrapii_export_f52ec4c0e5f4",
-    "oi_reg_embrapii_export_feb449daef00",
-    "oi_reg_australia_crcp_026f2c14f1ff",
-    "oi_reg_australia_crcp_0398abfa9eac",
-    "oi_reg_australia_crcp_0a2e2d186ba5",
-    "oi_reg_australia_crcp_0a9c90a0baa8",
-    "oi_reg_australia_crcp_0d13115c36bd",
-    "oi_reg_australia_crcp_0fbd7b401a53",
-    "oi_reg_australia_crcp_1496262bd1d8",
-    "oi_reg_australia_crcp_1750922f267a",
-    "oi_reg_australia_crcp_17fd0c298219",
-    "oi_reg_australia_crcp_1988d0f31916",
-    "oi_reg_australia_crcp_1b590238cee3",
-    "oi_reg_australia_crcp_23f381e256a9",
-    "oi_reg_australia_crcp_25d1d8c52b2d",
-    "oi_reg_australia_crcp_26ef0d167896",
-    "oi_reg_australia_crcp_28dfa8c7f283",
-    "oi_reg_australia_crcp_2d7ec496599b",
-    "oi_reg_australia_crcp_30924c645f4a",
-    "oi_reg_australia_crcp_30fdbb55360a",
-    "oi_reg_australia_crcp_3234f46aaff3",
-    "oi_reg_australia_crcp_33e7a62ee1ba",
-    "oi_reg_australia_crcp_345c958d15fb",
-    "oi_reg_australia_crcp_35a583ed7cac",
-    "oi_reg_australia_crcp_35c93b18e499",
-    "oi_reg_australia_crcp_38483b031758",
-    "oi_reg_australia_crcp_3911d9c5cbb4",
-    "oi_reg_australia_crcp_399f964d016a",
-    "oi_reg_australia_crcp_3e38a13a8829",
-    "oi_reg_australia_crcp_41aa2680cea2",
-    "oi_reg_australia_crcp_43f205acecba",
-    "oi_reg_australia_crcp_45a97b718e62",
-    "oi_reg_australia_crcp_48e87f0eec60",
-    "oi_reg_australia_crcp_4ded2c1c1803",
-    "oi_reg_australia_crcp_50b734c85902",
-    "oi_reg_australia_crcp_51f3e6e3f2fb",
-    "oi_reg_australia_crcp_55f82036bf5a",
-    "oi_reg_australia_crcp_5ab91ceb1a75",
-    "oi_reg_australia_crcp_5c2fbfb7810f",
-    "oi_reg_australia_crcp_5f63727c8974",
-    "oi_reg_australia_crcp_67c5487c469c",
-    "oi_reg_australia_crcp_69595acd6ebe",
-    "oi_reg_australia_crcp_6c8e51c10435",
-    "oi_reg_australia_crcp_6db9622df92a",
-    "oi_reg_australia_crcp_6eb53c0abbe0",
-    "oi_reg_australia_crcp_6fd3cc6b3e4c",
-    "oi_reg_australia_crcp_72c9dfae67d5",
-    "oi_reg_australia_crcp_776487f05dd2",
-    "oi_reg_australia_crcp_794448da139e",
-    "oi_reg_australia_crcp_7f6a007225cf",
-    "oi_reg_australia_crcp_804e47ddd869",
-    "oi_reg_australia_crcp_8353dbcf2956",
-    "oi_reg_australia_crcp_85ae100e4eff",
-    "oi_reg_australia_crcp_86864481fa9b",
-    "oi_reg_australia_crcp_8a649afdc2d0",
-    "oi_reg_australia_crcp_8b68b0d2181b",
-    "oi_reg_australia_crcp_8c4d6750b075",
-    "oi_reg_australia_crcp_8ce6037fd831",
-    "oi_reg_australia_crcp_91314288d039",
-    "oi_reg_australia_crcp_94418d3cb132",
-    "oi_reg_australia_crcp_947f2de911ac",
-    "oi_reg_australia_crcp_959eed045903",
-    "oi_reg_china_moe_first_list_01e5318c2644",
-    "oi_reg_china_moe_first_list_07a6d4925ba8",
-    "oi_reg_china_moe_first_list_0e605ee2183c",
-    "oi_reg_china_moe_first_list_169e69d6d3b0",
-    "oi_reg_china_moe_first_list_1fbae2caadf6",
-    "oi_reg_china_moe_first_list_237073fa7b8f",
-    "oi_reg_china_moe_first_list_2cea4a512284",
-    "oi_reg_china_moe_first_list_2e0fe76efc58",
-    "oi_reg_china_moe_first_list_2e740c06f58a",
-    "oi_reg_china_moe_first_list_342eaffe0a2d",
-    "oi_reg_china_moe_first_list_3e7d7f1573f5",
-    "oi_reg_china_moe_first_list_4da5ba1cd759",
-    "oi_reg_china_moe_first_list_51e42653e3a7",
-    "oi_reg_china_moe_first_list_6171d3961ca1",
-    "oi_reg_china_moe_first_list_623686edfaea",
-    "oi_reg_china_moe_first_list_629f45629442",
-    "oi_reg_china_moe_first_list_630f14861c5f",
-    "oi_reg_china_moe_first_list_65664474e19d",
-    "oi_reg_china_moe_first_list_6c83f6fbc123",
-    "oi_reg_china_moe_first_list_786840a80de5",
-    "oi_reg_china_moe_first_list_7bb91620f6bf",
-    "oi_reg_china_moe_first_list_8198cd05bc9a",
-    "oi_reg_china_moe_first_list_88382491a9f4",
-    "oi_reg_china_moe_first_list_88884c0cecea",
-    "oi_reg_china_moe_first_list_8da77b153c08",
-    "oi_reg_china_moe_first_list_9102e1ed6c58",
-    "oi_reg_china_moe_first_list_9bd07182de28",
-    "oi_reg_china_moe_first_list_a831431afa97",
-    "oi_reg_china_moe_first_list_a8ee995fcd40",
-    "oi_reg_china_moe_first_list_a8f200e823c3",
-    "oi_reg_china_moe_first_list_aa0c3a6ad5dd",
-    "oi_reg_china_moe_first_list_abd078f665e3",
-    "oi_reg_china_moe_first_list_ad93f8c58e1a",
-    "oi_reg_china_moe_first_list_ade9af6481e3",
-    "oi_reg_china_moe_first_list_aff25234392c",
-    "oi_reg_china_moe_first_list_b93b4840ca1b",
-    "oi_reg_china_moe_first_list_bacb89564c35",
-    "oi_reg_china_moe_first_list_bcfabd880b80",
-    "oi_reg_china_moe_first_list_c16061f50ba0",
-    "oi_reg_china_moe_first_list_c7bd0230fd05",
-    "oi_reg_china_moe_first_list_c8933652e81a",
-    "oi_reg_china_moe_first_list_ca130dcb9921",
-    "oi_reg_china_moe_first_list_cba1cb8800b7",
-    "oi_reg_china_moe_first_list_d49a66e303f3",
-    "oi_reg_china_moe_first_list_d5929e018014",
-    "oi_reg_china_moe_first_list_e2fb1df2d851",
-    "oi_reg_china_moe_first_list_f22bb9021786",
-    "oi_reg_china_moe_second_list_0b7a026f0901",
-    "oi_reg_china_moe_second_list_13ee8d59400f",
-    "oi_reg_china_moe_second_list_160fc0cf6d3e",
-    "oi_reg_china_moe_second_list_176670baa520",
-    "oi_reg_china_moe_second_list_1f44069a5196",
-    "oi_reg_china_moe_second_list_21aa189366ed",
-    "oi_reg_china_moe_second_list_2755eeda414f",
-    "oi_reg_china_moe_second_list_2cc58620942c",
-    "oi_reg_china_moe_second_list_2e827b6a3848",
-    "oi_reg_china_moe_second_list_30d95338e25c",
-    "oi_reg_china_moe_second_list_3cc95660db78",
-    "oi_reg_china_moe_second_list_5e6e62b1f677",
-    "oi_reg_china_moe_second_list_6c67abc9e7f1",
-    "oi_reg_china_moe_second_list_8e8229740e81",
-    "oi_reg_china_moe_second_list_9a4827037f9a",
-    "oi_reg_china_moe_second_list_b74bad947064",
-    "oi_reg_china_moe_second_list_b825c807b33c",
-    "oi_reg_china_moe_second_list_d9a31781bd1e",
-    "oi_reg_china_moe_second_list_e17db3add609",
-    "oi_reg_china_moe_second_list_e200c6a3621e",
-    "oi_reg_china_moe_second_list_e84b098fe93c",
-    "oi_reg_china_moe_second_list_ef20575cc804",
-    "oi_reg_china_moe_second_list_f872c612146a",
-    "oi_reg_china_moe_second_list_f90d332cd8a1",
-    "oi_reg_nsf_iucrc_004a30ab0331",
-    "oi_reg_nsf_iucrc_0147fde5b07f",
-    "oi_reg_nsf_iucrc_01c5a10d0f25",
-    "oi_reg_nsf_iucrc_0207442126b0",
-    "oi_reg_nsf_iucrc_02e02b95ee86",
-    "oi_reg_nsf_iucrc_03dd20cabb94",
-    "oi_reg_nsf_iucrc_059711e98ea6",
-    "oi_reg_nsf_iucrc_068b48afed40",
-    "oi_reg_nsf_iucrc_09535fe07825",
-    "oi_reg_nsf_iucrc_0a26627e0b0b",
-    "oi_reg_nsf_iucrc_0fe0e0c9cb46",
-    "oi_reg_nsf_iucrc_101b82bd4241",
-    "oi_reg_nsf_iucrc_116e4cfaf6c0",
-    "oi_reg_nsf_iucrc_13822631ab55",
-    "oi_reg_nsf_iucrc_159e01af8081",
-    "oi_reg_nsf_iucrc_15bf625785a3",
-    "oi_reg_nsf_iucrc_1768101e74e9",
-    "oi_reg_nsf_iucrc_177e11da8c89",
-    "oi_reg_nsf_iucrc_17b90941cbc5",
-    "oi_reg_nsf_iucrc_19d695107cb2",
-    "oi_reg_nsf_iucrc_1db2ef9987ce",
-    "oi_reg_nsf_iucrc_1dfb55d0c4c7",
-    "oi_reg_nsf_iucrc_1f407cf4abaa",
-    "oi_reg_nsf_iucrc_200852b0b550",
-    "oi_reg_nsf_iucrc_2123ecf70f1c",
-    "oi_reg_nsf_iucrc_21fd596defe1",
-    "oi_reg_nsf_iucrc_267fbcee3e44",
-    "oi_reg_nsf_iucrc_27bbe938f6ac",
-    "oi_reg_nsf_iucrc_28a494d1273c",
-    "oi_reg_nsf_iucrc_2a4d82fa4de9",
-    "oi_reg_nsf_iucrc_2a8970af9305",
-    "oi_reg_nsf_iucrc_2d475886b6c2",
-    "oi_reg_nsf_iucrc_2f59e8382b2f",
-    "oi_reg_nsf_iucrc_34afa63ee127",
-    "oi_reg_nsf_iucrc_3af7b9ff10c1",
-    "oi_reg_nsf_iucrc_3d9882e9b13e",
-    "oi_reg_nsf_iucrc_3ddc11d1c759",
-    "oi_reg_nsf_iucrc_3e9ce92b5646",
-    "oi_reg_nsf_iucrc_482548abeb59",
-    "oi_reg_nsf_iucrc_4d3dc9cc8605",
-    "oi_reg_nsf_iucrc_4f2318263c42",
-    "oi_reg_nsf_iucrc_51a753b09fd9",
-    "oi_reg_nsf_iucrc_51bc1e90654d",
-    "oi_reg_nsf_iucrc_52cc50bcb500",
-    "oi_reg_nsf_iucrc_53f42d61ea08",
-    "oi_reg_nsf_iucrc_5515603f9d10",
-    "oi_reg_nsf_iucrc_5716b2132646",
-    "oi_reg_nsf_iucrc_61f6c9f6a4be",
-    "oi_reg_nsf_iucrc_65501d1d9224",
-    "oi_reg_nsf_iucrc_66cc2aa2a432",
-    "oi_reg_nsf_iucrc_69c575fd6c32",
-    "oi_reg_nsf_iucrc_6ce492cc0986",
-    "oi_reg_nsf_iucrc_6f1e151b80eb",
-    "oi_reg_nsf_iucrc_6fb103411667",
-    "oi_reg_nsf_iucrc_748a648fcfac",
-    "oi_reg_nsf_iucrc_76d6d7834390",
-    "oi_reg_nsf_iucrc_78201a17a432",
-    "oi_reg_nsf_iucrc_795ea081760b",
-    "oi_reg_nsf_iucrc_7dccc2368e43",
-    "oi_reg_nsf_iucrc_85ec21d1aa93",
-    "oi_reg_nsf_iucrc_87c9a8427501",
-    "oi_reg_nsf_iucrc_884935856b6d",
-    "oi_reg_nsf_iucrc_8884403e90eb",
-    "oi_reg_nsf_iucrc_8911d30ba921",
-    "oi_reg_nsf_iucrc_899c87b7c91e",
-    "oi_reg_nsf_iucrc_8d18ed66fc13",
-    "oi_reg_nsf_iucrc_9161892b266c",
-    "oi_reg_nsf_iucrc_91f560043774",
-    "oi_reg_nsf_iucrc_93cc42618a43",
-    "oi_reg_nsf_iucrc_94ff77a7c518",
-    "oi_reg_nsf_iucrc_96e3cd058d44",
-    "oi_reg_nsf_iucrc_9733dc68db77",
-    "oi_reg_nsf_iucrc_9acb7a9fd4f6",
-    "oi_reg_nsf_iucrc_9c88b4999eb3",
-    "oi_reg_nsf_iucrc_9ce6933e9037",
-    "oi_reg_nsf_iucrc_a01cf0a4b4da",
-    "oi_reg_nsf_iucrc_a61b0ca9c620",
-    "oi_reg_nsf_iucrc_aa6d258880c4",
-    "oi_reg_nsf_iucrc_aaba322c29cb",
-    "oi_reg_nsf_iucrc_b51e7dce0188",
-    "oi_reg_nsf_iucrc_b615bd760223",
-    "oi_reg_nsf_iucrc_b8cf0b45d2cc",
-    "oi_reg_nsf_iucrc_b98ab5859251",
-    "oi_reg_nsf_iucrc_bdb2cc823b06",
-    "oi_reg_nsf_iucrc_c0a4b360e3de",
-    "oi_reg_nsf_iucrc_c0af22e5478f",
-    "oi_reg_nsf_iucrc_c2082a61895d",
-    "oi_reg_nsf_iucrc_c2b868298648",
-    "oi_reg_nsf_iucrc_c2d032c1585e",
-    "oi_reg_nsf_iucrc_c3184c6943a9",
-    "oi_reg_nsf_iucrc_c41e39e5a714",
-    "oi_reg_nsf_iucrc_c491ea6444e8",
-    "oi_reg_nsf_iucrc_cbac2f21f208",
-    "oi_reg_nsf_iucrc_d048739c3135",
-    "oi_reg_nsf_iucrc_d294fb1a2fa6",
-    "oi_reg_nsf_iucrc_d46b0bf3f548",
-    "oi_reg_nsf_iucrc_d51e058ea674",
-    "oi_reg_nsf_iucrc_dd2aa2177e64",
-    "oi_reg_nsf_iucrc_df0773a7bc3c",
-    "oi_reg_nsf_iucrc_e3976894405c",
-    "oi_reg_nsf_iucrc_e4c62767889e",
-    "oi_reg_nsf_iucrc_e520bb463ed0",
-    "oi_reg_nsf_iucrc_e692c4489bc4",
-    "oi_reg_nsf_iucrc_e9c7f6b8c7e9",
-    "oi_reg_nsf_iucrc_f037ae6d5144",
-    "oi_reg_nsf_iucrc_f0eaa67f452b",
-    "oi_reg_nsf_iucrc_f2f2c7db7745",
-    "oi_reg_nsf_iucrc_f3be9400cf4d",
-    "oi_reg_nsf_iucrc_f6cec949bcbf",
-    "oi_reg_nsf_iucrc_f79d7b799390",
-    "oi_reg_nsf_iucrc_fdf15e628901"
+    "oi_reg_australia_crcp_96241f7467cf",
+    "oi_reg_australia_crcp_97260ab64b77",
+    "oi_reg_australia_crcp_980ddc113e2e",
+    "oi_reg_australia_crcp_9911c2b91f05",
+    "oi_reg_australia_crcp_9b9d9e2f6a45",
+    "oi_reg_australia_crcp_9de743a2c89b",
+    "oi_reg_australia_crcp_a196543700b2",
+    "oi_reg_australia_crcp_a3e4373f0f01",
+    "oi_reg_australia_crcp_a45052b18579",
+    "oi_reg_australia_crcp_a46aa473d313",
+    "oi_reg_australia_crcp_a8da1c380690",
+    "oi_reg_australia_crcp_a90ee0521bd9"
   ]
 }
