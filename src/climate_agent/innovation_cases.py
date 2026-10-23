@@ -204,6 +204,8 @@ def write_innovation_cases(root: Path, output: Path, archives: list[dict], *, to
         book.setdefault("provenance", {}).update(extra.get("provenance", {}))
         coverage_profiles.extend(extra.get("model_profiles", []))
         book["reviewed_at"] = max(book["reviewed_at"], extra.get("reviewed_at", book["reviewed_at"]))
+    from .innovation_case_details import apply_case_details
+    apply_case_details(book, root)
     model_path = root / "config/open_innovation_models.json"
     if model_path.exists():
         model_config = json.loads(model_path.read_text(encoding="utf-8"))

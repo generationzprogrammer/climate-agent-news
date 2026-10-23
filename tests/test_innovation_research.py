@@ -28,7 +28,10 @@ class ResearchTests(unittest.TestCase):
         for p in (ROOT/'config').glob('open_innovation_*.json'):
             for c in json.loads(p.read_text(encoding='utf-8')).get('cases',[]):
                 for key,value in c.items():
-                    if key!='research_annotation':self.assertEqual(current[c['id']][key],value,(c['id'],key))
+                    if key=='evidence':
+                        self.assertEqual(current[c['id']][key][:len(value)],value,(c['id'],key))
+                        self.assertTrue(all(e.get('supports')==['case_detail'] for e in current[c['id']][key][len(value):]))
+                    elif key!='research_annotation':self.assertEqual(current[c['id']][key],value,(c['id'],key))
     def test_unknown_dates_not_imputed(self):
         c=next(c for c in self.book['cases'] if c['id']=='oi_ssl_factory')
         self.assertIsNone(c['timeline']['origin_year'])

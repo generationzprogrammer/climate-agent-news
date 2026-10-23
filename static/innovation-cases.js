@@ -26,6 +26,61 @@
   const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
   const url = value => { try { const u = new URL(value); return u.protocol === "https:" && !u.username && !u.password ? u.href : ""; } catch { return ""; } };
   const text = (value, lang) => value && typeof value === "object" ? (value[lang] || value.zh || value.en || "") : String(value ?? "");
+  // A presentation adapter, not a rewrite of the source records. Programme-wide
+  // rules remain inspectable but are not presented as individual achievements.
+  function casePresentation(c, language="zh") {
+    const zh=language==="zh",r=c.registry_record;
+    const view={title:text(c.title,language),summary:text(c.summary,language),facts:[],sections:{},programme:"",original:""};
+    for(const key of ["actors","mechanism","observed","constraints","transfer"])view.sections[key]=text(c[key],language);
+    if(!r)return view;
+    const add=(key,cn,en,value)=>{if(value!==null&&value!==undefined&&value!=="")view.facts.push({key,label:zh?cn:en,value:String(value)});};
+    view.sections.constraints="";view.sections.transfer="";view.sections.observed="";
+    view.programme=view.sections.mechanism;view.sections.mechanism="";
+    const key=r.registry||"";
+    if(key==='nsf_iucrc'){
+      const hosts=r.universities||[],members=r.member_names||[];
+      add('hosts','列名高校','Listed universities',hosts.length||null);
+      // An empty directory list is not evidence that the centre has no members.
+      add('members','列名产业及其他成员','Listed industry and other members',members.length||null);
+      add('established','成立年份','Established',r.year);
+      add('location','名录所在地','Listed location',r.location);
+      if(r.status==='completed')add('status','名录状态','Directory status',zh?'已完成':'Completed');
+      if(zh)view.summary=view.summary.replace(/，研究覆盖[^。]+。名录登记的具体方向为/,'，研究方向为');
+    }else if(key==='embrapii_export'){
+      if(zh)view.summary=view.summary.split('企业可围绕')[0];
+      add('location','实施地','Location',r.location);
+      const focus=zh?view.summary.match(/是EMBRAPII认证的(.+?)研究单元/)?.[1]:(r.focus||[]).join('; ');
+      add('focus','技术专长','Technical focus',focus);
+      view.original=r.activities||"";
+    }else if(key==='australia_crcp'){
+      add('partners','列名合作方','Named partners',r.partners?.length||null);
+      view.original=r.objective_original||"";
+    }else if(key.startsWith('china_moe')){
+      const year=r.designation_year;
+      view.summary=zh?(r.name+(year?'于'+year+'年':'')+'入选教育部高校科技成果转化和技术转移基地。'+(r.practice||'')):
+        text(c.summary,language).replace(', connecting university research with industrial application.','.');
+      add('designation','认定年份','Designation year',year);
+      add('city','实施地','Location',zh?r.city:null);
+      if(r.practice){view.sections.mechanism=zh?r.practice:(r.practice_en||'');view.programme="";}
+    }else if(key==='jst_coinext'){
+      if(zh)view.summary=view.summary.replace('，在JST共创平台计划下组织围绕这一目标的研究与合作。','。');
+      const status={'進行中プロジェクト':['进行中','Ongoing'],'終了プロジェクト':['已结束','Completed']}[r.stage];
+      if(status)add('status','计划登记状态','Programme status',status[zh?0:1]);
+    }else if(key.startsWith('africa')){
+      view.summary=view.sections.actors.replace(zh?'中心与依托机构：':'Centre and host: ','');
+      view.sections.actors="";
+    }
+    if(c.case_detail){
+      view.title=text(c.case_detail.title,language);view.summary=text(c.case_detail.summary,language);
+      for(const f of c.case_detail.facts||[])view.facts.push({key:'detail',label:text(f.label,language),value:text(f.value,language),source_id:f.source_id,locator:f.locator});
+    }
+    return view;
+  }
+  function substantiveField(c,key,language="zh"){
+    const view=casePresentation(c,language);
+    if(key==='mechanism'&&view.programme)return (language==='zh'?'计划共同规则：':'Programme rules: ')+view.programme;
+    return view.sections[key]||"";
+  }
   Object.assign(TXT.zh,{sector:"技术领域",compareHelp:"先筛选同一技术领域，勾选两至三个案例，再点击对比。",profile:"合作结构画像",raw:"原始数值",score:"刻度",missing:"未披露",rubric:"查看刻度依据",profileNote:"刻度1–5表示合作规模与结构，不表示技术水平或商业成效。",noProfile:"平台与制度安排不使用项目资助口径评分。",mixed:"所选案例包括不同层级，雷达图仅绘制项目；制度与平台请查阅下方事实表。",participants:"合作机构名录",organization:"机构",actorType:"机构类型",role:"角色",coordinator:"协调方",participant:"参与方",budget:"项目登记",grant:"欧盟最高资助额",cost:"登记总成本",objective:"技术任务",original:"研究目标原文",action:"资助类型",identifier:"官方项目编号",timeline:"项目期",scheme:"项目与制度",source:"来源",planned:"登记目标",showParticipants:"展开合作机构",status:"登记状态",signed:"已签约",closed:"已结项",unit:"单位",fundingNote:"资助额为批准上限，不是实际支出或营收。",originalTitle:"原题",scoringMethod:"合作结构刻度"});
   Object.assign(TXT.en,{sector:"Technology",compareHelp:"Filter by technology, select two or three cases, then compare.",profile:"Collaboration profile",raw:"Observation",score:"Band",missing:"Not disclosed",rubric:"Scale definitions",profileNote:"Bands 1–5 describe collaboration scale and structure, not technical quality or commercial success.",noProfile:"Platforms and institutional arrangements are not scored using project-grant metrics.",mixed:"Selection spans different levels. Radar profiles include projects only; use the fact table for platforms and rules.",participants:"Partner register",organization:"Organisation",actorType:"Actor type",role:"Role",coordinator:"Coordinator",participant:"Participant",budget:"Project register",grant:"Maximum EU contribution",cost:"Registered total cost",objective:"Technical objectives",original:"Original research objectives",action:"Action type",identifier:"Official project ID",timeline:"Project period",scheme:"Project and institutions",source:"Source",planned:"Registered objectives",showParticipants:"Explore partners",status:"Register status",signed:"Grant signed",closed:"Closed",unit:"Unit",fundingNote:"Grant figures are approved ceilings, not expenditure or revenue.",originalTitle:"Original title",scoringMethod:"Collaboration scales"});
   const number = value => typeof value === "number" ? value.toLocaleString(lang==="zh"?"zh-CN":"en-GB",{maximumFractionDigits:2}) : t("missing");
@@ -107,10 +162,15 @@
     const sourceMap = new Map(book.sources.map(s=>[s.id,s]));
     const keys = ["id","title","countries","scope","sector","challenges","modes","institutions","factors","start_year","end_year",
       "summary","actors","mechanism","observed","constraints","transfer","source_urls","reviewed_at","official_id","eu_grant_eur","participant_count","country_count","award_usd","funding_basis",
-      "primary_model","province","city","continent","economy","grain","cohort","verified_origin_year","origin_period","activity_periods","organization_tags","organization_participant_tags"];
+      "primary_model","province","city","continent","economy","grain","cohort","verified_origin_year","origin_period","activity_periods","organization_tags","organization_participant_tags","programme_rules","mechanism_scope","case_detail_json"];
     const value = (c,key) => {
       if (key==="source_urls") return c.evidence.map(ref=>sourceMap.get(ref.source_id)?.url||"").filter(Boolean).join(" | ");
+      if(key==='title'||key==='summary')return casePresentation(c,lang)[key];
       if (key==="reviewed_at") return book.reviewed_at;
+      if(key==='programme_rules')return casePresentation(c,lang).programme;
+      if(key==='mechanism_scope')return casePresentation(c,lang).programme?'programme':'case_description';
+      if(key==='case_detail_json')return c.case_detail?JSON.stringify(c.case_detail):'';
+      if(c.registry_record&&['mechanism','observed','constraints','transfer'].includes(key))return casePresentation(c,lang).sections[key];
       if(key==='verified_origin_year')return c.timeline?.origin_year??'';
       if(key==='origin_period')return c.timeline?.origin_period||'';
       if(key==='activity_periods')return (c.timeline?.activity_periods||[]).join(' | ');
@@ -140,6 +200,13 @@
   const tags = (c,group) => c[group].map(tag=>'<span>'+esc(label(group,tag))+'</span>').join("");
   const period = c => {const y=c.timeline?c.timeline.origin_year:c.start_year;return y?String(y)+(c.end_year&&c.end_year!==y?"–"+c.end_year:""):"";};
   const anchor = (href,title) => { const safe=url(href); return safe ? '<a href="'+esc(safe)+'" target="_blank" rel="noopener noreferrer">'+esc(title)+' ↗</a>' : esc(title); };
+  function registryFacts(view){
+    return view.facts.length?'<dl class="ic-project-facts ic-registry-facts">'+view.facts.map(row=>{const s=book.sources.find(s=>s.id===row.source_id);return '<div><dt>'+esc(row.label)+'</dt><dd>'+esc(row.value)+(s?' <small>'+anchor(s.url,t('source'))+'</small>':'')+'</dd></div>';}).join('')+'</dl>':'';
+  }
+  function compactFacts(c){
+    const rows=casePresentation(c,lang).facts.filter(r=>['hosts','members','partners','designation','focus'].includes(r.key)).slice(0,2);
+    return rows.length?'<dl class="ic-card-facts">'+rows.map(r=>'<div><dt>'+esc(r.label)+'</dt><dd>'+esc(r.value)+'</dd></div>').join('')+'</dl>':'';
+  }
   function profile(cases) {
     const axes=book.profile_axes||[];
     const known=cases.filter(c=>axes.some(a=>c.profile?.[a.id]?.score!==null&&c.profile?.[a.id]?.score!==undefined));
@@ -245,7 +312,7 @@
     host.querySelector(".ic-clear").disabled=!selected.size;
     host.querySelector(".ic-grid").innerHTML=cases.slice(0,visible).map(c=>'<article class="ic-card">'+
       '<div class="ic-card-meta"><span title="'+esc(location(c))+'">'+esc(c.countries.length>3?countries(c).split(" · ").slice(0,3).join(" · ")+' +'+(c.countries.length-3):location(c))+'</span><span>'+esc(period(c))+'</span></div>'+
-      '<h3>'+esc(local(c.title))+'</h3><p>'+esc(local(c.summary).length>190?local(c.summary).slice(0,190)+'…':local(c.summary))+'</p><div class="ic-tags">'+modelTag(c)+tags(c,"modes")+'</div>'+
+      '<h3>'+esc(casePresentation(c,lang).title)+'</h3><p>'+esc(casePresentation(c,lang).summary.length>190?casePresentation(c,lang).summary.slice(0,190)+'…':casePresentation(c,lang).summary)+'</p>'+compactFacts(c)+'<div class="ic-tags">'+modelTag(c)+tags(c,"modes")+'</div>'+
       '<div class="ic-card-actions"><button type="button" data-detail="'+c.id+'">'+t("detail")+' →</button>'+
       '<label><input type="checkbox" data-select="'+c.id+'" '+(selected.has(c.id)?"checked":"")+' '+(!selected.has(c.id)&&selected.size>=3?"disabled":"")+'>'+t("compare")+'</label></div></article>').join("") ||
       '<div class="ic-empty">'+t("empty")+'</div>';
@@ -273,21 +340,23 @@
     host.querySelector(".ic-close").focus();
   }
   function evidence(c) {
-    const refs=c.evidence.map(ref=>book.sources.find(s=>s.id===ref.source_id)).filter(Boolean);
+    const refs=c.evidence.map(ref=>{const s=book.sources.find(s=>s.id===ref.source_id);return s?{...s,locator:ref.locator}:null;}).filter(Boolean);
     return '<ol class="ic-sources">'+refs.map(s=>'<li>'+anchor(s.url,s.title)+'<span>'+esc(s.publisher)+' · '+esc(s.language.toUpperCase())+
-      (s.published_date?' · '+esc(s.published_date):"")+'</span></li>').join("")+'</ol>';
+      (s.published_date?' · '+esc(s.published_date):"")+'</span>'+(s.locator&&s.locator!=='Programme rules'?'<span>'+(lang==='zh'?'原文定位：':'Locator: ')+esc(s.locator)+'</span>':'')+'</li>').join("")+'</ol>';
   }
   function detail(id) {
-    const c=byId(id);
-    show('<p class="overline">'+esc(location(c))+(period(c)?" · "+esc(period(c)):"")+'</p><h2>'+esc(local(c.title))+'</h2>'+
+    const c=byId(id),view=casePresentation(c,lang);
+    show('<p class="overline">'+esc(location(c))+(period(c)?" · "+esc(period(c)):"")+'</p><h2>'+esc(view.title)+'</h2>'+
       '<div class="ic-tags">'+modelTag(c)+tags(c,"modes")+tags(c,"institutions")+'</div>'+
-      '<p class="ic-detail-summary">'+esc(local(c.summary))+'</p>'+projectFacts(c)+
+      '<p class="ic-detail-summary">'+esc(view.summary)+'</p>'+registryFacts(view)+projectFacts(c)+
       (c.timeline?.events?.length?'<section class="ir-timeline"><h3>'+(lang==='zh'?'历史节点':'Documented milestones')+'</h3><ol>'+c.timeline.events.map(e=>'<li><time>'+esc(e.date)+'</time><p>'+esc(local(e.description))+'</p>'+e.source_ids.map(id=>{const s=book.sources.find(s=>s.id===id);return s?anchor(s.url,lang==='zh'?'来源':'Source'):'';}).join(' ')+'</li>').join('')+'</ol></section>':'')+
-      '<h3 class="ic-group-title">'+t("facts")+'</h3>'+
-      ["actors","mechanism","observed"].map(key=>'<section><h4>'+t(key)+'</h4><p>'+esc(local(c[key]))+'</p></section>').join("")+
-      partnerList(c)+(c.objective_excerpt?'<details class="ic-original"><summary>'+t("original")+'</summary><p lang="en">'+esc(c.objective_excerpt.en)+'</p></details>':"")+profile([c])+
+      (["actors","mechanism","observed"].some(key=>view.sections[key]&&!view.summary.includes(view.sections[key]))?'<h3 class="ic-group-title">'+t("facts")+'</h3>':'')+
+      ["actors","mechanism","observed"].filter(key=>view.sections[key]&&!view.summary.includes(view.sections[key])).map(key=>'<section><h4>'+t(key)+'</h4><p>'+esc(view.sections[key])+'</p></section>').join("")+
+      partnerList(c)+((c.objective_excerpt?.en||view.original)?'<details class="ic-original"><summary>'+(view.original?(lang==='zh'?'技术内容原文':'Original technical description'):t("original"))+'</summary><p>'+esc(c.objective_excerpt?.en||view.original)+'</p></details>':"")+
+      (view.programme?'<details class="ic-programme"><summary>'+(lang==='zh'?'计划共同规则':'Programme rules')+'</summary><p>'+esc(view.programme)+'</p>'+c.evidence.filter(e=>e.supports?.includes('mechanism')).map(e=>{const s=book.sources.find(s=>s.id===e.source_id);return s?anchor(s.url,s.title):'';}).join(' · ')+'</details>':'')+
+      ((book.profile_axes||[]).some(a=>c.profile?.[a.id]?.score!=null)?profile([c]):'')+
       '<section><h4>'+t("factors")+'</h4><div class="ic-tags">'+tags(c,"factors")+'</div></section>'+
-      (c.constraints||c.transfer?'<h3 class="ic-group-title">'+t("analysis")+'</h3>'+["constraints","transfer"].filter(key=>c[key]).map(key=>'<section><h4>'+t(key)+'</h4><p>'+esc(local(c[key]))+'</p></section>').join(""):"")+
+      (view.sections.constraints||view.sections.transfer?'<h3 class="ic-group-title">'+t("analysis")+'</h3>'+["constraints","transfer"].filter(key=>view.sections[key]).map(key=>'<section><h4>'+t(key)+'</h4><p>'+esc(view.sections[key])+'</p></section>').join(""):"")+
       '<h3 class="ic-group-title">'+t("evidence")+'</h3>'+evidence(c)+
       '<p class="ic-review">'+t("review")+' · '+esc(book.reviewed_at)+'</p>'+
       (c.developments?.length?'<h3 class="ic-group-title">'+t("developments")+'</h3><ul class="ic-news">'+c.developments.map(n=>
@@ -298,17 +367,20 @@
     if(cases.length<2)return;
     const rows=[
       ["country",c=>countries(c)],["kind",c=>local(c.sector)],
+      ["summary",c=>casePresentation(c,lang).summary],
       ["timeline",registeredPeriod],
       ["grant",registeredGrant],
-      ["participants",c=>c.project?.participant_count!==null&&c.project?.participant_count!==undefined?c.project.participant_count+' · '+c.project.company_count+(lang==='zh'?'家企业':' companies'):
+      ["participants",c=>c.registry_record?.universities?.length?casePresentation(c,lang).facts.filter(r=>['hosts','members'].includes(r.key)).map(r=>r.label+' '+r.value).join(' · '):
+        c.registry_record?.partners?.length?(lang==='zh'?'公开列名 ':'Named ')+c.registry_record.partners.length+(lang==='zh'?' 家合作方':' partners'):
+        c.project?.participant_count!==null&&c.project?.participant_count!==undefined?c.project.participant_count+' · '+c.project.company_count+(lang==='zh'?'家企业':' companies'):
         c.participants?.length?(lang==='zh'?'公开列名 ':'Named ')+c.participants.length+(lang==='zh'?' 家机构（非完整统计）':' organisations (not a complete census)'):t("missing")],
       ["mode",c=>c.modes.map(key=>label("modes",key)).join(" · ")],
       ["institution",c=>c.institutions.map(key=>label("institutions",key)).join(" · ")],
       ["factors",c=>c.factors.map(key=>label("factors",key)).join(" · ")],
-      ...["mechanism","observed","constraints","transfer"].filter(key=>cases.some(c=>local(c[key]))).map(key=>[key,c=>local(c[key])||t("missing")])
+      ...["mechanism","observed","constraints","transfer"].filter(key=>cases.some(c=>substantiveField(c,key,lang))).map(key=>[key,c=>substantiveField(c,key,lang)||t("missing")])
     ];
     show('<h2>'+t("compare")+'</h2>'+ (cases.some(c=>!c.project)&&cases.some(c=>c.project)?'<p>'+t("mixed")+'</p>':"")+profile(cases)+'<div class="ic-matrix-scroll" tabindex="0"><table class="ic-matrix"><thead><tr><th scope="col">'+t("field")+'</th>'+
-      cases.map(c=>'<th scope="col">'+esc(local(c.title))+'</th>').join("")+'</tr></thead><tbody>'+
+      cases.map(c=>'<th scope="col">'+esc(casePresentation(c,lang).title)+'</th>').join("")+'</tr></thead><tbody>'+
       rows.map(([key,value])=>'<tr><th scope="row">'+t(key)+'</th>'+cases.map(c=>'<td>'+esc(value(c))+'</td>').join("")+'</tr>').join("")+
       '<tr><th scope="row">'+t("evidence")+'</th>'+cases.map(c=>'<td>'+evidence(c)+'</td>').join("")+'</tr></tbody></table></div>',true);
   }
@@ -333,6 +405,6 @@
     catch{loadPromise=null;host.innerHTML='<p role="alert">'+t("failed")+' <button class="ic-retry" type="button">'+t("retry")+'</button></p>';
       host.querySelector(".ic-retry").addEventListener("click",()=>mount(host,options));}
   }
-  root.GruenInnovationCases={mount,filterCases,facetCounts,FAMILIES,DOMAINS,exportCsv,csvCell,radarSvg,getSnapshot:()=>book};
+  root.GruenInnovationCases={mount,filterCases,facetCounts,FAMILIES,DOMAINS,exportCsv,csvCell,radarSvg,casePresentation,substantiveField,getSnapshot:()=>book};
   if(typeof module==="object"&&module.exports)module.exports=root.GruenInnovationCases;
 })(typeof window==="undefined"?globalThis:window);

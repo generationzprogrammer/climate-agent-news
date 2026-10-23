@@ -95,6 +95,14 @@
 #innovationCases .ic-project-facts dt { font-size:14px; color:var(--muted); }
 #innovationCases .ic-project-facts dd { margin:3px 0 0; font:500 17px/1.6 var(--sans); }
 #innovationCases .ic-funding-note { font-size:15px; }
+#innovationCases .ic-card-facts { display:flex; flex-wrap:wrap; gap:10px 24px; margin:0 0 14px; }
+#innovationCases .ic-card-facts div { min-width:0; max-width:100%; }
+#innovationCases .ic-card-facts dt { font-size:13px; color:var(--muted); }
+#innovationCases .ic-card-facts dd { margin:3px 0 0; font-size:16px; font-weight:500; overflow-wrap:anywhere; }
+#innovationCases .ic-programme { margin:22px 0; border-top:1px solid var(--line); padding-top:16px; }
+#innovationCases .ic-programme summary { cursor:pointer; font-size:16px; font-weight:500; }
+#innovationCases .ic-programme a { display:inline; overflow-wrap:anywhere; }
+#innovationCases .ic-registry-facts dd { overflow-wrap:anywhere; }
 #innovationCases .ic-partners, #innovationCases .ic-original, #innovationCases .ic-rubric { margin-top:22px; }
 #innovationCases .ic-partners summary, #innovationCases .ic-original summary, #innovationCases .ic-rubric summary { cursor:pointer; font-size:16px; font-weight:500; }
 #innovationCases .ic-original p { font-family:Georgia,"Times New Roman",serif; overflow-wrap:anywhere; }
