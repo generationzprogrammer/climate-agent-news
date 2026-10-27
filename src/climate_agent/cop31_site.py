@@ -12,9 +12,6 @@ def write_cop31_entry(static_dir: Path) -> Path:
     soup.body["data-edition"] = "cop31"
     section_order = ("map", "today", "chinaCarbon", "singapore", "analytics", "assistant", "database")
     allowed = set(section_order)
-    for node in soup.select('#subscribeOpen, [data-open-subscribe]'):
-        node['hidden'] = ''
-        node['data-cop31-excluded'] = ''
     # Keep hidden DOM contracts for shared UI compatibility; their datasets and
     # scripts are not loaded. Seven curated sections are publicly displayed.
     for node in soup.select("main > section, main > div"):
@@ -31,7 +28,7 @@ def write_cop31_entry(static_dir: Path) -> Path:
         node["href"] = "./cop31/" + node["href"]
     for node in list(soup.select("script[src], link[rel=stylesheet]")):
         asset = node.get("src", node.get("href", ""))
-        if "/bth-" in asset or "/innovation-" in asset:
+        if ("/bth-" in asset and "/bth-transport.js" not in asset) or "/innovation-" in asset:
             node.decompose()
     logo = soup.select_one(".cop31-brand")
     logo["href"] = "https://cop31.tr/"

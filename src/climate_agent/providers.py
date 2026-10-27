@@ -179,7 +179,7 @@ def resolve_subscriber_endpoint(form_endpoint: str, configured_endpoint: str = "
     return urlunsplit((parts.scheme,parts.netloc,parts.path[:-len("subscribe")]+"subscribers","",""))
 
 
-def fetch_subscribers(endpoint: str, admin_token: str, *, timeout: int = 20) -> list[str]:
+def fetch_subscribers(endpoint: str, admin_token: str, *, timeout: int = 20, include_preferences: bool = False) -> list:
     """Read the active weekly list from a protected HTTPS subscription service."""
     parts = urlparse(endpoint or "")
     if parts.scheme != "https" or not parts.netloc:
@@ -217,4 +217,8 @@ def fetch_subscribers(endpoint: str, admin_token: str, *, timeout: int = 20) -> 
         email = str(value or "").strip().lower()
         if email and "@" in email and email not in subscribers:
             subscribers.append(email)
+    if include_preferences:
+        preferences = {str(item.get("email", "")).strip().lower(): ("en" if item.get("language") == "en" else "zh")
+                       for item in result.get("preferences", []) if isinstance(item, dict)}
+        return [{"email": email, "language": preferences.get(email, "zh")} for email in subscribers]
     return subscribers

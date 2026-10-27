@@ -8,7 +8,7 @@ const positiveInt = (v, fallback, cap) => Math.max(1, Math.min(cap, Number.parse
 const verificationRequired = env => env.BTH_VERIFICATION_MODE !== "off";
 const SUBSCRIPTION_BASE = "https://climate-news-subscriptions.1090697345.workers.dev";
 
-async function subscriptionRelay(request, origin, action) {
+async function subscriptionRelay(request, origin, action, env = {}) {
   // Fixed destination and public operations only. No arbitrary proxy or admin API.
   const raw = await limitedBody(request);
   if (raw === null || raw.length > 2048) return json({error:"request_too_large"},413,origin);
@@ -17,7 +17,8 @@ async function subscriptionRelay(request, origin, action) {
   const email = String(body.email || "").trim().toLowerCase();
   if (!/^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/.test(email)) return json({error:"invalid_email"},400,origin);
   try {
-    const response = await fetch(`${SUBSCRIPTION_BASE}/${action}`,{method:"POST",headers:{"Content-Type":"application/json","Origin":origin},body:JSON.stringify({email,language:body.language === "en" ? "en" : "zh"}),signal:AbortSignal.timeout(15000),redirect:"error"});
+    const outgoing = new Request(`${SUBSCRIPTION_BASE}/${action}`,{method:"POST",headers:{"Content-Type":"application/json","Origin":origin},body:JSON.stringify({email,language:body.language === "en" ? "en" : "zh"}),signal:AbortSignal.timeout(15000),redirect:"error"});
+    const response = env.SUBSCRIPTIONS ? await env.SUBSCRIPTIONS.fetch(outgoing) : await fetch(outgoing);
     const payload=await response.json();
     if (!response.ok || payload.ok !== true || payload.status !== (action === "subscribe" ? "subscribed" : "unsubscribed")) return json({error:"subscription_not_confirmed"},502,origin);
     return json({ok:true,status:payload.status,language:payload.language},200,origin);
@@ -257,7 +258,7 @@ export default {
     if (path === "/health" && request.method === "GET") return json({ok: true, ready: !!(env.BTH_LLM_API_KEY && (!verificationRequired(env) || env.BTH_TURNSTILE_SECRET_KEY) && env.BUDGET), verification: verificationRequired(env) ? "required" : "off", model: env.BTH_LLM_MODEL || "qwen3.5-plus", version: "20261010-1", transports: ["stream", "json"]}, 200, origin === allowed ? origin : "null");
     if (origin !== allowed) return json({error: "origin_not_allowed"}, 403, "null");
     if (request.method === "OPTIONS") return new Response(null, {status: 204, headers: {...headers(origin), "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Max-Age": "600"}});
-    if (["/subscriptions/subscribe","/subscriptions/unsubscribe"].includes(path) && request.method === "POST") return subscriptionRelay(request, origin, path.split("/").pop());
+    if (["/subscriptions/subscribe","/subscriptions/unsubscribe"].includes(path) && request.method === "POST") return subscriptionRelay(request, origin, path.split("/").pop(), env);
     if (path !== "/chat" || request.method !== "POST") return json({error: "not_found"}, 404, origin);
     if (!env.BTH_LLM_API_KEY || (verificationRequired(env) && !env.BTH_TURNSTILE_SECRET_KEY) || !env.BUDGET) return json({error: "service_not_configured"}, 503, origin);
     try {

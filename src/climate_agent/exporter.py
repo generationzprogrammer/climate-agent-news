@@ -92,12 +92,15 @@ def export_static_site(
     pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief.pdf")
     english_pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief_en.pdf", language="en")
     weekly_report = weekly_report_payload(archive)
+    enrich_daily_english(db, weekly_report.get("highlights", []))
     (data_dir / "weekly_report.json").write_text(json.dumps(weekly_report, ensure_ascii=False, indent=2), encoding="utf-8")
     (data_dir / "weekly_report.md").write_text(render_weekly_markdown(weekly_report), encoding="utf-8")
     weekly_pdf_path = write_weekly_report_pdf(weekly_report, data_dir / "weekly_report.pdf")
     (data_dir / "subscription.json").write_text(json.dumps({
         "endpoint": os.getenv("CLIMATE_SUBSCRIBE_ENDPOINT", ""),
         "unsubscribe_endpoint": os.getenv("CLIMATE_UNSUBSCRIBE_ENDPOINT", ""),
+        "fallback_endpoint": "https://gruen-climate-subscriptions.pages.dev/subscribe",
+        "fallback_unsubscribe_endpoint": "https://gruen-climate-subscriptions.pages.dev/unsubscribe",
         "contact_email": os.getenv("CLIMATE_PUBLIC_CONTACT_EMAIL", "yuan-yh21@mails.tsinghua.edu.cn"),
         "privacy_note": "订阅邮箱不写入公开源码或Git历史；请使用表单端点或GitHub Secrets保存订阅列表。",
     }, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -106,12 +109,18 @@ def export_static_site(
         "members": [
             {
                 "name": "宋伟泽",
+                "name_en": "Weize Song",
+                "role_en": "Director of Data Platform Research and Assistant Professor (Research), Low-Carbon Energy Laboratory, Tsinghua University",
+                "research_en": "Low-carbon transition scenarios and methods; environmental systems and intelligent decision-making; zero-carbon industrial park governance and policy innovation; urban environmental performance assessment.",
                 "role": "清华大学低碳能源实验室，数据平台研究主任，助理教授（研究系列）",
                 "email": "songwz@tsinghua.edu.cn",
                 "research": "低碳转型情景推演理论与方法；环境系统与智能决策；零碳园区治理与政策创新；城市空间环境绩效量化评估。",
             },
             {
                 "name": "袁誉杭",
+                "name_en": "Yuhang Yuan",
+                "role_en": "PhD student, Department of Chemical Engineering, Tsinghua University",
+                "research_en": "Lithium-ion battery electrolytes and artificial intelligence.",
                 "role": "清华大学化学工程系在读博士",
                 "email": "yuan-yh21@mails.tsinghua.edu.cn",
                 "research": "锂电池电解液与人工智能交叉领域。",

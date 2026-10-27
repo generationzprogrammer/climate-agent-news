@@ -3,6 +3,10 @@ main = "src/index.mjs"
 compatibility_date = "2026-10-01"
 workers_dev = true
 
+[[services]]
+binding = "SUBSCRIPTIONS"
+service = "climate-news-subscriptions"
+
 [vars]
 BTH_VERIFICATION_MODE = "off"
 BTH_LLM_MODEL = "qwen3.5-plus"

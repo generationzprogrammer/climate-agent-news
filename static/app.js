@@ -94,6 +94,8 @@ const UI_TEXT = {
   },
 };
 const tr = key => UI_TEXT[state.language]?.[key] || UI_TEXT.zh[key] || key;
+Object.assign(UI_TEXT.zh, {subscribeTitle:"订阅每周气候情报周报",subscribePrivacy:"邮箱仅用于周报订阅，保存在私有订阅服务中。",emailLabel:"邮箱",emailLanguage:"邮件语言"});
+Object.assign(UI_TEXT.en, {subscribeTitle:"Subscribe to the weekly climate briefing",subscribePrivacy:"Your email is stored privately and used only for this subscription.",emailLabel:"Email",emailLanguage:"Email language"});
 const field = (item, zhKey, enKey) => state.language === "en"
   ? ((enKey === "title_original" && item?.title_en) || item?.[enKey] || item?.title_original || item?.[zhKey] || "")
   : (item?.[zhKey] || item?.[enKey] || "");
@@ -1722,7 +1724,8 @@ async function subscriptionWithFallback(config, email, unsubscribe = false) {
   // This relay stores in the SAME KV as the primary route, not a second list.
   const assistant = await fetchJson("./data/bth_assistant_config.json").catch(()=>({}));
   const relay=assistant.endpoint?assistant.endpoint.replace(/\/$/,"") + "/subscriptions/" + action:"";
-  return window.GruenSubscriptions.submit([primary,relay],email,action);
+  const fallback = unsubscribe ? config.fallback_unsubscribe_endpoint : config.fallback_endpoint;
+  return window.GruenSubscriptions.submit([fallback,primary,relay],email,action,{language:$("subscribeLanguage")?.value || state.language});
 }
 
 function setupSubscribe() {
@@ -1735,6 +1738,16 @@ function setupSubscribe() {
   form.dataset.bound = "true";
   openButtons.forEach(button => button.addEventListener("click", () => {
     closeMobileMenu();
+    const en=state.language==="en";
+    $("subscribeLanguage").value=state.language;
+    $("subscribeSubmit").textContent=en?"Subscribe":"提交订阅";
+    $("unsubscribeSubmit").textContent=en?"Unsubscribe":"退订";
+    $("weeklyDownload").textContent=en?"Read this week's briefing":"下载本周周报";
+    $("weeklyDownload").href=en?"./cop31/?lang=en#assistant":"./data/weekly_report.pdf";
+    $("subscribeHint").textContent=en?"Weekly on Mondays at 08:00 Beijing time. Resubmit to change language; unsubscribe at any time.":"每周一北京时间 08:00 发送；再次提交可更改邮件语言，可随时退订。";
+    $("subscribeHint").dataset.status="";
+    $("subscribeFallback").textContent=en?"Contact the team":"联系管理员";
+    $("subscribeFallback").hidden=true;
     openDialog(modal);
     setTimeout(() => $("subscribeEmail")?.focus(), 0);
   }));
@@ -1749,31 +1762,31 @@ function setupSubscribe() {
     const fallback = $("subscribeFallback");
     const email = $("subscribeEmail").value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast("请输入有效邮箱。");
+      toast(qaText("请输入有效邮箱。","Please enter a valid email address."));
       return;
     }
-    if (submit) { submit.disabled = true; submit.textContent = "提交中…"; }
+    if (submit) { submit.disabled = true; submit.textContent = qaText("提交中…","Submitting…"); }
     if (fallback) fallback.hidden = true;
     if (unsubscribe) unsubscribe.disabled = true;
-    if (hint) {hint.textContent = "正在连接订阅服务…";hint.dataset.status="pending";}
+    if (hint) {hint.textContent = qaText("正在连接订阅服务…","Connecting to the subscription service…");hint.dataset.status="pending";}
     try {
       const config = await subscriptionConfig();
       await subscriptionWithFallback(config, email);
-      if (hint) {hint.textContent = "订阅已登记。每周一北京时间 08:00 发送周报；如未收到，请检查垃圾邮件。";hint.dataset.status="success";}
-      toast("订阅成功，邮箱已登记。");
+      if (hint) {hint.textContent = qaText("订阅已登记。每周一北京时间 08:00 发送所选语言的周报；如未收到，请检查垃圾邮件。","Subscription saved. Your selected-language briefing arrives on Mondays at 08:00 Beijing time. Please also check your spam folder.");hint.dataset.status="success";}
+      toast(qaText("订阅成功，邮箱已登记。","Subscription saved."));
     } catch (error) {
       const codes={network_unreachable:"网络未能连接订阅入口",connection_timeout:"订阅入口响应超时",subscription_not_confirmed:"服务未确认登记",service_unavailable:"服务返回了非订阅响应"};
-      if (hint) {hint.textContent = `本次未确认订阅成功：${codes[error.message]||"订阅服务暂不可用"}。可重试，或通过邮件联系管理员代为登记。`;hint.dataset.status="error";}
+      if (hint) {hint.textContent = qaText(`本次未确认订阅成功：${codes[error.message]||"订阅服务暂不可用"}。可重试，或通过邮件联系管理员代为登记。`,"Subscription was not confirmed. Please retry or contact the team; no successful registration is being assumed.");hint.dataset.status="error";}
       if (fallback) fallback.hidden = false;
     } finally {
-      if (submit) { submit.disabled = false; submit.textContent = "提交订阅"; }
+      if (submit) { submit.disabled = false; submit.textContent = qaText("提交订阅","Subscribe"); }
       if (unsubscribe) unsubscribe.disabled = false;
     }
   });
   unsubscribe?.addEventListener("click", async () => {
     const email = $("subscribeEmail").value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast("请先输入需要退订的有效邮箱。");
+      toast(qaText("请先输入需要退订的有效邮箱。","Enter the email address you wish to unsubscribe."));
       return;
     }
     const submit=$("subscribeSubmit");
@@ -1781,9 +1794,9 @@ function setupSubscribe() {
     try {
       await subscriptionWithFallback(await subscriptionConfig(),email,true);
       closeDialog(modal);
-      toast("退订成功，该邮箱将不再接收周报。");
+      toast(qaText("退订成功，该邮箱将不再接收周报。","Unsubscribed. You will no longer receive the weekly briefing."));
     } catch (error) {
-      toast("退订失败，请稍后重试或通过联系邮箱处理。");
+      toast(qaText("退订失败，请稍后重试或通过联系邮箱处理。","Unsubscribe was not confirmed. Please retry or contact the team."));
     } finally {
       unsubscribe.disabled=false;if(submit)submit.disabled=false;
     }
@@ -1799,21 +1812,28 @@ function setupTeam() {
     closeMobileMenu();
     const team = state.team || {};
     $("teamList").innerHTML = (team.members || []).map(member => `<article class="team-card">
-      <h3>${esc(member.name)}</h3>
-      <p>${esc(member.role)}</p>
+      <h3>${esc(state.language === "en" ? member.name_en : member.name)}</h3>
+      <p>${esc(state.language === "en" ? member.role_en : member.role)}</p>
       <a href="mailto:${esc(member.email)}">${esc(member.email)}</a>
-      <small>${esc(member.research)}</small>
-    </article>`).join("") || "暂无公开团队信息。";
+      <small>${esc(state.language === "en" ? member.research_en : member.research)}</small>
+    </article>`).join("") || qaText("暂无公开团队信息。","Team information is not available.");
     openDialog(modal);
   }));
   close?.addEventListener("click", () => closeDialog(modal));
+}
+
+function chartLabel(value) {
+  if (state.language !== "en") return value;
+  const names={"能源与排放":"Energy and emissions","气候适应":"Climate adaptation","气候资金":"Climate finance","国际气候谈判":"Climate negotiations","气候综合":"General climate issues","国际碳市场":"International carbon markets","气候动态":"Climate developments","国家气候承诺":"National climate pledges","履约与全球盘点":"Implementation and stocktake","可再生能源":"Renewable energy","全球/未标注":"Global / unassigned","全球":"Global","亚洲":"Asia","北美洲":"North America","欧洲":"Europe","非洲":"Africa","大洋洲":"Oceania","南美洲":"South America","南极洲":"Antarctica","欧盟":"European Union","减缓与能源":"Energy and mitigation","科学与影响":"Science and impacts"};
+  const country=(state.taxonomy?.countries || []).find(row=>row.name_zh===value);
+  return names[value] || ({"中国":"China","美国得州":"Texas, United States","美国加州":"California, United States","印尼":"Indonesia","韩国":"South Korea","日本":"Japan","俄罗斯":"Russia"})[value] || country?.name_en || value;
 }
 
 function renderLineChart(id, rows, { x, y }) {
   const element = $(id);
   if (!element) return;
   if (!rows.length) {
-    element.innerHTML = '<div class="empty compact"><b>暂无趋势数据</b></div>';
+    element.innerHTML = `<div class="empty compact"><b>${qaText("暂无趋势数据","No trend data")}</b></div>`;
     return;
   }
   const width = 920, height = 300, left = 54, right = 24, top = 20, bottom = 44;
@@ -1831,7 +1851,7 @@ function renderLineChart(id, rows, { x, y }) {
     const label = Math.round(maxValue * (1 - ratio));
     return `<line class="chart-gridline" x1="${left}" y1="${yy}" x2="${width - right}" y2="${yy}"></line><text class="chart-muted" x="${left - 8}" y="${yy + 4}" text-anchor="end">${label}</text>`;
   }).join("");
-  element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="月度文本频率趋势图">
+  element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${qaText("月度文本频率趋势图","Monthly text frequency")}">
     ${grid}
     <path class="chart-area" d="${area}"></path>
     <path class="chart-line" d="${path}"></path>
@@ -1846,19 +1866,22 @@ function renderLineChart(id, rows, { x, y }) {
 function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill", valueFormat = formatCount, ariaLabel = "分类频率条形图" } = {}) {
   const element = $(id);
   if (!element) return;
+  if (state.language === "en" && ariaLabel === "分类频率条形图") ariaLabel = "Category frequency";
   const shown = rows.slice(0, limit);
   if (!shown.length) {
-    element.innerHTML = '<div class="empty compact"><b>暂无分布数据</b></div>';
+    element.innerHTML = `<div class="empty compact"><b>${qaText("暂无分布数据","No distribution data")}</b></div>`;
     return;
   }
-  const width = 520, rowHeight = 34, left = 120, right = 54, top = 12;
+  const width = 580, rowHeight = state.language === "en" ? 44 : 34, left = state.language === "en" ? 215 : 120, right = 54, top = 12;
   const height = top * 2 + shown.length * rowHeight;
   const maxValue = Math.max(1, ...shown.map(row => Number(row.count || 0)));
   element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(ariaLabel)}">
     ${shown.map((row, index) => {
       const y = top + index * rowHeight + 7;
       const barWidth = (width - left - right) * Number(row.count || 0) / maxValue;
-      return `<text class="chart-label" x="${left - 10}" y="${y + 13}" text-anchor="end">${esc(row.name)}</text>
+      const label=chartLabel(row.name), words=String(label).split(' '), lines=[''];
+      for(const word of words){const i=lines.length-1;if(lines[i] && (lines[i]+' '+word).length>27)lines.push(word);else lines[i]+=(lines[i]?' ':'')+word;}
+      return `<text class="chart-label" x="${left - 10}" y="${y + 9}" text-anchor="end"><title>${esc(label)}</title>${lines.slice(0,2).map((line,i)=>`<tspan x="${left-10}" dy="${i?15:0}">${esc(line)}${i===1&&lines.length>2?'…':''}</tspan>`).join('')}</text>
         <rect class="bar-track" x="${left}" y="${y}" width="${width - left - right}" height="16"></rect>
         <rect class="${colorClass}" x="${left}" y="${y}" width="${barWidth}" height="16"></rect>
         <text class="chart-value" x="${left + barWidth + 7}" y="${y + 12}">${esc(valueFormat(row.count))}</text>`;
@@ -1873,20 +1896,20 @@ function renderHeatmap(id, matrix) {
   const topics = matrix.topics || [];
   const cells = matrix.cells || [];
   if (!countries.length || !topics.length) {
-    element.innerHTML = '<div class="empty compact"><b>暂无交叉矩阵</b></div>';
+    element.innerHTML = `<div class="empty compact"><b>${qaText("暂无交叉矩阵","No cross-tabulation data")}</b></div>`;
     return;
   }
   const maxValue = Math.max(1, ...cells.map(cell => Number(cell.count || 0)));
   const cellMap = new Map(cells.map(cell => [`${cell.country}||${cell.topic}`, Number(cell.count || 0)]));
   element.innerHTML = `<div class="heatmap" style="--heatmap-columns:${topics.length}">
-    <div class="heatmap-row header"><span></span>${topics.map(topic => `<span>${esc(topic)}</span>`).join("")}</div>
+    <div class="heatmap-row header"><span></span>${topics.map(topic => `<span>${esc(chartLabel(topic))}</span>`).join("")}</div>
     ${countries.map(country => `<div class="heatmap-row">
-      <span class="heatmap-country">${esc(country)}</span>
+      <span class="heatmap-country">${esc(chartLabel(country))}</span>
       ${topics.map(topic => {
         const value = cellMap.get(`${country}||${topic}`) || 0;
         const alpha = 0.08 + 0.82 * value / maxValue;
         const ink = alpha > 0.46 ? "#fff" : "#12223a";
-        return `<span class="heat-cell" style="background:rgba(23,78,166,${alpha.toFixed(3)});color:${ink}" title="${esc(country)} / ${esc(topic)}：${value}">${value || ""}</span>`;
+        return `<span class="heat-cell" style="background:rgba(23,78,166,${alpha.toFixed(3)});color:${ink}" title="${esc(chartLabel(country))} / ${esc(chartLabel(topic))}: ${value}">${value || ""}</span>`;
       }).join("")}
     </div>`).join("")}
   </div>`;

@@ -290,6 +290,7 @@ def main(argv: list[str] | None = None) -> int:
         recipients = args.recipient or [
             item.strip() for item in os.getenv("CLIMATE_MAIL_TO", "").split(",") if item.strip()
         ]
+        languages = {address.strip().lower(): "zh" for address in recipients}
         wants_wecom = args.channel in {"wecom", "all"} or (args.channel == "auto" and bool(wecom_url))
         wants_email = args.channel in {"email", "all"} or (args.channel == "auto" and bool(recipients))
         if wants_wecom:
@@ -340,23 +341,30 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit("订阅者接口地址与管理令牌必须同时配置")
         if subscriber_endpoint and subscriber_token:
             try:
-                fetched = fetch_subscribers(subscriber_endpoint, subscriber_token, timeout=30)
+                fetched = fetch_subscribers(subscriber_endpoint, subscriber_token, timeout=30, include_preferences=True)
             except Exception as exc:
                 raise SystemExit(f"订阅者名单读取失败: {type(exc).__name__}") from exc
             print(json.dumps({"subscriber_endpoint": "ok", "active_subscribers": len(fetched)}, ensure_ascii=False))
-            recipients.extend(fetched)
+            recipients.extend(item["email"] for item in fetched)
+            languages.update({item["email"]: item["language"] for item in fetched})
         elif require_subscriber_endpoint:
             raise SystemExit("缺少 CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT 或 CLIMATE_SUBSCRIBER_ADMIN_TOKEN")
         recipients = list(dict.fromkeys(recipient.strip().lower() for recipient in recipients if recipient.strip()))
         if not recipients:
             print(json.dumps({"status": "skipped", "reason": "no_weekly_subscribers"}, ensure_ascii=False))
             return 0
-        delivery = publish_email_batch(
-            message,
-            recipients,
-            subject=report.get("meta", {}).get("title", "国际气候情报周报"),
-            retries=1,
-        )
+        delivery = {"sent": 0, "failed": 0, "failure_types": {}}
+        for language in ("zh", "en"):
+            group = [email for email in recipients if languages.get(email, "zh") == language]
+            if not group:
+                continue
+            subject = (f"GREEN Weekly Climate Briefing | {report.get('meta', {}).get('end_date', '')}" if language == "en"
+                       else report.get("meta", {}).get("title", "国际气候情报周报"))
+            result = publish_email_batch(build_weekly_message(report, args.public_url, language=language), group, subject=subject, retries=1)
+            delivery["sent"] += result["sent"]
+            delivery["failed"] += result["failed"]
+            for key, count in result["failure_types"].items():
+                delivery["failure_types"][key] = delivery["failure_types"].get(key, 0) + count
         print(json.dumps({"status": "sent" if not delivery["failed"] else "partial", "recipients": len(recipients), **delivery}, ensure_ascii=False))
         if delivery["failed"]:
             raise SystemExit(f"周报邮件部分投递失败: sent={delivery['sent']} failed={delivery['failed']}")

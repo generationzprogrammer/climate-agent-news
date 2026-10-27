@@ -22,3 +22,9 @@ test("retirement requires unsubscribe acknowledgement",async()=>{
 test("insecure routes are not used and duplicate routes are removed",async()=>{
   let count=0;const api=setup(async()=>{count++;return {ok:true,status:"subscribed"};});await api.submit(["http://no.test","https://a.test","https://a.test"],"synthetic@example.com");assert.equal(count,1);
 });
+test("selected language is sent and must be acknowledged",async()=>{
+  let sent;const api=setup(async(url,options)=>{sent=options.payload;return {ok:true,status:"subscribed",language:"en"};});
+  await api.submit(["https://test.invalid"],"synthetic@example.com","subscribe",{language:"en"});assert.equal(sent.language,"en");
+  const old=setup(async()=>({ok:true,status:"subscribed"}));
+  await assert.rejects(old.submit(["https://test.invalid"],"synthetic@example.com","subscribe",{language:"en"}),/language_not_confirmed/);
+});

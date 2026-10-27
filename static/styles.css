@@ -878,6 +878,9 @@ footer a:hover { color: var(--blue); }
 .modal-card label { display: grid; gap: 8px; margin-top: 18px; }
 .modal-card label span { color: #5f6a78; font: 800 11px var(--mono); letter-spacing: .1em; }
 .modal-card input { height: 46px; padding: 0 13px; border: 1px solid #bac3d0; font: 15px var(--sans); }
+.modal-card select { min-height: 46px; padding: 0 13px; border: 1px solid #bac3d0; background: #fff; color: #12223a; font: 16px var(--sans); }
+html[lang="en"] .heatmap-row { grid-template-columns: 125px repeat(var(--heatmap-columns), minmax(115px, 1fr)); }
+html[lang="en"] .heatmap-row.header span { font-size: 12px; line-height: 1.4; }
 .modal-actions { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
 .modal-actions button,
 .modal-actions a {

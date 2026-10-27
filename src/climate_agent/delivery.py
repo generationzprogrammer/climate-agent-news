@@ -36,8 +36,20 @@ def build_push_message(payload: dict, public_url: str, *, max_items: int = 3) ->
     return "\n".join(lines)
 
 
-def build_weekly_message(report: dict, public_url: str, *, max_items: int = 7) -> str:
+def build_weekly_message(report: dict, public_url: str, *, max_items: int = 7, language: str = "zh") -> str:
     meta = report.get("meta", {})
+    site = public_url.rstrip('/') + '/' if public_url else "https://generationzprogrammer.github.io/climate-agent-news/"
+    if language == "en":
+        from .english_brief import english_fields
+        lines = [f"GREEN Weekly Climate Briefing | {meta.get('start_date', '')} – {meta.get('end_date', '')}",
+                 f"This week's archive covers {meta.get('total', 0)} climate news records.", "", "Selected developments", ""]
+        for index, item in enumerate(report.get("highlights", [])[:max(1, min(max_items, 10))], 1):
+            title, summary = english_fields(item)
+            lines.extend([f"{index}. {title}", summary, f"Source: {item.get('canonical_url', '')}", ""])
+        lines.extend([f"Explore the interactive map and news archive: {urljoin(site, './cop31/?lang=en')}",
+                      f"Today's English PDF: {urljoin(site, './data/daily_brief_en.pdf')}",
+                      "Unsubscribe or change language: open the website, choose Subscribe and use the same email address. You can also reply with 'unsubscribe'."])
+        return "\n".join(lines)
     lines = [
         f"【{meta.get('title', '国际气候情报周报')}】",
         f"本周纳入 {meta.get('total', 0)} 条通过质量门禁的公开气候新闻记录。",
@@ -53,8 +65,8 @@ def build_weekly_message(report: dict, public_url: str, *, max_items: int = 7) -
             f"概括：{_clip(item.get('summary_zh') or '概要待补充。', 120)}",
             "",
         ])
-    if public_url:
-        lines.append(f"网页与PDF周报：{urljoin(public_url.rstrip('/') + '/', './data/weekly_report.pdf')}")
-    lines.append("退订：回复本邮件并在标题中注明“退订气候周报”。")
+    lines.append(f"查看全球地图与最新情报：{urljoin(site, './cop31/')}")
+    lines.append(f"下载PDF周报：{urljoin(site, './data/weekly_report.pdf')}")
+    lines.append("退订或修改邮件语言：打开网站，点击“订阅”，填写同一邮箱操作；也可回复本邮件并注明“退订气候周报”。")
     lines.append("说明：周报为自动生成；重要数字、承诺和立场请回到原文核验。")
     return "\n".join(lines)

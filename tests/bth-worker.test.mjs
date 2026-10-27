@@ -27,7 +27,7 @@ test("client cannot disable required server verification", async () => {
 
 test("subscription relay has fixed public routes and requires explicit acknowledgement", async () => {
   const original=globalThis.fetch; let destination;
-  globalThis.fetch=async(url,init)=>{destination=String(url);assert.equal(init.headers.Origin,"https://generationzprogrammer.github.io");return new Response('{"ok":true,"status":"subscribed"}');};
+  globalThis.fetch=async(request)=>{destination=request.url;assert.equal(request.headers.get("Origin"),"https://generationzprogrammer.github.io");return new Response('{"ok":true,"status":"subscribed"}');};
   const request=()=>new Request("https://worker/subscriptions/subscribe",{method:"POST",headers:{Origin:"https://generationzprogrammer.github.io"},body:JSON.stringify({email:"test@example.com",url:"https://attacker.example"})});
   try {
     assert.equal((await worker.fetch(request(),{},{})).status,200);

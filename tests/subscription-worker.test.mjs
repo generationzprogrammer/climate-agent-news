@@ -18,3 +18,11 @@ test("public visitors cannot read the private list or use an unapproved origin",
   const {env,records}=setup();assert.equal((await worker.fetch(new Request("https://service.test/subscribers"),env)).status,401);
   assert.equal((await worker.fetch(new Request("https://service.test/subscribe",{method:"POST",headers:{Origin:"https://other.invalid"},body:JSON.stringify({email:"reader-one@example.com"})}),env)).status,403);assert.equal(records.size,0);
 });
+test("language updates preserve a single private record and legacy users default to Chinese",async()=>{
+  const {env,records}=setup();await worker.fetch(request("reader@example.com"),env);
+  assert.equal([...records.values()][0].language,"zh");
+  const r=await worker.fetch(new Request('https://service.test/subscribe',{method:'POST',headers:{Origin:origin},body:JSON.stringify({email:'reader@example.com',language:'en'})}),env);
+  assert.equal((await r.json()).language,'en');assert.equal(records.size,1);
+  const list=await worker.fetch(new Request('https://service.test/subscribers',{headers:{Authorization:`Bearer ${env.CLIMATE_SUBSCRIBER_ADMIN_TOKEN}`}}),env);
+  assert.equal((await list.json()).preferences[0].language,'en');
+});

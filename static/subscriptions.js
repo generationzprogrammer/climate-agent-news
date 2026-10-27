@@ -11,9 +11,10 @@
       const run=async route=>{
         if(settled)return;
         try {
-          const result=await window.GruenBthTransport.request(route,{method:"POST",payload:{email,list:"climate-weekly"},accept:"application/json",signal:controller.signal,timeout});
+          const result=await window.GruenBthTransport.request(route,{method:"POST",payload:{email,list:"climate-weekly",language:options.language==="en"?"en":"zh"},accept:"application/json",signal:controller.signal,timeout});
           const expected=action==="unsubscribe"?"unsubscribed":"subscribed";
           if(result.ok!==true||result.status!==expected)throw new Error("subscription_not_confirmed");
+          if(action==="subscribe" && options.language && result.language!==options.language)throw new Error("language_not_confirmed");
           finish(null,result);
         }catch(error){if(settled)return;lastError=error;if(++failed===routes.length)finish(lastError);}
       };

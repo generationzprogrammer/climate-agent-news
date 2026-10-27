@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。">
   <title>格润｜国际气候与能源信息智能分析支持系统</title>
-  <link rel="stylesheet" href="./styles.css?v=20261027-cop31-bilingual">
+  <link rel="stylesheet" href="./styles.css?v=20261027-subscriptions-i18n">
   <link rel="stylesheet" href="./innovation-cases.css?v=20261023">
 </head>
 <body>
@@ -308,9 +308,10 @@
     <form class="modal-card" id="subscribeForm">
       <button class="modal-close" id="subscribeClose" type="button" aria-label="关闭订阅窗口">×</button>
       <p class="overline">WEEKLY BRIEFING</p>
-      <h2>订阅每周气候情报周报</h2>
-      <p>输入邮箱订阅周报。邮箱由独立订阅服务保存，不进入公开源码。</p>
-      <label><span>邮箱</span><input id="subscribeEmail" type="email" required placeholder="name@example.com" autocomplete="email"></label>
+      <h2 data-i18n="subscribeTitle">订阅每周气候情报周报</h2>
+      <p data-i18n="subscribePrivacy">邮箱仅用于周报订阅，保存在私有订阅服务中。</p>
+      <label><span data-i18n="emailLabel">邮箱</span><input id="subscribeEmail" type="email" required placeholder="name@example.com" autocomplete="email"></label>
+      <label><span data-i18n="emailLanguage">邮件语言</span><select id="subscribeLanguage"><option value="zh">中文</option><option value="en">English</option></select></label>
       <div class="modal-actions"><button id="subscribeSubmit" type="submit">提交订阅</button><button class="secondary" id="unsubscribeSubmit" type="button">退订</button><a id="weeklyDownload" href="./data/weekly_report.pdf" target="_blank" rel="noopener">下载本周周报</a></div>
       <p id="subscribeHint" role="status" aria-live="polite">订阅后每周一北京时间 08:00 发送周报；使用同一邮箱可随时退订。</p>
       <a class="subscribe-fallback" id="subscribeFallback" href="mailto:yuan-yh21@mails.tsinghua.edu.cn" hidden>联系管理员</a>
@@ -320,7 +321,7 @@
     <div class="modal-card team-modal-card">
       <button class="modal-close" id="teamClose" type="button" aria-label="关闭">×</button>
       <p class="overline">TEAM</p>
-      <h2>团队信息</h2>
+      <h2 data-i18n="team">团队信息</h2>
       <div class="team-list" id="teamList">正在读取团队信息…</div>
     </div>
   </dialog>
@@ -337,11 +338,11 @@
   <script src="./bth-transport.js?v=20261011-1" defer></script>
   <script src="./bth-assistant.js?v=20261010-1" defer></script>
   <script src="./bth-energy.js?v=20261011-1" defer></script>
-  <script src="./subscriptions.js?v=20261011-1" defer></script>
+  <script src="./subscriptions.js?v=20261027-languages" defer></script>
   <script src="./bth-tracker.js?v=20261003-1" defer></script>
   <script src="./innovation-research.js?v=20261018" defer></script>
   <script src="./innovation-analysis.js?v=20261014-1" defer></script>
   <script src="./innovation-cases.js?v=20261023" defer></script>
-  <script src="./app.js?v=20261027-cop31-bilingual" defer></script>
+  <script src="./app.js?v=20261027-subscriptions-i18n" defer></script>
 </body>
 </html>
