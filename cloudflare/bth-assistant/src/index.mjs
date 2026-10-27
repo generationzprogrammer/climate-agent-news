@@ -17,10 +17,10 @@ async function subscriptionRelay(request, origin, action) {
   const email = String(body.email || "").trim().toLowerCase();
   if (!/^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/.test(email)) return json({error:"invalid_email"},400,origin);
   try {
-    const response = await fetch(`${SUBSCRIPTION_BASE}/${action}`,{method:"POST",headers:{"Content-Type":"application/json","Origin":origin},body:JSON.stringify({email}),signal:AbortSignal.timeout(15000),redirect:"error"});
+    const response = await fetch(`${SUBSCRIPTION_BASE}/${action}`,{method:"POST",headers:{"Content-Type":"application/json","Origin":origin},body:JSON.stringify({email,language:body.language === "en" ? "en" : "zh"}),signal:AbortSignal.timeout(15000),redirect:"error"});
     const payload=await response.json();
     if (!response.ok || payload.ok !== true || payload.status !== (action === "subscribe" ? "subscribed" : "unsubscribed")) return json({error:"subscription_not_confirmed"},502,origin);
-    return json({ok:true,status:payload.status},200,origin);
+    return json({ok:true,status:payload.status,language:payload.language},200,origin);
   } catch {return json({error:"subscription_unavailable"},502,origin);}
 }
 async function limitedBody(request) {

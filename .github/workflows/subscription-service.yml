@@ -1,0 +1,33 @@
+name: 部署双语订阅服务
+on:
+  push:
+    branches: [main]
+    paths: ["cloudflare/subscription-worker/**", "cloudflare/subscription-relay/**", "scripts/prepare_subscription_deploy.mjs", ".github/workflows/subscription-service.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gruen-subscription-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.BTH_CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node --test tests/subscription-worker.test.mjs tests/subscriptions.test.mjs
+      - name: 保留现有KV并准备备用域名
+        run: node scripts/prepare_subscription_deploy.mjs --pages
+      - name: 更新订阅Worker（保留现有变量与密钥）
+        run: npm exec --yes --package=wrangler@4 -- wrangler deploy --config .subscription-deploy/wrangler.json --keep-vars
+      - name: 发布备用订阅入口
+        run: |
+          if [ -f .subscription-deploy/pages-ready ]; then
+            npm exec --yes --package=wrangler@4 -- wrangler pages deploy .subscription-deploy/pages --project-name gruen-climate-subscriptions --branch main
+          fi
