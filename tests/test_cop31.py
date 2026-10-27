@@ -9,7 +9,8 @@ from bs4 import BeautifulSoup
 from climate_agent.briefing import select_daily_window, select_daily_map_window, _continent, _ensure_places
 from climate_agent.cop_coverage import cop_topics, coverage_regions, prioritize_translation
 from climate_agent.cop31_site import write_cop31_entry
-from climate_agent.sync import GOOGLE_NEWS_QUERIES, GOOGLE_NEWS_LOCALES, interleave_discovery_batches, _source_scope_match, _analyse
+from climate_agent.sync import GOOGLE_NEWS_QUERIES, GOOGLE_NEWS_LOCALES, interleave_discovery_batches, _source_scope_match, _analyse, _article_rows
+from climate_agent.collector import NormalizedArticle
 from climate_agent.taxonomy import organization_tags_for, public_taxonomy
 from climate_agent.translation import detect_places, source_balanced_rows
 
@@ -80,6 +81,15 @@ class Cop31Tests(unittest.TestCase):
         item = row(1, "Tonga coastal resilience project shares Pacific voices", "TO")
         item["places"] = [{"name_zh": "太平洋地区", "lon": 165, "lat": -10}]
         self.assertEqual(_ensure_places(item)["places"][0]["name_zh"], "汤加")
+
+    def test_irrelevant_results_do_not_consume_accepted_article_budget(self):
+        def article(index, title):
+            return NormalizedArticle(str(index), "API004", "https://example.org/rss", f"https://example.org/{index}", title, None, None, None, "en", str(index))
+        rows, _ = _article_rows([article(i, "Football game") for i in range(160)] + [article(200, "Russia climate emissions policy")], {"authority": 3})
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["article_id"], "200")
+        rows, _ = _article_rows([article(i, "Climate emissions policy") for i in range(180)], {"authority": 3})
+        self.assertEqual(len(rows), 150)
 
     def test_translation_priorities_do_not_pull_old_cop_news_ahead_of_today(self):
         rows = [row(1, "Today solar project", "CN"), row(2, "COP31 climate finance", day="2026-10-26")]

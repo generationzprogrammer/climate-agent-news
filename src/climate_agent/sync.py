@@ -217,7 +217,7 @@ def _article_rows(articles: list[NormalizedArticle], source: dict) -> tuple[list
     rows = []
     rejected = {"future_date": 0, "duplicate_url": 0, "out_of_scope": 0}
     seen: set[str] = set()
-    for article in articles[:150]:
+    for article in articles:
         if not _source_scope_match(article, article.source_id):
             rejected["out_of_scope"] += 1
             continue
@@ -255,6 +255,8 @@ def _article_rows(articles: list[NormalizedArticle], source: dict) -> tuple[list
                 "fact_status": "source_claim_unverified",
             },
         })
+        if len(rows) >= 150:
+            break
     return rows, {
         "accepted": len(rows),
         "missing_dates": sum(not row["published_at_utc"] for row in rows),
