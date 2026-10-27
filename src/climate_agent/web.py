@@ -31,6 +31,8 @@ class AppHandler(BaseHTTPRequestHandler):
     def _send_static(self, relative: str) -> None:
         relative = relative or "index.html"
         candidate = (self.static_dir / relative).resolve()
+        if candidate.is_dir():
+            candidate = (candidate / "index.html").resolve()
         if self.static_dir.resolve() not in candidate.parents and candidate != self.static_dir.resolve():
             self.send_error(HTTPStatus.FORBIDDEN)
             return

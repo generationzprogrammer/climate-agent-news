@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+from io import BytesIO
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import Mock
 
 from bs4 import BeautifulSoup
 from climate_agent.briefing import select_daily_window, select_daily_map_window, _continent, _ensure_places
@@ -13,6 +15,7 @@ from climate_agent.sync import GOOGLE_NEWS_QUERIES, GOOGLE_NEWS_LOCALES, interle
 from climate_agent.collector import NormalizedArticle
 from climate_agent.taxonomy import organization_tags_for, public_taxonomy
 from climate_agent.translation import detect_places, source_balanced_rows
+from climate_agent.web import AppHandler
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -26,6 +29,17 @@ def row(index, title, code="US", day="2026-10-27", score=80):
 
 
 class Cop31Tests(unittest.TestCase):
+    def test_local_server_serves_standalone_directory_index(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "index.html").write_bytes(b"main")
+            (root / "cop31").mkdir()
+            (root / "cop31/index.html").write_bytes(b"COP31")
+            handler = SimpleNamespace(static_dir=root, send_response=Mock(), send_header=Mock(), end_headers=Mock(), send_error=Mock(), wfile=BytesIO())
+            AppHandler._send_static(handler, "cop31/")
+            self.assertEqual(handler.wfile.getvalue(), b"COP31")
+            handler.send_error.assert_not_called()
+
     def test_twelve_same_day_items_and_four_cop_priorities(self):
         titles = ["Wildfire damages forests in California", "Drought cuts crop harvest in Kenya", "Scientists measure Arctic ice", "India installs solar capacity", "Brazil builds electricity grid", "New battery factory opens in France", "Japanese heatwave breaks records", "Germany reforms electricity tariffs"]
         items = [row(i, title, code) for i, (title, code) in enumerate(zip(titles, ["US", "KE", "CA", "IN", "BR", "FR", "JP", "DE"]))]
