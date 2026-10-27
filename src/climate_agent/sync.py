@@ -202,6 +202,12 @@ def _source_scope_match(article: NormalizedArticle, source_id: str) -> bool:
     if source_id == "API004":
         if any(term in title for term in GOOGLE_NEWS_EXCLUDE_TERMS):
             return False
+        if re.search(r"[а-яё]", title):
+            # A vehicle fuel/price announcement is not a climate story merely
+            # because it mentions methane. Require a climate/emissions signal.
+            return any(term in title for term in ("климат", "парников", "декарбонизац", "углерод", "мерзлот", "cop31", "кс-31")) or (
+                "метан" in title and any(term in title for term in ("выброс", "утеч"))
+            )
         return any(term in title for term in CLIMATE_SIGNAL_TERMS)
     return True
 

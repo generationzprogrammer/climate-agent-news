@@ -49,6 +49,8 @@ class Cop31Tests(unittest.TestCase):
         self.assertIn("RU", coverage_regions({"title_original": article.title}))
         self.assertEqual(detect_places(article.title)[0]["name_zh"], "俄罗斯")
         self.assertFalse(_source_scope_match(SimpleNamespace(title="В России обсуждают футбол"), "API004"))
+        self.assertFalse(_source_scope_match(SimpleNamespace(title="Granta LPG: пропан вместо метана и запас хода 1000 км"), "API004"))
+        self.assertTrue(_source_scope_match(SimpleNamespace(title="Новые требования к выбросам метана"), "API004"))
 
     def test_pacific_islands_are_not_australia_or_pacific_northwest(self):
         for title in ["Australia solar capacity rises", "Pacific Northwest floods"]:
