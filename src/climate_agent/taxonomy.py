@@ -54,7 +54,7 @@ COUNTRY_ALIASES = {
     "US": ("united states", "united states of america", "u.s.", "u.s.a.", "usa", "美国"),
     "GB": ("united kingdom", "britain", "british", "英国"),
     "CN": ("china", "chinese", "people's republic of china", "中国", "中华人民共和国"),
-    "RU": ("russia", "russian federation", "russian", "俄罗斯", "俄联邦"),
+    "RU": ("russia", "russian federation", "russian", "俄罗斯", "俄联邦", "россия", "россии", "российск"),
     "KR": ("south korea", "republic of korea", "korean", "韩国"),
     "KP": ("north korea", "democratic people's republic of korea", "朝鲜"),
     "CZ": ("czechia", "czech republic", "捷克"),

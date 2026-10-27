@@ -57,6 +57,7 @@ GOOGLE_NEWS_QUERIES = (
     '("Pacific Islands" OR Fiji OR Tuvalu OR Vanuatu OR Samoa OR Tonga OR Kiribati) '
     '(climate OR emissions OR adaptation OR "sea level") when:1d',
     '(Russia OR Russian) ("climate change" OR emissions OR decarbonisation OR methane OR permafrost OR "carbon market") when:1d',
+    'Россия (климат OR "парниковые газы" OR декарбонизация OR "углеродная нейтральность" OR метан) when:1d',
 )
 GOOGLE_NEWS_LOCALES = (
     ("en-US", "US", "US:en"),
@@ -75,6 +76,7 @@ GOOGLE_NEWS_LOCALES = (
     ("en-GB", "GB", "GB:en"),
     ("en-NZ", "NZ", "NZ:en"),
     ("en-GB", "GB", "GB:en"),
+    ("ru-RU", "RU", "RU:ru"),
 )
 GDELT_PROFILES = {
     "API001": {
@@ -119,6 +121,7 @@ TOPIC_RULES = {
     "能源与排放": (
         "emission", "renewable", "fossil fuel", "coal", "methane", "energy transition",
         "clean energy", "clean power", "solar", "wind power", "battery", "energy storage", "power grid",
+        "парников", "декарбонизац", "углеродная нейтральность", "метан",
     ),
     "气候适应": (
         "adaptation", "loss and damage", "resilience", "climate disaster",
@@ -141,6 +144,7 @@ CLIMATE_SIGNAL_TERMS = (
     "energy startup", "energy company", "clean technology", "fusion energy",
     "气候", "碳", "排放", "可再生能源", "净零", "低碳", "绿色转型",
     "高温", "热浪", "野火", "干旱", "洪水", "风暴", "飓风",
+    "климат", "парников", "декарбонизац", "углерод", "метан", "мерзлот",
 )
 
 UNDERCOVERED_GEO_TERMS = (
@@ -149,6 +153,7 @@ UNDERCOVERED_GEO_TERMS = (
     "egypt", "morocco", "algeria", "tunisia", "libya", "north africa",
     "japan", "japanese", "south korea", "korean",
     "pacific islands", "fiji", "tuvalu", "vanuatu", "samoa", "kiribati", "tonga",
+    "росси",
 )
 
 NUMBER_PATTERN = re.compile(

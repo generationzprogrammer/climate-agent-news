@@ -38,7 +38,7 @@ def coverage_regions(item: dict) -> set[str]:
     codes = {str(value.get("alpha2", "")).upper() for value in item.get("country_codes", []) if isinstance(value, dict)}
     text = record_text(item)
     result = set()
-    if "RU" in codes or re.search(r"\brussia(?:n)?\b|俄罗斯|俄联邦", text, re.I):
+    if "RU" in codes or re.search(r"\brussia(?:n)?\b|俄罗斯|俄联邦|росси", text, re.I):
         result.add("RU")
     if codes & PACIFIC_ISLAND_CODES or _PACIFIC.search(text):
         result.add("PACIFIC_ISLANDS")

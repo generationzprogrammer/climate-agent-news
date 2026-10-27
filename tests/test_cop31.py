@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from climate_agent.briefing import select_daily_window, select_daily_map_window, _continent, _ensure_places
 from climate_agent.cop_coverage import cop_topics, coverage_regions, prioritize_translation
 from climate_agent.cop31_site import write_cop31_entry
-from climate_agent.sync import GOOGLE_NEWS_QUERIES, GOOGLE_NEWS_LOCALES, interleave_discovery_batches
+from climate_agent.sync import GOOGLE_NEWS_QUERIES, GOOGLE_NEWS_LOCALES, interleave_discovery_batches, _source_scope_match, _analyse
 from climate_agent.taxonomy import organization_tags_for, public_taxonomy
 from climate_agent.translation import detect_places, source_balanced_rows
 
@@ -41,6 +41,14 @@ class Cop31Tests(unittest.TestCase):
 
     def test_no_old_news_to_fill_target(self):
         self.assertEqual(len(select_daily_window([row(1, "Floods in Brazil", "BR"), row(2, "Climate finance", day="2026-10-26")])), 1)
+
+    def test_russian_language_discovery_is_climate_scoped(self):
+        article = SimpleNamespace(title="В России обсуждают климат и выбросы парниковых газов", summary_from_source="", source_id="API004")
+        self.assertTrue(_source_scope_match(article, "API004"))
+        self.assertGreaterEqual(_analyse(article, 3)["score"], 45)
+        self.assertIn("RU", coverage_regions({"title_original": article.title}))
+        self.assertEqual(detect_places(article.title)[0]["name_zh"], "俄罗斯")
+        self.assertFalse(_source_scope_match(SimpleNamespace(title="В России обсуждают футбол"), "API004"))
 
     def test_pacific_islands_are_not_australia_or_pacific_northwest(self):
         for title in ["Australia solar capacity rises", "Pacific Northwest floods"]:
