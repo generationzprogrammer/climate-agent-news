@@ -290,7 +290,6 @@ def main(argv: list[str] | None = None) -> int:
         recipients = args.recipient or [
             item.strip() for item in os.getenv("CLIMATE_MAIL_TO", "").split(",") if item.strip()
         ]
-        languages = {address.strip().lower(): "zh" for address in recipients}
         wants_wecom = args.channel in {"wecom", "all"} or (args.channel == "auto" and bool(wecom_url))
         wants_email = args.channel in {"email", "all"} or (args.channel == "auto" and bool(recipients))
         if wants_wecom:
@@ -326,6 +325,7 @@ def main(argv: list[str] | None = None) -> int:
         recipients = args.recipient or [
             item.strip() for item in os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS", "").split(",") if item.strip()
         ]
+        languages = {address.strip().lower(): "zh" for address in recipients}
         subscriber_endpoint = os.getenv("CLIMATE_WEEKLY_SUBSCRIBERS_ENDPOINT", "")
         # The deployed form and weekly sender must read the same service / KV.
         # Derive the private list URL from this very deployment's public form.
