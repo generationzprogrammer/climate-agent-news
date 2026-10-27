@@ -126,9 +126,72 @@ def _page_stream(lines: list[tuple[str, int, int]]) -> bytes:
     return "\n".join(commands).encode("ascii")
 
 
-def write_daily_brief_pdf(payload: dict, path: Path) -> Path:
-    """Write a dependency-free, searchable Chinese PDF using a standard CJK font."""
-    return _write_pdf(_brief_lines(payload), path)
+def write_daily_brief_pdf(payload: dict, path: Path, *, language: str = "zh") -> Path:
+    """Typeset both editions from identical daily records with real font metrics."""
+    from html import escape
+    from urllib.parse import urlsplit
+    from reportlab.lib import colors
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, PageBreak
+    from reportlab.pdfgen.canvas import Canvas
+    from functools import partial
+    from .english_brief import english_fields, english_text
+
+    pdfmetrics.registerFont(UnicodeCIDFont("STSong-Light"))
+    english = language == "en"
+    font = "Times-Roman" if english else "STSong-Light"
+    heading_font = "Times-Bold" if english else "STSong-Light"
+    date = payload.get("meta", {}).get("latest_news_date") or payload.get("meta", {}).get("date", "")
+    title = "Daily climate intelligence" if english else "全球气候情报简报"
+    styles = {
+        "title": ParagraphStyle("title", fontName=heading_font, fontSize=25, leading=32, spaceAfter=10, keepWithNext=True),
+        "headline": ParagraphStyle("headline", fontName=heading_font, fontSize=14, leading=20, spaceAfter=6, wordWrap="CJK" if not english else None),
+        "body": ParagraphStyle("body", fontName=font, fontSize=11, leading=18, spaceAfter=6, wordWrap="CJK" if not english else None),
+        "meta": ParagraphStyle("meta", fontName=font, fontSize=9, leading=13, textColor=colors.HexColor("#555555"), spaceAfter=5),
+        "link": ParagraphStyle("link", fontName=font, fontSize=9, leading=14, spaceAfter=10, splitLongWords=True, wordWrap="CJK" if not english else None),
+    }
+    def text(value):
+        # Conventional Latin/digit widths in mixed Chinese paragraphs.
+        if english:
+            return escape(str(value or ""))
+        return ''.join(f'<font name="Times-Roman">{escape(run)}</font>' if face == "F1" else escape(run) for face, run in _font_runs(str(value or "")))
+    def para(value, style="body"):
+        return Paragraph(text(value), styles[style])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    document = SimpleDocTemplate(str(path), pagesize=(PAGE_WIDTH, PAGE_HEIGHT), rightMargin=48, leftMargin=48, topMargin=54, bottomMargin=48,
+                                 title=title, author="GREEN", pageCompression=1)
+    records = payload.get("intelligence", [])
+    story = [para(title, "title"), para(f"{date}  |  {len(records)} stories  |  Beijing time" if english else f"{date}　北京时间　共 {len(records)} 条", "meta"), Spacer(1, 14)]
+    links = []
+    for index, item in enumerate(records, 1):
+        headline, summary = english_fields(item) if english else (item.get("title_zh") or item.get("title_original") or "", item.get("summary_zh") or "")
+        source = item.get("source_name") or ""
+        url = item.get("canonical_url") or ""
+        if english and not english_text(source):
+            source = urlsplit(url).hostname or "Source"
+        story.append(KeepTogether([para(f"{index:02d}  {headline}", "headline"), para(source, "meta"), para(summary), Spacer(1, 13)]))
+        if url.startswith(("https://", "http://")):
+            links.append((index, headline, url))
+    if links:
+        story.extend([Spacer(1, 18), para("Sources" if english else "原文链接", "title"), Spacer(1, 8)])
+        for index, headline, url in links:
+            label = "Read source" if english else "打开原文"
+            story.append(KeepTogether([Paragraph(f'{text(str(index) + ". " + headline)}<br/><link href="{escape(url, quote=True)}" color="#174d45">{text(label + " · " + (urlsplit(url).hostname or ""))}</link>', styles["link"])]))
+    if not records:
+        story.append(para("No qualified stories are available for this edition." if english else "本期暂无通过质量门禁的情报。"))
+    def footer(canvas, doc):
+        canvas.saveState()
+        canvas.setStrokeColor(colors.HexColor("#cccccc"))
+        canvas.line(48, 36, PAGE_WIDTH - 48, 36)
+        canvas.setFont("Times-Roman", 8)
+        canvas.setFillColor(colors.HexColor("#555555"))
+        canvas.drawString(48, 24, "GREEN  |  " + date)
+        canvas.drawRightString(PAGE_WIDTH - 48, 24, str(doc.page))
+        canvas.restoreState()
+    document.build(story, onFirstPage=footer, onLaterPages=footer, canvasmaker=partial(Canvas, pdfVersion=(1, 4)))
+    return path
 
 
 def write_weekly_report_pdf(report: dict, path: Path) -> Path:

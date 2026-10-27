@@ -95,7 +95,7 @@ const UI_TEXT = {
 };
 const tr = key => UI_TEXT[state.language]?.[key] || UI_TEXT.zh[key] || key;
 const field = (item, zhKey, enKey) => state.language === "en"
-  ? (item?.[enKey] || item?.title_original || item?.[zhKey] || "")
+  ? ((enKey === "title_original" && item?.title_en) || item?.[enKey] || item?.title_original || item?.[zhKey] || "")
   : (item?.[zhKey] || item?.[enKey] || "");
 const esc = (value = "") => String(value).replace(/[&<>'"]/g, character => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;",
@@ -129,7 +129,7 @@ function intelligenceAtoms(item, limit = 5) {
 }
 
 function summaryOrAtoms(item) {
-  const summary = state.language === "en" ? item.summary_source : item.summary_zh;
+  const summary = state.language === "en" ? (item.summary_en || item.summary_source) : item.summary_zh;
   if (substantiveSummary(summary)) return `<p>${esc(summary)}</p>`;
   if (state.language === "en") return "";
   const atoms = intelligenceAtoms(item);
@@ -332,6 +332,7 @@ function activateMode(mode) {
   state.assistant = { lastRecords: [], lastPlan: null };
   if (!COP31_EDITION) localStorage.setItem("climateTextMode", nextMode);
   applyModeCopy();
+  $("chatLog").innerHTML = `<article class="chat-message assistant"><span>${esc(tr("assistantName"))}</span><p>${esc(tr("assistantGreeting"))}</p></article>`;
   setupTaxonomyFilters();
   if (state.mode === "energy" && state.companyData) renderCompanyIntelligence();
   if (state.mode === "energy" && state.reportData) renderEnergyReports();
@@ -365,6 +366,11 @@ function renderMeta() {
   $("generatedAt").textContent = `${state.language === "en" ? "Generated: " : "最近生成："}${formatDate(dashboard.meta?.generated_at, true)}`;
   const briefLink = $("briefDownload");
   if (briefLink) briefLink.download = `${modeCopy().downloadName}-${dashboard.meta?.date || "latest"}.pdf`;
+  document.querySelectorAll('a[href*="daily_brief"]').forEach(link => {
+    link.href = `./data/daily_brief${state.language === "en" ? "_en" : ""}.pdf?v=${encodeURIComponent(dashboard.meta?.dataset_version || dashboard.meta?.generated_at || "latest")}`;
+    link.download = `${state.language === "en" ? "Daily-climate-brief" : "全球气候情报简报"}-${dashboard.meta?.latest_news_date || dashboard.meta?.date || "latest"}.pdf`;
+    link.textContent = tr("download");
+  });
 }
 
 function renderMiniLineChart(id, rows, label) {
@@ -1401,6 +1407,8 @@ function renderEnergyReportCards() {
 }
 
 const COUNTRY_CONCEPTS = [
+  { name: "俄罗斯", terms: ["俄罗斯", "russia", "russian"] },
+  { name: "太平洋岛国", terms: ["太平洋岛国", "pacific islands", "fiji", "tuvalu", "tonga", "vanuatu", "samoa", "kiribati"] },
   { name: "中国", terms: ["中国", "北京", "china", "chinese", "beijing"] },
   { name: "美国", terms: ["美国", "美方", "united states", "u.s.", "usa", "american", "north america", "texas", "california", "oregon", "new york", "michigan", "new england"] },
   { name: "欧盟", terms: ["欧盟", "欧洲", "europe", "european union", "eu"] },
@@ -1456,18 +1464,19 @@ function planQuestion(query) {
     entities = COUNTRY_CONCEPTS.filter(concept => ["中国", "美国"].includes(concept.name));
   }
   const topics = detectConcepts(normalized, TOPIC_CONCEPTS);
-  const isFollowUp = /这些|上述|其中|前述|继续|它们|前者|后者|第[一二三四五六七八12345678]条/.test(normalized);
-  let scope = /今日|今天|当天/.test(normalized) ? "today"
-    : (/本周|一周|近七天|最近7天/.test(normalized) ? "week" : "archive");
-  if (isFollowUp && state.assistant.lastPlan && !/今日|今天|当天|本周|一周|近七天|最近7天|历史|档案/.test(normalized)) {
+  if (/\bUS\b/.test(query) && !entities.some(c => c.name === "美国")) entities.push(COUNTRY_CONCEPTS.find(c => c.name === "美国"));
+  const isFollowUp = /这些|上述|其中|前述|继续|它们|前者|后者|第[一二三四五六七八12345678]条|\b(these|those|them|continue|above)\b/.test(normalized);
+  let scope = /今日|今天|当天|\btoday\b/.test(normalized) ? "today"
+    : (/本周|一周|近七天|最近7天|this week|past week|last seven days/.test(normalized) ? "week" : "archive");
+  if (isFollowUp && state.assistant.lastPlan && !/今日|今天|当天|本周|一周|近七天|最近7天|历史|档案|today|week|archive|histor/.test(normalized)) {
     scope = state.assistant.lastPlan.scope;
   }
-  const intent = /比较|对比|差异|异同|中美|美中/.test(normalized) ? "compare"
-    : (/趋势|演变|变化|进展|时间线/.test(normalized) ? "trend"
-      : (/意味着|影响|含义|谈判|政策|风险|启示/.test(normalized) ? "implication"
-        : (/简报|重点|概览|综述/.test(normalized) ? "brief" : "search")));
-  const countMatch = normalized.match(/(\d+)\s*(?:条|项|个)/);
-  const limit = Math.max(1, Math.min(8, countMatch ? Number(countMatch[1]) : (intent === "brief" ? 6 : 5)));
+  const intent = /比较|对比|差异|异同|中美|美中|compar|difference/.test(normalized) ? "compare"
+    : (/趋势|演变|变化|进展|时间线|trend|timeline|progress/.test(normalized) ? "trend"
+      : (/意味着|影响|含义|谈判|政策|风险|启示|implication|risk|meaning/.test(normalized) ? "implication"
+        : (/简报|重点|概览|综述|brief|overview|highlights/.test(normalized) ? "brief" : "search")));
+  const countMatch = normalized.match(/(\d+)\s*(?:条|项|个|stories|items|records)/);
+  const limit = Math.max(1, Math.min(12, countMatch ? Number(countMatch[1]) : (intent === "brief" ? 12 : 5)));
   const generic = /请|给出|告诉我|哪些|有什么|值得关注|气候|情报|近期|最近|今日|今天|当天|简报|本周|一周|近七天|最近7天|信息|动态|比较|对比|趋势|政策|影响|的|和|与|中/g;
   const residue = normalized.replace(generic, " ");
   const rawTerms = [
@@ -1522,6 +1531,7 @@ function scoreRecord(record, plan) {
 
 function selectEvidence(plan) {
   const candidates = scopedRecords(plan);
+  if (plan.scope === "today" && plan.intent === "brief" && !plan.entities.length && !plan.topics.length) return {records: candidates.slice(0, plan.limit), candidateCount: candidates.length};
   const ranked = candidates.map(record => ({ record, score: scoreRecord(record, plan) }))
     .filter(item => item.score >= 0)
     .sort((left, right) => right.score - left.score
@@ -1546,18 +1556,27 @@ function selectEvidence(plan) {
 }
 
 function scopeLabel(scope) {
-  return scope === "today" ? `最新完整日（${state.dashboard.meta?.date || "待核"}，单日约10条）`
+  if (state.language === "en") return scope === "today" ? `Today (${state.dashboard.meta?.latest_news_date || state.dashboard.meta?.date || ""})` : (scope === "week" ? "Latest seven days" : "News archive");
+  return scope === "today" ? `今日（${state.dashboard.meta?.latest_news_date || state.dashboard.meta?.date || "待核"}）`
     : (scope === "week" ? "最近七个自然日" : "站内滚动档案");
 }
 
 function intentLabel(intent) {
+  if (state.language === "en") return ({brief: "Briefing", compare: "Comparison", trend: "Timeline", implication: "Policy implications", search: "Evidence search"})[intent];
   return ({ brief: "简报归纳", compare: "样本比较", trend: "时间线", implication: "政策含义", search: "证据检索" })[intent];
 }
 
 function planHtml(plan, records) {
-  const region = plan.entities.length ? plan.entities.map(item => item.name).join(" / ") : "不限地区";
-  const topic = plan.topics.length ? plan.topics.map(item => item.name).join(" / ") : "综合议题";
-  return `<div class="chat-plan"><span>${esc(scopeLabel(plan.scope))}</span><span>${esc(region)}</span><span>${esc(topic)}</span><span>${esc(intentLabel(plan.intent))} · ${records.length} 条证据</span></div>`;
+  const region = plan.entities.length ? plan.entities.map(item => qaLabel(item.name)).join(", ") : qaText("不限地区", "All regions");
+  const topic = plan.topics.length ? plan.topics.map(item => qaLabel(item.name)).join(", ") : qaText("综合议题", "Climate developments");
+  return `<div class="chat-plan"><span>${esc(scopeLabel(plan.scope))}</span><span>${esc(region)}</span><span>${esc(topic)}</span><span>${esc(intentLabel(plan.intent))} · ${records.length} ${qaText("条证据", "sources")}</span></div>`;
+}
+
+const qaText = (zh, en) => state.language === "en" ? en : zh;
+function qaEnglish(value) { return /[A-Za-z]{3}/.test(value || "") && !/[\u3400-\u9fff\u0400-\u04ff]/.test(value || "") ? value : ""; }
+function qaLabel(value) {
+  if (state.language !== "en") return value;
+  return ({"中国":"China","美国":"United States","欧盟":"European Union","俄罗斯":"Russia","太平洋岛国":"Pacific islands","拉丁美洲":"Latin America","非洲":"Africa","澳大利亚及太平洋":"Australia and Pacific","南极洲":"Antarctica","气候资金":"Climate finance","能源与排放":"Energy and emissions","气候适应":"Adaptation","碳市场":"Carbon markets","极端天气":"Extreme weather","国际谈判":"Climate negotiations","减缓与能源":"Energy and mitigation","科学与影响":"Climate science and impacts"})[value] || qaEnglish(value) || "Climate policy";
 }
 
 function evidenceList(records, { showWhy = false, chronological = false } = {}) {
@@ -1565,21 +1584,25 @@ function evidenceList(records, { showWhy = false, chronological = false } = {}) 
     ? [...records].sort((a, b) => String(a.published_at).localeCompare(String(b.published_at)))
     : records;
   return `<ol class="evidence-list">${ordered.map((record, index) => `<li>
-    <b>${chronological ? esc(formatDate(record.published_at)) + " · " : ""}${esc(record.title_zh || record.title_original)}</b>
-    <p>${esc(record.summary_zh || "该条目尚无合格中文摘要。")}</p>
-    ${showWhy && record.why_zh ? `<p class="evidence-implication"><strong>关注含义：</strong>${esc(record.why_zh)}</p>` : ""}
-    <small>[${index + 1}] ${esc(record.source_name)} · ${esc(formatDate(record.published_at))}</small>
-    <a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">核验原文 ↗</a>
+    <b>${chronological ? esc(formatDate(record.published_at)) + " · " : ""}${esc(qaText(record.title_zh || record.title_original, qaEnglish(record.title_en) || qaEnglish(record.title_original) || "Source-language climate report"))}</b>
+    <p>${esc(qaText(record.summary_zh || "该条目尚无合格中文摘要。", qaEnglish(record.summary_en) || qaEnglish(record.summary_source) || "Please consult the original source for this record; an English summary is not available."))}</p>
+    ${showWhy && record.why_zh && state.language !== "en" ? `<p class="evidence-implication"><strong>关注含义：</strong>${esc(record.why_zh)}</p>` : ""}
+    <small>[${index + 1}] ${esc(qaText(record.source_name, qaEnglish(record.source_name) || new URL(safeUrl(record.canonical_url), location.href).hostname))} · ${esc(formatDate(record.published_at))}</small>
+    <a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">${qaText("核验原文", "Read source")} ↗</a>
   </li>`).join("")}</ol>`;
 }
 
 function topTopics(records) {
   const counts = new Map();
   records.flatMap(record => record.topics || []).forEach(topic => counts.set(topic, (counts.get(topic) || 0) + 1));
-  return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(item => item[0]).join("、") || "综合气候议题";
+  return [...new Set([...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(item => qaLabel(item[0])))].join(qaText("、", ", ")) || qaText("综合气候议题", "Climate developments");
 }
 
 function comparisonHtml(plan, records) {
+  if (state.language === "en") return `<div class="chat-analysis"><h4>Evidence comparison</h4>${plan.entities.map(concept => {
+    const group = records.filter(record => recordMatchesConcept(record, concept));
+    return `<p><strong>${esc(qaLabel(concept.name))}:</strong> ${group.length ? `${group.length} records covering ${esc(topTopics(group))}.` : "Insufficient evidence in the selected time window."}</p>`;
+  }).join("")}<p>These are comparisons of retrieved reports, not rankings of national climate performance.</p></div>`;
   return `<div class="chat-analysis"><h4>样本对比</h4>${plan.entities.map(concept => {
     const group = records.filter(record => recordMatchesConcept(record, concept));
     return `<p><strong>${esc(concept.name)}：</strong>${group.length
@@ -1591,7 +1614,7 @@ function comparisonHtml(plan, records) {
 function addChatMessage(role, html) {
   const article = document.createElement("article");
   article.className = `chat-message ${role}`;
-  article.innerHTML = `<span>${role === "user" ? "您" : "情报助手"}</span><div>${html}</div>`;
+  article.innerHTML = `<span>${role === "user" ? qaText("您", "You") : tr("assistantName")}</span><div>${html}</div>`;
   $("chatLog").appendChild(article);
   $("chatLog").scrollTop = $("chatLog").scrollHeight;
 }
@@ -1600,6 +1623,14 @@ function answerQuestion(query) {
   addChatMessage("user", `<p>${esc(query)}</p>`);
   const plan = planQuestion(query);
   const { records, candidateCount } = selectEvidence(plan);
+  if (state.language === "en") {
+    const intro = records.length ? `<p>${records.length} source-linked records covering ${esc(topTopics(records))}.</p>` : `<p>No evidence matches the selected region and topic among ${candidateCount} records. Try a wider date range or fewer conditions.</p>`;
+    const comparison = plan.intent === "compare" && plan.entities.length > 1 ? comparisonHtml(plan, records) : "";
+    const note = plan.intent === "trend" ? "<p>Listed by publication date. This sample alone does not establish a long-term trend.</p>" : (plan.intent === "implication" ? "<p>The evidence below identifies reported policy actions and commitments; it does not establish their causal effects.</p>" : "");
+    addChatMessage("assistant", `${planHtml(plan, records)}${intro}${comparison}${note}${evidenceList(records, {chronological: plan.intent === "trend"})}`);
+    state.assistant.lastRecords = records; state.assistant.lastPlan = plan;
+    return;
+  }
   if (!records.length) {
     addChatMessage("assistant", `${planHtml(plan, records)}<p>在${esc(scopeLabel(plan.scope))}的 ${candidateCount} 条候选记录中，没有找到同时满足地区和议题条件的证据。您可以放宽时间范围或去掉一个限定词；系统不会用档案外常识补写答案。</p>`);
     return;
@@ -1916,6 +1947,9 @@ async function init() {
   }));
   [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => button.addEventListener("click", () => {
     state.language = state.language === "en" ? "zh" : "en";
+    const languageUrl = new URL(location.href);
+    languageUrl.searchParams.set("lang", state.language);
+    history.replaceState(null, "", languageUrl);
     localStorage.setItem("climateTextLanguage", state.language);
     closeMobileMenu();
     activateMode(state.mode);

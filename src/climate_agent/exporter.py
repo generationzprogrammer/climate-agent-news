@@ -22,6 +22,7 @@ from .taxonomy import public_taxonomy
 from .topic_desks import write_topic_desks
 from .bth_assistant import write_assistant_assets
 from .cop31_site import write_cop31_entry
+from .english_brief import enrich_daily_english
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -56,6 +57,15 @@ def export_static_site(
     archive_path = archive_path or db.path.parent / "news_archive.json"
     archive = update_archive(archive_path, publishable_intelligence(db), limit=archive_limit)
     payload = apply_archive_windows(payload, archive)
+    english_status = enrich_daily_english(db, payload.get("intelligence", []))
+    english_by_url = {item.get("canonical_url"): item for item in payload.get("intelligence", [])}
+    for item in archive.get("records", []):
+        current = english_by_url.get(item.get("canonical_url"))
+        if current:
+            for key in ("title_en", "summary_en", "english_fingerprint"):
+                if current.get(key):
+                    item[key] = current[key]
+    archive_path.write_text(json.dumps(archive, ensure_ascii=False, indent=2), encoding="utf-8")
     payload["archive"] = {
         "dataset_name": archive["dataset_name"],
         "updated_at": archive["updated_at"],
@@ -80,6 +90,7 @@ def export_static_site(
     )
     (data_dir / "daily_brief.md").write_text(render_markdown(payload), encoding="utf-8")
     pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief.pdf")
+    english_pdf_path = write_daily_brief_pdf(payload, data_dir / "daily_brief_en.pdf", language="en")
     weekly_report = weekly_report_payload(archive)
     (data_dir / "weekly_report.json").write_text(json.dumps(weekly_report, ensure_ascii=False, indent=2), encoding="utf-8")
     (data_dir / "weekly_report.md").write_text(render_weekly_markdown(weekly_report), encoding="utf-8")
@@ -181,6 +192,8 @@ def export_static_site(
         "week_map_markers": len(payload.get("map_events_week", [])),
         "phrases": len(payload.get("phrases", [])),
         "pdf": str(pdf_path),
+        "english_pdf": str(english_pdf_path),
+        "english_brief": english_status,
         "weekly_pdf": str(weekly_pdf_path),
         "archive_total": archive["total"],
         "archive_added": archive["statistics"]["added"],

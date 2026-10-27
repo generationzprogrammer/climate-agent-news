@@ -10,10 +10,13 @@ def write_cop31_entry(static_dir: Path) -> Path:
     base = soup.new_tag("base", href="../")
     soup.head.insert(1, base)
     soup.body["data-edition"] = "cop31"
-    section_order = ("map", "today", "chinaCarbon", "singapore", "analytics", "database")
+    section_order = ("map", "today", "chinaCarbon", "singapore", "analytics", "assistant", "database")
     allowed = set(section_order)
+    for node in soup.select('#subscribeOpen, [data-open-subscribe]'):
+        node['hidden'] = ''
+        node['data-cop31-excluded'] = ''
     # Keep hidden DOM contracts for shared UI compatibility; their datasets and
-    # scripts are not loaded. Only six curated sections are publicly displayed.
+    # scripts are not loaded. Seven curated sections are publicly displayed.
     for node in soup.select("main > section, main > div"):
         if node.get("id") not in allowed:
             node["data-cop31-excluded"] = ""

@@ -122,6 +122,10 @@ class Cop31Tests(unittest.TestCase):
             self.assertNotIn("./cop31/#companies", links)
             self.assertFalse(any("innovation" in node.get("src", "") for node in page.select("script")))
             self.assertFalse(page.select_one("#today").has_attr("hidden"))
+            self.assertFalse(page.select_one("#assistant").has_attr("hidden"))
+            self.assertIn("./cop31/#assistant", links)
+            self.assertTrue(page.select_one("#subscribeOpen").has_attr("hidden"))
+            self.assertIsNotNone(page.select_one("#subscribeForm"))
             visible = [node.get("id") for node in page.select("main > section") if node.get("id") and not node.has_attr("hidden")]
             self.assertEqual(visible[:2], ["map", "today"])
 

@@ -422,6 +422,8 @@ def _publishable_candidates(db: Database) -> list[dict]:
         row["topics"] = [TOPIC_ZH_ALIASES.get(topic, topic) for topic in _decode_json(row.pop("topics_json"), [])]
         row["numbers"] = _decode_json(row.pop("numbers_json"), [])
         row["summary_zh"] = metadata.get("summary_zh")
+        for key in ("title_en", "summary_en", "english_fingerprint"):
+            row[key] = metadata.get(key)
         row["theme_zh"] = metadata.get("theme_zh") or (row["topics"][0] if row["topics"] else "气候动态")
         row["why_zh"] = metadata.get("importance_zh") or metadata.get("why_zh", "进入人工复核队列。")
         row["places"] = metadata.get("places", [])
