@@ -10,7 +10,8 @@ def write_cop31_entry(static_dir: Path) -> Path:
     base = soup.new_tag("base", href="../")
     soup.head.insert(1, base)
     soup.body["data-edition"] = "cop31"
-    allowed = {"map", "today", "chinaCarbon", "singapore", "analytics", "database"}
+    section_order = ("map", "today", "chinaCarbon", "singapore", "analytics", "database")
+    allowed = set(section_order)
     # Keep hidden DOM contracts for shared UI compatibility; their datasets and
     # scripts are not loaded. Only six curated sections are publicly displayed.
     for node in soup.select("main > section, main > div"):
@@ -34,6 +35,8 @@ def write_cop31_entry(static_dir: Path) -> Path:
     logo["target"] = "_blank"
     logo["rel"] = "noopener noreferrer"
     logo["aria-label"] = "COP31 official website"
+    for section_id in reversed(section_order):
+        soup.main.insert(0, soup.find(id=section_id).extract())
     banner = soup.new_tag("section", attrs={"class": "cop31-intro", "aria-label": "COP31"})
     banner.append(BeautifulSoup('<p>COP31 · ANTALYA · 9–20 NOV 2026</p><h1 data-i18n="cop31Title">全球气候情报</h1>', "html.parser"))
     soup.main.insert(0, banner)

@@ -55,6 +55,8 @@ class Cop31Tests(unittest.TestCase):
             places = detect_places(name + " climate plan")
             self.assertTrue(places, name)
             self.assertEqual(_continent({"places": places}), "大洋洲")
+        for title, name in [("Türkiye hosts COP31", "土耳其"), ("Finnish forest emissions fall", "芬兰"), ("Welsh methane project", "威尔士"), ("图瓦卢适应气候变化", "图瓦卢")]:
+            self.assertEqual(detect_places(title)[0]["name_zh"], name)
 
     def test_query_coverage_and_round_robin_before_cap(self):
         self.assertEqual(len(GOOGLE_NEWS_QUERIES), len(GOOGLE_NEWS_LOCALES))
@@ -81,6 +83,8 @@ class Cop31Tests(unittest.TestCase):
             self.assertNotIn("./cop31/#companies", links)
             self.assertFalse(any("innovation" in node.get("src", "") for node in page.select("script")))
             self.assertFalse(page.select_one("#today").has_attr("hidden"))
+            visible = [node.get("id") for node in page.select("main > section") if node.get("id") and not node.has_attr("hidden")]
+            self.assertEqual(visible[:2], ["map", "today"])
 
 
 if __name__ == "__main__":
