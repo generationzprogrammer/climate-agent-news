@@ -24,9 +24,11 @@ if(process.argv.includes('--pages')) {
     if(!projects.some(x=>x.name===name))await api('/pages/projects',{method:'POST',body:JSON.stringify({name,production_branch:'main'})});
     mkdirSync(resolve(dir,'pages'),{recursive:true});
     copyFileSync('cloudflare/subscription-relay/_worker.js',resolve(dir,'pages/_worker.js'));
+    mkdirSync(resolve(dir,'subscription-worker/src'),{recursive:true});
+    copyFileSync('cloudflare/subscription-worker/src/index.js',resolve(dir,'subscription-worker/src/index.js'));
     writeFileSync(resolve(dir,'pages/index.html'),'<!doctype html><title>GREEN subscription service</title><p>GREEN subscription service</p>');
     mkdirSync(resolve(dir,'relay'),{recursive:true});
-    writeFileSync(resolve(dir,'relay/wrangler.json'),JSON.stringify({name,pages_build_output_dir:'../pages',compatibility_date:'2026-10-01',services:[{binding:'SUBSCRIPTIONS',service:'climate-news-subscriptions'}]}));
+    writeFileSync(resolve(dir,'relay/wrangler.json'),JSON.stringify({name,pages_build_output_dir:'../pages',compatibility_date:'2026-10-01',kv_namespaces:[{binding:'CLIMATE_SUBSCRIBERS_KV',id:binding.namespace_id}]}));
     writeFileSync(resolve(dir,'pages-ready'),'ready');
     console.log('Pages subscription relay project ready.');
   } catch(error) { console.log('Pages relay not deployed: Pages Edit permission may be required. Existing Worker remains unchanged by this optional step.'); }
