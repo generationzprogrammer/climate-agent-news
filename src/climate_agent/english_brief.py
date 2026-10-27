@@ -3,6 +3,7 @@ import hashlib
 import json
 import os
 import re
+from datetime import UTC, datetime
 from .providers import OpenAICompatibleModel
 
 
@@ -58,6 +59,7 @@ def enrich_daily_english(db, records, model=None):
                     fields = {'title_en': title, 'summary_en': summary, 'english_fingerprint': fingerprint(item)}
                     item.update(fields)
                     metadata.update(fields)
+                    metadata.update({'english_model': getattr(model, 'model', 'configured_model'), 'english_translated_at': datetime.now(UTC).isoformat()})
                     db.execute('UPDATE articles SET metadata_json=? WHERE article_id=?', (json.dumps(metadata, ensure_ascii=False), item.get('article_id')))
                     generated += 1
             except Exception:

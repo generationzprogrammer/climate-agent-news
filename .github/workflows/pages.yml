@@ -118,7 +118,7 @@ jobs:
             # Do not restore this stash over the snapshot or commit form config.
             test -f site/data/dashboard.json
             test -f site/data/news_archive.json
-            git stash push --include-untracked --message ci-generated-static-data -- static/data
+            git stash push --include-untracked --message ci-generated-static-data -- static/data static/cop31
             # A code push can arrive during collection. Rebase the data-only
             # commit instead of failing deployment or overwriting newer code.
             for attempt in 1 2 3; do

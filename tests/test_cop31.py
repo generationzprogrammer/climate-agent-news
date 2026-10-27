@@ -29,6 +29,12 @@ def row(index, title, code="US", day="2026-10-27", score=80):
 
 
 class Cop31Tests(unittest.TestCase):
+    def test_daily_publish_stashes_generated_cop31_entry_before_rebase(self):
+        workflow = (ROOT / '.github/workflows/pages.yml').read_text(encoding='utf-8')
+        self.assertIn('-- static/data static/cop31', workflow)
+        self.assertIn('30 22 * * *', workflow)
+        self.assertIn('30 10 * * *', workflow)
+
     def test_local_server_serves_standalone_directory_index(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

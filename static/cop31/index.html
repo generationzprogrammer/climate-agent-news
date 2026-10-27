@@ -7,7 +7,7 @@
 <meta content="#ffffff" name="theme-color"/>
 <meta content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。" name="description"/>
 <title>GREEN · COP31 | 全球气候情报</title>
-<link href="./styles.css?v=20261027-cop31" rel="stylesheet"/>
+<link href="./styles.css?v=20261027-cop31-bilingual" rel="stylesheet"/>
 
 </head>
 <body data-edition="cop31">
@@ -24,7 +24,7 @@
 <a data-i18n="navToday" href="./cop31/#today">今日情报</a>
 <details class="topic-nav"><summary data-i18n="navFocus">专题</summary><div><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a></div></details>
 <a data-i18n="navAnalytics" href="./cop31/#analytics">语料分析</a>
-
+<a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a>
 <a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 
 
@@ -35,12 +35,12 @@
 <button class="mode-toggle" data-cop31-excluded="" hidden="" id="modeToggle" type="button">切换到能源技术</button>
 <div class="brief-actions">
 <a class="data-download" data-i18n="download" download="" href="./data/daily_brief.pdf" id="briefDownload">下载今日简报</a>
-<button class="subscribe-button" data-i18n="subscribe" id="subscribeOpen" type="button">订阅</button>
+<button class="subscribe-button" data-cop31-excluded="" data-i18n="subscribe" hidden="" id="subscribeOpen" type="button">订阅</button>
 </div>
 </header>
 <aside aria-label="移动端页面导航" class="mobile-menu" hidden="" id="mobileMenu">
 <nav>
-<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日情报</a><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a><a data-i18n="navAnalytics" href="./cop31/#analytics">语料分析</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
+<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日情报</a><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a><a data-i18n="navAnalytics" href="./cop31/#analytics">语料分析</a><a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 
 
 
@@ -48,7 +48,7 @@
 <div class="mobile-menu-actions">
 <button class="project-intro-link" data-i18n="projectIntro" data-open-project="" type="button">项目介绍</button>
 <button class="team-link" data-open-team="" type="button">团队信息</button>
-<button class="subscribe-button" data-open-subscribe="" type="button">订阅周报</button>
+<button class="subscribe-button" data-cop31-excluded="" data-open-subscribe="" hidden="" type="button">订阅周报</button>
 <button class="mode-toggle" data-cop31-excluded="" hidden="" id="mobileModeToggle" type="button">切换到能源技术</button>
 <button class="language-toggle" id="mobileLanguageToggle" type="button">English</button>
 <a class="data-download" download="" href="./data/daily_brief.pdf">下载今日简报</a>
@@ -143,6 +143,32 @@
 </article>
 </div>
 <p class="analytics-note" id="analyticsNote">正在读取语料库统计文件…</p>
+</section><section class="section assistant-section" id="assistant">
+<div class="section-heading">
+<div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 id="assistantTitle">气候情报问答</h2></div>
+</div>
+<div class="assistant-shell">
+<aside class="assistant-intro">
+<span class="assistant-status"><i></i> <em data-i18n="evidenceSearch">零费用站内证据检索</em></span>
+<h3 data-i18n="assistantIntroTitle">从问题到证据，而不只是列标题</h3>
+<p data-i18n="assistantIntroNote">可要求比较国家、梳理时间线、提取政策含义，也可继续追问上一轮证据。若档案不足，系统会明确说明。</p>
+<div aria-label="常用问题" class="quick-prompts">
+<button data-prompt="请给出今日简报" type="button">今日简报</button>
+<button data-prompt="本周有哪些值得关注的气候情报？" type="button">本周重点</button>
+<button data-prompt="比较本周中国与美国的重点气候情报" type="button">本周中美比较</button>
+<button data-prompt="近期有哪些气候资金信息？" type="button">气候资金</button>
+</div>
+</aside>
+<div class="chat-panel">
+<div aria-live="polite" class="chat-log" id="chatLog">
+<article class="chat-message assistant"><span data-i18n="assistantName">情报助手</span><p data-i18n="assistantGreeting">您好。我可以基于本站最多 100000 条中文气候情报，规划检索并生成简报、国家比较、时间线和政策含义；回答均附原文证据。</p></article>
+</div>
+<form class="chat-form" id="chatForm">
+<label data-i18n="askDatabase" for="chatInput">向气候情报库提问</label>
+<div><input autocomplete="off" data-i18n-placeholder="chatPlaceholder" id="chatInput" maxlength="120" placeholder="例如：本周拉丁美洲有哪些重要动态？"/><button data-i18n="send" type="submit">发送</button></div>
+</form>
+</div>
+</div>
 </section><section class="section database-section" id="database">
 <div class="section-heading">
 <div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 id="databaseTitle">气候新闻文本数据库</h2></div>
@@ -256,33 +282,7 @@
 </section>
 
 
-<section class="section assistant-section" data-cop31-excluded="" hidden="" id="assistant">
-<div class="section-heading">
-<div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 id="assistantTitle">气候情报问答</h2></div>
-</div>
-<div class="assistant-shell">
-<aside class="assistant-intro">
-<span class="assistant-status"><i></i> <em data-i18n="evidenceSearch">零费用站内证据检索</em></span>
-<h3 data-i18n="assistantIntroTitle">从问题到证据，而不只是列标题</h3>
-<p data-i18n="assistantIntroNote">可要求比较国家、梳理时间线、提取政策含义，也可继续追问上一轮证据。若档案不足，系统会明确说明。</p>
-<div aria-label="常用问题" class="quick-prompts">
-<button data-prompt="请给出今日简报" type="button">今日简报</button>
-<button data-prompt="本周有哪些值得关注的气候情报？" type="button">本周重点</button>
-<button data-prompt="比较本周中国与美国的重点气候情报" type="button">本周中美比较</button>
-<button data-prompt="近期有哪些气候资金信息？" type="button">气候资金</button>
-</div>
-</aside>
-<div class="chat-panel">
-<div aria-live="polite" class="chat-log" id="chatLog">
-<article class="chat-message assistant"><span data-i18n="assistantName">情报助手</span><p data-i18n="assistantGreeting">您好。我可以基于本站最多 100000 条中文气候情报，规划检索并生成简报、国家比较、时间线和政策含义；回答均附原文证据。</p></article>
-</div>
-<form class="chat-form" id="chatForm">
-<label data-i18n="askDatabase" for="chatInput">向气候情报库提问</label>
-<div><input autocomplete="off" data-i18n-placeholder="chatPlaceholder" id="chatInput" maxlength="120" placeholder="例如：本周拉丁美洲有哪些重要动态？"/><button data-i18n="send" type="submit">发送</button></div>
-</form>
-</div>
-</div>
-</section>
+
 
 </main>
 <footer>
@@ -327,6 +327,6 @@
 
 
 
-<script defer="" src="./app.js?v=20261027-cop31"></script>
+<script defer="" src="./app.js?v=20261027-cop31-bilingual"></script>
 </body>
 </html>

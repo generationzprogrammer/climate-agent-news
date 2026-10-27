@@ -137,6 +137,7 @@ def write_daily_brief_pdf(payload: dict, path: Path, *, language: str = "zh") ->
     from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, KeepTogether, PageBreak
     from reportlab.pdfgen.canvas import Canvas
     from functools import partial
+    from unicodedata import normalize
     from .english_brief import english_fields, english_text
 
     pdfmetrics.registerFont(UnicodeCIDFont("STSong-Light"))
@@ -154,8 +155,11 @@ def write_daily_brief_pdf(payload: dict, path: Path, *, language: str = "zh") ->
     }
     def text(value):
         # Conventional Latin/digit widths in mixed Chinese paragraphs.
+        value = normalize("NFKC", str(value or "")).replace("−", "-")
+        for symbol, code in (("₹", "INR "), ("₽", "RUB "), ("₺", "TRY "), ("₩", "KRW ")):
+            value = value.replace(symbol, code)
         if english:
-            return escape(str(value or ""))
+            return escape(value)
         return ''.join(f'<font name="Times-Roman">{escape(run)}</font>' if face == "F1" else escape(run) for face, run in _font_runs(str(value or "")))
     def para(value, style="body"):
         return Paragraph(text(value), styles[style])
