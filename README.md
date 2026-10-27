@@ -4,7 +4,9 @@
 
 COP31独立页支持同一入口切换中英文、双语情报问答与按语言下载的每日PDF。两份PDF与当天约12条新闻同步生成，中文摘要持续执行质量门禁；英文增量编译带缓存。订阅入口已恢复，可选择中文或英文周报，邮件包含网站链接；Corpus图表标签和团队资料随界面切换。排版采用宋体兼容字体与Times Roman，来源链接置于文末。
 
-订阅优先使用`gruen-climate-subscriptions.pages.dev`，通过Cloudflare Service Binding调用原订阅Worker，保留原KV和受保护名单。原workers.dev入口作为备用；COP31页面保留订阅需要的网络请求脚本。只有服务确认写入且确认所选语言时才提示成功。旧订阅默认中文，再次提交同一邮箱可改语言。维护与验证见[订阅配置](docs/SUBSCRIPTION_SETUP.md)。
+订阅优先使用`gruen-climate-subscriptions.pages.dev`，通过KV绑定直接写入原私有名单，复用同一份校验代码；原Worker及受保护名单接口保留。原workers.dev入口作为备用；COP31页面保留订阅需要的网络请求脚本。只有服务确认写入且确认所选语言时才提示成功。旧订阅默认中文，再次提交同一邮箱可改语言。维护与验证见[订阅配置](docs/SUBSCRIPTION_SETUP.md)。
+
+仅修改界面或服务配置时，维护提交可标记`[site-only]`，复用当前档案重建页面与简报，避免重复全量采集。每日06:30与18:30、周一周报仍按既有计划采集更新，质量门禁不跳过。
 
 每日气候情报目标为12条，其中约4条优先覆盖COP全球重点议题；地图与PDF同步更新，保留同日及中文摘要质量门禁。新增太平洋岛国论坛（PIF）分类、岛国和俄罗斯定向发现，分别以约5%滚动覆盖为软目标。独立入口为 [/cop31/](https://generationzprogrammer.github.io/climate-agent-news/cop31/)，英文版加 `?lang=en`；共用主站日更数据，无须另行运行服务。完整规则、来源、模型处理上限与维护说明见 [COP31_RELEASE.md](docs/COP31_RELEASE.md)。
 

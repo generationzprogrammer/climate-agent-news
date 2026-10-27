@@ -62,6 +62,8 @@ jobs:
           PYTHONPATH: src
           CLIMATE_ARCHIVE_LIMIT: "100000"
           CLIMATE_MAX_STALE_DAYS: "2"
+          # UI/service-only changes reuse the latest archive; daily schedules still crawl.
+          CLIMATE_SITE_ONLY: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[site-only]') }}
           # Code pushes run a one-time wider translation pass so newly added
           # regional sources can repair the current seven-day balance. The
           # 12 daily items, including COP priorities: bounded 32-record processing
@@ -87,10 +89,10 @@ jobs:
         shell: bash
         run: |
           python -m climate_agent.cli init
-          if [ "${{ github.event_name }}" != "workflow_run" ]; then
+          if [ "${{ github.event_name }}" != "workflow_run" ] && [ "$CLIMATE_SITE_ONLY" != "true" ]; then
             python -m climate_agent.cli update-visitors
             python -m climate_agent.cli sync --skip-ndc
-          else
+          elif [ "${{ github.event_name }}" = "workflow_run" ]; then
             # Registry publication must not depend on paid model calls or a new news crawl.
             unset CLIMATE_MODEL_API_KEY
           fi

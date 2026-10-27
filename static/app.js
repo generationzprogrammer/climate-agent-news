@@ -1742,8 +1742,8 @@ function setupSubscribe() {
     $("subscribeLanguage").value=state.language;
     $("subscribeSubmit").textContent=en?"Subscribe":"提交订阅";
     $("unsubscribeSubmit").textContent=en?"Unsubscribe":"退订";
-    $("weeklyDownload").textContent=en?"Read this week's briefing":"下载本周周报";
-    $("weeklyDownload").href=en?"./cop31/?lang=en#assistant":"./data/weekly_report.pdf";
+    $("weeklyDownload").textContent=en?"Weekly PDF (Chinese)":"下载本周周报";
+    $("weeklyDownload").href="./data/weekly_report.pdf";
     $("subscribeHint").textContent=en?"Weekly on Mondays at 08:00 Beijing time. Resubmit to change language; unsubscribe at any time.":"每周一北京时间 08:00 发送；再次提交可更改邮件语言，可随时退订。";
     $("subscribeHint").dataset.status="";
     $("subscribeFallback").textContent=en?"Contact the team":"联系管理员";

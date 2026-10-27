@@ -4,7 +4,7 @@
 
 现有用户无需重新建立KV或更换密钥。COP31页恢复订阅按钮，并保留必需的`bth-transport.js`。新访客无需登录Cloudflare、GitHub或网站管理员账户。
 
-- 前端优先使用`https://gruen-climate-subscriptions.pages.dev`，其后才尝试原Worker与问答服务备用路由。Pages通过Service Binding调用原订阅Worker，避免Worker之间经公共域名调用的失败；三个入口共享原私有KV。
+- 前端优先使用`https://gruen-climate-subscriptions.pages.dev`，其后才尝试原Worker与问答服务备用路由。Pages直接绑定原KV，复用原订阅Worker的校验和写入代码，减少服务间转发依赖。原受保护名单接口不变，不建立第二份邮箱库。Pages不绑定管理令牌，也不允许访问名单管理路径。
 - 邮箱与`zh`或`en`语言偏好只保存在私有KV。受保护的`/subscribers`保留原邮箱数组，并附加语言偏好，旧记录默认中文。重复订阅更新偏好，不新增重复地址。
 - 周一发送按语言分组，逐个收件人单独发信，不公开其他收件人。英文内容取同一周报重点记录的英文题名与摘要；导出时缓存补充缺失的英文摘要，最多处理10条周报重点记录。失败保留来源英文，缺失则明确提示，不编造。
 - 中英文邮件都提供COP31网站入口、相应阅读链接和退订方式。中文提供周报PDF，英文提供网站与当日英文PDF，邮件正文自身为英文周报；不会把中文PDF标作英文周报。
@@ -13,7 +13,7 @@
 
 网络测试覆盖浏览器内主动阻断workers.dev的情形，但不等于所有运营商可达性保证。若pages.dev也被所在网络阻断，需配置可达的自有域名；不得关闭名单管理认证或把管理令牌放到网页。
 
-官方实现依据：[Pages Service bindings](https://developers.cloudflare.com/pages/functions/bindings/#service-bindings)。
+官方实现依据：[Pages KV bindings](https://developers.cloudflare.com/pages/functions/bindings/#kv-namespaces)。
 
 网站是 GitHub Pages 静态站点，需要由 Cloudflare Worker 接收订阅请求，并由 Workers KV 保存邮箱。以下名称请原样使用，不要自行缩写。
 
