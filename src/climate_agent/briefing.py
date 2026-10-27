@@ -129,6 +129,14 @@ def _ensure_places(item: dict) -> dict:
         if isinstance(place, dict) and all(key in place for key in ("name_zh", "lon", "lat"))
         and str(place.get("name_zh") or "") not in {"全球", "全球/未标注", "未标注"}
     ]
+    regional_names = {"全球", "太平洋地区", "太平洋岛国", "欧洲", "亚洲", "非洲", "北美洲", "南美洲", "中亚地区", "东欧", "北非"}
+    # A regional phrase in the source summary must not displace a country
+    # explicitly named in the headline (e.g. Tonga's Pacific climate project).
+    if places and places[0].get("name_zh") in regional_names:
+        headline_places = detect_places(" ".join(str(item.get(key) or "") for key in ("title_original", "title_zh")))
+        specific = [place for place in headline_places if place.get("name_zh") not in regional_names]
+        if specific:
+            places = specific
     if not places:
         text = " ".join(str(item.get(key) or "") for key in (
             "title_zh", "title_original", "summary_zh", "summary_source", "source_name", "source_domain",

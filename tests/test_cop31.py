@@ -6,7 +6,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from bs4 import BeautifulSoup
-from climate_agent.briefing import select_daily_window, select_daily_map_window, _continent
+from climate_agent.briefing import select_daily_window, select_daily_map_window, _continent, _ensure_places
 from climate_agent.cop_coverage import cop_topics, coverage_regions, prioritize_translation
 from climate_agent.cop31_site import write_cop31_entry
 from climate_agent.sync import GOOGLE_NEWS_QUERIES, GOOGLE_NEWS_LOCALES, interleave_discovery_batches
@@ -65,6 +65,11 @@ class Cop31Tests(unittest.TestCase):
         self.assertEqual(len({item.canonical_url.split('/')[0] for item in selected}), 16)
         duplicate = SimpleNamespace(canonical_url="same")
         self.assertEqual(len(interleave_discovery_batches([[duplicate], [duplicate]])), 1)
+
+    def test_headline_island_takes_precedence_over_broad_pacific_context(self):
+        item = row(1, "Tonga coastal resilience project shares Pacific voices", "TO")
+        item["places"] = [{"name_zh": "太平洋地区", "lon": 165, "lat": -10}]
+        self.assertEqual(_ensure_places(item)["places"][0]["name_zh"], "汤加")
 
     def test_translation_priorities_do_not_pull_old_cop_news_ahead_of_today(self):
         rows = [row(1, "Today solar project", "CN"), row(2, "COP31 climate finance", day="2026-10-26")]
