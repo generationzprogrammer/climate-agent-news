@@ -29,5 +29,6 @@ jobs:
       - name: 发布备用订阅入口
         run: |
           if [ -f .subscription-deploy/pages-ready ]; then
-            npm exec --yes --package=wrangler@4 -- wrangler pages deploy --config .subscription-deploy/pages.wrangler.json --project-name gruen-climate-subscriptions --branch main
+            cd .subscription-deploy/relay
+            npm exec --yes --package=wrangler@4 -- wrangler pages deploy --project-name gruen-climate-subscriptions --branch main
           fi

@@ -1,5 +1,8 @@
 name: 检查周报订阅链路
 on:
+  workflow_run:
+    workflows: ["部署双语订阅服务"]
+    types: [completed]
   workflow_dispatch:
   push:
     branches: [main]
@@ -13,8 +16,9 @@ permissions:
   contents: read
 jobs:
   check:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
