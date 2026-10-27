@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<base href="../"/><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。" name="description"/>
+<title>GREEN · COP31 | 全球气候情报</title>
+<link href="./styles.css?v=20261027-cop31" rel="stylesheet"/>
+
+</head>
+<body data-edition="cop31">
+<header class="topbar">
+<a aria-label="返回顶部" class="brand" href="./cop31/#top">
+<img alt="" class="brand-mark" src="./assets/green-logo-mark.png"/>
+<span class="brand-wordmark"><b id="brandTitle">格润气候治理</b><span><strong>GREEN</strong> <i>2026</i></span><small id="brandDescriptor">climate governance</small></span>
+</a>
+<a aria-label="COP31 official website" class="cop31-brand" href="https://cop31.tr/" rel="noopener noreferrer" target="_blank"><img alt="COP31 Türkiye Antalya" height="46" src="./assets/cop31-official.svg" width="112"/></a>
+<button class="project-intro-link" data-i18n="projectIntro" id="projectIntroOpen" type="button">项目介绍</button>
+<button aria-controls="mobileMenu" aria-expanded="false" aria-label="打开页面导航" class="mobile-menu-toggle" id="mobileMenuToggle" type="button">菜单</button>
+<nav aria-label="页面导航">
+<a data-i18n="navMap" href="./cop31/#map">全球现场</a>
+<a data-i18n="navToday" href="./cop31/#today">今日情报</a>
+<details class="topic-nav"><summary data-i18n="navFocus">专题</summary><div><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a></div></details>
+<a data-i18n="navAnalytics" href="./cop31/#analytics">语料分析</a>
+
+<a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
+
+
+
+<button class="team-link nav-team-link" data-i18n="team" id="teamOpen" type="button">团队信息</button>
+</nav>
+<button aria-label="Switch language" class="language-toggle" id="languageToggle" type="button">EN</button>
+<button class="mode-toggle" data-cop31-excluded="" hidden="" id="modeToggle" type="button">切换到能源技术</button>
+<div class="brief-actions">
+<a class="data-download" data-i18n="download" download="" href="./data/daily_brief.pdf" id="briefDownload">下载今日简报</a>
+<button class="subscribe-button" data-i18n="subscribe" id="subscribeOpen" type="button">订阅</button>
+</div>
+</header>
+<aside aria-label="移动端页面导航" class="mobile-menu" hidden="" id="mobileMenu">
+<nav>
+<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日情报</a><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a><a data-i18n="navAnalytics" href="./cop31/#analytics">语料分析</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
+
+
+
+</nav>
+<div class="mobile-menu-actions">
+<button class="project-intro-link" data-i18n="projectIntro" data-open-project="" type="button">项目介绍</button>
+<button class="team-link" data-open-team="" type="button">团队信息</button>
+<button class="subscribe-button" data-open-subscribe="" type="button">订阅周报</button>
+<button class="mode-toggle" data-cop31-excluded="" hidden="" id="mobileModeToggle" type="button">切换到能源技术</button>
+<button class="language-toggle" id="mobileLanguageToggle" type="button">English</button>
+<a class="data-download" download="" href="./data/daily_brief.pdf">下载今日简报</a>
+</div>
+</aside>
+<main id="top"><section aria-label="COP31" class="cop31-intro"><p>COP31 · ANTALYA · 9–20 NOV 2026</p><h1 data-i18n="cop31Title">全球气候情报</h1></section>
+<section aria-label="站点更新曲线" class="metrics-strip" data-cop31-excluded="" hidden="">
+<article class="mini-chart-card">
+<div><span>TEXT ARCHIVE</span><h2 data-i18n="archiveChart">累计气候文本档案</h2></div>
+<div class="mini-chart" id="archiveGrowthChart"><div class="skeleton small"></div></div>
+</article>
+<article class="mini-chart-card">
+<div><span>SITE TRAFFIC</span><h2 data-i18n="visitorChart">累计访客/访问量</h2></div>
+<div class="mini-chart" id="visitorGrowthChart"><div class="skeleton small"></div></div>
+</article>
+</section>
+<section class="section map-section map-section-lead" id="map">
+<div class="section-heading">
+<div><p class="overline" id="mapOverline">GLOBAL CLIMATE SITUATION</p><h1 id="mapTitle">全球气候现场</h1></div>
+<p id="mapRangeNote">今日队列</p>
+</div>
+<div class="map-layout">
+<div class="map-canvas" id="mapCanvas">
+<div aria-label="地图情报时段" class="map-period-toggle" role="group">
+<button class="active" data-map-period="today" type="button"><i data-i18n="todayQueue">今日队列</i> <span id="todayMapCount">0</span></button>
+<button data-map-period="week" type="button"><i data-i18n="thisWeek">本周</i> <span id="weekMapCount">0</span></button>
+</div>
+<svg aria-label="全球气候事件地图" id="worldMap" role="img" viewbox="0 0 1000 500">
+<rect class="map-base" height="500" width="1000"></rect>
+<text class="map-initial-text" text-anchor="middle" x="500" y="250">正在绘制全球气候事件地图…</text>
+</svg>
+<div class="map-tooltip" id="mapTooltip" role="status"></div>
+<div class="map-loading" id="mapLoading">正在读取地图与今日地点…</div>
+</div>
+<aside class="map-detail" id="mapDetail"><span>选择红点或地点</span><h2>查看对应气候情报</h2><p>这里将显示中文标题、概要、来源、日期和原文入口。</p></aside>
+</div>
+<div aria-label="地图地点快捷入口" class="map-place-list" id="mapPlaceList"></div>
+</section>
+<section class="section spotlight-section climate-only-section" id="chinaCarbon">
+<div class="section-heading">
+<div><p class="overline">CHINA CARBON MARKET</p><h2 data-i18n="chinaCarbonTitle">中国碳市场</h2></div>
+</div>
+<div class="agency-grid" id="carbonAgencies"><div class="skeleton small"></div></div>
+<div aria-label="中国碳市场分类" class="spotlight-tabs" id="carbonTopicTabs" role="group"></div>
+<div class="spotlight-grid" id="carbonSpotlightList"><div class="skeleton"></div></div>
+<section aria-labelledby="carbonCompanyTitle" class="carbon-company-database" data-cop31-excluded="" hidden="">
+<div class="subsection-heading"><div><span>NATIONAL ETS REGISTER</span><h3 data-i18n="carbonCompanyTitle" id="carbonCompanyTitle">全国重点排放单位名录</h3></div></div>
+<div class="company-kpis" id="carbonCompanyKpis"><div class="skeleton small"></div></div>
+<div class="company-search-panel carbon-register-filters">
+<label><span data-i18n="searchEntity">检索单位</span><input autocomplete="off" data-i18n-placeholder="carbonCompanyPlaceholder" id="carbonEntitySearch" placeholder="单位名称或统一社会信用代码" type="search"/></label>
+<label><span data-i18n="province">省份</span><select id="carbonProvinceFilter"><option data-i18n="allProvinces" value="">全部省份</option></select></label>
+<label><span data-i18n="industry">行业</span><select id="carbonIndustryFilter"><option data-i18n="allIndustries" value="">全部行业</option></select></label>
+<div class="result-count"><span data-i18n="results">当前结果</span><b id="carbonEntityResultCount">—</b></div>
+</div>
+<div class="carbon-register-grid" id="carbonEntityList"><div class="skeleton"></div></div>
+<button class="load-more" data-i18n="showMoreEntities" id="carbonEntityLoadMore" type="button">显示更多单位</button>
+<a class="registry-source-link" data-i18n="officialRegister" href="https://www.mee.gov.cn/xxgk2018/xxgk/xxgk06/202504/t20250415_1114934.html" id="carbonRegistrySource" rel="noopener noreferrer" target="_blank">查看官方名录 ↗</a>
+</section>
+</section>
+<section class="section spotlight-section climate-only-section" id="singapore">
+<div class="section-heading">
+<div><p class="overline">SINGAPORE CLIMATE DESK</p><h2 data-i18n="singaporeTitle">新加坡气候政策与行动</h2></div>
+<p id="singaporeCoverage"></p>
+</div>
+<div class="agency-grid" id="singaporeAgencies"><div class="skeleton small"></div></div>
+<div aria-label="新加坡机构分类" class="spotlight-tabs" id="singaporeAgencyTabs" role="group"></div>
+<div class="spotlight-grid" id="singaporeSpotlightList"><div class="skeleton"></div></div>
+</section>
+<div data-cop31-excluded="" hidden="" id="topicDeskList"></div>
+<section class="section company-section" data-cop31-excluded="" hidden="" id="companies">
+<div class="section-heading">
+<div><p class="overline">GLOBAL ENERGY COMPANY INTELLIGENCE</p><h2 data-i18n="companyIntelligence">企业情报</h2></div>
+<p data-i18n="companyScope" id="companyScopeNote">持续扩展的全球能源企业名录，以及从站内新闻中识别的重大项目、初创企业和企业合作。</p>
+</div>
+<section aria-labelledby="companyDatabaseTitle" class="company-database">
+<div class="subsection-heading"><div><span>COMPANY DATABASE</span><h3 data-i18n="companyDatabaseTitle" id="companyDatabaseTitle">能源公司数据库</h3></div><p data-i18n="companyDatabaseNote">按企业名称、国家和业务方向检索；企业动态均可返回原文。</p></div>
+<div class="company-kpis" id="companyKpis"><div class="skeleton small"></div></div>
+<div class="company-search-panel">
+<label><span data-i18n="searchCompany">检索企业</span><input autocomplete="off" data-i18n-placeholder="companyPlaceholder" id="companySearch" placeholder="企业名称、国家或业务，如：储能、氢能" type="search"/></label>
+<label><span data-i18n="companyType">企业类型</span><select id="companyTypeFilter"><option data-i18n="allCompanies" value="">全部企业</option><option data-i18n="energyMajors" value="energy_major">能源巨头与龙头企业</option><option data-i18n="energyStartups" value="energy_startup">能源初创企业</option><option data-i18n="identifiedCompanies" value="energy_company">动态识别企业</option></select></label>
+<label><span data-i18n="country">国家</span><select id="companyCountryFilter"><option data-i18n="allCountries" value="">全部国家</option></select></label>
+<div class="result-count"><span data-i18n="results">当前结果</span><b id="companyResultCount">—</b></div>
+</div>
+<div class="company-grid" id="companyList"><div class="skeleton"></div></div>
+<button class="load-more" data-i18n="showMoreCompanies" id="companyLoadMore" type="button">显示更多企业</button>
+</section>
+<section aria-labelledby="companyMapTitle" class="company-live">
+<div class="subsection-heading"><div><span>GLOBAL COMPANY SITUATION</span><h3 data-i18n="companyMapTitle" id="companyMapTitle">全球企业情报现场</h3></div><p data-i18n="companyMapNote">红点表示企业新闻涉及地点；若原文未明确项目地点，则以企业总部定位并清楚标注。</p></div>
+<div class="map-layout company-map-layout">
+<div class="map-canvas" id="companyMapCanvas">
+<div aria-label="企业情报时段" class="map-period-toggle" role="group">
+<button class="active" data-company-map-period="today" type="button"><i data-i18n="todayQueue">今日队列</i> <span id="companyTodayMapCount">0</span></button>
+<button data-company-map-period="week" type="button"><i data-i18n="thisWeek">本周</i> <span id="companyWeekMapCount">0</span></button>
+</div>
+<svg aria-label="全球能源企业情报地图" id="companyWorldMap" role="img" viewbox="0 0 1000 500">
+<rect class="map-base" height="500" width="1000"></rect>
+<text class="map-initial-text" text-anchor="middle" x="500" y="250">正在绘制全球能源企业情报地图…</text>
+</svg>
+<div class="map-tooltip" id="companyMapTooltip" role="status"></div>
+<div class="map-loading" id="companyMapLoading">正在读取企业情报地点…</div>
+</div>
+<aside class="map-detail" id="companyMapDetail"><span>选择红点</span><h2>查看企业项目与合作</h2><p>这里将显示涉及企业、事件类别、中文概要、定位依据和原文入口。</p></aside>
+</div>
+<div aria-label="企业情报地点快捷入口" class="map-place-list" id="companyMapPlaceList"></div>
+</section>
+</section>
+<section class="section energy-report-section" data-cop31-excluded="" hidden="" id="energyReports">
+<div class="section-heading">
+<div><p class="overline">ENERGY REPORTS &amp; DATA</p><h2 data-i18n="energyReportsTitle">能源报告与数据库</h2></div>
+</div>
+<div class="report-kpis" id="energyReportKpis"><div class="skeleton small"></div></div>
+<div class="report-search-panel">
+<label class="search-box"><span data-i18n="searchResources">检索资源</span><input autocomplete="off" data-i18n-placeholder="reportPlaceholder" id="energyReportSearch" placeholder="报告、数据库、机构或主题，如：电池、核聚变" type="search"/></label>
+<label><span data-i18n="resourceType">资源类型</span><select id="energyResourceType"><option data-i18n="allTypes" value="">全部类型</option><option data-i18n="energyReport" value="能源报告">能源报告</option><option data-i18n="energyDatabase" value="能源数据库">能源数据库</option></select></label>
+<label><span data-i18n="countryOrganization">国家或组织</span><select id="energyReportCountry"><option data-i18n="allCountryOrganizations" value="">全部国家或组织</option></select></label>
+<label><span data-i18n="internationalOrganization">国际组织</span><select id="energyReportOrganization"><option data-i18n="allInternationalOrganizations" value="">全部国际组织</option></select></label>
+<label><span data-i18n="year">年份</span><select id="energyReportYear"><option data-i18n="allYears" value="">全部年份</option></select></label>
+<div class="result-count"><span data-i18n="results">当前结果</span><b id="energyReportResultCount">—</b></div>
+</div>
+<div class="report-grid" id="energyReportList"><div class="skeleton"></div></div>
+<button class="load-more" data-i18n="showMoreResources" id="energyReportLoadMore" type="button">显示更多资源</button>
+<p class="analytics-note" id="energyReportNote">报告库每日扫描官方发布页；仅在发现新的、可追溯报告时增量更新。</p>
+</section>
+<section aria-label="科产融合全球案例库" class="section energy-only-section" data-cop31-excluded="" hidden="" id="innovationCases"></section>
+<section aria-labelledby="heroTitle" class="hero" data-cop31-excluded="" hidden="">
+<div class="hero-copy">
+<p class="overline" id="heroOverline">DAILY CLIMATE TEXT INTELLIGENCE</p>
+<h2 id="heroTitle">每天读懂全球气候变化<br/><span>重点情报与文本数据库</span></h2>
+<p class="hero-lede" id="heroLede">从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。</p>
+<div class="update-line">
+<span aria-hidden="true" class="live-dot"></span>
+<b data-i18n="dailyUpdate">每日 06:30 自动更新</b>
+<span id="generatedAt">正在读取数据版本…</span>
+</div>
+</div>
+<aside aria-label="数据集概览" class="dataset-card">
+<p id="datasetName">CLIMATETEXT-100000</p>
+<h2 id="datasetTitle">每日气候文本档案</h2>
+<dl>
+<div><dt data-i18n="archivedTexts">已归档文本</dt><dd><strong id="archiveTotal">—</strong><small>/ 100000</small></dd></div>
+<div><dt data-i18n="todaySignals">今日重点情报</dt><dd><strong id="todayTotal">—</strong><small data-i18n="itemsUnit">条</small></dd></div>
+<div><dt data-i18n="todayPlaces">今日涉及地点</dt><dd><strong id="mapPlaceTotal">—</strong><small data-i18n="placesUnit">个</small></dd></div>
+</dl>
+<p class="dataset-version">最近数据版本 <span id="datasetVersion">—</span></p>
+</aside>
+</section>
+<section class="section" id="today">
+<div class="section-heading">
+<div><p class="overline" id="todayOverline">DAILY SIGNALS</p><h2 id="todayTitle">今日重要气候情报</h2></div>
+<label class="compact-filter"><span data-i18n="internationalOrganization">国际组织</span><select id="todayOrganizationFilter"><option value="">全部国际组织</option></select></label>
+</div>
+<div class="today-grid" id="todayGrid"><div class="skeleton"></div></div>
+</section>
+<section class="section analytics-section" id="analytics">
+<div class="section-heading">
+<div><p class="overline">CORPUS ANALYTICS</p><h2 id="analyticsTitle">语料库统计分析</h2></div>
+</div>
+<div class="analytics-kpis" id="analyticsKpis">
+<div class="skeleton"></div>
+</div>
+<div class="analytics-grid">
+<article class="chart-card wide">
+<div class="chart-heading"><span>MONTHLY FREQUENCY</span><h3 data-i18n="monthlyFrequency">月度文本频率</h3><p data-i18n="monthlyFrequencyNote">按发布时间聚合；用于观察议题热度和采集覆盖的时间变化。</p></div>
+<div class="chart-box" id="monthlyTrendChart"></div>
+</article>
+<article class="chart-card">
+<div class="chart-heading"><span>TOPIC MIX</span><h3 data-i18n="topicMix">高频主题</h3><p data-i18n="topicMixNote">按记录主题标签计数，一条文本可对应多个主题。</p></div>
+<div class="chart-box" id="topicBarChart"></div>
+</article>
+<article class="chart-card">
+<div class="chart-heading"><span>COUNTRY TAGS</span><h3 data-i18n="countryDistribution">国家/地区分布</h3><p data-i18n="countryDistributionNote">仅统计文本或地点字段明确出现的国家/地区。</p></div>
+<div class="chart-box" id="countryBarChart"></div>
+</article>
+<article class="chart-card">
+<div class="chart-heading"><span>REGIONAL STRUCTURE</span><h3 data-i18n="regionalStructure">洲别结构</h3><p data-i18n="regionalStructureNote">按国家/地区标签映射到洲别；全球性文本保留未标注。</p></div>
+<div class="chart-box" id="continentBarChart"></div>
+</article>
+<article class="chart-card">
+<div class="chart-heading"><span>SOURCE MIX</span><h3 data-i18n="sourceMix">主要来源</h3><p data-i18n="sourceMixNote">用于识别语料来源集中度和后续补源方向。</p></div>
+<div class="chart-box" id="sourceBarChart"></div>
+</article>
+<article class="chart-card wide">
+<div class="chart-heading"><span>COUNTRY × TOPIC</span><h3 data-i18n="countryTopic">国家—主题热力矩阵</h3><p data-i18n="countryTopicNote">显示主要国家/地区与高频主题的共现关系，便于后续分类和趋势建模。</p></div>
+<div class="chart-box heatmap-box" id="countryTopicHeatmap"></div>
+</article>
+</div>
+<p class="analytics-note" id="analyticsNote">正在读取语料库统计文件…</p>
+</section>
+<section class="section assistant-section" data-cop31-excluded="" hidden="" id="assistant">
+<div class="section-heading">
+<div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 id="assistantTitle">气候情报问答</h2></div>
+</div>
+<div class="assistant-shell">
+<aside class="assistant-intro">
+<span class="assistant-status"><i></i> <em data-i18n="evidenceSearch">零费用站内证据检索</em></span>
+<h3 data-i18n="assistantIntroTitle">从问题到证据，而不只是列标题</h3>
+<p data-i18n="assistantIntroNote">可要求比较国家、梳理时间线、提取政策含义，也可继续追问上一轮证据。若档案不足，系统会明确说明。</p>
+<div aria-label="常用问题" class="quick-prompts">
+<button data-prompt="请给出今日简报" type="button">今日简报</button>
+<button data-prompt="本周有哪些值得关注的气候情报？" type="button">本周重点</button>
+<button data-prompt="比较本周中国与美国的重点气候情报" type="button">本周中美比较</button>
+<button data-prompt="近期有哪些气候资金信息？" type="button">气候资金</button>
+</div>
+</aside>
+<div class="chat-panel">
+<div aria-live="polite" class="chat-log" id="chatLog">
+<article class="chat-message assistant"><span data-i18n="assistantName">情报助手</span><p data-i18n="assistantGreeting">您好。我可以基于本站最多 100000 条中文气候情报，规划检索并生成简报、国家比较、时间线和政策含义；回答均附原文证据。</p></article>
+</div>
+<form class="chat-form" id="chatForm">
+<label data-i18n="askDatabase" for="chatInput">向气候情报库提问</label>
+<div><input autocomplete="off" data-i18n-placeholder="chatPlaceholder" id="chatInput" maxlength="120" placeholder="例如：本周拉丁美洲有哪些重要动态？"/><button data-i18n="send" type="submit">发送</button></div>
+</form>
+</div>
+</div>
+</section>
+<section class="section database-section" id="database">
+<div class="section-heading">
+<div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 id="databaseTitle">气候新闻文本数据库</h2></div>
+</div>
+<div class="search-panel">
+<label class="search-box">
+<span data-i18n="search">检索</span>
+<input autocomplete="off" data-i18n-placeholder="archivePlaceholder" id="archiveSearch" placeholder="搜索中文标题、原文、来源、议题或地域" type="search"/>
+</label>
+<label><span data-i18n="topic">议题</span><select id="topicFilter"><option value="">全部议题</option></select></label>
+<label><span data-i18n="internationalOrganization">国际组织</span><select id="organizationFilter"><option value="">全部国际组织</option></select></label>
+<label><span data-i18n="country">国家</span><input autocomplete="off" data-i18n-placeholder="countryPlaceholder" id="countryFilter" list="countryCodeList" placeholder="中国、CN或CHN" type="search"/><datalist id="countryCodeList"></datalist></label>
+<div class="result-count"><span data-i18n="results">当前结果</span><b id="resultCount">—</b></div>
+</div>
+<div aria-label="气候新闻文本记录" class="archive-table" role="region">
+<div class="archive-head"><span data-i18n="date">日期</span><span data-i18n="textRecord">文本记录</span><span data-i18n="sourceTopic">来源 / 议题</span><span data-i18n="figuresPlaces">关键数字 / 地域</span></div>
+<div id="archiveList"></div>
+</div>
+<button class="load-more" data-i18n="showMoreRecords" id="loadMore" type="button">显示更多记录</button>
+</section>
+</main>
+<footer>
+<div><b id="footerBrand">格润气候治理</b><span data-i18n="footerSubtitle">全球气候与能源信息智能分析支持系统</span></div>
+<div><a href="./data/daily_brief.pdf">下载今日简报</a><a href="./data/global_climate_analysis_report_latest.html">全球气候分析报告</a><a href="./data/news_archive.json">开放数据</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
+<p class="cop31-credit" data-i18n="cop31Independent">格润独立研究展示页 · 非 COP31 官方网站</p></footer>
+<dialog class="modal" id="subscribeModal">
+<form class="modal-card" id="subscribeForm">
+<button aria-label="关闭订阅窗口" class="modal-close" id="subscribeClose" type="button">×</button>
+<p class="overline">WEEKLY BRIEFING</p>
+<h2>订阅每周气候情报周报</h2>
+<p>输入邮箱订阅周报。邮箱由独立订阅服务保存，不进入公开源码。</p>
+<label><span>邮箱</span><input autocomplete="email" id="subscribeEmail" placeholder="name@example.com" required="" type="email"/></label>
+<div class="modal-actions"><button id="subscribeSubmit" type="submit">提交订阅</button><button class="secondary" id="unsubscribeSubmit" type="button">退订</button><a href="./data/weekly_report.pdf" id="weeklyDownload" rel="noopener" target="_blank">下载本周周报</a></div>
+<p aria-live="polite" id="subscribeHint" role="status">订阅后每周一北京时间 08:00 发送周报；使用同一邮箱可随时退订。</p>
+<a class="subscribe-fallback" hidden="" href="mailto:yuan-yh21@mails.tsinghua.edu.cn" id="subscribeFallback">联系管理员</a>
+</form>
+</dialog>
+<dialog class="modal" id="teamModal">
+<div class="modal-card team-modal-card">
+<button aria-label="关闭" class="modal-close" id="teamClose" type="button">×</button>
+<p class="overline">TEAM</p>
+<h2>团队信息</h2>
+<div class="team-list" id="teamList">正在读取团队信息…</div>
+</div>
+</dialog>
+<dialog class="modal project-intro-modal" id="projectIntroModal">
+<div class="modal-card project-intro-card">
+<button aria-label="关闭" class="modal-close" id="projectIntroClose" type="button">×</button>
+<p class="overline">GREEN DATA PLATFORM</p>
+<h2 data-i18n="projectIntroTitle">项目介绍</h2>
+<div id="projectIntroContent"></div>
+</div>
+</dialog>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+
+
+
+
+<script defer="" src="./subscriptions.js?v=20261011-1"></script>
+
+
+
+
+<script defer="" src="./app.js?v=20261027-cop31"></script>
+</body>
+</html>

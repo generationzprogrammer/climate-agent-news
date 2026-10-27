@@ -37,6 +37,7 @@ ORGANIZATION_GROUPS = (
             ("SCO", "上海合作组织", (r"\bshanghai cooperation organi[sz]ation\b", r"\bsco\b", r"上海合作组织", r"上合组织")),
             ("EU", "欧洲联盟", (r"\beuropean union\b", r"欧盟")),
             ("AU", "非洲联盟", (r"\bafrican union\b", r"非洲联盟", r"非盟")),
+            ("PIF", "太平洋岛国论坛", (r"\bpacific islands forum\b", r"\bsouth pacific forum\b", r"太平洋岛国论坛", r"南太平洋论坛")),
             ("CPTPP", "全面与进步跨太平洋伙伴关系协定", (r"\bcptpp\b", r"全面与进步跨太平洋伙伴关系协定")),
         ),
     },
@@ -158,6 +159,14 @@ def event_tags_for(text: str) -> list[str]:
 
 
 def public_taxonomy() -> dict:
+    names_en = {
+        "UN": "United Nations", "UNFCCC": "UN Framework Convention on Climate Change", "COP": "UN Climate Change Conference",
+        "G20": "Group of Twenty", "G7": "Group of Seven", "BRICS": "BRICS", "OECD": "Organisation for Economic Co-operation and Development",
+        "BRI": "Belt and Road Initiative", "APEC": "Asia-Pacific Economic Cooperation", "ASEAN": "Association of Southeast Asian Nations",
+        "SCO": "Shanghai Cooperation Organisation", "EU": "European Union", "AU": "African Union", "PIF": "Pacific Islands Forum",
+        "CPTPP": "Comprehensive and Progressive Agreement for Trans-Pacific Partnership", "IEA": "International Energy Agency", "IRENA": "International Renewable Energy Agency",
+    }
+    groups_en = {"联合国与气候机制": "United Nations and climate mechanisms", "全球经济与政策协调": "Global economic and policy coordination", "区域合作机制": "Regional cooperation", "国际能源机构": "International energy organisations"}
     return {
         "schema_version": "1.0",
         "country_standard": "ISO 3166-1",
@@ -165,8 +174,9 @@ def public_taxonomy() -> dict:
         "organization_groups": [
             {
                 "label_zh": group["group"],
+                "label_en": groups_en[group["group"]],
                 "organizations": [
-                    {"code": code, "name_zh": name} for code, name, _patterns in group["items"]
+                    {"code": code, "name_zh": name, "name_en": names_en[code]} for code, name, _patterns in group["items"]
                 ],
             }
             for group in ORGANIZATION_GROUPS

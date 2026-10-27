@@ -179,7 +179,7 @@ class CoreTests(unittest.TestCase):
         self.assertIn("climate", url.lower())
         self.assertNotIn("{query}", url)
         urls = _google_news_urls(endpoint)
-        self.assertEqual(len(urls), 10)
+        self.assertEqual(len(urls), 16)
         self.assertTrue(all("when%3A1d" in item for item in urls))
         self.assertTrue(any("Kazakhstan" in item for item in urls))
         self.assertTrue(any("nccs.gov.sg" in item for item in urls))

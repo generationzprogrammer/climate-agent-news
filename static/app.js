@@ -14,8 +14,10 @@ const state = {
   taxonomy: { organization_groups: [], countries: [] },
 };
 const $ = id => document.getElementById(id);
+const COP31_EDITION = document.body.dataset.edition === "cop31";
 const UI_TEXT = {
   zh: {
+    cop31Title: "全球气候情报", cop31Independent: "格润独立研究展示页 · 非 COP31 官方网站",
     navMap: "全球现场", navToday: "今日情报", navFocus: "专题", navChinaCarbon: "中国碳市场",
     navSingapore: "新加坡", navBth: "京津冀能源统计数据库", navRenewable: "新能源", navStorage: "储能技术", navAidc: "人工智能数据中心",
     navAnalytics: "语料分析", navAssistant: "情报问答", navDatabase: "文本数据库",
@@ -53,6 +55,7 @@ const UI_TEXT = {
     textRecord: "文本记录", sourceTopic: "来源 / 议题", figuresPlaces: "关键数字 / 地域", showMoreRecords: "显示更多记录",
   },
   en: {
+    cop31Title: "Global climate intelligence", cop31Independent: "Independent GREEN research platform · Not an official COP31 website",
     navMap: "Global desk", navToday: "Today", navFocus: "Focus", navChinaCarbon: "China carbon market",
     navSingapore: "Singapore", navAnalytics: "Corpus", navAssistant: "Q&A", navDatabase: "Text database",
     chinaCarbonTitle: "China carbon market", singaporeTitle: "Singapore climate policy and action", all: "All", source: "Open source ↗",
@@ -188,6 +191,7 @@ function setupMobileMenu() {
 }
 
 async function fetchJson(url) {
+  if (COP31_EDITION && /\/(?:energy_[^/]+|national_carbon_market_entities|topic_desks|site_metrics)\.json/.test(url)) return null;
   const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) throw new Error(`${response.status} ${url}`);
   return response.json();
@@ -279,6 +283,7 @@ function applyModeCopy() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach(element => { element.placeholder = tr(element.dataset.i18nPlaceholder); });
   const climateBrand = state.mode !== "energy";
   if ($("brandTitle")) $("brandTitle").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
+  if (COP31_EDITION && $("brandTitle")) $("brandTitle").textContent = state.language === "en" ? "GREEN · COP31" : "格润 · COP31";
   if ($("brandDescriptor")) $("brandDescriptor").textContent = climateBrand ? "climate governance" : "energy technology";
   if ($("footerBrand")) $("footerBrand").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
   const firstOptionLabels = {
@@ -316,7 +321,7 @@ function applyModeCopy() {
 }
 
 function activateMode(mode) {
-  const nextMode = mode === "energy" && state.datasets.energy ? "energy" : "climate";
+  const nextMode = !COP31_EDITION && mode === "energy" && state.datasets.energy ? "energy" : "climate";
   const dataset = state.datasets[nextMode];
   state.mode = nextMode;
   state.dashboard = dataset.dashboard;
@@ -325,7 +330,7 @@ function activateMode(mode) {
   state.filtered = [];
   state.visible = 18;
   state.assistant = { lastRecords: [], lastPlan: null };
-  localStorage.setItem("climateTextMode", nextMode);
+  if (!COP31_EDITION) localStorage.setItem("climateTextMode", nextMode);
   applyModeCopy();
   setupTaxonomyFilters();
   if (state.mode === "energy" && state.companyData) renderCompanyIntelligence();
@@ -617,12 +622,14 @@ function renderBthRegionalTools(desk) {
 
 function setupStickyNavigation() {
   const header = document.querySelector(".topbar");
-  const navLinks = [...document.querySelectorAll('nav a[href^="#"]')]
+  const navLinks = [...document.querySelectorAll('nav a[href*="#"]')]
     .filter(link => link.getAttribute("href") !== "#top");
   let ticking = false;
   const headerOffset = () => (header?.getBoundingClientRect().height || 0) + 16;
   const targetFor = link => {
-    const hash = link.getAttribute("href") || "";
+    const targetUrl = new URL(link.href, location.href);
+    if (targetUrl.origin !== location.origin || targetUrl.pathname !== location.pathname) return null;
+    const hash = targetUrl.hash;
     if (!hash.startsWith("#") || hash.length < 2) return null;
     try { return document.getElementById(decodeURIComponent(hash.slice(1))); }
     catch (_error) { return null; }
@@ -652,7 +659,7 @@ function setupStickyNavigation() {
     requestAnimationFrame(update);
   };
   document.addEventListener("click", event => {
-    const link = event.target.closest('a[href^="#"]');
+    const link = event.target.closest('a[href*="#"]');
     const target = link && targetFor(link);
     if (!target) return;
     event.preventDefault();
@@ -662,7 +669,7 @@ function setupStickyNavigation() {
     const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const behavior = reducedMotion || Math.abs(top - window.scrollY) > 1800 ? "auto" : "smooth";
     window.scrollTo({ top, behavior });
-    history.pushState(null, "", `#${encodeURIComponent(target.id)}`);
+    history.pushState(null, "", `${location.pathname}${location.search}#${encodeURIComponent(target.id)}`);
     scheduleUpdate();
     setTimeout(scheduleUpdate, behavior === "auto" ? 0 : 450);
   });
@@ -822,7 +829,7 @@ function renderToday() {
     .filter(item => item.title_zh)
     .map(item => ({ item, record: findArchiveRecord(item) }))
     .filter(({ record }) => !organization || organizationCodes(record).includes(organization));
-  $("todayGrid").innerHTML = items.length ? items.slice(0, 10).map(({ item, record }, index) => {
+  $("todayGrid").innerHTML = items.length ? items.map(({ item, record }, index) => {
     const classification = [...organizationCodes(record), ...(record.event_tags || [])].slice(0, 3);
     return `<article class="signal-card">
       <div class="signal-index">${String(index + 1).padStart(2, "0")}</div>
@@ -1048,7 +1055,11 @@ function selectMapEvent(item) {
 
 function renderMapPlaces(events) {
   $("mapPlaceList").innerHTML = events.length
-    ? events.map(item => `<button type="button" data-map-id="${esc(item.marker_id)}"><i></i>${esc(item.place)}<span>${esc(item.theme)}</span></button>`).join("")
+    ? events.map(item => {
+      const country = (state.taxonomy.countries || []).find(row => row.name_zh === item.place);
+      const label = state.language === "en" ? (country?.name_en || (findArchiveRecord(item).country_codes || []).map(row => row.alpha3).join(" · ") || "Global / regional") : item.place;
+      return `<button type="button" data-map-id="${esc(item.marker_id)}"><i></i>${esc(label)}<span>${esc(state.language === "en" ? "Climate" : item.theme)}</span></button>`;
+    }).join("")
     : `<span>${state.mapPeriod === "today" ? "今日队列" : "本周"}暂无带有明确地理位置的新记录。</span>`;
   document.querySelectorAll("[data-map-id]").forEach(button => button.addEventListener("click", () => {
     const item = events.find(event => event.marker_id === button.dataset.mapId);

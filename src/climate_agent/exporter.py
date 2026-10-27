@@ -21,6 +21,7 @@ from .spotlights import write_spotlights
 from .taxonomy import public_taxonomy
 from .topic_desks import write_topic_desks
 from .bth_assistant import write_assistant_assets
+from .cop31_site import write_cop31_entry
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -164,11 +165,13 @@ def export_static_site(
         if report_path.exists():
             shutil.copy2(report_path, data_dir / report_name)
     output_dir.mkdir(parents=True, exist_ok=True)
+    write_cop31_entry(static_dir)
     shutil.copytree(static_dir, output_dir, dirs_exist_ok=True)
     analytics_beacon = _inject_cloudflare_beacon(
         output_dir / "index.html",
         os.getenv("CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN", ""),
     )
+    _inject_cloudflare_beacon(output_dir / "cop31" / "index.html", os.getenv("CLOUDFLARE_WEB_ANALYTICS_SITE_TOKEN", ""))
     (output_dir / ".nojekyll").write_text("", encoding="utf-8")
     return {
         "output": str(output_dir),

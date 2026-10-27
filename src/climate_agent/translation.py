@@ -60,6 +60,46 @@ GEO_TERMS = {
     "canada": ("加拿大", -106.0, 56.0),
     "turkey": ("土耳其", 35.0, 39.0),
     "germany": ("德国", 10.0, 51.0),
+    "russia": ("俄罗斯", 100.0, 60.0),
+    "russian federation": ("俄罗斯", 100.0, 60.0),
+    "俄罗斯": ("俄罗斯", 100.0, 60.0),
+    "ukraine": ("乌克兰", 31.0, 49.0),
+    "乌克兰": ("乌克兰", 31.0, 49.0),
+    "poland": ("波兰", 19.0, 52.0),
+    "波兰": ("波兰", 19.0, 52.0),
+    "romania": ("罗马尼亚", 25.0, 46.0),
+    "罗马尼亚": ("罗马尼亚", 25.0, 46.0),
+    "bulgaria": ("保加利亚", 25.0, 43.0),
+    "保加利亚": ("保加利亚", 25.0, 43.0),
+    "czechia": ("捷克", 15.5, 49.8),
+    "czech republic": ("捷克", 15.5, 49.8),
+    "捷克": ("捷克", 15.5, 49.8),
+    "eastern europe": ("东欧", 25.0, 51.0),
+    "东欧": ("东欧", 25.0, 51.0),
+    "kazakhstan": ("哈萨克斯坦", 68.0, 48.0),
+    "哈萨克斯坦": ("哈萨克斯坦", 68.0, 48.0),
+    "uzbekistan": ("乌兹别克斯坦", 64.0, 41.0),
+    "乌兹别克斯坦": ("乌兹别克斯坦", 64.0, 41.0),
+    "kyrgyzstan": ("吉尔吉斯斯坦", 75.0, 41.0),
+    "吉尔吉斯斯坦": ("吉尔吉斯斯坦", 75.0, 41.0),
+    "tajikistan": ("塔吉克斯坦", 71.0, 39.0),
+    "塔吉克斯坦": ("塔吉克斯坦", 71.0, 39.0),
+    "turkmenistan": ("土库曼斯坦", 59.0, 39.0),
+    "土库曼斯坦": ("土库曼斯坦", 59.0, 39.0),
+    "central asia": ("中亚地区", 67.0, 43.0),
+    "中亚": ("中亚地区", 67.0, 43.0),
+    "egypt": ("埃及", 30.0, 27.0),
+    "埃及": ("埃及", 30.0, 27.0),
+    "morocco": ("摩洛哥", -6.0, 32.0),
+    "摩洛哥": ("摩洛哥", -6.0, 32.0),
+    "algeria": ("阿尔及利亚", 2.0, 28.0),
+    "阿尔及利亚": ("阿尔及利亚", 2.0, 28.0),
+    "tunisia": ("突尼斯", 9.0, 34.0),
+    "突尼斯": ("突尼斯", 9.0, 34.0),
+    "libya": ("利比亚", 17.0, 27.0),
+    "利比亚": ("利比亚", 17.0, 27.0),
+    "north africa": ("北非", 15.0, 28.0),
+    "北非": ("北非", 15.0, 28.0),
     "france": ("法国", 2.0, 46.0),
     "法国": ("法国", 2.0, 46.0),
     "philippines": ("菲律宾", 122.0, 13.0),
@@ -78,13 +118,32 @@ GEO_TERMS = {
     "greenland": ("格陵兰", -42.0, 72.0),
     "new zealand": ("新西兰", 174.0, -41.0),
     "pacific islands": ("太平洋岛国", 165.0, -10.0),
+    "fiji": ("斐济", 178.0, -17.8),
+    "tuvalu": ("图瓦卢", 179.2, -8.5),
+    "vanuatu": ("瓦努阿图", 167.0, -16.0),
+    "samoa": ("萨摩亚", -172.1, -13.8),
+    "tonga": ("汤加", -175.2, -21.2),
+    "kiribati": ("基里巴斯", 173.0, 1.4),
+    "solomon islands": ("所罗门群岛", 160.2, -9.6),
+    "marshall islands": ("马绍尔群岛", 171.2, 7.1),
+    "micronesia": ("密克罗尼西亚", 158.2, 6.9),
+    "papua new guinea": ("巴布亚新几内亚", 144.0, -6.3),
+    "nauru": ("瑙鲁", 166.9, -0.5),
+    "palau": ("帕劳", 134.5, 7.5),
+    "cook islands": ("库克群岛", -159.8, -21.2),
+    "niue": ("纽埃", -169.9, -19.1),
+    "new caledonia": ("新喀里多尼亚", 165.6, -21.3),
+    "french polynesia": ("法属波利尼西亚", -149.4, -17.7),
     "pacific": ("太平洋地区", 165.0, -10.0),
     "south africa": ("南非", 24.0, -29.0),
     "南非": ("南非", 24.0, -29.0),
     "kenya": ("肯尼亚", 37.0, 0.0),
     "nigeria": ("尼日利亚", 8.0, 9.0),
     "japan": ("日本", 138.0, 37.0),
+    "日本": ("日本", 138.0, 37.0),
     "south korea": ("韩国", 128.0, 36.0),
+    "republic of korea": ("韩国", 128.0, 36.0),
+    "韩国": ("韩国", 128.0, 36.0),
     "caribbean": ("加勒比地区", -75.0, 18.0),
     "加勒比": ("加勒比地区", -75.0, 18.0),
     "haiti": ("海地", -72.3, 19.0),
@@ -263,9 +322,10 @@ def _write_translation(db: Database, row: dict, item: dict, *, fallback: bool = 
 
 
 def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int = 20) -> dict:
+    from .cop_coverage import prioritize_translation
     rows = db.rows("""
         SELECT a.article_id,a.source_id,a.title_original,a.summary_source,a.canonical_url,
-               a.metadata_json,s.region AS source_region
+               a.metadata_json,a.published_at_utc,s.region AS source_region
         FROM articles a JOIN sources s ON s.source_id=a.source_id
         WHERE (a.title_zh IS NULL OR trim(a.title_zh)='' OR a.metadata_json NOT LIKE '%"summary_zh"%'
                OR a.metadata_json LIKE '%"translation_status": "fallback_needs_review"%'
@@ -289,7 +349,7 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
         except json.JSONDecodeError:
             metadata = {}
         row["publisher_name"] = metadata.get("publisher_name")
-    rows = source_balanced_rows(rows, limit)
+    rows = prioritize_translation(rows, limit, source_balanced_rows)
     def load_context(row: dict) -> tuple[str, str]:
         try:
             page = fetch_article_text(str(row.get("canonical_url") or ""))

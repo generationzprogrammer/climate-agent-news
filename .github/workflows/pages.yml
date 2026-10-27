@@ -64,8 +64,9 @@ jobs:
           CLIMATE_MAX_STALE_DAYS: "2"
           # Code pushes run a one-time wider translation pass so newly added
           # regional sources can repair the current seven-day balance. The
-          # scheduled daily job returns to the normal 20-record budget.
-          CLIMATE_TRANSLATION_LIMIT: ${{ github.event_name == 'push' && '40' || '20' }}
+          # 12 daily items, including COP priorities: bounded 32-record processing
+          # budget; failed/generic summaries still cannot enter the public desk.
+          CLIMATE_TRANSLATION_LIMIT: ${{ github.event_name == 'push' && '48' || '32' }}
           # 代码发布时额外修复历史条目的中文简介；日常任务维持较低额度。
           ENERGY_REPORT_DISCOVERY_LIMIT: ${{ github.event_name == 'push' && '30' || '12' }}
           # GitHub Models 已于 2026-07-30 退役。默认迁移到 Gemini

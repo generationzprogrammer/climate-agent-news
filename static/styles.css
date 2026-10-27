@@ -61,6 +61,27 @@ a { color: inherit; }
   text-decoration: none;
 }
 .brand-mark { width: 46px; height: 46px; object-fit: contain; }
+.cop31-brand { display: flex; flex: 0 0 112px; align-items: center; text-decoration: none; }
+.cop31-brand img { display: block; width: 112px; height: 46px; object-fit: contain; }
+body[data-edition="cop31"] [data-cop31-excluded] { display: none !important; }
+.cop31-intro { padding: 30px 0 0; border-bottom: 1px solid var(--line); }
+.cop31-intro p { font: 600 12px var(--sans); letter-spacing: .15em; color: var(--blue); margin: 0 0 10px; }
+.cop31-intro h1 { font: 600 clamp(26px, 3vw, 40px) var(--sans); margin: 0 0 22px; }
+.cop31-credit { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+@media (min-width: 1101px) and (max-width: 1600px) {
+  .topbar { gap: 12px; padding-left: 24px; padding-right: 24px; }
+  .topbar .brand { min-width: 175px; gap: 8px; }
+  .topbar nav { gap: 12px; }
+  .topbar > .project-intro-link { display: none; }
+  .cop31-brand { flex-basis: 92px; }
+  .cop31-brand img { width: 92px; }
+}
+@media (max-width: 760px) {
+  .topbar .brand { margin-right: 0; min-width: 0; }
+  .topbar .cop31-brand { flex: 0 0 88px; margin-right: auto; }
+  .topbar .cop31-brand img { width: 88px; height: 40px; }
+  .topbar { gap: 10px; }
+}
 .brand-wordmark > span { display: flex; align-items: baseline; gap: 4px; color: #178451; font-size: 10px; line-height: 1; }
 .brand-wordmark > span strong { font-size: 12px; letter-spacing: .02em; }
 .brand-wordmark > span i { color: #111; font-style: normal; font-weight: 750; }

@@ -4,6 +4,7 @@ import json
 import re
 import time
 import uuid
+from itertools import zip_longest
 from datetime import UTC, datetime, timedelta
 from urllib.parse import urlencode, urlparse
 
@@ -49,6 +50,13 @@ GOOGLE_NEWS_QUERIES = (
     '(green OR low-carbon OR energy OR emissions OR air quality) when:1d',
     '("AI data centre" OR "AI data center" OR AIDC) '
     '(electricity OR energy OR grid OR cooling OR water OR emissions) when:1d',
+    f'({CURRENT_COP_TERM} OR UNFCCC OR "nationally determined contributions" OR "global stocktake") when:1d',
+    '("climate finance" OR "loss and damage" OR "adaptation fund" OR "Article 6") when:1d',
+    '("climate adaptation" OR "just transition" OR "methane emissions" OR "climate resilient") when:1d',
+    '(site:cop31.tr OR site:unfccc.int OR site:enb.iisd.org) (climate OR COP31 OR finance OR adaptation) when:1d',
+    '("Pacific Islands" OR Fiji OR Tuvalu OR Vanuatu OR Samoa OR Tonga OR Kiribati) '
+    '(climate OR emissions OR adaptation OR "sea level") when:1d',
+    '(Russia OR Russian) ("climate change" OR emissions OR decarbonisation OR methane OR permafrost OR "carbon market") when:1d',
 )
 GOOGLE_NEWS_LOCALES = (
     ("en-US", "US", "US:en"),
@@ -61,6 +69,12 @@ GOOGLE_NEWS_LOCALES = (
     ("en-SG", "SG", "SG:en"),
     ("zh-CN", "CN", "CN:zh-Hans"),
     ("en-SG", "SG", "SG:en"),
+    ("en-GB", "GB", "GB:en"),
+    ("en-GB", "GB", "GB:en"),
+    ("en-GB", "GB", "GB:en"),
+    ("en-GB", "GB", "GB:en"),
+    ("en-NZ", "NZ", "NZ:en"),
+    ("en-GB", "GB", "GB:en"),
 )
 GDELT_PROFILES = {
     "API001": {
@@ -134,6 +148,7 @@ UNDERCOVERED_GEO_TERMS = (
     "kazakhstan", "uzbekistan", "kyrgyzstan", "tajikistan", "turkmenistan", "central asia",
     "egypt", "morocco", "algeria", "tunisia", "libya", "north africa",
     "japan", "japanese", "south korea", "korean",
+    "pacific islands", "fiji", "tuvalu", "vanuatu", "samoa", "kiribati", "tonga",
 )
 
 NUMBER_PATTERN = re.compile(
@@ -237,6 +252,22 @@ def _article_rows(articles: list[NormalizedArticle], source: dict) -> tuple[list
     }
 
 
+def interleave_discovery_batches(batches: list[list[NormalizedArticle]]) -> list[NormalizedArticle]:
+    """Give each query a turn before the shared 150-record processing cap.
+
+    Concatenating feeds previously let the first broad queries consume the
+    whole budget, silently discarding newly added regional/COP discoveries.
+    """
+    seen = set()
+    articles = []
+    for group in zip_longest(*batches):
+        for article in group:
+            if article is not None and article.canonical_url not in seen:
+                seen.add(article.canonical_url)
+                articles.append(article)
+    return articles
+
+
 def _gdelt_url(endpoint: str, source_id: str) -> str:
     profile = GDELT_PROFILES[source_id]
     params = {
@@ -323,9 +354,8 @@ def sync_p0(db: Database, source_ids: tuple[str, ...] = P0_SOURCE_IDS) -> dict:
             if source_id in GDELT_SOURCE_IDS:
                 articles = parse_gdelt(responses[0].payload, source_id)
             else:
-                articles = []
-                for response in responses:
-                    articles.extend(parse_feed(response.payload, source_id, languages[0] if languages else None))
+                batches = [parse_feed(response.payload, source_id, languages[0] if languages else None) for response in responses]
+                articles = interleave_discovery_batches(batches)
             rows, quality = _article_rows(articles, source)
             counts = db.upsert_articles(rows)
             run.update({

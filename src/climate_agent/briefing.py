@@ -11,6 +11,7 @@ from .db import Database
 from .pipeline import decode_event, module_manifest
 from .summary_utils import factual_fallback_summary, intelligence_keywords, is_generic_summary, is_generic_title
 from .translation import detect_places
+from .cop_coverage import DAILY_TARGET, COP_DAILY_TARGET, PACIFIC_ISLAND_CODES, cop_topics, coverage_regions, regional_deficits
 
 
 TOPIC_ZH_ALIASES = {
@@ -81,6 +82,10 @@ def _continent(item: dict) -> str:
     lon = float(place.get("lon") or 0)
     if "南极" in name or lat <= -60:
         return "南极洲"
+    if any(country.get("alpha2") in PACIFIC_ISLAND_CODES for country in item.get("country_codes", []) if isinstance(country, dict)):
+        return "大洋洲"
+    if name in {"斐济", "图瓦卢", "瓦努阿图", "萨摩亚", "汤加", "基里巴斯", "所罗门群岛", "马绍尔群岛", "密克罗尼西亚", "巴布亚新几内亚", "瑙鲁", "帕劳", "库克群岛", "纽埃", "新喀里多尼亚", "法属波利尼西亚"}:
+        return "大洋洲"
     if any(term in name for term in ("澳大利亚", "新西兰", "太平洋", "大洋洲")):
         return "大洋洲"
     if any(term in name for term in ("巴西", "南美", "拉丁美洲", "亚马孙", "阿根廷", "智利", "秘鲁", "哥伦比亚")):
@@ -251,7 +256,7 @@ def select_latest_day(items: list[dict], *, limit: int = 12) -> list[dict]:
 def select_daily_window(
     items: list[dict],
     *,
-    limit: int = 10,
+    limit: int = DAILY_TARGET,
     lookback_days: int = 7,
     min_items: int = 8,
     min_sources: int = 3,
@@ -270,7 +275,20 @@ def select_daily_window(
     if not latest:
         return []
     latest_items = _deduplicate_items([item for item, day in dated if day == latest])
-    selected = balanced_select(latest_items, limit)
+    # Select COP priorities from the same quality-gated day, then complete the
+    # general desk. Regional coverage is a rolling, soft editorial objective.
+    history = []
+    for offset in range(1, 7):
+        history.extend(balanced_select([item for item, day in dated if day == latest - timedelta(days=offset)], limit))
+    selected = []
+    for region in sorted(regional_deficits(history, min(limit, len(latest_items)))):
+        regional = [item for item in latest_items if region in coverage_regions(item)]
+        selected.extend(balanced_select(regional, min(1, limit - len(selected)), already_selected=selected))
+    cop_needed = max(0, min(COP_DAILY_TARGET, limit) - sum(bool(cop_topics(item)) for item in selected))
+    selected.extend(balanced_select([item for item in latest_items if cop_topics(item)], min(cop_needed, limit - len(selected)), already_selected=selected))
+    selected.extend(balanced_select(latest_items, limit - len(selected), already_selected=selected))
+    for item in selected:
+        item["cop_topics"] = cop_topics(item)
     return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
 
 
@@ -287,7 +305,7 @@ def _country_key(item: dict) -> str:
     return str(places[0].get("name_zh") or "") if places else ""
 
 
-def select_daily_map_window(items: list[dict], *, limit: int = 10) -> list[dict]:
+def select_daily_map_window(items: list[dict], *, limit: int = DAILY_TARGET) -> list[dict]:
     """Select a geographically balanced map queue from the newest day only."""
     dated = [(item, _published_day(item.get("published_at"))) for item in items]
     latest = max((day for _, day in dated if day), default=None)
@@ -305,6 +323,7 @@ def select_daily_map_window(items: list[dict], *, limit: int = 10) -> list[dict]
     country_counts: Counter[str] = Counter()
     continent_counts: Counter[str] = Counter()
     source_counts: Counter[str] = Counter()
+    priority_ids = {item.get("article_id") for item in select_daily_window(items, limit=limit)}
 
     def take(*, country_cap: int, continent_cap: int, source_cap: int) -> None:
         while pool and len(selected) < limit:
@@ -322,6 +341,8 @@ def select_daily_map_window(items: list[dict], *, limit: int = 10) -> list[dict]
                 continent = _continent(item)
                 source = _source_key(item)
                 score = float(item.get("relevance_score") or 0) + min(8, float(item.get("authority") or 0))
+                if item.get("article_id") in priority_ids:
+                    score += 18
                 if not continent_counts[continent]:
                     score += 22
                 if not country_counts[country]:
@@ -339,13 +360,13 @@ def select_daily_map_window(items: list[dict], *, limit: int = 10) -> list[dict]
             continent_counts[_continent(choice)] += 1
             source_counts[_source_key(choice)] += 1
 
-    # Ten markers should normally cover several regions. Relax only enough to
-    # reach the 8-item floor when the same-day candidate pool is unusually thin.
-    take(country_cap=2, continent_cap=3, source_cap=2)
-    if len(selected) < min(8, limit):
+    # Keep country concentration bounded even when there are fewer than 12
+    # safely geolocated stories; never manufacture a location for global talks.
+    take(country_cap=2, continent_cap=max(3, math.ceil(limit / 3)), source_cap=2)
+    if len(selected) < limit:
         take(country_cap=2, continent_cap=4, source_cap=3)
-    if len(selected) < min(8, limit):
-        take(country_cap=3, continent_cap=4, source_cap=3)
+    if len(selected) < limit:
+        take(country_cap=3, continent_cap=max(4, math.ceil(limit * .42)), source_cap=3)
     return sorted(selected, key=lambda item: item.get("published_at") or "", reverse=True)
 
 
@@ -522,7 +543,7 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
             and not is_generic_summary(prepared.get("summary_zh"))
         ):
             records.append(prepared)
-    today_items = select_daily_window(records, limit=10)
+    today_items = select_daily_window(records, limit=DAILY_TARGET)
     week_items = select_latest_week(records, limit=60)
     if not today_items:
         return payload
@@ -532,8 +553,8 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
     )
     publication_day = datetime.now(BEIJING_TZ).date()
     payload["intelligence"] = today_items
-    map_today_items = select_daily_map_window(records, limit=10)
-    payload["map_events_today"] = _map_events(map_today_items, max_events=10)
+    map_today_items = select_daily_map_window(records, limit=DAILY_TARGET)
+    payload["map_events_today"] = _map_events(map_today_items, max_events=DAILY_TARGET)
     payload["map_events_week"] = _map_events(week_items)
     payload["map_events"] = payload["map_events_today"]
     payload["meta"]["date"] = publication_day.isoformat()
@@ -541,9 +562,11 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
     selected_days = [_published_day(item.get("published_at")) for item in today_items]
     selected_days = [day for day in selected_days if day]
     payload["meta"]["daily_window_start"] = min(selected_days).isoformat() if selected_days else payload["meta"]["date"]
-    payload["meta"]["daily_target"] = 10
+    payload["meta"]["daily_target"] = DAILY_TARGET
+    payload["meta"]["cop_priority_target"] = COP_DAILY_TARGET
+    payload["meta"]["cop_priority_count"] = sum(bool(cop_topics(item)) for item in today_items)
     payload["meta"]["daily_backfilled"] = count_backfilled_items(today_items)
-    payload["meta"]["daily_complete_day"] = len(today_items) >= 8
+    payload["meta"]["daily_complete_day"] = len(today_items) >= DAILY_TARGET
     payload["meta"]["daily_sources"] = len({_source_key(item) for item in today_items})
     payload["meta"]["daily_continents"] = len({_continent(item) for item in today_items if _continent(item) != "未标注"})
     payload["metrics"]["high_priority"] = sum(item.get("relevance_score", 0) >= 70 for item in today_items)
@@ -563,7 +586,7 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
 def dashboard_payload(db: Database) -> dict:
     source_rows = db.rows("SELECT * FROM sources ORDER BY enabled DESC, authority DESC, name")
     candidates = _publishable_candidates(db)
-    intelligence = select_daily_window(candidates, limit=10)
+    intelligence = select_daily_window(candidates, limit=DAILY_TARGET)
     weekly_intelligence = select_latest_week(candidates)
     demo_rows = db.rows("SELECT * FROM events ORDER BY urgency DESC, published_at DESC")
     demo_events = sorted((decode_event(row) for row in demo_rows), key=lambda x: x["priority"], reverse=True)
@@ -590,7 +613,7 @@ def dashboard_payload(db: Database) -> dict:
     """)}
     official = _official_data(db)
     live = bool(intelligence)
-    map_events_today = _map_events(select_daily_map_window(candidates, limit=10), max_events=10)
+    map_events_today = _map_events(select_daily_map_window(candidates, limit=DAILY_TARGET), max_events=DAILY_TARGET)
     map_events_week = _map_events(weekly_intelligence)
     intelligence_days = [_published_day(item.get("published_at")) for item in intelligence]
     intelligence_days = [day for day in intelligence_days if day]
@@ -611,14 +634,16 @@ def dashboard_payload(db: Database) -> dict:
             "timezone": "Asia/Shanghai",
             "demo_mode": not live,
             "notice": (
-                f"今日简报按北京时间自然日生成且不混入往日记录；系统通过分主题聚合检索和每日晚间刷新，将当天目标维持在约 10 条。动态 P0 入口最近成功 {run_ok} 个。标题和摘要是来源陈述，尚需人工核验。"
+                f"今日简报按北京时间自然日生成且不混入往日记录，目标约 12 条，其中约 4 条覆盖 COP 全球重点议题。动态 P0 入口最近成功 {run_ok} 个。"
                 if live else "尚未执行在线同步，以下事件仅用于界面演示；UNFCCC 本地档案可独立浏览。"
             ),
             "latest_news_date": max(intelligence_days, default=today).isoformat(),
             "daily_window_start": min(intelligence_days, default=today).isoformat(),
-            "daily_target": 10,
+            "daily_target": DAILY_TARGET,
+            "cop_priority_target": COP_DAILY_TARGET,
+            "cop_priority_count": sum(bool(cop_topics(item)) for item in intelligence),
             "daily_backfilled": backfilled,
-            "daily_complete_day": len(intelligence) >= 8,
+            "daily_complete_day": len(intelligence) >= DAILY_TARGET,
             "daily_sources": len({_source_key(item) for item in intelligence}),
             "daily_continents": len({_continent(item) for item in intelligence if _continent(item) != "未标注"}),
         },
