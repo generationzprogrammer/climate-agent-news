@@ -1,6 +1,7 @@
 const state = {
   mode: "climate", language: "zh", datasets: {},
   dashboard: null, archive: null, analytics: null, filtered: [], visible: 18,
+  sourceOnly: true,
   mapPeriod: "today", mapTopology: null,
   assistant: { lastRecords: [], lastPlan: null },
   siteMetrics: null, subscription: null, team: null,
@@ -856,6 +857,9 @@ function renderToday() {
 
 function setupFilters() {
   populateTopicFilter();
+  [["sourceRecordsMode",true],["metadataRecordsMode",false]].forEach(([id,value])=>$(id)?.addEventListener('click',()=>{
+    state.sourceOnly=value;state.visible=18;populateTopicFilter();applyFilters();
+  }));
   ["archiveSearch", "topicFilter", "organizationFilter", "countryFilter"].forEach(id => $(id)?.addEventListener(["archiveSearch", "countryFilter"].includes(id) ? "input" : "change", () => {
     state.visible = 18;
     applyFilters();
@@ -867,8 +871,26 @@ function setupFilters() {
   });
 }
 
+function archiveRecords() {
+  if(state.mode !== 'climate' || COP31_EDITION || !state.sourceOnly || !window.GREEN_RESEARCH)return state.archive?.records || [];
+  return [...window.GREEN_RESEARCH.texts.values()].map(record=>({
+    ...record, summary_source:record.source_text,
+    topics:(record.governance_themes||[]).map(item=>state.language==='en'?item.label_en:item.label_zh),
+    places:(record.country_codes||[]).filter(item=>typeof item==='object').map(item=>({name_zh:item.name_zh})),
+    numbers:(record.quantitative_claims||[]).map(item=>item.value_text),
+  }));
+}
+
 function populateTopicFilter() {
-  const topics = [...new Set(state.archive.records.flatMap(record => record.topics || []))]
+  const controls=$("sourceArchiveModes");
+  if(controls)controls.hidden=state.mode!=='climate'||COP31_EDITION;
+  if($("sourceRecordsMode")){
+    $("sourceRecordsMode").textContent=state.language==='en'?'Stored source texts':'原文语料';
+    $("metadataRecordsMode").textContent=state.language==='en'?'News metadata archive':'新闻元数据档案';
+    $("sourceRecordsMode").setAttribute('aria-pressed',String(state.sourceOnly));
+    $("metadataRecordsMode").setAttribute('aria-pressed',String(!state.sourceOnly));
+  }
+  const topics = [...new Set(archiveRecords().flatMap(record => record.topics || []))]
     .sort((left, right) => left.localeCompare(right, "zh-CN"));
   $("topicFilter").innerHTML = `<option value="">${state.language === "en" ? "All topics" : "全部议题"}</option>`
     + topics.map(topic => `<option value="${esc(topic)}">${esc(topic)}</option>`).join("");
@@ -879,9 +901,9 @@ function applyFilters() {
   const topic = $("topicFilter").value;
   const organization = $("organizationFilter")?.value || "";
   const country = $("countryFilter")?.value || "";
-  state.filtered = state.archive.records.filter(record => {
+  state.filtered = archiveRecords().filter(record => {
     const haystack = [
-      record.title_zh, record.title_original, record.summary_zh, record.source_name,
+      record.title_zh, record.title_original, record.summary_zh, record.source_name, record.source_text,
       ...(record.topics || []), ...(record.places || []).map(place => place.name_zh),
       ...organizationCodes(record), ...(record.event_tags || []),
       ...(record.country_codes || []).flatMap(item => [item.name_zh, item.alpha2, item.alpha3]),
@@ -896,6 +918,10 @@ function applyFilters() {
 }
 
 function renderArchiveRows() {
+  if(state.mode==='climate'&&!COP31_EDITION&&state.sourceOnly&&!window.GREEN_RESEARCH){
+    $("archiveList").innerHTML=`<p>${state.language==='en'?'Loading stored source texts…':'正在读取原文语料…'}</p>`;
+    $("resultCount").textContent='—';return;
+  }
   const shown = state.filtered.slice(0, state.visible);
   $("resultCount").textContent = state.filtered.length;
   $("archiveList").innerHTML = shown.length ? shown.map(record => {
@@ -910,7 +936,7 @@ function renderArchiveRows() {
       <div class="archive-title"><h3>${esc(field(record, "title_zh", "title_original"))}</h3>${state.language === "en" ? "" : `<p>${esc(record.title_original)}</p>`}</div>
       <div class="archive-source"><b>${esc(record.source_name)}</b><span>${esc(state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : ((record.topics || []).slice(0, 2).join(" · ") || "气候动态"))}</span></div>
       <div class="archive-atoms">${facts.length ? facts.map(fact => `<i>${esc(fact)}</i>`).join("") : ""}<a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
-      ${window.GREEN_RESEARCH?.texts.has(record.canonical_url) ? `<div class="archive-original"><button type="button" data-research-text="${esc(window.GREEN_RESEARCH.texts.get(record.canonical_url).text_id)}">${state.language === 'en' ? 'Read stored source text' : '阅读已存原文'}</button></div>` : ''}
+      ${window.GREEN_RESEARCH?.texts.has(record.canonical_url) ? `<div class="archive-original">${record.source_text?`<p class="archive-source-excerpt">${esc(record.source_text.slice(0,350))}${record.source_text.length>350?'…':''}</p>`:''}<button type="button" data-research-text="${esc(window.GREEN_RESEARCH.texts.get(record.canonical_url).text_id)}">${state.language === 'en' ? 'Read stored source text' : '阅读已存原文'}</button></div>` : ''}
     </article>`;
   }).join("") : `<div class="empty compact"><b>${state.language === "en" ? "No matching records" : "没有匹配记录"}</b><p>${state.language === "en" ? "Try fewer filters or a different search term." : "请减少筛选条件或更换关键词。"}</p></div>`;
   $("loadMore").hidden = state.visible >= state.filtered.length;
@@ -1987,7 +2013,8 @@ async function init() {
   }
 }
 
-document.addEventListener('green:research-ready',()=>{if(Array.isArray(state.filtered))renderArchiveRows();});
+document.addEventListener('green:research-ready',()=>{if(state.archive){populateTopicFilter();applyFilters();}});
+document.addEventListener('green:research-unavailable',()=>{state.sourceOnly=false;if(state.archive){populateTopicFilter();applyFilters();}});
 
 init().catch(error => {
   console.error(error);
