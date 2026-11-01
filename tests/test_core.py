@@ -247,17 +247,29 @@ class CoreTests(unittest.TestCase):
                 "summary_zh": "这是一条已经翻译完成的中文气候摘要，重复同步时不能被清空。",
                 "places": [{"name_zh": "美国", "lon": -100, "lat": 39}],
                 "translation_status": "model_generated_needs_review",
+                "summary_profile":"evidence-v2", "evidence_chars":900,
+                "evidence_sha256":"source-hash", "content_basis":"stored_article_excerpt",
+                "title_en":"Climate update", "summary_en":"Existing factual English paragraph.",
+                "english_fingerprint":"english-cache", "translation_model":"gemini-test",
             },
         }
         refreshed = dict(original)
         refreshed["content_hash"] = "def"
         refreshed["metadata"] = {"why_zh": "fresh fetch"}
         self.db.upsert_articles([original])
+        same_source={**original,'metadata':{'why_zh':'same source fetched again'}}
+        self.db.upsert_articles([same_source])
+        cached=json.loads(self.db.rows("SELECT metadata_json FROM articles WHERE canonical_url=?",('https://example.org/a',))[0]['metadata_json'])
+        self.assertEqual(cached['summary_profile'],'evidence-v2')
+        self.assertEqual(cached['summary_en'],'Existing factual English paragraph.')
+        self.assertNotIn('summary_evidence_update_available',cached)
         self.db.upsert_articles([refreshed])
         metadata = json.loads(self.db.rows("SELECT metadata_json FROM articles WHERE canonical_url=?", ("https://example.org/a",))[0]["metadata_json"])
         self.assertEqual(metadata["summary_zh"], original["metadata"]["summary_zh"])
         self.assertEqual(metadata["places"][0]["name_zh"], "美国")
         self.assertEqual(metadata["why_zh"], "fresh fetch")
+        self.assertTrue(metadata['summary_evidence_update_available'])
+        self.assertEqual(metadata['evidence_sha256'],'source-hash')
 
     def test_place_detection_supports_map_markers(self) -> None:
         places = detect_places("Hospitals in Europe face heat while Texas recovers from floods")

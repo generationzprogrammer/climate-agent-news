@@ -273,6 +273,9 @@ class Database:
             preserve_metadata_keys = {
                 "summary_zh", "theme_zh", "importance_zh", "poster_phrase",
                 "places", "translation_status", "translated_at", "fact_status",
+                "title_en", "summary_en", "english_fingerprint", "translation_model",
+                "summary_profile", "evidence_chars", "evidence_sha256", "content_basis",
+                "company_entities", "summary_evidence_update_available",
             }
             for row in rows:
                 current_metadata = dict(row.get("metadata") or {})
@@ -280,6 +283,14 @@ class Database:
                 for key in preserve_metadata_keys:
                     if key in previous_metadata and key not in current_metadata:
                         current_metadata[key] = previous_metadata[key]
+                for key in ('publisher_name','publisher_homepage'):
+                    if not current_metadata.get(key) and previous_metadata.get(key):
+                        current_metadata[key]=previous_metadata[key]
+                old=existing.get(row['canonical_url'])
+                if old and old['content_hash']!=row['content_hash'] and previous_metadata.get('translation_status')!='human_reviewed':
+                    # Retain the useful old paragraph while requesting a new
+                    # compilation only when the source content actually changed.
+                    current_metadata['summary_evidence_update_available']=True
                 row["metadata"] = current_metadata
             sql = """
             INSERT INTO articles (
