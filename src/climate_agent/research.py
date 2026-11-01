@@ -22,7 +22,7 @@ from functools import lru_cache
 from urllib.parse import urlsplit
 
 from .article_content import fetch_article_text, METADATA_ONLY_HOSTS
-from .taxonomy import country_codes_for
+from .taxonomy import country_codes_for, country_index
 
 VERSION = '1.0.0'
 THEMES = (
@@ -416,9 +416,13 @@ def write_research(root, db, data_dir):
     root=Path(root);data_dir=Path(data_dir);data_dir.mkdir(parents=True,exist_ok=True)
     status=collect_texts(root,db,fetch_limit=0)
     texts=load_jsonl(root/'data/research_texts.jsonl')
+    country_catalog={c['alpha2']:c for c in country_index()}
     for i,row in enumerate(texts):
         if 'quantitative_claims' not in row or 'document_type' not in row:
             texts[i]={**make_text_record(row,row['source_text'],row['text_kind'],resolved_url=row.get('publisher_url'),basis=row.get('text_basis')),**row}
+        for field in ['country_codes','country_mentions']:
+            texts[i][field]=[{**c,**country_catalog.get(c.get('alpha2'),{})} if isinstance(c,dict) else c
+                             for c in texts[i].get(field,[])]
     persist_texts(root/'data/research_texts.jsonl',texts)
     # Full source corpus remains downloadable; the interactive payload is bounded.
     recent=texts[:1800]
@@ -433,6 +437,7 @@ def write_research(root, db, data_dir):
                          'interactive_records':len(recent),
                          'scope':'Climate news source passages plus separately identified licensed policy reference documents.'},
              'records':recent,'events':events[:500],'positions':positions[-400:],'comparisons':comparisons[:40],
+             'countries':list(country_catalog.values()),
              'themes':[{'id':r[0],'label_zh':r[1],'label_en':r[2]} for r in THEMES],
              'fields':[{'id':a,'label_zh':b,'label_en':c} for a,b,c in FIELDS],
              'methods':{'event_link':'Title overlap at least 0.64, at least five shared content words, no more than 30 days. Candidate linkage, not expert-confirmed event identity.',

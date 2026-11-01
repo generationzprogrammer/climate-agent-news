@@ -49,6 +49,16 @@ class ResearchTests(unittest.TestCase):
         self.assertTrue(any('$24 million'==claim['value_text'] for claim in record['quantitative_claims']))
         self.assertIsNone(record['event_date'])
 
+    def test_export_completes_legacy_country_labels_without_changing_source(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);record=make_text_record(row(),TEXT,'source_excerpt')
+            record['country_codes']=[{'alpha2':'GB'}]
+            save_jsonl(root/'data/research_texts.jsonl',[record])
+            write_research(root,None,root/'site/data')
+            exported=json.loads((root/'site/data/research_index.json').read_text(encoding='utf-8'))
+            self.assertEqual(exported['records'][0]['country_codes'][0]['name_en'],'United Kingdom')
+            self.assertEqual(exported['records'][0]['text_sha256'],record['text_sha256'])
+
     def test_source_text_never_comes_from_an_ai_summary(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);(root/'data').mkdir()

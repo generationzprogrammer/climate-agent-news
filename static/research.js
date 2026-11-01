@@ -12,7 +12,8 @@
   let data=null,tab='events',country='',theme='',track='',query='',visible=20,watch={countries:[],themes:[],groups:[]};
   try{const saved=JSON.parse(localStorage.getItem('green-research-watch-v1')||'null');if(saved&&Array.isArray(saved.countries)&&Array.isArray(saved.themes))watch={...watch,...saved};}catch{}
   let dialog=document.createElement('dialog');dialog.className='research-dialog';document.body.append(dialog);
-  const countryList=()=>[...new Map(data.records.flatMap(r=>r.country_codes||[]).filter(c=>typeof c==='object'&&c.alpha2).map(c=>[c.alpha2,c])).values()].sort((a,b)=>(en()?a.name_en:a.name_zh).localeCompare(en()?b.name_en:b.name_zh));
+  const countryName=(c,english=en())=>{if(typeof c==='string')return c;const canonical=(data.countries||[]).find(v=>v.alpha2===c.alpha2)||c;return String((english?canonical.name_en:canonical.name_zh)||c.alpha3||c.alpha2||'');};
+  const countryList=()=>[...new Map(data.records.flatMap(r=>r.country_codes||[]).filter(c=>typeof c==='object'&&c.alpha2).map(c=>[c.alpha2,{...c,name_zh:countryName(c,false),name_en:countryName(c,true)}])).values()].sort((a,b)=>countryName(a).localeCompare(countryName(b)));
   const countries=r=>(r.country_codes||[]).map(c=>typeof c==='string'?c:c.alpha2);
   const groups=r=>{const text=r.source_text+' '+r.title_original;return [['EU',/European Union|\bEU\b|欧盟/i],['AOSIS',/\bAOSIS\b|Small Island States|小岛屿国家联盟/i],['G77',/G77|七十七国集团/i],['LDC',/Least Developed Countries|\bLDCs\b|最不发达国家/i]].filter(x=>x[1].test(text)).map(x=>x[0]);};
   function matches(r){return (!country||countries(r).includes(country))&&(!theme||(r.governance_themes||[]).some(v=>v.id===theme))&&(!track||r.track===track)&&(!query||[r.title_original,r.title_zh,r.source_text,r.summary_zh].filter(Boolean).join(' ').toLowerCase().includes(query.toLowerCase()));}

@@ -17,3 +17,11 @@ test('comparison action is not rebound to pagination and cleared',()=>{
   const research=fs.readFileSync(require('node:path').join(__dirname,'../static/research.js'),'utf8');
   assert.match(research,/if\(tab==='events'\|\|tab==='watch'\)host\.querySelector\('\.research-more'\)/);
 });
+test('English research filters tolerate legacy country records without names',()=>{
+  const research=fs.readFileSync(require('node:path').join(__dirname,'../static/research.js'),'utf8');
+  const countryBlock=research.slice(research.indexOf('const countryName='),research.indexOf('const countries='));
+  const context={data:{records:[{country_codes:[{alpha2:'GB'},{alpha2:'US',name_zh:'美国'}]}],countries:[{alpha2:'GB',name_en:'United Kingdom',name_zh:'英国'},{alpha2:'US',name_en:'United States',name_zh:'美国'}]},en:()=>true};
+  vm.createContext(context);vm.runInContext(countryBlock+'\nresult=countryList();',context);
+  assert.equal(context.result[0].name_en,'United Kingdom');assert.equal(context.result[1].name_en,'United States');
+  context.data.countries=[];vm.runInContext('fallback=countryList();',context);assert.equal(context.fallback.length,2);
+});
