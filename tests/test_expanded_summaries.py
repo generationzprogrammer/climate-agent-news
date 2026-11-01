@@ -74,6 +74,18 @@ class ExpandedSummaryTests(unittest.TestCase):
                 self.assertEqual(translate_pending(db,model,limit=5)['translated'],5)
                 self.assertEqual(translate_pending(db,model,limit=5)['pending'],0)
             self.assertEqual(model.sizes,[4,1])
+            # A subsequently retrieved publisher excerpt must refresh a cached
+            # short summary exactly once, then be reusable without another call.
+            evidence='The government approved coastal adaptation funding for flood barriers and warning systems. '*8
+            (Path(folder)/'research_texts.jsonl').write_text(json.dumps({
+                'canonical_url':'https://example.org/0','source_text':evidence,
+                'text_kind':'article_excerpt'})+'\n',encoding='utf-8')
+            self.assertEqual(translate_pending(db,model,limit=5)['translated'],1)
+            self.assertEqual(translate_pending(db,model,limit=5)['pending'],0)
+            metadata=json.loads(db.rows("SELECT metadata_json FROM articles WHERE article_id='a0'")[0]['metadata_json'])
+            self.assertEqual(metadata['evidence_chars'],len(evidence))
+            self.assertNotIn('summary_evidence_update_available',metadata)
+            self.assertEqual(model.sizes,[4,1,1])
             row=db.rows("SELECT * FROM articles WHERE article_id='a0'")[0]
             self.assertFalse(_write_translation(db,row,{'title_zh':'政府批准沿海适应基金','summary_zh':'较短的来源摘要，仅提及沿海基金和防洪设施。'},fallback=True))
 

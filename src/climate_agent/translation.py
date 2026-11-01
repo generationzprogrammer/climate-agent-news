@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import hashlib
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
@@ -337,7 +338,9 @@ def _write_translation(db: Database, row: dict, item: dict, *, fallback: bool = 
         "translated_at": datetime.now(UTC).isoformat(),
         "summary_profile": SUMMARY_PROFILE if not fallback else "source_extract",
         "evidence_chars": len(str(row.get("_source_excerpt") or "")),
+        "evidence_sha256": hashlib.sha256(str(row.get('_source_excerpt') or '').encode('utf-8')).hexdigest(),
     })
+    metadata.pop('summary_evidence_update_available',None)
     from .english_brief import english_text, fingerprint
     if english_text(item.get("title_en")) and english_text(item.get("summary_en")):
         metadata.update({"title_en": item["title_en"], "summary_en": item["summary_en"],
@@ -354,6 +357,17 @@ def _write_translation(db: Database, row: dict, item: dict, *, fallback: bool = 
 
 def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int = 20) -> dict:
     from .cop_coverage import prioritize_translation
+    from .research import load_jsonl
+    text_cache={item['canonical_url']:item for item in load_jsonl(db.path.parent/'research_texts.jsonl')}
+    for old in db.rows("SELECT article_id,canonical_url,metadata_json FROM articles WHERE datetime(published_at_utc)>=datetime('now','-7 days')"):
+        cached=text_cache.get(old['canonical_url'])
+        if not cached:continue
+        metadata=json.loads(old.get('metadata_json') or '{}')
+        evidence=str(cached.get('source_text') or '')[:4200]
+        if metadata.get('translation_status')=='human_reviewed':continue
+        if len(evidence)>int(metadata.get('evidence_chars') or 0) and hashlib.sha256(evidence.encode()).hexdigest()!=metadata.get('evidence_sha256'):
+            metadata['summary_evidence_update_available']=True
+            db.execute('UPDATE articles SET metadata_json=? WHERE article_id=?',(json.dumps(metadata,ensure_ascii=False),old['article_id']))
     rows = db.rows("""
         SELECT a.article_id,a.source_id,a.title_original,a.summary_source,a.canonical_url,
                a.metadata_json,a.published_at_utc,s.region AS source_region
@@ -362,6 +376,7 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
                OR a.metadata_json LIKE '%"translation_status": "fallback_needs_review"%'
                OR a.metadata_json LIKE '%"translation_status": "metadata_compiled_needs_review"%'
                OR a.metadata_json LIKE '%"translation_status": "model_retry_required"%'
+               OR a.metadata_json LIKE '%"summary_evidence_update_available": true%'
                OR a.metadata_json LIKE '%来源消息显示%'
                OR a.metadata_json LIKE '%该段为题名与来源摘要的保守编译%'
                OR a.metadata_json LIKE '%主题上属于%'
@@ -383,12 +398,10 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
             metadata = {}
         row["publisher_name"] = metadata.get("publisher_name")
     rows = prioritize_translation(rows, limit, source_balanced_rows)
-    from .research import load_jsonl
-    text_cache={item['canonical_url']:item for item in load_jsonl(db.path.parent/'research_texts.jsonl')}
     def load_context(row: dict) -> tuple[str, str]:
         cached=text_cache.get(row.get('canonical_url'))
         if cached and len(cached.get('source_text',''))>len(row.get('summary_source') or ''):
-            return cached['source_text'], 'stored_'+cached.get('text_kind','source_excerpt')
+            return cached['source_text'][:4200], 'stored_'+cached.get('text_kind','source_excerpt')
         try:
             page = fetch_article_text(str(row.get("canonical_url") or ""))
         except Exception:
