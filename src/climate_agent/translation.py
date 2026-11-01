@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 
@@ -10,7 +11,7 @@ from .db import Database
 from .providers import OpenAICompatibleModel
 from .summary_utils import factual_fallback_summary, is_generic_summary, is_generic_title, sanitize_summary
 
-SUMMARY_PROFILE = "expanded-v1"
+SUMMARY_PROFILE = "evidence-v2"
 
 
 GEO_TERMS = {
@@ -364,7 +365,7 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
                OR a.metadata_json LIKE '%来源消息显示%'
                OR a.metadata_json LIKE '%该段为题名与来源摘要的保守编译%'
                OR a.metadata_json LIKE '%主题上属于%'
-               OR (a.metadata_json NOT LIKE '%"summary_profile": "expanded-v1"%'
+               OR (a.metadata_json NOT LIKE '%"summary_profile": "evidence-v2"%'
                    AND a.metadata_json NOT LIKE '%"translation_status": "human_reviewed"%')
                OR a.title_zh LIKE '%议题受到关注%'
                OR a.title_zh IN ('全球气候议题出现新动态','国际气候谈判出现新动向','极端天气风险出现新动态',
@@ -382,7 +383,12 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
             metadata = {}
         row["publisher_name"] = metadata.get("publisher_name")
     rows = prioritize_translation(rows, limit, source_balanced_rows)
+    from .research import load_jsonl
+    text_cache={item['canonical_url']:item for item in load_jsonl(db.path.parent/'research_texts.jsonl')}
     def load_context(row: dict) -> tuple[str, str]:
+        cached=text_cache.get(row.get('canonical_url'))
+        if cached and len(cached.get('source_text',''))>len(row.get('summary_source') or ''):
+            return cached['source_text'], 'stored_'+cached.get('text_kind','source_excerpt')
         try:
             page = fetch_article_text(str(row.get("canonical_url") or ""))
         except Exception:

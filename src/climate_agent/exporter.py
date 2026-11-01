@@ -23,6 +23,7 @@ from .topic_desks import write_topic_desks
 from .bth_assistant import write_assistant_assets
 from .cop31_site import write_cop31_entry
 from .english_brief import enrich_daily_english
+from .research import write_research
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -170,6 +171,8 @@ def export_static_site(
         analytics = write_corpus_analytics(corpus_path, data_dir / "corpus_analytics.json", manifest_path)
         write_energy_corpus_analytics(corpus_path, data_dir / "energy_corpus_analytics.json", manifest_path)
     site_metrics = write_site_metrics(corpus_path, db.path.parent / "visitor_history.json", data_dir / "site_metrics.json")
+    research_root = db.path.parent.parent if db.path.parent.name == 'data' else db.path.parent
+    research = write_research(research_root, db, data_dir)
     for history_name in ("climate_text_corpus.jsonl", "climate_text_corpus.manifest.json"):
         history_path = db.path.parent / history_name
         if history_path.exists():
@@ -214,6 +217,7 @@ def export_static_site(
         "corpus_added": corpus_merge.get("added", 0),
         "corpus_analytics_records": (analytics or {}).get("records", 0),
         "site_metrics_points": len(site_metrics.get("archive_cumulative", [])),
+        "research": research,
         "analytics_beacon": analytics_beacon,
         "china_carbon_spotlight": len(spotlights["china_carbon_market"]["records"]),
         "singapore_spotlight": len(spotlights["singapore"]["records"]),

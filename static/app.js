@@ -910,6 +910,7 @@ function renderArchiveRows() {
       <div class="archive-title"><h3>${esc(field(record, "title_zh", "title_original"))}</h3>${state.language === "en" ? "" : `<p>${esc(record.title_original)}</p>`}</div>
       <div class="archive-source"><b>${esc(record.source_name)}</b><span>${esc(state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : ((record.topics || []).slice(0, 2).join(" · ") || "气候动态"))}</span></div>
       <div class="archive-atoms">${facts.length ? facts.map(fact => `<i>${esc(fact)}</i>`).join("") : ""}<a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
+      ${window.GREEN_RESEARCH?.texts.has(record.canonical_url) ? `<div class="archive-original"><button type="button" data-research-text="${esc(window.GREEN_RESEARCH.texts.get(record.canonical_url).text_id)}">${state.language === 'en' ? 'Read stored source text' : '阅读已存原文'}</button></div>` : ''}
     </article>`;
   }).join("") : `<div class="empty compact"><b>${state.language === "en" ? "No matching records" : "没有匹配记录"}</b><p>${state.language === "en" ? "Try fewer filters or a different search term." : "请减少筛选条件或更换关键词。"}</p></div>`;
   $("loadMore").hidden = state.visible >= state.filtered.length;
@@ -1985,6 +1986,8 @@ async function init() {
     $("mapCanvas").classList.add("map-error");
   }
 }
+
+document.addEventListener('green:research-ready',()=>{if(Array.isArray(state.filtered))renderArchiveRows();});
 
 init().catch(error => {
   console.error(error);

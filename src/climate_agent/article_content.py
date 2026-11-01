@@ -204,6 +204,8 @@ def fetch_article_text(url: str) -> dict:
                 return {"text": "", "basis": "response_too_large"}
             charset = response.headers.get_content_charset() or "utf-8"
             html = data.decode(charset, errors="replace")
+    except urllib.error.HTTPError as exc:
+        return {"text": "", "basis": f"http_{exc.code}"}
     except (OSError, UnicodeError, urllib.error.URLError):
         return {"text": "", "basis": "fetch_failed"}
     return extract_article_text(html)

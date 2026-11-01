@@ -169,6 +169,14 @@ def main(argv: list[str] | None = None) -> int:
         if all(os.getenv(name) for name in ("CLIMATE_MODEL_BASE_URL", "CLIMATE_MODEL_API_KEY", "CLIMATE_MODEL_NAME")):
             try:
                 configured_model = OpenAICompatibleModel.from_env()
+                from .research import collect_texts
+                from .source_lookup import lookup_publishers
+                try:
+                    result['source_texts'] = collect_texts(ROOT, db, fetch_limit=12)
+                    result['publisher_lookup'] = lookup_publishers(ROOT, db, configured_model)
+                except Exception as research_error:
+                    # Optional discovery cannot prevent daily compilation.
+                    result['source_texts'] = {'status':'failed','error_type':type(research_error).__name__}
                 result["translation"] = translate_pending(
                     db,
                     configured_model,

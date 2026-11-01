@@ -14,6 +14,8 @@ on:
       - "data/energy_reports.json"
       - "data/visitor_history.json"
       - "data/model_usage.json"
+      - "data/research_*.json*"
+      - "data/research_releases/**"
   workflow_dispatch:
     inputs:
       send_notification:
@@ -85,6 +87,9 @@ jobs:
           CLIMATE_MODEL_USAGE_PATH: data/model_usage.json
           CLIMATE_MODEL_DAILY_REQUEST_LIMIT: "40"
           CLIMATE_MODEL_MIN_INTERVAL_SECONDS: "12"
+          # Gemini 2.5 Flash Search is documented as available on Free tier.
+          # URLs only; original text must be fetched and title-checked separately.
+          CLIMATE_RESEARCH_GROUNDED_LOOKUP: "1"
           # 代码发布时额外修复历史条目的中文简介；日常任务维持较低额度。
           ENERGY_REPORT_DISCOVERY_LIMIT: ${{ github.event_name == 'push' && '30' || '12' }}
           # GitHub Models 已于 2026-07-30 退役。默认迁移到 Gemini
@@ -108,6 +113,7 @@ jobs:
           if [ "${{ github.event_name }}" != "workflow_run" ] && [ "$CLIMATE_SITE_ONLY" != "true" ]; then
             python -m climate_agent.cli update-visitors
             python -m climate_agent.cli sync --skip-ndc
+            python scripts/update_research_corpus.py --fetch-limit 40 --documents
           else
             # Registry/site-only publication never calls model APIs; scheduled
             # news updates still use the configured shared request budget.
@@ -133,6 +139,8 @@ jobs:
           git config user.email "climate-text-bot@users.noreply.github.com"
           git add data/climate.db data/news_archive.json data/source_health.json data/climate_text_corpus.jsonl data/climate_text_corpus.manifest.json data/energy_reports.json
           if [ -f data/model_usage.json ]; then git add data/model_usage.json; fi
+          if [ -f data/research_texts.jsonl.gz ]; then git add data/research_*.json data/research_*.jsonl.gz; fi
+          if [ -d data/research_releases ]; then git add data/research_releases; fi
           if [ -f data/visitor_history.json ]; then
             git add data/visitor_history.json
           fi
