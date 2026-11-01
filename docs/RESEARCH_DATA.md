@@ -18,7 +18,9 @@
 
 ## 更新与许可
 
-每日06:30、18:30北京时间沿用现有云端任务。新新闻优先回源；每轮最多4次Gemini 2.5 Flash Search用于发现发布者URL，每日最多8次，和其他模型任务共同受40次日预算限制。Google项目目前由用户确认是Free tier；2.5 Flash Search免费层依据Google定价页面，而3.5 Flash-Lite Search不属于其免费层。账户实际可用性以API返回为准，403、429停止，不开启计费，不付费兜底。搜索生成文字不入原文库，候选网址须另行获取且核对标题，发现日期冲突超过7天时不接受。
+每日06:30、18:30北京时间沿用现有云端任务。新新闻优先回源。2026年11月1日实际云端运行增加到1018条真实语料，47条双语概要编译成功，门禁通过。可选的Gemini 2.5 Flash Search在本项目实测返回404，已经默认关闭；Google目前仅向曾使用2.5模型的项目提供这一旧型号。3.5 Flash-Lite普通编译与公开网页回填正常，不能将搜索服务不可用误写为普通模型不可用。
+
+若未来具备适用权限，可显式开启搜索辅助，最多每轮4次、每日8次，和其他模型任务共同受40次日预算限制。Google项目由用户确认是Free tier；不切换到不含免费搜索的3.x型号，不开启计费，不付费兜底。搜索生成文字不入原文库，候选网址须另行获取且核对标题，发现日期冲突超过7天时不接受。
 
 历史回填每轮最多40页，四个并发槽、同域波次间隔2秒，保留失败原因；同域401、403、429停止本轮访问。遵守robots和既有来源存储策略，不使用私有Google解码接口，不绕过付费墙、登录或验证。来源不可用不会删除已存文字。旧原文及许可文件按周期复查。
 
@@ -39,3 +41,4 @@
 3. Smith et al. The LTS-SP dataset. *Scientific Data* (2025). https://doi.org/10.1038/s41597-025-04804-4
 4. Google Gemini API pricing. https://ai.google.dev/gemini-api/docs/pricing （2026-11-01核查）
 5. Open Government Licence v3.0. https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/
+6. Google Gemini model availability and deprecations. https://ai.google.dev/gemini-api/docs/deprecations （2026-11-01核查；2.5型号限制于既有项目）
