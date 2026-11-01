@@ -116,10 +116,15 @@ class Cop31Tests(unittest.TestCase):
         self.assertEqual(prioritize_translation(rows, 1, source_balanced_rows)[0]["article_id"], "1")
 
     def test_standalone_entry_uses_shared_assets_and_curated_navigation(self):
+        # The redesigned page is hand-built (static/cop31/); publishing keeps it and only checks its contracts.
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / "index.html").write_text((ROOT / "static/index.html").read_text(encoding="utf-8"), encoding="utf-8")
-            page = BeautifulSoup(write_cop31_entry(root).read_text(encoding="utf-8"), "html.parser")
+            (root / "cop31").mkdir()
+            source = (ROOT / "static/cop31/index.html").read_text(encoding="utf-8")
+            (root / "cop31/index.html").write_text(source, encoding="utf-8")
+            published = write_cop31_entry(root).read_text(encoding="utf-8")
+            self.assertEqual(published, source)
+            page = BeautifulSoup(published, "html.parser")
             self.assertEqual(page.body["data-edition"], "cop31")
             self.assertEqual(page.base["href"], "../")
             links = {node["href"] for node in page.select("nav a")}
@@ -134,8 +139,22 @@ class Cop31Tests(unittest.TestCase):
             self.assertIsNotNone(page.select_one("#subscribeForm"))
             self.assertIsNotNone(page.select_one('script[src*="bth-transport.js"]'))
             self.assertIsNotNone(page.select_one('#subscribeLanguage'))
-            visible = [node.get("id") for node in page.select("main > section") if node.get("id") and not node.has_attr("hidden")]
-            self.assertEqual(visible[:2], ["map", "today"])
+            self.assertNotIn("preview-mode.js", published)
+            self.assertNotIn("Content-Security-Policy", published)
+
+    def test_entry_strips_preview_markup_and_rejects_broken_pages(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "cop31").mkdir()
+            source = (ROOT / "static/cop31/index.html").read_text(encoding="utf-8")
+            preview = source.replace("<head>", '<head>\n<meta http-equiv="Content-Security-Policy" content="default-src \'self\'">\n<script src="preview-mode.js"></script>\n', 1)
+            (root / "cop31/index.html").write_text(preview, encoding="utf-8")
+            published = write_cop31_entry(root).read_text(encoding="utf-8")
+            self.assertNotIn("preview-mode.js", published)
+            self.assertNotIn("Content-Security-Policy", published)
+            (root / "cop31/index.html").write_text(source.replace('id="subscribeForm"', 'id="renamed"'), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                write_cop31_entry(root)
 
 
 if __name__ == "__main__":

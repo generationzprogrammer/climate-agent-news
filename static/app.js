@@ -169,13 +169,15 @@ function toast(message) {
   setTimeout(() => element.classList.remove("show"), 3200);
 }
 
+const menuToggleLabel = open => state.language === "en" ? (open ? "Close" : "Menu") : (open ? "关闭" : "菜单");
+
 function closeMobileMenu() {
   const menu = $("mobileMenu");
   const toggle = $("mobileMenuToggle");
   if (!menu || !toggle) return;
   menu.hidden = true;
   toggle.setAttribute("aria-expanded", "false");
-  toggle.textContent = "菜单";
+  toggle.textContent = menuToggleLabel(false);
 }
 
 function setupMobileMenu() {
@@ -186,7 +188,7 @@ function setupMobileMenu() {
     const opening = menu.hidden;
     menu.hidden = !opening;
     toggle.setAttribute("aria-expanded", String(opening));
-    toggle.textContent = opening ? "关闭" : "菜单";
+    toggle.textContent = menuToggleLabel(opening);
   });
   menu.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMobileMenu));
   document.addEventListener("keydown", event => { if (event.key === "Escape") closeMobileMenu(); });
@@ -286,7 +288,6 @@ function applyModeCopy() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach(element => { element.placeholder = tr(element.dataset.i18nPlaceholder); });
   const climateBrand = state.mode !== "energy";
   if ($("brandTitle")) $("brandTitle").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
-  if (COP31_EDITION && $("brandTitle")) $("brandTitle").textContent = state.language === "en" ? "GREEN · COP31" : "格润 · COP31";
   if ($("brandDescriptor")) $("brandDescriptor").textContent = climateBrand ? "climate governance" : "energy technology";
   if ($("footerBrand")) $("footerBrand").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
   const firstOptionLabels = {
@@ -297,6 +298,7 @@ function applyModeCopy() {
   [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => {
     button.textContent = state.language === "en" ? "中文" : "EN";
   });
+  if ($("mobileMenuToggle")) $("mobileMenuToggle").textContent = menuToggleLabel(!$("mobileMenu")?.hidden);
   [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => { button.textContent = copy.button; });
   ["mapOverline", "mapTitle", "heroOverline", "heroLede", "datasetName", "datasetTitle",
     "todayOverline", "todayTitle", "analyticsTitle", "assistantOverline", "assistantTitle",
@@ -1935,8 +1937,9 @@ function renderHeatmap(id, matrix) {
       ${topics.map(topic => {
         const value = cellMap.get(`${country}||${topic}`) || 0;
         const alpha = 0.08 + 0.82 * value / maxValue;
-        const ink = alpha > 0.46 ? "#fff" : "#12223a";
-        return `<span class="heat-cell" style="background:rgba(23,78,166,${alpha.toFixed(3)});color:${ink}" title="${esc(chartLabel(country))} / ${esc(chartLabel(topic))}: ${value}">${value || ""}</span>`;
+        // Pages may theme the matrix through --heat-rgb / --heat-ink-*; the defaults keep the main-site colours.
+        const ink = alpha > 0.46 ? "var(--heat-ink-strong,#fff)" : "var(--heat-ink,#12223a)";
+        return `<span class="heat-cell" style="background:rgba(var(--heat-rgb,23,78,166),${alpha.toFixed(3)});color:${ink}" title="${esc(chartLabel(country))} / ${esc(chartLabel(topic))}: ${value}">${value || ""}</span>`;
       }).join("")}
     </div>`).join("")}
   </div>`;
