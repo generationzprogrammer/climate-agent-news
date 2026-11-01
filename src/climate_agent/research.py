@@ -354,7 +354,13 @@ def extract_positions(records):
                 if not match:continue
                 verb=match.group('verb').lower()
                 between=sentence[match.start('actor'):match.start('verb')]
-                stance='opposition' if re.search(r'oppos|reject|反对',verb) else ('qualified_statement' if re.search(r'\bnot\b|n.t|不|未',between,re.I) else 'support_or_call')
+                gap=sentence[match.end('actor'):match.start('verb')]
+                # Do not attribute an embedded country's statement to an earlier
+                # speaker (e.g. "UK said the United States supports ...").
+                if any(other!=code and re.search(other_pattern,gap,re.I)
+                       for other,_,_,other_pattern in entities):continue
+                stance=('qualified_statement' if re.search(r'\bnot\b|n.t|不|未',gap,re.I)
+                        else ('opposition' if re.search(r'oppos|reject|反对',verb) else 'support_or_call'))
                 positions.append({'position_id':row['text_id']+'_'+str(code)+'_'+str(len(positions)),
                                   'actor':code,'actor_zh':zh,'actor_en':en,'position_type':stance,
                                   'claim_original':sentence,'date':row.get('published_at'),'themes':row['governance_themes'],

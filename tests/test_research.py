@@ -88,6 +88,16 @@ class ResearchTests(unittest.TestCase):
         record=make_text_record(row(),TEXT,'source_excerpt')
         self.assertEqual(extract_positions([record]),[])
 
+    def test_negated_opposition_is_not_opposition(self):
+        record=make_text_record(row(),'The United Kingdom does not oppose the proposal on carbon markets. '+TEXT,'source_excerpt')
+        self.assertEqual(extract_positions([record])[0]['position_type'],'qualified_statement')
+
+    def test_reported_actor_is_not_the_earlier_speaker(self):
+        record=make_text_record(row(),'The United Kingdom said the United States supports the proposal on climate finance. '+TEXT,'source_excerpt')
+        record['country_mentions']=[{'alpha2':'US','name_zh':'美国','name_en':'United States'}]
+        positions=extract_positions([record])
+        self.assertEqual([p['actor'] for p in positions],['US'])
+
     def test_real_policy_family_comparison_uses_stored_texts(self):
         a=make_text_record(row(),TEXT,'licensed_document_text');a.update(document_family='UK-NDC',document_country='GB',published_at='2022-09-23')
         b=make_text_record(row('https://example.org/new'),TEXT+' The target is revised.','licensed_document_text');b.update(document_family='UK-NDC',document_country='GB',published_at='2025-01-30')
