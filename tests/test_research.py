@@ -59,6 +59,13 @@ class ResearchTests(unittest.TestCase):
             exported=json.loads((root/'site/data/research_index.json').read_text(encoding='utf-8'))
             self.assertEqual(exported['records'][0]['country_codes'][0]['name_en'],'United Kingdom')
             self.assertEqual(exported['records'][0]['text_sha256'],record['text_sha256'])
+            self.assertLessEqual(set(exported['records'][0]),{f['id'] for f in exported['fields']})
+
+    def test_source_institution_does_not_determine_document_genre(self):
+        item=row();item['source_id']='OFF123'
+        self.assertEqual(make_text_record(item,TEXT,'source_excerpt')['document_type'],'source_report')
+        item['title_original']='Analysis: coastal adaptation funding decisions'
+        self.assertEqual(make_text_record(item,TEXT,'source_excerpt')['document_type'],'commentary_or_analysis')
 
     def test_policy_reference_survives_growth_beyond_the_news_window(self):
         with tempfile.TemporaryDirectory() as folder:

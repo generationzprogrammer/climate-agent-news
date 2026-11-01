@@ -182,6 +182,13 @@ def annotations(text):
     return result
 
 
+def document_type_for(row,kind):
+    if kind=='licensed_document_text':return 'official_policy_document','curated_licensed_document_registry'
+    if re.match(r'^(?:Analysis|Commentary|Opinion|Editorial|Guest (?:post|commentary))\s*[:：]|^(?:分析|评论|社论|客座文章|专家解读)\s*[:：]',str(row.get('title_original') or ''),re.I):
+        return 'commentary_or_analysis','explicit_title_prefix'
+    return 'source_report','document_genre_not_independently_established'
+
+
 def make_text_record(row, text, kind, *, resolved_url=None, basis=None):
     text=clean(text)
     url=row['canonical_url']
@@ -203,7 +210,8 @@ def make_text_record(row, text, kind, *, resolved_url=None, basis=None):
             'published_at':row.get('published_at') or row.get('published_at_utc') or row.get('published_date'),
             'source_text':text,'text_kind':kind,'text_characters':len(text),'text_sha256':digest,
             'text_basis':basis or kind,'collected_at':stamp(),'extractor_version':VERSION,
-            'document_type':'official_policy_document' if kind=='licensed_document_text' else ('official_communication' if str(row.get('source_id','')).startswith('OFF') else 'source_report'),
+            'document_type':document_type_for(row,kind)[0],
+            'document_type_basis':document_type_for(row,kind)[1],
             'event_date':None,'event_date_precision':None,'source_updated_at':None,
             'policy_direction':None,'legal_effect':None,'summary_model':row.get('summary_model'),
             'quantitative_claims':claims[:30],
@@ -411,6 +419,32 @@ def version_comparisons(records):
 
 FIELDS=[('text_id','语料标识','Text identifier'),('canonical_url','原记录链接','Original record URL'),('publisher_url','真实发布页','Publisher URL'),('source_text','原文摘录','Original source excerpt'),('text_kind','文本类型','Text kind'),('text_sha256','文本指纹','Text hash'),('published_at','来源发布时间','Publication time'),('collected_at','采集时间','Collection time'),('country_mentions','原文提及国家','Country mentions'),('governance_themes','治理议题与证据位置','Governance themes and evidence offsets'),('policy_tools','政策工具与证据位置','Policy tools and evidence offsets'),('policy_stages','政策阶段措辞','Policy-stage wording'),('track','谈判或行动轨道','Negotiations or action track'),('review_status','复核状态','Review status'),('rights_status','留存权限','Retention scope')]
 FIELDS += [('document_type','文件类型','Document type'),('quantitative_claims','数字原句与字符位置','Quantitative statements and offsets'),('conference_ids','明确提及的会议编号','Explicit conference identifiers'),('event_date','事件日期，未确认时为空','Event date; null unless established'),('source_updated_at','原文修订时间，未知时为空','Source update time; null if unknown'),('summary_model','概括模型，已记录时提供','Summary model where recorded'),('document_family','政策文件系列','Policy-document family'),('version_label','文件版本与目标周期','Version and target horizon'),('licence_url','来源许可依据','Source licence URL')]
+FIELDS += [
+    ('record_id','关联新闻标识','Linked news record identifier'),
+    ('source_id','采集接口标识','Collection-source identifier'),
+    ('source_name','采集来源名称；发布页见publisher_url','Collection source; publisher page is given separately'),
+    ('source_type','来源接口或机构类型，与文件类型分开','Source/interface type, separate from document genre'),
+    ('title_original','原始题名','Original title'),('title_zh','中文题名','Chinese title'),('title_en','英文题名','English title'),
+    ('summary_zh','中文编译，与原文分开保存','Chinese compiled summary, separate from source text'),
+    ('summary_en','英文概括，与原文分开保存','English summary, separate from source text'),
+    ('language','来源语言标记','Source language tag'),('text_characters','所存文字字符数','Stored text character count'),
+    ('text_basis','正文提取位置或来源摘录类型','Extraction location or source-excerpt basis'),
+    ('extractor_version','抽取器版本','Extractor version'),('annotation_method','自动标注方法版本','Annotation method version'),
+    ('country_codes','ISO国别检索标签，不等同政策管辖地','ISO country search tags, not policy jurisdictions'),
+    ('event_date_precision','事件日期精度，未知时为空','Event-date precision; null if unknown'),
+    ('policy_direction','政策方向，未核实时为空','Policy direction; null unless established'),
+    ('legal_effect','法律效力，未核实时为空','Legal effect; null unless established'),
+    ('agenda_item_id','正式议程编号，未知时为空','Formal agenda identifier; null if unknown'),
+    ('thematic_day_id','主题日编号，未知时为空','Thematic-day identifier; null if unknown'),
+    ('document_country','许可政策文件所属国','Country of the licensed policy document'),
+    ('target_year','文件明确给出的目标年份','Explicit target year'),
+    ('rights_evidence','来源许可或留存依据','Source-specific permission or retention evidence'),
+    ('text_transformations','文本清理与隐私遮蔽记录','Text cleaning and privacy-redaction operations'),
+    ('source_page_title','回源网页题名','Fetched publisher-page title'),
+    ('page_title_verified','回源题名是否通过自动匹配','Whether fetched title passed automatic matching'),
+    ('publisher_discovery','发布者链接发现方法','Publisher-link discovery method'),
+    ('document_type_basis','文件类型判定依据','Document-genre classification basis'),
+]
 
 
 def write_research(root, db, data_dir):
@@ -424,6 +458,7 @@ def write_research(root, db, data_dir):
         for field in ['country_codes','country_mentions']:
             texts[i][field]=[{**c,**country_catalog.get(c.get('alpha2'),{})} if isinstance(c,dict) else c
                              for c in texts[i].get(field,[])]
+        texts[i]['document_type'],texts[i]['document_type_basis']=document_type_for(texts[i],texts[i]['text_kind'])
     persist_texts(root/'data/research_texts.jsonl',texts)
     # Full source corpus remains downloadable; the interactive payload is bounded.
     recent=texts[:1800]
