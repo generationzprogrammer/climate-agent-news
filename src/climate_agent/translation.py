@@ -406,6 +406,7 @@ def translate_pending(db: Database, model: OpenAICompatibleModel, *, limit: int 
 只输出 JSON 对象，键为 translations，值为数组。每项必须包含 article_id、title_zh、summary_zh、theme_zh、importance_zh、poster_phrase、company_entities。
 要求：title_zh 必须逐义忠实翻译原新闻标题，保留标题中的主体、地点、动作、数字和疑问语气，不得改写为“受到关注”“出现新动态”“出现新进展”等分类模板；summary_zh 写成一段自然中文，证据充分时约200–280字，优先交代主体、地点、行动与已知结果，补足来源明确给出的背景、关键数字、适用范围、实施时间及限制条件。保留“拟议、承诺、通过、生效、已经实施”的区别；不写“来源消息显示”“报道中出现”“主题上属于”“值得关注”“聚焦”等元话语，不添加核验免责声明。原文证据不足时允许短于目标长度，严禁为了字数补造背景、重复标题或泛谈意义；不得猜测。theme_zh 使用自然短语，如“甲烷减排”“气候资金”“极端高温”；importance_zh 单独说明政策或谈判意义并标明观点与事实边界；poster_phrase 不超过14个汉字。company_entities 为新闻明确点名的能源企业数组，每项只写name_en、name_zh、business_zh、country、company_type；business_zh只概括素材明确说明的业务，company_type只能是energy_major、energy_startup或energy_company，无法确认则用energy_company；没有能源企业时返回空数组。不得补充输入中不存在的事实。"""
     system += "\n同时提供title_en与summary_en：标题忠实使用或翻译原题名，摘要用120至180词的专业英文表达与中文概括相同的事实，证据不足时允许更短，不增添信息。"
+    system += "\n若证据只有题名或与题名相同的短摘录，只概括其中明确的事实；不得推断未出现的技术、行业、资金用途、政策效果或会议议程。不要以‘未提供’‘未披露’‘未详细说明’等描述素材缺失来填充段落。长摘要必须建立在来源实际提供的实质内容上。"
     # Gemini compiles both editions in four-record batches, reducing requests.
     # Keep conservative batches for other compatible providers.
     batch_size = 4 if str(getattr(model, "model", "")).startswith("gemini-") else 2

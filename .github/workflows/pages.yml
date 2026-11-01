@@ -83,7 +83,7 @@ jobs:
           # All model tasks and retries share a persisted daily request ceiling.
           # This is a safety budget, not proof of the account's billing tier.
           CLIMATE_MODEL_USAGE_PATH: data/model_usage.json
-          CLIMATE_MODEL_DAILY_REQUEST_LIMIT: "18"
+          CLIMATE_MODEL_DAILY_REQUEST_LIMIT: "40"
           CLIMATE_MODEL_MIN_INTERVAL_SECONDS: "12"
           # 代码发布时额外修复历史条目的中文简介；日常任务维持较低额度。
           ENERGY_REPORT_DISCOVERY_LIMIT: ${{ github.event_name == 'push' && '30' || '12' }}
