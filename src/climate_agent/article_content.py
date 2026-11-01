@@ -137,7 +137,10 @@ def extract_article_text(html: str, *, limit: int = MAX_EXCERPT_CHARS) -> dict:
             "title": parser.titles[0] if parser.titles else "",
             "published_at": parser.published_dates[0] if parser.published_dates else "",
         }
-    basis, text = max(candidates, key=lambda pair: len(pair[1]))
+    # A page-wide paragraph collection is usually longer because it also
+    # includes related stories and banners. Prefer an actual article container
+    # or structured article body when it supplies a substantive passage.
+    basis, text = next((pair for pair in candidates if len(pair[1]) >= 160), candidates[0])
     return {
         "text": text[:limit].strip(),
         "basis": basis,

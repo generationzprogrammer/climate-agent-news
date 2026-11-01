@@ -14,6 +14,7 @@ from climate_agent.research import (annotations,build_events,clean,collect_texts
     freeze_release,load_jsonl,make_text_record,real_embedded_url,save_jsonl,substantive,version_comparisons,write_research)
 from climate_agent.source_lookup import lookup_publishers
 from climate_agent.research_documents import update_documents
+from climate_agent.article_content import extract_article_text
 
 
 TEXT=('The government approved a coastal adaptation programme with funding of $24 million. '
@@ -27,6 +28,12 @@ def row(url='https://example.org/one',title='Government approves coastal adaptat
 
 
 class ResearchTests(unittest.TestCase):
+    def test_article_container_wins_over_longer_page_boilerplate(self):
+        html='<title>Coastal adaptation funding</title><p>'+('Unrelated recommendations and site information. '*40)+'</p><article><p>'+TEXT+'</p></article>'
+        result=extract_article_text(html)
+        self.assertEqual(result['basis'],'article_paragraphs')
+        self.assertEqual(result['text'],TEXT)
+
     def test_title_only_is_not_a_substantive_source_text(self):
         title='Government approves coastal adaptation funding programme'
         self.assertFalse(substantive(title+' - Example newspaper',title))
