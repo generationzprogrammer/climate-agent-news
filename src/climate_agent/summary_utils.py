@@ -67,7 +67,12 @@ def sanitize_summary(text: str | None) -> str:
         for sentence in sentences
         if sentence.strip() and not any(marker in sentence for marker in GENERIC_SUMMARY_MARKERS)
     ]
-    return "".join(kept).strip()[:220]
+    result = "".join(kept).strip()
+    if len(result) <= 640:
+        return result
+    # Prefer a complete sentence over cutting a figure, condition or attribution.
+    boundary = max(result.rfind(mark, 0, 640) for mark in ("。", "！", "？", ". "))
+    return result[:boundary + 1] if boundary >= 80 else result[:640]
 
 
 def intelligence_keywords(record: dict, limit: int = 5) -> list[str]:

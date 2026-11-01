@@ -13,6 +13,7 @@ on:
       - "data/climate_text_corpus.manifest.json"
       - "data/energy_reports.json"
       - "data/visitor_history.json"
+      - "data/model_usage.json"
   workflow_dispatch:
     inputs:
       send_notification:
@@ -57,6 +58,16 @@ jobs:
           python-version: "3.12"
       - name: 安装项目依赖
         run: python -m pip install --disable-pip-version-check -e .
+      - name: 确定模型额度日期
+        id: model_quota
+        shell: bash
+        run: echo "day=$(TZ=America/Los_Angeles date +%F)" >> "$GITHUB_OUTPUT"
+      - name: 恢复当日模型请求计数
+        uses: actions/cache/restore@v4
+        with:
+          path: data/model_usage.json
+          key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: model-usage-${{ steps.model_quota.outputs.day }}-
       - name: 增量采集、中文编译与质量门禁
         env:
           PYTHONPATH: src
@@ -69,6 +80,11 @@ jobs:
           # 12 daily items, including COP priorities: bounded 32-record processing
           # budget; failed/generic summaries still cannot enter the public desk.
           CLIMATE_TRANSLATION_LIMIT: ${{ github.event_name == 'push' && '48' || '32' }}
+          # All model tasks and retries share a persisted daily request ceiling.
+          # This is a safety budget, not proof of the account's billing tier.
+          CLIMATE_MODEL_USAGE_PATH: data/model_usage.json
+          CLIMATE_MODEL_DAILY_REQUEST_LIMIT: "18"
+          CLIMATE_MODEL_MIN_INTERVAL_SECONDS: "12"
           # 代码发布时额外修复历史条目的中文简介；日常任务维持较低额度。
           ENERGY_REPORT_DISCOVERY_LIMIT: ${{ github.event_name == 'push' && '30' || '12' }}
           # GitHub Models 已于 2026-07-30 退役。默认迁移到 Gemini
@@ -92,8 +108,9 @@ jobs:
           if [ "${{ github.event_name }}" != "workflow_run" ] && [ "$CLIMATE_SITE_ONLY" != "true" ]; then
             python -m climate_agent.cli update-visitors
             python -m climate_agent.cli sync --skip-ndc
-          elif [ "${{ github.event_name }}" = "workflow_run" ]; then
-            # Registry publication must not depend on paid model calls or a new news crawl.
+          else
+            # Registry/site-only publication never calls model APIs; scheduled
+            # news updates still use the configured shared request budget.
             unset CLIMATE_MODEL_API_KEY
           fi
           python -m climate_agent.cli export-web --output site --archive-limit 100000
@@ -102,6 +119,12 @@ jobs:
             python -m climate_agent.cli validate-publish --site site
           fi
           cp site/data/news_archive.json data/news_archive.json
+      - name: 保留模型请求计数 包括质量门禁失败的运行
+        if: ${{ always() && hashFiles('data/model_usage.json') != '' }}
+        uses: actions/cache/save@v4
+        with:
+          path: data/model_usage.json
+          key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
       - name: 保存滚动档案与来源健康状态
         if: ${{ github.event_name != 'workflow_run' }}
         shell: bash
@@ -109,6 +132,7 @@ jobs:
           git config user.name "climate-text-bot"
           git config user.email "climate-text-bot@users.noreply.github.com"
           git add data/climate.db data/news_archive.json data/source_health.json data/climate_text_corpus.jsonl data/climate_text_corpus.manifest.json data/energy_reports.json
+          if [ -f data/model_usage.json ]; then git add data/model_usage.json; fi
           if [ -f data/visitor_history.json ]; then
             git add data/visitor_history.json
           fi

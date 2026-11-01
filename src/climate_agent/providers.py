@@ -33,6 +33,7 @@ class OpenAICompatibleModel:
         )
 
     def complete_json(self, system: str, payload: dict) -> dict:
+        from .model_budget import reserve_request, record_usage
         body = json.dumps({
             "model": self.model,
             "temperature": 0.1,
@@ -58,8 +59,10 @@ class OpenAICompatibleModel:
             if delay:
                 time.sleep(delay)
             try:
+                reserve_request(self.model)
                 with urllib.request.urlopen(request, timeout=self.timeout) as response:
                     result = json.loads(response.read())
+                record_usage(result.get("usage") or {})
                 content = str(result["choices"][0]["message"]["content"]).strip()
                 if content.startswith("```"):
                     content = content.split("\n", 1)[-1]
@@ -74,7 +77,9 @@ class OpenAICompatibleModel:
                     raise
             except urllib.error.HTTPError as exc:
                 last_error = exc
-                if exc.code not in {408, 429, 500, 502, 503, 504} or attempt == 2:
+                # Repeated quota errors burn the daily request allowance. Keep
+                # cached evidence and defer to the next scheduled update.
+                if exc.code not in {408, 500, 502, 503, 504} or attempt == 2:
                     raise
             except (OSError, urllib.error.URLError) as exc:
                 last_error = exc
