@@ -23,6 +23,11 @@ for (raw,) in c.execute('SELECT metadata_json FROM articles'):
     if m.get('summary_zh'): lengths.append(len(m['summary_zh']))
     basis[m.get('content_basis') or 'unrecorded'] += 1
 counts = {t:c.execute(f'SELECT count(*) FROM {t}').fetchone()[0] for t in ['articles','historical_articles','official_documents','sources']}
+article_urls = {url for (url,) in c.execute('SELECT canonical_url FROM articles') if url}
+history_urls = {url for (url,) in c.execute('SELECT canonical_url FROM historical_articles') if url}
+export_urls = {r.get('canonical_url') for r in rows if r.get('canonical_url')}
+archive_urls = {r.get('canonical_url') for r in archive if r.get('canonical_url')}
+all_news_urls = article_urls | history_urls | export_urls | archive_urls
 c.close()
 result = {'snapshot_date':'2026-11-01','corpus_records':len(rows),'archive_records':len(archive),
           'date_min':min(r['published_date'] for r in rows),'date_max':max(r['published_date'] for r in rows),
@@ -33,7 +38,12 @@ result = {'snapshot_date':'2026-11-01','corpus_records':len(rows),'archive_recor
           'metadata_only_flag_true':sum(r.get('quality_flags',{}).get('metadata_only') is True for r in rows),
           'translation_models':dict(models),'content_basis':dict(basis),
           'chinese_summary_median_chars':statistics.median(lengths) if lengths else None,
-          'tables':counts,'note':'Content-basis labels describe extraction input, not storage rights or verified full text.'}
+          'tables':counts,
+          'url_scope': {'all_news_unique_urls':len(all_news_urls),
+                        'articles_history_url_overlap':len(article_urls & history_urls),
+                        'urls_outside_climate_export':len(all_news_urls - export_urls),
+                        'note':'URL-level union, not event deduplication; articles may include energy news. Climate eligibility must be screened before backfill.'},
+          'note':'Content-basis labels describe extraction input, not storage rights or verified full text.'}
 args.output.parent.mkdir(parents=True, exist_ok=True)
 args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n',encoding='utf-8')
 print(json.dumps(result, ensure_ascii=True))
