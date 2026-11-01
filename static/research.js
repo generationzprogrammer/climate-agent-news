@@ -62,7 +62,7 @@
     host.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;visible=20;render();});
     const search=host.querySelector('#researchQuery');search.onchange=()=>{query=search.value.trim();visible=20;render();};search.addEventListener('keydown',e=>{if(e.key==='Enter'){query=search.value.trim();visible=20;render();}});
     [['researchCountry',v=>country=v],['researchTheme',v=>theme=v],['researchTrack',v=>track=v]].forEach(([id,set])=>host.querySelector('#'+id).onchange=e=>{set(e.target.value);visible=20;render();});
-    host.querySelector('.research-more')?.addEventListener('click',()=>{visible+=20;render();});bindDetails();
+    if(tab==='events'||tab==='watch')host.querySelector('.research-more')?.addEventListener('click',()=>{visible+=20;render();});bindDetails();
   }
   function bindDetails(){host.querySelectorAll('[data-text]').forEach(b=>b.onclick=()=>detail(b.dataset.text));}
   document.addEventListener('click',e=>{const button=e.target.closest('[data-research-text]');if(button){e.preventDefault();detail(button.dataset.researchText);}});
