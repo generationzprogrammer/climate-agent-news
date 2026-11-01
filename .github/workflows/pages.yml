@@ -117,6 +117,11 @@ jobs:
             python -m climate_agent.cli update-visitors
             python -m climate_agent.cli sync --skip-ndc
             python scripts/update_research_corpus.py --fetch-limit 40 --documents
+            # New source passages found during backfill can improve today's
+            # summaries before the final export, within the same daily budget.
+            if [ -n "$CLIMATE_MODEL_API_KEY" ]; then
+              python -m climate_agent.cli translate --limit 12
+            fi
           else
             # Registry/site-only publication never calls model APIs; scheduled
             # news updates still use the configured shared request budget.

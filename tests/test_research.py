@@ -59,6 +59,18 @@ class ResearchTests(unittest.TestCase):
             self.assertEqual(exported['records'][0]['country_codes'][0]['name_en'],'United Kingdom')
             self.assertEqual(exported['records'][0]['text_sha256'],record['text_sha256'])
 
+    def test_policy_reference_survives_growth_beyond_the_news_window(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);base=make_text_record(row(),TEXT,'source_excerpt')
+            records=[{**base,'text_id':f'text_{i}','canonical_url':f'https://example.org/{i}'} for i in range(1801)]
+            records.append({**base,'text_id':'policy-old','canonical_url':'https://example.org/policy','document_family':'NDC'})
+            save_jsonl(root/'data/research_texts.jsonl',records)
+            with patch('climate_agent.research.collect_texts',return_value={}),patch('climate_agent.research.build_events',return_value=[]),patch('climate_agent.research.extract_positions',return_value=[]),patch('climate_agent.research.version_comparisons',return_value=[]):
+                write_research(root,None,root/'site/data')
+            exported=json.loads((root/'site/data/research_index.json').read_text(encoding='utf-8'))
+            self.assertEqual(len(exported['records']),1801)
+            self.assertIn('policy-old',[r['text_id'] for r in exported['records']])
+
     def test_source_text_never_comes_from_an_ai_summary(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);(root/'data').mkdir()

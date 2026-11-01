@@ -426,6 +426,8 @@ def write_research(root, db, data_dir):
     persist_texts(root/'data/research_texts.jsonl',texts)
     # Full source corpus remains downloadable; the interactive payload is bounded.
     recent=texts[:1800]
+    # Preserve selectable policy versions when daily news exceeds the UI window.
+    recent.extend(r for r in texts[1800:] if r.get('document_family'))
     events=build_events(recent)
     positions=extract_positions(texts)
     comparisons=version_comparisons(texts)

@@ -25,3 +25,9 @@ test('English research filters tolerate legacy country records without names',()
   assert.equal(context.result[0].name_en,'United Kingdom');assert.equal(context.result[1].name_en,'United States');
   context.data.countries=[];vm.runInContext('fallback=countryList();',context);assert.equal(context.fallback.length,2);
 });
+test('filtered CSV preserves quotes and protects spreadsheet formulas',()=>{
+  const research=fs.readFileSync(require('node:path').join(__dirname,'../static/research.js'),'utf8');
+  const code=research.match(/const csvCell = [^\n]+/)[0];
+  const ctx={};vm.createContext(ctx);vm.runInContext(code+'\nformula=csvCell("=1+1");quoted=csvCell(\'a"b\');',ctx);
+  assert.equal(ctx.formula,'"\'=1+1"');assert.equal(ctx.quoted,'"a""b"');
+});

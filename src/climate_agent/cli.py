@@ -172,7 +172,7 @@ def main(argv: list[str] | None = None) -> int:
                 from .research import collect_texts
                 from .source_lookup import lookup_publishers
                 try:
-                    result['source_texts'] = collect_texts(ROOT, db, fetch_limit=12)
+                    result['source_texts'] = collect_texts(ROOT, db, fetch_limit=24)
                     result['publisher_lookup'] = lookup_publishers(ROOT, db, configured_model)
                 except Exception as research_error:
                     # Optional discovery cannot prevent daily compilation.
