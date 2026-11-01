@@ -15,6 +15,7 @@ import gzip
 import json
 import re
 import time
+import unicodedata
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -95,8 +96,8 @@ def clean(value):
 
 
 def title_key(value):
-    value = re.split(r'\s[-|–]\s', clean(value))[0].lower()
-    return re.sub(r'[^a-z0-9\u3400-\u9fff]', '', value)
+    value = unicodedata.normalize('NFKC',re.split(r'\s[-|–]\s', clean(value))[0]).casefold()
+    return ''.join(character for character in value if character.isalnum())
 
 
 def substantive(text, title):

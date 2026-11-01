@@ -39,6 +39,7 @@ class ResearchTests(unittest.TestCase):
         self.assertFalse(substantive(title+' - Example newspaper',title))
         self.assertFalse(substantive('https://example.org',title))
         self.assertTrue(substantive(TEXT,title))
+        self.assertTrue(substantive('Правительство одобрило программу климатической адаптации. На защиту побережья направлены средства для строительства дамб и систем раннего предупреждения. Реализация программы рассчитана на 2027–2030 годы.','Климатическая адаптация прибрежных районов'))
 
     def test_original_text_and_offsets_are_inspectable(self):
         record=make_text_record(row(),TEXT,'source_excerpt')
