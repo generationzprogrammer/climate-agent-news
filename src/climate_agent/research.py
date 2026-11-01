@@ -157,6 +157,7 @@ def news_records(root, db=None):
             meta=json.loads(row.get('metadata_json') or '{}')
             current=by_url[url]
             current['source_name']=meta.get('publisher_name') or row['source_name']
+            current['publisher_homepage']=meta.get('publisher_homepage')
             current['summary_model']=meta.get('translation_model')
             current.update({k:row[k] for k in ['article_id','source_type','published_at_utc']})
             for key in ['title_zh','summary_zh','summary_en','title_en']:
@@ -233,8 +234,12 @@ def collect_texts(root,db=None,*,fetch_limit=0):
         url=row['canonical_url']; prior=texts.get(url)
         if prior and prior['text_kind'] in ['article_excerpt','licensed_document_text'] and prior.get('collected_at','')>cutoff:continue
         attempt=attempts.get(url,{})
-        if attempt.get('attempted_at','')>cutoff:continue
+        if attempt.get('attempted_at','')>cutoff and not (
+            attempt.get('status')=='publisher_url_unresolved' and row.get('publisher_homepage')):continue
         resolved=real_embedded_url(url) or title_urls.get(title_key(row.get('title_original')))
+        homepage=row.get('publisher_homepage')
+        if not resolved and homepage and str(row.get('published_at_utc') or row.get('published_at') or '')>cutoff:
+            resolved=homepage
         if not resolved:
             attempts[url]={'status':'publisher_url_unresolved','attempted_at':stamp()};continue
         host=urlsplit(resolved).hostname or ''
@@ -251,6 +256,10 @@ def collect_texts(root,db=None,*,fetch_limit=0):
             if bucket and len(selected)<fetch_limit:selected.append(bucket.pop(0))
     def fetch(item):
         row,url=item
+        if urlsplit(row['canonical_url']).hostname=='news.google.com' and url==row.get('publisher_homepage'):
+            from .publisher_links import resolve_publisher
+            url=resolve_publisher(row['title_original'],url)
+            if not url:return row,None,'publisher_link_not_found'
         try:page=fetch_article_text(url)
         except Exception:return row,None,'extraction_failed'
         text=page.get('text','')

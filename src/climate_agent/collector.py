@@ -48,6 +48,7 @@ class NormalizedArticle:
     extraction_method: str = "rss"
     parser_version: str = "rss.v1"
     publisher_name: str | None = None
+    publisher_homepage: str | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -129,6 +130,8 @@ def parse_feed(payload: bytes, source_id: str, language: str | None = None) -> l
             "description", "field_synopsis", "{http://www.w3.org/2005/Atom}summary", "field_body",
         ]))
         publisher_name = _text(node, ["source", "{http://www.w3.org/2005/Atom}source"])
+        publisher_node = node.find('source')
+        publisher_homepage = publisher_node.get('url') if publisher_node is not None else None
         digest = hashlib.sha256(f"{title}\n{summary or ''}".encode("utf-8")).hexdigest()
         articles.append(NormalizedArticle(
             article_id=stable_id("article", canonical), source_id=source_id, source_url=link,
@@ -137,6 +140,7 @@ def parse_feed(payload: bytes, source_id: str, language: str | None = None) -> l
             language=language, content_hash=digest,
             parser_version="rss.recovered.v1" if recovered else "rss.v1",
             publisher_name=publisher_name,
+            publisher_homepage=publisher_homepage,
         ))
     return articles
 

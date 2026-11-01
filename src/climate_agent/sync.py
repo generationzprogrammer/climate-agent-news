@@ -252,6 +252,7 @@ def _article_rows(articles: list[NormalizedArticle], source: dict) -> tuple[list
                 "extraction_method": article.extraction_method,
                 "parser_version": article.parser_version,
                 "publisher_name": article.publisher_name,
+                "publisher_homepage": article.publisher_homepage,
                 "fact_status": "source_claim_unverified",
             },
         })
