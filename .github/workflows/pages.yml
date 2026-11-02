@@ -86,6 +86,7 @@ jobs:
           # UI/service-only changes reuse the latest archive; daily schedules still crawl.
           CLIMATE_SITE_ONLY: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[site-only]') }}
           CLIMATE_RESEARCH_BACKFILL: ${{ inputs.translate_research == true || (github.event_name == 'push' && contains(github.event.head_commit.message, '[research-backfill]')) }}
+          CLIMATE_RESEARCH_DIAGNOSTIC: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[research-diagnostic]') }}
           # Code pushes run a one-time wider translation pass so newly added
           # regional sources can repair the current seven-day balance. The
           # 12 daily items, including COP priorities: bounded 32-record processing
@@ -135,7 +136,11 @@ jobs:
           fi
           if [ -n "$CLIMATE_MODEL_API_KEY" ]; then
             if [ "$CLIMATE_RESEARCH_BACKFILL" = "true" ]; then
-              python scripts/translate_research_texts.py --max-requests 280 --workers 4
+              if [ "$CLIMATE_RESEARCH_DIAGNOSTIC" = "true" ]; then
+                python scripts/translate_research_texts.py --max-requests 1 --workers 1
+              else
+                python scripts/translate_research_texts.py --max-requests 280 --workers 4
+              fi
               python scripts/update_research_corpus.py --fetch-limit 0 --freeze
             elif [ "$CLIMATE_SITE_ONLY" != "true" ] && [ "${{ github.event_name }}" != "workflow_run" ]; then
               python scripts/translate_research_texts.py --max-requests 4 --workers 2
@@ -150,6 +155,13 @@ jobs:
             python -m climate_agent.cli validate-publish --site site
           fi
           cp site/data/news_archive.json data/news_archive.json
+      - name: 保存未通过译文检查的诊断样本 不作为公开语料
+        if: ${{ always() && hashFiles('.research_review/rejected.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-translation-review
+          path: .research_review/rejected.json
+          retention-days: 7
       - name: 保留模型请求计数 包括质量门禁失败的运行
         if: ${{ always() && hashFiles('data/model_usage.json') != '' }}
         uses: actions/cache/save@v4

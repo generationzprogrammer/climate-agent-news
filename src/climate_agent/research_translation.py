@@ -134,6 +134,7 @@ def translate_corpus(root,model=None,*,max_requests=4,workers=2):
     if batch:batches.append(batch)
     max_requests=max(0,min(400,max_requests));batches=batches[:max_requests]
     errors=Counter();completed=0
+    review=[]
     # This separate, persisted pool has a 400/day ceiling. Together with the
     # unchanged news pool (40, or 48 during a repair), the ceiling is 448, below
     # the user's confirmed 500-RPD project limit. 429 stops; no paid fallback.
@@ -166,7 +167,9 @@ def translate_corpus(root,model=None,*,max_requests=4,workers=2):
                     value['text_'+target]=clean(_cc.convert(str(value.get('text_'+target) or '')) if target=='zh' else str(value.get('text_'+target) or ''))
                     if not value.get('title_'+target) or not valid_translation(task['text'],value['text_'+target],target):valid=False
                 if valid:cache[task['id']]={**value,'id':task['id'],'source_hash':task['source_hash'],'text_id':task['text_id'],'model':model.model,'translated_at':stamp(),'profile':PROFILE}
-                else:errors['validation_pending']+=1
+                else:
+                    errors['validation_pending']+=1
+                    if len(review)<20:review.append({'id':task['id'],'text_id':task['text_id'],'source_language':lang,'source_text':task['text'],'candidate':value,'source_numbers':sorted(map(str,numeric_values(task['text']))),'target_numbers':{target:sorted(map(str,numeric_values(value.get('text_'+target,'')))) for target in (['zh'] if lang=='en' else ['en'] if lang=='zh' else ['zh','en'])},'status':'rejected_not_published'})
         save_jsonl(path,cache.values())
         print(json.dumps({'research_translation_progress':{'batches_completed':completed,'cached_chunks':len(cache),'errors':dict(errors)}}),flush=True)
         if stop:break
@@ -176,4 +179,7 @@ def translate_corpus(root,model=None,*,max_requests=4,workers=2):
     status={'status':'ok' if ready==len(records) else 'partial','records':len(records),'bilingual_ready':ready,
             'pending_records':len(records)-ready,'batches_completed':completed,'errors':dict(errors),'profile':PROFILE,'updated_at':stamp()}
     (root/'data/research_translation_status.json').write_text(json.dumps(status,ensure_ascii=False,indent=2),encoding='utf-8')
+    if review:
+        folder=root/'.research_review';folder.mkdir(exist_ok=True)
+        (folder/'rejected.json').write_text(json.dumps(review,ensure_ascii=False,indent=2),encoding='utf-8')
     return status
