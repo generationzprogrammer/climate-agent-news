@@ -39,13 +39,20 @@ def chunks(text,size=1200):
         result.append(text[start:end]);start=end
     return result
 
-SCALES={'thousand':1000,'million':10**6,'billion':10**9,'trillion':10**12,'千':1000,'万':10000,'百万':10**6,'千万':10**7,'亿':10**8,'十亿':10**9,'万亿':10**12}
+SCALES={'thousand':1000,'million':10**6,'billion':10**9,'trillion':10**12,'mn':10**6,'bn':10**9,'tn':10**12,'千':1000,'万':10000,'百万':10**6,'千万':10**7,'亿':10**8,'十亿':10**9,'万亿':10**12}
 def numeric_values(text):
     values=set()
-    pattern=r'(?<![A-Za-z0-9.])(\d[\d,]*(?:\.\d+)?)\s*(trillion|billion|million|thousand|万亿|十亿|千万|百万|亿|万|千)?'
+    number=r'\d[\d,]*(?:\.\d+)?';scale=r'trillion|billion|million|thousand|\bbn\b|\bmn\b|\btn\b|万亿|十亿|千万|百万|亿|万|千'
+    pattern=r'(?<![A-Za-z0-9.])('+number+r')\s*('+scale+r'|bn\b|mn\b|tn\b)?'
     for match in re.finditer(pattern,text,re.I):
-        try:values.add(Decimal(match[1].replace(',',''))*SCALES.get((match[2] or '').lower(),1))
+        try:
+            multiplier=SCALES.get((match[2] or '').lower(),1)
+            # Currency shorthand such as $3m, but not a physical 3 m length.
+            if multiplier==1 and re.match(r'm\b',text[match.end():],re.I) and re.search(r'[$£€]\s*$',text[max(0,match.start()-6):match.start()]):multiplier=10**6
+            values.add(Decimal(match[1].replace(',',''))*multiplier)
         except InvalidOperation:pass
+    for match in re.finditer(r'('+number+r')\s*(?:[-–—]|\bto\b|\band\b|至|到)\s*('+number+r')\s*('+scale+r'|bn\b|mn\b|tn\b)',text,re.I):
+        left=Decimal(match[1].replace(',',''));values.discard(left);values.add(left*SCALES.get(match[3].lower(),1))
     return values
 
 def valid_translation(source,target,language):

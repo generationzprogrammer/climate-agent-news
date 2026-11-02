@@ -41,6 +41,9 @@ class ResearchExpansionTests(unittest.TestCase):
         self.assertLessEqual(max(map(len,chunks(text))),1200)
     def test_numeric_magnitudes_and_missing_fact_guard(self):
         self.assertEqual(numeric_values('2 billion'),numeric_values('20亿美元'))
+        self.assertEqual(numeric_values('69bn rupees'),numeric_values('690亿卢比'))
+        self.assertEqual(numeric_values('$3m'),numeric_values('300万美元'))
+        self.assertEqual(numeric_values('3–4 million tonnes'),numeric_values('300万至400万吨'))
         self.assertTrue(valid_translation(TEXT,ZH,'zh'))
         self.assertFalse(valid_translation(TEXT,ZH.replace('2027','2028'),'zh'))
     def test_translation_keeps_english_original_and_is_cached(self):
