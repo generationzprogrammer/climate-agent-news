@@ -1,0 +1,19 @@
+[Unit]
+Description=GRENN news database: verified backup, then a health check (fails the unit on problems)
+
+[Service]
+Type=oneshot
+User=grenn
+Group=grenn
+EnvironmentFile=-/srv/grenn/conf/newsdb.env
+ExecStart=/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_newsdb.py backup
+ExecStartPost=/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_newsdb.py verify
+SyslogIdentifier=grenn-newsdb
+TimeoutStartSec=1h
+Nice=10
+IOSchedulingClass=idle
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/srv/grenn/newsdb
