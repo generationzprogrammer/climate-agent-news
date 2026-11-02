@@ -326,7 +326,7 @@ tests/                  离线单元与集成测试
 静态导出时，报告会复制为 `static/data/global_climate_analysis_report_latest.html`，网站页脚提供入口。
 # 2026-11-02 语料与COP31更新
 
-真实来源文字由1,053条增至3,668条（3,650个不同文本指纹），原有记录和冻结版本保留。新增2,615条来自Carbon Brief、Yale Climate Connections、Inside Climate News、Mongabay及Dialogue Earth的公开档案接口，保存有限摘录和可追溯出处，不将题名、链接或模型生成内容算作原文。候选集合、抽样方法及接口未完全遍历的情况见 `data/research_expansion_20261102.json`。
+真实来源文字由1,053条增至3,683条，含新增档案摘录2,615条及自动任务同期增量15条，原有记录和冻结版本保留。档案来自Carbon Brief、Yale Climate Connections、Inside Climate News、Mongabay及Dialogue Earth的公开接口，保存有限摘录和可追溯出处，不将题名、链接或模型生成内容算作原文。候选集合、抽样和主题复核见 [处理记录](docs/research_corpus_20261102.md) 及 `data/research_expansion_20261102.json`。
 
 主站和COP31共用双语语料、研究工具及访问统计。`source_text`永久保留来源文字，`source_text_zh/en`单独记录译文；未完成的译文显示来源文字，不伪造中文。国别从原题名与所存原文重新抽取，匹配证据见`country_evidence`，修订记录见`data/research_country_corrections.jsonl.gz`。新闻元数据数量与真实语料数量分别统计。
 

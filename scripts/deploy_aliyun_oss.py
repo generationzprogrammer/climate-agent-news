@@ -12,7 +12,7 @@ def public_files(site):
         if path.is_symlink():raise ValueError('Symlinks are not allowed in the public upload')
         if not path.is_file():continue
         rel=path.relative_to(site)
-        if any(part.lower() in FORBIDDEN or part.startswith('.') for part in rel.parts):
+        if any(part.lower() in FORBIDDEN or (part.startswith('.') and part!='.nojekyll') for part in rel.parts):
             raise ValueError('Non-public file detected; upload cancelled')
         if re.search(r'(?:subscriber.*list|private|credentials|secret|model_usage|translation_usage)',str(rel),re.I):
             raise ValueError('Potentially private file detected; upload cancelled')
@@ -38,7 +38,17 @@ def main():
         if key.endswith('.jsonl'):mime='application/x-ndjson'
         if key.endswith(('.html','.css','.js','.json','.csv','.jsonl')):mime+='; charset=utf-8'
         headers={'Content-Type':mime,'Cache-Control':'public, max-age=300, must-revalidate'}
-        bucket.put_object_from_file(key,str(path),headers=headers)
+        public_token=os.getenv('ALIYUN_WEB_ANALYTICS_SITE_TOKEN','').strip()
+        if key.endswith('.html') and public_token:
+            if not re.fullmatch(r'[A-Za-z0-9_-]{16,128}',public_token):raise ValueError('Invalid public analytics site token')
+            from bs4 import BeautifulSoup
+            soup=BeautifulSoup(path.read_text(encoding='utf-8'),'html.parser')
+            beacon=soup.select_one('script[data-cf-beacon]')
+            if beacon is None:
+                beacon=soup.new_tag('script',src='https://static.cloudflareinsights.com/beacon.min.js');beacon['defer']='';soup.body.append(beacon)
+            beacon['data-cf-beacon']=json.dumps({'token':public_token})
+            bucket.put_object(key,str(soup).encode('utf-8'),headers=headers)
+        else:bucket.put_object_from_file(key,str(path),headers=headers)
     # No bucket listing, ACL changes or deletion; old public assets remain.
     print(json.dumps({'status':'uploaded','files':len(files)}))
 

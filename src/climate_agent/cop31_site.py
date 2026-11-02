@@ -13,7 +13,7 @@ def write_cop31_entry(static_dir: Path) -> Path:
     section_order = ("siteMetrics", "map", "today", "chinaCarbon", "singapore", "analytics", "research", "assistant", "database")
     allowed = set(section_order)
     # Keep hidden DOM contracts for shared UI compatibility; their datasets and
-    # scripts are not loaded. Seven curated sections are publicly displayed.
+    # scripts are not loaded. Curated climate and research sections are displayed.
     for node in soup.select("main > section, main > div"):
         if node.get("id") not in allowed:
             node["data-cop31-excluded"] = ""

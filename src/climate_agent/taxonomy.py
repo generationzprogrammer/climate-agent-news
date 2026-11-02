@@ -78,13 +78,18 @@ COUNTRY_ALIASES = {
 AMBIGUOUS_ENGLISH_NAMES = {"chad", "georgia", "jordan", "jersey", "turkey"}
 AMBIGUOUS_FREE_TERMS=AMBIGUOUS_ENGLISH_NAMES|{'congo','刚果','korean'}
 EXTRA_COUNTRY_TERMS={
-    'US':('New Mexico','New Jersey','California','Texas','Massachusetts','West Virginia'),
+    'US':('New Mexico','New Jersey','California','Texas','Massachusetts','West Virginia','Alabama','Alaska','Arizona','Arkansas','Colorado','Connecticut','Delaware','Florida','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Utah','Vermont','Virginia','Wisconsin','Wyoming','District of Columbia','Washington, D.C.','Washington DC'),
     'GB':('UK','U.K.','Scotland','Wales','England','Northern Ireland'),
     'CN':('Beijing','Tianjin','Hebei','北京','天津','河北'),
     'RU':('Russian','Россия','России'),
     'KR':('South Korea','South Korean','Republic of Korea','韩国'),
     'KP':('North Korea','North Korean','Democratic People\'s Republic of Korea','朝鲜'),
-    'CA':('British Columbia',),
+    'CA':('British Columbia','Canadian','Ontario','Quebec','Alberta'),
+    'AU':('Australian','New South Wales','Queensland','Western Australia','South Australia'),
+    'DE':('German','Bavaria'), 'FR':('French',), 'JP':('Japanese',),
+    'IN':('Indian government','Indian states','New Delhi'),
+    'BR':('Brazilian',), 'ID':('Indonesian',), 'NG':('Nigerian',),
+    'ZA':('South African',), 'NZ':('New Zealanders',),
     'TW':('Chinese Taipei',),
     'VI':('US Virgin Islands','U.S. Virgin Islands'),
     'CG':('Republic of the Congo','Republic of Congo','刚果共和国','刚果（布）','刚果(布)'),
@@ -124,12 +129,15 @@ def _country_patterns():
         for term in (row.get('name_zh'),row.get('name_en'),*COUNTRY_ALIASES.get(row['alpha2'],()),*EXTRA_COUNTRY_TERMS.get(row['alpha2'],())):
             if term and _normalise(term) not in AMBIGUOUS_FREE_TERMS:
                 terms.setdefault(_normalise(term),set()).add(row['alpha2'])
-    patterns=[]
+    english=[];other=[]
     for term in sorted(terms,key=len,reverse=True):
         pattern=re.escape(term)
-        if re.search(r'[a-z]',term) and not re.search(r'[\u3400-\u9fff]',term):pattern=r'(?<![A-Za-z0-9])'+pattern+r'(?![A-Za-z0-9])'
-        patterns.append(pattern)
-    return re.compile('|'.join(patterns),re.I),terms
+        if re.search(r'[a-z]',term) and not re.search(r'[\u3400-\u9fff]',term):english.append(pattern)
+        else:other.append(pattern)
+    # Share word-boundary assertions instead of repeating them for every alias
+    # at every character of a long source document.
+    combined=r'(?<![A-Za-z0-9])(?:'+'|'.join(english)+r')(?![A-Za-z0-9])|(?:'+'|'.join(other)+')'
+    return re.compile(combined,re.I),terms
 
 
 @lru_cache(maxsize=32768)

@@ -23,6 +23,12 @@ class ResearchExpansionTests(unittest.TestCase):
         self.assertEqual(parse_archive_post(p,SOURCE)[1],'unexpected_host')
         p=post();p['title']['rendered']='Local transport';p['excerpt']['rendered']='Regular municipal information. '*20;p['content']['rendered']=''
         self.assertEqual(parse_archive_post(p,SOURCE)[1],'outside_climate_scope')
+        p['content']['rendered']='A short local report. '*80+' Climate change is discussed in a related article.'
+        self.assertEqual(parse_archive_post(p,SOURCE)[1],'outside_climate_scope')
+    def test_gzip_named_jsonl_roundtrip(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)/'audit.jsonl.gz';save_jsonl(path,[{'id':'safe'}])
+            self.assertEqual(path.read_bytes()[:2],b'\x1f\x8b');self.assertEqual(load_jsonl(path),[{'id':'safe'}])
     def test_missing_or_future_date_rejected(self):
         p=post();p['date_gmt']=None
         self.assertEqual(parse_archive_post(p,SOURCE)[1],'missing_utc_date')

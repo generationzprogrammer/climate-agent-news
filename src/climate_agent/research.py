@@ -60,7 +60,8 @@ def stamp():
 
 def load_jsonl(path):
     path=Path(path)
-    if path.exists():raw=path.read_text(encoding='utf-8')
+    if path.exists():
+        content=path.read_bytes();raw=(gzip.decompress(content) if content.startswith(b'\x1f\x8b') else content).decode('utf-8')
     elif path.with_suffix(path.suffix+'.gz').exists():raw=gzip.decompress(path.with_suffix(path.suffix+'.gz').read_bytes()).decode('utf-8')
     else:return []
     return [json.loads(line) for line in raw.splitlines() if line.strip()]
@@ -69,7 +70,8 @@ def load_jsonl(path):
 def save_jsonl(path, rows):
     path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix+'.tmp')
-    temporary.write_text(''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in rows), encoding='utf-8')
+    raw=''.join(json.dumps(row,ensure_ascii=False)+'\n' for row in rows).encode('utf-8')
+    temporary.write_bytes(gzip.compress(raw,mtime=0) if path.suffix=='.gz' else raw)
     temporary.replace(path)
     if path.name in ['research_texts.jsonl','research_document_versions.jsonl','research_text_versions.jsonl','research_translations.jsonl','research_country_corrections.jsonl']:
         compressed=path.with_suffix(path.suffix+'.gz')

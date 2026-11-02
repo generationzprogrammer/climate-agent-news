@@ -89,7 +89,7 @@ def collect_archive(root,source,*,max_pages=100):
                     'source_excerpt' if article.extraction_method=='public_wordpress_excerpt' else 'article_excerpt',
                     basis=article.extraction_method)
                 record.update(archive_source_endpoint=source['endpoint'],archive_collected_at=stamp(),
-                              published_at_raw=article.published_at_raw)
+                              published_at_raw=article.published_at_raw,archive_post_id=item.get('id'))
                 records[record['canonical_url']]=record
             page+=1
             save_jsonl(path,records.values())

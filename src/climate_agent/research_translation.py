@@ -61,7 +61,8 @@ def valid_translation(source,target,language):
 def _tasks(records,cache):
     tasks=[];expected={}
     for row in records:
-        lang=source_language(row['source_text']);parts=chunks(row['source_text'])
+        lang=(row.get('detected_source_language') if row.get('translation_source_sha256')==row.get('text_sha256') else None) or source_language(row['source_text'])
+        parts=chunks(row['source_text'])
         ids=[]
         for i,part in enumerate(parts):
             key=hashlib.sha256((PROFILE+'|'+row['text_sha256']+'|'+row['title_original']+'|'+str(i)).encode()).hexdigest()[:24]

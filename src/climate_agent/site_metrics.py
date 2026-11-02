@@ -79,7 +79,7 @@ def save_visitor_history(path: Path, records: list[dict]) -> dict:
         }
     ordered = [merged[day] for day in sorted(merged)]
     path.parent.mkdir(parents=True, exist_ok=True)
-    payload = {"updated_at": datetime.now(UTC).isoformat(), "records": ordered[-120:]}
+    payload = {"updated_at": datetime.now(UTC).isoformat(), "records": ordered}
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return payload
 
