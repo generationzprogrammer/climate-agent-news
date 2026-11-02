@@ -324,3 +324,13 @@ tests/                  离线单元与集成测试
 - `reports/quarter_continent_keywords_2026-08-04.csv`
 
 静态导出时，报告会复制为 `static/data/global_climate_analysis_report_latest.html`，网站页脚提供入口。
+# 2026-11-02 语料与COP31更新
+
+真实来源文字由1,053条增至3,668条（3,650个不同文本指纹），原有记录和冻结版本保留。新增2,615条来自Carbon Brief、Yale Climate Connections、Inside Climate News、Mongabay及Dialogue Earth的公开档案接口，保存有限摘录和可追溯出处，不将题名、链接或模型生成内容算作原文。候选集合、抽样方法及接口未完全遍历的情况见 `data/research_expansion_20261102.json`。
+
+主站和COP31共用双语语料、研究工具及访问统计。`source_text`永久保留来源文字，`source_text_zh/en`单独记录译文；未完成的译文显示来源文字，不伪造中文。国别从原题名与所存原文重新抽取，匹配证据见`country_evidence`，修订记录见`data/research_country_corrections.jsonl.gz`。新闻元数据数量与真实语料数量分别统计。
+
+历史翻译使用已有GitHub Secret配置的Gemini免费模型，缓存复用；独立每日200请求上限，日常最多4批，HTTP429停止，不自动转向付费模型。需要补译时在每日工作流勾选“补齐历史语料中英译文”；原新闻编译预算不增加。Google项目内其他应用也共享免费额度，免费层级及可用额度以AI Studio为准。[Google定价](https://ai.google.dev/gemini-api/docs/pricing)
+
+正式域名部署采用可选OSS同步，不影响现有GitHub Pages。操作见[阿里云正式网站部署步骤](docs/阿里云正式网站部署步骤.md)。未配置`ALIYUN_OSS_DEPLOY=true`时不会访问阿里云或产生OSS上传费用。访问指标为各入口共同统计的页面访问量，不是跨设备去重人数。
+

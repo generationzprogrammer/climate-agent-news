@@ -10,7 +10,7 @@ def write_cop31_entry(static_dir: Path) -> Path:
     base = soup.new_tag("base", href="../")
     soup.head.insert(1, base)
     soup.body["data-edition"] = "cop31"
-    section_order = ("map", "today", "chinaCarbon", "singapore", "analytics", "assistant", "database")
+    section_order = ("siteMetrics", "map", "today", "chinaCarbon", "singapore", "analytics", "research", "assistant", "database")
     allowed = set(section_order)
     # Keep hidden DOM contracts for shared UI compatibility; their datasets and
     # scripts are not loaded. Seven curated sections are publicly displayed.

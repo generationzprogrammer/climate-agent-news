@@ -102,15 +102,35 @@ def visitor_cumulative_series(visitor_path: Path, *, today: date | None = None, 
 
 
 def write_site_metrics(corpus_path: Path, visitor_path: Path, output_path: Path) -> dict:
+    from .research import load_jsonl
+    from zoneinfo import ZoneInfo
+    research=load_jsonl(corpus_path.parent/'research_texts.jsonl')
+    corpus_series=corpus_cumulative_series(corpus_path)
+    if research:
+        first={}
+        for row in [*load_jsonl(corpus_path.parent/'research_text_versions.jsonl'),*research]:
+            identity=row.get('text_id');value=row.get('collected_at')
+            if not identity or not value:continue
+            try:day=datetime.fromisoformat(value.replace('Z','+00:00')).astimezone(ZoneInfo('Asia/Shanghai')).date()
+            except ValueError:continue
+            first[identity]=min(first.get(identity,day),day)
+        today=datetime.now(ZoneInfo('Asia/Shanghai')).date();start=today-timedelta(days=91)
+        current_ids={r['text_id'] for r in research};days=Counter(first[i] for i in current_ids if i in first)
+        cumulative=sum(v for d,v in days.items() if d<start);corpus_series=[]
+        for day in _daterange(start,today):
+            cumulative+=days[day];corpus_series.append({'date':day.isoformat(),'value':cumulative})
     payload = {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "generated_at": datetime.now(UTC).isoformat(),
         "window_days": 92,
-        "archive_cumulative": corpus_cumulative_series(corpus_path),
+        "archive_cumulative": corpus_series,
+        "metadata_cumulative":corpus_cumulative_series(corpus_path),
         "visitor_cumulative": visitor_cumulative_series(visitor_path),
+        "visitor_metric":"page_views",
+        "scope":"Shared across GREEN, energy and COP31 entry points; not distinct identified people.",
         "notes": [
-            "档案曲线按历史语料库 published_date 聚合，表示本站已积累文本记录的累计规模。",
-            "访客曲线来自 GitHub Traffic API 已写回的 visitor_history.json；GitHub 只提供近期流量，系统会从启用后开始累积。",
+            "真实语料曲线按首次采集日累计；历史新闻的发布日期不冒充本站入库日期。旧元数据曲线另存metadata_cumulative。",
+            "访问曲线使用同一Cloudflare统计和已写回的visitor_history，合并各入口的页面访问量，不作为独立自然人数。",
         ],
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -186,7 +206,7 @@ def update_cloudflare_visitor_history(
                         "datetime_geq": f"{start_day.isoformat()}T00:00:00Z",
                         "datetime_leq": f"{end_day.isoformat()}T23:59:59Z",
                     },
-                    {"requestHost": hostname},
+                    ({"requestHost":hostname.strip()} if ',' not in hostname else {"OR":[{"requestHost":host.strip()} for host in hostname.split(',') if host.strip()]}),
                     {"bot": 0},
                 ]
             },

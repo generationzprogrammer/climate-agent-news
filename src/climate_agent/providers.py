@@ -34,7 +34,7 @@ class OpenAICompatibleModel:
 
     def complete_json(self, system: str, payload: dict) -> dict:
         from .model_budget import reserve_request, record_usage
-        body = json.dumps({
+        request_body = {
             "model": self.model,
             "temperature": 0.1,
             "response_format": {"type": "json_object"},
@@ -42,7 +42,10 @@ class OpenAICompatibleModel:
                 {"role": "system", "content": system},
                 {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
             ],
-        }).encode("utf-8")
+        }
+        if os.getenv('CLIMATE_MODEL_MAX_OUTPUT_TOKENS'):
+            request_body['max_tokens']=max(256,min(32768,int(os.environ['CLIMATE_MODEL_MAX_OUTPUT_TOKENS'])))
+        body=json.dumps(request_body).encode('utf-8')
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",

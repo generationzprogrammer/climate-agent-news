@@ -135,7 +135,10 @@ class Cop31Tests(unittest.TestCase):
             self.assertIsNotNone(page.select_one('script[src*="bth-transport.js"]'))
             self.assertIsNotNone(page.select_one('#subscribeLanguage'))
             visible = [node.get("id") for node in page.select("main > section") if node.get("id") and not node.has_attr("hidden")]
-            self.assertEqual(visible[:2], ["map", "today"])
+            self.assertEqual(visible[:3], ["siteMetrics", "map", "today"])
+            self.assertIn('./cop31/#research',links)
+            self.assertFalse(page.select_one('#research').has_attr('hidden'))
+            self.assertIsNotNone(page.select_one('script[src*="research.js"]'))
 
 
 if __name__ == "__main__":

@@ -8,11 +8,20 @@ from __future__ import annotations
 import json
 import os
 import time
+import threading
+from functools import wraps
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 _last_request = 0.0
+_ledger_lock=threading.RLock()
+
+def _serial_ledger(function):
+    @wraps(function)
+    def wrapped(*args,**kwargs):
+        with _ledger_lock:return function(*args,**kwargs)
+    return wrapped
 
 
 class ModelBudgetExceeded(RuntimeError):
@@ -47,6 +56,7 @@ def _save(path: Path, data: dict) -> None:
     temporary.replace(path)
 
 
+@_serial_ledger
 def reserve_request(model: str) -> None:
     global _last_request
     path, data = _state()
@@ -65,6 +75,7 @@ def reserve_request(model: str) -> None:
     _last_request = time.monotonic()
 
 
+@_serial_ledger
 def record_usage(usage: dict) -> None:
     path, data = _state()
     if path is None:
