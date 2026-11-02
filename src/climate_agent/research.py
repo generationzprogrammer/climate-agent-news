@@ -583,6 +583,11 @@ def freeze_release(root):
         return manifest
     manifest={'id':release_id,'version':VERSION,'sha256':digest,'records':len(raw.splitlines()),'released_at':stamp(),
               'rights':'Source-specific: attributed excerpts and explicitly licensed documents. No blanket full-text redistribution licence.'}
+    if (root/'.git').exists():
+        import subprocess
+        try:manifest['software_commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True,timeout=10).strip()
+        except (OSError,subprocess.SubprocessError):pass
+    manifest['country_rules_sha256']=hashlib.sha256((Path(__file__).with_name('taxonomy.py')).read_bytes()).hexdigest()
     (folder/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     (root/'data/research_release.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     return manifest

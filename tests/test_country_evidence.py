@@ -21,5 +21,8 @@ class CountryEvidenceTests(unittest.TestCase):
         for item in country_mentions_with_evidence(text):self.assertEqual(text[item['start']:item['end']],item['matched_text'])
     def test_explicit_iso_codes_remain_supported(self):
         self.assertEqual({r['alpha2'] for r in country_codes_for('',country_tags=['USA','CN'])},{'US','CN'})
+    def test_long_official_names_and_territorial_names_are_not_split(self):
+        self.assertEqual(self.codes('Democratic People’s Republic of Korea climate submission'),{'KP'})
+        self.assertEqual(self.codes('U.S. Virgin Islands adaptation programme'),{'VI'})
 
 if __name__=='__main__':unittest.main()

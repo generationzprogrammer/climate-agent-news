@@ -83,7 +83,7 @@ EXTRA_COUNTRY_TERMS={
     'CN':('Beijing','Tianjin','Hebei','北京','天津','河北'),
     'RU':('Russian','Россия','России'),
     'KR':('South Korea','South Korean','Republic of Korea','韩国'),
-    'KP':('North Korea','North Korean','Democratic People\'s Republic of Korea','朝鲜'),
+    'KP':('North Korea','North Korean','Democratic People\'s Republic of Korea','Democratic People’s Republic of Korea','Democratic Peoples Republic of Korea','DPRK','朝鲜'),
     'CA':('British Columbia','Canadian','Ontario','Quebec','Alberta'),
     'AU':('Australian','New South Wales','Queensland','Western Australia','South Australia'),
     'DE':('German','Bavaria'), 'FR':('French',), 'JP':('Japanese',),
@@ -161,6 +161,7 @@ def country_mentions_with_evidence(text: str) -> list[dict]:
     # "us", and a currency prefix must not create a US country tag.
     for match in re.finditer(r'(?<![A-Za-z0-9])(?:US|U\.S\.)(?![A-Za-z0-9])',masked):
         if re.match(r'\$|\s*[- ]?dollars?\b',masked[match.end():],re.I):continue
+        if any(r['alpha2']!='US' and r['start']<=match.start() and match.end()<=r['end'] for r in result):continue
         result.append({**index['US'],'start':match.start(),'end':match.end(),'matched_text':text[match.start():match.end()],'method':'country-acronym-v2'})
     rules=[('GE',r'\bGeorgia\b',r'Tbilisi|Caucasus|Republic of Georgia'),
            ('JO',r'\bJordan\b',r'Amman|Hashemite Kingdom|Jordanian government'),
