@@ -19,7 +19,7 @@ on:
   workflow_dispatch:
     inputs:
       translate_research:
-        description: "补齐历史语料中英译文（独立300请求每日上限）"
+        description: "补齐历史语料中英译文（独立400请求每日上限）"
         required: false
         default: false
         type: boolean

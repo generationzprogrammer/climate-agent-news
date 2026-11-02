@@ -48,7 +48,13 @@ class ResearchExpansionTests(unittest.TestCase):
         self.assertEqual(numeric_values('2 billion'),numeric_values('20亿美元'))
         self.assertEqual(numeric_values('69bn rupees'),numeric_values('690亿卢比'))
         self.assertEqual(numeric_values('$3m'),numeric_values('300万美元'))
+        self.assertEqual(numeric_values('$2b'),numeric_values('20亿美元'))
         self.assertEqual(numeric_values('3–4 million tonnes'),numeric_values('300万至400万吨'))
+        self.assertEqual(numeric_values('2 GW'),numeric_values('2000兆瓦'))
+        self.assertEqual(numeric_values('2 GW'),numeric_values('200万千瓦'))
+        self.assertEqual(numeric_values('40 GtCO2'),numeric_values('400亿吨二氧化碳'))
+        self.assertEqual(numeric_values('1–2 GW'),numeric_values('10亿至20亿瓦'))
+        self.assertNotEqual(numeric_values('2 GW'),numeric_values('2 MW'))
         self.assertTrue(valid_translation(TEXT,ZH,'zh'))
         self.assertFalse(valid_translation(TEXT,ZH.replace('2027','2028'),'zh'))
     def test_translation_keeps_english_original_and_is_cached(self):
@@ -61,6 +67,12 @@ class ResearchExpansionTests(unittest.TestCase):
         row=record();tasks,_=_tasks([row],{});cache={tasks[0]['id']:True}
         row['source_text']+=' More evidence.';row['text_sha256']=hashlib.sha256(row['source_text'].encode()).hexdigest()
         self.assertTrue(_tasks([row],cache)[0])
+    def test_cached_wrong_capacity_unit_is_rejected(self):
+        row=record();row['source_text']='Installed renewable power capacity is 2 GW.';row['text_sha256']=hashlib.sha256(row['source_text'].encode()).hexdigest()
+        tasks,expected=_tasks([row],{});cache={tasks[0]['id']:{'title_zh':'装机规模','text_zh':'可再生能源发电装机规模为2兆瓦。'}}
+        tasks,expected=_tasks([row],cache);self.assertEqual(len(tasks),1);self.assertFalse(cache)
+        row['source_text_zh']='旧错误译文';apply_translations([row],cache,expected)
+        self.assertNotIn('source_text_zh',row);self.assertEqual(row['source_text_en'],row['source_text'])
     def test_unverified_paid_backend_is_not_used_for_bulk(self):
         model=SimpleNamespace(base_url='https://paid.example',model='unknown')
         with tempfile.TemporaryDirectory() as folder:
