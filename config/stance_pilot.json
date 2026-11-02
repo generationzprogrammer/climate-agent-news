@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "actors": [
+    {"id":"CN","name_zh":"中国","name_en":"China","flag":"🇨🇳","kind":"country","aliases":["China","中国"],"official_hosts":["mee.gov.cn","gov.cn","scio.gov.cn"]},
+    {"id":"US","name_zh":"美国","name_en":"United States","flag":"🇺🇸","kind":"country","aliases":["United States","美国","U.S."],"official_hosts":["whitehouse.gov","state.gov","treasury.gov","govinfo.gov"]},
+    {"id":"EU","name_zh":"欧盟","name_en":"European Union","flag":"🇪🇺","kind":"regional_organization","aliases":["European Union","EU","欧盟"],"official_hosts":["consilium.europa.eu","climate.ec.europa.eu","commission.europa.eu","eur-lex.europa.eu"]},
+    {"id":"GB","name_zh":"英国","name_en":"United Kingdom","flag":"🇬🇧","kind":"country","aliases":["United Kingdom","UK","英国"],"official_hosts":["gov.uk"]},
+    {"id":"IN","name_zh":"印度","name_en":"India","flag":"🇮🇳","kind":"country","aliases":["India","印度"],"official_hosts":["pib.gov.in","moef.gov.in"]},
+    {"id":"BR","name_zh":"巴西","name_en":"Brazil","flag":"🇧🇷","kind":"country","aliases":["Brazil","Brasil","巴西"],"official_hosts":["gov.br","cop30.br"]},
+    {"id":"G77","name_zh":"七十七国集团和中国","name_en":"G77 and China","flag":"G77","kind":"negotiating_group","aliases":["G77","Group of 77","七十七国集团"],"official_hosts":["g77.org"]}
+  ],
+  "topics": [
+    {"id":"finance","name_zh":"气候资金","name_en":"Climate finance"},
+    {"id":"markets","name_zh":"国际碳市场","name_en":"International carbon markets"},
+    {"id":"fossil","name_zh":"化石能源转型","name_en":"Fossil-fuel transition"}
+  ],
+  "propositions": [
+    {"id":"finance_delivery","topic":"finance","name_zh":"扩大并落实对发展中国家的资金支持","name_en":"Scale up and deliver finance for developing countries"},
+    {"id":"finance_grants","topic":"finance","name_zh":"采用赠款与高度优惠资金","name_en":"Use grants and highly concessional finance"},
+    {"id":"finance_goal","topic":"finance","name_zh":"对COP29新资金目标的评价","name_en":"Assessment of the COP29 finance goal"},
+    {"id":"market_article6","topic":"markets","name_zh":"推进巴黎协定第六条跨境合作","name_en":"Advance cross-border cooperation under Paris Agreement Article 6"},
+    {"id":"market_integrity","topic":"markets","name_zh":"自愿碳信用须额外补充自身减排","name_en":"Voluntary credits must supplement own emission reductions"},
+    {"id":"market_coordination","topic":"markets","name_zh":"推进受监管碳市场规则合作","name_en":"Cooperate on compliance carbon-market rules"},
+    {"id":"fossil_transition","topic":"fossil","name_zh":"制定公正有序的化石能源转型路径","name_en":"Develop fair and orderly pathways away from fossil fuels"},
+    {"id":"fossil_subsidies","topic":"fossil","name_zh":"改革低效化石能源补贴","name_en":"Reform inefficient fossil-fuel subsidies"},
+    {"id":"fossil_production","topic":"fossil","name_zh":"扩大化石能源开发与供给","name_en":"Expand fossil-fuel development and supply"}
+  ],
+  "stances": [
+    {"id":"support","name_zh":"支持","name_en":"Supports"},
+    {"id":"oppose","name_zh":"不支持","name_en":"Opposes"},
+    {"id":"qualified","name_zh":"附有条件或保留意见","name_en":"Conditions or reservations"},
+    {"id":"mixed","name_zh":"存在不同表述","name_en":"Differing statements"},
+    {"id":"insufficient","name_zh":"证据不足","name_en":"Insufficient evidence"}
+  ],
+  "scope_zh":"仅比较所列具体主张的有日期表态，不据此推断国家整体态度。",
+  "scope_en":"Compare dated statements on the specified propositions, not a country's overall attitude."
+}

@@ -11,7 +11,7 @@ test('default climate database exposes actual source text rather than link-only 
   const result=records();assert.equal(result.length,1);assert.equal(result[0].canonical_url,'real');assert.equal(result[0].summary_source,'Actual publisher text.');
 });
 test('legacy metadata remains accessible without deletion',()=>{assert.equal(records({sourceOnly:false})[0].canonical_url,'old');});
-test('energy and COP31 keep their existing database behaviour',()=>{assert.equal(records({mode:'energy'})[0].canonical_url,'old');assert.equal(records({},true)[0].canonical_url,'old');});
+test('energy retains metadata and COP31 shares the source-text database',()=>{assert.equal(records({mode:'energy'})[0].canonical_url,'old');assert.equal(records({},true)[0].canonical_url,'real');assert.equal(records({sourceOnly:false},true)[0].canonical_url,'old');});
 test('English topics derive from English labels',()=>{assert.equal(records({language:'en'})[0].topics[0],'Climate finance');});
 test('comparison action is not rebound to pagination and cleared',()=>{
   const research=fs.readFileSync(require('node:path').join(__dirname,'../static/research.js'),'utf8');

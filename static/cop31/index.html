@@ -9,6 +9,8 @@
 <title>GREEN · COP31 | 全球气候情报</title>
 <link href="./styles.css?v=20261027-subscriptions-i18n" rel="stylesheet"/>
 
+<link href="./research.css?v=20261102-stance-1" rel="stylesheet"/>
+<link href="./stance.css?v=20261102-stance-1" rel="stylesheet"/>
 </head>
 <body data-edition="cop31">
 <header class="topbar">
@@ -18,12 +20,13 @@
 </a>
 <a aria-label="COP31 official website" class="cop31-brand" href="https://cop31.tr/" rel="noopener noreferrer" target="_blank"><img alt="COP31 Türkiye Antalya" height="46" src="./assets/cop31-official.svg" width="112"/></a>
 <button class="project-intro-link" data-i18n="projectIntro" id="projectIntroOpen" type="button">项目介绍</button>
-<button aria-controls="mobileMenu" aria-expanded="false" aria-label="打开页面导航" class="mobile-menu-toggle" id="mobileMenuToggle" type="button">菜单</button>
+<button aria-controls="mobileMenu" aria-expanded="false" aria-label="打开页面导航" class="mobile-menu-toggle" data-i18n="menu" id="mobileMenuToggle" type="button">菜单</button>
 <nav aria-label="页面导航">
 <a data-i18n="navMap" href="./cop31/#map">全球现场</a>
 <a data-i18n="navToday" href="./cop31/#today">今日情报</a>
 <details class="topic-nav"><summary data-i18n="navFocus">专题</summary><div><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a></div></details>
 <a data-i18n="navAnalytics" href="./cop31/#analytics">语料分析</a>
+<a class="research-nav" data-research-nav="" href="./cop31/#research">研究工具</a>
 <a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a>
 <a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 
@@ -46,6 +49,7 @@
 
 </nav>
 <div class="mobile-menu-actions">
+<a class="research-nav" data-research-nav="" href="./cop31/#research">研究工具</a>
 <button class="project-intro-link" data-i18n="projectIntro" data-open-project="" type="button">项目介绍</button>
 <button class="team-link" data-i18n="team" data-open-team="" type="button">团队信息</button>
 <button class="subscribe-button" data-i18n="subscribe" data-open-subscribe="" type="button">订阅周报</button>
@@ -54,7 +58,16 @@
 <a class="data-download" data-i18n="download" download="" href="./data/daily_brief.pdf">下载今日简报</a>
 </div>
 </aside>
-<main id="top"><section aria-label="COP31" class="cop31-intro"><p>COP31 · ANTALYA · 9–20 NOV 2026</p><h1 data-i18n="cop31Title">全球气候情报</h1></section><section class="section map-section map-section-lead" id="map">
+<main id="top"><section aria-label="COP31" class="cop31-intro"><p>COP31 · ANTALYA · 9–20 NOV 2026</p><h1 data-i18n="cop31Title">全球气候情报</h1></section><section aria-label="站点更新曲线" class="metrics-strip" id="siteMetrics">
+<article class="mini-chart-card">
+<div><h2 data-i18n="archiveChart">累计气候语料</h2><b class="metric-total" id="metricArchiveTotal">—</b></div>
+<div class="mini-chart" id="archiveGrowthChart"><div class="skeleton small"></div></div>
+</article>
+<article class="mini-chart-card">
+<div><h2 data-i18n="visitorChart">累计访问量</h2><b class="metric-total" id="visitorTotal">—</b></div>
+<div class="mini-chart" id="visitorGrowthChart"><div class="skeleton small"></div></div>
+</article>
+</section><section class="section map-section map-section-lead" id="map">
 <div class="section-heading">
 <div><p class="overline" id="mapOverline">GLOBAL CLIMATE SITUATION</p><h1 id="mapTitle">全球气候现场</h1></div>
 <p id="mapRangeNote">今日队列</p>
@@ -143,7 +156,7 @@
 </article>
 </div>
 <p class="analytics-note" id="analyticsNote">正在读取语料库统计文件…</p>
-</section><section class="section assistant-section" id="assistant">
+</section><section class="section" id="research"><h2>气候治理研究工具</h2><p>正在读取原文语料…</p></section><section class="section assistant-section" id="assistant">
 <div class="section-heading">
 <div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 id="assistantTitle">气候情报问答</h2></div>
 </div>
@@ -173,6 +186,7 @@
 <div class="section-heading">
 <div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 id="databaseTitle">气候新闻文本数据库</h2></div>
 </div>
+<div class="source-archive-modes" id="sourceArchiveModes"><button aria-pressed="true" id="sourceRecordsMode" type="button">原文语料</button><button aria-pressed="false" id="metadataRecordsMode" type="button">新闻元数据档案</button></div>
 <div class="search-panel">
 <label class="search-box">
 <span data-i18n="search">检索</span>
@@ -189,16 +203,7 @@
 </div>
 <button class="load-more" data-i18n="showMoreRecords" id="loadMore" type="button">显示更多记录</button>
 </section>
-<section aria-label="站点更新曲线" class="metrics-strip" data-cop31-excluded="" hidden="">
-<article class="mini-chart-card">
-<div><span>TEXT ARCHIVE</span><h2 data-i18n="archiveChart">累计气候文本档案</h2></div>
-<div class="mini-chart" id="archiveGrowthChart"><div class="skeleton small"></div></div>
-</article>
-<article class="mini-chart-card">
-<div><span>SITE TRAFFIC</span><h2 data-i18n="visitorChart">累计访客/访问量</h2></div>
-<div class="mini-chart" id="visitorGrowthChart"><div class="skeleton small"></div></div>
-</article>
-</section>
+
 
 
 
@@ -284,6 +289,7 @@
 
 
 
+
 </main>
 <footer>
 <div><b id="footerBrand">格润气候治理</b><span data-i18n="footerSubtitle">全球气候与能源信息智能分析支持系统</span></div>
@@ -328,6 +334,8 @@
 
 
 
-<script defer="" src="./app.js?v=20261027-subscriptions-i18n"></script>
+<script defer="" src="./app.js?v=20261102-bilingual-3"></script>
+<script defer="" src="./stance.js?v=20261102-stance-1"></script>
+<script defer="" src="./research.js?v=20261102-stance-1"></script>
 </body>
 </html>

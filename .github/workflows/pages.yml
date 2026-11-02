@@ -14,6 +14,7 @@ on:
       - "data/energy_reports.json"
       - "data/visitor_history.json"
       - "data/model_usage.json"
+      - "data/stance_candidates.jsonl"
       - "data/research_*.json*"
       - "data/research_releases/**"
   workflow_dispatch:
@@ -149,6 +150,9 @@ jobs:
           fi
           # Export is deterministic/offline. Translation is confined to the
           # explicit bounded phases above, never secretly called by a renderer.
+          if [ -n "$CLIMATE_MODEL_API_KEY" ] && [ "$CLIMATE_SITE_ONLY" != "true" ] && [ "${{ github.event_name }}" != "workflow_run" ]; then
+            python scripts/update_stance_pilot.py --max-requests 2
+          fi
           unset CLIMATE_MODEL_API_KEY
           python -m climate_agent.cli export-web --output site --archive-limit 100000
           python scripts/build_innovation_live_figures.py --site site
@@ -181,6 +185,7 @@ jobs:
           git config user.email "climate-text-bot@users.noreply.github.com"
           git add data/climate.db data/news_archive.json data/source_health.json data/climate_text_corpus.jsonl data/climate_text_corpus.manifest.json data/energy_reports.json
           if [ -f data/model_usage.json ]; then git add data/model_usage.json; fi
+          if [ -f data/stance_candidates.jsonl ]; then git add data/stance_candidates.jsonl; fi
           if [ -f data/research_texts.jsonl.gz ]; then git add data/research_*.json data/research_*.jsonl.gz; fi
           if [ -d data/research_releases ]; then git add data/research_releases; fi
           if [ -f data/visitor_history.json ]; then
