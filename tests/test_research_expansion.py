@@ -68,7 +68,12 @@ class ResearchExpansionTests(unittest.TestCase):
         self.assertEqual(numeric_values('210m barrels'),numeric_values('2.1亿桶'))
         self.assertEqual(numeric_values('210m additional barrels'),numeric_values('2.1亿桶'))
         self.assertEqual(numeric_values('700 -megawatt 250 -MW'),numeric_values('700兆瓦250兆瓦'))
+        self.assertEqual(numeric_values('700-megawatt 250-MW'),numeric_values('700兆瓦250兆瓦'))
         self.assertEqual(numeric_values('135 kph'),numeric_values('每小时135公里'))
+        self.assertEqual(numeric_values('135kph'),numeric_values('每小时135公里'))
+        self.assertEqual(numeric_values('111 . 5 million'),numeric_values('1.115亿美元'))
+        self.assertNotEqual(numeric_values('$ 500 , 000'),numeric_values('5万美元'))
+        self.assertEqual(numeric_values('17.59m square kilometres'),numeric_values('1759万平方公里'))
         self.assertEqual(numeric_values('2m sea level'),{2})
         self.assertTrue(valid_translation('The 20th annual climate meeting was held in 2026.','第二十届年度气候会议于2026年举行。','zh'))
         self.assertTrue(valid_translation('Wildfire frequency increased in the 1970s.','野火发生频率在20世纪70年代有所上升。','zh'))
@@ -110,6 +115,19 @@ class ResearchExpansionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{},clear=False):
             root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',[record()])
             self.assertEqual(translate_corpus(root,Model(),max_requests=1)['pending_records'],1)
+    def test_failed_passages_do_not_starve_unattempted_records(self):
+        class Model:
+            base_url='https://generativelanguage.googleapis.com/v1beta/openai';model='gemini-3.5-flash-lite';timeout=1
+            def __init__(self):self.calls=[]
+            def complete_json(self,system,payload):self.calls.append(payload['items']);return {'items':[]}
+        rows=[]
+        for index in range(5):
+            row=record();row.update(text_id=row['text_id']+str(index),title_original=row['title_original']+str(index),translation_status='pending_validation');rows.append(row)
+        expected=_tasks(rows,{})[0][-1]['id'];model=Model()
+        with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{},clear=False):
+            root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',rows)
+            translate_corpus(root,model,max_requests=1);translate_corpus(root,model,max_requests=1)
+            self.assertEqual(model.calls[1][0]['id'],expected)
     def test_metric_counts_real_texts_not_metadata(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',[record()])

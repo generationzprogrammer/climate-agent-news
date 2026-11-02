@@ -76,6 +76,7 @@ jobs:
             data/model_usage.json
             data/research_translation_usage.json
             data/research_translations.jsonl.gz
+            data/research_translation_attempts.json
           key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: model-usage-${{ steps.model_quota.outputs.day }}-
       - name: 增量采集、中文编译与质量门禁
@@ -143,7 +144,7 @@ jobs:
               fi
               python scripts/update_research_corpus.py --fetch-limit 0 --freeze
             elif [ "$CLIMATE_SITE_ONLY" != "true" ] && [ "${{ github.event_name }}" != "workflow_run" ]; then
-              python scripts/translate_research_texts.py --max-requests 4 --workers 2
+              python scripts/translate_research_texts.py --max-requests 8 --workers 2
             fi
           fi
           # Export is deterministic/offline. Translation is confined to the
@@ -170,6 +171,7 @@ jobs:
             data/model_usage.json
             data/research_translation_usage.json
             data/research_translations.jsonl.gz
+            data/research_translation_attempts.json
           key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
       - name: 保存滚动档案与来源健康状态
         if: ${{ github.event_name != 'workflow_run' }}
