@@ -67,7 +67,7 @@ def numeric_values(text):
             # Currency shorthand such as $3m, but not a physical 3 m length.
             currency=re.search(r'[$£€]\s*$',text[max(0,match.start()-6):match.start()])
             shorthand=re.match(r'([mbt])\b',text[match.end():],re.I)
-            count_shorthand=shorthand and re.match(r'm\s+(?:tonnes?|tons?|barrels?|people|homes?|households?|vehicles?)\b',text[match.end():],re.I)
+            count_shorthand=shorthand and re.match(r'm\s+(?:(?:additional|metric|new)\s+){0,2}(?:tonnes?|tons?|barrels?|people|homes?|households?|vehicles?|cars?)\b',text[match.end():],re.I)
             if multiplier==1 and shorthand and (currency or count_shorthand):multiplier={'m':10**6,'b':10**9,'t':10**12}[shorthand[1].lower()]
             unit=re.match(UNIT_PATTERN,text[match.end():])
             if unit:multiplier*=unit_scale(unit[0])
@@ -90,7 +90,11 @@ def target_numeric_values(text):
             else:value+=(part or 1)*{'十':10,'百':100}[char];part=0
         return '第'+str(value+part)
     normalized=re.sub(r'第([零一二两三四五六七八九十百]+)(?=[届次个期])',ordinal,text)
-    return numeric_values(text)|numeric_values(normalized)
+    values=numeric_values(text)|numeric_values(normalized)
+    for match in re.finditer(r'(\d{1,2})世纪\s*(\d{1,2})年代',normalized):
+        century,decade=map(int,match.groups())
+        if 1<=century<=21 and 0<=decade<=90 and decade%10==0:values.add(Decimal((century-1)*100+decade))
+    return values
 
 def valid_translation(source,target,language):
     target=str(target or '').strip()
