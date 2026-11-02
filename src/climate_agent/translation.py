@@ -16,6 +16,9 @@ SUMMARY_PROFILE = "evidence-v2"
 
 
 GEO_TERMS = {
+    "european union": ("欧盟", 10.0, 51.0),
+    "欧盟": ("欧盟", 10.0, 51.0),
+    "eu": ("欧盟", 10.0, 51.0),
     "china": ("中国", 105.0, 35.0),
     "beijing": ("中国", 105.0, 35.0),
     "中国": ("中国", 105.0, 35.0),
@@ -199,12 +202,14 @@ FALLBACK_TOPIC_TERMS = (
 
 
 def detect_places(text: str) -> list[dict]:
-    haystack = f" {text.lower()} "
+    from .taxonomy import geographic_evidence_text
+    haystack = f" {geographic_evidence_text(text).lower()} "
     haystack = re.sub(r"\bu\s*\.\s*s\s*\.?\b", " u s ", haystack)
     places = []
     seen = set()
     occupied: list[tuple[int, int]] = []
     for term, (name, lon, lat) in sorted(GEO_TERMS.items(), key=lambda item: len(item[0]), reverse=True):
+        if term=='eu' and not re.search(r'\bEU\b',text):continue
         pattern = rf"(?<![a-z0-9]){re.escape(term.lower())}(?![a-z0-9-])"
         match = next(
             (

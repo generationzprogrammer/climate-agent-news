@@ -140,6 +140,12 @@ def _country_patterns():
     return re.compile(combined,re.I),terms
 
 
+def geographic_evidence_text(text):
+    text=str(text or '')
+    masked=re.sub(r'https?://\S+',lambda m:' '*len(m.group()),text)
+    masked=re.sub(r'发展中国家|朝鲜半岛',lambda m:' '*len(m.group()),masked)
+    return re.sub(r'\b(?:The New York Times|New York Times|Yahoo (?:Finance|News)(?: (?:Singapore|UK|Australia))?|South China Morning Post|China Daily|The Times of India|Japan Times|France 24)\b',lambda m:' '*len(m.group()),masked,flags=re.I)
+
 @lru_cache(maxsize=32768)
 def country_mentions_with_evidence(text: str) -> list[dict]:
     """Longest-name-first spans, with conservative ambiguous-name handling.
@@ -148,7 +154,7 @@ def country_mentions_with_evidence(text: str) -> list[dict]:
     jurisdiction or the nationality of an attributed speaker.
     """
     text=str(text or '')
-    masked=re.sub(r'https?://\S+',lambda m:' '*len(m.group()),text)
+    masked=geographic_evidence_text(text)
     # A country/city inside a publisher's brand is not a geographic reference
     # to the event (especially RSS headlines with a trailing publisher name).
     masked=re.sub(r'\b(?:The New York Times|New York Times|Yahoo (?:Finance|News)(?: (?:Singapore|UK|Australia))?|South China Morning Post|China Daily|The Times of India|Japan Times|France 24)\b',lambda m:' '*len(m.group()),masked,flags=re.I)

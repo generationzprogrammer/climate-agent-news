@@ -130,6 +130,13 @@ def _ensure_places(item: dict) -> dict:
         and str(place.get("name_zh") or "") not in {"全球", "全球/未标注", "未标注"}
     ]
     regional_names = {"全球", "太平洋地区", "太平洋岛国", "欧洲", "亚洲", "非洲", "北美洲", "南美洲", "中亚地区", "东欧", "北非"}
+    headline_places=detect_places(' '.join(str(item.get(k) or '') for k in ('title_original','title_zh')))
+    if headline_places:
+        places=headline_places
+    elif places:
+        evidence_text=' '.join(str(item.get(k) or '') for k in ('title_original','title_zh','summary_source','summary_zh'))
+        if '发展中国家' in evidence_text and not any(p['name_zh']=='中国' for p in detect_places(evidence_text)):
+            places=[p for p in places if p['name_zh']!='中国']
     # A regional phrase in the source summary must not displace a country
     # explicitly named in the headline (e.g. Tonga's Pacific climate project).
     if places and places[0].get("name_zh") in regional_names:
@@ -139,21 +146,16 @@ def _ensure_places(item: dict) -> dict:
             places = specific
     if not places:
         text = " ".join(str(item.get(key) or "") for key in (
-            "title_zh", "title_original", "summary_zh", "summary_source", "source_name", "source_domain",
+            "title_original", "title_zh", "summary_source", "summary_zh",
         ))
         places = detect_places(text)
     if not places:
-        for country in item.get("country_codes") or []:
+        from .taxonomy import country_codes_for
+        for country in country_codes_for(' '.join(str(item.get(k) or '') for k in ('title_original','summary_source','source_text'))):
             if not isinstance(country, dict):
                 continue
             places = detect_places(str(country.get("name_zh") or ""))
             if places:
-                break
-    if not places:
-        for country in item.get("country_tags") or []:
-            mapped = COUNTRY_PLACE_MAP.get(str(country))
-            if mapped:
-                places = [dict(mapped)]
                 break
     item["places"] = places[:1]
     return item
@@ -511,7 +513,7 @@ def _official_data(db: Database) -> dict:
     }
 
 
-def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
+def _map_events(items: list[dict], *, max_events: int = 80, include_unlocated: bool = False) -> list[dict]:
     events: list[dict] = []
     for item in items:
         _prepare_public_item(item)
@@ -519,14 +521,15 @@ def _map_events(items: list[dict], *, max_events: int = 80) -> list[dict]:
             (place for place in item.get("places", []) if all(key in place for key in ("name_zh", "lon", "lat"))),
             None,
         )
-        if not place:
+        if not place and not include_unlocated:
             continue
         events.append({
             "marker_id": f"{item['article_id']}_primary",
             "article_id": item["article_id"],
-            "place": place["name_zh"],
-            "lon": place["lon"],
-            "lat": place["lat"],
+            "place": place["name_zh"] if place else "全球议题",
+            "lon": place["lon"] if place else None,
+            "lat": place["lat"] if place else None,
+            "location_status":"reported" if place else "unresolved",
             "theme": item.get("theme_zh") or "气候动态",
             "title_zh": item.get("title_zh") or item["title_original"],
             "title_original": item.get("title_original") or "",
@@ -563,10 +566,12 @@ def apply_archive_windows(payload: dict, archive: dict) -> dict:
     )
     publication_day = datetime.now(BEIJING_TZ).date()
     payload["intelligence"] = today_items
-    map_today_items = select_daily_map_window(records, limit=DAILY_TARGET)
+    map_today_items = today_items
     payload["map_events_today"] = _map_events(map_today_items, max_events=DAILY_TARGET)
     payload["map_events_week"] = _map_events(week_items)
     payload["map_events"] = payload["map_events_today"]
+    payload['map_queue_today']=_map_events(today_items,max_events=DAILY_TARGET,include_unlocated=True)
+    payload['map_queue_week']=_map_events(week_items,include_unlocated=True)
     payload["meta"]["date"] = publication_day.isoformat()
     payload["meta"]["latest_news_date"] = latest_day.isoformat() if latest_day else payload["meta"]["date"]
     selected_days = [_published_day(item.get("published_at")) for item in today_items]
@@ -623,7 +628,7 @@ def dashboard_payload(db: Database) -> dict:
     """)}
     official = _official_data(db)
     live = bool(intelligence)
-    map_events_today = _map_events(select_daily_map_window(candidates, limit=DAILY_TARGET), max_events=DAILY_TARGET)
+    map_events_today = _map_events(intelligence, max_events=DAILY_TARGET)
     map_events_week = _map_events(weekly_intelligence)
     intelligence_days = [_published_day(item.get("published_at")) for item in intelligence]
     intelligence_days = [day for day in intelligence_days if day]
@@ -673,6 +678,8 @@ def dashboard_payload(db: Database) -> dict:
         "map_events": map_events_today,
         "map_events_today": map_events_today,
         "map_events_week": map_events_week,
+        "map_queue_today":_map_events(intelligence,max_events=DAILY_TARGET,include_unlocated=True),
+        "map_queue_week":_map_events(weekly_intelligence,include_unlocated=True),
         "phrases": phrases,
         "events": [] if live else demo_events,
         "topics": [{"name": name, "weight": count} for name, count in topics.most_common()],

@@ -1075,11 +1075,19 @@ async function renderMap(events) {
   $("mapCanvas").classList.add("map-ready");
 }
 
+function mapPlaceName(item) {
+  if(state.language!=='en')return item.place;
+  if(item.place==='欧盟')return 'European Union';
+  if(item.location_status==='unresolved'||item.place==='全球议题')return 'Global issue';
+  const country=(state.taxonomy.countries||[]).find(r=>r.name_zh===item.place);
+  return country?.name_en || (findArchiveRecord(item).country_codes||[]).map(c=>c.alpha3).join(' · ') || 'Global / regional';
+}
+
 function showMapTooltip(event, item) {
   const tooltip = $("mapTooltip");
   const bounds = $("mapCanvas").getBoundingClientRect();
   const record = findArchiveRecord(item);
-  const place = state.language === "en" ? ((record.country_codes || []).map(country => country.alpha3).join(" · ") || "Global") : item.place;
+  const place = mapPlaceName(item);
   tooltip.innerHTML = `<b>${esc(place)} · ${esc(state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : item.theme)}</b><span>${esc(field(record, "title_zh", "title_original"))}</span>`;
   tooltip.style.left = `${Math.min(bounds.width - 280, Math.max(12, event.clientX - bounds.left + 12))}px`;
   tooltip.style.top = `${Math.max(12, event.clientY - bounds.top - 80)}px`;
@@ -1088,7 +1096,7 @@ function showMapTooltip(event, item) {
 
 function selectMapEvent(item) {
   const record = findArchiveRecord(item);
-  const place = state.language === "en" ? ((record.country_codes || []).map(country => country.alpha3).join(" · ") || "Global") : item.place;
+  const place = mapPlaceName(item);
   const theme = state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : item.theme;
   $("mapDetail").innerHTML = `<span>${esc(place)} · ${esc(theme)}</span><h2>${esc(field(record, "title_zh", "title_original"))}</h2>${summaryOrAtoms(record)}<small>${esc(item.source_name)} · ${esc(formatDate(item.published_at))}</small><a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a>`;
 }
@@ -1097,8 +1105,8 @@ function renderMapPlaces(events) {
   $("mapPlaceList").innerHTML = events.length
     ? events.map(item => {
       const country = (state.taxonomy.countries || []).find(row => row.name_zh === item.place);
-      const label = state.language === "en" ? (country?.name_en || (findArchiveRecord(item).country_codes || []).map(row => row.alpha3).join(" · ") || "Global / regional") : item.place;
-      return `<button type="button" data-map-id="${esc(item.marker_id)}"><i></i>${esc(label)}<span>${esc(state.language === "en" ? "Climate" : item.theme)}</span></button>`;
+      const label = mapPlaceName(item);
+      return `<button type="button" class="${item.location_status==='unresolved'?'map-unlocated':''}" data-map-id="${esc(item.marker_id)}"><i></i>${esc(label)}<span>${esc(state.language === "en" ? "Climate" : item.theme)}</span></button>`;
     }).join("")
     : `<span>${state.mapPeriod === "today" ? "今日队列" : "本周"}暂无带有明确地理位置的新记录。</span>`;
   document.querySelectorAll("[data-map-id]").forEach(button => button.addEventListener("click", () => {
@@ -1112,6 +1120,10 @@ function mapEventsFor(period) {
   return state.dashboard.map_events_today || state.dashboard.map_events || [];
 }
 
+function mapQueueFor(period) {
+  return (period==='week'?state.dashboard.map_queue_week:state.dashboard.map_queue_today) || mapEventsFor(period);
+}
+
 async function switchMapPeriod(period) {
   state.mapPeriod = period;
   document.querySelectorAll("[data-map-period]").forEach(button => {
@@ -1121,8 +1133,9 @@ async function switchMapPeriod(period) {
   });
   const events = mapEventsFor(period);
   $("mapRangeNote").textContent = period === "today" ? tr("todayQueue") : tr("thisWeek");
-  renderMapPlaces(events);
+  renderMapPlaces(mapQueueFor(period));
   await renderMap(events);
+  if(!events.length && mapQueueFor(period).length)selectMapEvent(mapQueueFor(period)[0]);
 }
 
 function setupMapPeriods() {
@@ -1136,8 +1149,8 @@ function setupMapPeriods() {
 }
 
 function updateMapPeriodCounts() {
-  const todayEvents = mapEventsFor("today");
-  const weekEvents = mapEventsFor("week");
+  const todayEvents = mapQueueFor("today");
+  const weekEvents = mapQueueFor("week");
   $("todayMapCount").textContent = todayEvents.length;
   $("weekMapCount").textContent = weekEvents.length;
 }
