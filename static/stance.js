@@ -9,7 +9,7 @@
   const safe=s=>{try{const u=new URL(s);return u.protocol==='https:'?u.href:'#';}catch{return '#';}};
   let data=null,container=null,view='cards',topic='finance',actor='all',proposition='all',year='all';
   const statuses=()=>Object.fromEntries(data.stances.map(s=>[s.id,label(s)]));
-  const actors=()=>data.actors.filter(a=>actor==='all'||a.id===actor);
+  const actors=()=>data.actors.filter(a=>(actor==='all'||a.id===actor)&&(view!=='cards'||actor!=='all'||rows().some(r=>r.actor_id===a.id)));
   const props=()=>data.propositions.filter(p=>p.topic===topic&&(proposition==='all'||p.id===proposition));
   function rows(){const ids=new Set(props().map(p=>p.id));return data.assertions.filter(r=>ids.has(r.proposition_id)&&(actor==='all'||r.actor_id===actor)&&(year==='all'||r.statement_date.startsWith(year))).sort((a,b)=>b.statement_date.localeCompare(a.statement_date)||a.id.localeCompare(b.id));}
   function cell(actorId,propId,list=rows()){
@@ -88,6 +88,10 @@
         const entries=props().map(p=>cell(a.id,p.id,allRows)).filter(c=>c.items.length);
         return `<article class="stance-country-card"><h3 class="stance-actor-heading">${flag(a)}<span>${esc(label(a))}</span></h3>${entries.length?entries.map(c=>statement(c.items[0])+(c.status==='mixed'?`<p>${t('同日存在不同表述，请查阅时间线中的全部证据。','Differing statements on the same day; inspect all evidence in the timeline.')}</p>`:'')).join(''):`<div class="stance-missing"><span>${esc(s.insufficient)}</span><p>${t('当前筛选下没有可归属该主体的已核对表态。','No source-checked statement attributable to this actor matches the selection.')}</p></div>`}</article>`;
       }).join('')}</div>`;
+      const count=document.createElement('p');count.className='stance-card-count';
+      count.textContent=t('当前有已核对证据的主体','Actors with source-checked evidence')+': '+actors().length;
+      content.prepend(count);
+      if(!actors().length){const empty=document.createElement('p');empty.textContent=t('当前筛选没有已核对表态；可查看原文资料或调整筛选。','No source-checked statement matches this selection. Inspect source texts or adjust the filters.');content.append(empty);}
     }else if(view==='matrix'){
       content.innerHTML=`<p class="stance-matrix-help">${t('点击单元格查看该主张的原文依据。每格采用最新日期，不按转载数量投票。','Select a cell to inspect its evidence. Each cell uses the latest date, not a majority vote over reposts.')}</p><div class="stance-matrix-wrap"><table class="stance-matrix"><caption>${esc(label(data.topics.find(v=>v.id===topic)))} · ${t('具体主张对比','Specific-proposition comparison')}</caption><thead><tr><th scope="col">${t('国家或集团','Country or group')}</th>${props().map(p=>`<th scope="col">${esc(label(p))}</th>`).join('')}</tr></thead><tbody>${actors().map(a=>`<tr><th scope="row"><span class="stance-actor-heading">${flag(a)}${esc(label(a))}</span></th>${props().map(p=>{const c=cell(a.id,p.id,allRows);return `<td class="stance-matrix-cell status-${c.status}">${c.items.length?`<button type="button" data-stance-evidence="${esc(c.items[0].id)}" aria-label="${esc(label(a)+' · '+label(p)+' · '+s[c.status])}"><strong>${esc(s[c.status])}</strong><span>${esc(c.items[0].statement_date)}</span><span>${new Set(c.items.map(r=>r.event_id)).size} ${t('次表态',new Set(c.items.map(r=>r.event_id)).size===1?'statement event':'statement events')}</span></button>`:`<span>${esc(s.insufficient)}</span>`}</td>`;}).join('')}</tr>`).join('')}</tbody></table></div><div class="stance-legend">${data.stances.map(v=>`<span class="status-${v.id}">${esc(label(v))}</span>`).join('')}</div>`;
     }else{
