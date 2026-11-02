@@ -95,6 +95,8 @@ const UI_TEXT = {
   },
 };
 const tr = key => UI_TEXT[state.language]?.[key] || UI_TEXT.zh[key] || key;
+Object.assign(UI_TEXT.zh,{menu:'菜单',closeMenu:'关闭'});
+Object.assign(UI_TEXT.en,{menu:'Menu',closeMenu:'Close'});
 Object.assign(UI_TEXT.zh, {subscribeTitle:"订阅每周气候情报周报",subscribePrivacy:"邮箱仅用于周报订阅，保存在私有订阅服务中。",emailLabel:"邮箱",emailLanguage:"邮件语言"});
 Object.assign(UI_TEXT.en, {subscribeTitle:"Subscribe to the weekly climate briefing",subscribePrivacy:"Your email is stored privately and used only for this subscription.",emailLabel:"Email",emailLanguage:"Email language"});
 const field = (item, zhKey, enKey) => state.language === "en"
@@ -175,7 +177,7 @@ function closeMobileMenu() {
   if (!menu || !toggle) return;
   menu.hidden = true;
   toggle.setAttribute("aria-expanded", "false");
-  toggle.textContent = "菜单";
+  toggle.textContent = tr('menu');
 }
 
 function setupMobileMenu() {
@@ -186,7 +188,7 @@ function setupMobileMenu() {
     const opening = menu.hidden;
     menu.hidden = !opening;
     toggle.setAttribute("aria-expanded", String(opening));
-    toggle.textContent = opening ? "关闭" : "菜单";
+    toggle.textContent = tr(opening?'closeMenu':'menu');
   });
   menu.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMobileMenu));
   document.addEventListener("keydown", event => { if (event.key === "Escape") closeMobileMenu(); });
@@ -282,6 +284,7 @@ function applyModeCopy() {
   document.body.dataset.mode = state.mode;
   document.body.dataset.language = state.language;
   document.documentElement.lang = state.language === "en" ? "en" : "zh-CN";
+  if($('mobileMenuToggle'))$('mobileMenuToggle').setAttribute('aria-label',state.language==='en'?'Open page navigation':'打开页面导航');
   document.querySelectorAll("[data-i18n]").forEach(element => { element.textContent = tr(element.dataset.i18n); });
   document.querySelectorAll("[data-i18n-placeholder]").forEach(element => { element.placeholder = tr(element.dataset.i18nPlaceholder); });
   const climateBrand = state.mode !== "energy";
