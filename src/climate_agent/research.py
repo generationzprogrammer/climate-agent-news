@@ -426,6 +426,7 @@ FIELDS += [
     ('source_text_en','来源文字的英文原文或译文','English source text or translation'),
     ('country_evidence','国别匹配原词及来源字段与位置','Country evidence, source field and character offsets'),
     ('country_tag_version','国别标注方法版本','Country annotation version'),
+    ('exact_duplicate_of','相同来源文字的主记录；保留不同报道记录','Primary record with identical source text; distinct report records retained'),
     ('source_language_declared','原采集接口语言声明','Initially declared source language'),
     ('detected_source_language','本地识别来源语言','Locally detected source language'),
     ('translation_status','机器翻译待复核状态','Machine translation review status'),
@@ -501,7 +502,18 @@ def write_research(root, db, data_dir):
     root=Path(root);data_dir=Path(data_dir);data_dir.mkdir(parents=True,exist_ok=True)
     status=collect_texts(root,db,fetch_limit=0)
     texts=load_jsonl(root/'data/research_texts.jsonl')
+    sampling_path=root/'data/research_expansion_20261102.json'
+    sampling=json.loads(sampling_path.read_text(encoding='utf-8')).get('scope_review',{}) if sampling_path.exists() else {}
+    if sampling.get('eligible_sampling_frame') and 0<sampling.get('inclusion_probability',0)<=1:
+        for row in texts:
+            if row.get('sample_frame') in ['public_archives_20261102','public_archives_scope_review_20261102']:
+                row.update(sample_frame='public_archives_scope_review_20261102',sampling_method='two_stage_uniform_url_hash_with_scope_screen',sampling_probability=sampling['inclusion_probability'])
     country_catalog={c['alpha2']:c for c in country_index()}
+    primary_text={}
+    for row in sorted(texts,key=lambda r:(r.get('collected_at') or '',r['text_id'])):
+        primary=primary_text.setdefault(row['text_sha256'],row['text_id'])
+        if primary!=row['text_id']:row['exact_duplicate_of']=primary
+        else:row.pop('exact_duplicate_of',None)
     for i,row in enumerate(texts):
         if 'quantitative_claims' not in row or 'document_type' not in row:
             texts[i]={**make_text_record(row,row['source_text'],row['text_kind'],resolved_url=row.get('publisher_url'),basis=row.get('text_basis')),**row}
@@ -524,6 +536,7 @@ def write_research(root, db, data_dir):
                          'publication_max':max((r.get('published_at') or '' for r in texts),default=None),
                          'publishers':len({r.get('source_name') for r in texts if r.get('source_name')}),
                          'interactive_records':len(recent),
+                         'archive_sampling':sampling,
                          'scope':'Climate news source passages plus separately identified licensed policy reference documents.'},
              'records':recent,'events':[{**e,'records':[{'text_id':r['text_id']} for r in e['records']]} for e in events],'positions':positions[-400:],'comparisons':comparisons[:40],
              'countries':list(country_catalog.values()),
@@ -541,13 +554,17 @@ def write_research(root, db, data_dir):
     (data_dir/'research_index.json').write_text(json.dumps(payload,ensure_ascii=False),encoding='utf-8')
     (data_dir/'research_catalog.json').write_text(json.dumps({k:v for k,v in payload.items() if k not in ['records','events','positions','comparisons']},ensure_ascii=False,indent=2),encoding='utf-8')
     import shutil
+    for frame in root.glob('data/research_sampling_frame_*.jsonl.gz'):shutil.copy2(frame,data_dir/frame.name)
     if (root/'data/research_releases').exists():shutil.copytree(root/'data/research_releases',data_dir/'research_releases',dirs_exist_ok=True)
     shutil.copy2(root/'data/research_texts.jsonl',data_dir/'research_texts.jsonl')
     with (data_dir/'research_records.csv').open('w',encoding='utf-8-sig',newline='') as file:
-        keys=['text_id','title_original','title_zh','title_en','published_at','source_name','publisher_url','text_kind','source_text','source_text_zh','source_text_en','text_sha256','review_status','translation_status']
+        keys=['text_id','title_original','title_zh','title_en','published_at','collected_at','source_id','source_name','publisher_url','language','country_iso2','country_iso3','theme_ids','track','text_kind','source_text','source_text_zh','source_text_en','text_sha256','rights_status','review_status','translation_status']
         writer=csv.writer(file);writer.writerow(keys)
         for row in texts:
-            values=[str(row.get(k) or '') for k in keys]
+            flat={**row,'country_iso2':';'.join(c['alpha2'] for c in row['country_codes']),
+                  'country_iso3':';'.join(c['alpha3'] for c in row['country_codes']),
+                  'theme_ids':';'.join(t['id'] for t in row.get('governance_themes',[]))}
+            values=[str(flat.get(k) or '') for k in keys]
             writer.writerow(["'"+v if v.lstrip().startswith(('=','+','-','@')) else v for v in values])
     return {'texts':len(texts),'events':len(events),'multi_article_events':sum(c['article_count']>1 for c in events),
             'positions':len(positions),'passage_comparisons':len(comparisons),'corpus_sha256':corpus_hash}
