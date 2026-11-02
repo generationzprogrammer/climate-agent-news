@@ -13,9 +13,9 @@
   const $ = id => document.getElementById(id);
   const make = (tag, className) => Object.assign(document.createElement(tag), { className });
   const esc = text => String(text).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
-  const SECTION_IDS = ["map", "today", "countries", "analytics", "assistant", "database"]; // menu / reel order
+  const SECTION_IDS = ["map", "today", "countries", "analytics", "research", "assistant", "database"]; // menu / reel order
   // pages of their own; home = the stamp stage + 全球气候现场. The country topics are pages reached from 国家专题.
-  const PAGE_IDS = ["today", "countries", "chinaCarbon", "singapore", "analytics", "assistant", "database"];
+  const PAGE_IDS = ["today", "countries", "chinaCarbon", "singapore", "analytics", "research", "assistant", "database"];
   const menuIdOf = id => (id === "chinaCarbon" || id === "singapore" ? "countries" : id); // a topic lights 国家专题
 
   /* ---------- Reveal roles (the reference spring/entrance study) ---------- */
@@ -82,6 +82,7 @@
   /* ---------- Chinese / English chrome that app.js does not translate ---------- */
   const localize = () => {
     const en = root.lang.startsWith("en"), word = en ? "MENU" : "菜单", focus = en ? "Country focus" : "国家专题";
+    const research = en ? "Research tools" : "研究工具"; // research.js names only its own [data-research-nav] links
     document.querySelectorAll(".rail-label, .menu-pop-label").forEach(label => { label.textContent = word; });
     const home = en ? "Home" : "返回首页"; // the drop-down's way home (a link with morphing glyphs: compare its spoken label)
     document.querySelectorAll(".menu-home").forEach(item => { if ((item.querySelector(".sr-only")?.textContent ?? item.textContent) !== home) item.textContent = home; });
@@ -90,6 +91,9 @@
     if (cueUp) cueUp.textContent = en ? "Back up to home" : "向上回到首页";
     document.querySelectorAll(".nav-countries").forEach(item => { // the rail link holds morphing glyphs: compare its spoken label
       if ((item.querySelector(".sr-only")?.textContent ?? item.textContent) !== focus) item.textContent = focus;
+    });
+    document.querySelectorAll(".nav-research").forEach(item => {
+      if ((item.querySelector(".sr-only")?.textContent ?? item.textContent) !== research) item.textContent = research;
     });
     document.querySelectorAll(".ct-place[data-en]").forEach(place => { place.dataset.zh ??= place.textContent; place.textContent = en ? place.dataset.en : place.dataset.zh; });
   };
@@ -537,7 +541,7 @@
   // 国家专题 from any other page comes in behind the reference's six-column overlay (countries.js, window.GreenFocus)
   const focusEntry = target => target?.id === "countries" && currentPage() !== "countries" && !!window.GreenFocus?.open && !reducedMotion.matches;
   // …and so do 语料分析 / 情报问答 / 文本数据库 (2026-10-29): the same overlay, the page's own entrance under it
-  const BLIND_PAGES = ["analytics", "assistant", "database"];
+  const BLIND_PAGES = ["analytics", "research", "assistant", "database"];
   const blindsEntry = target => BLIND_PAGES.includes(target?.id) && currentPage() !== target.id && !!window.GreenFocus?.blinds && !reducedMotion.matches;
   function markPage(page) {
     root.dataset.page = page;

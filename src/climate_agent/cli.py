@@ -387,7 +387,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.output,
                 account_id=os.environ["CLOUDFLARE_ACCOUNT_ID"],
                 api_token=os.environ["CLOUDFLARE_ANALYTICS_API_TOKEN"],
-                hostname=os.getenv("CLIMATE_SITE_HOSTNAME", "generationzprogrammer.github.io"),
+                hostname=os.getenv("CLIMATE_SITE_HOSTNAMES") or os.getenv("CLIMATE_SITE_HOSTNAME", "generationzprogrammer.github.io"),
             )
         else:
             result = update_github_visitor_history(args.output)

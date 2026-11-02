@@ -5,7 +5,7 @@ import {runInNewContext} from 'node:vm';
 const source=readFileSync(new URL('../static/app.js',import.meta.url),'utf8').replace(/init\(\)\.catch\([\s\S]*$/, '');
 function setup(language='en') {
   const messages=[];
-  const document={body:{dataset:{edition:'cop31'}},getElementById:()=>({appendChild:node=>messages.push(node.innerHTML),scrollTop:0,scrollHeight:1}),createElement:()=>({})};
+  const document={body:{dataset:{edition:'cop31'}},addEventListener(){},getElementById:()=>({appendChild:node=>messages.push(node.innerHTML),scrollTop:0,scrollHeight:1}),createElement:()=>({})};
   const context={document,URL,Intl,Date,console,location:{href:'https://example.org/cop31/'}};
   runInNewContext(source+`;globalThis.qa={state,planQuestion,selectEvidence,answerQuestion,scopeLabel};`,context);
   const qa=context.qa;qa.state.language=language;

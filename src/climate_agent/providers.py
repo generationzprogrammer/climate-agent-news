@@ -5,6 +5,7 @@ import os
 import smtplib
 import ssl
 import time
+import re
 import urllib.error
 import urllib.request
 from urllib.parse import urlparse, urlsplit, urlunsplit
@@ -13,6 +14,20 @@ from dataclasses import dataclass
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
 from pathlib import Path
+
+def _complete_item_prefix(content: str) -> list[dict]:
+    """Recover only completely decoded objects from a truncated item array."""
+    match=re.search(r'"(?:items|translations)"\s*:\s*\[',content)
+    start=match.end() if match else (content.find('[')+1 if content.lstrip().startswith('[') else -1)
+    if start<0:return []
+    decoder=json.JSONDecoder();items=[];position=start
+    while position<len(content):
+        while position<len(content) and (content[position].isspace() or content[position]==','):position+=1
+        try:item,end=decoder.raw_decode(content,position)
+        except json.JSONDecodeError:break
+        if not isinstance(item,dict) or not isinstance(item.get('id'),str):break
+        items.append(item);position=end
+    return items
 
 
 @dataclass(slots=True)
@@ -34,7 +49,7 @@ class OpenAICompatibleModel:
 
     def complete_json(self, system: str, payload: dict) -> dict:
         from .model_budget import reserve_request, record_usage
-        body = json.dumps({
+        request_body = {
             "model": self.model,
             "temperature": 0.1,
             "response_format": {"type": "json_object"},
@@ -42,7 +57,10 @@ class OpenAICompatibleModel:
                 {"role": "system", "content": system},
                 {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
             ],
-        }).encode("utf-8")
+        }
+        if os.getenv('CLIMATE_MODEL_MAX_OUTPUT_TOKENS'):
+            request_body['max_tokens']=max(256,min(32768,int(os.environ['CLIMATE_MODEL_MAX_OUTPUT_TOKENS'])))
+        body=json.dumps(request_body).encode('utf-8')
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
@@ -69,7 +87,11 @@ class OpenAICompatibleModel:
                     content = content.rsplit("```", 1)[0].strip()
                 try:
                     return json.loads(content)
-                except json.JSONDecodeError:
+                except json.JSONDecodeError as parse_error:
+                    if os.getenv('CLIMATE_MODEL_ALLOW_PARTIAL_ITEMS')=='1':
+                        recovered=_complete_item_prefix(content)
+                        print(json.dumps({'research_json_format':{'error':parse_error.msg,'characters':len(content),'complete_items_recovered':len(recovered)}}),flush=True)
+                        if recovered:return {'items':recovered}
                     start = content.find("{")
                     end = content.rfind("}")
                     if start >= 0 and end > start:

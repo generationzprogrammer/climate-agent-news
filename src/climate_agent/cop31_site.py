@@ -21,7 +21,7 @@ PREVIEW_ONLY = (
 )
 # Sections app.js renders into, plus the subscription contract.
 REQUIRED_IDS = (
-    "map", "today", "chinaCarbon", "singapore", "analytics", "assistant", "database",
+    "siteMetrics", "map", "today", "chinaCarbon", "singapore", "analytics", "research", "assistant", "database",
     "subscribeOpen", "subscribeForm", "subscribeLanguage", "teamList",
 )
 

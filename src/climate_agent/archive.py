@@ -314,11 +314,7 @@ def update_archive(path: Path, candidates: list[dict], *, limit: int = DEFAULT_A
         taxonomy_text = " ".join(str(record.get(key) or "") for key in (
             "title_original", "title_zh", "summary_source", "summary_zh", "source_name",
         ))
-        record["country_codes"] = country_codes_for(
-            taxonomy_text,
-            places=record["places"],
-            country_tags=list(record.get("country_tags") or []),
-        )
+        record["country_codes"] = country_codes_for(' '.join(str(record.get(k) or '') for k in ('title_original','summary_source','source_text')))
         record["organization_tags"] = organization_tags_for(taxonomy_text)
         record["event_tags"] = event_tags_for(taxonomy_text)
         record["quality"] = quality_result(record)

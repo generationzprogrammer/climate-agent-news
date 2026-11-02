@@ -76,6 +76,26 @@ COUNTRY_ALIASES = {
 # They are still part of the ISO index but are not inferred from free text
 # without a less ambiguous alias or an already detected place.
 AMBIGUOUS_ENGLISH_NAMES = {"chad", "georgia", "jordan", "jersey", "turkey"}
+AMBIGUOUS_FREE_TERMS=AMBIGUOUS_ENGLISH_NAMES|{'congo','刚果','korean'}
+EXTRA_COUNTRY_TERMS={
+    'US':('New Mexico','New Jersey','California','Texas','Massachusetts','West Virginia','Alabama','Alaska','Arizona','Arkansas','Colorado','Connecticut','Delaware','Florida','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Utah','Vermont','Virginia','Wisconsin','Wyoming','District of Columbia','Washington, D.C.','Washington DC'),
+    'GB':('UK','U.K.','Scotland','Wales','England','Northern Ireland'),
+    'CN':('Beijing','Tianjin','Hebei','北京','天津','河北'),
+    'RU':('Russian','Россия','России'),
+    'KR':('South Korea','South Korean','Republic of Korea','韩国'),
+    'KP':('North Korea','North Korean','Democratic People\'s Republic of Korea','Democratic People’s Republic of Korea','Democratic Peoples Republic of Korea','DPRK','朝鲜'),
+    'CA':('British Columbia','Canadian','Ontario','Quebec','Alberta'),
+    'AU':('Australian','New South Wales','Queensland','Western Australia','South Australia'),
+    'DE':('German','Bavaria'), 'FR':('French',), 'JP':('Japanese',),
+    'IN':('Indian government','Indian states','New Delhi'),
+    'BR':('Brazilian',), 'ID':('Indonesian',), 'NG':('Nigerian',),
+    'ZA':('South African',), 'NZ':('New Zealanders',),
+    'TW':('Chinese Taipei',),
+    'VI':('US Virgin Islands','U.S. Virgin Islands'),
+    'CG':('Republic of the Congo','Republic of Congo','刚果共和国','刚果（布）','刚果(布)'),
+    'CD':('Democratic Republic of the Congo','Democratic Republic of Congo','DR Congo','DRC','刚果民主共和国','刚果（金）','刚果(金)'),
+    'TR':('Turkish','Türkiye','Turkiye'),
+}
 
 
 def _normalise(value: object) -> str:
@@ -102,6 +122,58 @@ def _contains_term(text: str, term: str) -> bool:
     return term in text
 
 
+@lru_cache(maxsize=1)
+def _country_patterns():
+    terms={}
+    for row in country_index():
+        for term in (row.get('name_zh'),row.get('name_en'),*COUNTRY_ALIASES.get(row['alpha2'],()),*EXTRA_COUNTRY_TERMS.get(row['alpha2'],())):
+            if term and _normalise(term) not in AMBIGUOUS_FREE_TERMS:
+                terms.setdefault(_normalise(term),set()).add(row['alpha2'])
+    english=[];other=[]
+    for term in sorted(terms,key=len,reverse=True):
+        pattern=re.escape(term)
+        if re.search(r'[a-z]',term) and not re.search(r'[\u3400-\u9fff]',term):english.append(pattern)
+        else:other.append(pattern)
+    # Share word-boundary assertions instead of repeating them for every alias
+    # at every character of a long source document.
+    combined=r'(?<![A-Za-z0-9])(?:'+'|'.join(english)+r')(?![A-Za-z0-9])|(?:'+'|'.join(other)+')'
+    return re.compile(combined,re.I),terms
+
+
+@lru_cache(maxsize=32768)
+def country_mentions_with_evidence(text: str) -> list[dict]:
+    """Longest-name-first spans, with conservative ambiguous-name handling.
+
+    Country tags describe textual/geographic relevance, not a policy's legal
+    jurisdiction or the nationality of an attributed speaker.
+    """
+    text=str(text or '')
+    masked=re.sub(r'https?://\S+',lambda m:' '*len(m.group()),text)
+    # The Korean Peninsula is a region, not an explicit North-Korean reference.
+    masked=re.sub('朝鲜半岛',lambda m:' '*len(m.group()),masked)
+    pattern,terms=_country_patterns();index=_country_by_code();result=[]
+    for match in pattern.finditer(masked):
+        for code in terms.get(_normalise(match.group()),()):
+            if code=='US' and _normalise(match.group()) in {'u.s.','u.s.a.'} and re.match(r'\$|\s*[- ]?dollars?\b',masked[match.end():],re.I):continue
+            result.append({**index[code],'start':match.start(),'end':match.end(),'matched_text':text[match.start():match.end()],
+                           'method':'country-span-v2'})
+    # "US" in running text must be an uppercase acronym, never the pronoun
+    # "us", and a currency prefix must not create a US country tag.
+    for match in re.finditer(r'(?<![A-Za-z0-9])(?:US|U\.S\.)(?![A-Za-z0-9])',masked):
+        if re.match(r'\$|\s*[- ]?dollars?\b',masked[match.end():],re.I):continue
+        if any(r['alpha2']!='US' and r['start']<=match.start() and match.end()<=r['end'] for r in result):continue
+        result.append({**index['US'],'start':match.start(),'end':match.end(),'matched_text':text[match.start():match.end()],'method':'country-acronym-v2'})
+    rules=[('GE',r'\bGeorgia\b',r'Tbilisi|Caucasus|Republic of Georgia'),
+           ('JO',r'\bJordan\b',r'Amman|Hashemite Kingdom|Jordanian government'),
+           ('TD',r'\bChad\b',r"N.?Djamena|Chadian|Republic of Chad|Chad.s (?:NDC|government|president|minister)"),
+           ('TR',r'\bTurkey\b',r'Turkish|Türkiye|Ankara|Erdo[gğ]an|Turkey.s (?:government|climate|energy|NDC)|Turkey (?:hosts|will host)')]
+    for code,name,context in rules:
+        if not re.search(context,masked,re.I):continue
+        for match in re.finditer(name,masked,re.I):
+            result.append({**index[code],'start':match.start(),'end':match.end(),'matched_text':text[match.start():match.end()],'method':'country-context-v2'})
+    return sorted({(r['alpha2'],r['start'],r['end']):r for r in result}.values(),key=lambda r:(r['start'],r['alpha2']))
+
+
 def country_codes_for(
     text: str,
     *,
@@ -109,31 +181,14 @@ def country_codes_for(
     country_tags: list[str] | None = None,
 ) -> list[dict]:
     """Return ISO 3166-1 alpha-2/alpha-3 tags without treating regions as states."""
-    index = country_index()
-    haystack = _normalise(text)
-    place_text = _normalise(" ".join(
-        str(place.get("name_zh") or "") for place in (places or []) if isinstance(place, dict)
-    ))
-    tag_text = _normalise(" ".join(str(tag) for tag in (country_tags or [])))
-    explicit_text = f" {place_text} {tag_text} "
-    matched: list[dict] = []
-    for row in index:
-        code = str(row["alpha2"])
-        names = {_normalise(row.get("name_zh")), _normalise(row.get("name_en"))}
-        aliases = {_normalise(term) for term in COUNTRY_ALIASES.get(code, ())}
-        explicit = any(name and name in explicit_text for name in names | aliases)
-        free_terms = aliases or names
-        free_match = any(
-            term and term not in AMBIGUOUS_ENGLISH_NAMES and _contains_term(haystack, term)
-            for term in free_terms
-        )
-        if explicit or free_match:
-            matched.append({
-                "name_zh": row["name_zh"],
-                "alpha2": row["alpha2"],
-                "alpha3": row["alpha3"],
-            })
-    return matched
+    matches=list(country_mentions_with_evidence(text))
+    matches+=country_mentions_with_evidence(' '.join(str(p.get('name_zh') or '') for p in (places or []) if isinstance(p,dict)))
+    codes={r['alpha2'] for r in matches}
+    explicit={_normalise(v) for v in (country_tags or [])}
+    for row in country_index():
+        if explicit & {_normalise(row['alpha2']),_normalise(row['alpha3']),_normalise(row['name_zh']),_normalise(row['name_en'])}:
+            codes.add(row['alpha2'])
+    return [dict(row) for row in country_index() if row['alpha2'] in codes]
 
 
 def organization_tags_for(text: str) -> list[str]:

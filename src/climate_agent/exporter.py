@@ -170,9 +170,9 @@ def export_static_site(
     if corpus_path.exists():
         analytics = write_corpus_analytics(corpus_path, data_dir / "corpus_analytics.json", manifest_path)
         write_energy_corpus_analytics(corpus_path, data_dir / "energy_corpus_analytics.json", manifest_path)
-    site_metrics = write_site_metrics(corpus_path, db.path.parent / "visitor_history.json", data_dir / "site_metrics.json")
     research_root = db.path.parent.parent if db.path.parent.name == 'data' else db.path.parent
     research = write_research(research_root, db, data_dir)
+    site_metrics = write_site_metrics(corpus_path, db.path.parent / "visitor_history.json", data_dir / "site_metrics.json")
     for history_name in ("climate_text_corpus.jsonl", "climate_text_corpus.manifest.json"):
         history_path = db.path.parent / history_name
         if history_path.exists():

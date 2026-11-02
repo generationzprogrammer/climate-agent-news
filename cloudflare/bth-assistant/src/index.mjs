@@ -253,10 +253,10 @@ function streamedAnswer(request, env, ctx, body, origin) {
 export default {
   async fetch(request, env, ctx) {
     const origin = request.headers.get("Origin") || "";
-    const allowed = env.BTH_ALLOWED_ORIGIN || "https://generationzprogrammer.github.io";
+    const allowed = String(env.BTH_ALLOWED_ORIGIN || "https://generationzprogrammer.github.io").split(',').map(v=>v.trim().replace(/\/$/,''));
     const path = new URL(request.url).pathname;
-    if (path === "/health" && request.method === "GET") return json({ok: true, ready: !!(env.BTH_LLM_API_KEY && (!verificationRequired(env) || env.BTH_TURNSTILE_SECRET_KEY) && env.BUDGET), verification: verificationRequired(env) ? "required" : "off", model: env.BTH_LLM_MODEL || "qwen3.5-plus", version: "20261010-1", transports: ["stream", "json"]}, 200, origin === allowed ? origin : "null");
-    if (origin !== allowed) return json({error: "origin_not_allowed"}, 403, "null");
+    if (path === "/health" && request.method === "GET") return json({ok: true, ready: !!(env.BTH_LLM_API_KEY && (!verificationRequired(env) || env.BTH_TURNSTILE_SECRET_KEY) && env.BUDGET), verification: verificationRequired(env) ? "required" : "off", model: env.BTH_LLM_MODEL || "qwen3.5-plus", version: "20261010-1", transports: ["stream", "json"]}, 200, allowed.includes(origin) ? origin : "null");
+    if (!allowed.includes(origin)) return json({error: "origin_not_allowed"}, 403, "null");
     if (request.method === "OPTIONS") return new Response(null, {status: 204, headers: {...headers(origin), "Access-Control-Allow-Methods": "GET, POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Max-Age": "600"}});
     if (["/subscriptions/subscribe","/subscriptions/unsubscribe"].includes(path) && request.method === "POST") return subscriptionRelay(request, origin, path.split("/").pop(), env);
     if (path !== "/chat" || request.method !== "POST") return json({error: "not_found"}, 404, origin);

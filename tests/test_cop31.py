@@ -139,6 +139,12 @@ class Cop31Tests(unittest.TestCase):
             self.assertIsNotNone(page.select_one("#subscribeForm"))
             self.assertIsNotNone(page.select_one('script[src*="bth-transport.js"]'))
             self.assertIsNotNone(page.select_one('#subscribeLanguage'))
+            # main-site sections shown on the COP31 page since 2026-11-02: site curves, research tools
+            self.assertFalse(page.select_one("#siteMetrics").has_attr("hidden"))
+            self.assertIn("./cop31/#research", links)
+            self.assertFalse(page.select_one("#research").has_attr("hidden"))
+            self.assertIsNotNone(page.select_one('script[src*="research.js"]'))
+            self.assertIsNotNone(page.select_one("#sourceArchiveModes"))
             self.assertNotIn("preview-mode.js", published)
             self.assertNotIn("Content-Security-Policy", published)
 

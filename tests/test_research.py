@@ -57,7 +57,8 @@ class ResearchTests(unittest.TestCase):
             save_jsonl(root/'data/research_texts.jsonl',[record])
             write_research(root,None,root/'site/data')
             exported=json.loads((root/'site/data/research_index.json').read_text(encoding='utf-8'))
-            self.assertEqual(exported['records'][0]['country_codes'][0]['name_en'],'United Kingdom')
+            self.assertEqual(exported['records'][0]['country_codes'],[])
+            self.assertTrue(exported['country_review']['changed_records'])
             self.assertEqual(exported['records'][0]['text_sha256'],record['text_sha256'])
             self.assertLessEqual(set(exported['records'][0]),{f['id'] for f in exported['fields']})
 
@@ -76,7 +77,7 @@ class ResearchTests(unittest.TestCase):
             with patch('climate_agent.research.collect_texts',return_value={}),patch('climate_agent.research.build_events',return_value=[]),patch('climate_agent.research.extract_positions',return_value=[]),patch('climate_agent.research.version_comparisons',return_value=[]):
                 write_research(root,None,root/'site/data')
             exported=json.loads((root/'site/data/research_index.json').read_text(encoding='utf-8'))
-            self.assertEqual(len(exported['records']),1801)
+            self.assertEqual(len(exported['records']),1802)
             self.assertIn('policy-old',[r['text_id'] for r in exported['records']])
 
     def test_source_text_never_comes_from_an_ai_summary(self):

@@ -1,12 +1,13 @@
 /* Research views use stored source passages only; visitor preferences stay local. */
 (() => {
   'use strict';
-  const host=document.getElementById('research'); if(!host||document.body.dataset.edition==='cop31')return;
+  const host=document.getElementById('research'); if(!host)return;
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const url=s=>{try{const u=new URL(s);return ['https:','http:'].includes(u.protocol)?u.href:'#';}catch{return '#';}};
   const en=()=>document.documentElement.lang==='en';
   const t=(zh,eng)=>en()?eng:zh;
   const title=r=>en()?(r.title_en||r.title_original):(r.title_zh||r.title_original);
+  const passage=r=>en()?(r.source_text_en||r.source_text):(r.source_text_zh||r.source_text);
   const date=s=>String(s||'').slice(0,10);
   const label=r=>en()?(r.label_en||r.label_zh):(r.label_zh||r.label_en);
   let data=null,tab='events',country='',theme='',track='',query='',visible=20,watch={countries:[],themes:[],groups:[]};
@@ -16,18 +17,21 @@
   const countryList=()=>[...new Map(data.records.flatMap(r=>r.country_codes||[]).filter(c=>typeof c==='object'&&c.alpha2).map(c=>[c.alpha2,{...c,name_zh:countryName(c,false),name_en:countryName(c,true)}])).values()].sort((a,b)=>countryName(a).localeCompare(countryName(b)));
   const countries=r=>(r.country_codes||[]).map(c=>typeof c==='string'?c:c.alpha2);
   const groups=r=>{const text=r.source_text+' '+r.title_original;return [['EU',/European Union|\bEU\b|欧盟/i],['AOSIS',/\bAOSIS\b|Small Island States|小岛屿国家联盟/i],['G77',/G77|七十七国集团/i],['LDC',/Least Developed Countries|\bLDCs\b|最不发达国家/i]].filter(x=>x[1].test(text)).map(x=>x[0]);};
-  function matches(r){return (!country||countries(r).includes(country))&&(!theme||(r.governance_themes||[]).some(v=>v.id===theme))&&(!track||r.track===track)&&(!query||[r.title_original,r.title_zh,r.source_text,r.summary_zh].filter(Boolean).join(' ').toLowerCase().includes(query.toLowerCase()));}
+  function matches(r){return (!country||countries(r).includes(country))&&(!theme||(r.governance_themes||[]).some(v=>v.id===theme))&&(!track||r.track===track)&&(!query||[r.title_original,r.title_zh,r.title_en,r.source_text,r.source_text_zh,r.source_text_en].filter(Boolean).join(' ').toLowerCase().includes(query.toLowerCase()));}
   const csvCell = value=>{let s=String(value??'');if(/^[\s]*[=+@-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
   function selectionRecords(){return data.records.filter(r=>matches(r)&&(tab!=='watch'||((!watch.countries.length||countries(r).some(c=>watch.countries.includes(c)))&&(!watch.themes.length||(r.governance_themes||[]).some(c=>watch.themes.includes(c.id)))&&(!watch.groups.length||groups(r).some(c=>watch.groups.includes(c))))));}
   function source(r){return `<div class="research-meta"><span>${esc(date(r.published_at))}</span><span>${esc(r.source_name||'')}</span><a href="${esc(url(r.publisher_url||r.canonical_url))}" target="_blank" rel="noopener noreferrer">${t('原文','Source')} ↗</a></div>`;}
   function tags(r){return `<div class="research-tags">${(r.governance_themes||[]).slice(0,3).map(v=>`<span>${esc(label(v))}</span>`).join('')}${(r.country_codes||[]).slice(0,3).map(c=>`<span>${esc(typeof c==='string'?c:(en()?c.name_en:c.name_zh))}</span>`).join('')}</div>`;}
   function card(r){
-    const claims=r.document_family?[...new Set((r.quantitative_claims||[]).filter(c=>c.interpretation==='target_or_commitment').map(c=>c.evidence))].slice(0,2):[];
-    const passage=claims.length?claims.join(' '):r.source_text;
-    return `<article class="research-card">${source(r)}<h3>${esc(title(r))}</h3>${r.version_label?`<p>${esc(r.version_label)}</p>`:''}${r.summary_zh&&!en()?`<p>${esc(r.summary_zh)}</p>`:''}<blockquote lang="${esc(r.language||'en')}">${esc(passage.slice(0,600))}${passage.length>600?'…':''}</blockquote>${tags(r)}<button type="button" data-text="${esc(r.text_id)}">${r.document_family?t('阅读政策原文','Read policy text'):t('阅读原文摘录','Read source passage')}</button></article>`;
+    const text=passage(r);
+    return `<article class="research-card">${source(r)}<h3>${esc(title(r))}</h3>${r.version_label?`<p>${esc(r.version_label)}</p>`:''}<blockquote>${esc(text.slice(0,600))}${text.length>600?'…':''}</blockquote>${tags(r)}<button type="button" data-text="${esc(r.text_id)}">${r.document_family?t('阅读政策原文','Read policy text'):t('阅读来源文字','Read source passage')}</button></article>`;
   }
   function detail(id){const r=data.records.find(v=>v.text_id===id)||data.events.flatMap(e=>e.records).find(v=>v.text_id===id);if(!r)return;
     dialog.innerHTML=`<button class="research-close" type="button" aria-label="${t('关闭','Close')}">×</button>${source(r)}<h2>${esc(title(r))}</h2>${tags(r)}<h3>${t('保存的原文摘录','Stored original passage')}</h3><div class="research-original">${esc(r.source_text)}</div><details><summary>${t('文本与标注信息','Text and annotation information')}</summary><dl><dt>SHA-256</dt><dd class="research-hash">${esc(r.text_sha256)}</dd><dt>${t('采集时间','Collected')}</dt><dd>${esc(r.collected_at)}</dd><dt>${t('内容类型','Text type')}</dt><dd>${esc(r.text_kind)}</dd><dt>${t('标注','Annotations')}</dt><dd>${t('词典规则抽取，未逐条人工核验','Dictionary-based extraction; not individually human-verified')}</dd></dl>${[...(r.policy_tools||[]),...(r.policy_stages||[])].map(v=>`<p><strong>${esc(label(v))}</strong> · ${esc(v.evidence)}</p>`).join('')}</details>`;
+    const original=dialog.querySelector('.research-original');
+    original.textContent=passage(r);
+    original.previousElementSibling.textContent=t('来源文字','Source passage');
+    if(passage(r)!==r.source_text){const disclosure=document.createElement('details');const heading=document.createElement('summary');heading.textContent=t('查看原文','View original');const body=document.createElement('div');body.className='research-original';body.textContent=r.source_text;disclosure.append(heading,body);original.after(disclosure);}
     dialog.querySelector('.research-close').onclick=()=>dialog.close();dialog.showModal();}
   dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
   function render(){if(!data)return;
@@ -37,7 +41,7 @@
     host.innerHTML=`<div class="section-heading"><div><p class="overline">RESEARCH & EVIDENCE</p><h2>${t('气候治理研究工具','Climate governance research tools')}</h2></div></div><div class="research-tabs" role="tablist">${tabs.map(([id,zh,eng])=>`<button type="button" role="tab" aria-selected="${tab===id}" data-tab="${id}">${t(zh,eng)}</button>`).join('')}</div><div class="research-filters" ${tab==='methods'?'hidden':''}><input id="researchQuery" value="${esc(query)}" placeholder="${t('检索原文、标题或机构','Search source text, title or institution')}" aria-label="${t('检索','Search')}"><select id="researchCountry" aria-label="${t('国家','Country')}"><option value="">${t('全部国家','All countries')}</option>${ct.map(c=>`<option value="${c.alpha2}" ${country===c.alpha2?'selected':''}>${esc(en()?c.name_en:c.name_zh)} · ${c.alpha3}</option>`).join('')}</select><select id="researchTheme" aria-label="${t('议题','Theme')}"><option value="">${t('全部议题','All themes')}</option>${data.themes.map(v=>`<option value="${v.id}" ${theme===v.id?'selected':''}>${esc(label(v))}</option>`).join('')}</select><select id="researchTrack" aria-label="${t('轨道','Track')}"><option value="">${t('全部轨道','All tracks')}</option><option value="negotiations" ${track==='negotiations'?'selected':''}>${t('谈判相关','Negotiation-related')}</option><option value="action" ${track==='action'?'selected':''}>${t('气候行动','Climate action')}</option></select></div><div id="researchView"></div>`;
     const view=host.querySelector('#researchView');
     const exportButton=document.createElement('button');exportButton.type='button';exportButton.className='research-export';exportButton.hidden=!['events','watch'].includes(tab);const exportRows=selectionRecords();exportButton.disabled=!exportRows.length;exportButton.textContent=t('导出筛选','Export results')+' · '+exportRows.length;host.querySelector('.section-heading').append(exportButton);
-    exportButton.onclick=()=>{const keys=['text_id','title_original','title_zh','source_name','published_at','publisher_url','source_text','text_sha256','rights_status','review_status'];const csv=[keys,...exportRows.map(r=>keys.map(k=>r[k]||''))].map(row=>row.map(csvCell).join(',')).join('\r\n');const file=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const link=document.createElement('a');link.href=URL.createObjectURL(file);link.download='green-source-texts-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),1000);};
+    exportButton.onclick=()=>{const keys=['text_id','title_original','title_zh','title_en','source_name','published_at','publisher_url','country_iso2','theme_ids','language','source_text','source_text_zh','source_text_en','text_sha256','rights_status','review_status','translation_status'];const csv=[keys,...exportRows.map(r=>keys.map(k=>k==='country_iso2'?countries(r).join(';'):k==='theme_ids'?(r.governance_themes||[]).map(v=>v.id).join(';'):r[k]||''))].map(row=>row.map(csvCell).join(',')).join('\r\n');const file=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const link=document.createElement('a');link.href=URL.createObjectURL(file);link.download='green-source-texts-'+new Date().toISOString().slice(0,10)+'.csv';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),1000);};
     host.querySelector('#researchCountry').hidden=tab==='positions';
     host.querySelector('#researchTrack').hidden=tab==='positions';
     if(tab==='events'){
@@ -67,11 +71,15 @@
     host.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;visible=20;render();});
     const search=host.querySelector('#researchQuery');search.onchange=()=>{query=search.value.trim();visible=20;render();};search.addEventListener('keydown',e=>{if(e.key==='Enter'){query=search.value.trim();visible=20;render();}});
     [['researchCountry',v=>country=v],['researchTheme',v=>theme=v],['researchTrack',v=>track=v]].forEach(([id,set])=>host.querySelector('#'+id).onchange=e=>{set(e.target.value);visible=20;render();});
+    if(tab==='events'){
+      const shown=data.events.filter(e=>e.records.some(matches)).slice(0,visible).flatMap(e=>e.records.slice().reverse());
+      view.querySelectorAll('.research-timeline blockquote').forEach((b,i)=>{const value=passage(shown[i]);b.textContent=value.slice(0,300)+(value.length>300?'…':'');});
+    }
     if(tab==='events'||tab==='watch')host.querySelector('.research-more')?.addEventListener('click',()=>{visible+=20;render();});bindDetails();
   }
   function bindDetails(){host.querySelectorAll('[data-text]').forEach(b=>b.onclick=()=>detail(b.dataset.text));}
   document.addEventListener('click',e=>{const button=e.target.closest('[data-research-text]');if(button){e.preventDefault();detail(button.dataset.researchText);}});
   new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   document.querySelectorAll('[data-research-tab]').forEach(a=>a.addEventListener('click',()=>{tab=a.dataset.researchTab;render();}));
-  fetch('./data/research_index.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(String(r.status));return r.json();}).then(v=>{data=v;window.GREEN_RESEARCH={texts:new Map(v.records.map(r=>[r.canonical_url,r])),open:detail};document.dispatchEvent(new CustomEvent('green:research-ready'));render();}).catch(()=>{document.dispatchEvent(new CustomEvent('green:research-unavailable'));host.innerHTML=`<h2>${t('研究工具','Research tools')}</h2><p>${t('语料暂时无法读取，请稍后重试。','Source texts could not be loaded. Please retry later.')}</p><a href="./data/research_texts.jsonl">${t('直接下载语料','Download source texts')}</a>`;});
+  fetch('./data/research_index.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(String(r.status));return r.json();}).then(v=>{const byId=new Map(v.records.map(r=>[r.text_id,r]));v.events.forEach(e=>e.records=e.records.map(r=>byId.get(r.text_id)).filter(Boolean));data=v;window.GREEN_RESEARCH={texts:new Map(v.records.map(r=>[r.canonical_url,r])),open:detail};document.dispatchEvent(new CustomEvent('green:research-ready'));render();}).catch(()=>{document.dispatchEvent(new CustomEvent('green:research-unavailable'));host.innerHTML=`<h2>${t('研究工具','Research tools')}</h2><p>${t('语料暂时无法读取，请稍后重试。','Source texts could not be loaded. Please retry later.')}</p><a href="./data/research_texts.jsonl">${t('直接下载语料','Download source texts')}</a>`;});
 })();

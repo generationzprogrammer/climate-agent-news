@@ -16,11 +16,7 @@ def _enrich_taxonomy(record: dict) -> tuple[dict, bool]:
     metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
     text = f"{text} {metadata.get('title_zh', '')} {metadata.get('summary_zh', '')}"
     expected = {
-        "country_codes": country_codes_for(
-            text,
-            places=list(record.get("places") or []),
-            country_tags=list(record.get("country_tags") or []),
-        ),
+        "country_codes": country_codes_for(' '.join(str(record.get(k) or '') for k in ('title_original','summary_source','source_text'))),
         "organization_tags": organization_tags_for(text),
         "event_tags": event_tags_for(text),
     }

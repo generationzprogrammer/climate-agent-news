@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 test('both corpora render English labels without changing source counts',()=>{
   const source=readFileSync(new URL('../static/app.js',import.meta.url),'utf8').replace(/init\(\)\.catch\([\s\S]*$/, '');
-  const nodes=new Map();const document={body:{dataset:{}},getElementById:id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:''});return nodes.get(id);}};
+  const nodes=new Map();const document={body:{dataset:{}},addEventListener(){},getElementById:id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:''});return nodes.get(id);}};
   const context={document,URL,Intl,Date,console,location:{href:'https://example.org/'}};
   runInNewContext(source+';globalThis.qa={state,renderBarChart,renderHeatmap};',context);
   context.qa.state.language='en';context.qa.state.taxonomy=JSON.parse(readFileSync(new URL('../static/data/taxonomy.json',import.meta.url)));

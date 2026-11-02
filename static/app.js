@@ -24,7 +24,7 @@ const UI_TEXT = {
     navAnalytics: "语料分析", navAssistant: "情报问答", navDatabase: "文本数据库",
     chinaCarbonTitle: "中国碳市场", singaporeTitle: "新加坡气候政策与行动", all: "全部", source: "查看原文 ↗",
     archive: "站内新增", agencyAll: "全部机构", coverage: "官方机构 · 近一年", siteSubtitle: "国际气候情报与文本数据库",
-    team: "团队信息", subscribe: "订阅", download: "下载今日简报", archiveChart: "累计气候文本档案", visitorChart: "累计访客/访问量",
+    team: "团队信息", subscribe: "订阅", download: "下载今日简报", archiveChart: "累计气候语料", visitorChart: "累计访问量",
     todayQueue: "今日队列", thisWeek: "本周", projectIntro: "项目介绍", projectIntroTitle: "项目介绍",
     navCompany: "企业情报", navEnergyReports: "能源报告与数据库", navInnovation: "科产融合", companyIntelligence: "企业情报",
     companyScope: "持续扩展的全球能源企业名录，以及从站内新闻中识别的重大项目、初创企业和企业合作。",
@@ -63,7 +63,7 @@ const UI_TEXT = {
     navBth: "BTH energy statistics", navRenewable: "New energy", navStorage: "Energy storage", navAidc: "AI data centres",
     evidenceRecords: "Three-year evidence", recent30: "Last 30 days", sourceDiversity: "Distinct sources", officialShare: "Official sources", showMoreEvidence: "Show more evidence", showLessEvidence: "Show less",
     archive: "New from archive", agencyAll: "All agencies", coverage: "Official institutions · past 12 months", siteSubtitle: "International climate intelligence and text database",
-    team: "Team", subscribe: "Subscribe", download: "Download today's brief", archiveChart: "Cumulative climate text archive", visitorChart: "Cumulative visits / page views",
+    team: "Team", subscribe: "Subscribe", download: "Download today's brief", archiveChart: "Source-text corpus", visitorChart: "Cumulative page views",
     todayQueue: "Today", thisWeek: "This week", projectIntro: "About", projectIntroTitle: "About the project",
     navCompany: "Companies", navEnergyReports: "Energy reports & data", navInnovation: "Open innovation", companyIntelligence: "Company intelligence",
     companyScope: "A growing directory of global energy companies, projects, start-ups and corporate partnerships identified in the archive.",
@@ -95,6 +95,8 @@ const UI_TEXT = {
   },
 };
 const tr = key => UI_TEXT[state.language]?.[key] || UI_TEXT.zh[key] || key;
+Object.assign(UI_TEXT.zh,{menu:'菜单',closeMenu:'关闭'});
+Object.assign(UI_TEXT.en,{menu:'Menu',closeMenu:'Close'});
 Object.assign(UI_TEXT.zh, {subscribeTitle:"订阅每周气候情报周报",subscribePrivacy:"邮箱仅用于周报订阅，保存在私有订阅服务中。",emailLabel:"邮箱",emailLanguage:"邮件语言"});
 Object.assign(UI_TEXT.en, {subscribeTitle:"Subscribe to the weekly climate briefing",subscribePrivacy:"Your email is stored privately and used only for this subscription.",emailLabel:"Email",emailLanguage:"Email language"});
 const field = (item, zhKey, enKey) => state.language === "en"
@@ -169,7 +171,6 @@ function toast(message) {
   setTimeout(() => element.classList.remove("show"), 3200);
 }
 
-const menuToggleLabel = open => state.language === "en" ? (open ? "Close" : "Menu") : (open ? "关闭" : "菜单");
 
 function closeMobileMenu() {
   const menu = $("mobileMenu");
@@ -177,7 +178,7 @@ function closeMobileMenu() {
   if (!menu || !toggle) return;
   menu.hidden = true;
   toggle.setAttribute("aria-expanded", "false");
-  toggle.textContent = menuToggleLabel(false);
+  toggle.textContent = tr('menu');
 }
 
 function setupMobileMenu() {
@@ -188,7 +189,7 @@ function setupMobileMenu() {
     const opening = menu.hidden;
     menu.hidden = !opening;
     toggle.setAttribute("aria-expanded", String(opening));
-    toggle.textContent = menuToggleLabel(opening);
+    toggle.textContent = tr(opening?'closeMenu':'menu');
   });
   menu.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMobileMenu));
   document.addEventListener("keydown", event => { if (event.key === "Escape") closeMobileMenu(); });
@@ -196,7 +197,7 @@ function setupMobileMenu() {
 }
 
 async function fetchJson(url) {
-  if (COP31_EDITION && /\/(?:energy_[^/]+|national_carbon_market_entities|topic_desks|site_metrics)\.json/.test(url)) return null;
+  if (COP31_EDITION && /\/(?:energy_[^/]+|national_carbon_market_entities|topic_desks)\.json/.test(url)) return null;
   const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) throw new Error(`${response.status} ${url}`);
   return response.json();
@@ -284,6 +285,7 @@ function applyModeCopy() {
   document.body.dataset.mode = state.mode;
   document.body.dataset.language = state.language;
   document.documentElement.lang = state.language === "en" ? "en" : "zh-CN";
+  if($('mobileMenuToggle'))$('mobileMenuToggle').setAttribute('aria-label',state.language==='en'?'Open page navigation':'打开页面导航');
   document.querySelectorAll("[data-i18n]").forEach(element => { element.textContent = tr(element.dataset.i18n); });
   document.querySelectorAll("[data-i18n-placeholder]").forEach(element => { element.placeholder = tr(element.dataset.i18nPlaceholder); });
   const climateBrand = state.mode !== "energy";
@@ -298,7 +300,7 @@ function applyModeCopy() {
   [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => {
     button.textContent = state.language === "en" ? "中文" : "EN";
   });
-  if ($("mobileMenuToggle")) $("mobileMenuToggle").textContent = menuToggleLabel(!$("mobileMenu")?.hidden);
+  if ($("mobileMenuToggle")) $("mobileMenuToggle").textContent = tr($("mobileMenu")?.hidden === false ? "closeMenu" : "menu");
   [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => { button.textContent = copy.button; });
   ["mapOverline", "mapTitle", "heroOverline", "heroLede", "datasetName", "datasetTitle",
     "todayOverline", "todayTitle", "analyticsTitle", "assistantOverline", "assistantTitle",
@@ -824,8 +826,9 @@ function matchesCountry(record, query) {
 
 function renderSiteMetrics() {
   const metrics = state.siteMetrics || {};
-  renderMiniLineChart("archiveGrowthChart", metrics.archive_cumulative || [], "累计气候文本档案曲线");
-  renderMiniLineChart("visitorGrowthChart", metrics.visitor_cumulative || [], "累计访客访问量曲线");
+  renderMiniLineChart("archiveGrowthChart", metrics.archive_cumulative || [], state.language==='en'?'Cumulative source-text records':'累计气候语料');
+  renderMiniLineChart("visitorGrowthChart", metrics.visitor_cumulative || [], state.language==='en'?'Cumulative page views':'累计访问量');
+  for(const [id,series] of [['metricArchiveTotal',metrics.archive_cumulative],['visitorTotal',metrics.visitor_cumulative]])if($(id))$(id).textContent=series?.length?Number(series.at(-1).value).toLocaleString(state.language==='en'?'en-US':'zh-CN'):'—';
 }
 
 function findArchiveRecord(item) {
@@ -874,9 +877,10 @@ function setupFilters() {
 }
 
 function archiveRecords() {
-  if(state.mode !== 'climate' || COP31_EDITION || !state.sourceOnly || !window.GREEN_RESEARCH)return state.archive?.records || [];
+  if(state.mode !== 'climate' || !state.sourceOnly || !window.GREEN_RESEARCH)return state.archive?.records || [];
   return [...window.GREEN_RESEARCH.texts.values()].map(record=>({
     ...record, summary_source:record.source_text,
+    source_text_display:state.language==='en'?(record.source_text_en||record.source_text):(record.source_text_zh||record.summary_zh||''),
     topics:(record.governance_themes||[]).map(item=>state.language==='en'?item.label_en:item.label_zh),
     places:(record.country_codes||[]).filter(item=>typeof item==='object').map(item=>({name_zh:item.name_zh})),
     numbers:(record.quantitative_claims||[]).map(item=>item.value_text),
@@ -885,7 +889,7 @@ function archiveRecords() {
 
 function populateTopicFilter() {
   const controls=$("sourceArchiveModes");
-  if(controls)controls.hidden=state.mode!=='climate'||COP31_EDITION;
+  if(controls)controls.hidden=state.mode!=='climate';
   if($("sourceRecordsMode")){
     $("sourceRecordsMode").textContent=state.language==='en'?'Stored source texts':'原文语料';
     $("metadataRecordsMode").textContent=state.language==='en'?'News metadata archive':'新闻元数据档案';
@@ -905,7 +909,7 @@ function applyFilters() {
   const country = $("countryFilter")?.value || "";
   state.filtered = archiveRecords().filter(record => {
     const haystack = [
-      record.title_zh, record.title_original, record.summary_zh, record.source_name, record.source_text,
+      record.title_zh, record.title_en, record.title_original, record.summary_zh, record.source_name, record.source_text,record.source_text_zh,record.source_text_en,
       ...(record.topics || []), ...(record.places || []).map(place => place.name_zh),
       ...organizationCodes(record), ...(record.event_tags || []),
       ...(record.country_codes || []).flatMap(item => [item.name_zh, item.alpha2, item.alpha3]),
@@ -920,7 +924,7 @@ function applyFilters() {
 }
 
 function renderArchiveRows() {
-  if(state.mode==='climate'&&!COP31_EDITION&&state.sourceOnly&&!window.GREEN_RESEARCH){
+  if(state.mode==='climate'&&state.sourceOnly&&!window.GREEN_RESEARCH){
     $("archiveList").innerHTML=`<p>${state.language==='en'?'Loading stored source texts…':'正在读取原文语料…'}</p>`;
     $("resultCount").textContent='—';return;
   }
@@ -938,7 +942,7 @@ function renderArchiveRows() {
       <div class="archive-title"><h3>${esc(field(record, "title_zh", "title_original"))}</h3>${state.language === "en" ? "" : `<p>${esc(record.title_original)}</p>`}</div>
       <div class="archive-source"><b>${esc(record.source_name)}</b><span>${esc(state.language === "en" ? (state.mode === "energy" ? "Energy technology" : "Climate") : ((record.topics || []).slice(0, 2).join(" · ") || "气候动态"))}</span></div>
       <div class="archive-atoms">${facts.length ? facts.map(fact => `<i>${esc(fact)}</i>`).join("") : ""}<a href="${esc(safeUrl(record.canonical_url))}" target="_blank" rel="noopener noreferrer">${esc(tr("source"))}</a></div>
-      ${window.GREEN_RESEARCH?.texts.has(record.canonical_url) ? `<div class="archive-original">${record.source_text?`<p class="archive-source-excerpt">${esc(record.source_text.slice(0,350))}${record.source_text.length>350?'…':''}</p>`:''}<button type="button" data-research-text="${esc(window.GREEN_RESEARCH.texts.get(record.canonical_url).text_id)}">${state.language === 'en' ? 'Read stored source text' : '阅读已存原文'}</button></div>` : ''}
+      ${window.GREEN_RESEARCH?.texts.has(record.canonical_url) ? `<div class="archive-original">${record.source_text_display?`<p class="archive-source-excerpt">${esc(record.source_text_display.slice(0,420))}${record.source_text_display.length>420?'…':''}</p>`:''}<button type="button" data-research-text="${esc(window.GREEN_RESEARCH.texts.get(record.canonical_url).text_id)}">${state.language === 'en' ? 'Read source passage' : '阅读来源文字'}</button></div>` : ''}
     </article>`;
   }).join("") : `<div class="empty compact"><b>${state.language === "en" ? "No matching records" : "没有匹配记录"}</b><p>${state.language === "en" ? "Try fewer filters or a different search term." : "请减少筛选条件或更换关键词。"}</p></div>`;
   $("loadMore").hidden = state.visible >= state.filtered.length;

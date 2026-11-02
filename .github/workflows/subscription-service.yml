@@ -16,16 +16,17 @@ jobs:
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.BTH_CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLIMATE_PUBLIC_ORIGINS: ${{ vars.CLIMATE_PUBLIC_ORIGINS || 'https://generationzprogrammer.github.io' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - run: node --test tests/subscription-worker.test.mjs tests/subscriptions.test.mjs
+      - run: node --test tests/subscription-worker.test.mjs tests/subscriptions.test.mjs tests/multi-origin.test.mjs
       - name: 保留现有KV并准备备用域名
         run: node scripts/prepare_subscription_deploy.mjs --pages
       - name: 更新订阅Worker（保留现有变量与密钥）
-        run: npm exec --yes --package=wrangler@4 -- wrangler deploy --config .subscription-deploy/wrangler.json --keep-vars
+        run: npm exec --yes --package=wrangler@4 -- wrangler deploy --config .subscription-deploy/wrangler.json --keep-vars --var "CLIMATE_ALLOWED_ORIGIN:$CLIMATE_PUBLIC_ORIGINS"
       - name: 发布备用订阅入口
         run: |
           if [ -f .subscription-deploy/pages-ready ]; then

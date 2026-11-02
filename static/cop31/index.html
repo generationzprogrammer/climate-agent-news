@@ -7,7 +7,7 @@
 <meta content="#fffbf4" name="theme-color"/>
 <meta content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。" name="description"/>
 <title>GREEN · COP31 | 全球气候情报</title>
-<link href="./cop31/cop31.css?v=20261102-db" rel="stylesheet"/>
+<link href="./cop31/cop31.css?v=20261102-merge" rel="stylesheet"/>
 <link href="./cop31/intel.css?v=20261029-lod" rel="stylesheet"/>
 <link href="./cop31/countries.css?v=20261029-menu" rel="stylesheet"/>
 
@@ -68,6 +68,7 @@
 <a class="nav-countries" href="./cop31/#countries">国家专题</a>
 <div class="topic-nav" hidden=""><span class="rail-sub" data-i18n="navFocus">专题</span><div><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a></div></div>
 <a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a>
+<a class="nav-research" href="./cop31/#research">研究工具</a>
 <a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a>
 <a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 <a class="menu-home" href="./cop31/#top">返回首页</a>
@@ -81,9 +82,9 @@
 <!-- Section reel: labels reuse the navigation text (data-i18n), ticks mark progress. -->
 <div class="reel" role="group">
 <div class="reel-viewport"><div class="reel-track">
-<button data-i18n="navMap" data-reel="map" type="button">全球现场</button><button data-i18n="navToday" data-reel="today" type="button">今日情报</button><button class="nav-countries" data-reel="countries" type="button">国家专题</button><button data-i18n="navAnalytics" data-reel="analytics" type="button">数据统计</button><button data-i18n="navAssistant" data-reel="assistant" type="button">情报问答</button><button data-i18n="navDatabase" data-reel="database" type="button">文本数据库</button>
+<button data-i18n="navMap" data-reel="map" type="button">全球现场</button><button data-i18n="navToday" data-reel="today" type="button">今日情报</button><button class="nav-countries" data-reel="countries" type="button">国家专题</button><button data-i18n="navAnalytics" data-reel="analytics" type="button">数据统计</button><button class="nav-research" data-reel="research" type="button">研究工具</button><button data-i18n="navAssistant" data-reel="assistant" type="button">情报问答</button><button data-i18n="navDatabase" data-reel="database" type="button">文本数据库</button>
 </div></div>
-<span aria-hidden="true" class="reel-ticks"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+<span aria-hidden="true" class="reel-ticks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
 </div>
 <div class="reel-steps"><button aria-label="上一节" data-reel-step="-1" type="button">↑</button><button aria-label="下一节" data-reel-step="1" type="button">↓</button></div>
 </div>
@@ -91,7 +92,7 @@
 <div class="sheet">
 <span aria-hidden="true" class="sheet-handle"></span>
 <nav>
-<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日情报</a><a class="nav-countries" href="./cop31/#countries">国家专题</a><a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a><a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
+<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日情报</a><a class="nav-countries" href="./cop31/#countries">国家专题</a><a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a><a class="nav-research" href="./cop31/#research">研究工具</a><a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 </nav>
 <div class="mobile-menu-actions">
 <button class="project-intro-link" data-i18n="projectIntro" data-open-project="" type="button">项目介绍</button>
@@ -223,6 +224,16 @@
 <div class="skeleton"></div>
 </div>
 <div class="analytics-grid">
+<section aria-label="站点更新曲线" class="metrics-strip" id="siteMetrics">
+<article class="chart-card mini-chart-card">
+<div class="chart-heading"><span>TEXT ARCHIVE</span><h3 data-i18n="archiveChart">累计气候语料</h3><b class="metric-total" id="metricArchiveTotal">—</b></div>
+<div class="chart-box mini-chart" id="archiveGrowthChart"><div class="skeleton small"></div></div>
+</article>
+<article class="chart-card mini-chart-card">
+<div class="chart-heading"><span>SITE TRAFFIC</span><h3 data-i18n="visitorChart">累计访问量</h3><b class="metric-total" id="visitorTotal">—</b></div>
+<div class="chart-box mini-chart" id="visitorGrowthChart"><div class="skeleton small"></div></div>
+</article>
+</section>
 <article class="chart-card wide">
 <div class="chart-heading"><span>MONTHLY FREQUENCY</span><h3 data-i18n="monthlyFrequency">月度文本频率</h3><p data-i18n="monthlyFrequencyNote">按发布时间聚合；用于观察议题热度和采集覆盖的时间变化。</p></div>
 <div class="chart-box" id="monthlyTrendChart"></div>
@@ -251,6 +262,7 @@
 <p class="analytics-note" id="analyticsNote">正在读取语料库统计文件…</p>
 </section>
 
+<section class="section research-section" id="research"></section>
 <section class="section assistant-section" id="assistant">
 <div class="section-heading">
 <div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 class="ink" id="assistantTitle">气候情报问答</h2></div>
@@ -284,6 +296,7 @@
 <div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 class="ink" id="databaseTitle">气候新闻文本数据库</h2></div>
 </div>
 <div class="data-export" hidden="" id="dataExport"></div>
+<div class="source-archive-modes" id="sourceArchiveModes"><button aria-pressed="true" id="sourceRecordsMode" type="button">原文语料</button><button aria-pressed="false" id="metadataRecordsMode" type="button">新闻元数据档案</button></div>
 <div class="search-panel">
 <label class="search-box">
 <span data-i18n="search">检索</span>
@@ -302,16 +315,6 @@
 </section>
 
 <!-- Main-site modules that the COP31 edition keeps hidden. app.js still addresses these IDs, so they stay in the DOM. -->
-<section aria-label="站点更新曲线" class="metrics-strip" data-cop31-excluded="" hidden="">
-<article class="mini-chart-card">
-<div><span>TEXT ARCHIVE</span><h2 data-i18n="archiveChart">累计气候文本档案</h2></div>
-<div class="mini-chart" id="archiveGrowthChart"><div class="skeleton small"></div></div>
-</article>
-<article class="mini-chart-card">
-<div><span>SITE TRAFFIC</span><h2 data-i18n="visitorChart">累计访客/访问量</h2></div>
-<div class="mini-chart" id="visitorGrowthChart"><div class="skeleton small"></div></div>
-</article>
-</section>
 <div data-cop31-excluded="" hidden="" id="topicDeskList"></div>
 <section class="section company-section" data-cop31-excluded="" hidden="" id="companies">
 <div class="section-heading">
@@ -442,10 +445,11 @@
 
 <script defer="" src="./bth-transport.js?v=20261011-1"></script>
 <script defer="" src="./subscriptions.js?v=20261027-languages"></script>
-<script defer="" src="./app.js?v=20261029-brand"></script>
+<script defer="" src="./app.js?v=20261102-merge"></script>
+<script defer="" src="./research.js?v=20261102-bilingual-2"></script>
 <script defer="" src="./cop31/motion-kit.js?v=20261028-paper"></script>
 <script defer="" src="./cop31/intel.js?v=20261029-lod"></script>
-<script defer="" src="./cop31/cop31.js?v=20261029-toast"></script>
+<script defer="" src="./cop31/cop31.js?v=20261102-merge"></script>
 <script defer="" src="./cop31/globe.js?v=20261029-plate"></script>
 <script defer="" src="./cop31/countries.js?v=20261029-cut"></script>
 <script defer="" src="./cop31/downloads.js?v=20261102-db"></script>

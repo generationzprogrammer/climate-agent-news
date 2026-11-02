@@ -18,6 +18,11 @@ on:
       - "data/research_releases/**"
   workflow_dispatch:
     inputs:
+      translate_research:
+        description: "补齐历史语料中英译文（独立300请求每日上限）"
+        required: false
+        default: false
+        type: boolean
       send_notification:
         description: "部署成功后发送企业微信或邮件提醒"
         required: false
@@ -43,7 +48,7 @@ permissions:
 
 concurrency:
   group: climate-text-pages
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[replace-backfill]') }}
 
 jobs:
   build:
@@ -67,7 +72,10 @@ jobs:
       - name: 恢复当日模型请求计数
         uses: actions/cache/restore@v4
         with:
-          path: data/model_usage.json
+          path: |
+            data/model_usage.json
+            data/research_translation_usage.json
+            data/research_translations.jsonl.gz
           key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: model-usage-${{ steps.model_quota.outputs.day }}-
       - name: 增量采集、中文编译与质量门禁
@@ -77,6 +85,7 @@ jobs:
           CLIMATE_MAX_STALE_DAYS: "2"
           # UI/service-only changes reuse the latest archive; daily schedules still crawl.
           CLIMATE_SITE_ONLY: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[site-only]') }}
+          CLIMATE_RESEARCH_BACKFILL: ${{ inputs.translate_research == true || (github.event_name == 'push' && contains(github.event.head_commit.message, '[research-backfill]')) }}
           # Code pushes run a one-time wider translation pass so newly added
           # regional sources can repair the current seven-day balance. The
           # 12 daily items, including COP priorities: bounded 32-record processing
@@ -107,6 +116,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_ANALYTICS_API_TOKEN: ${{ secrets.CLOUDFLARE_ANALYTICS_API_TOKEN }}
           CLIMATE_SITE_HOSTNAME: generationzprogrammer.github.io
+          CLIMATE_SITE_HOSTNAMES: ${{ vars.CLIMATE_SITE_HOSTNAMES || 'generationzprogrammer.github.io' }}
           BTH_ASSISTANT_ENDPOINT: ${{ vars.BTH_ASSISTANT_ENDPOINT }}
           BTH_TURNSTILE_SITE_KEY: ${{ vars.BTH_TURNSTILE_SITE_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
@@ -122,11 +132,18 @@ jobs:
             if [ -n "$CLIMATE_MODEL_API_KEY" ]; then
               python -m climate_agent.cli translate --limit 12
             fi
-          else
-            # Registry/site-only publication never calls model APIs; scheduled
-            # news updates still use the configured shared request budget.
-            unset CLIMATE_MODEL_API_KEY
           fi
+          if [ -n "$CLIMATE_MODEL_API_KEY" ]; then
+            if [ "$CLIMATE_RESEARCH_BACKFILL" = "true" ]; then
+              python scripts/translate_research_texts.py --max-requests 280 --workers 4
+              python scripts/update_research_corpus.py --fetch-limit 0 --freeze
+            elif [ "$CLIMATE_SITE_ONLY" != "true" ] && [ "${{ github.event_name }}" != "workflow_run" ]; then
+              python scripts/translate_research_texts.py --max-requests 4 --workers 2
+            fi
+          fi
+          # Export is deterministic/offline. Translation is confined to the
+          # explicit bounded phases above, never secretly called by a renderer.
+          unset CLIMATE_MODEL_API_KEY
           python -m climate_agent.cli export-web --output site --archive-limit 100000
           python scripts/build_innovation_live_figures.py --site site
           if [ "${{ github.event_name }}" != "workflow_run" ]; then
@@ -137,7 +154,10 @@ jobs:
         if: ${{ always() && hashFiles('data/model_usage.json') != '' }}
         uses: actions/cache/save@v4
         with:
-          path: data/model_usage.json
+          path: |
+            data/model_usage.json
+            data/research_translation_usage.json
+            data/research_translations.jsonl.gz
           key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
       - name: 保存滚动档案与来源健康状态
         if: ${{ github.event_name != 'workflow_run' }}
@@ -186,6 +206,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
+      - name: 同步阿里云正式网站 配置后启用
+        if: ${{ vars.ALIYUN_OSS_DEPLOY == 'true' }}
+        env:
+          ALIYUN_OSS_BUCKET: ${{ vars.ALIYUN_OSS_BUCKET }}
+          ALIYUN_OSS_ENDPOINT: ${{ vars.ALIYUN_OSS_ENDPOINT }}
+          ALIYUN_OSS_REGION: ${{ vars.ALIYUN_OSS_REGION }}
+          ALIYUN_WEB_ANALYTICS_SITE_TOKEN: ${{ vars.ALIYUN_WEB_ANALYTICS_SITE_TOKEN }}
+          ALIYUN_OSS_ACCESS_KEY_ID: ${{ secrets.ALIYUN_OSS_ACCESS_KEY_ID }}
+          ALIYUN_OSS_ACCESS_KEY_SECRET: ${{ secrets.ALIYUN_OSS_ACCESS_KEY_SECRET }}
+        run: |
+          python -m pip install 'oss2>=2.19,<3'
+          python scripts/deploy_aliyun_oss.py --site site
 
   deploy:
     runs-on: ubuntu-latest
