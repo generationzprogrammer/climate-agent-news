@@ -66,6 +66,21 @@ class ResearchExpansionTests(unittest.TestCase):
             result=translate_corpus(root,Model(),max_requests=20)
             self.assertEqual(result['batches_completed'],1);self.assertEqual(result['pending_records'],1)
             self.assertEqual(load_jsonl(root/'data/research_texts.jsonl')[0]['source_text'],TEXT)
+    def test_list_model_response_is_accepted_without_crashing(self):
+        class Model:
+            base_url='https://generativelanguage.googleapis.com/v1beta/openai';model='gemini-3.5-flash-lite';timeout=1
+            def complete_json(self,system,payload):return [{'id':r['id'],'title_zh':'美国批准气候适应资金','text_zh':ZH} for r in payload['items']]
+        with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{},clear=False):
+            root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',[record()])
+            result=translate_corpus(root,Model(),max_requests=1)
+            self.assertEqual(result['bilingual_ready'],1)
+    def test_invalid_response_shape_stays_pending(self):
+        class Model:
+            base_url='https://generativelanguage.googleapis.com/v1beta/openai';model='gemini-3.5-flash-lite';timeout=1
+            def complete_json(self,*args):return 'invalid'
+        with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{},clear=False):
+            root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',[record()])
+            self.assertEqual(translate_corpus(root,Model(),max_requests=1)['pending_records'],1)
     def test_metric_counts_real_texts_not_metadata(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',[record()])
