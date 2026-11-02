@@ -24,6 +24,7 @@ from .bth_assistant import write_assistant_assets
 from .cop31_site import write_cop31_entry
 from .english_brief import enrich_daily_english
 from .research import write_research
+from .stance_pilot import write_stance_pilot
 
 
 def _inject_cloudflare_beacon(index_path: Path, token: str) -> bool:
@@ -172,6 +173,7 @@ def export_static_site(
         write_energy_corpus_analytics(corpus_path, data_dir / "energy_corpus_analytics.json", manifest_path)
     research_root = db.path.parent.parent if db.path.parent.name == 'data' else db.path.parent
     research = write_research(research_root, db, data_dir)
+    write_stance_pilot(research_root, data_dir)
     site_metrics = write_site_metrics(corpus_path, db.path.parent / "visitor_history.json", data_dir / "site_metrics.json")
     for history_name in ("climate_text_corpus.jsonl", "climate_text_corpus.manifest.json"):
         history_path = db.path.parent / history_name

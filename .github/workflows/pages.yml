@@ -14,12 +14,13 @@ on:
       - "data/energy_reports.json"
       - "data/visitor_history.json"
       - "data/model_usage.json"
+      - "data/stance_candidates.jsonl"
       - "data/research_*.json*"
       - "data/research_releases/**"
   workflow_dispatch:
     inputs:
       translate_research:
-        description: "补齐历史语料中英译文（独立300请求每日上限）"
+        description: "补齐历史语料中英译文（独立400请求每日上限）"
         required: false
         default: false
         type: boolean
@@ -76,6 +77,7 @@ jobs:
             data/model_usage.json
             data/research_translation_usage.json
             data/research_translations.jsonl.gz
+            data/research_translation_attempts.json
           key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: model-usage-${{ steps.model_quota.outputs.day }}-
       - name: 增量采集、中文编译与质量门禁
@@ -86,6 +88,7 @@ jobs:
           # UI/service-only changes reuse the latest archive; daily schedules still crawl.
           CLIMATE_SITE_ONLY: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[site-only]') }}
           CLIMATE_RESEARCH_BACKFILL: ${{ inputs.translate_research == true || (github.event_name == 'push' && contains(github.event.head_commit.message, '[research-backfill]')) }}
+          CLIMATE_RESEARCH_DIAGNOSTIC: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[research-diagnostic]') }}
           # Code pushes run a one-time wider translation pass so newly added
           # regional sources can repair the current seven-day balance. The
           # 12 daily items, including COP priorities: bounded 32-record processing
@@ -135,14 +138,21 @@ jobs:
           fi
           if [ -n "$CLIMATE_MODEL_API_KEY" ]; then
             if [ "$CLIMATE_RESEARCH_BACKFILL" = "true" ]; then
-              python scripts/translate_research_texts.py --max-requests 280 --workers 4
+              if [ "$CLIMATE_RESEARCH_DIAGNOSTIC" = "true" ]; then
+                python scripts/translate_research_texts.py --max-requests 1 --workers 1
+              else
+                python scripts/translate_research_texts.py --max-requests 280 --workers 4
+              fi
               python scripts/update_research_corpus.py --fetch-limit 0 --freeze
             elif [ "$CLIMATE_SITE_ONLY" != "true" ] && [ "${{ github.event_name }}" != "workflow_run" ]; then
-              python scripts/translate_research_texts.py --max-requests 4 --workers 2
+              python scripts/translate_research_texts.py --max-requests 8 --workers 2
             fi
           fi
           # Export is deterministic/offline. Translation is confined to the
           # explicit bounded phases above, never secretly called by a renderer.
+          if [ -n "$CLIMATE_MODEL_API_KEY" ] && [ "$CLIMATE_SITE_ONLY" != "true" ] && [ "${{ github.event_name }}" != "workflow_run" ]; then
+            python scripts/update_stance_pilot.py --max-requests 2
+          fi
           unset CLIMATE_MODEL_API_KEY
           python -m climate_agent.cli export-web --output site --archive-limit 100000
           python scripts/build_innovation_live_figures.py --site site
@@ -150,6 +160,13 @@ jobs:
             python -m climate_agent.cli validate-publish --site site
           fi
           cp site/data/news_archive.json data/news_archive.json
+      - name: 保存未通过译文检查的诊断样本 不作为公开语料
+        if: ${{ always() && hashFiles('.research_review/rejected.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-translation-review
+          path: .research_review/rejected.json
+          retention-days: 7
       - name: 保留模型请求计数 包括质量门禁失败的运行
         if: ${{ always() && hashFiles('data/model_usage.json') != '' }}
         uses: actions/cache/save@v4
@@ -158,6 +175,7 @@ jobs:
             data/model_usage.json
             data/research_translation_usage.json
             data/research_translations.jsonl.gz
+            data/research_translation_attempts.json
           key: model-usage-${{ steps.model_quota.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
       - name: 保存滚动档案与来源健康状态
         if: ${{ github.event_name != 'workflow_run' }}
@@ -167,6 +185,7 @@ jobs:
           git config user.email "climate-text-bot@users.noreply.github.com"
           git add data/climate.db data/news_archive.json data/source_health.json data/climate_text_corpus.jsonl data/climate_text_corpus.manifest.json data/energy_reports.json
           if [ -f data/model_usage.json ]; then git add data/model_usage.json; fi
+          if [ -f data/stance_candidates.jsonl ]; then git add data/stance_candidates.jsonl; fi
           if [ -f data/research_texts.jsonl.gz ]; then git add data/research_*.json data/research_*.jsonl.gz; fi
           if [ -d data/research_releases ]; then git add data/research_releases; fi
           if [ -f data/visitor_history.json ]; then

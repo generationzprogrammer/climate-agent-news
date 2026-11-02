@@ -1,0 +1,458 @@
+{
+  "version": "1.1.0",
+  "actors": [
+    {
+      "id": "CN",
+      "name_zh": "中国",
+      "name_en": "China",
+      "flag": "🇨🇳",
+      "kind": "country",
+      "aliases": [
+        "China",
+        "中国"
+      ],
+      "official_hosts": [
+        "mee.gov.cn",
+        "gov.cn",
+        "scio.gov.cn"
+      ]
+    },
+    {
+      "id": "US",
+      "name_zh": "美国",
+      "name_en": "United States",
+      "flag": "🇺🇸",
+      "kind": "country",
+      "aliases": [
+        "United States",
+        "美国",
+        "U.S."
+      ],
+      "official_hosts": [
+        "whitehouse.gov",
+        "state.gov",
+        "treasury.gov",
+        "govinfo.gov"
+      ]
+    },
+    {
+      "id": "EU",
+      "name_zh": "欧盟",
+      "name_en": "European Union",
+      "flag": "🇪🇺",
+      "kind": "regional_organization",
+      "aliases": [
+        "European Union",
+        "EU",
+        "欧盟"
+      ],
+      "official_hosts": [
+        "consilium.europa.eu",
+        "climate.ec.europa.eu",
+        "commission.europa.eu",
+        "eur-lex.europa.eu"
+      ]
+    },
+    {
+      "id": "GB",
+      "name_zh": "英国",
+      "name_en": "United Kingdom",
+      "flag": "🇬🇧",
+      "kind": "country",
+      "aliases": [
+        "United Kingdom",
+        "UK",
+        "英国"
+      ],
+      "official_hosts": [
+        "gov.uk"
+      ]
+    },
+    {
+      "id": "IN",
+      "name_zh": "印度",
+      "name_en": "India",
+      "flag": "🇮🇳",
+      "kind": "country",
+      "aliases": [
+        "India",
+        "印度"
+      ],
+      "official_hosts": [
+        "pib.gov.in",
+        "moef.gov.in"
+      ]
+    },
+    {
+      "id": "BR",
+      "name_zh": "巴西",
+      "name_en": "Brazil",
+      "flag": "🇧🇷",
+      "kind": "country",
+      "aliases": [
+        "Brazil",
+        "Brasil",
+        "巴西"
+      ],
+      "official_hosts": [
+        "gov.br",
+        "cop30.br"
+      ]
+    },
+    {
+      "id": "G77",
+      "name_zh": "七十七国集团和中国",
+      "name_en": "G77 and China",
+      "flag": "G77",
+      "kind": "negotiating_group",
+      "aliases": [
+        "G77",
+        "Group of 77",
+        "七十七国集团"
+      ],
+      "official_hosts": [
+        "g77.org"
+      ]
+    },
+    {
+      "id": "AU",
+      "name_zh": "澳大利亚",
+      "name_en": "Australia",
+      "kind": "country",
+      "aliases": [
+        "Australia",
+        "澳大利亚"
+      ],
+      "official_hosts": [
+        "dcceew.gov.au",
+        "pm.gov.au",
+        "minister.dcceew.gov.au"
+      ]
+    },
+    {
+      "id": "JP",
+      "name_zh": "日本",
+      "name_en": "Japan",
+      "kind": "country",
+      "aliases": [
+        "Japan",
+        "日本"
+      ],
+      "official_hosts": [
+        "mofa.go.jp",
+        "env.go.jp",
+        "unfccc.int"
+      ]
+    },
+    {
+      "id": "ZA",
+      "name_zh": "南非",
+      "name_en": "South Africa",
+      "kind": "country",
+      "aliases": [
+        "South Africa",
+        "南非"
+      ],
+      "official_hosts": [
+        "gov.za",
+        "thepresidency.gov.za",
+        "presidency.gov.za"
+      ]
+    },
+    {
+      "id": "BASIC",
+      "name_zh": "基础四国",
+      "name_en": "BASIC",
+      "kind": "negotiating_group",
+      "aliases": [
+        "BASIC",
+        "基础四国"
+      ],
+      "official_hosts": [
+        "pib.gov.in"
+      ]
+    },
+    {
+      "id": "LMDC",
+      "name_zh": "立场相近发展中国家集团",
+      "name_en": "Like-Minded Developing Countries",
+      "kind": "negotiating_group",
+      "aliases": [
+        "LMDC",
+        "立场相近发展中国家集团"
+      ],
+      "official_hosts": [
+        "pib.gov.in"
+      ]
+    }
+  ],
+  "topics": [
+    {
+      "id": "finance",
+      "name_zh": "气候资金",
+      "name_en": "Climate finance"
+    },
+    {
+      "id": "carbon_markets",
+      "name_zh": "碳市场",
+      "name_en": "Carbon markets"
+    },
+    {
+      "id": "adaptation",
+      "name_zh": "适应与韧性",
+      "name_en": "Adaptation and resilience"
+    },
+    {
+      "id": "mitigation",
+      "name_zh": "减缓与减排",
+      "name_en": "Mitigation"
+    },
+    {
+      "id": "loss_damage",
+      "name_zh": "损失与损害",
+      "name_en": "Loss and damage"
+    },
+    {
+      "id": "energy",
+      "name_zh": "能源与产业",
+      "name_en": "Energy and industry"
+    },
+    {
+      "id": "justice",
+      "name_zh": "公正转型",
+      "name_en": "Just transition"
+    },
+    {
+      "id": "transparency",
+      "name_zh": "透明度与核查",
+      "name_en": "Transparency and reporting"
+    },
+    {
+      "id": "science",
+      "name_zh": "气候科学与风险",
+      "name_en": "Climate science and risk"
+    },
+    {
+      "id": "fossil",
+      "name_zh": "化石能源转型",
+      "name_en": "Fossil-fuel transition"
+    }
+  ],
+  "propositions": [
+    {
+      "id": "finance_delivery",
+      "topic": "finance",
+      "name_zh": "扩大并落实对发展中国家的资金支持",
+      "name_en": "Scale up and deliver finance for developing countries"
+    },
+    {
+      "id": "finance_grants",
+      "topic": "finance",
+      "name_zh": "采用赠款与高度优惠资金",
+      "name_en": "Use grants and highly concessional finance"
+    },
+    {
+      "id": "finance_goal",
+      "topic": "finance",
+      "name_zh": "对COP29新资金目标的评价",
+      "name_en": "Assessment of the COP29 finance goal"
+    },
+    {
+      "id": "market_article6",
+      "topic": "carbon_markets",
+      "name_zh": "推进巴黎协定第六条跨境合作",
+      "name_en": "Advance cross-border cooperation under Paris Agreement Article 6"
+    },
+    {
+      "id": "market_integrity",
+      "topic": "carbon_markets",
+      "name_zh": "自愿碳信用须额外补充自身减排",
+      "name_en": "Voluntary credits must supplement own emission reductions"
+    },
+    {
+      "id": "market_coordination",
+      "topic": "carbon_markets",
+      "name_zh": "推进受监管碳市场规则合作",
+      "name_en": "Cooperate on compliance carbon-market rules"
+    },
+    {
+      "id": "fossil_transition",
+      "topic": "fossil",
+      "name_zh": "制定公正有序的化石能源转型路径",
+      "name_en": "Develop fair and orderly pathways away from fossil fuels"
+    },
+    {
+      "id": "fossil_subsidies",
+      "topic": "fossil",
+      "name_zh": "改革低效化石能源补贴",
+      "name_en": "Reform inefficient fossil-fuel subsidies"
+    },
+    {
+      "id": "fossil_production",
+      "topic": "fossil",
+      "name_zh": "扩大化石能源开发与供给",
+      "name_en": "Expand fossil-fuel development and supply"
+    },
+    {
+      "id": "adaptation_plans",
+      "topic": "adaptation",
+      "name_zh": "制定并实施国家适应规划",
+      "name_en": "Develop and implement national adaptation plans"
+    },
+    {
+      "id": "adaptation_indicators",
+      "topic": "adaptation",
+      "name_zh": "完善全球适应目标及其指标",
+      "name_en": "Develop the global goal on adaptation and its indicators"
+    },
+    {
+      "id": "adaptation_warning",
+      "topic": "adaptation",
+      "name_zh": "扩大气候灾害预警与韧性建设",
+      "name_en": "Expand early warnings and climate resilience"
+    },
+    {
+      "id": "mitigation_ndc",
+      "topic": "mitigation",
+      "name_zh": "提高并落实国家减排目标",
+      "name_en": "Raise and implement national emission-reduction targets"
+    },
+    {
+      "id": "mitigation_netzero",
+      "topic": "mitigation",
+      "name_zh": "推进净零或碳中和目标",
+      "name_en": "Advance net-zero or carbon-neutrality goals"
+    },
+    {
+      "id": "mitigation_methane",
+      "topic": "mitigation",
+      "name_zh": "减少甲烷等非二氧化碳排放",
+      "name_en": "Reduce methane and other non-CO2 emissions"
+    },
+    {
+      "id": "loss_fund",
+      "topic": "loss_damage",
+      "name_zh": "支持损失与损害基金及资金安排",
+      "name_en": "Support the loss-and-damage fund and funding arrangements"
+    },
+    {
+      "id": "loss_support",
+      "topic": "loss_damage",
+      "name_zh": "加强脆弱国家损失与损害应对",
+      "name_en": "Strengthen responses to loss and damage in vulnerable countries"
+    },
+    {
+      "id": "energy_clean",
+      "topic": "energy",
+      "name_zh": "扩大清洁电力与可再生能源",
+      "name_en": "Expand clean power and renewable energy"
+    },
+    {
+      "id": "energy_efficiency",
+      "topic": "energy",
+      "name_zh": "提高能源利用效率",
+      "name_en": "Improve energy efficiency"
+    },
+    {
+      "id": "energy_technology",
+      "topic": "energy",
+      "name_zh": "推进低碳技术与产业合作",
+      "name_en": "Advance low-carbon technology and industrial cooperation"
+    },
+    {
+      "id": "justice_workers",
+      "topic": "justice",
+      "name_zh": "保障转型中的劳动者和社区",
+      "name_en": "Protect workers and communities in the transition"
+    },
+    {
+      "id": "justice_equity",
+      "topic": "justice",
+      "name_zh": "坚持公平及共同但有区别的责任",
+      "name_en": "Apply equity and common but differentiated responsibilities"
+    },
+    {
+      "id": "justice_trade",
+      "topic": "justice",
+      "name_zh": "反对妨碍气候合作的单边贸易措施",
+      "name_en": "Oppose unilateral trade measures that obstruct climate cooperation"
+    },
+    {
+      "id": "justice_participation",
+      "topic": "justice",
+      "name_zh": "扩大公众与弱势群体参与",
+      "name_en": "Broaden public and vulnerable-group participation"
+    },
+    {
+      "id": "transparency_reports",
+      "topic": "transparency",
+      "name_zh": "提交排放清单与透明度报告",
+      "name_en": "Submit emission inventories and transparency reports"
+    },
+    {
+      "id": "transparency_methods",
+      "topic": "transparency",
+      "name_zh": "完善排放核算与核查方法",
+      "name_en": "Improve emission-accounting and verification methods"
+    },
+    {
+      "id": "transparency_capacity",
+      "topic": "transparency",
+      "name_zh": "支持透明度能力建设",
+      "name_en": "Support transparency capacity building"
+    },
+    {
+      "id": "science_ipcc",
+      "topic": "science",
+      "name_zh": "以气候科学评估支持决策",
+      "name_en": "Use climate-science assessments in decision-making"
+    },
+    {
+      "id": "science_risk",
+      "topic": "science",
+      "name_zh": "开展气候风险评估与防范",
+      "name_en": "Assess and manage climate risks"
+    },
+    {
+      "id": "mitigation_paris",
+      "topic": "mitigation",
+      "name_zh": "参与巴黎协定减排合作框架",
+      "name_en": "Participate in the Paris Agreement mitigation framework"
+    },
+    {
+      "id": "energy_wind",
+      "topic": "energy",
+      "name_zh": "推进风电开发与审批",
+      "name_en": "Advance wind development and permitting"
+    }
+  ],
+  "stances": [
+    {
+      "id": "support",
+      "name_zh": "支持",
+      "name_en": "Supports"
+    },
+    {
+      "id": "oppose",
+      "name_zh": "不支持",
+      "name_en": "Opposes"
+    },
+    {
+      "id": "qualified",
+      "name_zh": "附有条件或保留意见",
+      "name_en": "Conditions or reservations"
+    },
+    {
+      "id": "mixed",
+      "name_zh": "存在不同表述",
+      "name_en": "Differing statements"
+    },
+    {
+      "id": "insufficient",
+      "name_zh": "证据不足",
+      "name_en": "Insufficient evidence"
+    }
+  ],
+  "scope_zh": "仅比较所列具体主张的有日期表态，不据此推断国家整体态度。",
+  "scope_en": "Compare dated statements on the specified propositions, not a country's overall attitude."
+}

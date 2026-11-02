@@ -48,7 +48,13 @@ class ResearchExpansionTests(unittest.TestCase):
         self.assertEqual(numeric_values('2 billion'),numeric_values('20亿美元'))
         self.assertEqual(numeric_values('69bn rupees'),numeric_values('690亿卢比'))
         self.assertEqual(numeric_values('$3m'),numeric_values('300万美元'))
+        self.assertEqual(numeric_values('$2b'),numeric_values('20亿美元'))
         self.assertEqual(numeric_values('3–4 million tonnes'),numeric_values('300万至400万吨'))
+        self.assertEqual(numeric_values('2 GW'),numeric_values('2000兆瓦'))
+        self.assertEqual(numeric_values('2 GW'),numeric_values('200万千瓦'))
+        self.assertEqual(numeric_values('40 GtCO2'),numeric_values('400亿吨二氧化碳'))
+        self.assertEqual(numeric_values('1–2 GW'),numeric_values('10亿至20亿瓦'))
+        self.assertNotEqual(numeric_values('2 GW'),numeric_values('2 MW'))
         self.assertTrue(valid_translation(TEXT,ZH,'zh'))
         self.assertFalse(valid_translation(TEXT,ZH.replace('2027','2028'),'zh'))
     def test_translation_keeps_english_original_and_is_cached(self):
@@ -57,10 +63,30 @@ class ResearchExpansionTests(unittest.TestCase):
         self.assertEqual(apply_translations([row],cache,expected),1)
         self.assertEqual(row['source_text'],TEXT);self.assertEqual(row['source_text_en'],TEXT)
         self.assertEqual(row['source_text_zh'],ZH);self.assertFalse(_tasks([row],cache)[0])
+    def test_typography_and_contextual_million_are_equivalent(self):
+        self.assertEqual(numeric_values('CO 2 emissions: 450m tonnes'),numeric_values('二氧化碳排放：4.5亿吨'))
+        self.assertEqual(numeric_values('210m barrels'),numeric_values('2.1亿桶'))
+        self.assertEqual(numeric_values('210m additional barrels'),numeric_values('2.1亿桶'))
+        self.assertEqual(numeric_values('700 -megawatt 250 -MW'),numeric_values('700兆瓦250兆瓦'))
+        self.assertEqual(numeric_values('700-megawatt 250-MW'),numeric_values('700兆瓦250兆瓦'))
+        self.assertEqual(numeric_values('135 kph'),numeric_values('每小时135公里'))
+        self.assertEqual(numeric_values('135kph'),numeric_values('每小时135公里'))
+        self.assertEqual(numeric_values('111 . 5 million'),numeric_values('1.115亿美元'))
+        self.assertNotEqual(numeric_values('$ 500 , 000'),numeric_values('5万美元'))
+        self.assertEqual(numeric_values('17.59m square kilometres'),numeric_values('1759万平方公里'))
+        self.assertEqual(numeric_values('2m sea level'),{2})
+        self.assertTrue(valid_translation('The 20th annual climate meeting was held in 2026.','第二十届年度气候会议于2026年举行。','zh'))
+        self.assertTrue(valid_translation('Wildfire frequency increased in the 1970s.','野火发生频率在20世纪70年代有所上升。','zh'))
     def test_source_change_invalidates_cache(self):
         row=record();tasks,_=_tasks([row],{});cache={tasks[0]['id']:True}
         row['source_text']+=' More evidence.';row['text_sha256']=hashlib.sha256(row['source_text'].encode()).hexdigest()
         self.assertTrue(_tasks([row],cache)[0])
+    def test_cached_wrong_capacity_unit_is_rejected(self):
+        row=record();row['source_text']='Installed renewable power capacity is 2 GW.';row['text_sha256']=hashlib.sha256(row['source_text'].encode()).hexdigest()
+        tasks,expected=_tasks([row],{});cache={tasks[0]['id']:{'title_zh':'装机规模','text_zh':'可再生能源发电装机规模为2兆瓦。'}}
+        tasks,expected=_tasks([row],cache);self.assertEqual(len(tasks),1);self.assertFalse(cache)
+        row['source_text_zh']='旧错误译文';apply_translations([row],cache,expected)
+        self.assertNotIn('source_text_zh',row);self.assertEqual(row['source_text_en'],row['source_text'])
     def test_unverified_paid_backend_is_not_used_for_bulk(self):
         model=SimpleNamespace(base_url='https://paid.example',model='unknown')
         with tempfile.TemporaryDirectory() as folder:
@@ -89,6 +115,19 @@ class ResearchExpansionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{},clear=False):
             root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',[record()])
             self.assertEqual(translate_corpus(root,Model(),max_requests=1)['pending_records'],1)
+    def test_failed_passages_do_not_starve_unattempted_records(self):
+        class Model:
+            base_url='https://generativelanguage.googleapis.com/v1beta/openai';model='gemini-3.5-flash-lite';timeout=1
+            def __init__(self):self.calls=[]
+            def complete_json(self,system,payload):self.calls.append(payload['items']);return {'items':[]}
+        rows=[]
+        for index in range(5):
+            row=record();row.update(text_id=row['text_id']+str(index),title_original=row['title_original']+str(index),translation_status='pending_validation');rows.append(row)
+        expected=_tasks(rows,{})[0][-1]['id'];model=Model()
+        with tempfile.TemporaryDirectory() as folder,patch.dict(os.environ,{},clear=False):
+            root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',rows)
+            translate_corpus(root,model,max_requests=1);translate_corpus(root,model,max_requests=1)
+            self.assertEqual(model.calls[1][0]['id'],expected)
     def test_metric_counts_real_texts_not_metadata(self):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);save_jsonl(root/'data/research_texts.jsonl',[record()])

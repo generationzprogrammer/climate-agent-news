@@ -151,6 +151,11 @@ def _repair_places(item: dict) -> list[dict]:
     """Migrate obvious old keyword-geocoding mistakes in public archives."""
     text = _geo_text(item)
     places = list(item.get("places") or [])[:4]
+    from .translation import detect_places
+    headline=detect_places(' '.join(str(item.get(k) or '') for k in ('title_original','title_zh')))
+    if headline:return headline[:1]
+    if any(p.get('name_zh')=='中国' for p in places) and not any(p['name_zh']=='中国' for p in detect_places(text)):
+        places=[p for p in places if p.get('name_zh')!='中国']
     if "new mexico" in text or "美国新墨西哥" in text:
         return [NEW_MEXICO_PLACE]
     if "caribbean" in text or "加勒比" in text:
