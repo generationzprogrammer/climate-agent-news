@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from climate_agent.stance_pilot import build_pilot, digest, evidence_span, validate_assertion, write_stance_pilot, update_candidates
+from climate_agent.stance_pilot import build_pilot, digest, evidence_span, validate_assertion, write_stance_pilot, update_candidates, relevant_passages
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -19,13 +19,16 @@ class StancePilotTests(unittest.TestCase):
         cls.sources={s['id']:s for s in cls.registry['sources']}
         cls.sample=copy.deepcopy(cls.registry['assertions'][0])
 
-    def test_real_registry_has_exact_evidence_and_three_topics_seven_actors(self):
+    def test_real_registry_covers_all_research_topics_and_preserves_initial_evidence(self):
+        from climate_agent.research import THEMES
         payload=build_pilot(ROOT)
-        self.assertEqual(len(payload['topics']),3)
-        self.assertEqual(len(payload['actors']),7)
+        self.assertTrue({t[0] for t in THEMES}<={t['id'] for t in payload['topics']})
+        self.assertGreaterEqual(len(payload['actors']),10)
         self.assertTrue({'CN','US','EU'}<={a['id'] for a in payload['actors']})
-        self.assertEqual(payload['statistics']['assertions'],21)
-        self.assertEqual(len(payload['cells']),63)
+        self.assertGreaterEqual(payload['statistics']['assertions'],80)
+        self.assertTrue({r['id'] for r in self.registry['assertions']}<={r['id'] for r in payload['assertions']})
+        self.assertEqual(len(payload['cells']),len(payload['actors'])*len(payload['propositions']))
+        self.assertTrue(all(any(r['topic_id']==t['id'] for r in payload['assertions']) for t in payload['topics']))
         self.assertTrue(any(c['stance']=='insufficient' for c in payload['cells']))
         self.assertIsNone(payload['method']['accuracy'])
         for row in payload['assertions']:
@@ -76,7 +79,7 @@ class StancePilotTests(unittest.TestCase):
         old=copy.deepcopy(self.sample);old['id']='old';old['statement_date']='2024-01-01'
         new=copy.deepcopy(self.sample);new.update(id='new',statement_date='2025-01-01',stance='oppose')
         with tempfile.TemporaryDirectory() as folder:
-            root=self.fixture(folder,[old,old,old,new]);p=build_pilot(root)
+            root=self.fixture(folder,[old,{**old,'id':'old-copy-2'},{**old,'id':'old-copy-3'},new]);p=build_pilot(root)
             c=next(c for c in p['cells'] if c['actor_id']==new['actor_id'] and c['proposition_id']==new['proposition_id'])
             self.assertEqual(c['stance'],'oppose');self.assertEqual(c['statement_events'],2)
             peer=copy.deepcopy(new);peer.update(id='peer',stance='support',event_id='second-event')
@@ -105,6 +108,29 @@ class StancePilotTests(unittest.TestCase):
     def test_no_paid_or_unverified_backend(self):
         class Model:base_url='https://paid.example.com';model='other'
         self.assertEqual(update_candidates(ROOT,Model())['status'],'disabled')
+
+    def test_expansion_preserves_group_attribution_and_intensity_baselines(self):
+        p=build_pilot(ROOT)
+        group=[r for r in p['assertions'] if r['actor_id'] in {'BASIC','LMDC'}]
+        self.assertTrue(group)
+        self.assertTrue(all('2189018' in r['source_url'] for r in group))
+        india=next(r for r in p['assertions'] if r['source_id']=='IN-NDC-2022-EXP' and r['proposition_id']=='mitigation_ndc')
+        self.assertIn('强度',india['summary_zh']);self.assertIn('2005',india['summary_zh'])
+        us=next(r for r in p['assertions'] if r['source_id']=='US-PARIS-2025-EXP')
+        self.assertEqual(us['proposition_id'],'mitigation_paris')
+
+    def test_passage_selection_reaches_beyond_document_preamble(self):
+        text=('Administrative introduction without relevant vocabulary. '*100)+'The government supports national adaptation planning. '+('More information. '*40)+'Transparent reporting follows IPCC guidelines.'
+        result=relevant_passages(text)
+        self.assertIn('supports national adaptation planning.',result)
+        self.assertLess(len(result),3300)
+        for fragment in result.split('\n[…]\n'):self.assertIn(fragment,text)
+
+    def test_duplicate_expansion_identifiers_fail_closed(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=self.fixture(folder,[self.sample])
+            (root/'data/stance_evidence_expansion_fixture.json').write_text(json.dumps({'sources':[],'assertions':[self.sample]}),encoding='utf-8')
+            with self.assertRaises(ValueError):build_pilot(root)
 
     def test_two_pass_candidates_remain_unpublished_and_cached(self):
         from climate_agent.research import load_jsonl as original_load

@@ -11,8 +11,23 @@ from pathlib import Path
 from urllib.parse import urlsplit
 from .research import load_jsonl, stamp, extract_positions
 
-PROFILE='stance-pilot-v1'
+PROFILE='stance-pilot-v2'
 ALLOWED_STANCES={'support','oppose','qualified'}
+
+def relevant_passages(text,limit=3200):
+    """Select intact source sentences instead of clipping a long document's preamble."""
+    from .research import THEMES
+    patterns=[re.compile(row[3],re.I) for row in THEMES]
+    sentences=re.split(r'(?<=[.!?])\s+|(?<=[。！？])',text)
+    selected=[];size=0
+    for pattern in patterns:
+        for sentence in sentences:
+            if sentence in selected or not pattern.search(sentence):continue
+            if len(sentence)>1100:continue
+            if size+len(sentence)>limit:break
+            selected.append(sentence);size+=len(sentence)
+            break
+    return '\n[…]\n'.join(selected) or text[:limit]
 
 def digest(text):return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
@@ -61,7 +76,12 @@ def validate_assertion(row,sources,codebook):
 def build_pilot(root,*,as_of=None):
     root=Path(root);as_of=as_of or datetime.now(UTC).date().isoformat()
     codebook=json.loads((root/'config/stance_pilot.json').read_text(encoding='utf-8'))
-    registry=json.loads((root/'data/stance_evidence.json').read_text(encoding='utf-8')) if (root/'data/stance_evidence.json').exists() else {'sources':[],'assertions':[]}
+    paths=[root/'data/stance_evidence.json',*sorted((root/'data').glob('stance_evidence_expansion_*.json'))]
+    registries=[json.loads(path.read_text(encoding='utf-8')) for path in paths if path.exists()]
+    registry={key:[row for part in registries for row in part.get(key,[])] for key in ['sources','assertions']}
+    for key in ['sources','assertions']:
+        ids=[row['id'] for row in registry[key]]
+        if len(ids)!=len(set(ids)):raise ValueError('Duplicate '+key+' identifier; review required')
     corpus={r['text_id']:r for r in load_jsonl(root/'data/research_texts.jsonl.gz')}
     sources={}
     for item in registry['sources']:
@@ -96,7 +116,7 @@ def build_pilot(root,*,as_of=None):
             'codebook_sha256':digest(json.dumps(codebook,ensure_ascii=False,sort_keys=True)),
             **{k:codebook[k] for k in ['actors','topics','propositions','stances','scope_zh','scope_en']},
             'assertions':assertions,'cells':cells,
-            'statistics':{'assertions':len(assertions),'source_documents':len({r['source_id'] for r in assertions}),
+            'statistics':{'assertions':len(assertions),'source_documents':len({r['source_url'] for r in assertions}),
                           'statement_events':len({(r['actor_id'],r['event_id']) for r in assertions}),
                           'covered_cells':sum(c['stance']!='insufficient' for c in cells),'total_cells':len(cells),
                           'corpus_records':len(corpus),'unpublished_candidate_records':len(candidates)},
@@ -114,7 +134,7 @@ def write_stance_pilot(root,data_dir):
     if not (root/'config/stance_pilot.json').exists():return {'status':'not_configured'}
     payload=build_pilot(root)
     (data_dir/'stance_pilot.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf-8')
-    public_keys=['id','actor_id','topic_id','proposition_id','stance','statement_date','date_basis','summary_zh','summary_en','source_url','source_title','source_language','source_sha256','evidence','evidence_quote','qualifier_quote','reasons','authority_zh','authority_en','review_status','event_id']
+    public_keys=['id','actor_id','topic_id','proposition_id','stance','statement_kind','statement_date','date_basis','summary_zh','summary_en','source_url','source_title','source_language','source_sha256','evidence','evidence_quote','qualifier_quote','reasons','authority_zh','authority_en','review_status','event_id']
     rows=[{k:r.get(k) for k in public_keys} for r in payload['assertions']]
     (data_dir/'stance_assertions.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows),encoding='utf-8')
     stream=io.StringIO(newline='');writer=csv.writer(stream);writer.writerow(public_keys)
@@ -151,15 +171,19 @@ def update_candidates(root,model=None,*,max_requests=2):
     texts=load_jsonl(root/'data/research_texts.jsonl.gz');by_id={r['text_id']:r for r in texts}
     path=root/'data/stance_candidates.jsonl';previous=load_jsonl(path)
     keys={(r['text_id'],r['source_sha256'],r.get('profile')) for r in previous}
-    selected=[];seen=set()
+    from .research import THEMES
+    theme_pattern=re.compile('|'.join(row[3] for row in THEMES),re.I)
+    selected=[];seen=set();actor_counts={}
     for candidate in sorted(extract_positions(texts),key=lambda r:r.get('date') or '',reverse=True):
         source=by_id[candidate['text_id']]
         if candidate['actor'] not in {a['id'] for a in book['actors']}:continue
-        if not re.search(r'climate financ|carbon market|article\s*6|fossil.fuel|气候资金|碳市场|化石能源',source['source_text'],re.I):continue
+        if not theme_pattern.search(source['source_text']):continue
+        if actor_counts.get(candidate['actor'],0)>=2:continue
         key=(source['text_id'],source['text_sha256'],PROFILE)
         if key in keys or source['text_sha256'] in seen:continue
-        seen.add(source['text_sha256']);selected.append({'source_id':source['text_id'],'title':source['title_original'],'text':source['source_text'][:1800],'published_at':source.get('published_at'),'source_url':source.get('publisher_url')})
-        if len(selected)==4:break
+        seen.add(source['text_sha256']);actor_counts[candidate['actor']]=actor_counts.get(candidate['actor'],0)+1
+        selected.append({'source_id':source['text_id'],'title':source['title_original'],'text':relevant_passages(source['source_text']),'published_at':source.get('published_at'),'source_url':source.get('publisher_url')})
+        if len(selected)==8:break
     if not selected:return {'status':'up_to_date','processed':0}
     try:
         with _corpus_budget(root):
@@ -172,9 +196,10 @@ def update_candidates(root,model=None,*,max_requests=2):
                 source=next((s for s in selected if s['source_id']==item.get('source_id')),None)
                 if not source or item.get('actor_id') not in {a['id'] for a in book['actors']} or item.get('proposition_id') not in {p['id'] for p in book['propositions']} or item.get('stance') not in ALLOWED_STANCES:continue
                 try:
-                    evidence_span(source['text'],item.get('evidence_quote'))
-                    for reason in item.get('reasons',[]):evidence_span(source['text'],reason.get('quote'))
-                    if item.get('qualifier_quote'):evidence_span(source['text'],item['qualifier_quote'])
+                    original_text=by_id[source['source_id']]['source_text']
+                    evidence_span(original_text,item.get('evidence_quote'))
+                    for reason in item.get('reasons',[]):evidence_span(original_text,reason.get('quote'))
+                    if item.get('qualifier_quote'):evidence_span(original_text,item['qualifier_quote'])
                     if item['stance']=='qualified' and not item.get('qualifier_quote'):continue
                 except (ValueError,TypeError,KeyError):continue
                 safe.append(item)
