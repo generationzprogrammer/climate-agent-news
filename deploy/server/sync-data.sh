@@ -17,7 +17,8 @@ OPTIONAL=(bth_assistant_config.json bth_assistant_knowledge.json bth_energy_data
   global_climate_analysis_data_2026-08-04.json global_climate_analysis_report_latest.html innovation_cases.json
   innovation_update.json national_carbon_market_entities.json quarter_continent_keywords_2026-08-04.csv
   quarter_global_keywords_2026-08-04.csv research_catalog.json research_index.json research_records.csv
-  research_texts.jsonl weekly_report.json weekly_report.md weekly_report.pdf)
+  research_texts.jsonl stance_assertions.csv stance_assertions.jsonl stance_codebook.json stance_pilot.json
+  weekly_report.json weekly_report.md weekly_report.pdf)
 
 mkdir -p "$ROOT/snapshots"
 exec 9>/run/lock/grenn-sync.lock

@@ -342,7 +342,7 @@
   topics.forEach((t, i) => {
     const s = t.section, heading = s.querySelector(":scope > .section-heading");
     s.classList.add("pd");
-    const img = make("div", "pd-img", `<img alt="" src="${t.image}" draggable="false">`);
+    const img = make("div", "pd-img", `<img alt="" data-src="${t.image}" draggable="false">`); // src set on the first visit (setClasses)
     img.setAttribute("aria-hidden", "true");
     const lines = make("div", "pd-lines", "<i></i><i></i><i></i>");
     lines.setAttribute("aria-hidden", "true");
@@ -453,6 +453,8 @@
     root.classList.toggle("focus-page", isList || isDetail);
     root.classList.toggle("focus-list", isList);
     root.classList.toggle("focus-detail", isDetail);
+    // the full-size photos (≈1.4 MB) load once 国家专题 is open, not with the home page (2026-11-02)
+    if (isList || isDetail) topics.forEach(t => { const photo = t.img?.querySelector("img[data-src]"); if (photo) { photo.src = photo.dataset.src; photo.removeAttribute("data-src"); } });
   };
   let busy = false, swapping = false;
   const swap = id => { swapping = true; window.GreenPages?.swap(id); swapping = false; setClasses(id === "countries" || topicOf(id) ? id : "home"); };

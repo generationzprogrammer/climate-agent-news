@@ -6,8 +6,8 @@
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#fffbf4" name="theme-color"/>
 <meta content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。" name="description"/>
-<title>GREEN · COP31 | 全球气候情报</title>
-<link href="./cop31/cop31.css?v=20261102-merge" rel="stylesheet"/>
+<title>GREEN · COP31 | 全球气候治理新闻数据库</title>
+<link href="./cop31/cop31.css?v=20261102-stance-3" rel="stylesheet"/>
 <link href="./cop31/intel.css?v=20261029-lod" rel="stylesheet"/>
 <link href="./cop31/countries.css?v=20261029-menu" rel="stylesheet"/>
 
@@ -63,14 +63,14 @@
 <div class="rail-menu" id="siteMenu">
 <p aria-hidden="true" class="rail-label">菜单</p>
 <nav aria-label="页面导航">
+<a class="nav-db" href="./cop31/#database">进入数据库</a>
 <a data-i18n="navMap" href="./cop31/#map">全球现场</a>
-<a data-i18n="navToday" href="./cop31/#today">今日情报</a>
+<a data-i18n="navToday" href="./cop31/#today">今日新闻</a>
 <a class="nav-countries" href="./cop31/#countries">国家专题</a>
 <div class="topic-nav" hidden=""><span class="rail-sub" data-i18n="navFocus">专题</span><div><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a></div></div>
 <a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a>
 <a class="nav-research" href="./cop31/#research">研究工具</a>
 <a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a>
-<a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 <a class="menu-home" href="./cop31/#top">返回首页</a>
 </nav>
 </div>
@@ -82,7 +82,7 @@
 <!-- Section reel: labels reuse the navigation text (data-i18n), ticks mark progress. -->
 <div class="reel" role="group">
 <div class="reel-viewport"><div class="reel-track">
-<button data-i18n="navMap" data-reel="map" type="button">全球现场</button><button data-i18n="navToday" data-reel="today" type="button">今日情报</button><button class="nav-countries" data-reel="countries" type="button">国家专题</button><button data-i18n="navAnalytics" data-reel="analytics" type="button">数据统计</button><button class="nav-research" data-reel="research" type="button">研究工具</button><button data-i18n="navAssistant" data-reel="assistant" type="button">情报问答</button><button data-i18n="navDatabase" data-reel="database" type="button">文本数据库</button>
+<button data-i18n="navMap" data-reel="map" type="button">全球现场</button><button data-i18n="navToday" data-reel="today" type="button">今日新闻</button><button class="nav-countries" data-reel="countries" type="button">国家专题</button><button data-i18n="navAnalytics" data-reel="analytics" type="button">数据统计</button><button class="nav-research" data-reel="research" type="button">研究工具</button><button data-i18n="navAssistant" data-reel="assistant" type="button">情报问答</button><button data-i18n="navDatabase" data-reel="database" type="button">文本数据库</button>
 </div></div>
 <span aria-hidden="true" class="reel-ticks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
 </div>
@@ -92,7 +92,7 @@
 <div class="sheet">
 <span aria-hidden="true" class="sheet-handle"></span>
 <nav>
-<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日情报</a><a class="nav-countries" href="./cop31/#countries">国家专题</a><a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a><a class="nav-research" href="./cop31/#research">研究工具</a><a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
+<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日新闻</a><a class="nav-countries" href="./cop31/#countries">国家专题</a><a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a><a class="nav-research" href="./cop31/#research">研究工具</a><a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 </nav>
 <div class="mobile-menu-actions">
 <button class="project-intro-link" data-i18n="projectIntro" data-open-project="" type="button">项目介绍</button>
@@ -106,6 +106,8 @@
 </aside>
 <main id="top">
 <section aria-label="COP31" class="cop31-intro">
+<!-- Photographs behind the stage (2026-11-02, home-photos.js): decorative, no text. -->
+<div aria-hidden="true" class="home-photos"></div>
 <!-- Site actions on the home stage top line (moved out of the rail on 2026-10-29; the COP31 date line was removed). -->
 <div class="rail-actions">
 <button class="project-intro-link" data-i18n="projectIntro" id="projectIntroOpen" type="button">项目介绍</button>
@@ -117,17 +119,33 @@
 <button aria-label="Switch language" class="language-toggle" id="languageToggle" type="button">EN</button>
 <button class="mode-toggle" data-cop31-excluded="" hidden="" id="modeToggle" type="button">切换到能源技术</button>
 </div>
-<!-- Stamp cluster: one stamp per section of this page (labels reuse the navigation text; artwork is decorative). -->
-<div class="stamps">
-<a class="stamp" data-finish="kogei" data-stamp="map" href="./cop31/#map" style="--x:6%;--y:28%;--rot:-16deg;--z:6"><span class="stamp-paper"><span class="stamp-art art-map"><span class="stamp-map" data-stamp-map=""></span></span><span class="stamp-label" data-i18n="navMap">全球现场</span></span></a>
-<a class="stamp" data-finish="impasto" data-stamp="today" href="./cop31/#today" style="--x:25%;--y:16%;--rot:16deg;--z:7"><span class="stamp-paper"><span class="stamp-art art-today"><i></i><i></i><i></i></span><span class="stamp-label" data-i18n="navToday">今日情报</span></span></a>
-<a class="stamp" data-finish="gold" data-stamp="countries" href="./cop31/#countries" style="--x:1%;--y:52%;--rot:-38deg;--z:4"><span class="stamp-paper"><span class="stamp-art art-countries"></span><span class="stamp-label nav-countries">国家专题</span></span></a>
-<a class="stamp" data-finish="kogei" data-stamp="analytics" href="./cop31/#analytics" style="--x:56%;--y:50%;--rot:-16deg;--z:6"><span class="stamp-paper"><span class="stamp-art art-analytics"><i></i><i></i><i></i><i></i><i></i></span><span class="stamp-label" data-i18n="navAnalytics">数据统计</span></span></a>
-<a class="stamp" data-finish="silver" data-stamp="assistant" href="./cop31/#assistant" style="--x:40%;--y:64%;--rot:5deg;--z:5"><span class="stamp-paper"><span class="stamp-art art-assistant"></span><span class="stamp-label" data-i18n="navAssistant">情报问答</span></span></a>
-<a class="stamp" data-finish="gold" data-stamp="database" href="./cop31/#database" style="--x:62%;--y:20%;--rot:9deg;--z:3"><span class="stamp-paper"><span class="stamp-art art-database"></span><span class="stamp-label" data-i18n="navDatabase">文本数据库</span></span></a>
+<!-- Home (2026-11-02, user: the text database first, the rest as tools): the database's front page on the left — title,
+     description (mirrors #heroLede), figures and full-archive files from downloads/manifest.json (downloads.js) — and the
+     other sections as an orderly sheet of stamps on the right (labels reuse the navigation text; artwork is decorative). -->
+<div class="home-main">
+<div class="home-db">
+<p class="overline home-db-overline">TEXT DATABASE</p>
+<h1 class="ink" data-i18n="cop31Title">全球气候治理&#8203;新闻数据库</h1>
+<p class="home-db-lede" data-mirror="heroLede"></p>
+<dl class="home-db-stats" hidden="" id="homeDbStats"></dl>
+<div class="home-db-actions">
+<a class="home-db-go" data-en="Open the database" href="./cop31/#database">进入数据库</a>
+<p class="home-db-files" hidden="" id="homeDbFiles"></p>
+</div>
+</div>
+<div class="home-tools">
+<p class="home-tools-label" data-en="Other tools">其他工具</p>
+<div class="stamps" data-grid="">
+<a class="stamp" data-finish="kogei" data-stamp="map" href="./cop31/#map"><span class="stamp-paper"><span class="stamp-art art-map"><span class="stamp-map" data-stamp-map=""></span></span><span class="stamp-label" data-i18n="navMap">全球现场</span></span></a>
+<a class="stamp" data-finish="impasto" data-stamp="today" href="./cop31/#today"><span class="stamp-paper"><span class="stamp-art art-today"><i></i><i></i><i></i></span><span class="stamp-label" data-i18n="navToday">今日新闻</span></span></a>
+<a class="stamp" data-finish="gold" data-stamp="countries" href="./cop31/#countries"><span class="stamp-paper"><span class="stamp-art art-countries"></span><span class="stamp-label nav-countries">国家专题</span></span></a>
+<a class="stamp" data-finish="kogei" data-stamp="analytics" href="./cop31/#analytics"><span class="stamp-paper"><span class="stamp-art art-analytics"><i></i><i></i><i></i><i></i><i></i></span><span class="stamp-label" data-i18n="navAnalytics">数据统计</span></span></a>
+<a class="stamp" data-finish="silver" data-stamp="research" href="./cop31/#research"><span class="stamp-paper"><span class="stamp-art art-research"><i></i><i></i></span><span class="stamp-label nav-research">研究工具</span></span></a>
+<a class="stamp" data-finish="silver" data-stamp="assistant" href="./cop31/#assistant"><span class="stamp-paper"><span class="stamp-art art-assistant"></span><span class="stamp-label" data-i18n="navAssistant">情报问答</span></span></a>
 <span aria-hidden="true" class="stamp-tip"></span>
 </div>
-<h1 class="ink" data-i18n="cop31Title">全球气候情报</h1>
+</div>
+</div>
 <!-- Scroll cues (2026-10-29): "scroll down" on the stage; "back up" in the gap above the sheet once 全球气候现场 is up (desktop). -->
 <p aria-hidden="true" class="scroll-cue scroll-cue-down"><span class="scroll-cue-label">向下滑动</span><i></i></p>
 <p aria-hidden="true" class="scroll-cue scroll-cue-up"><i></i><span class="scroll-cue-label">向上回到首页</span></p></section>
@@ -174,12 +192,12 @@
 <span class="ct-kicker nav-countries">国家专题</span>
 <span class="ct-title" data-i18n="navChinaCarbon">中国碳市场</span>
 <span class="ct-meta"><b>CHINA CARBON MARKET</b><span class="ct-place" data-en="China">中国</span></span>
-<span class="ct-img"><img alt="" decoding="async" sizes="(max-width: 1100px) 32vw, 17vw" src="./assets/focus-china.jpg" srcset="./assets/focus-china-list.jpg 1000w"/></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" sizes="(max-width: 1100px) 32vw, 17vw" src="./assets/focus-china.jpg" srcset="./assets/focus-china-list.jpg 1000w"/></span>
 </a>
 <a class="ct-row" data-focus="singapore" data-lat="1.35" data-lon="103.82" href="./cop31/#singapore">
 <span class="ct-title" data-i18n="navSingapore">新加坡</span>
 <span class="ct-meta"><b>SINGAPORE CLIMATE DESK</b><span class="ct-place" data-en="Singapore">新加坡</span></span>
-<span class="ct-img"><img alt="" decoding="async" sizes="(max-width: 1100px) 32vw, 17vw" src="./assets/focus-singapore.jpg" srcset="./assets/focus-singapore-list.jpg 1400w"/></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" sizes="(max-width: 1100px) 32vw, 17vw" src="./assets/focus-singapore.jpg" srcset="./assets/focus-singapore-list.jpg 1400w"/></span>
 </a>
 </div>
 </section>
@@ -262,7 +280,10 @@
 <p class="analytics-note" id="analyticsNote">正在读取语料库统计文件…</p>
 </section>
 
-<section class="section research-section" id="research"></section>
+<section class="section research-section" id="research"><!-- shown until research.js has the 4.5 MB index (2026-11-02) -->
+<div class="section-heading"><div><p class="overline">RESEARCH &amp; EVIDENCE</p><h2>气候治理研究工具</h2></div></div>
+<p class="research-loading">正在读取原文语料…</p>
+</section>
 <section class="section assistant-section" id="assistant">
 <div class="section-heading">
 <div><p class="overline" id="assistantOverline">GROUNDED CLIMATE Q&amp;A</p><h2 class="ink" id="assistantTitle">气候情报问答</h2></div>
@@ -445,13 +466,15 @@
 
 <script defer="" src="./bth-transport.js?v=20261011-1"></script>
 <script defer="" src="./subscriptions.js?v=20261027-languages"></script>
-<script defer="" src="./app.js?v=20261102-merge"></script>
-<script defer="" src="./research.js?v=20261102-bilingual-2"></script>
+<script defer="" src="./app.js?v=20261102-news"></script>
+<script defer="" src="./stance.js?v=20261102-stance-3"></script>
+<script defer="" src="./research.js?v=20261102-stance-2"></script>
 <script defer="" src="./cop31/motion-kit.js?v=20261028-paper"></script>
-<script defer="" src="./cop31/intel.js?v=20261029-lod"></script>
-<script defer="" src="./cop31/cop31.js?v=20261102-merge"></script>
+<script defer="" src="./cop31/intel.js?v=20261102-landscape"></script>
+<script defer="" src="./cop31/cop31.js?v=20261102-menu"></script>
+<script defer="" src="./cop31/home-photos.js?v=20261102-fix"></script>
 <script defer="" src="./cop31/globe.js?v=20261029-plate"></script>
-<script defer="" src="./cop31/countries.js?v=20261029-cut"></script>
-<script defer="" src="./cop31/downloads.js?v=20261102-db"></script>
+<script defer="" src="./cop31/countries.js?v=20261102-lazy"></script>
+<script defer="" src="./cop31/downloads.js?v=20261102-home"></script>
 </body>
 </html>

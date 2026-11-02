@@ -1467,7 +1467,7 @@
     if (detail) endDetail();
     resetScene();
     buildTiles();
-    // The intro stands on the site's own grey-blue ground (a copy of the fixed background, contours included).
+    // The intro stands on the site's own grey-blue ground (a copy of the fixed background, landscape drawing included).
     const ground = document.querySelector(".page-bg")?.cloneNode(true);
     ui.ground.replaceChildren(...(ground ? [ground] : []));
     phase = "intro";

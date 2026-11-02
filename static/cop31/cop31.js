@@ -83,6 +83,7 @@
   const localize = () => {
     const en = root.lang.startsWith("en"), word = en ? "MENU" : "菜单", focus = en ? "Country focus" : "国家专题";
     const research = en ? "Research tools" : "研究工具"; // research.js names only its own [data-research-nav] links
+    const enter = en ? "Open the database" : "进入数据库"; // the menu's first item (2026-11-02, user)
     document.querySelectorAll(".rail-label, .menu-pop-label").forEach(label => { label.textContent = word; });
     const home = en ? "Home" : "返回首页"; // the drop-down's way home (a link with morphing glyphs: compare its spoken label)
     document.querySelectorAll(".menu-home").forEach(item => { if ((item.querySelector(".sr-only")?.textContent ?? item.textContent) !== home) item.textContent = home; });
@@ -95,7 +96,10 @@
     document.querySelectorAll(".nav-research").forEach(item => {
       if ((item.querySelector(".sr-only")?.textContent ?? item.textContent) !== research) item.textContent = research;
     });
-    document.querySelectorAll(".ct-place[data-en]").forEach(place => { place.dataset.zh ??= place.textContent; place.textContent = en ? place.dataset.en : place.dataset.zh; });
+    document.querySelectorAll(".nav-db").forEach(item => {
+      if ((item.querySelector(".sr-only")?.textContent ?? item.textContent) !== enter) item.textContent = enter;
+    });
+    document.querySelectorAll(".ct-place[data-en], .home-main [data-en]").forEach(place => { place.dataset.zh ??= place.textContent; place.textContent = en ? place.dataset.en : place.dataset.zh; });
   };
 
   /* ---------- Scroll-spy (the reference writings page R5: 45 % line, last section at the page end) + reel ---------- */
@@ -289,6 +293,7 @@
       px: sp(), py: sp(), scale: sp(1), tx: sp(), ty: sp(), dx: 0, dy: 0, dr: 0, box: null, pressed: false,
     }));
     let hovered = null, pointer = { x: -1e4, y: -1e4 }, grace = 0, last = performance.now(), running = false, onScreen = true;
+    const orderly = cluster.hasAttribute("data-grid"); // the home sheet of tools (2026-11-02): upright and still, no drift
     const t0 = last;
     const measure = () => list.forEach(s => { // rest geometry in cluster coordinates, rotated bounding box
       const w = s.el.offsetWidth, h = s.el.offsetHeight, r = s.rot * Math.PI / 180;
@@ -346,7 +351,7 @@
       const target = hovered?.box;
       let nx = 0, ny = 0;
       for (const s of list) {
-        if (!still) {
+        if (!still && !orderly) {
           s.dx = vnoise(t * s.speed + s.seed[0]) * 8;
           s.dy = vnoise(t * s.speed + s.seed[1]) * 8;
           s.dr = vnoise(t * s.speed + s.seed[2]) * 1.5;
@@ -413,6 +418,17 @@
         watcher.observe(map, { childList: true });
       }
     }
+  }
+
+  /* ---------- Home description: [data-mirror="id"] repeats that element's text (app.js writes it per language) ---------- */
+  function setupMirrors() {
+    document.querySelectorAll("[data-mirror]").forEach(copy => {
+      const source = $(copy.dataset.mirror);
+      if (!source) return;
+      const sync = () => { copy.textContent = source.textContent.trim(); };
+      sync();
+      new MutationObserver(sync).observe(source, { childList: true, characterData: true, subtree: true });
+    });
   }
 
   /* ---------- Clean copies (map stamp miniature, chart lightbox): no ids, no live regions, shown complete ---------- */
@@ -639,7 +655,7 @@
 
   document.addEventListener("click", event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const link = event.target.closest?.(".rail-menu nav a, .sheet nav a, a.stamp, a.brand");
+    const link = event.target.closest?.(".rail-menu nav a, .sheet nav a, a.stamp, a.brand, a.home-db-go");
     if (!link) return;
     const url = new URL(link.href, location.href);
     if (url.pathname !== location.pathname || !url.hash) return;
@@ -987,12 +1003,12 @@
       roleEn: "Director of Data Platform Research and Assistant Professor (Research), Low-Carbon Energy Laboratory, Tsinghua University",
       research: "低碳转型情景推演理论与方法；环境系统与智能决策；零碳园区治理与政策创新；城市空间环境绩效量化评估。",
       researchEn: "Low-carbon transition scenarios and methods; environmental systems and intelligent decision-making; zero-carbon industrial park governance and policy innovation; urban environmental performance assessment." },
-    { name: "张蔚然", en: "Weiran Zhang", place: "left", email: "zhangwr25@mails.tsinghua.edu.cn",
+    { name: "张蔚然", en: "Weiran Zhang", place: "right", email: "zhangwr25@mails.tsinghua.edu.cn",
       role: "清华大学经济管理学院在读硕士",
       roleEn: "Master's student, School of Economics and Management, Tsinghua University",
       research: "数字经济与大数据分析领域",
       researchEn: "Digital economy and big data analytics." },
-    { name: "袁誉杭", en: "Yuhang Yuan", place: "right", email: "yuan-yh21@mails.tsinghua.edu.cn",
+    { name: "袁誉杭", en: "Yuhang Yuan", place: "left", email: "yuan-yh21@mails.tsinghua.edu.cn",
       role: "清华大学化学工程系在读博士",
       roleEn: "PhD student, Department of Chemical Engineering, Tsinghua University",
       research: "锂电池电解液与人工智能交叉领域。",
@@ -1694,15 +1710,16 @@
     chromeRefresh();
   }
 
-  /* ---------- Paper contours (background texture, 2026-10-29) ----------
-     Faint topographic contour lines under the page: smooth 2D value noise (two octaves, float precision — SVG turbulence
-     is 8-bit and terraces) sampled on a 6 px grid and traced with marching squares at 16 levels; every fourth line is a
-     little stronger, like a survey map's index contours. Drawn once per window width at idle time and handed to the
-     fixed background layer as an image (so copies of the background carry it); the lines fade out under the left rail. */
-  function setupContours() {
+  /* ---------- Paper landscape (background drawing; 2026-11-02, replacing the 2026-10-29 contour lines) ----------
+     A hairline elevation drawing of a low-carbon landscape under the page: wind streamlines drifting across the sky
+     (traced through smooth value noise, fading in and out along their length), and along the bottom of the window two
+     ridgelines with wind turbines receding into the distance and rows of solar panels in the foreground. One turbine
+     hub carries the page's red. Seeded, so the drawing is the same on every visit; drawn once per window size at idle
+     time and handed to the fixed background layer as an image (so copies of the background carry it). */
+  function setupLandscape() {
     const layer = document.querySelector(".page-bg");
     if (!layer || !("toBlob" in HTMLCanvasElement.prototype)) return;
-    let url = "", drawnWidth = 0;
+    let url = "", drawnWidth = 0, drawnHeight = 0;
     const cell = (x, y) => { const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return s - Math.floor(s); };
     const ease = t => t * t * (3 - 2 * t);
     const noise = (x, y) => {
@@ -1710,65 +1727,107 @@
       const a = cell(xi, yi), b = cell(xi + 1, yi), c = cell(xi, yi + 1), d = cell(xi + 1, yi + 1);
       return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
     };
-    const height = (x, y) => .7 * noise(x, y) + .3 * noise(x * 2.03 + 17.3, y * 2.03 + 9.1);
+    const INK = "63, 85, 108";
     function draw() {
-      const w = innerWidth, h = Math.max(innerHeight, 900), dpr = Math.min(2, devicePixelRatio || 1);
+      const w = innerWidth, h = innerHeight, dpr = Math.min(2, devicePixelRatio || 1);
       const canvas = make("canvas");
       canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
       const ctx = canvas.getContext("2d");
       ctx.scale(dpr, dpr);
-      const step = 6, cols = Math.ceil(w / step) + 1, rows = Math.ceil(h / step) + 1, scale = 1 / 280;
-      const field = new Float32Array(cols * rows);
-      for (let j = 0; j < rows; j += 1) for (let i = 0; i < cols; i += 1) field[j * cols + i] = height(i * step * scale + 3.7, j * step * scale + 1.9);
-      const LEVELS = 16, normal = new Path2D(), index = new Path2D();
-      for (let k = 1; k < LEVELS; k += 1) {
-        const level = k / LEVELS, path = k % 4 ? normal : index;
-        for (let j = 0; j < rows - 1; j += 1) for (let i = 0; i < cols - 1; i += 1) {
-          const a = field[j * cols + i], b = field[j * cols + i + 1], c = field[(j + 1) * cols + i + 1], d = field[(j + 1) * cols + i];
-          const code = (a > level) | (b > level) << 1 | (c > level) << 2 | (d > level) << 3;
-          if (code === 0 || code === 15) continue;
-          const x = i * step, y = j * step, t = (p, q) => (level - p) / (q - p);
-          const top = [x + step * t(a, b), y], right = [x + step, y + step * t(b, c)], bottom = [x + step * t(d, c), y + step], left = [x, y + step * t(a, d)];
-          const segment = (p, q) => { path.moveTo(p[0], p[1]); path.lineTo(q[0], q[1]); };
-          switch (code) {
-            case 1: case 14: segment(left, top); break;
-            case 2: case 13: segment(top, right); break;
-            case 3: case 12: segment(left, right); break;
-            case 4: case 11: segment(right, bottom); break;
-            case 6: case 9: segment(top, bottom); break;
-            case 7: case 8: segment(left, bottom); break;
-            case 5: segment(left, top); segment(right, bottom); break;
-            case 10: segment(top, right); segment(bottom, left); break;
-          }
+      ctx.lineCap = "round"; ctx.lineJoin = "round";
+      let seed = 7;
+      const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+      const k = Math.min(1, Math.max(.55, h / 900)); // drawing scale on short windows
+
+      // Sky: wind streamlines, each a polyline through the flow field, drawn in short pieces so it can fade at both ends
+      const lines = Math.round(Math.min(46, Math.max(18, w / 32)));
+      for (let n = 0; n < lines; n += 1) {
+        let x = -40 + rand() * w * .35, y = h * (.05 + .6 * (n + rand()) / lines); // one per band: spread, not bunched
+        const length = w * (.35 + .5 * rand()), points = [[x, y]];
+        for (let d = 0; d < length; d += 7) {
+          const angle = (noise(x / 560 + 3.1, y / 900 + 7.7) - .5) * .6 + (noise(x / 240 + 9, y / 1400) - .5) * .16; // one field, slow in y: laminar, no crossings
+          x += Math.cos(angle) * 7; y += Math.sin(angle) * 7;
+          points.push([x, y]);
+        }
+        const peak = .12 + .18 * rand();
+        for (let i = 1; i < points.length; i += 1) {
+          const t = i / (points.length - 1), a = peak * Math.sin(Math.PI * t) ** 1.4;
+          if (a < .01) continue;
+          ctx.strokeStyle = `rgba(${INK}, ${a.toFixed(3)})`;
+          ctx.lineWidth = .7;
+          ctx.beginPath(); ctx.moveTo(points[i - 1][0], points[i - 1][1]); ctx.lineTo(points[i][0], points[i][1]); ctx.stroke();
         }
       }
-      ctx.lineCap = "round";
-      ctx.strokeStyle = "rgba(63, 85, 108, .34)"; ctx.lineWidth = .8; ctx.stroke(normal);
-      ctx.strokeStyle = "rgba(63, 85, 108, .62)"; ctx.lineWidth = 1.1; ctx.stroke(index);
-      const rail = parseFloat(getComputedStyle(root).getPropertyValue("--rail-w")) || 0;
-      if (rail) { // keep the rail's text clean
-        const fade = ctx.createLinearGradient(rail * .55, 0, rail * 1.04, 0);
-        fade.addColorStop(0, "#000"); fade.addColorStop(1, "rgba(0, 0, 0, 0)");
-        ctx.globalCompositeOperation = "destination-out";
-        ctx.fillStyle = fade;
-        ctx.fillRect(0, 0, rail * 1.04, h);
+
+      // Ground: a far and a near ridgeline along the bottom of the window
+      const horizon = h - 150 * k;
+      const ridge = (x, base, amp, f, off) => base - amp * (.65 * noise(x / f + off, off) + .35 * noise(x / (f * .37) + off * 2, off + 5));
+      const far = x => ridge(x, horizon, 44 * k, 360, 11.3), near = x => ridge(x, horizon + 70 * k, 36 * k, 300, 23.9);
+      const traceRidge = (fn, alpha, width) => {
+        ctx.strokeStyle = `rgba(${INK}, ${alpha})`; ctx.lineWidth = width;
+        ctx.beginPath();
+        ctx.moveTo(-10, fn(-10));
+        for (let x = -4; x <= w + 10; x += 6) ctx.lineTo(x, fn(x));
+        ctx.stroke();
+      };
+      // Turbines: tower, three tapered blades, hub; smaller and fainter with distance
+      const turbine = (x, ground, size, alpha, accent) => {
+        const hub = [x, ground - size], blade = size * .52, turn = rand() * Math.PI * 2;
+        ctx.strokeStyle = `rgba(${INK}, ${alpha})`;
+        ctx.lineWidth = Math.max(.6, size / 90);
+        ctx.beginPath(); ctx.moveTo(x - size * .018, ground); ctx.lineTo(x - size * .008, hub[1]); ctx.lineTo(x + size * .008, hub[1]); ctx.lineTo(x + size * .018, ground); ctx.stroke();
+        for (let b = 0; b < 3; b += 1) {
+          const a = turn + b * Math.PI * 2 / 3, cos = Math.cos(a), sin = Math.sin(a), side = size * .022;
+          ctx.beginPath();
+          ctx.moveTo(hub[0] - sin * side, hub[1] + cos * side);
+          ctx.quadraticCurveTo(hub[0] + cos * blade * .35 - sin * side * 1.4, hub[1] + sin * blade * .35 + cos * side * 1.4, hub[0] + cos * blade, hub[1] + sin * blade);
+          ctx.lineTo(hub[0] + sin * side * .3, hub[1] - cos * side * .3);
+          ctx.closePath(); ctx.stroke();
+        }
+        ctx.fillStyle = accent ? "rgba(200, 55, 45, .85)" : `rgba(${INK}, ${alpha})`;
+        ctx.beginPath(); ctx.arc(hub[0], hub[1], Math.max(1.2, size / 55), 0, Math.PI * 2); ctx.fill();
+      };
+      traceRidge(far, .42, .8);
+      const count = Math.max(3, Math.round(w / 150)), accentAt = Math.floor(count * .62);
+      for (let i = 0; i < count; i += 1) {
+        const x = (i + .25 + .5 * rand()) / count * w, depth = rand();
+        if (x > w * .06 && x < w * .24) continue; // leave the sky above the solar field clear
+        turbine(x, far(x) + 2, (52 + 70 * depth) * k, (.3 + .35 * depth).toFixed(2), i === accentAt);
       }
+      traceRidge(near, .5, .9);
+      // Solar: rows of tilted panels in perspective, a block on each side of the foreground
+      const solar = (x0, width, rows) => {
+        for (let r = 0; r < rows; r += 1) {
+          const y = near(x0 + width / 2) + (18 + r * 17) * k, panelW = (22 + r * 4) * k, panelH = (6 + r * 1.6) * k, gap = 3 * k;
+          const shift = (r - rows / 2) * 6 * k, end = x0 + shift + width + r * 14 * k;
+          ctx.strokeStyle = `rgba(${INK}, ${(.32 + r * .08).toFixed(2)})`; ctx.lineWidth = .7;
+          ctx.beginPath();
+          for (let x = x0 + shift; x + panelW < end; x += panelW + gap) {
+            ctx.moveTo(x + panelH * .6, y); ctx.lineTo(x + panelW + panelH * .6, y); ctx.lineTo(x + panelW, y + panelH); ctx.lineTo(x, y + panelH); ctx.closePath();
+            ctx.moveTo(x + panelW / 2 + panelH * .3, y); ctx.lineTo(x + panelW / 2, y + panelH); // the module seam
+          }
+          ctx.moveTo(x0 + shift, y + panelH + 2 * k); ctx.lineTo(end, y + panelH + 2 * k); // the row's frame
+          ctx.stroke();
+        }
+      };
+      solar(w * .04, Math.min(260, w * .22), 4);
+      if (w > 760) solar(w * .7, Math.min(300, w * .2), 4);
       canvas.toBlob(blob => {
         if (!blob) return;
         const next = URL.createObjectURL(blob);
-        layer.style.setProperty("--contours", `url("${next}")`);
+        layer.style.setProperty("--landscape", `url("${next}")`);
         if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);
         url = next;
-        drawnWidth = w;
-        requestAnimationFrame(() => layer.classList.add("has-contours"));
+        drawnWidth = w; drawnHeight = h;
+        requestAnimationFrame(() => layer.classList.add("has-landscape"));
       });
     }
     const idle = window.requestIdleCallback ?? (callback => setTimeout(callback, 200));
     idle(draw, { timeout: 1500 });
     let timer = 0;
-    addEventListener("resize", () => { // a width change redraws; height changes (phone toolbars) only rescale the image
+    addEventListener("resize", () => { // redraw on a real size change; phone toolbars (small height changes) only rescale it
       clearTimeout(timer);
-      timer = setTimeout(() => { if (Math.abs(innerWidth - drawnWidth) > 60) idle(draw, { timeout: 1500 }); }, 400);
+      timer = setTimeout(() => { if (Math.abs(innerWidth - drawnWidth) > 60 || Math.abs(innerHeight - drawnHeight) > 160) idle(draw, { timeout: 1500 }); }, 400);
     });
   }
 
@@ -1786,6 +1845,7 @@
     reel = setupReel();
     spy = setupSpy();
     setupStamps();
+    setupMirrors();
     setupIdentity();
     setupFlip();
     setupScramble();
@@ -1799,7 +1859,7 @@
     if (finePointer.matches) document.querySelectorAll(".spotlight-tabs, .map-place-list").forEach(dragScroll);
     setupSheet();
     setupRubber();
-    setupContours();
+    setupLandscape();
     setupChrome();
     const menu = $("mobileMenu");
     menu?.addEventListener("click", event => { if (event.target === menu) $("mobileMenuToggle")?.click(); });
