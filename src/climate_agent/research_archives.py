@@ -36,12 +36,12 @@ def parse_archive_post(item,source):
     if published>datetime.now(UTC):return None,'future_date'
     short=text_of((item.get('excerpt') or {}).get('rendered'))
     body=text_of((item.get('content') or {}).get('rendered'))
-    if not CORE.search(title+' '+short+' '+body[:6000]):return None,'outside_climate_scope'
     # Source-provided summaries take precedence. Short teasers are supplemented
     # with a bounded passage from the actual public article content field.
     basis='public_wordpress_excerpt' if substantive(short,title) else 'public_wordpress_content_excerpt'
     text=excerpt(short if basis=='public_wordpress_excerpt' else body,800)
     if not substantive(text,title):return None,'no_substantive_source_text'
+    if not CORE.search(title+' '+text):return None,'outside_climate_scope'
     article=NormalizedArticle(article_id=stable_id('article',url),source_id=source['source_id'],
         source_url=url,canonical_url=url,title=title,published_at_raw=raw_date,
         published_at_utc=published.isoformat(),summary_from_source=text,language='en',
@@ -121,6 +121,7 @@ def expand_archives(root,*,target_unique=3650,max_pages=100):
     candidates=[]
     for source in sources:
         for r in load_jsonl(root/'data/research_archive_cache'/(source['source_id']+'.jsonl')):
+            if not CORE.search(r['title_original']+' '+r['source_text']):continue
             key=(title_key(r['title_original']),str(r.get('published_at'))[:10])
             if r['canonical_url'] in identities or r['text_sha256'] in hashes or key in titles:continue
             candidates.append(r);identities.add(r['canonical_url']);hashes.add(r['text_sha256']);titles.add(key)
