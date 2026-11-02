@@ -6,6 +6,7 @@ from climate_agent.research_archives import parse_archive_post,text_of
 from climate_agent.research_translation import chunks,numeric_values,valid_translation,_tasks,apply_translations,translate_corpus
 from climate_agent.research import make_text_record,save_jsonl,load_jsonl,write_research
 from climate_agent.site_metrics import write_site_metrics
+from climate_agent.providers import _complete_item_prefix
 
 TEXT='The United States approved $2 billion in climate adaptation funding. The programme supports coastal flood protection and warning systems. Communities will receive funding in 2027.'
 ZH='美国批准了20亿美元的气候适应资金。该计划支持沿海洪水防护和预警系统。社区将在2027年获得资金。'
@@ -14,6 +15,10 @@ def post():return {'link':'https://example.org/climate','date_gmt':'2026-01-01T0
 def record():return make_text_record({'canonical_url':'https://example.org/climate','title_original':'US climate funding approved','published_at_utc':'2026-01-01T00:00:00+00:00','source_name':'Fixture','language':'en'},TEXT,'source_excerpt')
 
 class ResearchExpansionTests(unittest.TestCase):
+    def test_truncated_json_recovers_only_complete_items(self):
+        content='{"items":[{"id":"a","text_zh":"完整译文"},{"id":"b","text_zh":"截断'
+        self.assertEqual(_complete_item_prefix(content),[{'id':'a','text_zh':'完整译文'}])
+        self.assertEqual(_complete_item_prefix('not JSON'),[])
     def test_publisher_api_preserves_actual_excerpt(self):
         article,reason=parse_archive_post(post(),SOURCE)
         self.assertIsNone(reason);self.assertEqual(article.summary_from_source,TEXT)

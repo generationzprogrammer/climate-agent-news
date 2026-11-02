@@ -116,14 +116,16 @@ def translate_corpus(root,model=None,*,max_requests=4,workers=2):
     # the user's confirmed 500-RPD project limit. 429 stops; no paid fallback.
     os.environ['CLIMATE_MODEL_USAGE_PATH']=str(root/'data/research_translation_usage.json')
     os.environ['CLIMATE_MODEL_DAILY_REQUEST_LIMIT']='300'
-    os.environ['CLIMATE_MODEL_MIN_INTERVAL_SECONDS']='12'
+    os.environ['CLIMATE_MODEL_MIN_INTERVAL_SECONDS']='8'
     os.environ['CLIMATE_MODEL_MAX_OUTPUT_TOKENS']='20000'
+    os.environ['CLIMATE_MODEL_ALLOW_PARTIAL_ITEMS']='1'
     model.timeout=120
     def run(batch):
         try:return batch,model.complete_json(SYSTEM,{'items':[{k:v for k,v in item.items() if k in ['id','source_language','title','text']} for item in batch]}),None
         except Exception as exc:return batch,None,exc
-    for start in range(0,len(batches),max(1,min(workers,2))):
-        with ThreadPoolExecutor(max_workers=max(1,min(workers,2))) as pool:results=list(pool.map(run,batches[start:start+max(1,min(workers,2))]))
+    width=max(1,min(workers,4))
+    for start in range(0,len(batches),width):
+        with ThreadPoolExecutor(max_workers=width) as pool:results=list(pool.map(run,batches[start:start+width]))
         stop=False
         for batch,result,error in results:
             completed+=1
