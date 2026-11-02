@@ -53,6 +53,11 @@ def unit_scale(value):
     if value.startswith(('GtCO','MtCO','ktCO')):value=value[:2]
     return UNIT_SCALES.get(value,UNIT_SCALES.get(value.lower().rstrip('s'),1))
 def numeric_values(text):
+    # HTML subscripts and hyphenated capacity adjectives are typography, not
+    # additional quantities. Do not modify the stored source passage.
+    text=re.sub(r'\b(CO|CH|N|SF|NF)\s+([₂₄₆2346])\b',r'\1\2',text)
+    text=re.sub(r'(\d)\s+-\s*(?=(?:megawatt|gigawatt|MW|GW)\b)',r'\1 ',text,flags=re.I)
+    text=re.sub(r'\bkph\b','km',text)
     values=set()
     number=r'\d[\d,]*(?:\.\d+)?';scale=r'trillion|billion|million|thousand|\bbn\b|\bmn\b|\btn\b|万亿|十亿|千万|百万|亿|万|千'
     pattern=r'(?<![A-Za-z0-9.])('+number+r')\s*('+scale+r'|bn\b|mn\b|tn\b)?'
@@ -62,7 +67,8 @@ def numeric_values(text):
             # Currency shorthand such as $3m, but not a physical 3 m length.
             currency=re.search(r'[$£€]\s*$',text[max(0,match.start()-6):match.start()])
             shorthand=re.match(r'([mbt])\b',text[match.end():],re.I)
-            if multiplier==1 and shorthand and currency:multiplier={'m':10**6,'b':10**9,'t':10**12}[shorthand[1].lower()]
+            count_shorthand=shorthand and re.match(r'm\s+(?:tonnes?|tons?|barrels?|people|homes?|households?|vehicles?)\b',text[match.end():],re.I)
+            if multiplier==1 and shorthand and (currency or count_shorthand):multiplier={'m':10**6,'b':10**9,'t':10**12}[shorthand[1].lower()]
             unit=re.match(UNIT_PATTERN,text[match.end():])
             if unit:multiplier*=unit_scale(unit[0])
             values.add(Decimal(match[1].replace(',',''))*multiplier)
@@ -73,6 +79,19 @@ def numeric_values(text):
         left=Decimal(match[1].replace(',',''));values.discard(left);values.add(left*unit_scale(match[3]))
     return values
 
+def target_numeric_values(text):
+    # Ordinal words (20th -> 第二十届) are a valid translation. Restrict this
+    # normalization to explicit ordinals; do not infer quantities from prose.
+    digits={'零':0,'一':1,'二':2,'两':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9}
+    def ordinal(match):
+        value=0;part=0
+        for char in match[1]:
+            if char in digits:part=digits[char]
+            else:value+=(part or 1)*{'十':10,'百':100}[char];part=0
+        return '第'+str(value+part)
+    normalized=re.sub(r'第([零一二两三四五六七八九十百]+)(?=[届次个期])',ordinal,text)
+    return numeric_values(text)|numeric_values(normalized)
+
 def valid_translation(source,target,language):
     target=str(target or '').strip()
     if not target or len(target)<max(12,len(source)*.10):return False
@@ -80,7 +99,7 @@ def valid_translation(source,target,language):
     if language=='en' and not re.search(r'[A-Za-z]{3}',target):return False
     # Unit-aware magnitudes allow 2 billion -> 20亿; retain the source when a
     # numeral may have been omitted. Date-month names need no fabricated digit.
-    if not numeric_values(source)<=numeric_values(target):return False
+    if not numeric_values(source)<=target_numeric_values(target):return False
     return not re.search(r'来源消息显示|主题上属于|保守编译|as an ai|ignore previous instructions',target,re.I)
 
 def _tasks(records,cache):
@@ -95,7 +114,8 @@ def _tasks(records,cache):
             targets=['zh'] if lang=='en' else ['en'] if lang=='zh' else ['zh','en']
             if key in cache and not all(isinstance(cache[key],dict) and isinstance(cache[key].get('title_'+target),str) and valid_translation(part,cache[key].get('text_'+target),target) for target in targets):cache.pop(key)
             if key not in cache:tasks.append({'id':key,'text_id':row['text_id'],'chunk':i,'source_language':lang,
-                'title':row['title_original'],'text':part,'source_hash':row['text_sha256']})
+                'title':row['title_original'],'text':part,'source_hash':row['text_sha256'],
+                'retry':row.get('translation_status')=='pending_validation'})
         expected[row['text_id']]={'ids':ids,'language':lang}
     return tasks,expected
 
@@ -129,7 +149,8 @@ def translate_corpus(root,model=None,*,max_requests=4,workers=2):
     cache={r['id']:r for r in load_jsonl(path)};tasks,expected=_tasks(records,cache)
     batches=[];batch=[];chars=0
     for task in tasks:
-        if batch and (len(batch)>=20 or chars+len(task['text'])>11000):batches.append(batch);batch=[];chars=0
+        retry=task.get('retry') or (batch and batch[0].get('retry'))
+        if batch and (len(batch)>=(4 if retry else 20) or chars+len(task['text'])>(4000 if retry else 11000)):batches.append(batch);batch=[];chars=0
         batch.append(task);chars+=len(task['text'])
     if batch:batches.append(batch)
     max_requests=max(0,min(400,max_requests));batches=batches[:max_requests]

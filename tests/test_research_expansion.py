@@ -63,6 +63,13 @@ class ResearchExpansionTests(unittest.TestCase):
         self.assertEqual(apply_translations([row],cache,expected),1)
         self.assertEqual(row['source_text'],TEXT);self.assertEqual(row['source_text_en'],TEXT)
         self.assertEqual(row['source_text_zh'],ZH);self.assertFalse(_tasks([row],cache)[0])
+    def test_typography_and_contextual_million_are_equivalent(self):
+        self.assertEqual(numeric_values('CO 2 emissions: 450m tonnes'),numeric_values('二氧化碳排放：4.5亿吨'))
+        self.assertEqual(numeric_values('210m barrels'),numeric_values('2.1亿桶'))
+        self.assertEqual(numeric_values('700 -megawatt 250 -MW'),numeric_values('700兆瓦250兆瓦'))
+        self.assertEqual(numeric_values('135 kph'),numeric_values('每小时135公里'))
+        self.assertEqual(numeric_values('2m sea level'),{2})
+        self.assertTrue(valid_translation('The 20th annual climate meeting was held in 2026.','第二十届年度气候会议于2026年举行。','zh'))
     def test_source_change_invalidates_cache(self):
         row=record();tasks,_=_tasks([row],{});cache={tasks[0]['id']:True}
         row['source_text']+=' More evidence.';row['text_sha256']=hashlib.sha256(row['source_text'].encode()).hexdigest()
