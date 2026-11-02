@@ -88,7 +88,7 @@ add(sid,'loss_support','up to £60 million for Loss and Damage','宣布最高600
 sid=source('CN-ADAPT-2026-EXP','CN','https://www.mee.gov.cn/ywdt/xwfb/202606/t20260617_1159586.shtml','中国适应气候变化进展报告（2025）发布','2026-06-17','生态环境部','Ministry of Ecology and Environment',
     ['锚定2035年气候适应型社会基本建成的总体目标','必须加快提升适应气候变化能力，有效化解系统性气候风险'],lang='zh')
 add(sid,'adaptation_plans','锚定2035年气候适应型社会基本建成的总体目标','以2035年基本建成气候适应型社会为总体目标，持续完善适应工作体系。','Retains the overall objective of substantially establishing a climate-adaptive society by 2035.')
-add(sid,'science_risk','有效化解系统性气候风险','将化解系统性气候风险列为适应工作的明确方向，不将单一灾害事件等同于长期趋势。','Explicitly prioritises addressing systemic climate risks in adaptation action.')
+add(sid,'science_risk','有效化解系统性气候风险','将化解系统性气候风险列为适应工作的明确方向。','Explicitly prioritises addressing systemic climate risks in adaptation action.')
 sid=source('CN-EARLY-2025-EXP','CN','https://www.mee.gov.cn/ywdt/xwfb/202506/t20250625_1121907.shtml','中国适应气候变化进展报告（2024）发布','2025-06-25','生态环境部','Ministry of Ecology and Environment',
     ['启动气候变化南南合作早期预警旗舰项目','为其他发展中国家提高早期预警和适应气候变化能力提供支持'],lang='zh')
 add(sid,'adaptation_warning','启动气候变化南南合作早期预警旗舰项目','通过气候变化南南合作早期预警旗舰项目，支持其他发展中国家提高预警和适应能力。','Uses a South–South early-warning flagship project to support developing countries’ warning and adaptation capabilities.',reason=('为其他发展中国家提高早期预警和适应气候变化能力提供支持','支持其他发展中国家的预警和适应能力。','Support other developing countries’ warning and adaptation capacity.'))
