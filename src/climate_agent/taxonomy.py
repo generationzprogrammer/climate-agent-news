@@ -149,6 +149,9 @@ def country_mentions_with_evidence(text: str) -> list[dict]:
     """
     text=str(text or '')
     masked=re.sub(r'https?://\S+',lambda m:' '*len(m.group()),text)
+    # A country/city inside a publisher's brand is not a geographic reference
+    # to the event (especially RSS headlines with a trailing publisher name).
+    masked=re.sub(r'\b(?:The New York Times|New York Times|Yahoo (?:Finance|News)(?: (?:Singapore|UK|Australia))?|South China Morning Post|China Daily|The Times of India|Japan Times|France 24)\b',lambda m:' '*len(m.group()),masked,flags=re.I)
     # The Korean Peninsula is a region, not an explicit North-Korean reference.
     masked=re.sub('朝鲜半岛',lambda m:' '*len(m.group()),masked)
     pattern,terms=_country_patterns();index=_country_by_code();result=[]

@@ -24,5 +24,9 @@ class CountryEvidenceTests(unittest.TestCase):
     def test_long_official_names_and_territorial_names_are_not_split(self):
         self.assertEqual(self.codes('Democratic People’s Republic of Korea climate submission'),{'KP'})
         self.assertEqual(self.codes('U.S. Virgin Islands adaptation programme'),{'VI'})
+    def test_publisher_brand_does_not_supply_an_event_country(self):
+        self.assertEqual(self.codes('China approves climate plan - Yahoo News Singapore'),{'CN'})
+        self.assertEqual(self.codes('Fiji adaptation policy - The New York Times'),{'FJ'})
+        self.assertEqual(self.codes('The Australian government expands climate funding'),{'AU'})
 
 if __name__=='__main__':unittest.main()
