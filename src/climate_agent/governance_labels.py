@@ -33,6 +33,36 @@ TOOL_PATTERNS = {
  'cooperation':r'bilateral agreement|memorandum of understanding|technology transfer|双边协定|谅解备忘录|技术转让',
 }
 STAGES={'proposed':r'proposed|proposal|draft law|拟议|草案|提案','adopted':r'adopted|approved|enacted|通过|批准|颁布','effective':r'entered into force|takes? effect|生效|施行','implemented':r'implemented|implementation|实施|执行','target':r'target|pledge|commitment|目标|承诺'}
+GOVERNANCE_ORGANIZATIONS={
+ 'IPCC':('IPCC','Intergovernmental Panel on Climate Change','政府间气候变化专门委员会'),
+ 'WMO':('World Meteorological Organization','WMO','世界气象组织'),
+ 'UNEP':('United Nations Environment Programme','UNEP','联合国环境规划署'),
+ 'GCF':('Green Climate Fund','绿色气候基金'),
+ 'GEF':('Global Environment Facility','全球环境基金'),
+ 'WORLD_BANK':('World Bank','世界银行'),
+ 'IMF':('International Monetary Fund','国际货币基金组织'),
+ 'AOSIS':('Alliance of Small Island States','AOSIS','小岛屿国家联盟'),
+ 'G77':('Group of 77','G77','七十七国集团'),
+ 'UNDP':('United Nations Development Programme','UNDP','联合国开发计划署'),
+}
+
+def governance_organization_evidence(title,body):
+    result=[]
+    for field,value in [('title',title),('source_text',body)]:
+        lower=value.lower()
+        if len(lower)!=len(value):lower=value  # Conservative Unicode-offset fallback.
+        for code,terms in GOVERNANCE_ORGANIZATIONS.items():
+            count=0
+            for term in terms:
+                start=lower.find(term.lower())
+                while start>=0 and count<3:
+                    end=start+len(term)
+                    left=value[start-1:start] if start else ''
+                    right=value[end:end+1]
+                    if not term.isascii() or not ((left and left.isascii() and left.isalnum()) or (right and right.isascii() and right.isalnum())):
+                        result.append({'label_type':'organization','label_id':code,'field':field,'start':start,'end':end,'quote':value[start:end]});count+=1
+                    start=lower.find(term.lower(),end)
+    return result
 
 def _evidence(pattern, field, value, limit=3):
     return [{'field':field,'start':m.start(),'end':m.end(),'quote':value[m.start():m.end()]} for m in list(pattern.finditer(value))[:limit]]
@@ -60,6 +90,8 @@ def label_text(title: str, body: str, *, countries: bool = True) -> dict:
             if es:
                 orgs.append(code);evidence += [{'label_type':'organization','label_id':code,**e} for e in es]
     country_codes=set()
+    extra_org=governance_organization_evidence(title,body)
+    evidence+=extra_org;orgs.extend(e['label_id'] for e in extra_org)
     if countries:
         for field,value in [('title',title),('source_text',body)]:
             count=defaultdict(int)

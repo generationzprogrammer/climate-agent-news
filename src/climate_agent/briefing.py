@@ -426,8 +426,6 @@ def _publishable_candidates(db: Database) -> list[dict]:
     for row in rows:
         metadata = _decode_json(row.pop("metadata_json"), {})
         row["source_name"] = metadata.get("publisher_name") or row["source_name"]
-        from .publisher_recovery import public_homepage
-        row["publisher_homepage"] = public_homepage(metadata.get("publisher_homepage"))
         row["topics"] = [TOPIC_ZH_ALIASES.get(topic, topic) for topic in _decode_json(row.pop("topics_json"), [])]
         row["numbers"] = _decode_json(row.pop("numbers_json"), [])
         row["summary_zh"] = metadata.get("summary_zh")

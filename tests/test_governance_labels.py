@@ -4,6 +4,9 @@ from climate_agent.governance_labels import label_text,group_brief_items,TOPICS
 class GovernanceTests(unittest.TestCase):
     def test_taxonomy(self):
         self.assertEqual(len(TOPICS),12);self.assertEqual(len({t[0] for t in TOPICS}),12)
+    def test_governance_organizations(self):
+        x=label_text('IPCC and World Bank discuss climate finance','The Green Climate Fund supports adaptation.')
+        self.assertTrue({'IPCC','WORLD_BANK','GCF'}.issubset(x['organization_mentions']))
     def test_country_not_substring(self):
         x=label_text('欧盟将对发展中国家提供气候资金','')
         self.assertNotIn('CN',x['country_mentions']);self.assertIn('EU',x['organization_mentions'])
