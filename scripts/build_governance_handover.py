@@ -11,7 +11,7 @@ from concurrent.futures import ProcessPoolExecutor
 from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
-from climate_agent.governance_labels import VERSION, TOPICS, TOOL_PATTERNS, STAGES, label_text
+from climate_agent.governance_labels import VERSION, TOPICS, TOOL_PATTERNS, STAGES, GOVERNANCE_ORGANIZATIONS, label_text
 from climate_agent.taxonomy import country_index, ORGANIZATION_GROUPS
 
 def dump(path,obj):path.write_text(json.dumps(obj,ensure_ascii=False,indent=2),encoding='utf-8')
@@ -146,6 +146,8 @@ def main():
     dump(out/'policy_timeline.json',timeline)
     table(out/'policy_document_links.csv',['event_id','document_key','relation','human_verified'],milestone_links)
     taxonomy={'version':VERSION,'topics':[{'id':x[0],'parent':x[1],'name_zh':x[2],'name_en':x[3],'pattern':x[4]} for x in TOPICS],'policy_tools':TOOL_PATTERNS,'policy_stages':STAGES,'countries':country_index(),'organizations':[{'id':c,'name_zh':n} for g in ORGANIZATION_GROUPS for c,n,_ in g['items']],'unknown_policy':'unclassified; never force equal class sizes','tag_semantics':'text mentions only; not asserted policy stance, cooperation, jurisdiction, impact or causality'}
+    known_orgs={r['id'] for r in taxonomy['organizations']}
+    taxonomy['organizations'] += [{'id':k,'name_zh':v[-1],'terms':list(v)} for k,v in GOVERNANCE_ORGANIZATIONS.items() if k not in known_orgs]
     dump(out/'taxonomy.json',taxonomy)
     assert conn.execute('SELECT COUNT(*) FROM evidence e LEFT JOIN articles a USING(document_key) WHERE a.document_key IS NULL').fetchone()[0]==0
     assert conn.execute('SELECT COUNT(*) FROM articles').fetchone()[0]==sum(counts[c] for c,_ in inputs)
