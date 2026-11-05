@@ -421,6 +421,8 @@ def _publishable_candidates(db: Database) -> list[dict]:
     for row in rows:
         metadata = _decode_json(row.pop("metadata_json"), {})
         row["source_name"] = metadata.get("publisher_name") or row["source_name"]
+        from .publisher_recovery import public_homepage
+        row["publisher_homepage"] = public_homepage(metadata.get("publisher_homepage"))
         row["topics"] = [TOPIC_ZH_ALIASES.get(topic, topic) for topic in _decode_json(row.pop("topics_json"), [])]
         row["numbers"] = _decode_json(row.pop("numbers_json"), [])
         row["summary_zh"] = metadata.get("summary_zh")
@@ -701,7 +703,12 @@ def render_markdown(payload: dict) -> str:
         f"# 国际气候情报今日简报｜{meta['date']}", "", f"> {meta['notice']}", "",
         "## 今日重要情报", "",
     ]
-    for index, item in enumerate(payload.get("intelligence", []), 1):
+    from .governance_labels import group_brief_items
+    ordered=[]
+    for section,items in group_brief_items(payload.get('intelligence',[])):
+        ordered.extend((section if i==0 else None,item) for i,item in enumerate(items))
+    for index, (section,item) in enumerate(ordered, 1):
+        if section: lines.extend([f'## {section}', ''])
         title = item.get("title_zh") or item["title_original"]
         summary = item.get("summary_zh") or factual_fallback_summary(item)
         theme = item.get("theme_zh") or "气候动态"
@@ -728,14 +735,14 @@ def weekly_report_payload(archive: dict) -> dict:
         _prepare_public_item(dict(record)) for record in (archive.get("records") or [])
         if record.get("title_zh") and not is_generic_title(record.get("title_zh"))
     ]
-    week_items = select_latest_week(records, limit=70)
+    week_items = select_latest_week(records, limit=100)
     latest_day = max((_published_day(item.get("published_at")) for item in week_items), default=datetime.now(BEIJING_TZ).date())
     start_day = latest_day - timedelta(days=6)
     topic_counts = Counter(topic for item in week_items for topic in item.get("topics", []) if topic)
     place_counts = Counter((item.get("places") or [{}])[0].get("name_zh") for item in week_items if item.get("places"))
     source_counts = Counter(_source_key(item) for item in week_items)
     daily_counts = Counter((_published_day(item.get("published_at")) or latest_day).isoformat() for item in week_items)
-    highlights = balanced_select(week_items, 10)
+    highlights = balanced_select(week_items, 24)
     observations: list[str] = []
     if topic_counts:
         primary_topic, primary_count = topic_counts.most_common(1)[0]
@@ -776,14 +783,20 @@ def render_weekly_markdown(report: dict) -> str:
     for item in report.get("observations", []):
         lines.append(f"- {item}")
     lines.extend(["", "## 值得重点阅读的情报", ""])
-    for index, item in enumerate(report.get("highlights", []), 1):
+    from .governance_labels import group_brief_items
+    ordered=[]
+    for section,items in group_brief_items(report.get('highlights',[])):
+        ordered.extend((section if i==0 else None,item) for i,item in enumerate(items))
+    for index, (section,item) in enumerate(ordered, 1):
+        if section: lines.extend([f'## {section}', ''])
         lines.extend([
             f"### {index}. {item.get('title_zh') or item.get('title_original')}", "",
             item.get("summary_zh") or factual_fallback_summary(item), "",
             f"来源：{item.get('source_name', '来源待核')}｜{item.get('published_at', '时间待核')}｜主题：{item.get('theme_zh') or '气候动态'}", "",
         ])
     lines.extend(["## 原文链接", ""])
-    for index, link in enumerate(report.get("links", []), 1):
+    ordered_links=[{'title':item.get('title_zh') or item.get('title_original'),'url':item.get('canonical_url')} for _,item in ordered if item.get('canonical_url')]
+    for index, link in enumerate(ordered_links, 1):
         lines.append(f"{index}. {link.get('title')}：{link.get('url')}")
     lines.extend(["", "## 退订", "", "如通过邮件收到本周报，可回复邮件标题“退订气候周报”；管理员应在下一次发送前从 CLIMATE_WEEKLY_SUBSCRIBERS Secret 中移除该邮箱。", ""])
     return "\n".join(lines)

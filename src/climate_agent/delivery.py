@@ -36,18 +36,23 @@ def build_push_message(payload: dict, public_url: str, *, max_items: int = 3) ->
     return "\n".join(lines)
 
 
-def build_weekly_message(report: dict, public_url: str, *, max_items: int = 7, language: str = "zh") -> str:
+def build_weekly_message(report: dict, public_url: str, *, max_items: int = 24, language: str = "zh") -> str:
     meta = report.get("meta", {})
     site = public_url.rstrip('/') + '/' if public_url else "https://generationzprogrammer.github.io/climate-agent-news/"
+    from .governance_labels import group_brief_items
+    ordered=[]
+    for section,items in group_brief_items(report.get('highlights',[])[:max(1,min(max_items,24))],language):
+        ordered.extend((section if i==0 else None,item) for i,item in enumerate(items))
     if language == "en":
         from .english_brief import english_fields
         lines = [f"GREEN Weekly Climate Briefing | {meta.get('start_date', '')} – {meta.get('end_date', '')}",
                  f"This week's archive covers {meta.get('total', 0)} climate news records.", "", "Selected developments", ""]
-        for index, item in enumerate(report.get("highlights", [])[:max(1, min(max_items, 10))], 1):
+        for index, (section,item) in enumerate(ordered, 1):
+            if section: lines.extend([section, ''])
             title, summary = english_fields(item)
             lines.extend([f"{index}. {title}", summary, f"Source: {item.get('canonical_url', '')}", ""])
         lines.extend([f"Explore the interactive map and news archive: {urljoin(site, './cop31/?lang=en')}",
-                      f"Today's English PDF: {urljoin(site, './data/daily_brief_en.pdf')}",
+                      f"English weekly PDF: {urljoin(site, './data/weekly_report_en.pdf')}",
                       "Unsubscribe or change language: open the website, choose Subscribe and use the same email address. You can also reply with 'unsubscribe'."])
         return "\n".join(lines)
     lines = [
@@ -59,10 +64,12 @@ def build_weekly_message(report: dict, public_url: str, *, max_items: int = 7, l
     for observation in report.get("observations", [])[:3]:
         lines.append(f"- {_clip(observation, 130)}")
     lines.extend(["", "重点阅读："])
-    for index, item in enumerate(report.get("highlights", [])[: max(1, min(max_items, 10))], 1):
+    for index, (section,item) in enumerate(ordered, 1):
+        if section: lines.extend([section, ''])
         lines.extend([
             f"{index}. [{_clip(item.get('theme_zh') or '气候动态', 12)}] {_clip(item.get('title_zh') or item.get('title_original'), 54)}",
-            f"概括：{_clip(item.get('summary_zh') or '概要待补充。', 120)}",
+            item.get('summary_zh') or '概要待补充。',
+            f"原文：{item.get('canonical_url', '')}",
             "",
         ])
     lines.append(f"查看全球地图与最新情报：{urljoin(site, './cop31/')}")

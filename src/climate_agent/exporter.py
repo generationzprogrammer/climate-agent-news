@@ -98,6 +98,7 @@ def export_static_site(
     (data_dir / "weekly_report.json").write_text(json.dumps(weekly_report, ensure_ascii=False, indent=2), encoding="utf-8")
     (data_dir / "weekly_report.md").write_text(render_weekly_markdown(weekly_report), encoding="utf-8")
     weekly_pdf_path = write_weekly_report_pdf(weekly_report, data_dir / "weekly_report.pdf")
+    write_weekly_report_pdf(weekly_report, data_dir / "weekly_report_en.pdf", language="en")
     (data_dir / "subscription.json").write_text(json.dumps({
         "endpoint": os.getenv("CLIMATE_SUBSCRIBE_ENDPOINT", ""),
         "unsubscribe_endpoint": os.getenv("CLIMATE_UNSUBSCRIBE_ENDPOINT", ""),

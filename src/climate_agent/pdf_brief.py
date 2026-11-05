@@ -145,10 +145,12 @@ def write_daily_brief_pdf(payload: dict, path: Path, *, language: str = "zh") ->
     font = "Times-Roman" if english else "STSong-Light"
     heading_font = "Times-Bold" if english else "STSong-Light"
     date = payload.get("meta", {}).get("latest_news_date") or payload.get("meta", {}).get("date", "")
-    title = "Daily climate intelligence" if english else "全球气候情报简报"
+    weekly = payload.get('edition') == 'weekly'
+    title = ("Weekly climate intelligence" if weekly else "Daily climate intelligence") if english else ("全球气候情报周报" if weekly else "全球气候情报简报")
     styles = {
         "title": ParagraphStyle("title", fontName=heading_font, fontSize=25, leading=32, spaceAfter=10, keepWithNext=True),
         "headline": ParagraphStyle("headline", fontName=heading_font, fontSize=14, leading=20, spaceAfter=6, wordWrap="CJK" if not english else None),
+        "section": ParagraphStyle("section", fontName=heading_font, fontSize=17, leading=24, spaceBefore=16, spaceAfter=10, keepWithNext=True, textColor=colors.HexColor("#174d45")),
         "body": ParagraphStyle("body", fontName=font, fontSize=11, leading=18, spaceAfter=6, wordWrap="CJK" if not english else None),
         "meta": ParagraphStyle("meta", fontName=font, fontSize=9, leading=13, textColor=colors.HexColor("#555555"), spaceAfter=5),
         "link": ParagraphStyle("link", fontName=font, fontSize=9, leading=14, spaceAfter=10, splitLongWords=True, wordWrap="CJK" if not english else None),
@@ -168,14 +170,22 @@ def write_daily_brief_pdf(payload: dict, path: Path, *, language: str = "zh") ->
                                  title=title, author="GREEN", pageCompression=1)
     records = payload.get("intelligence", [])
     story = [para(title, "title"), para(f"{date}  |  {len(records)} stories  |  Beijing time" if english else f"{date}　北京时间　共 {len(records)} 条", "meta"), Spacer(1, 14)]
+    from .governance_labels import group_brief_items
     links = []
-    for index, item in enumerate(records, 1):
+    ordered = []
+    for section, items in group_brief_items(records, language):
+        ordered.extend((section if index == 0 else None, item) for index, item in enumerate(items))
+    for index, (section, item) in enumerate(ordered, 1):
+        if section:
+            story.append(para(section, 'section'))
         headline, summary = english_fields(item) if english else (item.get("title_zh") or item.get("title_original") or "", item.get("summary_zh") or "")
         source = item.get("source_name") or ""
         url = item.get("canonical_url") or ""
         if english and not english_text(source):
             source = urlsplit(url).hostname or "Source"
-        story.append(KeepTogether([para(f"{index:02d}  {headline}", "headline"), para(source, "meta"), para(summary), Spacer(1, 13)]))
+        # Long summaries may break across pages; headline/source stay together.
+        story.append(KeepTogether([para(f"{index:02d}  {headline}", "headline"), para(source, "meta")]))
+        story.extend([para(summary), Spacer(1, 13)])
         if url.startswith(("https://", "http://")):
             links.append((index, headline, url))
     if links:
@@ -198,8 +208,9 @@ def write_daily_brief_pdf(payload: dict, path: Path, *, language: str = "zh") ->
     return path
 
 
-def write_weekly_report_pdf(report: dict, path: Path) -> Path:
-    return _write_pdf(_weekly_lines(report), path)
+def write_weekly_report_pdf(report: dict, path: Path, *, language: str = 'zh') -> Path:
+    meta=report.get('meta',{})
+    return write_daily_brief_pdf({'edition':'weekly','meta':{'date':f"{meta.get('start_date','')} - {meta.get('end_date','')}"},'intelligence':report.get('highlights',[])},path,language=language)
 
 
 def _write_pdf(lines: list[tuple[str, int, int]], path: Path) -> Path:
