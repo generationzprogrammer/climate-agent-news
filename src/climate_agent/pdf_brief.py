@@ -183,9 +183,9 @@ def write_daily_brief_pdf(payload: dict, path: Path, *, language: str = "zh") ->
         url = item.get("canonical_url") or ""
         if english and not english_text(source):
             source = urlsplit(url).hostname or "Source"
-        # Long summaries may break across pages; headline/source stay together.
-        story.append(KeepTogether([para(f"{index:02d}  {headline}", "headline"), para(source, "meta")]))
-        story.extend([para(summary), Spacer(1, 13)])
+        # Keep a normal-length story together. ReportLab releases oversized
+        # groups so an unusually long, valid source paragraph can still split.
+        story.append(KeepTogether([para(f"{index:02d}  {headline}", "headline"), para(source, "meta"), para(summary), Spacer(1, 13)]))
         if url.startswith(("https://", "http://")):
             links.append((index, headline, url))
     if links:

@@ -28,5 +28,8 @@ class GovernanceTests(unittest.TestCase):
         for text in ('New Mexico, China, United States and South Africa.','欧盟与发展中国家、英国、印度、南非。','North Korea and South Korea; United States of America.','U.S. dollar and US$ 5 million.','Republic of the Congo and Democratic Republic of the Congo.'):
             old=[(m.start(),m.end(),terms.get(_normalise(m.group()),())) for m in pattern.finditer(text)]
             self.assertEqual(old,_literal_country_spans(text))
+    def test_repeated_chinese_headline_not_repeated_in_brief(self):
+        from climate_agent.briefing import _near_duplicate
+        self.assertTrue(_near_duplicate({'title_zh':'巴西总统将出席气候峰会','title_original':'Lula to attend summit'},{'title_zh':'巴西总统将出席气候峰会','title_original':'Brazil president confirms trip'}))
 
 if __name__=='__main__':unittest.main()

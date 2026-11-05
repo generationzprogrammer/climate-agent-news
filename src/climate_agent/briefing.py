@@ -173,6 +173,11 @@ def _title_units(item: dict) -> set[str]:
 
 
 def _near_duplicate(left: dict, right: dict) -> bool:
+    # Identical translated headlines can accompany different syndicated English
+    # titles. Suppress the repeat only in brief selection, never delete archives.
+    lzh=''.join(re.findall(r'[\u4e00-\u9fff0-9]',left.get('title_zh') or ''))
+    rzh=''.join(re.findall(r'[\u4e00-\u9fff0-9]',right.get('title_zh') or ''))
+    if len(lzh)>=8 and lzh==rzh:return True
     left_units, right_units = _title_units(left), _title_units(right)
     if not left_units or not right_units:
         return False
