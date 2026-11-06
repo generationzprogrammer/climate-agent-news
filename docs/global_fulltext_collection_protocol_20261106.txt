@@ -20,6 +20,7 @@
 采用14个一级议题、83个二级议题。用户提供的图片分项数量合计83；图片末尾的77不作为实际字典长度。G12.04—G12.06及G14.01—G14.06为经用户授权补充的9项，其余来自提供的分类内容。这是一套研究分类，不是UNFCCC官方分类标准。
 
 国家和地区使用ISO alpha-2、alpha-3代码。名称出现、标题或导语中的重点候选、机构、政策工具、实施阶段分别存储。针对歧义名称保留上下文条件，例如Jersey不能仅凭普通单词匹配。来源所在国不自动等于报道涉及国。
+代码表采用本次项目所用的现行地区口径。跨年代研究需另行处理历史政体、独立时间和边界变更，不能直接把现行代码解释为历史疆域。
 
 每条标签附正文或标题中的证据位置，start从0计数，end为不包含的结束位置；位置单位为Unicode字符，不是UTF-8字节。证据须能回读为完全相同的原文。主题采用可审计词汇和上下文规则，标签属于机器候选，不能当作已经独立人工验证的国家立场、因果关系或外交合作关系。未命中可靠证据时允许不分类。
 
@@ -49,3 +50,21 @@ policy_timeline*.json：沿用上一版可追溯政策事件；事件日期与�
 本次流程的可复用部分是：带时间边界的采集快照、来源级验证、可续跑检查点、原文证据地址、质量分层以及覆盖缺口补充。API采集、OCR和正则识别本身是成熟方法。论文可报告实际吞吐量、来源覆盖、去重和质量筛选结果；是否构成专利创新仍需要现有技术检索。
 
 当前语料不是全球新闻的概率样本，早期年份、语言和出版方分布可能不均衡。自动标签尚需分层人工标注集评估精确率和召回率。不得把“已下载”“规则通过”“人工验证”三个概念混写。
+
+八、实现依据与可引用资料
+WordPress REST API官方说明：https://developer.wordpress.org/rest-api/reference/posts/ 。使用公开文章接口的content字段；date为站点时间，date_gmt为GMT时间，二者在来源元数据中区分。接口存在并不代表取得版权再分发授权。
+Trafilatura官方文档：https://trafilatura.readthedocs.io/en/latest/ 。用于网页正文提取或对照；对已取得完整语义块的公开API正文，避免重复调用备用提取器。可引用：Barbaresi, A. (2021). Trafilatura: A Web Scraping Library and Command-Line Tool for Text Discovery and Extraction. ACL-IJCNLP System Demonstrations, 122–131. https://aclanthology.org/2021.acl-demo.15/ 。
+RapidOCR项目文档：https://rapidai.github.io/RapidOCRDocs/ 。历史扫描页的识别模型、版本和修正记录单独保存；OCR结果不以大语言模型生成文本代替。
+上述软件与接口属于既有技术。项目方法的评价应基于来源可追溯性、完整性分层、缺口补采与证据标签的实测结果，而非将通用组件本身声称为原创算法。
+
+九、关键运行命令
+在独立环境中设置PYTHONPATH为src;scripts。以下命令均在项目根目录执行；输入快照、来源配置与旧库文件的放置位置见交接说明。
+python scripts/collect_global_expansion.py --minutes 120 --workers 4
+python scripts/collect_global_expansion.py --minutes 120 --workers 4 --ledger extra --probes source_probes_round2.json
+其他来源轮次同样通过--probes指定对应配置，不应绕过已经返回拒绝访问或限流的站点。
+python scripts/label_global_expansion.py --prepare
+python scripts/label_global_expansion.py --watch --minutes 240 --part 0 --parts 8
+离线标注可启动0至7号分片，每个编号只能有一个活动进程；更改分片数前先停止旧进程，再运行repartition_label_cache.py保留检查点。不要在标注过程中修改分类代码。
+停止采集并确认标注完成后，依次执行export_global_expansion.py --name 新快照名、audit_global_snapshot.py --snapshot 新快照名和package_global_expansion.py --snapshot 新快照名。导出器拒绝把未完成标注的输入封装为完整交付。
+python scripts/run_expansion_tests.py
+网络状态、出版方内容和软件版本可能变化。复现统计优先使用交接快照与校验值；重新访问网页属于新一次采集，应保留新的运行日期和版本。

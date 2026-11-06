@@ -1,18 +1,19 @@
 """Publisher-page cross-check of API extraction, with inspectable comparisons."""
-import concurrent.futures as cf,gzip,json,re,random,collections,difflib,time
+import concurrent.futures as cf,gzip,json,re,random,collections,difflib,time,argparse
 from pathlib import Path
 import fulltext_pilot as p
 import bulk_fulltext as b
 ROOT=p.ROOT;PRIVATE=ROOT/'data/private_global_expansion_20261106';OUT=ROOT/'analysis/global_expansion_20261106'
-def main():
+def main(args):
  groups=collections.defaultdict(list)
  for file in sorted(PRIVATE.glob('*.jsonl.gz')):groups[file.name.rsplit('_',1)[0]].append(file)
- selected=[]
+ selected=[];rng=random.Random(20261106)
  for source,files in groups.items():
-  for file in dict.fromkeys([files[0],files[len(files)//2],files[-1]]):
+  chosen=rng.sample(files,min(args.random_per_source,len(files))) if args.random_per_source else dict.fromkeys([files[0],files[len(files)//2],files[-1]])
+  for file in chosen:
    rows=[json.loads(s) for s in gzip.open(file,'rt',encoding='utf-8')]
    good=[d for d in rows if d.get('research_eligible')]
-   if good:selected.append(good[len(good)//2])
+   if good:selected.append(rng.choice(good) if args.random_per_source else good[len(good)//2])
  p.ACCEPT_ENCODING='gzip';p.TIMEOUT=25;fetcher=p.Fetcher();results=[]
  def audit(d):
   result={'id':d['id'],'source':d['source'],'url':d['url'],'api_text_sha256':d['text_sha256'],'published':d['date']}
@@ -30,6 +31,7 @@ def main():
  with cf.ThreadPoolExecutor(max_workers=4) as pool:
   for result in pool.map(audit,selected):
    results.append(result);print(json.dumps({k:result.get(k) for k in ['source','status','api_shingles_in_html','length_ratio','reason']}),flush=True)
-   p.dump(OUT/'source_crosscheck.json',{'sampling':'first/middle/latest available shard per publisher, middle eligible document, frozen at script start','samples':results,'not_a_random_label_accuracy_estimate':True})
- p.dump(OUT/'source_crosscheck_requests.json',fetcher.requests)
-if __name__=='__main__':main()
+   p.dump(OUT/(args.output+'.json'),{'sampling':('seeded random page shards per publisher, one eligible article per selected shard; seed 20261106' if args.random_per_source else 'first/middle/latest available shard per publisher, middle eligible document, frozen at script start'),'samples':results,'not_a_random_label_accuracy_estimate':True})
+ p.dump(OUT/(args.output+'_requests.json'),fetcher.requests)
+if __name__=='__main__':
+ a=argparse.ArgumentParser();a.add_argument('--random-per-source',type=int,default=0);a.add_argument('--output',default='source_crosscheck');main(a.parse_args())

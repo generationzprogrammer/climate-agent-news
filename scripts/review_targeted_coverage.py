@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import fulltext_pilot as p
 base=p.ROOT/'data/private_global_expansion_20261106';audit=base/'targeted_review_before';audit.mkdir(exist_ok=True)
 ids=['target_87555ae849486cfb6eaf65ec','target_be425b3e5bd49827bc93c0d8','target_c87c02db9b99951d4443e2fa','target_2b07a6adbb24161fd71ff368']
+ids.append('target_3f122b30bee6ba55e6389689')
 for ident in ids:
  file=base/'targeted'/(ident+'.json')
  if not file.exists():file=base/'targeted_undated'/(ident+'.json')

@@ -41,6 +41,9 @@ def main():
    text,checks=p.extract(html,title,final,compare_alternative=False)
    if len(text)<800:raise p.StopFetch('short_text')
    ok,tags=relevance(title,text)
+   if seed.get('language')=='fr':
+    matches=list(re.finditer(r'changement climatique|réchauffement|submersion|montée des eaux',title+' '+text,re.I))
+    ok=bool(matches);tags['native_relevance_matches']=[m.group() for m in matches[:8]]
    if not ok:raise p.StopFetch('relevance_needs_review')
    doc={'id':ident,'url':final,'title':title,'source':p.host(final),'source_id':'TARGETED_'+p.host(final),'language':(soup.html.get('lang','und') if soup.html else 'und'),'date':date or 'unknown','source_text':text,'text_sha256':p.digest(text.encode()),'raw_html_sha256':p.digest(raw),'acquired_at':p.stamp(),'country_retrieval_hint':seed['country_hint'],'country_hint_not_asserted':True,'collection_cohort':'targeted_geographic_supplement','rights_status':'private_research_copy_permission_not_established_for_redistribution','public_redistribution_allowed':False,**checks,**tags}
    doc.update(b.quality(doc));doc['document_genre']=seed.get('genre','news_or_commentary')

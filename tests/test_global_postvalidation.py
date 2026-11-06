@@ -19,6 +19,10 @@ class PostvalidationTests(unittest.TestCase):
         d = self.doc('New Jersey announced a climate plan.')
         self.assertNotIn('JE', d['labels']['country_mentions'])
 
+    def test_french_territory_alias(self):
+        d = self.doc('Saint-Pierre et Miquelon faces rising sea levels.')
+        self.assertIn('PM', d['labels']['country_mentions'])
+
     def test_policy_coherence_requires_climate_paragraph(self):
         d = self.doc('Policy coherence is needed for tax administration.\n\nClimate news follows.')
         self.assertFalse(any(e.get('method') == 'policy_coherence_with_climate_anchor_in_same_paragraph'

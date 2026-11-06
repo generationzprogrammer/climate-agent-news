@@ -3,6 +3,7 @@ import re
 from urllib.parse import urlsplit
 VERSION='post-label-validation-20261106-v1'
 ALIASES={'PS':r'\bPalestin(?:e|ian)\b|巴勒斯坦','PN':r'\bPitcairn\b','AX':r'\bÅland\b|\bAland Islands\b','KN':r'\bSaint Kitts and Nevis\b|\bSt\.? Kitts (?:and|&) Nevis\b'}
+ALIASES['PM']=r'\bSaint[- ]Pierre[- ](?:et|and)[- ]Miquelon\b'
 def enrich(doc):
  tags=doc['labels'];added=[]
  aliases=dict(ALIASES)
