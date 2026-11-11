@@ -1,20 +1,1696 @@
 {
   "schema_version": "1.0",
   "dataset_name": "ClimateText-100000",
-  "updated_at": "2026-11-10T18:22:00.091947+00:00",
+  "updated_at": "2026-11-11T02:19:46.170628+00:00",
   "limit": 100000,
-  "total": 4402,
+  "total": 4416,
   "statistics": {
-    "previous_total": 4397,
-    "added": 5,
-    "updated": 6,
+    "previous_total": 4415,
+    "added": 1,
+    "updated": 5,
     "rejected": 0,
     "pruned": 0,
     "duplicates_collapsed": 4,
     "tier_a": 40,
-    "tier_b": 4208
+    "tier_b": 4222
   },
   "records": [
+    {
+      "record_id": "article_ce0b8493f9663ee0",
+      "article_id": "article_ce0b8493f9663ee0",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPeHZMd2czR080MnYyUGQwOHM4Nk1EOFJ2Q3NFdGEyN2d0N0hnd3RTWmN1b1N1djVUajdxTko2S1kzSkNid2tLVnVMbnVIZEF1cktFWUNOVzdUdF9abU9fallCUnkxZVctOUd4WVR0OE5QVTMzRmZlS2ZOTjM2alFreDFydS1mT1U5?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPeHZMd2czR080MnYyUGQwOHM4Nk1EOFJ2Q3NFdGEyN2d0N0hnd3RTWmN1b1N1djVUajdxTko2S1kzSkNid2tLVnVMbnVIZEF1cktFWUNOVzdUdF9abU9fallCUnkxZVctOUd4WVR0OE5QVTMzRmZlS2ZOTjM2alFreDFydS1mT1U5?oc=5",
+      "source_id": "API004",
+      "source_name": "FBC News",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 70,
+      "title_original": "Fiji representative takes Nacula voices to COP31 - FBC News",
+      "title_zh": "斐济代表将纳库拉的声音带到COP31",
+      "summary_source": "Fiji representative takes Nacula voices to COP31 FBC News",
+      "summary_zh": "斐济代表拉维尼亚·奈瓦卢（Lavenia Naivalu）在土耳其安塔利亚举行的COP31气候变化大会上，将土著社区的关切带上全球气候舞台，呼吁对受气候变化影响最严重的人群采取有意义的行动并提供气候资金。现年43岁的奈瓦卢强调，保持1.5摄氏度温控目标以及确保气候资金流向处于气候变化最前沿的社区依然是重中之重。她已被选为地方社区和土著居民平台促进工作组的太平洋地区主要代表。本届COP31已正式开幕，会议将持续至11月20日。",
+      "title_en": "Fiji representative takes Nacula voices to COP31",
+      "summary_en": "Fiji representative Lavenia Naivalu brought the concerns of Indigenous communities to the COP31 climate summit in Antalya, Turkey, calling for meaningful action and climate finance for vulnerable populations. Naivalu prioritized keeping the 1.5-degree Celsius warming target alive and ensuring financial support reaches frontline communities. She has also been selected as the Pacific's primary representative on the Facilitative Working Group of the Local Communities and Indigenous Peoples Platform. COP31 runs until November 20.",
+      "english_fingerprint": "c9e4f50b87fbf914c1730ff22b489adfdf9209964921c2eba79b41a173f79f58",
+      "theme_zh": "气候资金与土著权益",
+      "why_zh": "该事件凸显了土著社区代表在联合国气候峰会上直接争取适应资金与温控目标的努力，体现了基层脆弱群体在国际气候谈判中的声音。",
+      "language": "multilingual",
+      "published_at": "2026-11-11T01:19:04+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "斐济",
+          "lon": 178.0,
+          "lat": -17.8
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "TR",
+          "alpha3": "TUR",
+          "name_zh": "土耳其",
+          "name_en": "Türkiye"
+        },
+        {
+          "alpha2": "FJ",
+          "alpha3": "FJI",
+          "name_zh": "斐济",
+          "name_en": "Fiji"
+        }
+      ],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "f9c726a1967e00cdc5d1407b648e83af4cae861b74bbc6d6f8952c89b4df6a42",
+      "poster_phrase": "土著声音与气候资金",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_ce0b8493f9663ee0",
+        "source_atom": {
+          "name": "FBC News",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "斐济"
+        ],
+        "country_code_atoms": [
+          "TUR",
+          "FJI"
+        ],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "该事件凸显了土著社区代表在联合国气候峰会上直接争取适应资金与温控目标的努力，体现了基层脆弱群体在国际气候谈判中的声音。"
+      },
+      "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_08beefafb91c4021",
+      "article_id": "article_08beefafb91c4021",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOWl9pcWFDTWxOY0ZkdnhDdnZXU1I5R1NRWEdCY3JtVV9WQ21hM29XRzJhNGtfbGFHeGFXYjN5NlZvcjByUXQ1OUVJTDFIZ0pPRHBHSmN4N0VIdDRwUzVENUhvLXZLX19PYlZtSm4tVmFIOVlaZ3RwLTdfY1ZXUnZuY1dNUVpSX3MwV0ROckJ6YW5vMl9hR0Q4V2xZVmcxOGNjUkpzUlJnS296Ync?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOWl9pcWFDTWxOY0ZkdnhDdnZXU1I5R1NRWEdCY3JtVV9WQ21hM29XRzJhNGtfbGFHeGFXYjN5NlZvcjByUXQ1OUVJTDFIZ0pPRHBHSmN4N0VIdDRwUzVENUhvLXZLX19PYlZtSm4tVmFIOVlaZ3RwLTdfY1ZXUnZuY1dNUVpSX3MwV0ROckJ6YW5vMl9hR0Q4V2xZVmcxOGNjUkpzUlJnS296Ync?oc=5",
+      "source_id": "API004",
+      "source_name": "The Guardian",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 76,
+      "title_original": "UN chief urges Cop31 hosts Turkey and Australia to turn fossil fuel promises into action - The Guardian",
+      "title_zh": "联合国秘书长敦促COP31主办国土耳其和澳大利亚将化石燃料承诺转化为行动",
+      "summary_source": "UN chief urges Cop31 hosts Turkey and Australia to turn fossil fuel promises into action The Guardian",
+      "summary_zh": "联合国秘书长敦促COP31的主办国土耳其和澳大利亚，将此前关于化石燃料的相关承诺切实转化为实际行动。该消息由《卫报》报道，凸显了国际社会对气候大会主办国在化石燃料减排和履约方面的切实要求。",
+      "title_en": "UN chief urges Cop31 hosts Turkey and Australia to turn fossil fuel promises into action",
+      "summary_en": "The UN chief urged COP31 hosts Turkey and Australia to turn their fossil fuel promises into concrete action, as reported by The Guardian. The call highlights international expectations for conference hosts to lead by example on fossil fuel phase-out and implementation.",
+      "english_fingerprint": "ec4bd5942a505503512bc5c3ceaa007f5c319f8234d7c7b2ee9ed198c98cdd9c",
+      "theme_zh": "化石燃料减排",
+      "why_zh": "体现了联合国最高官员对COP31主办国履行气候承诺的施压与政策导向，具有重要的外交谈判政治意义。",
+      "language": "multilingual",
+      "published_at": "2026-11-11T00:34:00+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判",
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "澳大利亚",
+          "lon": 134.0,
+          "lat": -25.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "TR",
+          "alpha3": "TUR",
+          "name_zh": "土耳其",
+          "name_en": "Türkiye"
+        },
+        {
+          "alpha2": "AU",
+          "alpha3": "AUS",
+          "name_zh": "澳大利亚",
+          "name_en": "Australia"
+        }
+      ],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "43678042deb53b7540c7e3fc962fa001c3ac704f304da7aca698b3d5db884901",
+      "poster_phrase": "敦促主办国落实化石燃料承诺",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 61,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_08beefafb91c4021",
+        "source_atom": {
+          "name": "The Guardian",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判",
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "澳大利亚"
+        ],
+        "country_code_atoms": [
+          "TUR",
+          "AUS"
+        ],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "体现了联合国最高官员对COP31主办国履行气候承诺的施压与政策导向，具有重要的外交谈判政治意义。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_edffa78622022dce",
+      "article_id": "article_edffa78622022dce",
+      "canonical_url": "https://www.bbc.co.uk/news/articles/c8wy9y37z30vo?at_medium=RSS&at_campaign=rss",
+      "source_url": "https://www.bbc.co.uk/news/articles/c8wy9y37z30vo?at_medium=RSS&at_campaign=rss",
+      "source_id": "INT014",
+      "source_name": "BBC Science & Environment",
+      "source_type": "公共媒体",
+      "authority": 5,
+      "relevance_score": 70,
+      "title_original": "'It can kill us': Kenyans fear impact of El Niño with floods predicted",
+      "title_zh": "“它会杀死我们”：肯尼亚预测将迎暴雨，民众对厄尔尼诺的影响充满恐惧",
+      "summary_source": "Forecasters warn that this year's El Niño could be one of the strongest on record, with heavy rain and flooding in Kenya.",
+      "summary_zh": "气象预报警告称，今年的厄尔尼诺现象可能是有记录以来最强烈的一次，将给肯尼亚带来强降雨和洪水。在首都内罗毕的基贝拉等非正式定居点，许多房屋紧邻恩贡河，居民对面临的灭顶之灾深感恐惧。此前在今年早些时候的长雨季中，广泛的破坏导致全国超过60人死亡，其中包括因房屋被淹触电身亡的案例。为应对可能到来的极端天气，在总统威廉·鲁托办公室属下的“气候工作”计划推动下，高可见度背心的工作人员一直在清理河床垃圾。内罗毕灾害管理主管布拉姆韦尔·西米尤指出，长年未加维护的排水系统和迅速膨胀的人口是导致灾难频发的主因，全面升级内罗毕的排污和排水系统估计需要高达1.92亿美元的投资，但面临资金短缺的困境。内罗毕河流域治理计划建议在河流周围设置缓冲区并对社区进行“人道主义搬迁”，然而不断加剧的贫困迫使大量人口继续居住在河流附近，据估计低收入定居点有多达10万人面临风险。",
+      "title_en": "'It can kill us': Kenyans fear impact of El Niño with floods predicted",
+      "summary_en": "Forecasters warn that this year's El Niño could be one of the strongest on record, bringing heavy rain and flooding to Kenya. Residents in informal settlements like Kibera in Nairobi fear for their lives following deadly floods earlier in the year that killed over 60 people. While government-backed cleanup programs are underway to clear clogged rivers and drains, local officials note that upgrading Nairobi's decades-old drainage and sewerage systems requires up to $192 million—funds that cash-strapped national and city councils struggle to raise. Up to 100,000 residents in low-income settlements remain at high risk as poverty continues to drive vulnerable populations to live close to rivers.",
+      "english_fingerprint": "8d4265a1ce9c606c6089c30afb324010c7935bdcba010bd057b81ea66ad18a32",
+      "theme_zh": "极端天气与防洪",
+      "why_zh": "突显了非洲城市在应对厄尔尼诺等极端气候事件时面临的基础设施落后与资金短缺困境，对城市气候适应规划具有现实参考价值。",
+      "language": "en",
+      "published_at": "2026-11-11T00:18:07+00:00",
+      "fetched_at": "2026-11-11T02:05:55.297208+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "肯尼亚",
+          "lon": 37.0,
+          "lat": 0.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "KE",
+          "alpha3": "KEN",
+          "name_zh": "肯尼亚",
+          "name_en": "Kenya"
+        }
+      ],
+      "organization_tags": [],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "d865a263ae5dc1c6ab733ede672c6aba7b9882bd372a88d32663b6e1f35a396a",
+      "poster_phrase": "肯尼亚迎战厄尔尼诺",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 77,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_edffa78622022dce",
+        "source_atom": {
+          "name": "BBC Science & Environment",
+          "authority": 5,
+          "type": "公共媒体"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "肯尼亚"
+        ],
+        "country_code_atoms": [
+          "KEN"
+        ],
+        "organization_atoms": [],
+        "event_atoms": [],
+        "decision_atom": "突显了非洲城市在应对厄尔尼诺等极端气候事件时面临的基础设施落后与资金短缺困境，对城市气候适应规划具有现实参考价值。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_d577380847c72f67",
+      "article_id": "article_d577380847c72f67",
+      "canonical_url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOeTIybUtFcWhydGpWdjcxVElKTTVJWmFFZHdIRWZOQWdKWUpRN1BHSFZrcUJoRDRsUzhsbVg5ZF9wOFN0blZFNzhGaVVsR3hoY0lFdXFfYmJoMW1XREx0WlhmaC1XaGhXLTljenZNNlRUakd3X0ZzS09OWVY4LTB3SHloSVAwNkttbVJfdHFJcTJIQnNmT1c4ZkFHM0ozZ2NfWkxBVW9CU1k4Sm5ZaXJjT0psTUo2QkhHRmZrSF9yTQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOeTIybUtFcWhydGpWdjcxVElKTTVJWmFFZHdIRWZOQWdKWUpRN1BHSFZrcUJoRDRsUzhsbVg5ZF9wOFN0blZFNzhGaVVsR3hoY0lFdXFfYmJoMW1XREx0WlhmaC1XaGhXLTljenZNNlRUakd3X0ZzS09OWVY4LTB3SHloSVAwNkttbVJfdHFJcTJIQnNmT1c4ZkFHM0ozZ2NfWkxBVW9CU1k4Sm5ZaXJjT0psTUo2QkhHRmZrSF9yTQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Daily Finland",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 76,
+      "title_original": "COP31 delegates call for urgent climate finance, justice for developing nations - Daily Finland",
+      "title_zh": "COP31代表呼吁提供紧迫的气候资金并为发展中国家实现气候正义",
+      "summary_source": "COP31 delegates call for urgent climate finance, justice for developing nations Daily Finland",
+      "summary_zh": "在土耳其海滨城市安塔利亚开幕的第31届联合国气候变化大会（COP31）上，来自近200个国家和地区的代表呼吁填补气候资金缺口，并为发展中国家确保气候正义。会议于周一开幕，将持续至11月20日。当前距离实现联合国2030年可持续发展议程仅剩四年，与会各方强调需要从设定目标转向实施具体解决方案。联合国教科文组织可持续发展教育主席穆罕默德·努鲁纳比在开幕式场边表示，当前仅有15%的可持续发展目标步入正轨，且许多国家未能提交用于追踪气候倡议的适当国家统计数据，导致真正的进展无法评估。",
+      "title_en": "COP31 delegates call for urgent climate finance, justice for developing nations",
+      "summary_en": "Delegates at the 31st United Nations Climate Change Conference (COP31) in Antalya, Turkey, called for closing the climate finance gap and securing climate justice for developing nations, with only four years left to deliver on the UN 2030 Agenda for Sustainable Development. Running through Nov. 20 and drawing representatives from nearly 200 countries and regions, the gathering emphasizes shifting from targets to concrete solutions. Mohammad Nurunnabi of UNESCO noted on the sidelines that only 15 percent of Sustainable Development Goals are on track, and many nations fail to submit proper national statistics to track their climate initiatives.",
+      "english_fingerprint": "240ad6d16941fa4920cf545f36857409292e484ae784113abd58c97b5ee9ec74",
+      "theme_zh": "气候资金与气候正义",
+      "why_zh": "反映了发展中国家在COP31上面临的资金缺口与履约统计难题，对国际气候资金谈判和落实2030年议程具有政策催促意义。",
+      "language": "multilingual",
+      "published_at": "2026-11-11T00:17:12+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判",
+        "气候资金"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "芬兰",
+          "lon": 26.0,
+          "lat": 64.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "TR",
+          "alpha3": "TUR",
+          "name_zh": "土耳其",
+          "name_en": "Türkiye"
+        },
+        {
+          "alpha2": "FI",
+          "alpha3": "FIN",
+          "name_zh": "芬兰",
+          "name_en": "Finland"
+        }
+      ],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "da065438e7ee8c6a469eb7ce5605b7d839b324f44460fb8fdfd5402f0986b85b",
+      "poster_phrase": "COP31呼吁填补气候资金缺口",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 61,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_d577380847c72f67",
+        "source_atom": {
+          "name": "Daily Finland",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判",
+          "气候资金"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "芬兰"
+        ],
+        "country_code_atoms": [
+          "TUR",
+          "FIN"
+        ],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "反映了发展中国家在COP31上面临的资金缺口与履约统计难题，对国际气候资金谈判和落实2030年议程具有政策催促意义。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_e64259495ec9dda5",
+      "article_id": "article_e64259495ec9dda5",
+      "canonical_url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOTUtLWGMyN3VCU1RFOVo3ODEyNndJNHp6Xzg2RWRTdXkxWnlwZnR3b3Q0S2o1V0NFV3RNUWsxOHhpTkRIbzBweVJ6NG9JWkFRZEhjUzdpTXhCZXE2Y01maERSNWxuYnBIcFZhTklIVmVjYXpPbU1DNE1uUFFUblZQNVdKaE1ITjVnRC16MDJDZWR2UWxqMEJjWjZqMA?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOTUtLWGMyN3VCU1RFOVo3ODEyNndJNHp6Xzg2RWRTdXkxWnlwZnR3b3Q0S2o1V0NFV3RNUWsxOHhpTkRIbzBweVJ6NG9JWkFRZEhjUzdpTXhCZXE2Y01maERSNWxuYnBIcFZhTklIVmVjYXpPbU1DNE1uUFFUblZQNVdKaE1ITjVnRC16MDJDZWR2UWxqMEJjWjZqMA?oc=5",
+      "source_id": "API004",
+      "source_name": "The Wild Hunt",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 88,
+      "title_original": "Climate Finance, Clean Energy and Concrete on the COP31 Agenda - The Wild Hunt",
+      "title_zh": "气候资金、清洁能源与混凝土成COP31议程焦点",
+      "summary_source": "Climate Finance, Clean Energy and Concrete on the COP31 Agenda The Wild Hunt",
+      "summary_zh": "联合国气候变化大会COP31于11月9日在土耳其安塔利亚开幕，来自190多个国家的代表参会，会议将持续至11月20日。土耳其担任东道国，澳大利亚根据去年在巴西贝伦举行的上届峰会上达成的妥协方案领导正式谈判。此次会议正值《巴黎协定》生效十年之际，在此之前全球经历了致命热浪、破坏性洪水和长期干旱。科学家预计全球变暖将暂时超过协定设定的1.5摄氏度阈值，而美国对外关系委员会预计在现有政策下，本世纪末变暖幅度将达到约2.8摄氏度。尽管太阳能、电池储能和电动汽车发展迅速，但许多国家仍然面临高借贷成本，使这些技术难以企及。",
+      "title_en": "Climate Finance, Clean Energy and Concrete on the COP31 Agenda",
+      "summary_en": "The United Nations climate summit COP31 opened in Antalya, Turkey, with delegates from over 190 countries addressing ongoing challenges in climate finance, emissions cuts, and clean energy adoption. Turkey is hosting the conference, while Australia leads formal negotiations following a compromise reached at the previous summit in Belém, Brazil. The talks coincide with the tenth anniversary of the entry into force of the Paris Agreement, coming on the heels of severe heat waves, floods, and droughts. Scientists project that global warming will temporarily exceed the 1.5°C threshold, with the Council on Foreign Relations estimating warming of about 2.8°C by century's end under current policies. Although solar, battery storage, and electric vehicles have expanded rapidly, high borrowing costs continue to hinder deployment in many developing nations.",
+      "english_fingerprint": "075a957ec485d565f4b6feec8b269b21149508ed8ba5307276ea6214ccd6da05",
+      "theme_zh": "气候资金",
+      "why_zh": "梳理了COP31大会的核心议题、地缘政治分工及当前面临的资金与变暖挑战，属于事实汇编与形势判断。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T23:14:28+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判",
+        "气候资金",
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "澳大利亚",
+          "lon": 134.0,
+          "lat": -25.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "US",
+          "alpha3": "USA",
+          "name_zh": "美国",
+          "name_en": "United States"
+        },
+        {
+          "alpha2": "TR",
+          "alpha3": "TUR",
+          "name_zh": "土耳其",
+          "name_en": "Türkiye"
+        },
+        {
+          "alpha2": "AU",
+          "alpha3": "AUS",
+          "name_zh": "澳大利亚",
+          "name_en": "Australia"
+        },
+        {
+          "alpha2": "BR",
+          "alpha3": "BRA",
+          "name_zh": "巴西",
+          "name_en": "Brazil"
+        }
+      ],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "2e7e35e68d2fd95598deaab00e4e6b98a829812727237061b4d70faeaf9808f6",
+      "poster_phrase": "COP31聚焦资金与清洁能源",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 65,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_e64259495ec9dda5",
+        "source_atom": {
+          "name": "The Wild Hunt",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判",
+          "气候资金",
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "澳大利亚"
+        ],
+        "country_code_atoms": [
+          "USA",
+          "TUR",
+          "AUS",
+          "BRA"
+        ],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "梳理了COP31大会的核心议题、地缘政治分工及当前面临的资金与变暖挑战，属于事实汇编与形势判断。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_8ca5f5ae275c4d9f",
+      "article_id": "article_8ca5f5ae275c4d9f",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTzAtbThZa1otVjE4Q3VVTllBSlQtdUZ4VlFkbEx5Z3RYS0J1ZE9OZ19OY0tJWXpCaGRZb2R5QWwzRF9OTVhCN1B0R3B6ekUyOFVaaE9veVhnNTZfOFhmWXItWHpDVVBkU2ZTTUd1MTdPbHBPUGpWdHBrTGgxN1IydXhQZjBKaEFnVFdaRXdpQTI5RFp6N3BwX1h2ekhWZVNKMGZjVVlwdm5RV1ZwcWswMXFXdTk2UmFhM2N1M21xMVJBdw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTzAtbThZa1otVjE4Q3VVTllBSlQtdUZ4VlFkbEx5Z3RYS0J1ZE9OZ19OY0tJWXpCaGRZb2R5QWwzRF9OTVhCN1B0R3B6ekUyOFVaaE9veVhnNTZfOFhmWXItWHpDVVBkU2ZTTUd1MTdPbHBPUGpWdHBrTGgxN1IydXhQZjBKaEFnVFdaRXdpQTI5RFp6N3BwX1h2ekhWZVNKMGZjVVlwdm5RV1ZwcWswMXFXdTk2UmFhM2N1M21xMVJBdw?oc=5",
+      "source_id": "API004",
+      "source_name": "TownAndCountryToday.com",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 68,
+      "title_original": "Beyond Local: Alberta approves 920-MW natural-gas power plant for AI data centre - TownAndCountryToday.com",
+      "title_zh": "超越地方：阿尔伯塔省批准用于人工智能数据中心的920兆瓦天然气发电厂",
+      "summary_source": "Beyond Local: Alberta approves 920-MW natural-gas power plant for AI data centre TownAndCountryToday.com",
+      "summary_zh": "根据地方媒体短讯，加拿大阿尔伯塔省已批准建设一座容量达920兆瓦的天然气发电厂，旨在为人工智能数据中心提供电力支撑。",
+      "title_en": "Beyond Local: Alberta approves 920-MW natural-gas power plant for AI data centre",
+      "summary_en": "Alberta has approved a 920-megawatt natural-gas power plant designed to supply electricity to an artificial intelligence data centre, according to local news reports.",
+      "english_fingerprint": "34d3a7581c00070f986b534462651d7c498bbaeb23c91fc1df40bbe5afe88567",
+      "theme_zh": "天然气发电",
+      "why_zh": "揭示了人工智能数据中心激增对区域化石能源电力供应的新需求。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T22:58:00+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国家气候承诺"
+      ],
+      "numbers": [
+        "920"
+      ],
+      "places": [],
+      "country_codes": [
+        {
+          "alpha2": "CA",
+          "alpha3": "CAN",
+          "name_zh": "加拿大",
+          "name_en": "Canada"
+        }
+      ],
+      "organization_tags": [],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "66a70b22762f3c157578df066a760fc9dee2ab2389a046e61a0099c4000e0891",
+      "poster_phrase": "阿省批准天然气电厂供电AI",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_8ca5f5ae275c4d9f",
+        "source_atom": {
+          "name": "TownAndCountryToday.com",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国家气候承诺"
+        ],
+        "number_atoms": [
+          "920"
+        ],
+        "geo_atoms": [],
+        "country_code_atoms": [
+          "CAN"
+        ],
+        "organization_atoms": [],
+        "event_atoms": [],
+        "decision_atom": "揭示了人工智能数据中心激增对区域化石能源电力供应的新需求。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_c5022cc8704c6e1f",
+      "article_id": "article_c5022cc8704c6e1f",
+      "canonical_url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQdVpMbkI1V0RiOEluTmlPNFJYdjZXX25tLXZNakd1ZElEYTVnSXNwYUppdWpENUVDT3F1SnFJajFtN3FPRHFuX0NnSEFNUlcxSktMZHhXaGQ0X2hLQU9MbWtmM2Mzd2RlMF9GZWZlNXlycHhlMU9aMWYxTVhpVUhEbHVvT1g3RklaTnBDOUZXT0l4S2tMal9CWWVWVDBHM2VCa3UyaXlfcEhlSnc5V1I0UGhn?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQdVpMbkI1V0RiOEluTmlPNFJYdjZXX25tLXZNakd1ZElEYTVnSXNwYUppdWpENUVDT3F1SnFJajFtN3FPRHFuX0NnSEFNUlcxSktMZHhXaGQ0X2hLQU9MbWtmM2Mzd2RlMF9GZWZlNXlycHhlMU9aMWYxTVhpVUhEbHVvT1g3RklaTnBDOUZXT0l4S2tMal9CWWVWVDBHM2VCa3UyaXlfcEhlSnc5V1I0UGhn?oc=5",
+      "source_id": "API004",
+      "source_name": "Bristol24/7",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 68,
+      "title_original": "'Creative thinking and compromise' needed to make COP31 a success says Bristol academic - Bristol24/7",
+      "title_zh": "布里斯托尔学者称需要“创造性思维和妥协”以使COP31取得成功",
+      "summary_source": "'Creative thinking and compromise' needed to make COP31 a success says Bristol academic Bristol24/7",
+      "summary_zh": "联合国气候变化大会（COP31）在土耳其举行期间，来自布里斯托尔大学卡博特环境研究所的十多位研究人员通过线上或线下方式参会，重点围绕公平能源系统、环境法与可持续性、温室气体去除与储存、气候政策以及气候正义等领域贡献专业知识。人工智能专业学生马特·洛在探讨未来适应型城市的专题讨论会上发言，并将就“实践中的可持续生活”发表主题演讲。他指出，无论是否主动规划，人工智能都将深刻塑造城市对能源和水资源的使用方式，并强调应让年轻人参与相关决策制定，而非事后阅读相关报道。随着城市向智能化发展，真正的核心挑战在于这种智能究竟是被用于削减排放并节约能源与水资源，还是仅仅成为电网的又一个负担。",
+      "title_en": "'Creative thinking and compromise' needed to make COP31 a success says Bristol academic",
+      "summary_en": "As the UN Climate Change Conference (COP31) is underway in Turkey, a dozen researchers from the University of Bristol’s Cabot Institute for the Environment are participating in person and online, contributing expertise in equitable energy systems, environmental law, greenhouse gas removal and storage, climate policy, and climate justice. Artificial Intelligence student Matt Lo spoke on a panel exploring future-fit cities and will deliver a talk on sustainable living. He stated that AI will shape how cities consume energy and water regardless of planning, and emphasized the need to include young people in decision-making rather than leaving them to read about decisions afterward. As cities get smarter, the core challenge is whether that intelligence will be directed toward cutting emissions and saving resources, or simply become another drain on the electrical grid.",
+      "english_fingerprint": "c649747c4758971d74167bb637bc345a2de16f286c9b9ff7e106f93585d7a142",
+      "theme_zh": "气候政策",
+      "why_zh": "展示了学术界和青年代表对COP31气候峰会议题的参与，特别是对人工智能与城市能源水资源消耗关系的关注，属于学术观点与参会事实。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T22:14:35+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判"
+      ],
+      "numbers": [
+        "7"
+      ],
+      "places": [
+        {
+          "name_zh": "土耳其",
+          "lon": 35.0,
+          "lat": 39.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "TR",
+          "alpha3": "TUR",
+          "name_zh": "土耳其",
+          "name_en": "Türkiye"
+        }
+      ],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "93d6276b28f63f08c7020741be77675e4394e0c7a5d8a4cea9b5e26ace2f1393",
+      "poster_phrase": "COP31需要创造性思维",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 58,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_c5022cc8704c6e1f",
+        "source_atom": {
+          "name": "Bristol24/7",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判"
+        ],
+        "number_atoms": [
+          "7"
+        ],
+        "geo_atoms": [
+          "土耳其"
+        ],
+        "country_code_atoms": [
+          "TUR"
+        ],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "展示了学术界和青年代表对COP31气候峰会议题的参与，特别是对人工智能与城市能源水资源消耗关系的关注，属于学术观点与参会事实。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_c55e1ebcac56ba5a",
+      "article_id": "article_c55e1ebcac56ba5a",
+      "canonical_url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONUdvbmR4ZDJNQ3VBcEM3b1lwSFpFMHlGbXRucmdOcElhVFFKVnBORXJuSXphaFJQZTZ0QkhERVROVEw1MFpvXzltbjVSTlJaQ3pPR2Q4TEpWZEVsTnlZcDNQbGpYZGxQeUtBUWRpdGdrckYwTEpLWkJqY0NnWkRmN2ZrSFBZTzJiUHV1UEhEaW5sdW01VkxFRldwckYzbXRfNDlZRVRVYUZqSld6akxB?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONUdvbmR4ZDJNQ3VBcEM3b1lwSFpFMHlGbXRucmdOcElhVFFKVnBORXJuSXphaFJQZTZ0QkhERVROVEw1MFpvXzltbjVSTlJaQ3pPR2Q4TEpWZEVsTnlZcDNQbGpYZGxQeUtBUWRpdGdrckYwTEpLWkJqY0NnWkRmN2ZrSFBZTzJiUHV1UEhEaW5sdW01VkxFRldwckYzbXRfNDlZRVRVYUZqSld6akxB?oc=5",
+      "source_id": "API004",
+      "source_name": "Risk & Insurance",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 62,
+      "title_original": "Climate Adaptation Projects Deliver $2 for Every $1 Spent, Swiss Re Institute Finds - Risk & Insurance",
+      "title_zh": "瑞士再保险研究所发现：气候适应项目每花费1美元可产生2美元回报",
+      "summary_source": "Climate Adaptation Projects Deliver $2 for Every $1 Spent, Swiss Re Institute Finds Risk & Insurance",
+      "summary_zh": "根据瑞士再保险研究所的分析，新兴市场中的气候适应项目每花费1美元，即可产生约2.10美元的预期收益，部分干预措施带来的回报甚至接近其成本的10倍。该结论基于对世界银行和亚洲开发银行42份项目完成报告的回顾，这些报告直接针对自然灾害物理风险并对适应效益进行了量化。分析指出，受保自然灾害损失正持续攀升，如果5%至7%的长期年均增长趋势持续，全球受保损失将从2025年的1070亿美元上升至2030年的1860亿美元。以欧洲洪水风险为例，尽管由于保险渗透率上升和暴露资产增加，受保洪水损失以约5%的复合年增长率增长，但研究所分析表明，在剔除这些因素后，并没有出现受保洪水损失残余向上的趋势，证明适应措施有助于在暴露度增加的同时控制损失。",
+      "title_en": "Climate Adaptation Projects Deliver $2 for Every $1 Spent, Swiss Re Institute Finds",
+      "summary_en": "Climate adaptation projects in emerging markets generate projected benefits of roughly $2.10 for every dollar spent, with some interventions yielding returns approaching 10 times their cost, according to an analysis by the Swiss Re Institute. The finding relies on a review of 42 World Bank and Asian Development Bank project completion reports addressing physical natural catastrophe hazards with quantified adaptation benefits. As insured natural catastrophe losses continue climbing—projected to rise from $107 billion in 2025 to $186 billion by 2030 if a 5% to 7% annual growth trend persists—the research highlights the economic value of resilience. Europe's experience with flood risk demonstrates that adaptation helps contain losses despite increasing exposure; although insured flood losses there grow at a compound annual rate of about 5% driven by rising insurance penetration and exposed assets, accounting for those factors reveals no residual upward trend in losses.",
+      "english_fingerprint": "05effc460accf007fff1eb6aa0534f01547cb368c6240b5cf1ae6063ca5db1da",
+      "theme_zh": "气候适应与经济回报",
+      "why_zh": "量化了气候适应项目的投资回报率，为金融机构和国际开发银行评估抗灾减灾资金的经济合理性提供了事实依据。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T22:08:16+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "气候适应"
+      ],
+      "numbers": [
+        "$2",
+        "$1"
+      ],
+      "places": [
+        {
+          "name_zh": "欧洲",
+          "lon": 10.0,
+          "lat": 51.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "CH",
+          "alpha3": "CHE",
+          "name_zh": "瑞士",
+          "name_en": "Switzerland"
+        }
+      ],
+      "organization_tags": [],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "4257772c6fd8f17e01fc9789e0ffd3282386873babac994db2e43d3854dcbdf9",
+      "poster_phrase": "气候适应项目每花1元回报2元",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 56,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_c55e1ebcac56ba5a",
+        "source_atom": {
+          "name": "Risk & Insurance",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候适应"
+        ],
+        "number_atoms": [
+          "$2",
+          "$1"
+        ],
+        "geo_atoms": [
+          "欧洲"
+        ],
+        "country_code_atoms": [
+          "CHE"
+        ],
+        "organization_atoms": [],
+        "event_atoms": [],
+        "decision_atom": "量化了气候适应项目的投资回报率，为金融机构和国际开发银行评估抗灾减灾资金的经济合理性提供了事实依据。"
+      },
+      "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_fcab04fb39d33bfb",
+      "article_id": "article_fcab04fb39d33bfb",
+      "canonical_url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPZDRkS2lmRkRHR2JCQm9NMzZjRzdjQTJXQ0dhWjltNndQQzNfc2I4NXFRMkRrVDVDSTFXS3FUaHNIcFdXTl9od3NnWFBueWtCVFNna2d5aC1tR2ZMYjI5V3VLWU01OGdvRG5tcFI5V1FGSDVUdHdxQklPWXBLVEZZcXB1RDFXX2hsVld4dTMyR3NpcXdYSlN0RjRVRHFwSXpHemNlQUU4Q1p3WnVpRlE?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPZDRkS2lmRkRHR2JCQm9NMzZjRzdjQTJXQ0dhWjltNndQQzNfc2I4NXFRMkRrVDVDSTFXS3FUaHNIcFdXTl9od3NnWFBueWtCVFNna2d5aC1tR2ZMYjI5V3VLWU01OGdvRG5tcFI5V1FGSDVUdHdxQklPWXBLVEZZcXB1RDFXX2hsVld4dTMyR3NpcXdYSlN0RjRVRHFwSXpHemNlQUU4Q1p3WnVpRlE?oc=5",
+      "source_id": "API004",
+      "source_name": "The Climate Watch",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 88,
+      "title_original": "COP31 day two puts Bangladesh’s clean energy and climate finance demands in focus - The Climate Watch",
+      "title_zh": "COP31第二日聚焦孟加拉国的清洁能源与气候资金诉求",
+      "summary_source": "COP31 day two puts Bangladesh’s clean energy and climate finance demands in focus The Climate Watch",
+      "summary_zh": "COP31第二日聚焦孟加拉国的清洁能源与气候资金诉求。",
+      "title_en": "COP31 day two puts Bangladesh’s clean energy and climate finance demands in focus",
+      "summary_en": "Day two of COP31 highlights Bangladesh's demands regarding clean energy and climate finance.",
+      "english_fingerprint": "82c5aa7446f9090a2bb7c85e722e1ca61ccb0e28daef5a63fbec46cf1c530ad5",
+      "theme_zh": "气候资金",
+      "why_zh": "反映了特定发展中国家在气候大会期间的优先诉求，属于外交议程事实。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T20:52:33+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判",
+        "气候资金",
+        "能源与排放"
+      ],
+      "numbers": [],
+      "places": [],
+      "country_codes": [
+        {
+          "alpha2": "BD",
+          "alpha3": "BGD",
+          "name_zh": "孟加拉国",
+          "name_en": "Bangladesh"
+        }
+      ],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "79f7393f0172f931ea28e0baa3df286b0b322c5451eb688224deff8eee6fb282",
+      "poster_phrase": "COP31聚焦孟加拉国诉求",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 65,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_fcab04fb39d33bfb",
+        "source_atom": {
+          "name": "The Climate Watch",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判",
+          "气候资金",
+          "能源与排放"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "country_code_atoms": [
+          "BGD"
+        ],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "反映了特定发展中国家在气候大会期间的优先诉求，属于外交议程事实。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_621430be6a9a37bc",
+      "article_id": "article_621430be6a9a37bc",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRkRTeWhqckl5RlkwLW5DdGtuanVXOURLMDRlR2tSUmp2TmFwUG1DOUFlNWdwRC1KcWdTd2EzRWpsXzNja2pSNVBjMThQeTFNRElCT2NhQm1jbVl6Ymk3MV9QaURLZTVGYzRtN1hwWXNPV1NfWlplN3lxMmlJY0t3VC1obldKRWxXa0ZwTERvWVJpWE9yMU9pU2ZQbVVPWU9FSzN3eHNKT3FGTjQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQRkRTeWhqckl5RlkwLW5DdGtuanVXOURLMDRlR2tSUmp2TmFwUG1DOUFlNWdwRC1KcWdTd2EzRWpsXzNja2pSNVBjMThQeTFNRElCT2NhQm1jbVl6Ymk3MV9QaURLZTVGYzRtN1hwWXNPV1NfWlplN3lxMmlJY0t3VC1obldKRWxXa0ZwTERvWVJpWE9yMU9pU2ZQbVVPWU9FSzN3eHNKT3FGTjQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Channel 4",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 72,
+      "title_original": "COP31: Trump’s war with Iran ‘has turned him into unintentional green campaigner’ - Channel 4",
+      "title_zh": "COP31：特朗普与伊朗的冲突“使他成了无意中的绿色活动家”",
+      "summary_source": "COP31: Trump’s war with Iran ‘has turned him into unintentional green campaigner’ Channel 4",
+      "summary_zh": "第四频道报道称，在COP31背景下，特朗普与伊朗之间的冲突被指使其成为了无意中的绿色活动家。",
+      "title_en": "COP31: Trump’s war with Iran ‘has turned him into unintentional green campaigner’ - Channel 4",
+      "summary_en": "Channel 4 reports on how Donald Trump's conflict with Iran has unexpectedly positioned him as an unintentional green campaigner within the context of climate politics and COP31 discussions.",
+      "english_fingerprint": "f4f2e209a5a74beb18b7f7f0fc9348c24df72e3a55c40eea1a2c147afd0afca8",
+      "theme_zh": "气候外交",
+      "why_zh": "从地缘政治与气候政治的关联角度，反映了外界对中东冲突对能源与气候议程潜在外溢效应的审视。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T19:51:18+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判"
+      ],
+      "numbers": [
+        "4 c",
+        "4"
+      ],
+      "places": [
+        {
+          "name_zh": "伊朗",
+          "lon": 53.0,
+          "lat": 32.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "IR",
+          "alpha3": "IRN",
+          "name_zh": "伊朗",
+          "name_en": "Iran"
+        }
+      ],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "737cd653daf9f49767a72cf14f0fdfb9019ca2b15e2acfd1cbc0c5660728586e",
+      "poster_phrase": "美伊冲突与绿色转型",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_621430be6a9a37bc",
+        "source_atom": {
+          "name": "Channel 4",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判"
+        ],
+        "number_atoms": [
+          "4 c",
+          "4"
+        ],
+        "geo_atoms": [
+          "伊朗"
+        ],
+        "country_code_atoms": [
+          "IRN"
+        ],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "从地缘政治与气候政治的关联角度，反映了外界对中东冲突对能源与气候议程潜在外溢效应的审视。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_cd39c5887fa2a9ca",
+      "article_id": "article_cd39c5887fa2a9ca",
+      "canonical_url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPSUgwNDM2bGIyZGsydkVvSEl1SThJWDRhSlFuT2lqR2J6YndvX0ljQVBfZnRnYTlTbHhPeFljMjFpcHlMNjRNZFBHZG1TdDZ1eXdRY3pSWjAwZ1A5b3R0WEFqekZyQ3RNbG8xSFJ3X1FROHZDTEtUSXlTQ0ZKRGVKWms0aHRWZENtNHZFVzlDVQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPSUgwNDM2bGIyZGsydkVvSEl1SThJWDRhSlFuT2lqR2J6YndvX0ljQVBfZnRnYTlTbHhPeFljMjFpcHlMNjRNZFBHZG1TdDZ1eXdRY3pSWjAwZ1A5b3R0WEFqekZyQ3RNbG8xSFJ3X1FROHZDTEtUSXlTQ0ZKRGVKWms0aHRWZENtNHZFVzlDVQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Post Courier",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 70,
+      "title_original": "Tuvalu warns COP31: “Little time left” for climate action - Post Courier",
+      "title_zh": "图瓦卢警告COP31：气候行动“时间所剩无几”",
+      "summary_source": "Tuvalu warns COP31: “Little time left” for climate action Post Courier",
+      "summary_zh": "图瓦卢就气候行动向《联合国气候变化框架公约》第三十一届缔约方会议（COP31）发出警告，指出应对气候变化的时间已经所剩无几。",
+      "title_en": "Tuvalu warns COP31: “Little time left” for climate action",
+      "summary_en": "Tuvalu has issued a warning to the 31st Conference of the Parties (COP31) of the UNFCCC, stating that very little time is left for climate action.",
+      "english_fingerprint": "a9c58e2e0542f36003c089c03f918737af656ffeb79c0a9f1428e8f0c6260e86",
+      "theme_zh": "气候谈判",
+      "why_zh": "反映了岛屿国家在气候谈判中对行动紧迫性的立场，事实边界局限于图瓦卢官方发出的警告表态。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T19:51:03+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判"
+      ],
+      "numbers": [],
+      "places": [
+        {
+          "name_zh": "图瓦卢",
+          "lon": 179.2,
+          "lat": -8.5
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "TV",
+          "alpha3": "TUV",
+          "name_zh": "图瓦卢",
+          "name_en": "Tuvalu"
+        }
+      ],
+      "organization_tags": [
+        "UNFCCC",
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "39de299b075d4e9c7bd469a9fc84e87c83031d5d912871f467cdfe62ca901bdc",
+      "poster_phrase": "气候行动时间所剩无几",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_cd39c5887fa2a9ca",
+        "source_atom": {
+          "name": "Post Courier",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [
+          "图瓦卢"
+        ],
+        "country_code_atoms": [
+          "TUV"
+        ],
+        "organization_atoms": [
+          "UNFCCC",
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "反映了岛屿国家在气候谈判中对行动紧迫性的立场，事实边界局限于图瓦卢官方发出的警告表态。"
+      },
+      "first_archived_at": "2026-11-11T02:19:46.170628+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_279ea2446d016259",
+      "article_id": "article_279ea2446d016259",
+      "canonical_url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbzFhenctOXpMNUxRQ0JZY0p2d3otZW9sd1VFQ09HMU1fQlBLcUxBeXZjamM2d25XSUFmMlUwTXRQaFhpbVJLd2VHQ2NfX2FGcHo4SG55ZjdBd1NVenBUVW1zQk8zRzM0cjg0UmtpS2FKMlNvT3ozeWEyNjdQVlNYNW50UGNra2EyYU5EdUV0bVlhNXJLRllqcXJKMkhYYkJyUFFuRlI2bmk3aVMtQ2M1T3NxaHZYQQ?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbzFhenctOXpMNUxRQ0JZY0p2d3otZW9sd1VFQ09HMU1fQlBLcUxBeXZjamM2d25XSUFmMlUwTXRQaFhpbVJLd2VHQ2NfX2FGcHo4SG55ZjdBd1NVenBUVW1zQk8zRzM0cjg0UmtpS2FKMlNvT3ozeWEyNjdQVlNYNW50UGNra2EyYU5EdUV0bVlhNXJLRllqcXJKMkhYYkJyUFFuRlI2bmk3aVMtQ2M1T3NxaHZYQQ?oc=5",
+      "source_id": "API004",
+      "source_name": "Sustainable Views",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "Scope 3 emissions disclosures are ‘likely unconstitutional’, US court rules - Sustainable Views",
+      "title_zh": "美国法院裁定：范畴三排放披露“可能违宪”",
+      "summary_source": "Scope 3 emissions disclosures are ‘likely unconstitutional’, US court rules Sustainable Views",
+      "summary_zh": "美国法院作出裁决，认定企业进行范畴三（Scope 3）温室气体排放披露的要求“可能违宪”。",
+      "title_en": "Scope 3 emissions disclosures are ‘likely unconstitutional’, US court rules",
+      "summary_en": "A US court has ruled that regulatory requirements concerning Scope 3 greenhouse gas emissions disclosures are likely unconstitutional, impacting corporate climate reporting mandates.",
+      "english_fingerprint": "9ddb209ae8b529d33655ed75bc21426b76dc0d475e227bfb8dc5db060ad899a5",
+      "theme_zh": "碳排放披露",
+      "why_zh": "对美国企业气候合规与强制性信息披露政策构成了潜在的法律阻碍，属于具有重要司法约束力的政策走向事实。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T19:40:58+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "3"
+      ],
+      "places": [
+        {
+          "name_zh": "美国",
+          "lon": -100.0,
+          "lat": 39.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "US",
+          "alpha3": "USA",
+          "name_zh": "美国",
+          "name_en": "United States"
+        }
+      ],
+      "organization_tags": [],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "fde985183f148c16d51a5dfa51a4865acd89ae44838ad23467ae04da8ff44328",
+      "poster_phrase": "范畴三披露可能违宪",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_279ea2446d016259",
+        "source_atom": {
+          "name": "Sustainable Views",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "3"
+        ],
+        "geo_atoms": [
+          "美国"
+        ],
+        "country_code_atoms": [
+          "USA"
+        ],
+        "organization_atoms": [],
+        "event_atoms": [],
+        "decision_atom": "对美国企业气候合规与强制性信息披露政策构成了潜在的法律阻碍，属于具有重要司法约束力的政策走向事实。"
+      },
+      "first_archived_at": "2026-11-10T18:22:00.091947+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_554a6c1e57614202",
+      "article_id": "article_554a6c1e57614202",
+      "canonical_url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPSHBuS2tyU0o0Q1lzYmJmeFdCYWNXQmp0T3AwaEJEa3RKS191TzlubVVJRG9RR09xWTlvei1DQUd0dGZERzJXT1ZuY0d0NEJoWkdjS2VNSWxwVlBPV3ltelhTQzFuejlNUTRPOGNESWluWWk0R2hKWDFreElDWlJNZFhLcUI3MHByOV9tZmJ1OWFhYVI3c3B4eEMxVmkyMldZYkhmbk5mRkFqemJ5SjhoZjlBV2pqMWdyOEt5Z01hek1SU040VzJITDd5UE15cDV5aWs5MFBudktpY0gzR2VN0gHkAUFVX3lxTE1NREtadU15WXRjWTVBRDBpZDRXTlJpUTVZV211QnM1S0Z2Z1d0WU9ITnZyREFVTUR6V3FFZjZyeUJhUENyVDg0YWlmMVNJVEtRUGZnMDdFNDNfMVMyOHZPVkF4djdndmdvOWxQdy01OHF6LTVESG1jYjU1VzZlRmNFd1ltRTQxODJMNjNYMU5FQVFMWDRDTE4xOXVOMDAtT0tRS0c1Sk5HWXFZeG91Y0xWcjQzWHRvS3RKTzRSbk1hRkNWWkhZWDV5VTY2UF8yVlJScEpvQXlLeUZwOHZDU0hQRG9TeA?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPSHBuS2tyU0o0Q1lzYmJmeFdCYWNXQmp0T3AwaEJEa3RKS191TzlubVVJRG9RR09xWTlvei1DQUd0dGZERzJXT1ZuY0d0NEJoWkdjS2VNSWxwVlBPV3ltelhTQzFuejlNUTRPOGNESWluWWk0R2hKWDFreElDWlJNZFhLcUI3MHByOV9tZmJ1OWFhYVI3c3B4eEMxVmkyMldZYkhmbk5mRkFqemJ5SjhoZjlBV2pqMWdyOEt5Z01hek1SU040VzJITDd5UE15cDV5aWs5MFBudktpY0gzR2VN0gHkAUFVX3lxTE1NREtadU15WXRjWTVBRDBpZDRXTlJpUTVZV211QnM1S0Z2Z1d0WU9ITnZyREFVTUR6V3FFZjZyeUJhUENyVDg0YWlmMVNJVEtRUGZnMDdFNDNfMVMyOHZPVkF4djdndmdvOWxQdy01OHF6LTVESG1jYjU1VzZlRmNFd1ltRTQxODJMNjNYMU5FQVFMWDRDTE4xOXVOMDAtT0tRS0c1Sk5HWXFZeG91Y0xWcjQzWHRvS3RKTzRSbk1hRkNWWkhZWDV5VTY2UF8yVlJScEpvQXlLeUZwOHZDU0hQRG9TeA?oc=5",
+      "source_id": "API004",
+      "source_name": "The Economic Times",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 72,
+      "title_original": "'Mobilising $1.3 trillion annually by 2035 to require overhaul of climate finance system' - The Economic Times",
+      "title_zh": "“到2035年每年调动1.3万亿美元需要对气候金融体系进行彻底改革”",
+      "summary_source": "'Mobilising $1.3 trillion annually by 2035 to require overhaul of climate finance system' The Economic Times",
+      "summary_zh": "《经济时报》指出，为了在2035年前实现每年调动1.3万亿美元的目标，必须对全球气候金融体系进行全面彻底的改革。",
+      "title_en": "'Mobilising $1.3 trillion annually by 2035 to require overhaul of climate finance system' - The Economic Times",
+      "summary_en": "The Economic Times reports that achieving the target of mobilizing $1.3 trillion annually by 2035 will necessitate a comprehensive overhaul of the global climate finance system.",
+      "english_fingerprint": "e78296327048c8689fb3f1ff1ffcfd94257aeb0c9aa860f68cf90d7d026076db",
+      "theme_zh": "气候资金",
+      "why_zh": "聚焦全球气候资金筹措与现有金融体系的结构性改革要求，直接关系到未来国际气候谈判的核心承诺落实。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T19:17:06+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "气候资金"
+      ],
+      "numbers": [
+        "$1.3 trillion",
+        "2035"
+      ],
+      "places": [],
+      "country_codes": [],
+      "organization_tags": [],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "0aa1c89c0711a25acf3b95f2147a6fedb0ecaf49cf37ca99a275a1de81a65b83",
+      "poster_phrase": "气候金融体系重组",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 59,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_554a6c1e57614202",
+        "source_atom": {
+          "name": "The Economic Times",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "气候资金"
+        ],
+        "number_atoms": [
+          "$1.3 trillion",
+          "2035"
+        ],
+        "geo_atoms": [],
+        "country_code_atoms": [],
+        "organization_atoms": [],
+        "event_atoms": [],
+        "decision_atom": "聚焦全球气候资金筹措与现有金融体系的结构性改革要求，直接关系到未来国际气候谈判的核心承诺落实。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_49cc4863551b97cb",
+      "article_id": "article_49cc4863551b97cb",
+      "canonical_url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNbUhTMTFHempueEstRGJlaExUZEgyX1dXY2EwaXdHT0xwZlZ4X3djc3JfTkRyR1RoXzNmSTRweVRJV3J5LU1KTGpuc201d3JlWEpUUWxPdDlPd2gxQ3lJb0p1VmpmTVd5cUpaVGpWdzZNY3k2MUpmQzJoWk9QRHpyb3NSUVVReFVkbkVaekJsOTR2WGNiNHc?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNbUhTMTFHempueEstRGJlaExUZEgyX1dXY2EwaXdHT0xwZlZ4X3djc3JfTkRyR1RoXzNmSTRweVRJV3J5LU1KTGpuc201d3JlWEpUUWxPdDlPd2gxQ3lJb0p1VmpmTVd5cUpaVGpWdzZNY3k2MUpmQzJoWk9QRHpyb3NSUVVReFVkbkVaekJsOTR2WGNiNHc?oc=5",
+      "source_id": "API004",
+      "source_name": "Fast Company",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "The Iran War led to a decline in carbon emissions in 2026. It doesn't mean we've turned a corner on fossil fuels - Fast Company",
+      "title_zh": "伊朗战争导致2026年碳排放量下降。但这并不意味着我们在化石燃料问题上已经迎来了转机——Fast Company",
+      "summary_source": "The Iran War led to a decline in carbon emissions in 2026. It doesn't mean we've turned a corner on fossil fuels Fast Company",
+      "summary_zh": "伊朗战争导致2026年碳排放量下降。但这并不意味着我们在化石燃料问题上已经迎来了转机。",
+      "title_en": "The Iran War led to a decline in carbon emissions in 2026. It doesn't mean we've turned a corner on fossil fuels - Fast Company",
+      "summary_en": "The Iran War led to a decline in carbon emissions in 2026. It doesn't mean we've turned a corner on fossil fuels.",
+      "english_fingerprint": "c881de328666df5eb96a02d3947e50569fca99f428108415fb442ca4409e5f78",
+      "theme_zh": "碳排放减排",
+      "why_zh": "反映了地缘政治冲突对化石燃料消耗和近期碳排放轨迹的阶段性影响，表明排放下降不等于根本性结构转变。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T19:02:44+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "2026"
+      ],
+      "places": [
+        {
+          "name_zh": "伊朗",
+          "lon": 53.0,
+          "lat": 32.0
+        }
+      ],
+      "country_codes": [
+        {
+          "alpha2": "IR",
+          "alpha3": "IRN",
+          "name_zh": "伊朗",
+          "name_en": "Iran"
+        }
+      ],
+      "organization_tags": [],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "313e5d8543d5b576f37b5a425ef69141d7c9e0a073eaecc958c7c11d03ed0ec2",
+      "poster_phrase": "伊朗战争与碳排下降",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_49cc4863551b97cb",
+        "source_atom": {
+          "name": "Fast Company",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "2026"
+        ],
+        "geo_atoms": [
+          "伊朗"
+        ],
+        "country_code_atoms": [
+          "IRN"
+        ],
+        "organization_atoms": [],
+        "event_atoms": [],
+        "decision_atom": "反映了地缘政治冲突对化石燃料消耗和近期碳排放轨迹的阶段性影响，表明排放下降不等于根本性结构转变。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_498ed8f9561c5128",
+      "article_id": "article_498ed8f9561c5128",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQakJmRkxBRHlvOEtqdmtDVlNfWDR6M3VHWHRWT3oxZE1pSFVkdVBxN0tMbFlkSWFXOTc0RVNicmFQbzY4RkVfRXRfVVZYREtydy05R2wtMXRINTVNdW5lMEF6ejVvanE4UVNZOWIwQ3ZRSDVMUnBFaUlkZ3ZHRFpqS1Q2LXN0UkN1dS1pWFhpdXFjcXpxX3BSMlNQWU9MclkwVlBqZ2RjYl9RNDVUZG1XRHVkSjU1SVZqVUNz0gG7AUFVX3lxTFBqQmZGTEFEeW84S2p2a0NWU19YNHozdUdYdFZPejFkTWlIVWR1UHE3S0xsWWRJYVc5NzRFU2JyYVBvNjhGRV9FdF9VVlhES3J3LTlHbC0xdEg1NU11bmUwQXp6NW9qcThRU1k5YjBDdlFINUxScEVpSWRndkdEWmpLVDYtc3RSQ3V1LWlYWGl1cWNxenFfcFIyU1BZT0xyWTBWUGpnZGNiX1E0NVRkbVdEdWRKNTVJVmpVQ3M?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQakJmRkxBRHlvOEtqdmtDVlNfWDR6M3VHWHRWT3oxZE1pSFVkdVBxN0tMbFlkSWFXOTc0RVNicmFQbzY4RkVfRXRfVVZYREtydy05R2wtMXRINTVNdW5lMEF6ejVvanE4UVNZOWIwQ3ZRSDVMUnBFaUlkZ3ZHRFpqS1Q2LXN0UkN1dS1pWFhpdXFjcXpxX3BSMlNQWU9MclkwVlBqZ2RjYl9RNDVUZG1XRHVkSjU1SVZqVUNz0gG7AUFVX3lxTFBqQmZGTEFEeW84S2p2a0NWU19YNHozdUdYdFZPejFkTWlIVWR1UHE3S0xsWWRJYVc5NzRFU2JyYVBvNjhGRV9FdF9VVlhES3J3LTlHbC0xdEg1NU11bmUwQXp6NW9qcThRU1k5YjBDdlFINUxScEVpSWRndkdEWmpLVDYtc3RSQ3V1LWlYWGl1cWNxenFfcFIyU1BZT0xyWTBWUGpnZGNiX1E0NVRkbVdEdWRKNTVJVmpVQ3M?oc=5",
+      "source_id": "API004",
+      "source_name": "PBS",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 74,
+      "title_original": "At UN climate talks, 5 nations back plan to double rooftop solar panels by 2030 - PBS",
+      "title_zh": "在联合国气候大会上，5国支持到2030年将屋顶太阳能电池板数量翻一番的计划",
+      "summary_source": "At UN climate talks, 5 nations back plan to double rooftop solar panels by 2030 PBS",
+      "summary_zh": "在联合国气候大会期间，有5个国家公开支持一项旨在到2030年将屋顶太阳能电池板装机容量或数量翻一番的计划。该报道由PBS发布，聚焦多国在气候会谈中针对可再生能源的具体增长目标。",
+      "title_en": "At UN climate talks, 5 nations back plan to double rooftop solar panels by 2030",
+      "summary_en": "At the UN climate talks, 5 nations backed a plan to double rooftop solar panels by 2030, according to a report by PBS. The initiative focuses on specific growth targets for renewable energy during the international climate negotiations.",
+      "english_fingerprint": "395fd4386481827aab1d5606d1503d65395ef9f24a3e4ee2185ea45a64f4c6a9",
+      "theme_zh": "太阳能发展",
+      "why_zh": "反映了部分国家在联合国气候大会期间推动特定可再生能源阶段性目标的政策动向，属于各国自愿或多边倡议范畴。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T18:57:48+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判",
+        "能源与排放"
+      ],
+      "numbers": [
+        "5",
+        "2030"
+      ],
+      "places": [],
+      "country_codes": [],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "5cf4035d4184ce6f5f7167a673f5aa8181d682327005e4348a6568cbb4a81c2c",
+      "poster_phrase": "5国支持2030年太阳能翻番",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 60,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_498ed8f9561c5128",
+        "source_atom": {
+          "name": "PBS",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判",
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "5",
+          "2030"
+        ],
+        "geo_atoms": [],
+        "country_code_atoms": [],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [],
+        "decision_atom": "反映了部分国家在联合国气候大会期间推动特定可再生能源阶段性目标的政策动向，属于各国自愿或多边倡议范畴。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_6383aa89bb81944e",
+      "article_id": "article_6383aa89bb81944e",
+      "canonical_url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5fZGFqdURPZW8wLTVXcDJCWXh6QnU0MVFOUS1YOXl0eXdyR2o3NGlXMlRNaUxLWW9YRlBzV25pYi1XYXV6LXFuQUV3?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5fZGFqdURPZW8wLTVXcDJCWXh6QnU0MVFOUS1YOXl0eXdyR2o3NGlXMlRNaUxLWW9YRlBzV25pYi1XYXV6LXFuQUV3?oc=5",
+      "source_id": "API004",
+      "source_name": "وكالة الأنباء السعودية",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 76,
+      "title_original": "OIC Leads Efforts at COP31 to Advance Environmental and Climate Finance Issues - وكالة الأنباء السعودية",
+      "title_zh": "伊斯兰合作组织在COP31上领导推进环境与气候金融议题的努力",
+      "summary_source": "OIC Leads Efforts at COP31 to Advance Environmental and Climate Finance Issues وكالة الأنباء السعودية",
+      "summary_zh": "伊斯兰合作组织（OIC）在第31届联合国气候变化大会（COP31）期间主导并领导了多项旨在推进环境与气候金融议题的努力。该报道由沙特通讯社发布，展示了区域性国际组织在气候资金谈判中的协调作用。",
+      "title_en": "OIC Leads Efforts at COP31 to Advance Environmental and Climate Finance Issues",
+      "summary_en": "The Organisation of Islamic Cooperation (OIC) led efforts at COP31 to advance environmental and climate finance issues, according to the Saudi Press Agency. The report highlights the coordinating role of regional international bodies in ongoing climate finance negotiations.",
+      "english_fingerprint": "dad8eb97070ee538c6a36b483e9f35d2540fdaa7e212d73825130c478c7d94bc",
+      "theme_zh": "气候金融",
+      "why_zh": "展示了伊斯兰合作组织在多边气候谈判中围绕环境和资金议题的集体行动与政治立场。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T18:15:02+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "国际气候谈判",
+        "气候资金"
+      ],
+      "numbers": [],
+      "places": [],
+      "country_codes": [],
+      "organization_tags": [
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "a805531865c5432ce369cb5324d1a4165b89a35f5426f06de7fc4d845969fe12",
+      "poster_phrase": "伊斯兰合作组织推进气候金融",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 61,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_6383aa89bb81944e",
+        "source_atom": {
+          "name": "وكالة الأنباء السعودية",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "国际气候谈判",
+          "气候资金"
+        ],
+        "number_atoms": [],
+        "geo_atoms": [],
+        "country_code_atoms": [],
+        "organization_atoms": [
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "展示了伊斯兰合作组织在多边气候谈判中围绕环境和资金议题的集体行动与政治立场。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
+    {
+      "record_id": "article_1587a8cf9736d4c7",
+      "article_id": "article_1587a8cf9736d4c7",
+      "canonical_url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONWUzSTNybnpFNVdNRG9SMEJjREVTQW5od29Zb3EzWTZqOWVwQTRsRGRyQlpxOUVuMnB0WHdObFNzZVRfbFJvUXhhaTlwSTFEX283LWhhQWtocko2czY2cG1jTGFFVDh3N0NaWDVwZl80X2tPZWVGN0pZenAxalhBbA?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONWUzSTNybnpFNVdNRG9SMEJjREVTQW5od29Zb3EzWTZqOWVwQTRsRGRyQlpxOUVuMnB0WHdObFNzZVRfbFJvUXhhaTlwSTFEX283LWhhQWtocko2czY2cG1jTGFFVDh3N0NaWDVwZl80X2tPZWVGN0pZenAxalhBbA?oc=5",
+      "source_id": "API004",
+      "source_name": "Energy News Network",
+      "source_type": "搜索聚合Feed",
+      "authority": 3,
+      "relevance_score": 58,
+      "title_original": "Tamba Solar in Senegal: FMO weighs up to €146.5m of senior debt - Energy News Network",
+      "title_zh": "塞内加尔坦巴太阳能项目：FMO考虑提供高达1.465亿欧元的优先债务——能源新闻网",
+      "summary_source": "Tamba Solar in Senegal: FMO weighs up to €146.5m of senior debt Energy News Network",
+      "summary_zh": "荷兰创业发展融资公司（FMO）正在考虑为塞内加尔的坦巴太阳能项目提供最高达1.465亿欧元的优先债务融资。",
+      "title_en": "Tamba Solar in Senegal: FMO weighs up to €146.5m of senior debt - Energy News Network",
+      "summary_en": "FMO is weighing up to €146.5m of senior debt for the Tamba Solar project in Senegal.",
+      "english_fingerprint": "4af540f97d2f949e1dfe54027405a9c29db7f10f45fbe55dacf931da7d22ef0b",
+      "theme_zh": "气候资金",
+      "why_zh": "展示了国际开发金融机构对非洲撒哈拉以南地区太阳能发电项目的资金支持意向。",
+      "language": "multilingual",
+      "published_at": "2026-11-10T18:11:15+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
+      "topics": [
+        "能源与排放"
+      ],
+      "numbers": [
+        "€146.5"
+      ],
+      "places": [],
+      "country_codes": [
+        {
+          "alpha2": "NL",
+          "alpha3": "NLD",
+          "name_zh": "荷兰",
+          "name_en": "Netherlands"
+        },
+        {
+          "alpha2": "SN",
+          "alpha3": "SEN",
+          "name_zh": "塞内加尔",
+          "name_en": "Senegal"
+        }
+      ],
+      "organization_tags": [],
+      "event_tags": [],
+      "translation_status": "model_generated_needs_review",
+      "fact_status": "source_claim_unverified",
+      "content_hash": "0e1bb77f665cccba08a813d1ba02a4ffd1fe0157ee4f8c09a31803223c327596",
+      "poster_phrase": "FMO审议坦巴太阳能融资",
+      "company_entities": [],
+      "alternate_urls": [],
+      "duplicate_observations": [],
+      "quality": {
+        "passed": true,
+        "score": 54,
+        "tier": "B",
+        "checks": {
+          "canonical_https": true,
+          "original_title": true,
+          "chinese_title": true,
+          "substantive_content": true,
+          "published_time": true,
+          "source_trace": true
+        }
+      },
+      "molecule": {
+        "identity": "article_1587a8cf9736d4c7",
+        "source_atom": {
+          "name": "Energy News Network",
+          "authority": 3,
+          "type": "搜索聚合Feed"
+        },
+        "evidence_atom": {
+          "fact_status": "source_claim_unverified",
+          "translation_status": "model_generated_needs_review",
+          "quality_tier": "B"
+        },
+        "topic_atoms": [
+          "能源与排放"
+        ],
+        "number_atoms": [
+          "€146.5"
+        ],
+        "geo_atoms": [],
+        "country_code_atoms": [
+          "NLD",
+          "SEN"
+        ],
+        "organization_atoms": [],
+        "event_atoms": [],
+        "decision_atom": "展示了国际开发金融机构对非洲撒哈拉以南地区太阳能发电项目的资金支持意向。"
+      },
+      "first_archived_at": "2026-11-11T02:14:20.256416+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
+    },
     {
       "record_id": "article_b1866b0db52efd50",
       "article_id": "article_b1866b0db52efd50",
@@ -100,7 +1776,7 @@
         "decision_atom": "展示了商业界对COP31议程中电气化基础设施与政策障碍的关切，反映了企业诉求与联合国气候谈判议程的交集。"
       },
       "first_archived_at": "2026-11-10T18:22:00.091947+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_fad6cf7ec6996410",
@@ -123,7 +1799,7 @@
       "why_zh": "结合了美国政治转向的宏观表态与地缘冲突导致化石燃料排放短期下降的最新科学评估，展示了政治意愿与外部突发事件对全球碳排的综合影响。本段表述基于公开新闻事实。",
       "language": "multilingual",
       "published_at": "2026-11-10T17:58:27+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -223,7 +1899,7 @@
         "decision_atom": "结合了美国政治转向的宏观表态与地缘冲突导致化石燃料排放短期下降的最新科学评估，展示了政治意愿与外部突发事件对全球碳排的综合影响。本段表述基于公开新闻事实。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_9eb2c757d660c399",
@@ -246,7 +1922,7 @@
       "why_zh": "记录了极端干旱对脆弱游牧民生计和粮食安全的实际破坏，反映了气候适应资金与援助的现实紧迫性。",
       "language": "en",
       "published_at": "2026-11-10T17:54:11+00:00",
-      "fetched_at": "2026-11-10T18:04:36.044904+00:00",
+      "fetched_at": "2026-11-11T02:05:54.515927+00:00",
       "topics": [
         "气候适应"
       ],
@@ -325,7 +2001,7 @@
         "decision_atom": "记录了极端干旱对脆弱游牧民生计和粮食安全的实际破坏，反映了气候适应资金与援助的现实紧迫性。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_94c3485d2a888e1e",
@@ -348,7 +2024,7 @@
       "why_zh": "体现了非政府组织与社会各界在COP31进程中对气候行动社会公平维度的推动力度。",
       "language": "multilingual",
       "published_at": "2026-11-10T17:40:58+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -429,7 +2105,7 @@
         "decision_atom": "体现了非政府组织与社会各界在COP31进程中对气候行动社会公平维度的推动力度。"
       },
       "first_archived_at": "2026-11-10T18:22:00.091947+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ded9f4b557a6849e",
@@ -452,7 +2128,7 @@
       "why_zh": "标志着主要化石燃料生产国与发展中国家在COP30前夕就公正转型路线图达成重要阶段性共识，平衡了不同起点的减排与发展诉求。",
       "language": "en",
       "published_at": "2026-11-10T17:26:10+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "气候动态"
       ],
@@ -574,7 +2250,7 @@
         "decision_atom": "标志着主要化石燃料生产国与发展中国家在COP30前夕就公正转型路线图达成重要阶段性共识，平衡了不同起点的减排与发展诉求。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b9a5f1d386efe76d",
@@ -597,7 +2273,7 @@
       "why_zh": "反映了脆弱小岛屿发展中国家对全球气候治理落实进度的强烈不满与具体诉求，凸显了COP31大会上关于气候资金兑现与减排力度的政治博弈边界。",
       "language": "multilingual",
       "published_at": "2026-11-10T17:25:51+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -692,7 +2368,7 @@
         "decision_atom": "反映了脆弱小岛屿发展中国家对全球气候治理落实进度的强烈不满与具体诉求，凸显了COP31大会上关于气候资金兑现与减排力度的政治博弈边界。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_d7333cbeef60aca0",
@@ -715,7 +2391,7 @@
       "why_zh": "提供了COP31峰会参与国与代表规模的初步统计事实，反映了主要国家（如美国）的缺席及东道国嘉宾规模的变化。",
       "language": "en",
       "published_at": "2026-11-10T17:21:37+00:00",
-      "fetched_at": "2026-11-10T18:04:32.279840+00:00",
+      "fetched_at": "2026-11-11T02:05:48.590344+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -833,7 +2509,7 @@
         "decision_atom": "提供了COP31峰会参与国与代表规模的初步统计事实，反映了主要国家（如美国）的缺席及东道国嘉宾规模的变化。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_e76b102b95c0a4a4",
@@ -846,14 +2522,14 @@
       "authority": 3,
       "relevance_score": 58,
       "title_original": "Carbon Emissions Dip in 2026 as Iran War Encourages Renewable Use - Impakter",
-      "title_zh": "由于伊朗战争刺激可再生能源利用，2026年碳排放量出现下降",
+      "title_zh": "伊朗战争推动可再生能源应用，2026年碳排放量下降——Impakter",
       "summary_source": "Carbon Emissions Dip in 2026 as Iran War Encourages Renewable Use Impakter",
-      "summary_zh": "受伊朗战争相关局势的刺激，可再生能源的利用得到推进，促使2026年的碳排放量出现下降。",
-      "title_en": "Carbon Emissions Dip in 2026 as Iran War Encourages Renewable Use",
-      "summary_en": "Driven by the geopolitical context of the Iran war, the utilization of renewable energy has been encouraged, leading to a recorded dip in carbon emissions in the year 2026.",
-      "english_fingerprint": "5ceb97a32ff033fbd4a5447d78d4693c1353fd3e38f8fed75fd852d1dcd30ac1",
-      "theme_zh": "碳排放下降",
-      "why_zh": "指出了地缘冲突对可再生能源转型及碳排放下降的直接传导影响，具有突发事件与能源转型的关联分析意义。",
+      "summary_zh": "在土耳其安塔利亚举行的《联合国气候变化框架公约》第三十一届缔约方会议（COP31）上发布的《全球碳预算》报告显示，2026年化石燃料二氧化碳排放量预计将基本持平，微降约0.4%。伊朗战争后高昂的油气价格促使驾驶员转向电动汽车，令石油相关排放减少了2%。太阳能、风能和电动汽车满足了全球三分之二的能源需求增长。不过科学家呼吁谨慎，因为毁林和土地转化使总排放量达到预计的433亿吨，高于去年的428亿吨。为避免永久突破1.5摄氏度温控目标所剩的碳预算约为150亿吨，仅够维持不到四年的当前排放水平。中国碳排放有望减少近1%，美国约减少1.3%，而印度的煤炭使用则推高了其排放量。格伦·彼得斯和比尔·黑尔表示，排放量平稳一年并不意味着已经达峰，并敦促各国政府采取更快行动。此外，一家德国汽车制造商于周二宣布与挪威海德鲁公司达成长期低碳铝供应协议，协议规定至少十分之一的原生铝供应将来自该渠道，旨在到2030年将金属二氧化碳排放量从目前的每公斤约4公斤逐步降至每公斤3公斤，而全球平均水平为14.4公斤。",
+      "title_en": "Carbon Emissions Dip in 2026 as Iran War Encourages Renewable Use - Impakter",
+      "summary_en": "The Global Carbon Budget report unveiled at COP31 in Antalya projects that fossil fuel CO2 emissions will stay almost level in 2026 with a 0.4% dip. Costly oil and gas following the Iran war pushed drivers to EVs, cutting oil emissions by 2%. Solar, wind and EVs met two-thirds of global energy demand growth. Scientists urge caution as deforestation raised total emissions to a forecast 43.3 billion tonnes. The remaining budget for 1.5C stands at 150 billion tonnes, under four years of output. China is on course for a 1% cut and the U.S. 1.3%, while India's coal use raised emissions. Glen Peters and Bill Hare warn one flat year is no peak. Separately, a German carmaker agreed to source low-carbon aluminium from Norway's Hydro to lower CO2 output to 3 kg per kg by 2030.",
+      "english_fingerprint": "770b54fa1726c93757762470f4662d89333a5ff6d1e858747bd611ba1cb7df07",
+      "theme_zh": "碳预算与减排",
+      "why_zh": "明确了地缘政治引发的能源成本上升对短期化石能源消费、清洁能源增长及全球碳预算剩余额度的实质影响，揭示了全球碳达峰进程的脆弱性。",
       "language": "multilingual",
       "published_at": "2026-11-10T17:02:22+00:00",
       "fetched_at": "2026-11-10T18:05:57.220770+00:00",
@@ -872,19 +2548,68 @@
       ],
       "country_codes": [
         {
+          "alpha2": "NO",
+          "alpha3": "NOR",
+          "name_zh": "挪威",
+          "name_en": "Norway"
+        },
+        {
+          "alpha2": "US",
+          "alpha3": "USA",
+          "name_zh": "美国",
+          "name_en": "United States"
+        },
+        {
+          "alpha2": "TR",
+          "alpha3": "TUR",
+          "name_zh": "土耳其",
+          "name_en": "Türkiye"
+        },
+        {
+          "alpha2": "CN",
+          "alpha3": "CHN",
+          "name_zh": "中华人民共和国",
+          "name_en": "China"
+        },
+        {
+          "alpha2": "DE",
+          "alpha3": "DEU",
+          "name_zh": "德国",
+          "name_en": "Germany"
+        },
+        {
           "alpha2": "IR",
           "alpha3": "IRN",
           "name_zh": "伊朗",
           "name_en": "Iran"
+        },
+        {
+          "alpha2": "IN",
+          "alpha3": "IND",
+          "name_zh": "印度",
+          "name_en": "India"
         }
       ],
-      "organization_tags": [],
-      "event_tags": [],
+      "organization_tags": [
+        "UNFCCC",
+        "COP"
+      ],
+      "event_tags": [
+        "COP31"
+      ],
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
       "content_hash": "de38005243c4fffc8ccf281c3ae97c424448fda9b1e1ae0d84e794ba2b34d961",
-      "poster_phrase": "2026年碳排放下降",
-      "company_entities": [],
+      "poster_phrase": "2026全球碳预算报告",
+      "company_entities": [
+        {
+          "name_en": "Norsk Hydro",
+          "name_zh": "挪威海德鲁",
+          "business_zh": "供应低碳铝",
+          "country": "Norway",
+          "company_type": "energy_company"
+        }
+      ],
       "alternate_urls": [],
       "duplicate_observations": [],
       "quality": {
@@ -922,14 +2647,25 @@
           "伊朗"
         ],
         "country_code_atoms": [
-          "IRN"
+          "NOR",
+          "USA",
+          "TUR",
+          "CHN",
+          "DEU",
+          "IRN",
+          "IND"
         ],
-        "organization_atoms": [],
-        "event_atoms": [],
-        "decision_atom": "指出了地缘冲突对可再生能源转型及碳排放下降的直接传导影响，具有突发事件与能源转型的关联分析意义。"
+        "organization_atoms": [
+          "UNFCCC",
+          "COP"
+        ],
+        "event_atoms": [
+          "COP31"
+        ],
+        "decision_atom": "明确了地缘政治引发的能源成本上升对短期化石能源消费、清洁能源增长及全球碳预算剩余额度的实质影响，揭示了全球碳达峰进程的脆弱性。"
       },
       "first_archived_at": "2026-11-10T18:22:00.091947+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_07d8a2a33a5dcb61",
@@ -952,7 +2688,7 @@
       "why_zh": "体现了联合国气候谈判中对海洋议题的持续关注，属于事实层面的会议日程通报。",
       "language": "multilingual",
       "published_at": "2026-11-10T17:01:38+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -1014,103 +2750,7 @@
         "decision_atom": "体现了联合国气候谈判中对海洋议题的持续关注，属于事实层面的会议日程通报。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
-    },
-    {
-      "record_id": "article_279ea2446d016259",
-      "article_id": "article_279ea2446d016259",
-      "canonical_url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbzFhenctOXpMNUxRQ0JZY0p2d3otZW9sd1VFQ09HMU1fQlBLcUxBeXZjamM2d25XSUFmMlUwTXRQaFhpbVJLd2VHQ2NfX2FGcHo4SG55ZjdBd1NVenBUVW1zQk8zRzM0cjg0UmtpS2FKMlNvT3ozeWEyNjdQVlNYNW50UGNra2EyYU5EdUV0bVlhNXJLRllqcXJKMkhYYkJyUFFuRlI2bmk3aVMtQ2M1T3NxaHZYQQ?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPbzFhenctOXpMNUxRQ0JZY0p2d3otZW9sd1VFQ09HMU1fQlBLcUxBeXZjamM2d25XSUFmMlUwTXRQaFhpbVJLd2VHQ2NfX2FGcHo4SG55ZjdBd1NVenBUVW1zQk8zRzM0cjg0UmtpS2FKMlNvT3ozeWEyNjdQVlNYNW50UGNra2EyYU5EdUV0bVlhNXJLRllqcXJKMkhYYkJyUFFuRlI2bmk3aVMtQ2M1T3NxaHZYQQ?oc=5",
-      "source_id": "API004",
-      "source_name": "Sustainable Views",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
-      "relevance_score": 58,
-      "title_original": "Scope 3 emissions disclosures are ‘likely unconstitutional’, US court rules - Sustainable Views",
-      "title_zh": "美国法院裁定：范畴三排放披露“可能违宪”",
-      "summary_source": "Scope 3 emissions disclosures are ‘likely unconstitutional’, US court rules Sustainable Views",
-      "summary_zh": "美国法院作出裁决，认定企业进行范畴三（Scope 3）温室气体排放披露的要求“可能违宪”。",
-      "title_en": "Scope 3 emissions disclosures are ‘likely unconstitutional’, US court rules",
-      "summary_en": "A US court has ruled that regulatory requirements concerning Scope 3 greenhouse gas emissions disclosures are likely unconstitutional, impacting corporate climate reporting mandates.",
-      "english_fingerprint": "9ddb209ae8b529d33655ed75bc21426b76dc0d475e227bfb8dc5db060ad899a5",
-      "theme_zh": "碳排放披露",
-      "why_zh": "对美国企业气候合规与强制性信息披露政策构成了潜在的法律阻碍，属于具有重要司法约束力的政策走向事实。",
-      "language": "multilingual",
-      "published_at": "2026-11-10T16:50:33+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [
-        "3"
-      ],
-      "places": [
-        {
-          "name_zh": "美国",
-          "lon": -100.0,
-          "lat": 39.0
-        }
-      ],
-      "country_codes": [
-        {
-          "alpha2": "US",
-          "alpha3": "USA",
-          "name_zh": "美国",
-          "name_en": "United States"
-        }
-      ],
-      "organization_tags": [],
-      "event_tags": [],
-      "translation_status": "model_generated_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "fde985183f148c16d51a5dfa51a4865acd89ae44838ad23467ae04da8ff44328",
-      "poster_phrase": "范畴三披露可能违宪",
-      "company_entities": [],
-      "alternate_urls": [],
-      "duplicate_observations": [],
-      "quality": {
-        "passed": true,
-        "score": 54,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_279ea2446d016259",
-        "source_atom": {
-          "name": "Sustainable Views",
-          "authority": 3,
-          "type": "搜索聚合Feed"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "model_generated_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放"
-        ],
-        "number_atoms": [
-          "3"
-        ],
-        "geo_atoms": [
-          "美国"
-        ],
-        "country_code_atoms": [
-          "USA"
-        ],
-        "organization_atoms": [],
-        "event_atoms": [],
-        "decision_atom": "对美国企业气候合规与强制性信息披露政策构成了潜在的法律阻碍，属于具有重要司法约束力的政策走向事实。"
-      },
-      "first_archived_at": "2026-11-10T18:22:00.091947+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_73f474ce7b274411",
@@ -1133,7 +2773,7 @@
       "why_zh": "反映了大会在能源与交通日期间对化石燃料转型与全球电气化承诺的推进态势，展示了土耳其主席国力推的重点方向。本段表述基于公开新闻事实。",
       "language": "multilingual",
       "published_at": "2026-11-10T16:39:19+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -1216,7 +2856,7 @@
         "decision_atom": "反映了大会在能源与交通日期间对化石燃料转型与全球电气化承诺的推进态势，展示了土耳其主席国力推的重点方向。本段表述基于公开新闻事实。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_28853944af5bbf5c",
@@ -1322,7 +2962,7 @@
         "decision_atom": "点出了东道国土耳其在本次峰会上的核心政策推进方向及其面临的谈判难点，属于宏观进展事实记录。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_71e1e93d5b0c5d1e",
@@ -1345,7 +2985,7 @@
       "why_zh": "表明国际碳市场机制、《巴黎协定》第六条实施以及碳捕集与清除技术在COP31上的重要讨论方向，反映出商业化路径与监管整合的新趋势。",
       "language": "multilingual",
       "published_at": "2026-11-10T16:31:52+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
         "国际气候谈判",
         "国际碳市场"
@@ -1437,7 +3077,7 @@
         "decision_atom": "表明国际碳市场机制、《巴黎协定》第六条实施以及碳捕集与清除技术在COP31上的重要讨论方向，反映出商业化路径与监管整合的新趋势。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_7e62e913116ae88f",
@@ -1460,7 +3100,7 @@
       "why_zh": "知名气候活动人士重返联合国气候大会并批评全球政治经济体系，反映出民间社会对现有气候治理速度与方向的强烈不满，对谈判各方形成外部施压。本段表述基于公开新闻事实。",
       "language": "en",
       "published_at": "2026-11-10T16:17:23+00:00",
-      "fetched_at": "2026-11-10T18:04:36.044904+00:00",
+      "fetched_at": "2026-11-11T02:05:54.515927+00:00",
       "topics": [
         "国际气候谈判",
         "气候适应"
@@ -1539,64 +3179,67 @@
         "decision_atom": "知名气候活动人士重返联合国气候大会并批评全球政治经济体系，反映出民间社会对现有气候治理速度与方向的强烈不满，对谈判各方形成外部施压。本段表述基于公开新闻事实。"
       },
       "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
-      "record_id": "article_c55e1ebcac56ba5a",
-      "article_id": "article_c55e1ebcac56ba5a",
-      "canonical_url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONUdvbmR4ZDJNQ3VBcEM3b1lwSFpFMHlGbXRucmdOcElhVFFKVnBORXJuSXphaFJQZTZ0QkhERVROVEw1MFpvXzltbjVSTlJaQ3pPR2Q4TEpWZEVsTnlZcDNQbGpYZGxQeUtBUWRpdGdrckYwTEpLWkJqY0NnWkRmN2ZrSFBZTzJiUHV1UEhEaW5sdW01VkxFRldwckYzbXRfNDlZRVRVYUZqSld6akxB?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONUdvbmR4ZDJNQ3VBcEM3b1lwSFpFMHlGbXRucmdOcElhVFFKVnBORXJuSXphaFJQZTZ0QkhERVROVEw1MFpvXzltbjVSTlJaQ3pPR2Q4TEpWZEVsTnlZcDNQbGpYZGxQeUtBUWRpdGdrckYwTEpLWkJqY0NnWkRmN2ZrSFBZTzJiUHV1UEhEaW5sdW01VkxFRldwckYzbXRfNDlZRVRVYUZqSld6akxB?oc=5",
+      "record_id": "article_05862f9dce5219aa",
+      "article_id": "article_05862f9dce5219aa",
+      "canonical_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5QR0QxdEpVUW5DdjBsLXQtT01jQWNNZWt2cF92eHR0cktWSGROOTVQU1VNNzRwY1M2cVhlWl9uM0tFR01COTdsRk5zbWJLSUVOZDdHWmphelJEM09pbDRmYWFGbTlOT1NPbVdOTFhscjV0Zk1lTDRxamNNeVU0dw?oc=5",
+      "source_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5QR0QxdEpVUW5DdjBsLXQtT01jQWNNZWt2cF92eHR0cktWSGROOTVQU1VNNzRwY1M2cVhlWl9uM0tFR01COTdsRk5zbWJLSUVOZDdHWmphelJEM09pbDRmYWFGbTlOT1NPbVdOTFhscjV0Zk1lTDRxamNNeVU0dw?oc=5",
       "source_id": "API004",
-      "source_name": "Risk & Insurance",
+      "source_name": "InsideEVs",
       "source_type": "搜索聚合Feed",
       "authority": 3,
-      "relevance_score": 62,
-      "title_original": "Climate Adaptation Projects Deliver $2 for Every $1 Spent, Swiss Re Institute Finds - Risk & Insurance",
-      "title_zh": "瑞士再保险研究所发现：气候适应项目每花费1美元可产生2美元回报",
-      "summary_source": "Climate Adaptation Projects Deliver $2 for Every $1 Spent, Swiss Re Institute Finds Risk & Insurance",
-      "summary_zh": "根据瑞士再保险研究所的分析，新兴市场中的气候适应项目每花费1美元，即可产生约2.10美元的预期收益，部分干预措施带来的回报甚至接近其成本的10倍。该结论基于对世界银行和亚洲开发银行42份项目完成报告的回顾，这些报告直接针对自然灾害物理风险并对适应效益进行了量化。分析指出，受保自然灾害损失正持续攀升，如果5%至7%的长期年均增长趋势持续，全球受保损失将从2025年的1070亿美元上升至2030年的1860亿美元。以欧洲洪水风险为例，尽管由于保险渗透率上升和暴露资产增加，受保洪水损失以约5%的复合年增长率增长，但研究所分析表明，在剔除这些因素后，并没有出现受保洪水损失残余向上的趋势，证明适应措施有助于在暴露度增加的同时控制损失。",
-      "title_en": "Climate Adaptation Projects Deliver $2 for Every $1 Spent, Swiss Re Institute Finds",
-      "summary_en": "Climate adaptation projects in emerging markets generate projected benefits of roughly $2.10 for every dollar spent, with some interventions yielding returns approaching 10 times their cost, according to an analysis by the Swiss Re Institute. The finding relies on a review of 42 World Bank and Asian Development Bank project completion reports addressing physical natural catastrophe hazards with quantified adaptation benefits. As insured natural catastrophe losses continue climbing—projected to rise from $107 billion in 2025 to $186 billion by 2030 if a 5% to 7% annual growth trend persists—the research highlights the economic value of resilience. Europe's experience with flood risk demonstrates that adaptation helps contain losses despite increasing exposure; although insured flood losses there grow at a compound annual rate of about 5% driven by rising insurance penetration and exposed assets, accounting for those factors reveals no residual upward trend in losses.",
-      "english_fingerprint": "05effc460accf007fff1eb6aa0534f01547cb368c6240b5cf1ae6063ca5db1da",
-      "theme_zh": "气候适应与经济回报",
-      "why_zh": "量化了气候适应项目的投资回报率，为金融机构和国际开发银行评估抗灾减灾资金的经济合理性提供了事实依据。",
+      "relevance_score": 66,
+      "title_original": "This American Battery Could Break China’s Grip On The EV Supply Chain - InsideEVs",
+      "title_zh": "这款美国电池能否打破中国对电动汽车供应链的控制？",
+      "summary_source": "This American Battery Could Break China’s Grip On The EV Supply Chain InsideEVs",
+      "summary_zh": "InsideEVs 报道了一款美国电池，并探讨其是否能够打破中国对电动汽车供应链的控制地位。该内容由 feed_summary 提供，未给出进一步的技术或市场细节。",
+      "title_en": null,
+      "summary_en": null,
+      "english_fingerprint": null,
+      "theme_zh": "电池供应链",
+      "why_zh": "该报道反映了美国媒体对本土电池技术摆脱对华依赖的战略关切，具有一定地缘经济与贸易竞争风向标意义（基于标题和短摘要的事实判断）。",
       "language": "multilingual",
-      "published_at": "2026-11-10T16:07:20+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "published_at": "2026-11-10T14:37:37+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
-        "气候适应"
+        "能源与排放"
       ],
-      "numbers": [
-        "$2",
-        "$1"
-      ],
+      "numbers": [],
       "places": [
         {
-          "name_zh": "欧洲",
-          "lon": 10.0,
-          "lat": 51.0
+          "name_zh": "中国",
+          "lon": 105.0,
+          "lat": 35.0
         }
       ],
       "country_codes": [
         {
-          "alpha2": "CH",
-          "alpha3": "CHE",
-          "name_zh": "瑞士",
-          "name_en": "Switzerland"
+          "alpha2": "US",
+          "alpha3": "USA",
+          "name_zh": "美国",
+          "name_en": "United States"
+        },
+        {
+          "alpha2": "CN",
+          "alpha3": "CHN",
+          "name_zh": "中华人民共和国",
+          "name_en": "China"
         }
       ],
       "organization_tags": [],
       "event_tags": [],
       "translation_status": "model_generated_needs_review",
       "fact_status": "source_claim_unverified",
-      "content_hash": "4257772c6fd8f17e01fc9789e0ffd3282386873babac994db2e43d3854dcbdf9",
-      "poster_phrase": "气候适应项目每花1元回报2元",
+      "content_hash": "acffd778186bae8026b9494eb19e859860616a5fb989b329480f8e852b110922",
+      "poster_phrase": "美国电池挑战供应链",
       "company_entities": [],
       "alternate_urls": [],
       "duplicate_observations": [],
       "quality": {
         "passed": true,
-        "score": 56,
+        "score": 57,
         "tier": "B",
         "checks": {
           "canonical_https": true,
@@ -1608,9 +3251,9 @@
         }
       },
       "molecule": {
-        "identity": "article_c55e1ebcac56ba5a",
+        "identity": "article_05862f9dce5219aa",
         "source_atom": {
-          "name": "Risk & Insurance",
+          "name": "InsideEVs",
           "authority": 3,
           "type": "搜索聚合Feed"
         },
@@ -1620,24 +3263,22 @@
           "quality_tier": "B"
         },
         "topic_atoms": [
-          "气候适应"
+          "能源与排放"
         ],
-        "number_atoms": [
-          "$2",
-          "$1"
-        ],
+        "number_atoms": [],
         "geo_atoms": [
-          "欧洲"
+          "中国"
         ],
         "country_code_atoms": [
-          "CHE"
+          "USA",
+          "CHN"
         ],
         "organization_atoms": [],
         "event_atoms": [],
-        "decision_atom": "量化了气候适应项目的投资回报率，为金融机构和国际开发银行评估抗灾减灾资金的经济合理性提供了事实依据。"
+        "decision_atom": "该报道反映了美国媒体对本土电池技术摆脱对华依赖的战略关切，具有一定地缘经济与贸易竞争风向标意义（基于标题和短摘要的事实判断）。"
       },
-      "first_archived_at": "2026-11-10T18:15:26.226592+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "first_archived_at": "2026-08-30T14:57:22.817347+00:00",
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f16e9177d5762d5d",
@@ -1660,7 +3301,7 @@
       "why_zh": "该评估报告揭示了地缘政治冲突和可再生能源扩张对短期化石燃料碳排放的实际影响，凸显出当前减排成果的脆弱性及全球距实现1.5摄氏度温控目标的巨大差距。",
       "language": "en",
       "published_at": "2026-11-10T11:55:06+00:00",
-      "fetched_at": "2026-11-10T18:04:38.284375+00:00",
+      "fetched_at": "2026-11-11T02:05:55.259311+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -1773,7 +3414,7 @@
         "decision_atom": "该评估报告揭示了地缘政治冲突和可再生能源扩张对短期化石燃料碳排放的实际影响，凸显出当前减排成果的脆弱性及全球距实现1.5摄氏度温控目标的巨大差距。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_aa6fd4bc9a48b6f4",
@@ -1796,7 +3437,7 @@
       "why_zh": "凸显了当前全球气候行动力度与《巴黎协定》目标之间存在的显著差距，并厘清了土耳其与澳大利亚在COP31大会上的分工以及地缘政治对能源转型的现实影响。",
       "language": "en",
       "published_at": "2026-11-10T06:45:39+00:00",
-      "fetched_at": "2026-11-10T18:04:38.284375+00:00",
+      "fetched_at": "2026-11-11T02:05:55.259311+00:00",
       "topics": [
         "国际气候谈判",
         "气候适应"
@@ -1925,7 +3566,7 @@
         "decision_atom": "凸显了当前全球气候行动力度与《巴黎协定》目标之间存在的显著差距，并厘清了土耳其与澳大利亚在COP31大会上的分工以及地缘政治对能源转型的现实影响。"
       },
       "first_archived_at": "2026-11-10T18:22:00.091947+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_52b9a7aaab458602",
@@ -2024,7 +3665,7 @@
         "decision_atom": "该拟议政策调整了中国光伏制造关键环节的出口合规要求，对全球供应链及印度等主要进口国产生了直接影响。事实边界局限于商务部公开征求意见的草案内容。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b10398d45ad92e3a",
@@ -2147,7 +3788,7 @@
         "decision_atom": "该路线图为各国摆脱化石燃料依赖提供了具体的政策指导与转型路径，是落实全球气候承诺的重要外交与政策工具。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ede74f8a13f1da4a",
@@ -2235,7 +3876,7 @@
         "decision_atom": "该声明反映了地方政党基层的政治表态，属于国内政治选举议程，与国际气候政策无直接关联。"
       },
       "first_archived_at": "2026-11-10T04:30:15.248266+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_72dac0406e2c7787",
@@ -2356,7 +3997,7 @@
         "decision_atom": "反映了宗教界与非国家行为体在COP31期间对气候资金结构（偏重赠款）、适应目标计量和公正转型的施压与政策呼吁。"
       },
       "first_archived_at": "2026-11-10T04:30:15.248266+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_39ce53b3e6995831",
@@ -2379,7 +4020,7 @@
       "why_zh": "指出了可持续交通在增强城市气候韧性中的实践与伙伴关系构建，内容侧重于官方议程和方案交付。",
       "language": "multilingual",
       "published_at": "2026-11-10T02:37:08+00:00",
-      "fetched_at": "2026-11-10T18:05:57.220770+00:00",
+      "fetched_at": "2026-11-11T02:07:18.005726+00:00",
       "topics": [
         "国际气候谈判",
         "气候适应"
@@ -2441,7 +4082,7 @@
         "decision_atom": "指出了可持续交通在增强城市气候韧性中的实践与伙伴关系构建，内容侧重于官方议程和方案交付。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b7d9fd82695b9e2c",
@@ -2550,7 +4191,7 @@
         "decision_atom": "揭示了化石燃料价格波动与全球通胀的宏观经济关联，强化了加快向可再生能源与电气化转型的政治动能。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_97f87724ab409abf",
@@ -2573,7 +4214,7 @@
       "why_zh": "东道国高级官员在大会开幕之际直面升温超标现实并重申1.5摄氏度目标的可逆性，对指导后续全球气候谈判与减排雄心具有重要风向标意义。",
       "language": "en",
       "published_at": "2026-11-10T02:23:21+00:00",
-      "fetched_at": "2026-11-10T18:04:38.284375+00:00",
+      "fetched_at": "2026-11-11T02:05:55.259311+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -2663,7 +4304,7 @@
         "decision_atom": "东道国高级官员在大会开幕之际直面升温超标现实并重申1.5摄氏度目标的可逆性，对指导后续全球气候谈判与减排雄心具有重要风向标意义。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f04a616fb64667b1",
@@ -2767,7 +4408,7 @@
         "decision_atom": "标志着新一轮全球气候峰会的正式启动，背景涉及全球温控目标的严峻形势。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_94bda8342079dd8c",
@@ -2875,7 +4516,7 @@
         "decision_atom": "事实边界明确了COP31举办的时间与地点；体现了联合国气候变化大会的官方日程安排。"
       },
       "first_archived_at": "2026-11-07T16:43:25.121441+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_db29ad1e300cd39e",
@@ -2954,7 +4595,7 @@
         "decision_atom": "提供了全球温室气体排放趋势的研究观测结果，具有科学参考价值。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_181d283d57bb95fb",
@@ -3064,7 +4705,7 @@
         "decision_atom": "揭示了地缘政治冲突导致的能源供应冲击对短期全球化石燃料减排的非持久性影响，表明当前清洁能源转型速度尚不足以驱动全球排放持续下降。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6fe0e3f2c483f613",
@@ -3087,7 +4728,7 @@
       "why_zh": "该预测反映了地缘冲突对全球化石能源消费与短期碳轨迹的实质性扰动，标明了化石能源减排与厄尔尼诺气候反弹并存的事实边界。",
       "language": "en",
       "published_at": "2026-11-10T01:01:00+00:00",
-      "fetched_at": "2026-11-10T18:04:32.279840+00:00",
+      "fetched_at": "2026-11-11T02:05:48.590344+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -3164,7 +4805,7 @@
         "decision_atom": "该预测反映了地缘冲突对全球化石能源消费与短期碳轨迹的实质性扰动，标明了化石能源减排与厄尔尼诺气候反弹并存的事实边界。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b6c213571082cad0",
@@ -3260,7 +4901,7 @@
         "decision_atom": "明确了清洁能源增长与地缘冲突共同作用下2026年全球化石碳排的阶段性走向，强调了加速能源转型以实现结构性减排的必要性。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_d0e49f99e9abd759",
@@ -3339,7 +4980,7 @@
         "decision_atom": "反映了主流媒体对2026年全球化石燃料减排趋势的预测，具有宏观气候政策趋势参考价值。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_5eed8eacafb04700",
@@ -3442,7 +5083,7 @@
         "decision_atom": "通过科学研究驳斥了绿色能源为2026年近期减排主因的假设，指出短期排放下降主要归因于地缘冲突带来的能源冲击，凸显能源转型的紧迫性。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_debacf1920f12d7f",
@@ -3540,7 +5181,7 @@
         "decision_atom": "体现了中国在能源转型领域的大规模资金投入，有助于推动清洁能源基础设施建设和减排目标。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6e79dccf52520af2",
@@ -3563,7 +5204,7 @@
       "why_zh": "凸显了主要化石燃料出口国在推进全球减排目标时面临的国内政治张力与政策双重性，阐明了澳大利亚在COP31中担任特殊谈判主席所面临的复杂国际协调挑战。该观点基于事实，指出出口排放上升与国内减排目标之间的矛盾。",
       "language": "en",
       "published_at": "2026-11-10T00:50:40+00:00",
-      "fetched_at": "2026-11-10T18:04:38.284375+00:00",
+      "fetched_at": "2026-11-11T02:05:55.259311+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -3653,7 +5294,7 @@
         "decision_atom": "凸显了主要化石燃料出口国在推进全球减排目标时面临的国内政治张力与政策双重性，阐明了澳大利亚在COP31中担任特殊谈判主席所面临的复杂国际协调挑战。该观点基于事实，指出出口排放上升与国内减排目标之间的矛盾。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0407b465a27294a7",
@@ -3756,7 +5397,7 @@
         "decision_atom": "警示了厄尔尼诺等气候背景下极端野火对热带国家碳预算的灾难性影响，突显自然灾害碳释放对全球气候目标的潜在干扰。"
       },
       "first_archived_at": "2026-09-12T06:30:47.407122+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_411d3a1a31484780",
@@ -3866,7 +5507,7 @@
         "decision_atom": "该报告量化评估了中国清洁技术出口对全球碳减排的年度贡献，并将其置于全球地缘政治与即将召开的联合国气候谈判背景中。观点与事实均基于发布的报告及专家评论。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_fdf6768ab807904c",
@@ -3973,7 +5614,7 @@
         "decision_atom": "该表态反映了太平洋岛国在COP31上抱团争取生存权与谈判话语权的政治诉求，体现了小岛屿国家在国际气候治理中的集体行动立场。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_dcc5a3b03ac64d00",
@@ -4073,114 +5714,7 @@
         "decision_atom": "表明了中国在推动能源转型上的宏大资金承诺，是评估全球清洁能源投资规模的关键事实。"
       },
       "first_archived_at": "2026-11-10T04:30:15.248266+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
-    },
-    {
-      "record_id": "article_ce0b8493f9663ee0",
-      "article_id": "article_ce0b8493f9663ee0",
-      "canonical_url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPeHZMd2czR080MnYyUGQwOHM4Nk1EOFJ2Q3NFdGEyN2d0N0hnd3RTWmN1b1N1djVUajdxTko2S1kzSkNid2tLVnVMbnVIZEF1cktFWUNOVzdUdF9abU9fallCUnkxZVctOUd4WVR0OE5QVTMzRmZlS2ZOTjM2alFreDFydS1mT1U5?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPeHZMd2czR080MnYyUGQwOHM4Nk1EOFJ2Q3NFdGEyN2d0N0hnd3RTWmN1b1N1djVUajdxTko2S1kzSkNid2tLVnVMbnVIZEF1cktFWUNOVzdUdF9abU9fallCUnkxZVctOUd4WVR0OE5QVTMzRmZlS2ZOTjM2alFreDFydS1mT1U5?oc=5",
-      "source_id": "API004",
-      "source_name": "FBC News",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
-      "relevance_score": 70,
-      "title_original": "Fiji representative takes Nacula voices to COP31 - FBC News",
-      "title_zh": "斐济代表将纳库拉的声音带到COP31",
-      "summary_source": "Fiji representative takes Nacula voices to COP31 FBC News",
-      "summary_zh": "斐济代表拉维尼亚·奈瓦卢（Lavenia Naivalu）在土耳其安塔利亚举行的COP31气候变化大会上，将土著社区的关切带上全球气候舞台，呼吁对受气候变化影响最严重的人群采取有意义的行动并提供气候资金。现年43岁的奈瓦卢强调，保持1.5摄氏度温控目标以及确保气候资金流向处于气候变化最前沿的社区依然是重中之重。她已被选为地方社区和土著居民平台促进工作组的太平洋地区主要代表。本届COP31已正式开幕，会议将持续至11月20日。",
-      "title_en": "Fiji representative takes Nacula voices to COP31",
-      "summary_en": "Fiji representative Lavenia Naivalu brought the concerns of Indigenous communities to the COP31 climate summit in Antalya, Turkey, calling for meaningful action and climate finance for vulnerable populations. Naivalu prioritized keeping the 1.5-degree Celsius warming target alive and ensuring financial support reaches frontline communities. She has also been selected as the Pacific's primary representative on the Facilitative Working Group of the Local Communities and Indigenous Peoples Platform. COP31 runs until November 20.",
-      "english_fingerprint": "c9e4f50b87fbf914c1730ff22b489adfdf9209964921c2eba79b41a173f79f58",
-      "theme_zh": "气候资金与土著权益",
-      "why_zh": "该事件凸显了土著社区代表在联合国气候峰会上直接争取适应资金与温控目标的努力，体现了基层脆弱群体在国际气候谈判中的声音。",
-      "language": "multilingual",
-      "published_at": "2026-11-09T23:48:55+00:00",
-      "fetched_at": "2026-11-10T04:17:20.053461+00:00",
-      "topics": [
-        "国际气候谈判"
-      ],
-      "numbers": [],
-      "places": [
-        {
-          "name_zh": "斐济",
-          "lon": 178.0,
-          "lat": -17.8
-        }
-      ],
-      "country_codes": [
-        {
-          "alpha2": "TR",
-          "alpha3": "TUR",
-          "name_zh": "土耳其",
-          "name_en": "Türkiye"
-        },
-        {
-          "alpha2": "FJ",
-          "alpha3": "FJI",
-          "name_zh": "斐济",
-          "name_en": "Fiji"
-        }
-      ],
-      "organization_tags": [
-        "COP"
-      ],
-      "event_tags": [
-        "COP31"
-      ],
-      "translation_status": "model_generated_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "f9c726a1967e00cdc5d1407b648e83af4cae861b74bbc6d6f8952c89b4df6a42",
-      "poster_phrase": "土著声音与气候资金",
-      "company_entities": [],
-      "alternate_urls": [],
-      "duplicate_observations": [],
-      "quality": {
-        "passed": true,
-        "score": 59,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_ce0b8493f9663ee0",
-        "source_atom": {
-          "name": "FBC News",
-          "authority": 3,
-          "type": "搜索聚合Feed"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "model_generated_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "国际气候谈判"
-        ],
-        "number_atoms": [],
-        "geo_atoms": [
-          "斐济"
-        ],
-        "country_code_atoms": [
-          "TUR",
-          "FJI"
-        ],
-        "organization_atoms": [
-          "COP"
-        ],
-        "event_atoms": [
-          "COP31"
-        ],
-        "decision_atom": "该事件凸显了土著社区代表在联合国气候峰会上直接争取适应资金与温控目标的努力，体现了基层脆弱群体在国际气候谈判中的声音。"
-      },
-      "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_97cbf4a6d173f5d8",
@@ -4203,7 +5737,7 @@
       "why_zh": "该研究揭示了极端干旱对热带雨林生态系统的长期滞后影响，深化了科学界对气候变化下森林脆弱性的理解。",
       "language": "en",
       "published_at": "2026-11-09T23:22:18+00:00",
-      "fetched_at": "2026-11-10T18:04:36.044904+00:00",
+      "fetched_at": "2026-11-11T02:05:54.515927+00:00",
       "topics": [
         "气候适应"
       ],
@@ -4278,7 +5812,7 @@
         "decision_atom": "该研究揭示了极端干旱对热带雨林生态系统的长期滞后影响，深化了科学界对气候变化下森林脆弱性的理解。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b3ddf7ee43d22d30",
@@ -4372,7 +5906,7 @@
         "decision_atom": "标志着新一轮联合国气候大会的正式开启并强调了极端天气议题。事实局限于会议开幕与高温警告这一事件本身。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_98a86ab24937c35c",
@@ -4457,7 +5991,7 @@
         "decision_atom": "突出了国际气候谈判中对适应资金和生态保护的重视，为提升区域气候韧性提供了路径。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f54e9cdc28e226a0",
@@ -4480,7 +6014,7 @@
       "why_zh": "记录了美国历史上异常高温的持续态势，为评估长期气候变暖趋势提供了官方气象数据事实。",
       "language": "en",
       "published_at": "2026-11-09T22:07:37+00:00",
-      "fetched_at": "2026-11-10T18:04:36.193822+00:00",
+      "fetched_at": "2026-11-11T02:05:54.598209+00:00",
       "topics": [
         "气候适应"
       ],
@@ -4571,7 +6105,7 @@
         "decision_atom": "记录了美国历史上异常高温的持续态势，为评估长期气候变暖趋势提供了官方气象数据事实。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_5fd484101919bfca",
@@ -4680,7 +6214,7 @@
         "decision_atom": "反映了太平洋岛国在COP31上对气候教育资金与韧性建设的政策诉求，属于各方在谈判边缘倡导的优先议题。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f624d1e2cc752087",
@@ -4763,7 +6297,7 @@
         "decision_atom": "展示了气候谈判框架下从政策承诺向具体金融和领土行动转化的实践案例，属于非正式边会与解决方案展示。"
       },
       "first_archived_at": "2026-11-10T04:30:15.248266+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0df8e162074ae5c1",
@@ -4852,7 +6386,7 @@
         "decision_atom": "强调了气候资金议题在COP31上的核心地位及对发达国家履约责任的要求，反映了民间与非政府组织对资金交付的立场。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b7b1b93de6c56fb5",
@@ -4965,7 +6499,7 @@
         "decision_atom": "该项目的成功并网展现了国际开发商在日本储能市场的实质性进展，并将通过专业聚合商参与电力市场交易。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_9e2040504a114ded",
@@ -5067,7 +6601,7 @@
         "decision_atom": "展示了中亚国家在多边气候峰会上推动区域适应行动的政治意愿与具体合作议程。"
       },
       "first_archived_at": "2026-11-10T04:24:10.383579+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ee2bd44d456d80c7",
@@ -5163,7 +6697,7 @@
         "decision_atom": "该政策流程直接关乎45Z燃料生产税收抵免的申请标准，影响相关能源企业的财政补贴核算与合规路径。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_2fafe72a664ee2ee",
@@ -5286,7 +6820,7 @@
         "decision_atom": "事实：COP31在土耳其安塔利亚开幕，各方呼吁落实资金承诺并推进减排与适应。观点：土耳其环境部长提出将本届大会定为“落实之COP”。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_d71c61673c28684d",
@@ -5371,7 +6905,7 @@
         "decision_atom": "事实：COP31气候峰会在经历极端天气频发的年份后正式开始。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_d0dc6559e3538261",
@@ -5471,7 +7005,7 @@
         "decision_atom": "体现了埃及政府通过深化公私合作与技术升级来推进国家能源战略的具体政策动向，事实表明埃及正积极拓展屋顶太阳能与电网数字化管理。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_08fd80036b0ebd4e",
@@ -5575,7 +7109,7 @@
         "decision_atom": "指明了COP31大会在安塔利亚开幕之初的优先工作领域，为后续谈判议题划定了事实与政策边界。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_7f190d703516e291",
@@ -5598,7 +7132,7 @@
       "why_zh": "该讲话在COP31开幕式上将化石燃料危机直接同全球通货膨胀挂钩，支持了东道国推进电气化与可再生能源转型的优先议程，反映了谈判面临加速取得成果的政治压力。观点与事实有明确边界。",
       "language": "en",
       "published_at": "2026-11-09T17:47:04+00:00",
-      "fetched_at": "2026-11-10T18:04:38.284375+00:00",
+      "fetched_at": "2026-11-11T02:05:55.259311+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -5684,7 +7218,7 @@
         "decision_atom": "该讲话在COP31开幕式上将化石燃料危机直接同全球通货膨胀挂钩，支持了东道国推进电气化与可再生能源转型的优先议程，反映了谈判面临加速取得成果的政治压力。观点与事实有明确边界。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_96bfef1ac11e2a1c",
@@ -5779,7 +7313,7 @@
         "decision_atom": "体现了大型能源企业对联合国气候变化大会（COP31）日程与气候政策走向的持续关注与参与。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0195bd9187e6a3fa",
@@ -5877,7 +7411,7 @@
         "decision_atom": "事实：联合国指出富国在气候适应资金上远未达标。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_40d48764cd7bb901",
@@ -5956,7 +7490,7 @@
         "decision_atom": "反映了国际金融机构通过发行适应债券筹集气候资金的实践，事实明确但背景信息较少。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f159602aae6817c2",
@@ -6060,7 +7594,7 @@
         "decision_atom": "反映了国际气候多边进程中各国领导人对于加速减排与履行气候承诺的政治意愿和紧迫要求。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_a556fa4630500861",
@@ -6139,7 +7673,7 @@
         "decision_atom": "该信息仅为标题索引，无法单独用于气候政策评估，事实边界局限于文献索引级别。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0429b58279ddad26",
@@ -6230,7 +7764,7 @@
         "decision_atom": "明确了UNFCCC在COP31框架下将电网和电气化行动作为清洁能源转型优先事项的官方定位。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_2760188ce27d6fa4",
@@ -6332,7 +7866,7 @@
         "decision_atom": "事实：COP31在土耳其安塔利亚开幕，各方围绕气候资金及能源转型出资责任产生争议。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_cb5da224a4c5a610",
@@ -6417,7 +7951,7 @@
         "decision_atom": "该报道揭示了当前全球气候适应资金在卫生领域的严重匮乏，突显出气候变化对人类健康的直接威胁与资金支持之间的巨大鸿沟。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6fa7ceb4faca9cc5",
@@ -6440,7 +7974,7 @@
       "why_zh": "介绍了COP30推出的非强制性化石燃料转型路线图的制定背景、评估机制及各国不同的起点，强调了考虑社会经济后果的重要性，界定了政策指导与国家自主行动的边界。",
       "language": "en",
       "published_at": "2026-11-09T16:11:46+00:00",
-      "fetched_at": "2026-11-10T18:04:38.054652+00:00",
+      "fetched_at": "2026-11-11T02:05:55.093063+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -6561,7 +8095,7 @@
         "decision_atom": "介绍了COP30推出的非强制性化石燃料转型路线图的制定背景、评估机制及各国不同的起点，强调了考虑社会经济后果的重要性，界定了政策指导与国家自主行动的边界。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f7f4dd5fb9446e58",
@@ -6660,7 +8194,7 @@
         "decision_atom": "该文章针对韩国清洁能源发展中的地缘经济叙事提出反思，反映了关于全球绿色供应链依赖与本土政策挑战的公开讨论。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_33560d3345af4dc9",
@@ -6747,7 +8281,7 @@
         "decision_atom": "该信息为媒体专栏的探讨性标题，不包含具体的政策决策或约束性条款。"
       },
       "first_archived_at": "2026-11-09T21:05:05.982209+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_cb6b3e2ee3b32c3c",
@@ -6839,7 +8373,7 @@
         "decision_atom": "反映出部分国家官员对气候峰会议程和减排目标设定节奏的政策立场，属于事实陈述。"
       },
       "first_archived_at": "2026-11-09T02:44:32.590851+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f05c0d25a6e65bb5",
@@ -6934,7 +8468,7 @@
         "decision_atom": "气候正义与跨国气候诉讼及赔偿要求的具体案例事实。"
       },
       "first_archived_at": "2026-11-09T02:44:32.590851+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_5f21b474f3d81ade",
@@ -7034,7 +8568,7 @@
         "decision_atom": "反映了美国新一届国会权力格局变化下，两党在清洁能源补贴、化石燃料开发以及用能成本上的立法与行政博弈，界定了当前美国气候政策调整的政治边界。"
       },
       "first_archived_at": "2026-11-09T02:44:32.590851+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4113a1a088e7b21e",
@@ -7218,7 +8752,7 @@
         "decision_atom": "突显了本次气候大会对工业脱碳、循环经济和2035年废物减量目标的重视。属于事实陈述。"
       },
       "first_archived_at": "2026-11-09T01:58:49.388043+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0223b32b382c097d",
@@ -7406,7 +8940,7 @@
         "decision_atom": "反映了当前气候谈判面临地缘冲突、预算受压和温升突破等多重现实挑战。属于事实陈述。"
       },
       "first_archived_at": "2026-11-09T01:58:49.388043+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_5a251921989e2c46",
@@ -7583,7 +9117,7 @@
         "decision_atom": "该议题将供应链管理、碳减排与包装回收纳入联合国气候大会的讨论范畴。"
       },
       "first_archived_at": "2026-11-09T01:58:49.388043+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_18430c2270501e9a",
@@ -7666,7 +9200,7 @@
         "decision_atom": "事实层面的电力监管指令，明确了特定可再生能源与储能项目的招标合规要求，界定清晰。"
       },
       "first_archived_at": "2026-11-09T02:44:32.590851+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_3ede2ef34b10c52d",
@@ -7883,7 +9417,7 @@
         "decision_atom": "阐明了COP31峰会前夕各方在气候资金规模、出资方责任、贷款与赠款比例以及损失与损害基金落实上的严重分歧与现实数据。"
       },
       "first_archived_at": "2026-11-09T01:58:49.388043+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4aeaa2a33a45d60a",
@@ -8008,7 +9542,7 @@
         "decision_atom": "标志着欧盟在COP31上由爱尔兰协调谈判立场，重点围绕历史资金承诺的履约、化石燃料转型及电气化自愿目标展开博弈，体现了发达国家与发展中国家在资金形式与债务风险上的分歧。"
       },
       "first_archived_at": "2026-11-09T02:04:21.875247+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b4f1a39addea5c89",
@@ -8043,14 +9577,7 @@
           "lat": 39.0
         }
       ],
-      "country_codes": [
-        {
-          "alpha2": "TR",
-          "alpha3": "TUR",
-          "name_zh": "土耳其",
-          "name_en": "Türkiye"
-        }
-      ],
+      "country_codes": [],
       "organization_tags": [
         "COP"
       ],
@@ -8096,9 +9623,7 @@
         "geo_atoms": [
           "土耳其"
         ],
-        "country_code_atoms": [
-          "TUR"
-        ],
+        "country_code_atoms": [],
         "organization_atoms": [
           "COP"
         ],
@@ -8108,7 +9633,7 @@
         "decision_atom": "展示了地方政府参与国际气候大会、结合旅游推广宣传生态保护的实践，属于事实记录。"
       },
       "first_archived_at": "2026-11-09T02:44:32.590851+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:14:20.256416+00:00"
     },
     {
       "record_id": "article_87d91d57d85abaf1",
@@ -8248,14 +9773,7 @@
           "lat": 39.0
         }
       ],
-      "country_codes": [
-        {
-          "alpha2": "TR",
-          "alpha3": "TUR",
-          "name_zh": "土耳其",
-          "name_en": "Türkiye"
-        }
-      ],
+      "country_codes": [],
       "organization_tags": [
         "COP"
       ],
@@ -8302,9 +9820,7 @@
         "geo_atoms": [
           "土耳其"
         ],
-        "country_code_atoms": [
-          "TUR"
-        ],
+        "country_code_atoms": [],
         "organization_atoms": [
           "COP"
         ],
@@ -8703,7 +10219,7 @@
         "decision_atom": "大会在资金承诺落地与美方缺席的背景下举行，考验多边气候合作能否在财政压力和地缘博弈中维持进展。属于事实陈述。"
       },
       "first_archived_at": "2026-11-09T01:58:49.388043+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1cd17193daaac6f8",
@@ -9000,14 +10516,7 @@
           "lat": 39.0
         }
       ],
-      "country_codes": [
-        {
-          "alpha2": "TR",
-          "alpha3": "TUR",
-          "name_zh": "土耳其",
-          "name_en": "Türkiye"
-        }
-      ],
+      "country_codes": [],
       "organization_tags": [
         "COP"
       ],
@@ -9062,9 +10571,7 @@
         "geo_atoms": [
           "土耳其"
         ],
-        "country_code_atoms": [
-          "TUR"
-        ],
+        "country_code_atoms": [],
         "organization_atoms": [
           "COP"
         ],
@@ -10757,7 +12264,7 @@
         "decision_atom": "反映了在极端气候与资金分歧背景下，多边气候峰会面临的紧迫压力与现实挑战。"
       },
       "first_archived_at": "2026-11-08T16:54:13.278252+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_64f5e775215a8467",
@@ -10861,7 +12368,7 @@
         "decision_atom": "点明了COP31峰会聚焦清洁能源与气候资金的核心议程。"
       },
       "first_archived_at": "2026-11-08T16:54:13.278252+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b162a567aa252ccb",
@@ -10965,7 +12472,7 @@
         "decision_atom": "明确了COP31的核心谈判议题，反映了国际社会对能源转型与气候资金的持续关注。"
       },
       "first_archived_at": "2026-11-08T16:58:51.570585+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ed224a74ead9763e",
@@ -11076,7 +12583,7 @@
         "decision_atom": "揭示了COP31主办权争议背后的政治博弈及澳大利亚关键官员的双重角色，事实边界局限于澳大利亚申办历程、土耳其举办地妥协及官员职责。"
       },
       "first_archived_at": "2026-11-08T16:58:51.570585+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1f15d522d91ee064",
@@ -11170,7 +12677,7 @@
         "decision_atom": "仅包含标题层面的宏观议题，事实边界限于中国绿色技术与碳减排竞赛，无具体落地政策证据。"
       },
       "first_archived_at": "2026-11-08T16:58:51.570585+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0c5c3322b9873537",
@@ -11332,99 +12839,7 @@
         "decision_atom": "指出了COP31大会面临化石燃料转型和气候资金等核心未决议题，事实边界限于会议开幕及议程本身的悬念。"
       },
       "first_archived_at": "2026-11-08T16:58:51.570585+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
-    },
-    {
-      "record_id": "article_05862f9dce5219aa",
-      "article_id": "article_05862f9dce5219aa",
-      "canonical_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5QR0QxdEpVUW5DdjBsLXQtT01jQWNNZWt2cF92eHR0cktWSGROOTVQU1VNNzRwY1M2cVhlWl9uM0tFR01COTdsRk5zbWJLSUVOZDdHWmphelJEM09pbDRmYWFGbTlOT1NPbVdOTFhscjV0Zk1lTDRxamNNeVU0dw?oc=5",
-      "source_url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5QR0QxdEpVUW5DdjBsLXQtT01jQWNNZWt2cF92eHR0cktWSGROOTVQU1VNNzRwY1M2cVhlWl9uM0tFR01COTdsRk5zbWJLSUVOZDdHWmphelJEM09pbDRmYWFGbTlOT1NPbVdOTFhscjV0Zk1lTDRxamNNeVU0dw?oc=5",
-      "source_id": "API004",
-      "source_name": "InsideEVs",
-      "source_type": "搜索聚合Feed",
-      "authority": 3,
-      "relevance_score": 66,
-      "title_original": "This American Battery Could Break China’s Grip On The EV Supply Chain - InsideEVs",
-      "title_zh": "这款美国电池能否打破中国对电动汽车供应链的控制？",
-      "summary_source": "This American Battery Could Break China’s Grip On The EV Supply Chain InsideEVs",
-      "summary_zh": "InsideEVs 报道了一款美国电池，并探讨其是否能够打破中国对电动汽车供应链的控制地位。该内容由 feed_summary 提供，未给出进一步的技术或市场细节。",
-      "title_en": null,
-      "summary_en": null,
-      "english_fingerprint": null,
-      "theme_zh": "电池供应链",
-      "why_zh": "该报道反映了美国媒体对本土电池技术摆脱对华依赖的战略关切，具有一定地缘经济与贸易竞争风向标意义（基于标题和短摘要的事实判断）。",
-      "language": "multilingual",
-      "published_at": "2026-11-08T05:24:02+00:00",
-      "fetched_at": "2026-11-09T03:48:16.087052+00:00",
-      "topics": [
-        "能源与排放"
-      ],
-      "numbers": [],
-      "places": [
-        {
-          "name_zh": "中国",
-          "lon": 105.0,
-          "lat": 35.0
-        }
-      ],
-      "country_codes": [
-        {
-          "alpha2": "CN",
-          "alpha3": "CHN",
-          "name_zh": "中华人民共和国",
-          "name_en": "China"
-        }
-      ],
-      "organization_tags": [],
-      "event_tags": [],
-      "translation_status": "model_generated_needs_review",
-      "fact_status": "source_claim_unverified",
-      "content_hash": "acffd778186bae8026b9494eb19e859860616a5fb989b329480f8e852b110922",
-      "poster_phrase": "美国电池挑战供应链",
-      "company_entities": [],
-      "alternate_urls": [],
-      "duplicate_observations": [],
-      "quality": {
-        "passed": true,
-        "score": 57,
-        "tier": "B",
-        "checks": {
-          "canonical_https": true,
-          "original_title": true,
-          "chinese_title": true,
-          "substantive_content": true,
-          "published_time": true,
-          "source_trace": true
-        }
-      },
-      "molecule": {
-        "identity": "article_05862f9dce5219aa",
-        "source_atom": {
-          "name": "InsideEVs",
-          "authority": 3,
-          "type": "搜索聚合Feed"
-        },
-        "evidence_atom": {
-          "fact_status": "source_claim_unverified",
-          "translation_status": "model_generated_needs_review",
-          "quality_tier": "B"
-        },
-        "topic_atoms": [
-          "能源与排放"
-        ],
-        "number_atoms": [],
-        "geo_atoms": [
-          "中国"
-        ],
-        "country_code_atoms": [
-          "CHN"
-        ],
-        "organization_atoms": [],
-        "event_atoms": [],
-        "decision_atom": "该报道反映了美国媒体对本土电池技术摆脱对华依赖的战略关切，具有一定地缘经济与贸易竞争风向标意义（基于标题和短摘要的事实判断）。"
-      },
-      "first_archived_at": "2026-08-30T14:57:22.817347+00:00",
-      "last_archived_at": "2026-11-10T04:30:15.248266+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_d9b3b7b4e6cfa8b6",
@@ -12799,7 +14214,7 @@
         "decision_atom": "该议题强调透明度对落实国家自主贡献（NDC）的关键赋能作用，对提升全球气候治理合规性与资金效能具有机制性意义。"
       },
       "first_archived_at": "2026-11-08T01:50:53.357341+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f87cd2cf75c0863e",
@@ -14169,7 +15584,7 @@
         "decision_atom": "展示了联合国气候机制下通过适应基金推进NDC与NAP落地实施的具体能力建设方向。"
       },
       "first_archived_at": "2026-11-08T01:50:53.357341+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_8b62aafdbd54da12",
@@ -16258,7 +17673,7 @@
         "decision_atom": "该文深刻剖析了巴黎协定实施十年后面临的温控目标突破、大国退出、主要经济体政策倒退及谈判机制官僚化等系统性危机，对审视全球气候治理框架的有效性具有重要政策警示意义。"
       },
       "first_archived_at": "2026-11-07T16:43:25.121441+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_32bb2d48954b4324",
@@ -18988,7 +20403,7 @@
         "decision_atom": "该文件作为联合国气候变化框架公约下的正式提交材料，为各方在公正转型框架下淘汰煤电、推进电网脱碳提供了政策路径与实践参考，具有重要的国际规则导向意义。"
       },
       "first_archived_at": "2026-11-07T16:43:25.121441+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_801161fdddb9b085",
@@ -19071,7 +20486,7 @@
         "decision_atom": "聚焦青年群体在国际气候进程中对适应及损失与损害议题的讨论，探讨如何将相关气候决策转化为具体落实行动，属于多边气候对话的机制与能力建设范畴。"
       },
       "first_archived_at": "2026-11-07T02:20:07.836076+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_9fa1ef03216c1cc9",
@@ -19158,7 +20573,7 @@
         "decision_atom": "记录了具体温室气体减排项目进入UNFCCC审议程序的官方事实。"
       },
       "first_archived_at": "2026-11-06T17:45:58.110090+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_d2073cbe1e78a447",
@@ -19457,7 +20872,7 @@
       "why_zh": "凸显了国际社会在极端气候下将海洋碳汇和海洋治理纳入COP31正式谈判议程的政策努力与外交博弈。",
       "language": "en",
       "published_at": "2026-11-06T17:16:31+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -19552,7 +20967,7 @@
         "decision_atom": "凸显了国际社会在极端气候下将海洋碳汇和海洋治理纳入COP31正式谈判议程的政策努力与外交博弈。"
       },
       "first_archived_at": "2026-11-06T17:45:58.110090+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c903a4f98bccdaa6",
@@ -19666,7 +21081,7 @@
       "why_zh": "反映了气候脆弱国在国际气候谈判中对避免债务加重和落实损失和损害基金的关切与诉求。",
       "language": "en",
       "published_at": "2026-11-06T17:14:36+00:00",
-      "fetched_at": "2026-11-10T18:04:38.054652+00:00",
+      "fetched_at": "2026-11-11T02:05:55.093063+00:00",
       "topics": [
         "国际气候谈判",
         "气候资金"
@@ -19737,7 +21152,7 @@
         "decision_atom": "反映了气候脆弱国在国际气候谈判中对避免债务加重和落实损失和损害基金的关切与诉求。"
       },
       "first_archived_at": "2026-11-06T17:45:58.110090+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0bd410188f600c17",
@@ -20013,7 +21428,7 @@
         "decision_atom": "反映了加勒比地区金融机构在气候峰会上对资金公平性与韧性建设的诉求，属于多边开发银行在国际气候议程中的政策倡导。"
       },
       "first_archived_at": "2026-11-06T17:45:58.110090+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4feb3edf4f4f829a",
@@ -21307,18 +22722,6 @@
           "alpha3": "NPL",
           "name_zh": "尼泊尔",
           "name_en": "Nepal"
-        },
-        {
-          "alpha2": "TR",
-          "alpha3": "TUR",
-          "name_zh": "土耳其",
-          "name_en": "Türkiye"
-        },
-        {
-          "alpha2": "BT",
-          "alpha3": "BTN",
-          "name_zh": "不丹",
-          "name_en": "Bhutan"
         }
       ],
       "organization_tags": [
@@ -21369,9 +22772,7 @@
           "土耳其"
         ],
         "country_code_atoms": [
-          "NPL",
-          "TUR",
-          "BTN"
+          "NPL"
         ],
         "organization_atoms": [
           "UNFCCC",
@@ -21406,7 +22807,7 @@
       "why_zh": "反映了在正式谈判受阻后，巴西正推动通过自愿路线图影响未来的联合国全球盘点进程，凸显了少数国家在减排政策对接上的立场分化。",
       "language": "en",
       "published_at": "2026-11-06T12:44:50+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -21485,7 +22886,7 @@
         "decision_atom": "反映了在正式谈判受阻后，巴西正推动通过自愿路线图影响未来的联合国全球盘点进程，凸显了少数国家在减排政策对接上的立场分化。"
       },
       "first_archived_at": "2026-11-07T16:43:25.121441+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_017c51e93e0feb22",
@@ -21529,46 +22930,16 @@
       ],
       "country_codes": [
         {
-          "alpha2": "TR",
-          "alpha3": "TUR",
-          "name_zh": "土耳其",
-          "name_en": "Türkiye"
-        },
-        {
-          "alpha2": "DK",
-          "alpha3": "DNK",
-          "name_zh": "丹麦",
-          "name_en": "Denmark"
-        },
-        {
           "alpha2": "DE",
           "alpha3": "DEU",
           "name_zh": "德国",
           "name_en": "Germany"
         },
         {
-          "alpha2": "IT",
-          "alpha3": "ITA",
-          "name_zh": "意大利",
-          "name_en": "Italy"
-        },
-        {
           "alpha2": "FR",
           "alpha3": "FRA",
           "name_zh": "法国",
           "name_en": "France"
-        },
-        {
-          "alpha2": "GB",
-          "alpha3": "GBR",
-          "name_zh": "英国",
-          "name_en": "United Kingdom"
-        },
-        {
-          "alpha2": "ES",
-          "alpha3": "ESP",
-          "name_zh": "西班牙",
-          "name_en": "Spain"
         }
       ],
       "organization_tags": [],
@@ -21620,13 +22991,8 @@
           "欧洲"
         ],
         "country_code_atoms": [
-          "TUR",
-          "DNK",
           "DEU",
-          "ITA",
-          "FRA",
-          "GBR",
-          "ESP"
+          "FRA"
         ],
         "organization_atoms": [],
         "event_atoms": [],
@@ -22066,7 +23432,7 @@
       "why_zh": "量化分析了中国季度碳排放的大幅下降及其驱动因素，反映了宏观经济、能源消费与外部危机的综合影响，具有高度的行业分析价值。",
       "language": "en",
       "published_at": "2026-11-06T00:01:00+00:00",
-      "fetched_at": "2026-11-10T18:04:32.279840+00:00",
+      "fetched_at": "2026-11-11T02:05:48.590344+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -22143,7 +23509,7 @@
         "decision_atom": "量化分析了中国季度碳排放的大幅下降及其驱动因素，反映了宏观经济、能源消费与外部危机的综合影响，具有高度的行业分析价值。"
       },
       "first_archived_at": "2026-11-06T02:50:16.492258+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_5b25873ad83e6c04",
@@ -22744,7 +24110,7 @@
         "decision_atom": "明确了COP31大会的核心议题及其实施导向，属于事实报道与专家观点结合。"
       },
       "first_archived_at": "2026-11-06T02:50:16.492258+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_e4900f9241d01ec4",
@@ -22767,7 +24133,7 @@
       "why_zh": "展示了气候与能源价格上涨如何成为影响国家选举政治的关键议题，表明将减排主张与民众生活成本相结合可转化为显著的政治优势。",
       "language": "en",
       "published_at": "2026-11-05T17:00:28+00:00",
-      "fetched_at": "2026-11-10T18:04:38.284375+00:00",
+      "fetched_at": "2026-11-11T02:05:55.259311+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -22849,7 +24215,7 @@
         "decision_atom": "展示了气候与能源价格上涨如何成为影响国家选举政治的关键议题，表明将减排主张与民众生活成本相结合可转化为显著的政治优势。"
       },
       "first_archived_at": "2026-11-06T17:51:23.659938+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1843d57c3538a4bd",
@@ -23336,7 +24702,7 @@
         "decision_atom": "表明了COP31领导人在关键气候议题上的政治承诺，属于宏观政策动向事实。"
       },
       "first_archived_at": "2026-11-06T02:50:16.492258+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_88f81883686a6b08",
@@ -25806,7 +27172,7 @@
       "why_zh": "强调了非洲国家在气候谈判中对资金落实的强硬立场，指出COP31若无实质资金进展将导致后续气候行动无法实施。",
       "language": "en",
       "published_at": "2026-11-04T15:46:23+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放",
@@ -25887,7 +27253,7 @@
         "decision_atom": "强调了非洲国家在气候谈判中对资金落实的强硬立场，指出COP31若无实质资金进展将导致后续气候行动无法实施。"
       },
       "first_archived_at": "2026-11-04T18:17:50.346305+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_d74d56e2862c4dc6",
@@ -26170,7 +27536,7 @@
         "decision_atom": "作为联合国气候变化框架公约下的官方工作方案条目，直接关乎各方在气候资金筹措与责任分担上的机制安排。"
       },
       "first_archived_at": "2026-11-04T18:17:50.346305+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_e484f55a7966e181",
@@ -26655,7 +28021,7 @@
         "decision_atom": "揭示了发达国家在适应气候变化资金支持上的严重滞后，对即将到来的气候谈判和全球南方的适应能力建设构成严峻挑战。"
       },
       "first_archived_at": "2026-11-04T18:17:50.346305+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_7d936b8c55eed0b7",
@@ -26840,7 +28206,7 @@
         "decision_atom": "汇总并记录了英国在特定时期内的国际气候资金投入与动员成效。"
       },
       "first_archived_at": "2026-11-04T18:17:50.346305+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6e089ecd7837c5b4",
@@ -28265,7 +29631,7 @@
         "decision_atom": "体现了多方利益相关方在探讨人工智能基础设施与可再生能源协同应对气候变化及保护儿童权利方面的合作动态。"
       },
       "first_archived_at": "2026-11-04T02:38:52.284980+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_22f2e5b83fedbc3f",
@@ -28565,7 +29931,7 @@
       "why_zh": "该路线图为实现2030年停止森林砍伐的目标提供了基于现有工具的行动框架，明确指出了加强资金与国家努力的必要性。",
       "language": "en",
       "published_at": "2026-11-03T19:16:08+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -28646,7 +30012,7 @@
         "decision_atom": "该路线图为实现2030年停止森林砍伐的目标提供了基于现有工具的行动框架，明确指出了加强资金与国家努力的必要性。"
       },
       "first_archived_at": "2026-11-04T02:38:52.284980+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1b66f831adc19b12",
@@ -28733,7 +30099,7 @@
         "decision_atom": "该报告系统梳理并综合了《巴黎协定》第六条市场机制下各国合作方法的审评结果与经验教训，对评估全球碳市场履约透明度与规则执行具有政策意义。内容完全基于官方汇编事实。"
       },
       "first_archived_at": "2026-11-04T02:38:52.284980+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_e778c8c652b4b23b",
@@ -28842,7 +30208,7 @@
       "why_zh": "这是COP30主席国提出的首个全球化石燃料转型自愿时间表，为各国规划减排和减少化石燃料依赖提供了政策框架，属于多边气候谈判与国家自主贡献的重要进展。",
       "language": "en",
       "published_at": "2026-11-03T18:37:22+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -28925,7 +30291,7 @@
         "decision_atom": "这是COP30主席国提出的首个全球化石燃料转型自愿时间表，为各国规划减排和减少化石燃料依赖提供了政策框架，属于多边气候谈判与国家自主贡献的重要进展。"
       },
       "first_archived_at": "2026-11-04T02:38:52.284980+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_26135da9ba948398",
@@ -31142,7 +32508,7 @@
         "decision_atom": "该文件总结了最不发达国家适应计划的进展与资金流向，对评估发达国家对发展中国家的财政支持具有参考意义。"
       },
       "first_archived_at": "2026-11-03T18:06:49.253674+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_dcb2dfb761940def",
@@ -31225,7 +32591,7 @@
         "decision_atom": "联合国气候变化框架下损失与损害机制的联合年度报告，记录了国际社会在应对气候影响方面的机制进展。"
       },
       "first_archived_at": "2026-11-03T18:14:33.587720+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b548612527202017",
@@ -32698,7 +34064,7 @@
       "why_zh": "该研究揭示了全球变暖导致极端高温季节性蔓延的趋势，为气象监测与公共卫生防范政策提供了事实依据。",
       "language": "en",
       "published_at": "2026-11-02T20:16:42+00:00",
-      "fetched_at": "2026-11-10T18:04:36.044904+00:00",
+      "fetched_at": "2026-11-11T02:05:54.515927+00:00",
       "topics": [
         "气候适应"
       ],
@@ -32785,7 +34151,7 @@
         "decision_atom": "该研究揭示了全球变暖导致极端高温季节性蔓延的趋势，为气象监测与公共卫生防范政策提供了事实依据。"
       },
       "first_archived_at": "2026-11-02T20:33:26.909155+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ff6e014f06fb4944",
@@ -33677,7 +35043,7 @@
         "decision_atom": "反映了南亚发展中国家在历届气候大会前后对气候灾害补偿与支持机制的持续关注。"
       },
       "first_archived_at": "2026-11-02T20:33:26.909155+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_9593c12e7fd0b915",
@@ -43250,7 +44616,7 @@
         "decision_atom": "该消息反映了尼日利亚在国家层面推进气候适应与防洪资金筹措的最新动向，属于官方政策声明与事实陈述。"
       },
       "first_archived_at": "2026-10-31T15:52:50.982397+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ac16bdfe790df85c",
@@ -44855,7 +46221,7 @@
         "decision_atom": "该议题凸显国际气候谈判对非经济性损失与损害的关注，拓展了传统气候资金与物质损失评估的政策边界。"
       },
       "first_archived_at": "2026-10-31T15:52:50.982397+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f9ea1e5e668eed73",
@@ -47079,7 +48445,7 @@
         "decision_atom": "该简报梳理了中国气候与能源政策动向及清洁技术出口趋势，对分析中国在 COP31 谈判中的战略走向具有政策参考价值。"
       },
       "first_archived_at": "2026-10-30T16:53:17.665697+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ca3748cd339d46fc",
@@ -48067,7 +49433,7 @@
         "decision_atom": "该资金注入展现了欧盟在国际气候资金承诺上的落实进展，凸显适应资金在多边气候议程中的核心地位，属于已确认的财政事实。"
       },
       "first_archived_at": "2026-10-29T17:14:28.874162+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0e232630853554ac",
@@ -48731,7 +50097,7 @@
         "decision_atom": "该文件涉及《巴黎协定》第六条第四款机制的治理与利益相关方意见，对未来全球碳信用规则制定具有政策参考意义。"
       },
       "first_archived_at": "2026-10-29T17:14:28.874162+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4adef3cb446153c8",
@@ -48938,7 +50304,7 @@
         "decision_atom": "该报道揭示了中国在COP31前夕的优先外交议程与政策立场，反映出中国对全球气候治理中多边合作、贸易壁垒及气候资金落实的关切，具有重要的气候外交与政策参考意义。"
       },
       "first_archived_at": "2026-10-30T16:53:17.665697+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_7897a4e391b42c78",
@@ -49413,7 +50779,7 @@
         "decision_atom": "量化评估了中国清洁技术贸易对全球碳减排的实际贡献，为评估全球气候政策与供应链减排效益提供了重要依据。"
       },
       "first_archived_at": "2026-10-29T17:14:28.874162+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f6b04a00f2096be0",
@@ -52241,7 +53607,7 @@
       "why_zh": "该事件直接关系到《联合国气候变化框架公约》第31次缔约方大会的议程设置与发展中国家适应资金落实，事实表明白金汉宫与发展中国家在资金基准与责任分摊上存在分歧，具有高度的谈判博弈意义。",
       "language": "en",
       "published_at": "2026-10-28T15:57:17+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判",
         "气候资金",
@@ -52313,7 +53679,7 @@
         "decision_atom": "该事件直接关系到《联合国气候变化框架公约》第31次缔约方大会的议程设置与发展中国家适应资金落实，事实表明白金汉宫与发展中国家在资金基准与责任分摊上存在分歧，具有高度的谈判博弈意义。"
       },
       "first_archived_at": "2026-10-28T16:55:09.710516+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_7983494a23b61919",
@@ -52794,7 +54160,7 @@
         "decision_atom": "该决定标志着美国联邦气候政策发生重大倒退，废除了旨在限制油气行业温室气体泄漏的关键法规，对全球甲烷减排进程和美国国内能源监管具有重要影响。"
       },
       "first_archived_at": "2026-10-28T01:37:17.015877+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_092124f2e4e58472",
@@ -53196,7 +54562,7 @@
       "why_zh": "该议题直接关乎全球南方国家低碳转型过程中的社会稳定与民众支持，对未来气候大会谈判及气候正义具有重要的政策指导意义。",
       "language": "en",
       "published_at": "2026-10-28T10:56:06+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -53258,7 +54624,7 @@
         "decision_atom": "该议题直接关乎全球南方国家低碳转型过程中的社会稳定与民众支持，对未来气候大会谈判及气候正义具有重要的政策指导意义。"
       },
       "first_archived_at": "2026-10-28T16:55:09.710516+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_22a610ea834570f1",
@@ -53350,7 +54716,7 @@
         "decision_atom": "强调了区域电网互联和资金支持对东南亚气候韧性的核心作用，属于政策倡议与区域外交表态。"
       },
       "first_archived_at": "2026-10-28T16:55:09.710516+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_414c7f2599dbabdf",
@@ -53531,7 +54897,7 @@
       "why_zh": "该文章对联合国气候大会的代表权结构和化石能源企业影响力提出了政策性质疑，强调必须保护公民人权与公众参与空间，反映了国际人权机构对气候治理公正性的立场边界。",
       "language": "en",
       "published_at": "2026-10-28T08:22:22+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判",
         "能源与排放"
@@ -53624,7 +54990,7 @@
         "decision_atom": "该文章对联合国气候大会的代表权结构和化石能源企业影响力提出了政策性质疑，强调必须保护公民人权与公众参与空间，反映了国际人权机构对气候治理公正性的立场边界。"
       },
       "first_archived_at": "2026-10-28T16:55:09.710516+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_14ad476b1105b124",
@@ -53931,7 +55297,7 @@
       "why_zh": "揭示了清洁技术关税与单边贸易措施在联合国气候大会上的地缘政治博弈，直接关乎全球绿色产业链的自由流动与贸易规则制定。",
       "language": "en",
       "published_at": "2026-10-28T06:00:00+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -54017,7 +55383,7 @@
         "decision_atom": "揭示了清洁技术关税与单边贸易措施在联合国气候大会上的地缘政治博弈，直接关乎全球绿色产业链的自由流动与贸易规则制定。"
       },
       "first_archived_at": "2026-10-28T16:55:09.710516+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6fead420a4ed2ae3",
@@ -59687,7 +61053,7 @@
         "decision_atom": "展示了发展中国家如何利用国际气候机制中的损失和损害基金应对极端天气灾后重建，具有典型谈判与政策实践意义。"
       },
       "first_archived_at": "2026-10-27T11:58:24.031705+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_01ce16b7a339cd96",
@@ -62147,7 +63513,7 @@
         "decision_atom": "关乎联合国气候谈判框架下各国立陶宛适应目标的透明度与履行标准，具有明确的政策推进意义。"
       },
       "first_archived_at": "2026-10-27T11:14:32.657778+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_eaf57faa696e8aaa",
@@ -65063,7 +66429,7 @@
         "decision_atom": "该专家呼吁凸显了发展中国家智库对未来气候大会议程设置的政策诉求，属于各方围绕 COP31 优先事项展开的事实主张。"
       },
       "first_archived_at": "2026-10-27T11:14:32.657778+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_2aed7fb5f0c6090b",
@@ -67219,7 +68585,7 @@
         "decision_atom": "该评论指向中印两国在国际气候谈判和自备煤电管理上的政策协调压力，属于智库针对 COP31 提出的政策建言与事实分析边界。"
       },
       "first_archived_at": "2026-10-27T11:14:32.657778+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_11e4da0e467a737e",
@@ -71080,7 +72446,7 @@
         "decision_atom": "直接关联未来气候大会的谈判焦点，凸显了发展中国家在极端灾害下面临的资金缺口与政策诉求，具有重要的国际气候外交意义。"
       },
       "first_archived_at": "2026-10-27T11:58:24.031705+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_2e02524a2937e2bf",
@@ -82101,7 +83467,7 @@
       "why_zh": "该现象折射出部分大国领导人在地缘政治冲突和经济压力下缺席关键气候峰会，前联合国气候官员指出这向外界释放了错误的政治信号，不利于推动全球减排与发展中国家支持。",
       "language": "en",
       "published_at": "2026-10-23T11:32:34+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判"
       ],
@@ -82214,7 +83580,7 @@
         "decision_atom": "该现象折射出部分大国领导人在地缘政治冲突和经济压力下缺席关键气候峰会，前联合国气候官员指出这向外界释放了错误的政治信号，不利于推动全球减排与发展中国家支持。"
       },
       "first_archived_at": "2026-10-23T15:29:59.564630+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_35a1acd263c5101d",
@@ -86116,7 +87482,7 @@
       "why_zh": "该决策标志着新设立的损失与损害基金启动实质性资金分配，在国际气候治理和资金落实方面具有历史意义，同时反映出发达国家与发展中国家在长期资金运作规则与先例设定上的博弈。",
       "language": "en",
       "published_at": "2026-10-22T16:55:20+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "气候资金",
         "气候适应"
@@ -86187,7 +87553,7 @@
         "decision_atom": "该决策标志着新设立的损失与损害基金启动实质性资金分配，在国际气候治理和资金落实方面具有历史意义，同时反映出发达国家与发展中国家在长期资金运作规则与先例设定上的博弈。"
       },
       "first_archived_at": "2026-10-23T00:56:03.969014+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_5e33767cc37a0a4e",
@@ -87311,7 +88677,7 @@
         "decision_atom": "该表态反映了中国在联合国气候谈判中对资金落实和行动实施的政策立场，属于外交与气候政策层面的事实。"
       },
       "first_archived_at": "2026-10-22T15:47:27.282647+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4ee3b561f36bdd30",
@@ -89328,7 +90694,7 @@
         "decision_atom": "该动向反映了气候灾害受害者正转化为国内气候政治的压力集团，具有明显的社会政治动员意义。"
       },
       "first_archived_at": "2026-10-22T00:55:15.805259+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_94677652f4f2afb1",
@@ -89516,7 +90882,7 @@
       "why_zh": "凸显了气候大会赞助商资质审查与化石能源巨头实际减排力度之间的政策张力，属于媒体对商业利益与气候承诺冲突的事实报道。",
       "language": "en",
       "published_at": "2026-10-21T08:30:00+00:00",
-      "fetched_at": "2026-11-10T18:04:34.253179+00:00",
+      "fetched_at": "2026-11-11T02:05:50.935170+00:00",
       "topics": [
         "国际气候谈判",
         "国家气候承诺"
@@ -89595,7 +90961,7 @@
         "decision_atom": "凸显了气候大会赞助商资质审查与化石能源巨头实际减排力度之间的政策张力，属于媒体对商业利益与气候承诺冲突的事实报道。"
       },
       "first_archived_at": "2026-10-21T15:33:46.286622+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_763fb943425ff6bb",
@@ -89978,7 +91344,7 @@
         "decision_atom": "反映了英国在平衡能源安全与2050年净零排放目标时面临的政策张力，事实表明政府在争议中最终批准了北海气田钻探并设立低碳财富基金。"
       },
       "first_archived_at": "2026-10-21T15:33:46.286622+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f2adbbe64ad5a5c0",
@@ -90149,7 +91515,7 @@
         "decision_atom": "该报告凸显了当前全球长期减排目标与短期行动之间的严重脱节，对国际气候政策谈判和各国的减排压力具有重要的警示意义（基于联合国报告及专家观点）。"
       },
       "first_archived_at": "2026-10-21T15:33:46.286622+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_cc9ab04759af8f03",
@@ -91716,7 +93082,7 @@
         "decision_atom": "该事件体现了《巴黎协定》履约委员会首次在年度报告中公开点名未按要求接触并提交国家自主贡献的国家，显示出国际气候治理在推动履约方面的机制化进展，这属于官方报告记录的事实。"
       },
       "first_archived_at": "2026-10-21T00:52:43.724618+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_78b6f4ceb0d15bdb",
@@ -100020,7 +101386,7 @@
         "decision_atom": "凸显了在缺乏政府有效监管的情况下，劳工组织通过供应链声誉机制争取气候适应权益的策略，具有重要的社会治理意义。"
       },
       "first_archived_at": "2026-10-18T14:11:33.074612+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_664fbdcd4054893f",
@@ -109734,7 +111100,7 @@
         "decision_atom": "该动议标志着损失与损害基金首次直接针对具体灾害进行资金预留，拓展了现有提案提交机制，对未来多边气候灾害救助的响应速度与模式具有重要实践意义。"
       },
       "first_archived_at": "2026-10-16T15:05:18.709298+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4cd039c429ed1435",
@@ -120191,7 +121557,7 @@
         "decision_atom": "反映了法国在燃料价格因素影响下的近期减排进展及其与法定气候目标的差距，属于事实层面的排放数据追踪。"
       },
       "first_archived_at": "2026-10-14T09:14:00.691265+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_a9ed8eab5c374dc5",
@@ -141941,7 +143307,7 @@
         "decision_atom": "该表态凸显了气候峰会主办国对提高气候资金投入的诉求，但在化石燃料转型议题上的模糊态度可能引发国际谈判分歧，兼具政策倡导意图与谈判博弈的事实特征。"
       },
       "first_archived_at": "2026-10-09T12:58:10.469493+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0adc66820ff6f096",
@@ -144595,7 +145961,7 @@
         "decision_atom": "反映了极端气候事件对地方防灾能力的严峻考验，属于基于科学预测与地方应急行动的事实报道。"
       },
       "first_archived_at": "2026-10-09T08:07:40.850686+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f4f90443738a56f9",
@@ -147669,7 +149035,7 @@
         "decision_atom": "该诉求直接推动COP31谈判聚焦核心减排与资金议题，反映出非政府组织对强化全球气候雄心的政策压力，明确了民间社会与国际谈判间的立场边界。"
       },
       "first_archived_at": "2026-10-09T02:31:13.659329+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_7aa867833d3a0de8",
@@ -151711,7 +153077,7 @@
         "decision_atom": "该决定明确了COP31将采用主席国主导的成果文件而非逐字谈判的冗长政治声明，关乎未来气候政治方向与1.5度目标认知，属于正在推进的外交程序事实。"
       },
       "first_archived_at": "2026-10-07T17:35:53.406660+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f6eee343efca9699",
@@ -154345,7 +155711,7 @@
         "decision_atom": "反映了脆弱岛国在国际气候谈判和资金获取机制上面临的政治与制度困境，凸显了COP进程中南北方关于适应资金的张力。"
       },
       "first_archived_at": "2026-10-06T16:59:15.069024+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b6a05e75ddd9801e",
@@ -154447,7 +155813,7 @@
         "decision_atom": "展现了离网可再生能源在提升亚马逊传统与原住民社区应对气候变化能力方面的实际成效，属于事实层面的基层适应案例。"
       },
       "first_archived_at": "2026-10-06T16:59:15.069024+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b5442675a6fc0e06",
@@ -154728,7 +156094,7 @@
         "decision_atom": "凸显了太平洋岛国对东道国化石能源政策的关切，反映出气候大会联合主席国在减排行动与国内煤炭开发之间的张力，对审视澳大利亚的气候承诺与外交信誉具有重要谈判意义。"
       },
       "first_archived_at": "2026-10-06T16:59:15.069024+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1d5df064bf823e64",
@@ -154840,7 +156206,7 @@
         "decision_atom": "凸显了太平洋岛国及澳大利亚对气候脆弱性的高度关切，强调了落实 1.5℃ 温控目标和加强适应资金支持的政治紧迫性。"
       },
       "first_archived_at": "2026-10-06T16:59:15.069024+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_7604b4ef0850aec4",
@@ -162373,7 +163739,7 @@
         "decision_atom": "凸显了主办国国内温室气体排放管控与国际气候雄心之间的巨大鸿沟，对评估其气候谈判公信力具有重要政策意义。"
       },
       "first_archived_at": "2026-10-05T05:37:49.323451+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1f2d4da25747a290",
@@ -163192,7 +164558,7 @@
         "decision_atom": "专家公开信指出英国政府在危机应对和食品供应链韧性方面存在重大盲区，凸显了气候危机与地缘政治对国家安全的直接冲击（基于专家观点与信件事实）。"
       },
       "first_archived_at": "2026-10-05T05:37:49.323451+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0ebbb8a3ee0e71f5",
@@ -167192,7 +168558,7 @@
         "decision_atom": "揭示了气候大会主办国历史排放与减排政策的张力，对审视主办国信誉及国际气候谈判具有参考意义。"
       },
       "first_archived_at": "2026-10-05T01:15:33.212071+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_08a68c07a603b4d1",
@@ -167817,7 +169183,7 @@
         "decision_atom": "该事件凸显了联合国气候大会主办国自身化石燃料政策与全球减排目标之间的紧张关系，对COP31谈判公信力构成考验。事实边界：基于350.org报告、媒体对煤矿扩建及两国贸易数据的报道。"
       },
       "first_archived_at": "2026-10-04T15:33:18.058609+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c7fd5b68b16a363e",
@@ -174260,7 +175626,7 @@
         "decision_atom": "该报道揭示了部分曾参与发起联合国净零银行联盟的国际大行在 2022 至 2025 年间继续维持煤炭融资的事实，凸显了金融机构在落实气候承诺与实际信贷行为之间仍存在政策差距，属于基于环保机构公开报告的客观事实报道。"
       },
       "first_archived_at": "2026-10-02T16:25:40.149443+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b6a8ae3816679e0c",
@@ -175322,7 +176688,7 @@
         "decision_atom": "该研究揭示了自然系统气候反馈对碳预算和温升预测的重大影响，提示 IPCC 等国际评估未来需将自然源排放纳入核心模型，对全球气候谈判具有科学警示意义（基于科学期刊论文与作者访谈的事实）。"
       },
       "first_archived_at": "2026-10-02T16:25:40.149443+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_02b5a8ffb458b705",
@@ -178705,7 +180071,7 @@
       "why_zh": "反映了美国地方层面通过立法推动分布式光伏发展的政策动向，对减轻居民用电负担具有直接的政策意义。事实边界局限于各州立法进展及新泽西州的最新立法签署。",
       "language": "en",
       "published_at": "2026-10-02T07:00:00+00:00",
-      "fetched_at": "2026-11-10T18:04:38.170534+00:00",
+      "fetched_at": "2026-11-11T02:05:55.222145+00:00",
       "topics": [
         "能源与排放"
       ],
@@ -178782,7 +180148,7 @@
         "decision_atom": "反映了美国地方层面通过立法推动分布式光伏发展的政策动向，对减轻居民用电负担具有直接的政策意义。事实边界局限于各州立法进展及新泽西州的最新立法签署。"
       },
       "first_archived_at": "2026-09-04T00:22:12.944045+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_a792c820f1697eda",
@@ -179054,7 +180420,7 @@
         "decision_atom": "此评论反映了民间社会对气候适应资金缺口和损失与损害赔偿机制的诉求，属于倡导性质的观点，事实部分基于国际非政府组织对极端天气损失与GDP占比的统计。"
       },
       "first_archived_at": "2026-10-02T08:26:32.383022+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_21b50b15daf35846",
@@ -181360,7 +182726,7 @@
         "decision_atom": "反映中国在下一代电池技术领域的战略目标与时间节点，属于行业发展事实。"
       },
       "first_archived_at": "2026-10-02T01:51:37.065387+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_cb132c3d32e7f1a0",
@@ -185193,7 +186559,7 @@
         "decision_atom": "反映了欧洲议会在国际气候谈判前夕推动加速能源转型和扩大气候融资的政策立场与政治诉求。"
       },
       "first_archived_at": "2026-10-01T17:12:23.102770+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_3201a82a142e35c6",
@@ -185973,7 +187339,7 @@
         "decision_atom": "该研究用具体数据揭示了欧洲阿尔卑斯地区极端的冰川退缩速度，强化了化石燃料排放与气候危机之间的直接事实依据。"
       },
       "first_archived_at": "2026-10-01T17:12:23.102770+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c845d78e303002a6",
@@ -187865,7 +189231,7 @@
         "decision_atom": "该报道反映了南美洲跨国交通走廊建设与热带雨林保护及碳信用收益之间的政策冲突，具有重要的环境治理与区域发展谈判意义。"
       },
       "first_archived_at": "2026-09-30T16:36:28.609795+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_de138e4f378daeea",
@@ -188959,7 +190325,7 @@
         "decision_atom": "该报道反映了自然灾害与碳排放对国家自主贡献（NDC）履约的潜在干扰，纯属对公开媒体动态的客观事实报道，未涉及深层谈判博弈。"
       },
       "first_archived_at": "2026-09-30T16:36:28.609795+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f4acd49b08778c6c",
@@ -189136,7 +190502,7 @@
         "decision_atom": "该报道揭示了自然碳汇受损和野火对国家自主贡献（NDC）履约的实质性干扰，凸显出气候适应与减排统筹规划的重要性。"
       },
       "first_archived_at": "2026-09-30T01:31:56.396859+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_3977204b565752e8",
@@ -189315,7 +190681,7 @@
         "decision_atom": "揭示了欧盟当前减排进度与2030年气候目标的差距，具有评估区域减排政策执行力度的政策意义，事实边界限定于清洁空气与能源研究中心公布的降幅数据。"
       },
       "first_archived_at": "2026-09-30T01:31:56.396859+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_52118f4d7a087cf4",
@@ -191125,7 +192491,7 @@
         "decision_atom": "该讨论聚焦COP31气候大会的减排议题与土耳其提出的目标，对评估国家自主贡献（NDC）中材料循环与脱碳政策的衔接具有政策参考意义，属于关于气候谈判目标的评论与事实边界。"
       },
       "first_archived_at": "2026-09-29T16:42:06.105799+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_2154fd5eaf09cffa",
@@ -206676,7 +208042,7 @@
         "decision_atom": "基于大规模观测揭示了海洋变暖对海洋生态系统的累积破坏，强调了减少温室气体排放的紧迫性。这属于科学评估事实，对国际气候减排谈判具有支撑作用。"
       },
       "first_archived_at": "2026-09-26T09:49:27.696333+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4f8c17d4807667f9",
@@ -208041,7 +209407,7 @@
         "decision_atom": "该事件凸显了英国农业补贴资金短缺对农民应对气候变化 resilience 的直接影响，属于基层农业与气候适应政策层面的事实报道。"
       },
       "first_archived_at": "2026-09-25T15:33:00.289585+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c6cbb8869087d6e2",
@@ -211920,7 +213286,7 @@
         "decision_atom": "该宣言强化了太平洋岛国媒体在气候谈判和损失与损害议题中的动员与传播能力，凸显了地区媒体对1.5°C温控目标及气候正义的政治诉求。"
       },
       "first_archived_at": "2026-09-24T08:07:41.863105+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_316489cfe84889ad",
@@ -216910,7 +218276,7 @@
         "decision_atom": "德国首次在政策路线图中明确提出摆脱化石燃料而非仅限碳中和，对欧盟及全球长期气候目标具有重要的政策导向与示范意义（基于德国政府发布路线图及专家评论的事实）。"
       },
       "first_archived_at": "2026-09-24T00:54:29.080855+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_27ba52029c92dc71",
@@ -223635,7 +225001,7 @@
         "decision_atom": "揭示了国际气候谈判在设定电气化目标时对化石燃料转型路径与清洁能源硬性约束的分歧。此为基于土耳其气候峰会主席团公布的文本及各方评论的事实。"
       },
       "first_archived_at": "2026-09-23T00:56:53.068928+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_8fc2a9a0f2713c72",
@@ -223731,7 +225097,7 @@
         "decision_atom": "突显国际气候资金机制响应迟缓，发展中国家被迫依赖民间众筹应对严重气候灾害，这对多边气候资金的实际效力构成挑战。"
       },
       "first_archived_at": "2026-09-23T00:56:53.068928+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_46cc25aed656c025",
@@ -224273,7 +225639,7 @@
         "decision_atom": "该分析揭示了联合国损失与损害基金面临的供需缺口巨大及单个项目申领上限对高灾害损失国家杯水车薪的现实，属于对国际气候谈判机制财政有效性的事实评估。"
       },
       "first_archived_at": "2026-09-23T00:56:53.068928+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_8a31ba84769192aa",
@@ -224538,7 +225904,7 @@
         "decision_atom": "该研究揭示了净零目标下全球气候正义与区域受影响程度的鸿沟，对未来气候谈判中如何倾斜资金和关注脆弱国家具有重要政策参考意义。观点基于科学模拟研究，事实指向热带地区升温与滞后收益。"
       },
       "first_archived_at": "2026-09-23T02:39:04.535840+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_e66178625591a5bc",
@@ -226656,7 +228022,7 @@
         "decision_atom": "该报道揭示了极端气候对生态系统的长期滞后影响，突显了英国在气候适应政策和基于自然的解决方案上面临的紧迫挑战。内容基于官方评估和科学观测，事实与观点界限清晰。"
       },
       "first_archived_at": "2026-09-22T01:08:02.764561+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6719fe84c8b55204",
@@ -227345,7 +228711,7 @@
         "decision_atom": "反映了国际气候谈判中对人工智能产业高能耗问题的强监管呼声，凸显了数字经济与全球气候治理的政策博弈（基于声明的事实边界）。"
       },
       "first_archived_at": "2026-09-21T16:39:08.841647+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b2493cb8f312c9cb",
@@ -232875,7 +234241,7 @@
         "decision_atom": "反映了韩国当前减排增速与 2035 年国家气候目标之间的差距，纯属客观事实报道，对评估其后续气候政策收紧具有参考意义。"
       },
       "first_archived_at": "2026-09-20T14:24:13.077231+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_a34569c8e06cefd9",
@@ -238327,7 +239693,7 @@
         "decision_atom": "该警告直指COP31主办国国内政策与全球气候治理目标之间的张力，凸显了东道国化石燃料扩张对多边气候谈判信誉的潜在负面影响。"
       },
       "first_archived_at": "2026-09-19T14:03:33.682410+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ac8b5cbda40fa6c4",
@@ -238510,7 +239876,7 @@
         "decision_atom": "该目标明确了阿尔巴尼亚在中期气候自主贡献阶段的温室气体排放控制水平，反映了其国家减排路径与国际气候谈判的衔接。该判断基于 Enerdata 发布的公开事实。"
       },
       "first_archived_at": "2026-09-18T14:41:24.062246+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_75e1f6667a0a773d",
@@ -241226,7 +242592,7 @@
         "decision_atom": "该政策推动全球加速落实降温承诺，平衡应对极端高温与控制温室气体排放的关系，具有重要的国际气候适应意义。事实表明相关机构已推出具体奖项与竞赛，观点则强调全球需迅速扩展可持续降温方案。"
       },
       "first_archived_at": "2026-09-17T15:16:46.267667+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ddecb4de57939830",
@@ -244556,7 +245922,7 @@
         "decision_atom": "该讲话明确了加速实施《蒙特利尔议定书》基加利修正案在应对全球变暖中的核心政策意义，强调了将臭氧层保护与甲烷减排及应对土地退化相结合的必要性。"
       },
       "first_archived_at": "2026-09-16T15:13:55.054266+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_afd29a657c9e1d95",
@@ -251147,7 +252513,7 @@
         "decision_atom": "揭示了自然灾害排放对国家气候履约的实质性干扰，凸显了森林防火与减排政策衔接的重要性，属于气候外交与履约风险的事实。"
       },
       "first_archived_at": "2026-09-15T13:31:31.169243+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c9082a8db4b6de13",
@@ -264315,7 +265681,7 @@
         "decision_atom": "该现象展示了自然气候振荡对东南亚陆地碳汇与温室气体排放的巨大扰动，凸显了厄尔尼诺对区域生态与全球碳循环的政策冲击。事实表明火灾规模与厄尔尼诺关联显著，科学家预测其对本世纪减排目标的干扰具有重要评估意义。"
       },
       "first_archived_at": "2026-09-11T14:42:39.607751+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b81e7391fb9088f5",
@@ -269114,7 +270480,7 @@
         "decision_atom": "该目标体现了菲律宾对2035年减排时间节点的政策承诺，属于官方自主贡献规划的事实，对于评估发展中国家气候雄心具有谈判参考意义。"
       },
       "first_archived_at": "2026-09-10T14:43:59.321816+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_617a4f128ec0a8f7",
@@ -269307,7 +270673,7 @@
         "decision_atom": "暴露出英国在推进希思罗机场扩建与实现净零排放法定目标之间的政策矛盾，对评估依赖技术修复的减排路径具有重要现实警示意义。事实边界局限于政府公开预测文件。"
       },
       "first_archived_at": "2026-09-10T14:43:59.321816+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_8494740f40cea29c",
@@ -269653,7 +271019,7 @@
         "decision_atom": "该研究指出自然源排放将进一步推高全球气温，对现有气候政策模型提出挑战，事实边界明确指向科学研究预测。评价：警示各国在制定减排和温控目标时需将生态反馈纳入考量。"
       },
       "first_archived_at": "2026-09-10T14:43:59.321816+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1b8942d594991073",
@@ -276549,7 +277915,7 @@
         "decision_atom": "该报道厘清了极端山洪与长期全球变暖之间的科学归因边界，强调了高山地区气候脆弱性与复合灾害风险。事实表明该事件由基岩和冰川崩塌引发，科学界认为变暖增加了此类灾害风险，但目前尚无正式的归因研究结果。"
       },
       "first_archived_at": "2026-09-09T02:45:49.451327+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b8e396667104ff22",
@@ -280848,7 +282214,7 @@
         "decision_atom": "该事件凸显了低排放发展中国家向主要排放国索赔损失与损害的政治诉求，将推动关于历史责任与气候正义的国际谈判。观点与事实边界：灾害由冰川融化引发及要求2000万美元赔偿为客观事实，大国责任认定属于外长政治表态。"
       },
       "first_archived_at": "2026-09-08T03:11:25.865500+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_9bac3117b700bf6d",
@@ -285649,7 +287015,7 @@
         "decision_atom": "强调了减污降碳协同增效的巨大经济和社会回报，为各国制定气候政策和财政投入提供了强有力的经济学证据，具有重要的政策指导意义。"
       },
       "first_archived_at": "2026-09-07T16:04:25.052977+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_e87c078d80b52c16",
@@ -287578,7 +288944,7 @@
         "decision_atom": "该诉求突显了太平洋岛国在气候谈判中对清洁能源转型资金与海洋保护的迫切需求，推动COP31议程聚焦区域适应与韧性建设，属于发展中国家与岛国集团的气候外交事实。"
       },
       "first_archived_at": "2026-09-07T16:04:25.052977+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_f918854598202fa3",
@@ -287663,7 +289029,7 @@
         "decision_atom": "该报告为各国政府优化减排财政投入提供了宏观经济学依据，强化了协同减排的政策必要性，属于基于模型评估的政策研究成果。"
       },
       "first_archived_at": "2026-09-08T03:28:08.011418+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b86df08789cbd7c1",
@@ -287787,7 +289153,7 @@
         "decision_atom": "联合国环境规划署执行主任关于机构改革与气候行动的表态，反映了多边环境机制在应对全球气候与灾害挑战时的优先议程与管理走向。观点与事实边界：讲话内容属于官员公开政策阐述与机构工作总结。"
       },
       "first_archived_at": "2026-09-08T03:11:25.865500+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c9d31956f35c914e",
@@ -288039,7 +289405,7 @@
         "decision_atom": "该报告从全球层面首次综合评估了气候与清洁空气协同行动的经济回报，强调统筹政策可大幅提高资金效率，对引导财政及金融机构打破部门预算壁垒具有政策参考意义。事实与边界基于联合国环境规划署发布的报告。"
       },
       "first_archived_at": "2026-09-07T16:04:25.052977+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_9591376dffad8f54",
@@ -289403,7 +290769,7 @@
         "decision_atom": "突显喜马拉雅地区冰川溃决灾害的严重跨国影响，并推动发展中国家向联合国损失与损害基金会提出正式气候赔偿要求（事实）。这反映了脆弱国家在气候适应和灾害追责上面临的紧迫谈判压力（观点）。"
       },
       "first_archived_at": "2026-09-07T00:17:26.622551+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_fb738f842b5f18ad",
@@ -295093,7 +296459,7 @@
         "decision_atom": "该报道揭示了气候变暖下欧洲野火灾害北移的严峻趋势，对各国立法和区域防灾减灾具有政策警示意义。"
       },
       "first_archived_at": "2026-09-06T00:13:31.808314+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_10fd432e9b9cbc8a",
@@ -300554,7 +301920,7 @@
         "decision_atom": "涉及COP33主办权走向及石油市场波动对碳排放的实际影响，具有气候外交与宏观减排评估意义。基于现有公开短讯报道。"
       },
       "first_archived_at": "2026-09-04T00:22:12.944045+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_4855eb3878f67364",
@@ -303824,7 +305190,7 @@
         "decision_atom": "该分析揭示了地缘政治冲突下中国能源安全与交通电动化的政策成效，指出清洁能源对缓解油价冲击的支撑作用，并展示了全球最大碳排放国去碳化进程的实质进展（事实边界）。"
       },
       "first_archived_at": "2026-09-03T00:32:39.658797+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_ed8674d22818ad29",
@@ -303922,7 +305288,7 @@
         "decision_atom": "该分析揭示了石油供应受阻对短期碳排放的结构性影响，事实表明地缘政治导致的化石燃料供应链冲击能够直接扭转碳排放走势，具有重要的能源安全与政策参考价值。"
       },
       "first_archived_at": "2026-09-03T00:32:39.658797+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_61d3a9c3fe4f796b",
@@ -305496,7 +306862,7 @@
         "decision_atom": "凸显了发展中国家对气候基金快速响应机制的迫切需求，推动损失和损害基金在应对突发气候灾难时的政策落实，基于事件信函与新闻报道事实。"
       },
       "first_archived_at": "2026-09-03T00:32:39.658797+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c6ca2e7f77f9dcc0",
@@ -306250,7 +307616,7 @@
         "decision_atom": "该报告界定了全球温升突破 1.5°C 后的路径与风险防范逻辑，明确了减排力度决定降温可能性的科学事实，对评估《巴黎协定》长期目标的执行具有重要的政策参考意义。"
       },
       "first_archived_at": "2026-09-02T14:42:15.845223+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_abaff097a66f1c0e",
@@ -307434,7 +308800,7 @@
         "decision_atom": "该联合国报告明确警告 1.5 摄氏度温控目标将被突破，对全球长期气候谈判和各国减排雄心具有重要政策警示意义。"
       },
       "first_archived_at": "2026-09-02T14:42:15.845223+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_8798ad326bfaa753",
@@ -309029,7 +310395,7 @@
         "decision_atom": "该报道提供了气象部门关于人类活动引发的气候变迁如何显著增加极端天气发生概率的科学证据，凸显了减排与适应气候变化的紧迫性。事实与观点边界清晰，数据均引自英国气象局官方声明与研究。"
       },
       "first_archived_at": "2026-09-01T15:08:22.013278+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6c871dfe04226d8e",
@@ -309704,7 +311070,7 @@
         "decision_atom": "该研究指出气候模型中二氧化碳与甲烷等效性折算的局限性，论证了脱钩减排的必要性，对评估长期温升控制路径具有科学参考意义。"
       },
       "first_archived_at": "2026-09-01T15:08:22.013278+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_1a990465db9db5cf",
@@ -310325,7 +311691,7 @@
         "decision_atom": "该事件凸显了喜马拉雅跨境高山峡谷地区地质脆弱性及极端灾害对边境贸易和人员安全的重大威胁，反映出基础设施在气候相关灾害面前的脆弱性。"
       },
       "first_archived_at": "2026-09-01T15:08:22.013278+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_08f380c5ab3f89a2",
@@ -313194,7 +314560,7 @@
         "decision_atom": "该事件标志着长期缺乏透明度的主要化石能源国在国际卫星监测和舆论压力下开始采取实质性减排行动，对全球油气行业温室气体管控具有重要的示范和谈判意义。"
       },
       "first_archived_at": "2026-08-31T17:42:09.549753+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_3971241f6b185dad",
@@ -322554,7 +323920,7 @@
         "decision_atom": "此举展示了太平洋岛国在气候资金获取机制上的自主创新，简化了面向基层的申请流程，对塑造 COP31 议程及小岛屿国家气候适应谈判具有积极意义。基于新闻事实。"
       },
       "first_archived_at": "2026-08-28T21:16:04.725145+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_2fbae0eb4fd70fab",
@@ -325007,7 +326373,7 @@
         "decision_atom": "该事件凸显了人工智能基础设施急剧扩张与地方环境、许可及空气质量法规之间的紧张关系，对审视科技巨头能源供应的合规性具有重要的政策参考意义。"
       },
       "first_archived_at": "2026-08-28T06:16:46.229803+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6c7b9a6ff747ba4f",
@@ -327852,7 +329218,7 @@
         "decision_atom": "该奖项的颁发强化了全球应对土地退化、干旱和气候变化的政治意愿，凸显自然恢复对保障粮食和水资源安全的核心作用。事实基于联合国机构的官方宣布，政策意义在于推动全球落实恢复十亿公顷土地的目标。"
       },
       "first_archived_at": "2026-08-26T11:05:19.816053+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_b62e0a7d2e6f4bcf",
@@ -332984,7 +334350,7 @@
         "decision_atom": "反映出极端气候影响下欧洲公众对气候减排政策与直接适应极端天气之间优先级的态度分歧，具有较高的社会政策研究价值。观点与事实边界清晰，数据来源于YouGov民调。"
       },
       "first_archived_at": "2026-08-24T11:06:14.089952+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_9063d73e6820bc49",
@@ -337522,7 +338888,7 @@
         "decision_atom": "该报道揭示了美国劳工组织在气候政策换届期维护清洁能源就业的政治博弈，反映出地方工会与联邦政策走向之间的张力（事实与观点交织）。"
       },
       "first_archived_at": "2026-08-23T22:50:33.911968+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_2f007acec78e0a5e",
@@ -337957,7 +339323,7 @@
         "decision_atom": "该事件揭示了极端气候下野火对地方碳收支及公共健康的严重影响，凸显出欧洲区域空气质量监测与气候适应政策面临的现实挑战。此判断基于慈善机构引用的欧盟观测数据与地方议会通报。"
       },
       "first_archived_at": "2026-08-22T22:52:23.667967+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_104b0c75733ac0e5",
@@ -340320,7 +341686,7 @@
         "decision_atom": "该报道揭示了强厄尔尼诺现象加剧亚洲高温与公共健康危机的实际事实，凸显了区域适应气候极端事件的紧迫性。"
       },
       "first_archived_at": "2026-08-21T22:53:19.241358+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_708219152a6605aa",
@@ -340427,7 +341793,7 @@
         "decision_atom": "该项目凸显了人工智能与云计算驱动下大型数据中心激增对国家电网和净零目标的严峻挑战。报道反映的事实表明高能耗数字基础设施与长期减排路径存在显著冲突。"
       },
       "first_archived_at": "2026-08-22T02:14:37.019337+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_14fe54e0f66c400c",
@@ -345901,7 +347267,7 @@
         "decision_atom": "该政策展示了挪威通过撬动私人资本大幅增加气候资金援助的成效，对推进发展中国家减排与适应气候变化具有积极的国际谈判与示范意义，体现了对国际气候融资承诺的履约进展。"
       },
       "first_archived_at": "2026-08-18T22:53:32.842367+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_38b28efdd1d99807",
@@ -353623,7 +354989,7 @@
         "decision_atom": "反映了英国政府在应对极端野火等气候灾害时，其实际政策在净零排放目标、电动汽车销量削减与北海化石燃料开采上面临的国内政治与环保压力。内容基于报道中的官方表态与环保组织观点。"
       },
       "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_8209abd221856c38",
@@ -354695,7 +356061,7 @@
         "decision_atom": "该规划直接影响中国碳达峰路径及能源转型节奏，分析认为其在强化煤炭作为安全可靠能源的同时也带来了向清洁能源多元化发展的转型压力，具有重要政策参考价值。"
       },
       "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_8fd64949aa8e017d",
@@ -354887,7 +356253,7 @@
         "decision_atom": "该报告通过统计数据揭示了东亚清洁能源替代化石能源的政策效果，表明区域内煤炭需求放缓正直接传导至上游采矿业投资的大幅收缩。"
       },
       "first_archived_at": "2026-08-14T23:50:14.739398+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_096543d98ce0cbdd",
@@ -371631,7 +372997,7 @@
       "why_zh": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。",
       "language": "en",
       "published_at": "2026-07-28T00:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "极端天气",
         "气候适应"
@@ -371722,7 +373088,7 @@
         "decision_atom": "过火面积与十年均值的对比提供了可核验的灾害强度信号，关系美国适应政策、应急资源和跨境烟霾风险。"
       },
       "first_archived_at": "2026-08-02T04:43:57.607626+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_be2d7f67b6b1bbc3",
@@ -372270,7 +373636,7 @@
       "why_zh": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。",
       "language": "en",
       "published_at": "2026-07-26T00:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "能源与排放",
         "气候适应"
@@ -372358,7 +373724,7 @@
         "decision_atom": "该案例提供极端高温场景下清洁电源降低尖峰燃油发电的实测样本，但跨年度时段并非完全同条件，比较结论仍需审慎。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_32a028df4d103aba",
@@ -373763,7 +375129,7 @@
       "why_zh": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。",
       "language": "en",
       "published_at": "2026-07-24T00:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "能源与排放",
         "清洁能源"
@@ -373844,7 +375210,7 @@
         "decision_atom": "该项目展示美国地方能源转型中光储一体化与既有煤电输电资产再利用的具体规模，可用于比较基础设施转型路径。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_6c67b4eafaf74973",
@@ -374475,7 +375841,7 @@
       "why_zh": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。",
       "language": "zh",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "能源与排放",
         "国家气候承诺"
@@ -374558,7 +375924,7 @@
         "decision_atom": "规划把2030年能源结构和风光装机目标具体化，是评估中国碳达峰路径与下一轮国际气候承诺落实进度的重要基准。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "curated_4550f4e28217628b",
@@ -374581,7 +375947,7 @@
       "why_zh": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "能源与排放",
         "产业转型"
@@ -374658,7 +376024,7 @@
         "decision_atom": "该举措把零碳工厂从倡议转为带有评估和验收机制的国家级实施安排，关系工业和算力基础设施的减排规则。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "curated_7c6b8d0a74561df8",
@@ -374681,7 +376047,7 @@
       "why_zh": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。",
       "language": "en",
       "published_at": "2026-07-23T00:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "能源与排放",
         "交通转型"
@@ -374756,7 +376122,7 @@
         "decision_atom": "试点把交通电气化与电力系统灵活性连接起来，可为高温负荷管理、储能政策和虚拟电厂规则提供观察样本。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_e0247ad0502dc99c",
@@ -377949,7 +379315,7 @@
         "decision_atom": "如果证据链成立，争议将进入历史责任、信息披露和气候诉讼领域；目前属于媒体报道，仍需回到原始档案核验。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_c5b5abc1795a29d9",
@@ -378040,7 +379406,7 @@
         "decision_atom": "甲烷是短期升温效应强的温室气体。这一进展值得关注的不是“AI”本身，而是监测能否形成可验证的企业减排和监管闭环。"
       },
       "first_archived_at": "2026-07-21T02:45:11.962554+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "article_0f92536c49d6f522",
@@ -378308,7 +379674,7 @@
       "why_zh": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。",
       "language": "zh",
       "published_at": "2026-07-13T16:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "国家气候承诺",
         "能源与排放"
@@ -378372,7 +379738,7 @@
         "decision_atom": "这是中国落实2035年国家自主贡献和推进碳达峰的核心国内政策文件，所列量化指标可直接用于后续履约跟踪。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     },
     {
       "record_id": "curated_cf238b7caf84c933",
@@ -378395,7 +379761,7 @@
       "why_zh": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。",
       "language": "zh",
       "published_at": "2026-02-08T16:00:00+00:00",
-      "fetched_at": "2026-11-10T18:21:48.736407+00:00",
+      "fetched_at": "2026-11-11T02:19:33.237792+00:00",
       "topics": [
         "碳市场",
         "履约与透明度"
@@ -378457,7 +379823,7 @@
         "decision_atom": "通知明确扩围后重点行业的数据质量、名录和履约节点，是判断中国碳市场执行强度和企业合规风险的一手依据。"
       },
       "first_archived_at": "2026-07-29T04:36:43.667082+00:00",
-      "last_archived_at": "2026-11-10T18:22:00.091947+00:00"
+      "last_archived_at": "2026-11-11T02:19:46.170628+00:00"
     }
   ]
 }
