@@ -1,0 +1,559 @@
+/* GREEN · COP31 — 今日情报 experience (cop31/intel.js, 2026-10-29), after 100lostspecies.com.
+   Intro: the 100lostspecies.com intro · gallery chrome: the 100lostspecies.com gallery.
+   Same layout, sizes and timings as the reference; the page's own palette and fonts: the intro stands on the site's
+   grey-blue ground, the gallery on white, red is the accent (Enter hover, the active view). */
+
+.ig {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  overflow: hidden;
+  color: var(--gb-950);
+  background: var(--surface-page);
+  touch-action: none;
+  overscroll-behavior: contain;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.ig[hidden] { display: none !important; }
+.ig.is-sliding { box-shadow: 0 -1.5px 4.4px -4px rgb(20 32 48 / .18), 0 -10px 22px -6px rgb(20 32 48 / .12); }
+.ig-ground, .ig-white, .ig-shards, .ig-gallery, .ig-dust { position: absolute; inset: 0; }
+.ig-ground > .page-bg { position: absolute; }
+.ig-white { background: #fff; opacity: 0; }
+.ig-shards { width: 100%; height: 100%; pointer-events: none; }
+.ig-shards[hidden] { display: none; }
+.ig-gallery { pointer-events: none; }
+.ig.is-gallery .ig-gallery { pointer-events: auto; }
+/* The stage's own plane sits at the front wall's depth: in the shared 3D context it would win the hit test over the
+   front card, so only the cards take the pointer. */
+.ig-stage { position: absolute; inset: 0; transform-style: preserve-3d; perspective-origin: 50% 50%; pointer-events: none; }
+.ig-card { pointer-events: auto; }
+.ig.can-pick.is-pointing .ig-stage { cursor: pointer; }
+
+/* ---------- Intro (intro §3.1) ---------- */
+.ig-intro { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.ig-intro[hidden] { display: none; }
+.ig-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
+  height: 100%;
+  padding: 0 16px;
+  text-align: center;
+}
+.ig-content > * { pointer-events: auto; }
+.ig-logo { width: 62px; height: 62px; overflow: hidden; border: 1px solid rgb(17 26 36 / .15); }
+.ig-logo > span { display: grid; grid-auto-rows: 60px; width: 60px; place-items: center; animation: igRoll 7s linear infinite; }
+.ig-logo svg { display: block; width: 31px; height: 31px; color: var(--gb-950); }
+/* every 2.33 s: .28 s fade out → jump 60 px while invisible → .28 s fade in → hold (intro §3.3) */
+@keyframes igRoll {
+  0%, 12.66% { opacity: 1; transform: translateY(0); }
+  16.66% { opacity: 0; transform: translateY(0); }
+  16.67% { opacity: 0; transform: translateY(-60px); }
+  20.67%, 45.99% { opacity: 1; transform: translateY(-60px); }
+  49.99% { opacity: 0; transform: translateY(-60px); }
+  50% { opacity: 0; transform: translateY(-120px); }
+  54%, 79.32% { opacity: 1; transform: translateY(-120px); }
+  83.32% { opacity: 0; transform: translateY(-120px); }
+  83.33% { opacity: 0; transform: translateY(-180px); }
+  87.33%, 99.999% { opacity: 1; transform: translateY(-180px); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+.ig-h1 {
+  max-width: 600px;
+  color: var(--gb-950);
+  font: 300 72px/72px var(--font-heading);
+  letter-spacing: -.02em;
+}
+.ig-h2 {
+  max-width: min(78vw, 490px);
+  color: var(--gb-700);
+  font: 400 14px/24px var(--font-body);
+}
+.ig-btnw { position: relative; border: 1.5px solid rgb(17 26 36 / .1); }
+.ig-percent {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--gb-700);
+  font: 400 16px/1 var(--font-heading);
+  letter-spacing: .02em;
+}
+.ig-enter {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 12px 24px;
+  background: var(--gb-950);
+  color: #fff;
+  font: 400 15px/16px var(--font-body);
+  visibility: hidden;
+}
+/* hover: a red panel wipes up from the bottom edge in .4 s, back down on leave (intro §4) */
+.ig-enter::before {
+  content: "";
+  position: absolute;
+  top: 101%;
+  left: -1%;
+  width: 102%;
+  height: 102%;
+  background: var(--red);
+  transition: transform .4s cubic-bezier(.66, 0, .34, 1);
+}
+.ig-enter span { position: relative; transition: color .4s cubic-bezier(.66, 0, .34, 1); }
+@media (hover: hover) and (pointer: fine) { .ig-enter:hover::before { transform: translate3d(0, -100%, 0); } }
+.ig-enter:focus-visible { outline: 2.5px solid var(--gb-950); outline-offset: 4px; }
+/* the intro's foot is the site's footer, as on every other page (2026-10-29): brand and line left, links right */
+.ig-credits {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px 32px;
+  padding: 32px 0 calc(32px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(169, 184, 199, .55);
+  color: var(--text-muted);
+  text-align: left;
+}
+.ig-credits > div:first-child { display: grid; gap: 4px; }
+.ig-credits b { color: var(--text-muted); font: 400 var(--fs-label)/1.4 var(--font-mono); text-transform: uppercase; }
+.ig-credits b::before { content: "✦ "; }
+.ig-credits span { color: var(--text-muted-half); font-size: 13px; }
+
+/* ---------- Gallery cards (the reference's square tiles; sizes in units of the 269 px front card) ---------- */
+.ig-card {
+  --paper: #f6f8fa; --ink: var(--gb-950); --ink-2: var(--gb-600); --rule: var(--gb-200); --accent: var(--red);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--c);
+  height: var(--c);
+  margin: calc(var(--c) / -2) 0 0 calc(var(--c) / -2);
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.ig-card.is-off { visibility: hidden; }
+.ig-card[data-tone="mist"] { --paper: var(--gb-100); --ink-2: var(--gb-600); --rule: var(--gb-300); }
+.ig-card[data-tone="deep"] { --paper: var(--gb-800); --ink: #fff; --ink-2: var(--gb-200); --rule: var(--gb-600); --accent: #ff7a6e; }
+.ig-card[data-tone="blush"] { --paper: #fbeeec; --rule: #ecd0cc; }
+.ig-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px rgb(63 85 108 / .12);
+  backface-visibility: hidden;
+}
+.ig-orn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(#000 28%, transparent 74%);
+  mask-image: linear-gradient(#000 28%, transparent 74%);
+}
+.ig-frame { position: absolute; inset: calc(9px * var(--u)); border: 1px solid var(--rule); pointer-events: none; }
+.ig-frame::before, .ig-frame::after {
+  content: "";
+  position: absolute;
+  top: calc(-2.5px * var(--u) - .5px);
+  left: calc(-2.5px * var(--u) - .5px);
+  width: calc(5px * var(--u));
+  height: calc(5px * var(--u));
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+.ig-frame::after { top: auto; left: auto; right: calc(-2.5px * var(--u) - .5px); bottom: calc(-2.5px * var(--u) - .5px); }
+.ig-text {
+  position: absolute;
+  left: calc(22px * var(--u));
+  right: calc(22px * var(--u));
+  bottom: calc(20px * var(--u));
+  display: grid;
+  gap: calc(7px * var(--u));
+}
+.ig-kick { display: flex; gap: calc(8px * var(--u)); color: var(--accent); font: 400 calc(10px * var(--u))/1.2 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+.ig-kick b { overflow: hidden; color: var(--ink-2); font-weight: 400; text-overflow: ellipsis; white-space: nowrap; }
+.ig-text h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink);
+  font: 400 calc(17px * var(--u))/1.3 var(--font-heading);
+  letter-spacing: -.01em;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.ig-text p {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink-2);
+  font-size: calc(11.5px * var(--u));
+  line-height: 1.55;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.ig.is-small .ig-text p { display: none; }
+.ig-cfoot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(10px * var(--u));
+  padding-top: calc(8px * var(--u));
+  border-top: 1px solid var(--rule);
+  color: var(--ink-2);
+  font: 400 calc(10px * var(--u))/1.2 var(--font-mono);
+}
+.ig-cfoot span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ig-cfoot a { position: relative; z-index: 1; margin: calc(-8px * var(--u)) calc(-10px * var(--u)); padding: calc(8px * var(--u)) calc(10px * var(--u)); color: var(--ink); white-space: nowrap; } /* a larger target */
+@media (hover: hover) and (pointer: fine) { .ig-cfoot a:hover { color: var(--accent); } }
+/* entrance tint: the view colour washes away left → right (fragment shader smoothstep(−.6, 1, u)) */
+.ig-tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(var(--tint-rgb) / .316), rgb(var(--tint-rgb) / .547) 25%, rgb(var(--tint-rgb) / .768) 50%, rgb(var(--tint-rgb) / .934) 75%, rgb(var(--tint-rgb)));
+  opacity: 0;
+  pointer-events: none;
+}
+/* the label under a card: source (serif) and date; 0.085 u below the card, 0.05 u between the lines (gallery §5) */
+.ig-label {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + .0186 * var(--vh));
+  display: grid;
+  gap: calc(.006 * var(--vh));
+  width: 160%;
+  transform: translateX(-50%);
+  text-align: center;
+  opacity: calc(var(--la, 0) * var(--labels, 1) * var(--lod, 1));
+  pointer-events: none;
+}
+.ig-label b { overflow: hidden; color: var(--gb-950); font: 300 calc(.018 * var(--vh))/1.15 var(--font-heading); text-overflow: ellipsis; white-space: nowrap; }
+.ig-label small { color: var(--gb-700); font: 400 calc(.0125 * var(--vh))/1.2 var(--font-body); }
+
+/* ---------- Gallery chrome (gallery §7–§8) ---------- */
+.ig-head, .ig-foot { position: absolute; z-index: 5; }
+.ig-head { inset: 0 0 auto; height: 0; }
+.ig-views { position: absolute; left: 58px; top: 47px; display: flex; gap: 10px; }
+.ig-views button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 40px;
+  overflow: hidden;
+  padding: 0 14px;
+  background: var(--gb-950);
+  color: #fff;
+  font: 300 15px/1 var(--font-heading);
+  white-space: nowrap;
+}
+.ig-views button[data-view="0"] { --vc: 200 55 45; }
+.ig-views button[data-view="1"] { --vc: 91 140 169; }
+.ig-views button[data-view="2"] { --vc: 126 147 168; }
+.ig-views button::before { content: ""; position: absolute; inset: 0; background: rgb(var(--vc)); transform: translateY(100%); transition: transform .4s ease-in-out; }
+.ig-views button > * { position: relative; }
+.ig-views button.is-on { background: rgb(var(--vc)); pointer-events: none; }
+@media (hover: hover) and (pointer: fine) { .ig-views button:hover::before { transform: none; } }
+.ig-scroll { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); color: var(--gb-950); font: 400 14px/18px var(--font-body); white-space: nowrap; pointer-events: none; }
+.ig-about { position: absolute; top: 58px; right: 58px; color: var(--gb-950); font: 400 14px/18px var(--font-body); }
+.ig-about span { position: relative; display: block; }
+.ig-about span::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 0 50%; transition: transform .6s ease-in-out; }
+@media (hover: hover) and (pointer: fine) { .ig-about:hover span::after { transform: scaleX(1); } }
+.ig-about { z-index: 2; transition: color .3s ease-in-out; }
+.ig.menu-on .ig-about { color: #fff; }
+.ig.menu-on .ig-about span::after { transform: scaleX(1); }
+
+/* 菜单 (2026-10-29): the site's drop-down (cop31.css), here too — a square column of dark glass hanging from the top
+   edge that rolls down like a shutter (.6 s; back up in .45 s); the rules between the rows draw from the left one after
+   another, each label rises out of its row 50 ms apart; numbered rows, a red sweep under the hovered one, the current
+   page (今日情报) marked red. */
+.ig-menu {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: max(240px, calc(100vw / 6));
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 104px 0 48px;
+  border-left: 1px solid rgb(255 255 255 / .2);
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.22'/></svg>"),
+    linear-gradient(172deg, rgb(36 50 67 / .6), rgb(17 26 36 / .76) 70%);
+  -webkit-backdrop-filter: blur(22px) saturate(1.3);
+  backdrop-filter: blur(22px) saturate(1.3);
+  counter-reset: igmenu;
+  scrollbar-width: none;
+  visibility: hidden;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .45s cubic-bezier(.55, 0, .75, .2), visibility 0s linear .45s;
+}
+.ig.menu-on .ig-menu { visibility: visible; clip-path: inset(0); transition: clip-path .6s cubic-bezier(.65, 0, .35, 1), visibility 0s; }
+.ig-menu a {
+  position: relative;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: baseline;
+  overflow: hidden;
+  padding: 16px max(12px, calc(13 * 100vw / 2024));
+  background: linear-gradient(rgb(255 255 255 / .16), rgb(255 255 255 / .16)) no-repeat 0 0 / 0 1px;
+  color: #fff;
+  font: 400 max(21px, calc(26 * 100vw / 2024))/1.2 var(--font-heading);
+  counter-increment: igmenu;
+  isolation: isolate;
+  transition: background-size .3s ease-in;
+}
+.ig-menu a:last-child {
+  background:
+    linear-gradient(rgb(255 255 255 / .16), rgb(255 255 255 / .16)) no-repeat 0 0 / 0 1px,
+    linear-gradient(rgb(255 255 255 / .16), rgb(255 255 255 / .16)) no-repeat 0 100% / 0 1px;
+}
+.ig-menu a:nth-child(2) { --i: 1; }
+.ig-menu a:nth-child(3) { --i: 2; }
+.ig-menu a:nth-child(4) { --i: 3; }
+.ig-menu a:nth-child(5) { --i: 4; }
+.ig-menu a:nth-child(6) { --i: 5; }
+.ig-menu a:nth-child(7) { --i: 6; }
+.ig-menu a.ig-mhome { counter-increment: none; }
+.ig-menu a.ig-mhome::before { content: "←"; font-size: 14px; } /* 返回首页: an arrow in place of a number */
+.ig-menu a::before { /* the row number */
+  content: counter(igmenu, decimal-leading-zero);
+  color: rgb(255 255 255 / .45);
+  font: 400 11px/1 var(--font-mono);
+  letter-spacing: .08em;
+  transform: translateY(160%);
+  transition: transform .3s ease-in, color .3s ease-in-out;
+}
+.ig-menu a::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--red); transform: scaleX(0); transform-origin: right center; transition: transform .3s ease-in-out; }
+.ig-mlabel { display: block; transform: translateY(115%); transition: transform .3s ease-in; }
+.ig.menu-on .ig-menu a { background-size: 100% 1px; transition: background-size .6s cubic-bezier(.65, 0, .35, 1) calc(.12s + var(--i, 0) * 50ms); }
+.ig.menu-on .ig-menu a::before,
+.ig.menu-on .ig-mlabel { transform: none; transition: transform .8s cubic-bezier(.22, 1, .36, 1) calc(.2s + var(--i, 0) * 50ms), color .3s ease-in-out; }
+.ig-menu a.is-current { box-shadow: inset 2px 0 var(--red); }
+.ig-menu a.is-current::before { color: var(--red); }
+.ig-menu a.is-current .ig-mlabel { font-style: italic; }
+@media (hover: hover) and (pointer: fine) {
+  .ig-menu a:hover::after { transform: scaleX(1); transform-origin: left center; }
+  .ig-menu a:hover::before { color: #fff; }
+}
+.ig-menu a:focus-visible { outline: 1px solid #fff; outline-offset: -5px; }
+.ig-foot { left: 60px; bottom: 38px; display: grid; justify-items: start; gap: 10px; max-width: 240px; }
+.ig-home { display: block; }
+.ig-home img { width: 34px; height: 34px; }
+.ig-tutorial { color: var(--gb-950); font: 400 15px/18px var(--font-body); }
+.ig-bill { position: absolute; left: 50%; top: 50%; z-index: 3; transform: translate(-50%, -50%); color: var(--gb-950); font: 400 48px/1 var(--font-body); opacity: 0; pointer-events: none; white-space: nowrap; }
+
+/* ---------- "Explore" tag (gallery §5) ---------- */
+.ig-cursor { position: absolute; left: 0; top: 0; z-index: 7; pointer-events: none; transition: opacity .4s linear .2s; }
+.ig-cursor span {
+  display: block;
+  padding: 1px 8px;
+  background: var(--gb-950);
+  color: #fff;
+  font: 400 12px/24px var(--font-body);
+  white-space: nowrap;
+  transform: scale(0);
+  transform-origin: 0 0;
+  transition: transform .4s cubic-bezier(.9, 0, .4, 1);
+}
+.ig-cursor.is-on span { transform: scale(1); transition: transform .6s cubic-bezier(.4, 0, .1, 1) .2s; }
+.ig.is-away .ig-cursor { opacity: 0; transition: none; }
+@media (pointer: coarse) { .ig-cursor { display: none; } }
+
+/* ---------- Dust: sparse dark specks over the scene (post pass, intro §2.8 / gallery §8.7) ---------- */
+.ig-dust { z-index: 2; background-image: var(--dust, none); background-size: 256px 256px; opacity: .55; pointer-events: none; animation: igDust 7s steps(4) infinite; }
+@keyframes igDust { 0% { background-position: 0 0; } 100% { background-position: 37px -61px; } }
+
+/* ---------- The three views (gallery §14): wrappers, flat squares, date labels, the title list ---------- */
+.ig-u { position: absolute; inset: 0; transform-style: preserve-3d; pointer-events: none; }
+.ig-u:not(.is-cur) .ig-card { pointer-events: none; }
+.ig-chip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--c);
+  height: var(--c);
+  margin: calc(var(--c) / -2) 0 0 calc(var(--c) / -2);
+  background: rgb(var(--tint-rgb));
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.ig-chip.is-off, .ig-year.is-off { visibility: hidden; }
+.ig-card.is-tiny .ig-face > :not(.ig-tint):not(.ig-flat), .ig-card.is-tiny .ig-label { visibility: hidden; } /* level of detail under ~46 px */
+.ig-card .ig-face > .ig-orn, .ig-card .ig-face > .ig-frame, .ig-card .ig-face > .ig-text { opacity: var(--lod, 1); } /* fading out between 78 and 46 px (intel.js) */
+.ig-flat { position: absolute; inset: 0; background: rgb(var(--tint-rgb)); opacity: 0; pointer-events: none; }
+.ig-year { position: absolute; left: 50%; top: 50%; color: var(--gb-950); font: 300 var(--year, 80px)/1 var(--font-heading); letter-spacing: -.03em; white-space: nowrap; pointer-events: none; will-change: transform; }
+.ig-year > span { display: block; } /* a real box (centred by margins from layoutDates), not overflow from a 0 × 0 anchor */
+.ig-names { position: absolute; left: 66%; top: 43%; right: 5%; z-index: 4; }
+.ig-names[hidden], .ig-names[hidden] + .ig-ngrad { display: none; }
+.ig-nlist { will-change: transform; }
+.ig-name {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  margin: 20px 0 -10px;
+  padding: 0 0 10px;
+  color: var(--gb-950);
+  font: 300 32px/110% var(--font-heading);
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color .2s linear;
+}
+.ig-name.is-on { color: rgb(91 140 169); }
+.ig-name sup { margin-left: .35em; color: rgb(91 140 169); font: 400 12px/1 var(--font-mono); letter-spacing: .04em; vertical-align: super; } /* the region's count */
+@media (hover: hover) and (pointer: fine) { .ig-name:hover { color: rgb(91 140 169); } }
+.ig-dash { position: absolute; right: 100%; top: 0; width: 16px; height: 1px; margin: 39px 18px 0 0; background: rgb(91 140 169); }
+.ig-ngrad { position: absolute; inset: auto 0 0; z-index: 4; height: 20vh; background: linear-gradient(rgb(255 255 255 / 0), rgb(255 255 255 / .5)); pointer-events: none; }
+.ig-bill { font: 300 calc(var(--vh, 900px) * .085)/1 var(--font-body); }
+
+/* ---------- Reading a card (gallery §6, §14.5) ---------- */
+.ig-ghost { position: absolute; inset: -10%; width: 120%; height: 120%; max-width: none; object-fit: cover; opacity: 0; pointer-events: none; filter: blur(2px); }
+.ig-card.is-read .ig-face::after { /* white veil riding the corner blob */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--vx, 100%) var(--vx, 100%), #fff 0, rgb(255 255 255 / .6) 38%, rgb(255 255 255 / 0) 72%);
+  opacity: var(--veil, 0);
+  pointer-events: none;
+}
+.ig-card.is-read .ig-tint, .ig-card.is-read .ig-flat { opacity: 0 !important; } /* the card just read comes back without the wash */
+.ig-detail { position: absolute; inset: 0; z-index: 6; visibility: hidden; opacity: 0; }
+.ig-detail[hidden] { display: none; }
+.ig-dview { position: absolute; inset: 0; overflow: hidden; perspective: 1200px; }
+.ig-dcontent { position: relative; will-change: transform; }
+.ig-dhero { height: var(--vh, 100vh); }
+.ig-dtext, .ig-dlinkw { width: clamp(400px, 31.2vw, 700px); margin: 45px auto 0; }
+.ig-dtext { display: grid; gap: 18px; color: var(--gb-950); -webkit-user-select: text; user-select: text; }
+.ig-dkick { display: flex; gap: 10px; color: var(--red); font: 400 11px/1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
+.ig-dkick b { color: var(--gb-600); font-weight: 400; }
+.ig-dtitle { font: 300 30px/1.3 var(--font-heading); letter-spacing: -.01em; }
+.ig-dmeta { padding-bottom: 18px; border-bottom: 1px solid var(--gb-200); color: var(--gb-600); font: 400 12px/1.5 var(--font-mono); }
+.ig-dsum { color: var(--gb-950); font: 300 20px/36px var(--font-heading); }
+.ig-dorig { margin-top: -8px; color: var(--gb-500); font: 400 13px/1.5 var(--font-body); }
+.ig-dwhy { padding-left: 14px; border-left: 2px solid var(--red); color: var(--gb-700); font: 300 16px/1.75 var(--font-heading); }
+.ig-dwhy b { display: block; margin-bottom: 4px; color: var(--red); font: 400 11px/1.4 var(--font-mono); letter-spacing: .06em; }
+.ig-dfacts { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0; padding: 0; list-style: none; }
+.ig-dfacts li { padding: 3px 8px; border: 1px solid var(--gb-200); color: var(--gb-600); font: 400 11px/1.4 var(--font-mono); text-transform: uppercase; }
+.ig-dorig[hidden], .ig-dwhy[hidden], .ig-dfacts[hidden] { display: none; }
+.ig-dlinkw { margin-top: 60px; }
+/* The news is read on the card itself (2026-10-29): the page around it keeps only its chrome (home, scroll hint,
+   关闭), lets the pointer through to the card, and the old text column is gone. */
+.ig-detail { pointer-events: none; }
+.ig-detail .ig-dhome, .ig-detail .ig-dclose { pointer-events: auto; }
+.ig-dview { display: none; }
+/* the reading face: laid out in the card's own units (--u), so it reads at the size the card is shown */
+.ig-read {
+  position: absolute;
+  inset: calc(9px * var(--u));
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: calc(6px * var(--u));
+  padding: calc(16px * var(--u)) calc(15px * var(--u)) 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  -webkit-user-select: text;
+  user-select: text;
+  transition: opacity .55s linear;
+}
+.ig-read::-webkit-scrollbar { display: none; }
+.ig-card.is-open .ig-read { opacity: 1; pointer-events: auto; }
+.ig-card.is-read .ig-text, .ig-card.is-read .ig-orn { transition: opacity .4s linear; } /* only the card being read: elsewhere the size drives it every frame */
+.ig-card.is-open .ig-text { opacity: 0; pointer-events: none; }
+.ig-card.is-open .ig-orn { opacity: .1; }
+.ig-card.is-crisp { will-change: auto; } /* settled at its reading size: let the browser draw the text sharp */
+.ig-rkick { display: flex; gap: calc(7px * var(--u)); color: var(--accent); font: 400 calc(8px * var(--u))/1.3 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
+.ig-rkick b { color: var(--ink-2); font-weight: 400; }
+.ig-rtitle { color: var(--ink); font: 400 calc(14px * var(--u))/1.3 var(--font-heading); letter-spacing: -.01em; }
+.ig-rorig { margin-top: calc(-3px * var(--u)); color: var(--ink-2); font: 400 calc(7.5px * var(--u))/1.45 var(--font-body); }
+.ig-rmeta { padding-bottom: calc(7px * var(--u)); border-bottom: 1px solid var(--rule); color: var(--ink-2); font: 400 calc(7.5px * var(--u))/1.4 var(--font-mono); }
+.ig-rsum { color: var(--ink); font: 300 calc(9.6px * var(--u))/1.65 var(--font-heading); }
+.ig-rfacts { display: flex; flex-wrap: wrap; gap: calc(4px * var(--u)); margin: 0; padding: 0; list-style: none; }
+.ig-rfacts li { padding: calc(2px * var(--u)) calc(5px * var(--u)); border: 1px solid var(--rule); color: var(--ink-2); font: 400 calc(6.5px * var(--u))/1.4 var(--font-mono); text-transform: uppercase; }
+/* the source link stays in reach: it closes the face when the news fits, and holds the bottom edge while it scrolls —
+   on a full-width paper strip, so a long summary (up to ~640 characters since 2026-11-01) passes under it, not beside it */
+.ig-rfoot {
+  position: sticky;
+  bottom: 0;
+  margin: auto calc(-15px * var(--u)) 0;
+  padding: calc(8px * var(--u)) calc(15px * var(--u)) calc(12px * var(--u));
+  background: var(--paper);
+}
+.ig-rfoot::before { /* the text fades out just above the strip */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: calc(14px * var(--u));
+  background: linear-gradient(to top, var(--paper), transparent);
+  pointer-events: none;
+}
+.ig-rlink {
+  display: inline-block;
+  padding: calc(6px * var(--u)) calc(11px * var(--u));
+  background: linear-gradient(var(--red), var(--red)) no-repeat 0 100% / 100% 0, var(--ink); /* the red rises on hover */
+  color: var(--paper);
+  font: 400 max(6px, calc(8px * var(--u)))/1.4 var(--font-mono);
+  transition: background-size .4s cubic-bezier(.66, 0, .34, 1), color .3s;
+}
+@media (hover: hover) and (pointer: fine) { .ig-rlink:hover { background-size: 100% 100%, auto; color: #fff; } }
+.ig-dlinkw[hidden] { display: none; }
+.ig-dlink { position: relative; display: inline-block; overflow: hidden; padding: 12px 24px; background: var(--gb-950); color: #fff; font: 400 15px/16px var(--font-body); }
+.ig-dlink::before, .ig-dx::before { content: ""; position: absolute; top: 101%; left: -1%; width: 102%; height: 102%; transition: transform .4s cubic-bezier(.66, 0, .34, 1); }
+.ig-dlink::before { background: var(--red); }
+.ig-dx::before { background: #000; }
+.ig-dlink span, .ig-dx span { position: relative; }
+@media (hover: hover) and (pointer: fine) { .ig-dlink:hover::before, .ig-dx:hover::before { transform: translate3d(0, -100%, 0); } }
+.ig-dend { display: grid; place-items: center; min-height: calc(var(--vh, 100vh) * .5); }
+.ig-dx { position: relative; width: 80px; height: 80px; overflow: hidden; background: rgb(var(--ucol, 200 55 45)); color: #fff; font: 300 40px/1 var(--font-body); }
+.ig-dhome { position: absolute; left: 45px; top: 40px; display: flex; align-items: center; gap: 10px; opacity: 0; }
+.ig-dhome img { width: 34px; height: 34px; }
+.ig-dmark { display: block; width: 40px; height: 40px; overflow: hidden; background: rgb(var(--ucol, 200 55 45)); color: #fff; }
+.ig-dmark > span { display: grid; grid-auto-rows: 60px; width: 60px; place-items: center; transform-origin: 0 0; scale: .667; animation: igRoll 7s linear infinite; }
+.ig-dmark svg { width: 31px; height: 31px; color: #fff; }
+.ig-dscroll { position: absolute; top: 58px; left: 50%; transform: translateX(-50%); color: var(--gb-950); font: 400 14px/18px var(--font-body); white-space: nowrap; pointer-events: none; }
+.ig-dclose { position: absolute; top: 48px; right: 48px; padding: 10px; color: var(--gb-950); font: 400 14px/18px var(--font-body); }
+.ig-dclose span { position: relative; display: block; }
+.ig-dclose span::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 0 50%; transition: transform .6s ease-in-out; }
+@media (hover: hover) and (pointer: fine) { .ig-dclose:hover span::after { transform: scaleX(1); } }
+
+/* ---------- Phones (gallery §10, intro bracket values) ---------- */
+@media (max-width: 767px) {
+  .ig-h1 { max-width: 80%; font-size: 32px; line-height: 32px; }
+  .ig-h2 { line-height: 22px; }
+  .ig-credits { left: 20px; right: 20px; grid-template-columns: 1fr; padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .ig-menu { width: 100%; border-left: 0; }
+  .ig-views { left: 20px; top: 45px; flex-direction: column; align-items: flex-start; }
+  .ig-views button { height: 32px; padding: 0 12px; font-size: 12px; }
+  .ig-about { top: 52px; right: 20px; }
+  .ig-scroll, .ig-tutorial, .ig-dscroll { display: none; }
+  .ig-foot { left: 20px; bottom: 20px; }
+  .ig-dhome { left: 20px; top: 40px; }
+  .ig-dclose { top: 42px; right: 10px; }
+  .ig-dtext, .ig-dlinkw { width: 268px; }
+  .ig-dtitle { font-size: 24px; }
+  .ig-dsum { font-size: 16px; line-height: 28.8px; }
+  .ig-names { left: 40%; }
+  .ig-name { font-size: 24px; line-height: 26.4px; }
+  .ig-dash { margin-top: 35px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-logo > span, .ig-dust, .ig-dmark > span { animation: none; }
+  .ig-menu, .ig-menu a, .ig-menu a::before, .ig-menu a::after, .ig-mlabel { transition: none !important; }
+}

@@ -18,8 +18,8 @@ const $ = id => document.getElementById(id);
 const COP31_EDITION = document.body.dataset.edition === "cop31";
 const UI_TEXT = {
   zh: {
-    cop31Title: "全球气候情报", cop31Independent: "格润独立研究展示页 · 非 COP31 官方网站",
-    navMap: "全球现场", navToday: "今日情报", navFocus: "专题", navChinaCarbon: "中国碳市场",
+    cop31Title: "全球气候治理\u200b新闻数据库", cop31Independent: "格润独立研究展示页 · 非 COP31 官方网站",
+    navMap: "全球现场", navToday: "今日新闻", navFocus: "专题", navChinaCarbon: "中国碳市场",
     navSingapore: "新加坡", navBth: "京津冀能源统计数据库", navRenewable: "新能源", navStorage: "储能技术", navAidc: "人工智能数据中心",
     navAnalytics: "语料分析", navAssistant: "情报问答", navDatabase: "文本数据库",
     chinaCarbonTitle: "中国碳市场", singaporeTitle: "新加坡气候政策与行动", all: "全部", source: "查看原文 ↗",
@@ -56,7 +56,7 @@ const UI_TEXT = {
     textRecord: "文本记录", sourceTopic: "来源 / 议题", figuresPlaces: "关键数字 / 地域", showMoreRecords: "显示更多记录",
   },
   en: {
-    cop31Title: "Global climate intelligence", cop31Independent: "Independent GREEN research platform · Not an official COP31 website",
+    cop31Title: "Global Climate Governance News Database", cop31Independent: "Independent GREEN research platform · Not an official COP31 website",
     navMap: "Global desk", navToday: "Today", navFocus: "Focus", navChinaCarbon: "China carbon market",
     navSingapore: "Singapore", navAnalytics: "Corpus", navAssistant: "Q&A", navDatabase: "Text database",
     chinaCarbonTitle: "China carbon market", singaporeTitle: "Singapore climate policy and action", all: "All", source: "Open source ↗",
@@ -170,6 +170,7 @@ function toast(message) {
   element.classList.add("show");
   setTimeout(() => element.classList.remove("show"), 3200);
 }
+
 
 function closeMobileMenu() {
   const menu = $("mobileMenu");
@@ -289,7 +290,6 @@ function applyModeCopy() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach(element => { element.placeholder = tr(element.dataset.i18nPlaceholder); });
   const climateBrand = state.mode !== "energy";
   if ($("brandTitle")) $("brandTitle").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
-  if (COP31_EDITION && $("brandTitle")) $("brandTitle").textContent = state.language === "en" ? "GREEN · COP31" : "格润 · COP31";
   if ($("brandDescriptor")) $("brandDescriptor").textContent = climateBrand ? "climate governance" : "energy technology";
   if ($("footerBrand")) $("footerBrand").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
   const firstOptionLabels = {
@@ -300,6 +300,7 @@ function applyModeCopy() {
   [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => {
     button.textContent = state.language === "en" ? "中文" : "EN";
   });
+  if ($("mobileMenuToggle")) $("mobileMenuToggle").textContent = tr($("mobileMenu")?.hidden === false ? "closeMenu" : "menu");
   [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => { button.textContent = copy.button; });
   ["mapOverline", "mapTitle", "heroOverline", "heroLede", "datasetName", "datasetTitle",
     "todayOverline", "todayTitle", "analyticsTitle", "assistantOverline", "assistantTitle",
@@ -1953,8 +1954,9 @@ function renderHeatmap(id, matrix) {
       ${topics.map(topic => {
         const value = cellMap.get(`${country}||${topic}`) || 0;
         const alpha = 0.08 + 0.82 * value / maxValue;
-        const ink = alpha > 0.46 ? "#fff" : "#12223a";
-        return `<span class="heat-cell" style="background:rgba(23,78,166,${alpha.toFixed(3)});color:${ink}" title="${esc(chartLabel(country))} / ${esc(chartLabel(topic))}: ${value}">${value || ""}</span>`;
+        // Pages may theme the matrix through --heat-rgb / --heat-ink-*; the defaults keep the main-site colours.
+        const ink = alpha > 0.46 ? "var(--heat-ink-strong,#fff)" : "var(--heat-ink,#12223a)";
+        return `<span class="heat-cell" style="background:rgba(var(--heat-rgb,23,78,166),${alpha.toFixed(3)});color:${ink}" title="${esc(chartLabel(country))} / ${esc(chartLabel(topic))}: ${value}">${value || ""}</span>`;
       }).join("")}
     </div>`).join("")}
   </div>`;

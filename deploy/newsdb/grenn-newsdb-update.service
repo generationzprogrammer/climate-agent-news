@@ -1,0 +1,21 @@
+[Unit]
+Description=GRENN news database: merge upstream data, crawl reachable sources, rebuild downloads
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=grenn
+Group=grenn
+EnvironmentFile=-/srv/grenn/conf/newsdb.env
+ExecStart=/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_newsdb.py update
+SyslogIdentifier=grenn-newsdb
+TimeoutStartSec=2h
+Nice=10
+IOSchedulingClass=idle
+MemoryMax=900M
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/srv/grenn/newsdb

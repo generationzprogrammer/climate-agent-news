@@ -1,0 +1,10 @@
+[Unit]
+Description=GRENN news database update, four times a day (after the upstream 06:30 / 18:30 runs)
+
+[Timer]
+OnCalendar=*-*-* 03,09,15,21:20:00
+RandomizedDelaySec=300
+Persistent=true
+
+[Install]
+WantedBy=timers.target

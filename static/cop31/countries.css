@@ -1,0 +1,239 @@
+/* GREEN · COP31 — 国家专题 (cop31/countries.js, 2026-10-29), after icebergdoc.org/impact-in-action.
+   the icebergdoc.org list page (list + globe) · the icebergdoc.org topic page (transition + topic page).
+   The reference's layout, sizes and timings in our palette: the globe stands on the grey-blue of our globe panel, our red
+   takes their orange, the topic panel is a light grey-blue and the dark hold our darkest grey-blue. u = 1/2024 of the
+   window on desktop (their artboard), 1/393 on phones. */
+:root { --u: calc(100vw / 2024); --pd-panel: #d3dce5; --pd-grey: #8a9bad; }
+
+/* ---------- Both pages: dark ground, white logos, no paper texture, no footer ---------- */
+html.focus-page body { background: var(--gb-950); }
+html.focus-page .page-bg, html.focus-page body > footer, html.focus-page .top-glass { display: none !important; }
+html.focus-page .brand, html.focus-page .brand-wordmark b, html.focus-page .brand-wordmark > span i { color: #fff; }
+html.focus-page .brand-wordmark > span, html.focus-page .brand-wordmark small { color: #86d6ad; }
+html.focus-page .cop31-brand img { filter: brightness(0) invert(1); opacity: .9; }
+html.focus-page main { padding: 0; }
+
+/* ---------- The list page (iceberg-list §5, §9.5) ---------- */
+html.focus-list .countries-section { padding: 0; }
+.ct-panel { position: relative; overflow: hidden; background: var(--gb-900); }
+.ct-globe { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.ct-line { position: absolute; top: 0; bottom: 0; left: calc(337 * var(--u)); width: 1px; background: #fff; opacity: .2; transform: translateX(-50%); pointer-events: none; }
+.ct-list { background: #fff; }
+.ct-row {
+  position: relative;
+  display: flex;
+  background: #fff;
+  color: var(--gb-950);
+  transition: color .3s ease-in-out, background .3s ease-in-out;
+}
+.ct-row::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: var(--gb-950); opacity: .1; pointer-events: none; }
+.ct-text { display: flex; flex: 1; flex-direction: column; justify-content: space-between; min-width: 0; padding: calc(28 * var(--u)) calc(12.5 * var(--u)) calc(12.5 * var(--u)); }
+.ct-kicker { margin-bottom: calc(10 * var(--u)); font: 700 calc(13 * var(--u))/1.2 var(--font-body); letter-spacing: .02em; text-transform: uppercase; }
+.ct-title { display: block; font: 700 calc(44 * var(--u))/1.05 var(--font-body); letter-spacing: -.01em; text-transform: uppercase; }
+.ct-meta { display: grid; grid-template-columns: 1fr 1fr; gap: calc(25 * var(--u)); margin-top: auto; padding-top: calc(20 * var(--u)); color: var(--pd-grey); font: 600 calc(16 * var(--u))/1.2 var(--font-body); transition: color .3s ease-in-out; }
+.ct-meta b { display: block; color: var(--gb-950); font-weight: 600; transition: color .3s ease-in-out; }
+.ct-meta .ct-place { grid-column: 1; }
+.ct-img { flex: 0 0 auto; width: calc(337 * var(--u)); aspect-ratio: 336 / 436; overflow: hidden; }
+.ct-img img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform 1.2s ease-in-out; }
+/* photo crops keep the landmark in frame: Marina Bay Sands sits at the left of the Singapore shot, the wall in the lower middle of the China one */
+.ct-row[data-focus="singapore"] .ct-img img { object-position: 4% 50%; }
+@media (hover: hover) and (pointer: fine) {
+  .ct-row:hover { background: var(--red); color: #fff; }
+  .ct-row:hover .ct-meta, .ct-row:hover .ct-meta b { color: #fff; }
+  .ct-row:hover .ct-img img { transform: scale(1.2); }
+}
+.ct-row:focus-visible { outline: 2.5px solid var(--red); outline-offset: -3px; }
+
+@media (min-width: 1101px) {
+  .ct-panel { position: fixed; inset: 0; z-index: 1; }
+  .ct-list { position: fixed; top: 0; right: 0; z-index: 3; width: 50%; height: 100vh; overflow-y: auto; overscroll-behavior: contain; will-change: transform; }
+}
+
+/* ---------- Coming in from another page: six columns in the page colour, over everything (iceberg-list §6) ---------- */
+.ct-overlay { position: fixed; top: 0; left: 0; z-index: 1000; display: flex; width: 100%; height: 100dvh; pointer-events: none; }
+.ct-overlay > div { width: 16.6666666667%; background: var(--gb-950); transform: scaleX(0); transform-origin: left center; }
+@media (max-width: 1023px) {
+  .ct-overlay > div { width: 25%; }
+  .ct-overlay > div:nth-child(n + 5) { display: none; }
+}
+
+/* ---------- A topic page (iceberg-detail §3.1) ---------- */
+.pd-map { position: fixed; left: 0; top: 0; z-index: 1; width: 33%; height: 100vh; opacity: 0; pointer-events: none; }
+html:not(.focus-detail) .pd-map { display: none; }
+.pd-img, .pd-lines { display: none; }
+html:not(.focus-detail) .pd-next { display: none; }
+html.focus-detail .section.pd { position: relative; padding: 0; background: var(--pd-panel); will-change: transform; }
+html.focus-detail .drawer-sheet > .section.pd, html.focus-detail .drawer-sheet > .section.pd.page-on { width: 100%; margin: 0; padding: 0; } /* outranks the page-title spacing */
+html.focus-list .drawer-sheet > .countries-section.page-on { padding: 0; }
+html.focus-detail .pd .pd-img { position: relative; display: block; aspect-ratio: 1349 / 759; overflow: hidden; }
+html.focus-detail .pd .pd-img img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; will-change: transform; }
+html.focus-detail #chinaCarbon .pd-img img { object-position: 50% 55%; }
+html.focus-detail .pd .pd-lines { position: absolute; top: 0; left: 0; z-index: 1; display: block; width: calc(2024 * var(--u)); height: 100%; margin-left: calc(-667.92 * var(--u)); opacity: 0; pointer-events: none; }
+.pd-lines i { position: absolute; top: 0; width: 1px; height: 100%; background: #fff; opacity: .2; transform: translateX(-50%); }
+.pd-lines i:nth-child(1) { left: calc(337 * var(--u)); }
+.pd-lines i:nth-child(2) { left: calc(1012 * var(--u)); }
+.pd-lines i:nth-child(3) { right: calc(337 * var(--u)); }
+/* the giant title (title + the section's own kicker as the white second row), rising letter by letter in line masks */
+html.focus-detail .pd > .section-heading {
+  position: relative;
+  z-index: 2;
+  display: block;
+  margin: 0;
+  padding: calc(28 * var(--u)) calc(20 * var(--u)) calc(156 * var(--u));
+  background: var(--pd-panel);
+  text-transform: uppercase;
+}
+html.focus-detail .pd > .section-heading::before, html.focus-detail .pd > .section-heading::after { display: none; }
+html.focus-detail .pd > .section-heading > div { display: flex; flex-direction: column; }
+html.focus-detail .pd > .section-heading h2 {
+  order: 1;
+  width: 73%;
+  color: var(--gb-950);
+  font: 700 calc(120 * var(--u))/.98 var(--font-body);
+  letter-spacing: -.01em;
+  filter: none;
+}
+html.focus-detail .pd > .section-heading .overline {
+  order: 2;
+  margin: 0;
+  color: #fff;
+  font: 700 calc(120 * var(--u))/.98 var(--font-body);
+  letter-spacing: -.01em;
+}
+.pd-line { display: block; overflow: hidden; padding-bottom: .06em; }
+.pd-word { display: inline-block; white-space: nowrap; }
+.pd-char { display: inline-block; will-change: transform, opacity; }
+/* the content: intro, tabs, the records as the reference's text blocks, the agencies as its closing table */
+html.focus-detail .pd .pd-content { position: relative; z-index: 2; display: flex; flex-direction: column; padding: 0 calc(20 * var(--u)) calc(156 * var(--u)); background: var(--pd-panel); }
+html.focus-detail .pd .pd-intro { order: 0; width: calc(674 * var(--u)); margin: 0 0 0 calc(492 * var(--u)); color: var(--gb-950); font: 600 calc(22 * var(--u))/1.2 var(--font-body); }
+html.focus-detail .pd .spotlight-tabs { order: 1; display: flex; flex-wrap: wrap; gap: 8px calc(28 * var(--u)); margin: calc(40 * var(--u)) 0 0; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; }
+html.focus-detail .pd .spotlight-tabs button {
+  position: relative;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  min-height: 0;
+  color: var(--gb-600);
+  font: 600 calc(16 * var(--u))/1.2 var(--font-body);
+  text-transform: uppercase;
+}
+html.focus-detail .pd .spotlight-tabs button::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: 100% 50%; transition: transform .3s ease-in-out; }
+html.focus-detail .pd .spotlight-tabs button.active { color: var(--gb-950); }
+html.focus-detail .pd .spotlight-tabs button.active::after { transform: scaleX(1); transform-origin: 0 50%; }
+@media (hover: hover) and (pointer: fine) { html.focus-detail .pd .spotlight-tabs button:hover::after { transform: scaleX(1); transform-origin: 0 50%; } }
+html.focus-detail .pd .spotlight-grid { order: 2; display: block; margin: 0; }
+html.focus-detail .pd .spotlight-card {
+  display: grid;
+  grid-template-columns: calc(407 * var(--u)) calc(674 * var(--u));
+  column-gap: calc(85 * var(--u));
+  margin-top: calc(100 * var(--u));
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
+  align-content: start;
+  background: none;
+  box-shadow: none;
+  color: var(--gb-950);
+  opacity: 1;
+  transform: none;
+}
+html.focus-detail .pd .spotlight-grid:has(.spotlight-card:hover) .spotlight-card { opacity: 1; } /* no dimming, no lift: the reference's blocks are still */
+html.focus-detail .pd .spotlight-card:hover { transform: none; box-shadow: none; }
+html.focus-detail .pd .spotlight-card-meta { grid-column: 1; grid-row: 1 / span 3; display: grid; align-content: start; gap: 2px; color: var(--gb-950); font: 600 calc(22 * var(--u))/1.2 var(--font-body); text-transform: none; }
+html.focus-detail .pd .spotlight-card-meta span:last-child { color: #fff; }
+html.focus-detail .pd .spotlight-card > h3 { grid-column: 2; margin: 0 0 .6em; color: var(--gb-950); font: 700 calc(22 * var(--u))/1.25 var(--font-body); }
+html.focus-detail .pd .spotlight-card > p { grid-column: 2; width: 87%; margin: 0 0 1.35em; color: var(--gb-950); font: 600 calc(22 * var(--u))/1.2 var(--font-body); }
+html.focus-detail .pd .spotlight-card-foot { grid-column: 2; display: flex; gap: 1.2em; align-items: baseline; padding: 0; border: 0; color: var(--gb-600); font: 600 calc(16 * var(--u))/1.2 var(--font-body); }
+html.focus-detail .pd .spotlight-card-foot a { position: relative; color: var(--gb-950); }
+html.focus-detail .pd .spotlight-card-foot a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: currentColor; transform-origin: 100% 50%; }
+@media (hover: hover) and (pointer: fine) { html.focus-detail .pd .spotlight-card-foot a:hover::after { animation: pdLink .6s ease-in-out; } }
+@keyframes pdLink { 0% { transform: scaleX(1); transform-origin: 100% 50%; } 49.9% { transform: scaleX(0); transform-origin: 100% 50%; } 50% { transform: scaleX(0); transform-origin: 0 50%; } 100% { transform: scaleX(1); transform-origin: 0 50%; } }
+html.focus-detail .pd .agency-grid { order: 3; display: block; margin: 0; padding-top: calc(237 * var(--u)); }
+html.focus-detail .pd .agency-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: calc(492 * var(--u)) calc(505 * var(--u));
+  grid-template-rows: auto auto;
+  padding: calc(13 * var(--u)) 0 calc(39 * var(--u));
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--gb-950);
+  transform: none;
+}
+html.focus-detail .pd .agency-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 1px; background: var(--gb-950); transform: scaleX(0); transform-origin: 0 0; transition: transform .7s cubic-bezier(.645, .045, .355, 1) var(--dl, 0s); }
+html.focus-detail .pd .agency-card > * { opacity: 0; transition: opacity .6s cubic-bezier(.645, .045, .355, 1) var(--dc, 0s); }
+html.focus-detail .pd .agency-grid.is-drawn .agency-card::before { transform: scaleX(1); }
+html.focus-detail .pd .agency-grid.is-drawn .agency-card > * { opacity: 1; }
+html.focus-detail .pd .agency-card > i { grid-column: 1; grid-row: 1 / span 2; font: 600 calc(12 * var(--u))/1.4 var(--font-body); font-style: normal; text-transform: uppercase; }
+html.focus-detail .pd .agency-card > b { grid-column: 2; font: 600 calc(16 * var(--u))/1.2 var(--font-body); }
+html.focus-detail .pd .agency-card > span { grid-column: 2; color: var(--gb-600); font: 600 calc(16 * var(--u))/1.2 var(--font-body); }
+/* NEXT: fixed under the map, our red (the reference's orange), grows on hover */
+html.focus-detail .pd-next {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  width: 33%;
+  height: calc(72 * var(--u));
+  padding: 0 calc(28 * var(--u));
+  background: var(--red);
+  color: #fff;
+  transform: translate3d(0, 100%, 0);
+  transition: height .2s ease-in-out;
+  will-change: transform;
+}
+.pd-next-label { margin-right: calc(25 * var(--u)); font: 600 calc(13 * var(--u))/1.2 var(--font-body); text-transform: uppercase; }
+.pd-next-body { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 12px; }
+.pd-next-title { font: 700 calc(16 * var(--u))/1.2 var(--font-body); text-transform: uppercase; }
+.pd-next-place { font: 600 calc(13 * var(--u))/1.2 var(--font-body); }
+@media (hover: hover) and (pointer: fine) { html.focus-detail .pd-next:hover { height: calc(80 * var(--u)); } }
+
+@media (min-width: 1101px) {
+  html.focus-detail main { width: 67%; margin-left: 33%; }
+}
+
+/* ---------- Phones / tablets (iceberg-list §8, iceberg-detail §5) ---------- */
+@media (max-width: 1100px) {
+  :root { --u: calc(100vw / 393); }
+  html.focus-page .rail { position: relative; z-index: 5; }
+  html.focus-page main { width: 100%; margin: 0; } /* edge to edge, like the reference */
+  .ct-panel { height: 46svh; }
+  .ct-row { min-height: 0; }
+  .ct-text { padding: calc(10 * var(--u)) calc(11 * var(--u)); }
+  .ct-title { font-size: calc(26 * var(--u)); }
+  .ct-kicker { font-size: calc(11 * var(--u)); }
+  .ct-meta { display: block; font-size: calc(14 * var(--u)); }
+  .ct-img { width: calc(125 * var(--u)); aspect-ratio: 125 / 170; }
+  .pd-map { display: none !important; }
+  html.focus-detail .pd .pd-lines { display: none; }
+  html.focus-detail .pd .pd-img { aspect-ratio: 393 / 464; }
+  html.focus-detail #chinaCarbon .pd-img img { object-position: 50% 60%; }
+  html.focus-detail #singapore .pd-img img { object-position: 5% 50%; }
+  html.focus-detail .pd > .section-heading { padding: calc(40 * var(--u)) calc(25 * var(--u)) calc(65 * var(--u)); }
+  html.focus-detail .pd > .section-heading h2 { width: 85%; font-size: calc(45 * var(--u)); }
+  html.focus-detail .pd > .section-heading .overline { font-size: calc(45 * var(--u)); }
+  html.focus-detail .pd .pd-content { padding: 0 calc(25 * var(--u)) calc(64 * var(--u)); }
+  html.focus-detail .pd .pd-intro { width: auto; margin: 0; font-size: calc(20 * var(--u)); }
+  html.focus-detail .pd .spotlight-card { display: block; margin-top: calc(57 * var(--u)); }
+  html.focus-detail .pd .spotlight-card-meta { margin-bottom: 1.5em; font-size: calc(20 * var(--u)); }
+  html.focus-detail .pd .spotlight-card > h3, html.focus-detail .pd .spotlight-card > p { width: auto; font-size: calc(18 * var(--u)); }
+  html.focus-detail .pd .spotlight-tabs button { font-size: calc(14 * var(--u)); }
+  html.focus-detail .pd .agency-grid { padding-top: calc(70 * var(--u)); }
+  html.focus-detail .pd .agency-card { display: block; }
+  html.focus-detail .pd .agency-card > i { display: block; margin-bottom: calc(8 * var(--u)); }
+  html.focus-detail .pd-next { position: static; width: 100%; height: auto; flex-direction: column; align-items: flex-start; padding: calc(20 * var(--u)) calc(25 * var(--u)) calc(100 * var(--u)); transform: none !important; }
+  html.focus-detail .pd-next .pd-next-body { flex-direction: column; align-items: flex-start; margin-top: 9px; }
+  .pd-next-label, .pd-next-place { font-size: calc(14 * var(--u)); }
+  .pd-next-title { font-size: calc(18 * var(--u)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ct-row, .ct-meta, .ct-meta b, .ct-img img, .pd-next { transition: none; }
+}
