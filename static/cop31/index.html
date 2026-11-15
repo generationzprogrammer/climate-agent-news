@@ -7,30 +7,22 @@
 <meta content="#fffbf4" name="theme-color"/>
 <meta content="每日更新、来源可追溯的国际气候情报与中文气候新闻文本数据库。" name="description"/>
 <title>GREEN · COP31 | 全球气候治理新闻数据库</title>
-<link href="./cop31/cop31.css?v=20261102-stance-3" rel="stylesheet"/>
-<link href="./cop31/intel.css?v=20261029-lod" rel="stylesheet"/>
-<link href="./cop31/countries.css?v=20261029-menu" rel="stylesheet"/>
+<!-- Which page this is, before the first paint (2026-11-14). The scripts are deferred: on a cold cache they arrive a
+     second or two after the styles, and until cop31.js marked the page every section was laid out at once (国家专题's
+     list over the home page). Home: html[data-page="home"] with #map already .page-on; any other address: nothing
+     but the background until cop31.js takes over (it removes data-boot). -->
+<script>(function(){var h=location.hash.slice(1),r=document.documentElement;if(!h||h==="top"||h==="map"||h==="today")r.setAttribute("data-page","home");else r.setAttribute("data-boot","page");})();</script>
+<link href="./cop31/cop31.css?v=20261115-phone" rel="stylesheet"/>
+<link href="./cop31/atlas/atlas.css?v=20261111-dots" rel="stylesheet"/>
+<link href="./cop31/intel.css?v=20261112-topic" rel="stylesheet"/>
+<link href="./cop31/countries.css?v=20261112-focus" rel="stylesheet"/>
+<link href="./cop31/research.css?v=20261113-research2" rel="stylesheet"/>
 
 </head>
 <body data-edition="cop31">
-<!-- Ink-bleed filters and the fading divider gradient, recreated from the reference design language. -->
+<!-- SVG definitions: the fading divider gradient and the stamp relief (the ink-bleed text filters were removed 2026-11-02). -->
 <svg aria-hidden="true" class="svg-defs" focusable="false" height="0" width="0">
 <defs>
-<filter height="130%" id="ink-bleed" width="130%" x="-15%" y="-15%">
-<feTurbulence baseFrequency="0.9" numOctaves="2" result="noiseNear" seed="4" type="fractalNoise"></feTurbulence>
-<feDisplacementMap in="SourceGraphic" in2="noiseNear" result="dispNear" scale="2.5"></feDisplacementMap>
-<feColorMatrix in="dispNear" result="bleed" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .5 0"></feColorMatrix>
-<feComponentTransfer in="noiseNear" result="stipple"><feFuncA intercept="-20" slope="20" type="linear"></feFuncA></feComponentTransfer>
-<feComposite in="dispNear" in2="stipple" operator="in" result="speckle"></feComposite>
-<feColorMatrix in="speckle" result="speckleSoft" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .35 0"></feColorMatrix>
-<feMerge><feMergeNode in="bleed"></feMergeNode><feMergeNode in="speckleSoft"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
-</filter>
-<filter height="150%" id="ink-bleed-nav" width="150%" x="-25%" y="-25%">
-<feTurbulence baseFrequency="1.1" numOctaves="2" result="noise" seed="4" type="fractalNoise"></feTurbulence>
-<feDisplacementMap in="SourceGraphic" in2="noise" result="disp" scale="1.2"></feDisplacementMap>
-<feColorMatrix in="disp" result="bleed" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .5 0"></feColorMatrix>
-<feMerge><feMergeNode in="bleed"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
-</filter>
 <!-- Stamp relief material (procedural stand-in for the reference's lit WebGL relief): brush-stroke height field,
      diffuse + specular light with a pointer lamp, revealed through a noise threshold (intercept = 25 × reveal). -->
 <filter color-interpolation-filters="sRGB" height="100%" id="stamp-relief" width="100%" x="0" y="0">
@@ -64,12 +56,19 @@
 <p aria-hidden="true" class="rail-label">菜单</p>
 <nav aria-label="页面导航">
 <a class="nav-db" href="./cop31/#database">进入数据库</a>
-<a data-i18n="navMap" href="./cop31/#map">全球现场</a>
+<!-- 2026-11-05: grouped by reader — delegates, researchers, policy makers (the three desks); links unchanged. -->
+<p class="rail-sub nav-group" data-en="Delegate Desk">参会代表</p>
 <a data-i18n="navToday" href="./cop31/#today">今日新闻</a>
-<a class="nav-countries" href="./cop31/#countries">国家专题</a>
-<div class="topic-nav" hidden=""><span class="rail-sub" data-i18n="navFocus">专题</span><div><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a></div></div>
+<a data-i18n="navMap" href="./cop31/#map">全球事件地图</a>
+<a class="nav-brief" data-en="Daily Climate Bulletin" download="" href="./data/daily_brief.pdf">每日气候通讯</a>
+<p class="rail-sub nav-group" data-en="Research Desk">科研人员</p>
+<a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
 <a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a>
 <a class="nav-research" href="./cop31/#research">研究工具</a>
+<p class="rail-sub nav-group" data-en="Policy Desk">政策制定者</p>
+<a class="nav-countries" href="./cop31/#countries">国家专题</a>
+<div class="topic-nav" hidden=""><span class="rail-sub" data-i18n="navFocus">专题</span><div><a class="climate-only-nav" data-i18n="navChinaCarbon" href="./cop31/#chinaCarbon">中国碳市场</a><a class="climate-only-nav" data-i18n="navSingapore" href="./cop31/#singapore">新加坡</a></div></div>
+<a class="nav-timeline" data-en="Policy timeline" href="./cop31/#policyTimeline">政策时间线</a>
 <a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a>
 <a class="menu-home" href="./cop31/#top">返回首页</a>
 </nav>
@@ -82,7 +81,7 @@
 <!-- Section reel: labels reuse the navigation text (data-i18n), ticks mark progress. -->
 <div class="reel" role="group">
 <div class="reel-viewport"><div class="reel-track">
-<button data-i18n="navMap" data-reel="map" type="button">全球现场</button><button data-i18n="navToday" data-reel="today" type="button">今日新闻</button><button class="nav-countries" data-reel="countries" type="button">国家专题</button><button data-i18n="navAnalytics" data-reel="analytics" type="button">数据统计</button><button class="nav-research" data-reel="research" type="button">研究工具</button><button data-i18n="navAssistant" data-reel="assistant" type="button">情报问答</button><button data-i18n="navDatabase" data-reel="database" type="button">文本数据库</button>
+<button data-i18n="navMap" data-reel="map" type="button">全球事件地图</button><button data-i18n="navToday" data-reel="today" type="button">今日新闻</button><button class="nav-countries" data-reel="countries" type="button">国家专题</button><button data-i18n="navAnalytics" data-reel="analytics" type="button">数据统计</button><button class="nav-research" data-reel="research" type="button">研究工具</button><button data-i18n="navAssistant" data-reel="assistant" type="button">情报问答</button><button data-i18n="navDatabase" data-reel="database" type="button">文本数据库</button>
 </div></div>
 <span aria-hidden="true" class="reel-ticks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
 </div>
@@ -92,10 +91,11 @@
 <div class="sheet">
 <span aria-hidden="true" class="sheet-handle"></span>
 <nav>
-<a data-i18n="navMap" href="./cop31/#map">全球现场</a><a data-i18n="navToday" href="./cop31/#today">今日新闻</a><a class="nav-countries" href="./cop31/#countries">国家专题</a><a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a><a class="nav-research" href="./cop31/#research">研究工具</a><a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a>
+<p class="nav-group" data-en="Delegate Desk">参会代表</p><a data-i18n="navToday" href="./cop31/#today">今日新闻</a><a data-i18n="navMap" href="./cop31/#map">全球事件地图</a><a class="nav-brief" data-en="Daily Climate Bulletin" download="" href="./data/daily_brief.pdf">每日气候通讯</a><p class="nav-group" data-en="Research Desk">科研人员</p><a data-i18n="navDatabase" href="./cop31/#database">文本数据库</a><a data-i18n="navAnalytics" href="./cop31/#analytics">数据统计</a><a class="nav-research" href="./cop31/#research">研究工具</a><p class="nav-group" data-en="Policy Desk">政策制定者</p><a class="nav-countries" href="./cop31/#countries">国家专题</a><a class="nav-timeline" data-en="Policy timeline" href="./cop31/#policyTimeline">政策时间线</a><a data-i18n="navAssistant" href="./cop31/#assistant">情报问答</a>
 </nav>
 <div class="mobile-menu-actions">
 <button class="project-intro-link" data-i18n="projectIntro" data-open-project="" type="button">项目介绍</button>
+<button class="project-intro-link partner-link" data-en="Open GREEN Partnership" data-open-partner="" type="button">开放GREEN伙伴计划</button>
 <button class="team-link" data-i18n="team" data-open-team="" type="button">团队信息</button>
 <button class="subscribe-button" data-i18n="subscribe" data-open-subscribe="" type="button">订阅周报</button>
 <button class="mode-toggle" data-cop31-excluded="" hidden="" id="mobileModeToggle" type="button">切换到能源技术</button>
@@ -111,6 +111,7 @@
 <!-- Site actions on the home stage top line (moved out of the rail on 2026-10-29; the COP31 date line was removed). -->
 <div class="rail-actions">
 <button class="project-intro-link" data-i18n="projectIntro" id="projectIntroOpen" type="button">项目介绍</button>
+<button class="project-intro-link partner-link" data-en="Open GREEN Partnership" data-open-partner="" type="button">开放GREEN伙伴计划</button>
 <button class="team-link nav-team-link" data-i18n="team" id="teamOpen" type="button">团队信息</button>
 <div class="brief-actions">
 <button class="subscribe-button" data-i18n="subscribe" id="subscribeOpen" type="button">订阅</button>
@@ -120,23 +121,28 @@
 <button class="mode-toggle" data-cop31-excluded="" hidden="" id="modeToggle" type="button">切换到能源技术</button>
 </div>
 <!-- Home (2026-11-02, user: the text database first, the rest as tools): the database's front page on the left — title,
-     description (mirrors #heroLede), figures and full-archive files from downloads/manifest.json (downloads.js) — and the
-     other sections as an orderly sheet of stamps on the right (labels reuse the navigation text; artwork is decorative). -->
+     figures and full-archive files from downloads/manifest.json (downloads.js) — and the
+     other sections as an orderly sheet of stamps on the right, folded behind 其他数据服务 until it is clicked (2026-11-03;
+     cop31.js setupToolsToggle; labels reuse the navigation text; artwork is decorative). -->
 <div class="home-main">
 <div class="home-db">
-<p class="overline home-db-overline">TEXT DATABASE</p>
 <h1 class="ink" data-i18n="cop31Title">全球气候治理&#8203;新闻数据库</h1>
-<p class="home-db-lede" data-mirror="heroLede"></p>
 <dl class="home-db-stats" hidden="" id="homeDbStats"></dl>
 <div class="home-db-actions">
 <a class="home-db-go" data-en="Open the database" href="./cop31/#database">进入数据库</a>
 <p class="home-db-files" hidden="" id="homeDbFiles"></p>
 </div>
+<!-- 2026-11-05: the three readers' desks (the same groups as the menu). -->
+<nav aria-label="用户工作台" class="home-desks">
+<div class="home-desk"><b data-en="Delegate Desk">参会代表</b><span><a data-en="Today's news" href="./cop31/#today">今日新闻</a><a data-en="Daily bulletin" download="" href="./data/daily_brief.pdf">每日气候通讯</a></span></div>
+<div class="home-desk"><b data-en="Research Desk">科研人员</b><span><a data-en="Text database" href="./cop31/#database">文本数据库</a><a data-en="Research charts" href="./cop31/#researchCharts">科研分析</a></span></div>
+<div class="home-desk"><b data-en="Policy Desk">政策制定者</b><span><a data-en="Country focus" href="./cop31/#countries">国家专题</a><a data-en="Policy timeline" href="./cop31/#policyTimeline">政策时间线</a></span></div>
+</nav>
 </div>
 <div class="home-tools">
-<p class="home-tools-label" data-en="Other tools">其他工具</p>
-<div class="stamps" data-grid="">
-<a class="stamp" data-finish="kogei" data-stamp="map" href="./cop31/#map"><span class="stamp-paper"><span class="stamp-art art-map"><span class="stamp-map" data-stamp-map=""></span></span><span class="stamp-label" data-i18n="navMap">全球现场</span></span></a>
+<button aria-controls="homeToolsSheet" aria-expanded="false" class="home-tools-toggle" type="button"><span class="home-tools-text" data-en="Data insight services">数据洞察服务</span><span aria-hidden="true" class="home-tools-plus"></span></button>
+<div class="stamps" data-grid="" id="homeToolsSheet">
+<a class="stamp" data-finish="kogei" data-stamp="map" href="./cop31/#map"><span class="stamp-paper"><span class="stamp-art art-map"><span class="stamp-map" data-stamp-map=""></span></span><span class="stamp-label" data-i18n="navMap">全球事件地图</span></span></a>
 <a class="stamp" data-finish="impasto" data-stamp="today" href="./cop31/#today"><span class="stamp-paper"><span class="stamp-art art-today"><i></i><i></i><i></i></span><span class="stamp-label" data-i18n="navToday">今日新闻</span></span></a>
 <a class="stamp" data-finish="gold" data-stamp="countries" href="./cop31/#countries"><span class="stamp-paper"><span class="stamp-art art-countries"></span><span class="stamp-label nav-countries">国家专题</span></span></a>
 <a class="stamp" data-finish="kogei" data-stamp="analytics" href="./cop31/#analytics"><span class="stamp-paper"><span class="stamp-art art-analytics"><i></i><i></i><i></i><i></i><i></i></span><span class="stamp-label" data-i18n="navAnalytics">数据统计</span></span></a>
@@ -153,9 +159,9 @@
 <!-- Everything below the stamp stage rides on one glassine sheet; on the desktop the wheel pulls it up over the stage (reference works drawer, cop31.js setupSheet). -->
 <div class="drawer-sheet">
 <div aria-hidden="true" class="drawer-paper"></div>
-<section class="section map-section map-section-lead" id="map">
+<section class="section map-section map-section-lead page-on" id="map">
 <div class="section-heading">
-<div><p class="overline" id="mapOverline">GLOBAL CLIMATE SITUATION</p><h2 class="ink" id="mapTitle">全球气候现场</h2></div>
+<div><p class="overline" id="mapOverline">GLOBAL EVENT MAP</p><h2 class="ink" id="mapTitle">全球事件地图</h2></div>
 <p class="sr-only" id="mapRangeNote">今日队列</p>
 </div>
 <div class="map-layout">
@@ -192,12 +198,129 @@
 <span class="ct-kicker nav-countries">国家专题</span>
 <span class="ct-title" data-i18n="navChinaCarbon">中国碳市场</span>
 <span class="ct-meta"><b>CHINA CARBON MARKET</b><span class="ct-place" data-en="China">中国</span></span>
-<span class="ct-img"><img alt="" decoding="async" loading="lazy" sizes="(max-width: 1100px) 32vw, 17vw" src="./assets/focus-china.jpg" srcset="./assets/focus-china-list.jpg 1000w"/></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" sizes="(max-width: 1100px) 32vw, 17vw" data-defer-src="./assets/focus-china.jpg" data-defer-srcset="./assets/focus-china-list.jpg 1000w"/></span>
 </a>
 <a class="ct-row" data-focus="singapore" data-lat="1.35" data-lon="103.82" href="./cop31/#singapore">
 <span class="ct-title" data-i18n="navSingapore">新加坡</span>
 <span class="ct-meta"><b>SINGAPORE CLIMATE DESK</b><span class="ct-place" data-en="Singapore">新加坡</span></span>
-<span class="ct-img"><img alt="" decoding="async" loading="lazy" sizes="(max-width: 1100px) 32vw, 17vw" src="./assets/focus-singapore.jpg" srcset="./assets/focus-singapore-list.jpg 1400w"/></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" sizes="(max-width: 1100px) 32vw, 17vw" data-defer-src="./assets/focus-singapore.jpg" data-defer-srcset="./assets/focus-singapore-list.jpg 1400w"/></span>
+</a>
+<!-- Countries and regions (2026-11-12): the ones named most in the crawled news (data/news_archive.json, 20 items or more);
+     each opens a page of all its news, filled by cop31/country-news.js. Photographs: assets/focus/ (docs/news-photos.md). -->
+<a class="ct-row" data-focus="focusUS" data-lat="39.0" data-lon="-98.0" href="./cop31/#focusUS">
+<span class="ct-title" data-en="United States">美国</span>
+<span class="ct-meta"><b>UNITED STATES</b><span class="ct-place" data-en="North America">北美洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/us-list.webp" data-hero="./assets/focus/us.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusGB" data-lat="54.0" data-lon="-2.0" href="./cop31/#focusGB">
+<span class="ct-title" data-en="United Kingdom">英国</span>
+<span class="ct-meta"><b>UNITED KINGDOM</b><span class="ct-place" data-en="Europe">欧洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/gb-list.webp" data-hero="./assets/focus/gb.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusCN" data-lat="35.0" data-lon="104.0" href="./cop31/#focusCN">
+<span class="ct-title" data-en="China">中国</span>
+<span class="ct-meta"><b>CHINA</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/cn-list.webp" data-hero="./assets/focus/cn.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusAU" data-lat="-25.0" data-lon="134.0" href="./cop31/#focusAU">
+<span class="ct-title" data-en="Australia">澳大利亚</span>
+<span class="ct-meta"><b>AUSTRALIA</b><span class="ct-place" data-en="Oceania">大洋洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/au-list.webp" data-hero="./assets/focus/au.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusEU" data-lat="50.85" data-lon="4.35" href="./cop31/#focusEU">
+<span class="ct-title" data-en="European Union">欧盟</span>
+<span class="ct-meta"><b>EUROPEAN UNION</b><span class="ct-place" data-en="Europe">欧洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/eu-list.webp" data-hero="./assets/focus/eu.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusNP" data-lat="28.2" data-lon="84.0" href="./cop31/#focusNP">
+<span class="ct-title" data-en="Nepal">尼泊尔</span>
+<span class="ct-meta"><b>NEPAL</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/np-list.webp" data-hero="./assets/focus/np.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusIN" data-lat="21.0" data-lon="78.0" href="./cop31/#focusIN">
+<span class="ct-title" data-en="India">印度</span>
+<span class="ct-meta"><b>INDIA</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/in-list.webp" data-hero="./assets/focus/in.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusTR" data-lat="39.0" data-lon="35.0" href="./cop31/#focusTR">
+<span class="ct-title" data-en="Türkiye">土耳其</span>
+<span class="ct-meta"><b>TÜRKIYE</b><span class="ct-place" data-en="Asia · Europe">亚洲 · 欧洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/tr-list.webp" data-hero="./assets/focus/tr.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusBR" data-lat="-10.0" data-lon="-52.0" href="./cop31/#focusBR">
+<span class="ct-title" data-en="Brazil">巴西</span>
+<span class="ct-meta"><b>BRAZIL</b><span class="ct-place" data-en="South America">南美洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/br-list.webp" data-hero="./assets/focus/br.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusFR" data-lat="46.5" data-lon="2.5" href="./cop31/#focusFR">
+<span class="ct-title" data-en="France">法国</span>
+<span class="ct-meta"><b>FRANCE</b><span class="ct-place" data-en="Europe">欧洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/fr-list.webp" data-hero="./assets/focus/fr.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusNG" data-lat="9.5" data-lon="8.0" href="./cop31/#focusNG">
+<span class="ct-title" data-en="Nigeria">尼日利亚</span>
+<span class="ct-meta"><b>NIGERIA</b><span class="ct-place" data-en="Africa">非洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/ng-list.webp" data-hero="./assets/focus/ng.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusCA" data-lat="57.0" data-lon="-102.0" href="./cop31/#focusCA">
+<span class="ct-title" data-en="Canada">加拿大</span>
+<span class="ct-meta"><b>CANADA</b><span class="ct-place" data-en="North America">北美洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/ca-list.webp" data-hero="./assets/focus/ca.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusID" data-lat="-2.0" data-lon="118.0" href="./cop31/#focusID">
+<span class="ct-title" data-en="Indonesia">印度尼西亚</span>
+<span class="ct-meta"><b>INDONESIA</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/id-list.webp" data-hero="./assets/focus/id.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusFJ" data-lat="-17.8" data-lon="178.0" href="./cop31/#focusFJ">
+<span class="ct-title" data-en="Fiji">斐济</span>
+<span class="ct-meta"><b>FIJI</b><span class="ct-place" data-en="Oceania">大洋洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/fj-list.webp" data-hero="./assets/focus/fj.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusIR" data-lat="32.0" data-lon="53.5" href="./cop31/#focusIR">
+<span class="ct-title" data-en="Iran">伊朗</span>
+<span class="ct-meta"><b>IRAN</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/ir-list.webp" data-hero="./assets/focus/ir.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusDE" data-lat="51.0" data-lon="10.3" href="./cop31/#focusDE">
+<span class="ct-title" data-en="Germany">德国</span>
+<span class="ct-meta"><b>GERMANY</b><span class="ct-place" data-en="Europe">欧洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/de-list.webp" data-hero="./assets/focus/de.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusJP" data-lat="36.5" data-lon="138.5" href="./cop31/#focusJP">
+<span class="ct-title" data-en="Japan">日本</span>
+<span class="ct-meta"><b>JAPAN</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/jp-list.webp" data-hero="./assets/focus/jp.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusMX" data-lat="23.5" data-lon="-102.0" href="./cop31/#focusMX">
+<span class="ct-title" data-en="Mexico">墨西哥</span>
+<span class="ct-meta"><b>MEXICO</b><span class="ct-place" data-en="North America">北美洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/mx-list.webp" data-hero="./assets/focus/mx.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusBD" data-lat="23.8" data-lon="90.3" href="./cop31/#focusBD">
+<span class="ct-title" data-en="Bangladesh">孟加拉国</span>
+<span class="ct-meta"><b>BANGLADESH</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/bd-list.webp" data-hero="./assets/focus/bd.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusES" data-lat="40.0" data-lon="-3.7" href="./cop31/#focusES">
+<span class="ct-title" data-en="Spain">西班牙</span>
+<span class="ct-meta"><b>SPAIN</b><span class="ct-place" data-en="Europe">欧洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/es-list.webp" data-hero="./assets/focus/es.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusEG" data-lat="26.5" data-lon="30.0" href="./cop31/#focusEG">
+<span class="ct-title" data-en="Egypt">埃及</span>
+<span class="ct-meta"><b>EGYPT</b><span class="ct-place" data-en="Africa">非洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/eg-list.webp" data-hero="./assets/focus/eg.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusKE" data-lat="0.3" data-lon="37.9" href="./cop31/#focusKE">
+<span class="ct-title" data-en="Kenya">肯尼亚</span>
+<span class="ct-meta"><b>KENYA</b><span class="ct-place" data-en="Africa">非洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/ke-list.webp" data-hero="./assets/focus/ke.webp"/></span>
+</a>
+<a class="ct-row" data-focus="focusKR" data-lat="36.3" data-lon="127.9" href="./cop31/#focusKR">
+<span class="ct-title" data-en="South Korea">韩国</span>
+<span class="ct-meta"><b>SOUTH KOREA</b><span class="ct-place" data-en="Asia">亚洲</span></span>
+<span class="ct-img"><img alt="" decoding="async" loading="lazy" src="./assets/focus/kr-list.webp" data-hero="./assets/focus/kr.webp"/></span>
 </a>
 </div>
 </section>
@@ -234,6 +357,237 @@
 <div class="spotlight-grid" id="singaporeSpotlightList"><div class="skeleton"></div></div>
 </section>
 
+<!-- 国家专题: one page per country / region (2026-11-12); the news is listed by cop31/country-news.js from data/news_archive.json. -->
+<section class="section spotlight-section climate-only-section focus-country" data-country="US" data-match="美国" id="focusUS">
+<div class="section-heading">
+<div><p class="overline">UNITED STATES</p><h2 class="ink" data-en="United States">美国</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="美国" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="GB" data-match="英国|英格兰|苏格兰|威尔士|北爱尔兰" id="focusGB">
+<div class="section-heading">
+<div><p class="overline">UNITED KINGDOM</p><h2 class="ink" data-en="United Kingdom">英国</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="英国" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="CN" data-match="中国" id="focusCN">
+<div class="section-heading">
+<div><p class="overline">CHINA</p><h2 class="ink" data-en="China">中国</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="中国" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="AU" data-match="澳大利亚|澳洲" id="focusAU">
+<div class="section-heading">
+<div><p class="overline">AUSTRALIA</p><h2 class="ink" data-en="Australia">澳大利亚</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="澳大利亚" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="EU" data-match="欧盟|欧洲" data-org="EU" id="focusEU">
+<div class="section-heading">
+<div><p class="overline">EUROPEAN UNION</p><h2 class="ink" data-en="European Union">欧盟</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="欧盟" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="NP" data-match="尼泊尔" id="focusNP">
+<div class="section-heading">
+<div><p class="overline">NEPAL</p><h2 class="ink" data-en="Nepal">尼泊尔</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="尼泊尔" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="IN" data-match="=印度" id="focusIN">
+<div class="section-heading">
+<div><p class="overline">INDIA</p><h2 class="ink" data-en="India">印度</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="印度" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="TR" data-match="土耳其" id="focusTR">
+<div class="section-heading">
+<div><p class="overline">TÜRKIYE</p><h2 class="ink" data-en="Türkiye">土耳其</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="土耳其" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="BR" data-match="巴西" id="focusBR">
+<div class="section-heading">
+<div><p class="overline">BRAZIL</p><h2 class="ink" data-en="Brazil">巴西</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="巴西" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="FR" data-match="法国" id="focusFR">
+<div class="section-heading">
+<div><p class="overline">FRANCE</p><h2 class="ink" data-en="France">法国</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="法国" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="NG" data-match="尼日利亚" id="focusNG">
+<div class="section-heading">
+<div><p class="overline">NIGERIA</p><h2 class="ink" data-en="Nigeria">尼日利亚</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="尼日利亚" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="CA" data-match="加拿大" id="focusCA">
+<div class="section-heading">
+<div><p class="overline">CANADA</p><h2 class="ink" data-en="Canada">加拿大</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="加拿大" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="ID" data-match="印度尼西亚|印尼" id="focusID">
+<div class="section-heading">
+<div><p class="overline">INDONESIA</p><h2 class="ink" data-en="Indonesia">印度尼西亚</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="印度尼西亚" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="FJ" data-match="斐济" id="focusFJ">
+<div class="section-heading">
+<div><p class="overline">FIJI</p><h2 class="ink" data-en="Fiji">斐济</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="斐济" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="IR" data-match="伊朗" id="focusIR">
+<div class="section-heading">
+<div><p class="overline">IRAN</p><h2 class="ink" data-en="Iran">伊朗</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="伊朗" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="DE" data-match="德国" id="focusDE">
+<div class="section-heading">
+<div><p class="overline">GERMANY</p><h2 class="ink" data-en="Germany">德国</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="德国" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="JP" data-match="日本" id="focusJP">
+<div class="section-heading">
+<div><p class="overline">JAPAN</p><h2 class="ink" data-en="Japan">日本</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="日本" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="MX" data-match="墨西哥" id="focusMX">
+<div class="section-heading">
+<div><p class="overline">MEXICO</p><h2 class="ink" data-en="Mexico">墨西哥</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="墨西哥" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="BD" data-match="孟加拉" id="focusBD">
+<div class="section-heading">
+<div><p class="overline">BANGLADESH</p><h2 class="ink" data-en="Bangladesh">孟加拉国</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="孟加拉国" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="ES" data-match="西班牙" id="focusES">
+<div class="section-heading">
+<div><p class="overline">SPAIN</p><h2 class="ink" data-en="Spain">西班牙</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="西班牙" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="EG" data-match="埃及" id="focusEG">
+<div class="section-heading">
+<div><p class="overline">EGYPT</p><h2 class="ink" data-en="Egypt">埃及</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="埃及" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="KE" data-match="肯尼亚" id="focusKE">
+<div class="section-heading">
+<div><p class="overline">KENYA</p><h2 class="ink" data-en="Kenya">肯尼亚</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="肯尼亚" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
+<section class="section spotlight-section climate-only-section focus-country" data-country="KR" data-match="韩国" id="focusKR">
+<div class="section-heading">
+<div><p class="overline">SOUTH KOREA</p><h2 class="ink" data-en="South Korea">韩国</h2></div>
+<p class="fc-count"></p>
+</div>
+<div aria-label="韩国" class="spotlight-tabs pill fc-tabs" role="group"></div>
+<div class="spotlight-grid fc-list"><div class="skeleton"></div></div>
+<button class="load-more fc-more" hidden="" type="button"></button>
+</section>
+
 <section class="section analytics-section" id="analytics">
 <div class="section-heading">
 <div><p class="overline">DATA STATISTICS</p><h2 class="ink" id="analyticsTitle">数据统计</h2></div>
@@ -241,6 +595,28 @@
 <div class="analytics-kpis" id="analyticsKpis">
 <div class="skeleton"></div>
 </div>
+<!-- 科研分析 (2026-11-05, user: 优先开发四类图表): drawn by cop31/analysis.js from downloads/analytics.json. -->
+<section class="research-charts" hidden="" id="researchCharts">
+<div class="research-charts-head" id="researchChartsHead"></div>
+<!-- 2026-11-11: seven further charts (cop31/analysis-more.js): topicRanks, topicQuadrant, agendaDiversity, coverageMap, countrySimilarity, continentProfiles, copWindow. -->
+<article class="chart-card wide rc-card" id="topicTrend"></article>
+<article class="chart-card wide rc-card" id="topicRanks"></article>
+<article class="chart-card wide rc-card" id="topicClusters"></article>
+<article class="chart-card rc-card" id="topicSpectrum"></article>
+<article class="chart-card rc-card" id="topicMovers"></article>
+<article class="chart-card rc-card" id="topicQuadrant"></article>
+<article class="chart-card rc-card" id="agendaDiversity"></article>
+<article class="chart-card wide rc-card" id="entityNetwork"></article>
+<article class="chart-card wide rc-card" id="coverageMap"></article>
+<article class="chart-card wide rc-card" id="countryTopics"></article>
+<article class="chart-card rc-card" id="countrySimilarity"></article>
+<article class="chart-card rc-card" id="topicMatrix"></article>
+<article class="chart-card wide rc-card" id="continentProfiles"></article>
+<article class="chart-card rc-card" id="issueCalendar"></article>
+<article class="chart-card rc-card" id="copWindow"></article>
+<article class="chart-card wide rc-card" id="policyFlows"></article>
+<article class="chart-card wide rc-card" id="policyTimeline"></article>
+</section>
 <div class="analytics-grid">
 <section aria-label="站点更新曲线" class="metrics-strip" id="siteMetrics">
 <article class="chart-card mini-chart-card">
@@ -280,7 +656,7 @@
 <p class="analytics-note" id="analyticsNote">正在读取语料库统计文件…</p>
 </section>
 
-<section class="section research-section" id="research"><!-- shown until research.js has the 4.5 MB index (2026-11-02) -->
+<section class="section research-section" id="research"><!-- shown until research.js has drawn the tools (2026-11-02; since 2026-11-13 it waits for the topic list only) -->
 <div class="section-heading"><div><p class="overline">RESEARCH &amp; EVIDENCE</p><h2>气候治理研究工具</h2></div></div>
 <p class="research-loading">正在读取原文语料…</p>
 </section>
@@ -312,11 +688,12 @@
 </div>
 </section>
 
-<section class="section database-section" id="database">
+<section class="section database-section textdb-pending" id="database">
 <div class="section-heading">
 <div><p class="overline" id="databaseOverline">TEXT DATABASE</p><h2 class="ink" id="databaseTitle">气候新闻文本数据库</h2></div>
 </div>
 <div class="data-export" hidden="" id="dataExport"></div>
+<div class="data-sets" hidden="" id="dataSets"></div>
 <div class="source-archive-modes" id="sourceArchiveModes"><button aria-pressed="true" id="sourceRecordsMode" type="button">原文语料</button><button aria-pressed="false" id="metadataRecordsMode" type="button">新闻元数据档案</button></div>
 <div class="search-panel">
 <label class="search-box">
@@ -418,8 +795,8 @@
 </main>
 <button aria-hidden="true" class="drawer-band" tabindex="-1" type="button"></button>
 <footer>
-<div><b id="footerBrand">格润气候治理</b><span data-i18n="footerSubtitle">全球气候与能源信息智能分析支持系统</span></div>
-<div class="footer-links"><a href="./data/global_climate_analysis_report_latest.html">全球气候分析报告</a><a href="./data/news_archive.json">开放数据</a><a href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
+<div><b id="footerBrand">格润气候治理</b><span data-i18n="footerSubtitle">全球气候治理新闻数据库</span></div>
+<div class="footer-links"><a href="./data/global_climate_analysis_report_latest.html">全球气候分析报告</a><a class="partner-link" data-en="Open GREEN Partnership" data-open-partner="" href="./cop31/#partner">开放GREEN伙伴计划</a><a hidden="" href="https://github.com/generationzprogrammer/climate-agent-news">GitHub</a></div>
 <p class="cop31-credit" data-i18n="cop31Independent">格润独立研究展示页 · 非 COP31 官方网站</p></footer>
 <!-- 文本数据库: one record in full (2026-10-29). cop31.js fills it from the row that was clicked (app.js's own data). -->
 <dialog aria-labelledby="archiveModalTitle" class="modal archive-modal" id="archiveModal">
@@ -443,7 +820,7 @@
 <label><span data-i18n="emailLanguage">邮件语言</span><select id="subscribeLanguage"><option value="zh">中文</option><option value="en">English</option></select></label>
 <div class="modal-actions"><button id="subscribeSubmit" type="submit">提交订阅</button><button class="secondary" id="unsubscribeSubmit" type="button">退订</button><a href="./data/weekly_report.pdf" id="weeklyDownload" rel="noopener" target="_blank">下载本周周报</a></div>
 <p aria-live="polite" id="subscribeHint" role="status">订阅后每周一北京时间 08:00 发送周报；使用同一邮箱可随时退订。</p>
-<a class="subscribe-fallback" hidden="" href="mailto:yuan-yh21@mails.tsinghua.edu.cn" id="subscribeFallback">联系管理员</a>
+<a class="subscribe-fallback" hidden="" href="mailto:zhangwr25@mails.tsinghua.edu.cn" id="subscribeFallback">联系管理员</a>
 </form>
 </dialog>
 <dialog class="modal" id="teamModal">
@@ -462,19 +839,43 @@
 <div id="projectIntroContent"></div>
 </div>
 </dialog>
+<!-- 开放 GREEN 伙伴计划 (2026-11-09): the value proposition; cop31.js opens it from [data-open-partner]. -->
+<dialog aria-labelledby="partnerTitle" class="modal project-intro-modal" id="partnerModal">
+<div class="modal-card partner-card">
+<button aria-label="关闭" class="modal-close" id="partnerClose" type="button">×</button>
+<p class="overline">OPEN GREEN PARTNERSHIP</p>
+<h2 data-en="Open GREEN Partnership" id="partnerTitle">开放GREEN伙伴计划</h2>
+<p class="partner-lede" data-en="Climate governance needs a shared base of evidence. GREEN opens its platform to research institutes, policy teams, media and civil society, to turn scattered climate news and policy text into evidence that can be searched, traced and reused together.">气候治理需要共同的事实基础。GREEN 向研究机构、政策团队、媒体与公益组织开放平台，一起把分散的全球气候新闻与政策文本，变成可检索、可回查、可共同使用的证据。</p>
+<ul class="partner-values">
+<li><b data-en="A shared evidence base">共享证据底座</b><span data-en="A full-text database of global climate governance news, labelled by topic, country and policy tool, with every label traceable to its place in the text.">全球气候治理新闻全文数据库，按议题、国家与政策工具标注，每个标签都能回查原文位置。</span></li>
+<li><b data-en="Wider global coverage">共建全球覆盖</b><span data-en="Partners recommend sources and add languages and regions, so the voices of the Global South are better heard.">伙伴推荐来源、补充语种与地区，让全球南方的声音被更充分地记录。</span></li>
+<li><b data-en="Research together">共同开展研究</b><span data-en="Joint work on topic tracking, national positions and policy timelines, built on open and repeatable methods.">围绕议题演变、国家立场与政策时间线开展联合分析，方法公开、结果可复现。</span></li>
+<li><b data-en="Support for negotiators and decision-makers">服务谈判与决策</b><span data-en="Daily bulletins and topic briefings during the COPs, and analysis for delegations and policy teams.">COP 期间的每日通讯与专题简报，以及面向代表团和政策团队的分析支持。</span></li>
+</ul>
+<div class="partner-foot">
+<p data-en="Independent research, open methods, and respect for publishers' copyright.">独立研究、方法公开、尊重原发布者版权。</p>
+<a class="partner-mail" data-en="Talk to us" href="mailto:zhangwr25@mails.tsinghua.edu.cn?subject=GREEN%20Partnership">联系我们</a>
+</div>
+</div>
+</dialog>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 
 <script defer="" src="./bth-transport.js?v=20261011-1"></script>
 <script defer="" src="./subscriptions.js?v=20261027-languages"></script>
-<script defer="" src="./app.js?v=20261102-news"></script>
-<script defer="" src="./stance.js?v=20261102-stance-3"></script>
-<script defer="" src="./research.js?v=20261102-stance-2"></script>
+<script defer="" src="./app.js?v=20261115-phone"></script>
+<script defer="" src="./stance.js?v=20261113-research2"></script>
 <script defer="" src="./cop31/motion-kit.js?v=20261028-paper"></script>
-<script defer="" src="./cop31/intel.js?v=20261102-landscape"></script>
-<script defer="" src="./cop31/cop31.js?v=20261102-menu"></script>
+<script data-research="./research.js?v=20261113-research2" defer="" src="./cop31/loader.js?v=20261113-research2"></script>
+<script defer="" src="./cop31/intel.js?v=20261112-topic"></script>
+<script defer="" src="./cop31/cop31.js?v=20261114-boot"></script>
 <script defer="" src="./cop31/home-photos.js?v=20261102-fix"></script>
-<script defer="" src="./cop31/globe.js?v=20261029-plate"></script>
-<script defer="" src="./cop31/countries.js?v=20261102-lazy"></script>
-<script defer="" src="./cop31/downloads.js?v=20261102-home"></script>
+<script defer="" src="./cop31/earth-gl.js?v=20261107-load"></script>
+<script defer="" src="./cop31/earth-atlas.js?v=20261110-min"></script>
+<script defer="" src="./cop31/countries.js?v=20261112-focus"></script>
+<script defer="" src="./cop31/country-news.js?v=20261112-focus2"></script>
+<script defer="" src="./cop31/downloads.js?v=20261107-fast"></script>
+<script defer="" src="./cop31/textdb.js?v=20261114-search"></script>
+<script defer="" src="./cop31/analysis.js?v=20261115-phone"></script>
+<script defer="" src="./cop31/analysis-more.js?v=20261111-more"></script>
 </body>
 </html>

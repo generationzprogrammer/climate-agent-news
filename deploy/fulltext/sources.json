@@ -1,0 +1,485 @@
+{
+  "note": "Discovery adapters for every source in config/sources.master.json. scope: dedicated = climate/energy publication (climate terms in title or opening text); general = broad outlet (climate terms required in title or lead). cop: also run the COP1-COP31 history pass. Sources listed under 'skip' keep the original project's policy (metadata only / API key / not news) or are unreachable.",
+  "sources": [
+    {
+      "source_id": "INT001",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://www.carbonbrief.org/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "INT002",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.climatechangenews.com/sitemap_index.xml"
+          ],
+          "sitemap_include": "post-sitemap",
+          "url_include": "^https://www\\.climatechangenews\\.com/\\d{4}/\\d{2}/\\d{2}/[a-z0-9-]+",
+          "date_from_url": "/(\\d{4})/(\\d{2})/(\\d{2})/"
+        }
+      ]
+    },
+    {
+      "source_id": "INT004",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://insideclimatenews.org/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "INT005",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.climatecentral.org/sitemap.xml"
+          ],
+          "url_include": "^https://www\\.climatecentral\\.org/(?:news|climate-matters|report|analysis|graphic)/[a-z0-9-]+"
+        }
+      ]
+    },
+    {
+      "source_id": "INT006",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "listing",
+          "url": "https://www.cleanenergywire.org/news?page={page}",
+          "first_page": 0,
+          "max_pages": 1500,
+          "link_include": "^https://www\\.cleanenergywire\\.org/news/[a-z0-9-]{12,}$"
+        }
+      ]
+    },
+    {
+      "source_id": "INT007",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://news.mongabay.com/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "INT008",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://yaleclimateconnections.org/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "INT009",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://dialogue.earth/en/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "INT010",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.canarymedia.com/sitemaps-1-sitemap.xml"
+          ],
+          "sitemap_include": "section-articles",
+          "url_include": "^https://www\\.canarymedia\\.com/articles/"
+        }
+      ]
+    },
+    {
+      "source_id": "INT013",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "guardian",
+          "tag_paths": [
+            "environment/climate-crisis"
+          ],
+          "section_paths": [
+            "environment"
+          ]
+        }
+      ]
+    },
+    {
+      "source_id": "INT014",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.bbc.com/sitemaps/https-index-com-archive.xml"
+          ],
+          "url_include": "^https://www\\.bbc\\.(?:com|co\\.uk)/news/science-environment-\\d+$",
+          "dates": "lastmod"
+        },
+        {
+          "type": "rss",
+          "feeds": [
+            "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml"
+          ]
+        }
+      ]
+    },
+    {
+      "source_id": "INT015",
+      "scope": "general",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.dw.com/sitemap.xml"
+          ],
+          "sitemap_include": "/en/",
+          "url_include": "^https://www\\.dw\\.com/en/[a-z0-9-]+/a-\\d+$",
+          "slug_filter": true
+        },
+        {
+          "type": "rss",
+          "feeds": [
+            "https://rss.dw.com/rdf/rss-en-environment"
+          ]
+        }
+      ]
+    },
+    {
+      "source_id": "INT018",
+      "scope": "dedicated",
+      "cop": false,
+      "fetch_pages": "abstract",
+      "adapters": [
+        {
+          "type": "rss",
+          "feeds": [
+            "https://www.nature.com/nclimate.rss"
+          ]
+        }
+      ]
+    },
+    {
+      "source_id": "OFF001",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://news.un.org/en/sitemap.xml"
+          ],
+          "url_include": "^https://news\\.un\\.org/en/story/\\d{4}/\\d{2}/\\d+$",
+          "date_from_url": "/story/(\\d{4})/(\\d{2})/",
+          "cop_window_days": [
+            -3,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "source_id": "OFF003",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://cop31.tr/sitemap-en.xml"
+          ],
+          "url_include": "^https://cop31\\.tr/(?:tr/)?[a-z-]*detay?i?l?/[a-z0-9-]+|^https://cop31\\.tr/[a-z-]*detail/[a-z0-9-]+"
+        }
+      ]
+    },
+    {
+      "source_id": "OFF004",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "listing",
+          "url": "https://iklim.gov.tr/en/news?page={page}",
+          "first_page": 1,
+          "max_pages": 300,
+          "link_include": "^https://iklim\\.gov\\.tr/en/[a-z0-9-]+-i-\\d+$"
+        }
+      ]
+    },
+    {
+      "source_id": "OFF005",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://wmo.int/sitemap.xml"
+          ],
+          "url_include": "^https://wmo\\.int/(?:media/news|news/media-centre|media/news-from-members)/[a-z0-9-]+$"
+        }
+      ]
+    },
+    {
+      "source_id": "OFF008",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.iea.org/sitemap-news.xml"
+          ],
+          "url_include": "^https://www\\.iea\\.org/news/[a-z0-9-]+$"
+        }
+      ]
+    },
+    {
+      "source_id": "OFF009",
+      "scope": "general",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.worldbank.org/sitemap.xml"
+          ],
+          "sitemap_include": "en-news-sitemap",
+          "url_include": "^https://www\\.worldbank\\.org/en/news/(?:press-release|feature|statement|speech)/\\d{4}/\\d{2}/\\d{2}/",
+          "date_from_url": "/(\\d{4})/(\\d{2})/(\\d{2})/",
+          "slug_filter": true
+        }
+      ]
+    },
+    {
+      "source_id": "OFF010",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://climate.ec.europa.eu/sitemap.xml"
+          ],
+          "url_include": "^https://climate\\.ec\\.europa\\.eu/news-(?:other-reads|your-voice)/news/[a-z0-9-]+_en$"
+        }
+      ]
+    },
+    {
+      "source_id": "OFF011",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "listing",
+          "url": "https://climate.copernicus.eu/news?page={page}",
+          "first_page": 0,
+          "max_pages": 200,
+          "link_include": "^https://climate\\.copernicus\\.eu/[a-z0-9-]{20,}$"
+        }
+      ]
+    },
+    {
+      "source_id": "OFF013",
+      "scope": "dedicated",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.bas.ac.uk/sitemap.xml"
+          ],
+          "sitemap_include": "news-sitemap",
+          "url_include": "^https://www\\.bas\\.ac\\.uk/news/[a-z0-9-]+/?$"
+        }
+      ]
+    },
+    {
+      "source_id": "OFF014",
+      "scope": "dedicated",
+      "cop": false,
+      "gate": "OFF014",
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://science.nasa.gov/wp-json/wp/v2/posts",
+          "link_include": "^https://science\\.nasa\\.gov/earth/"
+        }
+      ]
+    },
+    {
+      "source_id": "TUR001",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.aa.com.tr/en/SiteMap/News"
+          ],
+          "url_include": "^https://www\\.aa\\.com\\.tr/en/[a-z-]+/[a-z0-9-]+/\\d+$",
+          "slug_filter": true
+        },
+        {
+          "type": "listing",
+          "url": "https://www.aa.com.tr/en/environment?page={page}",
+          "first_page": 1,
+          "max_pages": 400,
+          "link_include": "^https://www\\.aa\\.com\\.tr/en/[a-z-]+/[a-z0-9-]+/\\d+$"
+        }
+      ]
+    },
+    {
+      "source_id": "TUR002",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "listing",
+          "url": "https://www.trtworld.com/climate?page={page}",
+          "first_page": 1,
+          "max_pages": 40,
+          "link_include": "^https://(?:www\\.)?trtworld\\.com/article/[0-9a-f]{12}$"
+        }
+      ],
+      "note": "sitemap URLs are opaque ids (no topic words); the climate section page is used instead (recent items only)"
+    },
+    {
+      "source_id": "TUR003",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://www.iklimhaber.org/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "TUR004",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://yesilgazete.org/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "TUR005",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://iklimagi.org/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "TUR006",
+      "scope": "general",
+      "cop": false,
+      "adapters": [
+        {
+          "type": "sitemap",
+          "sitemaps": [
+            "https://www.dailysabah.com/sitemaps/sitemap_latest.xml"
+          ],
+          "url_include": "^https://www\\.dailysabah\\.com/life/environment/"
+        }
+      ],
+      "note": "robots.txt exposes only sitemap_latest.xml (no archive): recent items only"
+    },
+    {
+      "source_id": "INT020",
+      "scope": "dedicated",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "wordpress",
+          "endpoint": "https://grist.org/wp-json/wp/v2/posts"
+        }
+      ]
+    },
+    {
+      "source_id": "API001",
+      "scope": "general",
+      "cop": true,
+      "adapters": [
+        {
+          "type": "gdelt",
+          "query": "(\"climate change\" OR UNFCCC OR \"climate finance\" OR NDC)",
+          "per_day": 25
+        }
+      ]
+    },
+    {
+      "source_id": "API005",
+      "scope": "general",
+      "cop": false,
+      "gate": "API005",
+      "adapters": [
+        {
+          "type": "gdelt",
+          "query": "(\"climate change\" OR \"carbon neutrality\" OR \"carbon market\" OR emissions OR renewable OR \"zero-carbon\") (domain:news.cn OR domain:gov.cn OR domain:mee.gov.cn OR domain:cma.gov.cn OR domain:dialogue.earth)",
+          "per_day": 25
+        }
+      ]
+    }
+  ],
+  "skip": {
+    "INT003": "IISD ENB: HTTP 403 (Cloudflare challenge) for an identified crawler; not bypassed",
+    "INT011": "Reuters: robots.txt disallows the crawler; original policy METADATA_ONLY_HOSTS",
+    "INT012": "AP: original policy METADATA_ONLY_HOSTS; HTTP 403",
+    "INT016": "Euractiv: HTTP 403 for an identified crawler; subscription site, not bypassed",
+    "INT017": "POLITICO Europe: original policy METADATA_ONLY_HOSTS (paywall)",
+    "INT019": "Mongabay Latin America: same WordPress archive as INT007 (deduplicated there)",
+    "OFF006": "UNEP: HTTP 403 for an identified crawler; not bypassed",
+    "OFF007": "IPCC: HTTP 403 for an identified crawler; not bypassed",
+    "OFF012": "NOAA Climate.gov: HTTP 403 for an identified crawler; not bypassed",
+    "OFF015": "ARPA-E projects: research project registry, not news (original: not in news polling)",
+    "CHN001": "China Environment News: listing rendered client-side (no article links in HTML)",
+    "CHN002": "Xinhua: no dated archive or sitemap; original project discovers it via GDELT (API005)",
+    "CHN003": "MEE: unreachable from this machine (proxy routes .gov.cn abroad); run on the Aliyun server",
+    "CHN004": "ccchina.org.cn: unreachable from this machine; run on the Aliyun server",
+    "CHN005": "NCSC: unreachable from this machine; run on the Aliyun server",
+    "CHN006": "gov.cn: unreachable from this machine; run on the Aliyun server",
+    "CHN007": "NEA: unreachable from this machine; run on the Aliyun server",
+    "CHN008": "SCIO: unreachable from this machine; run on the Aliyun server",
+    "API002": "Media Cloud: API key required (not configured)",
+    "API003": "Event Registry: API key required (not configured)",
+    "API004": "Google News RSS: robots.txt disallows /rss/search for crawlers; links are opaque redirects",
+    "OFF002": "UNFCCC: Incapsula anti-bot interstitial for an identified crawler; not bypassed"
+  }
+}

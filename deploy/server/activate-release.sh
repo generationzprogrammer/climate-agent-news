@@ -26,6 +26,19 @@ for page in ("cop31/index.html", "index.html", "innovation/index.html"):
         sys.exit(f"no footer in {page}")
     path.write_text(html, encoding="utf-8")
     print("ICP number added to", page)
+
+# the news database's small files (downloads/: the manifest, the research charts' data, the first part of the text
+# database's index) are requested while the page is still being parsed, ahead of app.js's large data/ files — over a
+# slow link they used to queue behind them, and the old list showed meanwhile (2026-11-07). /downloads/ exists on this
+# server only, so the hints are added here, not in the repository.
+page = rel / "cop31/index.html"
+html = page.read_text(encoding="utf-8")
+charset = '<meta charset="utf-8"/>'
+if "data-grenn-preload" not in html and charset in html:  # after <base href>, which the paths resolve against
+    hints = "".join(f'\n<link as="fetch" crossorigin="anonymous" data-grenn-preload="" fetchpriority="high" href="./downloads/{name}" rel="preload"/>'
+                    for name in ("manifest.json", "analytics.json", "search-index.json"))
+    page.write_text(html.replace(charset, charset + hints, 1), encoding="utf-8")
+    print("download preloads added to cop31/index.html")
 PY
 
 rm -rf "$REL/data"

@@ -1,0 +1,8 @@
+#!/bin/sh
+# grenn-subscriptions <command> — the weekly-briefing subscription tool (deploy/subscriptions/grenn_subscriptions.py),
+# run as the service user. Try: grenn-subscriptions status | send-weekly --dry-run | test-mail <address>
+set -a; [ -r /srv/grenn/subscriptions/smtp.env ] && . /srv/grenn/subscriptions/smtp.env; set +a
+run="/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_subscriptions.py"
+cd /srv/grenn/subscriptions 2>/dev/null || cd /
+if [ "$(id -un)" = grenn ]; then exec $run "$@"; fi
+exec runuser -u grenn -- $run "$@"

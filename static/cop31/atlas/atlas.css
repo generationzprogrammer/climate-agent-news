@@ -1,0 +1,182 @@
+/* GREEN · COP31 — 全球事件地图 as the 融观 globe (2026-11-10).
+   Three parts: (1) the package's demo shell (demo.css: palette, buttons), scoped to the atlas; (2) the package's
+   globe.css, atlas/effect.css and atlas/detail-map.css as they are, minus the light theme (:root:not([data-theme=dark])
+   rules), the unused sheen layer and the case-library dialog — the dark rules match through data-theme="dark" on
+   .atlas-view / .atlas-view-content; (3) what this page adds: the globe as a full-window stage on the page's own pale
+   background (no card: the dark rules only show once the stage has unfolded into the map), the today / this-week
+   switch, the COP31 host mark, the news popup. */
+
+/* ---- 1 · 融观 demo.css (dark palette), scoped ---- */
+.atlas-view,.atlas-view-content{--surface:#10191a;--soft:#1c2b2b;--ink:#e7ece2;--muted:#a8b9b1;--line:#41524d;--green:#c6d8b8;--mint:#2d4139;--atlas-grid:#b9c3bc;--atlas-marker:#aacbb2;--atlas-marker-rim:#e6eee1;--atlas-marker-halo:#32695720;--atlas-active:#c6b478;color:var(--ink);font:15px/1.65 system-ui,"Microsoft YaHei",sans-serif;text-align:left}
+.atlas-view{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.atlas-view button,.atlas-view select,.atlas-view-content button,.atlas-view-content select{font:inherit;cursor:pointer}
+.atlas-view button:focus-visible,.atlas-view select:focus-visible,.atlas-view-content button:focus-visible,.atlas-view-content select:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.atlas-view .button,.atlas-view-content .button{border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--ink);padding:8px 13px;white-space:nowrap}
+.atlas-map-kicker{font-size:11px;letter-spacing:.07em;color:var(--muted)}
+.atlas-view [hidden],.atlas-view-content [hidden]{display:none!important}
+.map-popup-links{display:flex;gap:20px}.map-case-popup{font-family:system-ui,"Microsoft YaHei",sans-serif}.map-popup-case p{overflow-wrap:anywhere}
+
+/* ---- 2 · the package's own style sheets ---- */
+
+/* ---- 融观 globe.css ---- */
+.atlas-view-bar{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 25px 0}.atlas-view-bar>span{font-size:12px;color:var(--muted)}.atlas-view-toggle{display:flex;gap:3px;padding:4px;border:1px solid var(--line);border-radius:9px;background:var(--soft,#f0f3ec)}.atlas-view-toggle button{font:inherit;font-size:12px;padding:6px 13px;border:0;border-radius:6px;color:var(--muted);background:none}.atlas-view-toggle button[aria-pressed=true]{background:var(--surface,#fffefa);color:var(--green);box-shadow:0 1px 5px #1436230e;font-weight:600}.atlas-view-toggle button:hover{color:var(--ink)}
+.globe-view{position:relative;background:var(--surface,#fffefa);border-radius:0 0 12px 12px;overflow:hidden}.globe-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 26px 10px}.globe-actions{display:flex;gap:4px;align-items:center}.globe-actions button{border:1px solid var(--line);background:var(--surface,#fffefa);color:var(--ink);border-radius:6px;padding:6px 10px;font-size:11px;min-height:32px}.globe-actions button:hover{background:var(--mint)}.globe-actions button[data-globe-action=in],.globe-actions button[data-globe-action=out]{font-size:16px;line-height:1}
+.globe-locate{display:flex;align-items:center;gap:10px;padding:0 26px;font-size:11px;color:var(--muted)}.globe-locate select{max-width:220px;min-width:130px;font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:6px;background:var(--surface,#fffefa);padding:7px 9px}.globe-arcs-label{display:flex;gap:6px;align-items:center;margin-left:auto}.globe-arcs-label input{accent-color:var(--green)}
+.globe-stage{position:relative;height:clamp(350px,43vw,540px);overflow:hidden;isolation:isolate}.globe-aura{position:absolute;width:80%;height:90%;left:10%;top:2%;border-radius:50%;background:radial-gradient(ellipse,#b4caae30,transparent 65%);pointer-events:none}.globe-canvas{position:absolute;inset:0}.globe-canvas canvas{display:block;width:100%;height:100%;cursor:grab}.globe-canvas canvas:active{cursor:grabbing}.globe-markers{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.globe-marker{position:absolute;left:0;top:0;padding:0;width:12px;height:12px;border:2px solid #fff8e4;border-radius:50%;background:#236a50;box-shadow:0 0 0 4px #2d795c20;pointer-events:auto;cursor:pointer}.globe-marker[hidden]{display:none}.globe-marker:hover,.globe-marker:focus-visible{background:#c49b52;box-shadow:0 0 0 6px #c49b5235;outline:2px solid var(--ink);outline-offset:3px;z-index:100!important}
+.globe-tooltip{position:absolute;z-index:200;pointer-events:none;padding:11px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface,#fffefa);box-shadow:0 6px 20px #132b2422;white-space:nowrap}.globe-tooltip strong{display:block;font-size:13px;color:var(--ink)}.globe-tooltip span{display:block;font-size:11px;color:var(--muted);margin-top:4px}.globe-instruction{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:1px;color:var(--muted);pointer-events:none;white-space:nowrap}
+.globe-selection{margin:0 26px 12px;padding:10px 14px;border:1px solid var(--line);background:var(--soft,#f0f3ec);border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px}.globe-selection[hidden]{display:none}.globe-footer{border-top:1px solid var(--line);padding:15px 26px 20px;display:flex;justify-content:space-between;gap:12px;font-size:10px;color:var(--muted);line-height:1.8}.globe-footer i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);margin-right:7px}.globe-loading,.globe-unavailable{padding:110px 25px;text-align:center;color:var(--muted);font-size:14px}.globe-unavailable p{margin:12px 0 20px}.globe-context-error{position:absolute;z-index:300;inset:40% 10% auto;background:var(--surface);padding:20px;border:1px solid var(--line);border-radius:10px;text-align:center;font-size:13px}
+@media(max-width:700px){.atlas-view-bar{padding:16px 16px 0}.atlas-view-bar>span{font-size:10px;max-width:110px}.atlas-view-toggle button{padding:6px 9px;font-size:11px}.globe-toolbar{padding:17px 16px 10px;flex-wrap:wrap}.globe-toolbar .atlas-map-kicker{font-size:8px}.globe-actions{gap:3px}.globe-actions button{padding:6px 8px}.globe-locate{padding:0 16px;gap:7px;font-size:10px;flex-wrap:wrap}.globe-locate select{font-size:11px;max-width:180px}.globe-stage{height:360px}.globe-marker{width:10px;height:10px;border-width:1.5px}.globe-footer{padding:13px 16px 17px;flex-direction:column;gap:4px;font-size:10px}.globe-selection{margin-left:16px;margin-right:16px}}
+@media print{.atlas-view-toggle,.globe-actions,.globe-locate,.globe-instruction{display:none}.globe-stage{height:400px}.globe-footer{font-size:9px}}
+.globe-aura{background:none}
+.globe-aura:after{content:"";position:absolute;left:30%;right:25%;height:5%;bottom:-3%;border-radius:50%;background:radial-gradient(ellipse,#434a4235,transparent 70%);filter:blur(10px)}
+.globe-marker{width:10px;height:10px;border:1.3px solid var(--atlas-marker-rim);background:var(--atlas-marker);box-shadow:0 0 0 3px var(--atlas-marker-halo)}
+.globe-marker:hover,.globe-marker:focus-visible{background:var(--atlas-active);box-shadow:0 0 0 5px var(--atlas-marker-halo)}
+.globe-toolbar{padding-top:20px}.globe-actions{gap:3px;padding:4px;border:1px solid var(--line);border-radius:9px;background:var(--surface,#fffefa)}.globe-actions button{border:0;border-radius:5px;background:none;min-height:30px;padding:0 10px}.globe-actions button[data-globe-action=in],.globe-actions button[data-globe-action=out]{width:32px;padding:0;font-size:17px}
+.globe-tooltip{border-radius:9px;box-shadow:0 8px 30px #172e2224}.globe-tooltip strong{font-size:14px;font-weight:600}.globe-tooltip span{font-size:12px}
+@media screen{[data-theme=dark] .globe-aura{background:radial-gradient(ellipse at 45% 43%,#59877922,transparent 64%)}[data-theme=dark] .globe-aura:after{background:radial-gradient(ellipse,#00000050,transparent 70%)}}
+
+/* ---- 融观 atlas/effect.css ---- */
+.globe-canvas{z-index:0}.globe-markers{z-index:2}.globe-instruction{z-index:3}.crystal-motion-control{display:flex;align-items:center;gap:6px;white-space:nowrap;cursor:pointer}.crystal-motion-control input{accent-color:var(--green)}.globe-locate .globe-arcs-label{margin-left:auto}.globe-footer>span:last-child{max-width:45%}@media(max-width:700px){.crystal-motion-control{margin-left:auto}.globe-locate .globe-arcs-label{margin-left:0}.globe-locate{row-gap:12px}.globe-footer>span:last-child{max-width:none}}
+
+.globe-stage {background:radial-gradient(ellipse at 50% 48%,#deebe7 0%,#eef0e9 53%,#f6f5ee 85%);border-radius:3px}.globe-aura{opacity:.12}.globe-marker span{box-shadow:0 0 7px #a4e5cc,0 0 15px #a4e5cc44}.globe-canvas{filter:none!important}[data-theme=dark] .globe-stage{background:radial-gradient(ellipse at 50% 48%,#102a34 0%,#0c161b 55%,#10191a 90%)}.globe-footer{font-size:11px}
+
+/* ---- 融观 atlas/detail-map.css ---- */
+.detail-atlas{animation:atlas-enter .65s cubic-bezier(.2,.7,.2,1)}
+.detail-map-canvas .leaflet-tile-pane{filter:saturate(.92) brightness(.86)!important}[data-theme=dark] .detail-map-canvas .leaflet-tile-pane{filter:saturate(.82) brightness(.58)!important}.detail-map-canvas{background:#071d36!important}.case-location-marker button{width:24px;height:24px;background:#ccedbf;color:#173d33;border:1px solid #fff;box-shadow:0 0 0 4px #b4e6b31c,0 2px 12px #071c3450}.case-location-marker i{width:6px;height:6px;background:#265d48}.precision-country button{background:#163d52;border:2px solid #deefb3}.precision-country i{background:#deefb3;width:5px;height:5px}.precision-global button{border-radius:4px;transform:rotate(45deg);background:#c9a466}.map-city-label{background:#0d2637b8;border:0;box-shadow:none;color:#f2f4e9;font:12px sans-serif;padding:3px 7px;text-shadow:0 1px 2px #0008}.map-city-label:before{display:none}.detail-map-canvas .leaflet-control-attribution{background:#112c35c9;color:#dae5d8}.detail-map-canvas .leaflet-control-attribution a{color:#dae5d8}
+.atlas-view-content{position:relative;overflow:hidden;isolation:isolate;min-height:660px}.atlas-globe-layer{position:relative;transition:opacity .85s ease;transform-origin:center center}.atlas-globe-fading{opacity:0;pointer-events:none}.atlas-detail-layer{position:absolute;inset:0;z-index:2;background:var(--surface,#f7f7ef);transition:opacity .85s cubic-bezier(.2,.6,.2,1)}.atlas-detail-layer .detail-atlas{animation:none}.atlas-detail-layer:not(.is-current) .detail-map-stage{height:calc(100% - 145px);min-height:430px}.atlas-detail-layer:not(.is-current) .detail-atlas{height:100%}.atlas-detail-layer:not(.is-current) .detail-map-note{display:none}.atlas-detail-layer.is-current{position:relative}.atlas-view-content[data-phase=approaching] .globe-locate,.atlas-view-content[data-phase=approaching] .globe-toolbar{pointer-events:none}
+.atlas-detail-layer:not(.is-current) .detail-map-stage{height:620px}@media(max-width:640px){.atlas-detail-layer:not(.is-current) .detail-map-stage{height:540px}}
+@media(prefers-reduced-motion:reduce){.atlas-detail-layer,.atlas-globe-layer{transition:none}}
+.detail-map-canvas .leaflet-tile-pane{filter:saturate(.35) contrast(.92)}[data-theme=dark] .detail-map-canvas .leaflet-tile-pane{filter:invert(1) hue-rotate(170deg) saturate(.35) brightness(.65) contrast(1.1)}
+.detail-map-heading{display:flex;align-items:center;gap:22px;padding:24px 16px}.detail-map-heading h3{margin:0;font-size:24px}.detail-map-heading p{margin:4px 0 0;font-size:13px;color:var(--muted,#70827b)}.detail-map-heading>span{margin-left:auto;font-size:12px;color:var(--muted,#70827b)}
+.detail-map-stage{height:620px;position:relative;isolation:isolate}.detail-map-canvas{height:100%;width:100%;background:#dce5e0;z-index:0}.detail-map-network{position:absolute;bottom:35px;left:15px;z-index:450;padding:10px 16px;background:var(--surface,#fff);font-size:12px;box-shadow:0 2px 16px #0002;border-radius:6px}.detail-map-note{font-size:12px;line-height:1.7;padding:16px;color:var(--muted,#75847c)}.detail-map-note details{margin-top:10px}.unlocated-cases{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;max-height:230px;overflow:auto;padding:12px 0}.unlocated-cases button{text-align:left;background:none;border:0;padding:12px 0;color:inherit;cursor:pointer;border-bottom:1px solid #87988c30}.unlocated-cases span{font-size:11px;display:block}
+.case-location-marker{background:transparent;border:0}.case-location-marker button{padding:0;width:28px;height:28px;border:1px solid #e9f5e7;border-radius:50%;background:#265f4f;box-shadow:0 0 0 5px #417f5926,0 2px 9px #0003;display:grid;place-items:center;color:#fff;cursor:pointer}.case-location-marker i{width:7px;height:7px;background:#eaf8cc;border-radius:50%}.case-location-marker b{position:absolute;font-size:10px;right:-5px;top:-6px;background:#f6e3aa;color:#284039;border-radius:8px;padding:0 4px}
+.case-location-popup .leaflet-popup-content-wrapper{border-radius:12px;background:#fcfcf7;color:#183b34;box-shadow:0 12px 44px #102f3830}.case-location-popup .leaflet-popup-content{margin:19px;width:350px!important;max-width:calc(100vw - 92px);max-height:370px;overflow:auto}.case-location-popup .leaflet-popup-tip{background:#fcfcf7}.map-popup-location{font-size:12px;display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid #bccfc450}.map-popup-location span{opacity:.65;font-size:10px}.map-popup-case{display:flex;gap:14px;padding:16px 0}.map-popup-case+.map-popup-case{border-top:1px solid #bccfc450}.map-popup-case img{width:76px;height:96px;object-fit:cover;border-radius:5px}.map-popup-case small{font-size:10px;opacity:.6}.map-popup-case h4{font-size:16px;line-height:1.5;margin:5px 0;font-family:inherit}.map-popup-case p{font-size:12px;line-height:1.8;margin:7px 0}.map-popup-case button{background:none;border:0;border-bottom:1px solid #477865;padding:5px 0;font-size:12px;color:inherit;cursor:pointer;text-align:left}
+[data-theme=dark] .detail-map-canvas{background:#142329}[data-theme=dark] .case-location-popup .leaflet-popup-content-wrapper,[data-theme=dark] .case-location-popup .leaflet-popup-tip{background:#24342f;color:#eef0e5}.atlas-view-content.is-departing{opacity:0;transform:scale(1.045);transition:opacity .35s ease,transform .45s ease}.atlas-view-content{transition:opacity .35s ease,transform .45s ease}.leaflet-control-attribution{font-size:9px!important}
+@keyframes atlas-enter{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+@media(max-width:640px){.detail-map-heading{flex-wrap:wrap;gap:14px;padding:16px 6px}.detail-map-heading>span{margin:0;width:100%}.detail-map-heading h3{font-size:20px}.detail-map-stage{height:540px}.unlocated-cases{grid-template-columns:1fr}.map-popup-case{gap:10px}.map-popup-case img{width:54px;height:70px}.detail-map-note{padding:12px 4px}}
+@media(prefers-reduced-motion:reduce){.detail-atlas{animation:none}.atlas-view-content,.atlas-view-content.is-departing{transition:none;transform:none}}
+
+/* Quiet, elastic case points; geographic anchors remain unchanged. */
+.regional-label-canvas{position:absolute;pointer-events:none}.detail-map-canvas{background:#142d3b!important}.detail-map-canvas .leaflet-tile-pane{transition:opacity .65s ease;filter:saturate(.65) brightness(.66)!important}[data-theme=dark] .detail-map-canvas .leaflet-tile-pane{filter:saturate(.65) brightness(.5)!important}
+.case-location-marker{overflow:visible}.case-location-marker button{position:relative;display:grid;place-items:center;width:16px;height:16px;padding:0;border:1px solid #e1ebc5b5;border-radius:50%;background:#849c76;box-shadow:0 0 0 3px #d4e4b50a,0 2px 9px #071b3640;transition:transform .45s cubic-bezier(.2,1.6,.3,1),background .3s,box-shadow .3s;cursor:pointer}.case-location-marker button:before{content:'';position:absolute;inset:-5px;border-radius:50%}.case-location-marker i{width:4px;height:4px;background:#f5f4db;border-radius:50%;pointer-events:none}.case-location-marker .point-ring{position:absolute;inset:-5px;border:1px solid #d8e9bc75;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s}.case-location-marker button:hover,.case-location-marker button:focus-visible{transform:scale(1.25);background:#a2b78b;box-shadow:0 0 0 6px #ccdfa614;outline:none}.case-location-marker button:hover .point-ring,.case-location-marker button:focus-visible .point-ring,.case-location-marker button.is-active .point-ring{opacity:1}.case-location-marker button:active{transform:scale(.82)}.case-location-marker button.is-active{background:#d9c28c;box-shadow:0 0 0 5px #e9d4a518}.precision-country button{background:#29444a;border-color:#d3c394}.precision-country i{background:#cfbf8e;width:3px;height:3px}.precision-global button{border-radius:4px;background:#8e785c}.precision-global i{background:#efe0bd}.marker-tether{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}.marker-tether line{stroke:#afc3b5;stroke-width:.6;opacity:.3}.case-point-tooltip{max-width:260px;white-space:normal;background:#182c34ed;color:#f0f1e7;border:1px solid #a3b7a435;border-radius:5px;font-size:11px;line-height:1.7;box-shadow:0 4px 18px #0002}.case-point-tooltip:before{display:none}
+@media(prefers-reduced-motion:reduce){.case-location-marker button,.detail-map-canvas .leaflet-tile-pane{transition:none}}
+
+.map-popup-links{display:flex;gap:20px;flex-wrap:wrap}.leaflet-maplibre-gl-layer{pointer-events:none}.leaflet-maplibre-gl-layer canvas{outline:none}.leaflet-pane.leaflet-detailedVectorPane-pane{background:#102332}.maplibregl-control-container{display:none}
+
+/* Both directions share one stage and retain the globe renderer. */
+.atlas-view-content{transition:height .65s cubic-bezier(.22,.72,.22,1);min-height:660px;background:var(--surface,#f7f7ef)}.atlas-view-content>.atlas-globe-layer,.atlas-view-content>.atlas-detail-layer,.atlas-view-content>.atlas-detail-layer.is-current{position:absolute;inset:0 0 auto;transition:none;will-change:opacity;transform:none}.atlas-detail-layer .detail-map-stage,.atlas-globe-layer .globe-stage{height:620px!important;transform-origin:50% 50%;will-change:transform}.atlas-detail-layer .detail-map-heading{height:108px;box-sizing:border-box;margin:0}.atlas-detail-layer .detail-atlas{height:auto!important;animation:none}.atlas-detail-layer .detail-map-note{display:block!important}.atlas-view-content[data-phase=approaching] .globe-instruction,.atlas-view-content[data-phase=blending] .globe-instruction{opacity:0}.map-is-travelling .leaflet-control,.map-is-travelling .case-location-marker,.map-is-travelling .detail-map-heading button{pointer-events:none}.atlas-view-content[data-phase=preparing] .atlas-globe-layer{pointer-events:none}
+@media(max-width:640px){.atlas-detail-layer .detail-map-stage,.atlas-globe-layer .globe-stage{height:540px!important}.atlas-detail-layer .detail-map-heading{height:128px}.atlas-view-content{min-height:660px}}
+@media(prefers-reduced-motion:reduce){.atlas-view-content{transition:none}}
+
+.globe-is-unfolding .globe-markers,.globe-is-unfolding .globe-aura,.globe-is-unfolding .globe-instruction,.globe-is-unfolding .globe-tooltip{visibility:hidden}.atlas-globe-layer .globe-toolbar{height:72px;box-sizing:border-box}.atlas-globe-layer .globe-locate{height:36px;box-sizing:border-box}.atlas-view-content[data-phase=unfolding] .atlas-globe-layer,.atlas-view-content[data-phase=folding] .atlas-globe-layer{opacity:1!important}.atlas-view-content[data-phase=unfolding] .atlas-detail-layer,.atlas-view-content[data-phase=folding] .atlas-detail-layer{opacity:0!important}
+@media(max-width:640px){.atlas-globe-layer .globe-toolbar{height:64px}.atlas-globe-layer .globe-locate{height:64px}}
+
+/* Decorations settle softly around the geometric morph, without fading map layers. */
+.globe-view .globe-markers,.globe-view .globe-instruction{transition:opacity .4s ease;visibility:visible}.globe-is-unfolding .globe-markers,.globe-is-unfolding .globe-instruction{visibility:visible;opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.globe-view .globe-markers,.globe-view .globe-instruction{transition:none}}
+
+/* Immersive viewport: imagery reaches the edges; controls float above it. */
+.atlas-view-content.is-immersive{position:fixed!important;z-index:10020;min-height:0;max-height:none;overflow:hidden;isolation:isolate;background:#102332;box-shadow:0 0 0 1px #102332;transition:none}.is-immersive>.atlas-globe-layer,.is-immersive>.atlas-detail-layer{height:100%!important;inset:0!important;background:#102332}.is-immersive .globe-view,.is-immersive .detail-atlas{position:relative;height:100%!important;border-radius:0!important;background:#102332!important;overflow:hidden}.is-immersive .globe-stage,.is-immersive .detail-map-stage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;border-radius:0!important;background:#102332!important}.is-immersive .globe-aura{display:none}.is-immersive .globe-toolbar,.is-immersive .globe-locate,.is-immersive .globe-footer,.is-immersive .detail-map-heading,.is-immersive .detail-map-note{position:absolute!important;z-index:900;box-sizing:border-box;color:#e0e7dc;transition:opacity .4s ease,transform .4s ease}.is-immersive .globe-toolbar{top:0;left:0;right:160px;height:72px;padding:20px 24px!important}.is-immersive .globe-locate{top:72px;left:0;right:0;padding:0 24px;height:38px}.is-immersive .globe-footer{bottom:0;left:0;right:0;padding:18px 24px!important;background:linear-gradient(transparent,#102332b0);pointer-events:none}.is-immersive .detail-map-heading{top:0;left:0;right:160px;height:108px;padding:20px 24px;align-items:flex-start;background:transparent;pointer-events:none;text-shadow:0 1px 5px #102332}.is-immersive .detail-map-heading h3{font-size:23px}.is-immersive .detail-map-heading p,.is-immersive .detail-map-heading>span{color:#b1c0b5}.is-immersive .detail-map-heading>span{display:none}.is-immersive .detail-map-heading button{pointer-events:auto}.is-immersive .detail-map-note{bottom:0;left:0;right:0;padding:12px 24px;background:linear-gradient(transparent,#102332dd);font-size:10px;color:#b5c5b8;pointer-events:none}.is-immersive .detail-map-note details{pointer-events:auto}.is-immersive .detail-map-note details[open]{max-height:250px;overflow:auto;background:#132e38ed;padding:12px;border-radius:6px}.is-immersive .detail-map-canvas .leaflet-bottom{bottom:70px}.is-immersive .globe-actions,.is-immersive .globe-actions button,.is-immersive .globe-locate select,.is-immersive .detail-map-heading .button,.atlas-immersive-exit{color:#e3eadd!important;background:#18313de6!important;border-color:#afc3b535!important;backdrop-filter:blur(12px)}.atlas-immersive-exit{position:absolute;z-index:1100;top:22px;right:24px;padding:11px 17px;border:1px solid #afc3b535;border-radius:6px;font:12px sans-serif;cursor:pointer;transition:opacity .35s}.is-immersive[data-phase=approaching] .globe-toolbar,.is-immersive[data-phase=approaching] .globe-locate,.is-immersive[data-phase=approaching] .globe-footer,.is-immersive[data-phase=unfolding] .globe-toolbar,.is-immersive[data-phase=unfolding] .globe-locate,.is-immersive[data-phase=unfolding] .globe-footer,.is-immersive[data-phase=unfolding] .atlas-immersive-exit,.is-immersive[data-phase=folding] .atlas-immersive-exit{opacity:0;pointer-events:none}.is-immersive[data-phase=unfolding] .globe-instruction{opacity:0}.is-immersive .globe-marker{z-index:10}.atlas-stage-placeholder{width:100%}
+@media(max-width:640px){.is-immersive .globe-toolbar{right:130px;padding:15px!important}.is-immersive .globe-toolbar .atlas-map-kicker{display:none}.is-immersive .globe-locate{left:0;top:70px;height:50px;padding:0 15px;font-size:10px}.is-immersive .detail-map-heading{right:110px;padding:18px 14px;gap:10px;height:auto;flex-wrap:wrap}.is-immersive .detail-map-heading h3{font-size:19px}.is-immersive .detail-map-heading p{font-size:10px}.atlas-immersive-exit{top:18px;right:14px;padding:10px;font-size:10px}.is-immersive .detail-map-note{padding:10px 14px}.is-immersive .globe-footer{padding:12px 15px!important;font-size:9px}}
+@media(prefers-reduced-motion:reduce){.is-immersive .globe-toolbar,.is-immersive .globe-locate,.is-immersive .globe-footer,.is-immersive .detail-map-heading,.is-immersive .detail-map-note,.atlas-immersive-exit{transition:none}}
+
+/* Large invisible targets, small visual anchors. Both themes use identical hit areas. */
+.atlas-globe-layer .globe-marker,.atlas-globe-layer .globe-marker:hover,.atlas-globe-layer .globe-marker:focus-visible{width:38px!important;height:38px!important;border:0!important;background:transparent!important;box-shadow:none!important;opacity:1}
+.atlas-globe-layer .globe-marker>span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;border:1.5px solid #e3eee1;background:#6cae92;pointer-events:none;transition:transform .2s ease}
+.atlas-globe-layer .globe-marker:hover>span,.atlas-globe-layer .globe-marker:focus-visible>span{transform:translate(-50%,-50%) scale(1.4)}
+.is-immersive[data-framing] .globe-toolbar,.is-immersive[data-framing] .globe-locate,.is-immersive[data-framing] .globe-footer,.is-immersive[data-framing] .globe-instruction,.is-immersive[data-phase=preparing] .globe-toolbar,.is-immersive[data-phase=preparing] .globe-locate,.is-immersive[data-phase=preparing] .globe-footer{opacity:0;pointer-events:none}
+.is-immersive .detail-map-heading{right:20px}.is-immersive .globe-toolbar{right:0}
+@media(max-width:640px){.is-immersive .detail-map-heading{right:0}}
+
+/* Leaflet loads its stylesheet after this page: specificity keeps credits themed. */
+.atlas-detail-layer .leaflet-container .leaflet-control-attribution{background:rgba(16,35,50,.88);color:#c4d2c7;font:10px/1.5 system-ui,sans-serif!important;padding:4px 8px;margin-right:12px;max-width:min(720px,calc(100vw - 24px));box-sizing:border-box;white-space:normal;text-align:right;border:0;box-shadow:none;border-radius:3px}
+.atlas-detail-layer .leaflet-container .leaflet-control-attribution a{color:#d6e3d7;text-decoration:none}
+.atlas-detail-layer .leaflet-container .leaflet-control-attribution a:hover,.atlas-detail-layer .leaflet-container .leaflet-control-attribution a:focus-visible{color:#fff;text-decoration:underline}
+@media(max-width:640px){.atlas-detail-layer .leaflet-container .leaflet-control-attribution{font-size:11px!important;text-align:left;margin-right:8px;max-width:calc(100vw - 16px)}}
+
+/* ---- 3 · GREEN · COP31 ---- */
+/* The globe page (2026-11-10, user: 占满全屏、不再有框、浅色背景、不显示下面的地点标签): the stage is the whole window on the
+   page's own background; the heading and the controls float over its corners; the flat map of app.js stays underneath
+   (hidden, the accessible layer), its note and place list are not shown (the news opens on the map). .atlas-wait holds
+   the stage's place while the globe loads; without either class (no WebGL 2) the block is the flat map, note and
+   place list as before. Everything here is scoped to #map: once the stage unfolds it is moved to <body> and the
+   package's dark map styles apply untouched. */
+#map{--atlas-stage:100svh;--atlas-x:var(--page-x,48px);--atlas-top:56px}
+@media(min-width:1101px){html.has-sheet #map{--atlas-stage:calc(100svh - 53px)}}
+/* no `display` here: on the other pages the section is hidden by `.section:not(.page-on)`, which an ID rule would
+   override (2026-11-11 fix: the stage showed as an empty block at the top of every other page) */
+.drawer-sheet>#map:is(.atlas-wait,.atlas-on){position:relative;width:100%;min-height:0;margin-inline:0;padding:0}
+html.has-sheet #map.page-on:is(.atlas-wait,.atlas-on){display:block}
+#map:is(.atlas-wait,.atlas-on) .section-heading{position:absolute;z-index:6;top:var(--atlas-top);left:var(--atlas-x);margin:0;pointer-events:none}
+#map:is(.atlas-wait,.atlas-on) .map-layout{display:block;min-height:0}
+#map:is(.atlas-wait,.atlas-on) :is(.map-detail,.map-place-list){display:none}
+#map:is(.atlas-wait,.atlas-on) .map-canvas{aspect-ratio:auto;min-height:0;overflow:visible;background:none;box-shadow:none}
+#map:is(.atlas-wait,.atlas-on) #worldMap{position:absolute;inset:0;z-index:-1;width:100%;height:100%;min-height:0;opacity:0;pointer-events:none}
+#map:is(.atlas-wait,.atlas-on) :is(.map-tooltip,.map-loading){display:none!important}
+#map.atlas-wait .map-period-toggle{visibility:hidden}
+#map.atlas-wait .map-canvas::before{content:"";display:block;height:var(--atlas-stage)}
+#map.atlas-wait .map-canvas:has(.atlas-view)::before{content:none}
+/* the page's palette for what floats over the stage */
+#map .atlas-view,#map .atlas-view-content{--surface:rgb(255 255 255/.86);--soft:rgb(255 255 255/.58);--ink:var(--text-headings,#1b2634);--muted:var(--text-muted,#587088);--line:rgb(20 34 52/.14);--green:var(--text-headings,#1b2634);--mint:rgb(20 34 52/.07);color:var(--ink)}
+#map .atlas-view{position:relative;border:0;border-radius:0;background:none;overflow:visible}
+#map .atlas-view-content{min-height:0;background:none}
+#map .globe-view{background:none;border-radius:0}
+#map .atlas-globe-layer .globe-stage{height:var(--atlas-stage)!important;background:none;border-radius:0}
+#map .globe-loading{padding:0;display:grid;place-items:center;height:var(--atlas-stage)}
+#map .globe-aura{opacity:1;background:none}
+#map .globe-aura:after{left:36%;right:36%;height:6%;bottom:1%;background:radial-gradient(ellipse,rgb(20 34 52/.2),transparent 70%);filter:blur(14px)}
+/* Minimal stage (2026-11-10 late, user: 这些组件都删掉、整体更极简): only the title (top left) and the two switches
+   (top right: today / this week, globe / map) float over the globe. The package's toolbar (pause, reset, zoom), the
+   place selector with the arc / cloud switches, the selection strip, the footer line and the drag hint are not shown
+   anywhere — the elements stay in the DOM, the globe's script still drives them. */
+.globe-toolbar,.globe-locate,.globe-selection,.globe-footer,.globe-instruction{display:none!important}
+#map .atlas-view-bar{position:absolute;z-index:6;top:var(--atlas-top);right:var(--atlas-x);gap:10px;padding:0}
+#map .atlas-view-bar>span{display:none}
+#map :is(.atlas-view-toggle,.map-period-toggle,.globe-tooltip){-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+#map .globe-tooltip{box-shadow:0 8px 30px rgb(20 34 52/.14)}
+@media(max-width:1100px){
+ #map{--atlas-stage:min(100svh,860px);--atlas-top:28px;--atlas-x:24px}
+ .drawer-sheet>#map:is(.atlas-wait,.atlas-on){width:100vw;margin-left:calc(50% - 50vw)} /* the sheet is inset here: out to the window's edges */
+ #map .atlas-view-bar{top:calc(var(--atlas-top) + 96px);left:var(--atlas-x);right:auto;flex-wrap:nowrap}
+ #map .atlas-view-toggle button{white-space:nowrap;padding:6px 10px}
+ #map .globe-aura{display:none}
+}
+/* touch: a vertical swipe on the full-window globe scrolls the page (a sideways drag turns it, the buttons zoom) */
+@media(pointer:coarse){#map .globe-canvas canvas{touch-action:pan-y!important}}
+
+/* the page's today / this-week switch sits beside the globe / map toggle, drawn like it */
+.atlas-view-bar .atlas-view-slot{margin-left:auto}
+.atlas-view-slot .map-period-toggle{position:static;display:flex;gap:3px;padding:4px;border:1px solid var(--line);border-radius:9px;background:var(--soft);box-shadow:none}
+.atlas-view-slot .map-period-toggle button{min-height:0;padding:6px 13px;border:0;border-radius:6px;background:none;color:var(--muted);font:inherit;font-size:12px;text-transform:none;letter-spacing:0;opacity:1;transform:none}
+.atlas-view-slot .map-period-toggle button:hover{color:var(--ink);opacity:1}
+.atlas-view-slot .map-period-toggle button.active{background:var(--surface);color:var(--green);box-shadow:0 1px 5px #1436230e;font-weight:600}
+.globe-count{font-weight:inherit}
+@media(max-width:700px){.atlas-view-slot .map-period-toggle button{padding:6px 9px;font-size:11px}}
+
+/* Event markers on the globe (2026-11-11, user: 做得更醒目一些): the page's red with a white rim and a glow, larger than
+   the package's 9 px mint dot, and a ring that pulses outward (staggered, so the globe does not blink in step). */
+.atlas-globe-layer .globe-marker>span{width:14px;height:14px;border:2px solid #fff;background:#e0392d;box-shadow:0 0 0 1px rgb(20 34 52/.3),0 0 10px 3px rgb(255 88 72/.8),0 0 26px 8px rgb(255 88 72/.38);transition:transform .2s ease,background .2s ease}
+.atlas-globe-layer .globe-marker::before,.atlas-globe-layer .globe-marker::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid rgb(255 104 88/.95);box-sizing:border-box;pointer-events:none;animation:atlas-marker-pulse 2.6s cubic-bezier(.16,.6,.3,1) infinite}
+.atlas-globe-layer .globe-marker::after{animation-delay:1.3s}
+.atlas-globe-layer .globe-marker:nth-child(3n+2)::before{animation-delay:-.9s}.atlas-globe-layer .globe-marker:nth-child(3n+2)::after{animation-delay:.4s}
+.atlas-globe-layer .globe-marker:nth-child(3n)::before{animation-delay:-1.7s}.atlas-globe-layer .globe-marker:nth-child(3n)::after{animation-delay:-.4s}
+.atlas-globe-layer .globe-marker:hover>span,.atlas-globe-layer .globe-marker:focus-visible>span{transform:translate(-50%,-50%) scale(1.4);background:#ff4b3a}
+@keyframes atlas-marker-pulse{0%{transform:scale(1);opacity:.95}70%{opacity:.25}100%{transform:scale(3.8);opacity:0}}
+@media(prefers-reduced-motion:reduce){.atlas-globe-layer .globe-marker::before{animation:none;transform:scale(1.9);opacity:.55}.atlas-globe-layer .globe-marker::after{display:none}}
+
+/* the COP31 host city, where the arcs rise from */
+.globe-hub{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none}
+.globe-hub i{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #ffffff2e}
+.globe-hub b{position:absolute;left:12px;top:-17px;white-space:nowrap;font:400 10px/1 ui-monospace,"Cascadia Mono",Consolas,monospace;letter-spacing:.08em;color:#e7ece2;text-shadow:0 1px 3px #06101a,0 0 8px #06101a}
+.globe-is-unfolding .globe-hub{visibility:hidden}
+
+/* the news popup: the date under the summary, the source link beside 查看周边 */
+.map-popup-case .map-popup-date{font-size:11px;letter-spacing:.04em;opacity:.7}
+.case-location-popup .map-popup-case a{border-bottom:1px solid #477865;padding:5px 0;font-size:12px;color:inherit;text-decoration:none}
+.map-popup-case a:hover,.map-popup-case button:hover{border-bottom-color:currentColor}
+.map-popup-case>div{min-width:0}
+.case-location-popup .leaflet-popup-content{scrollbar-width:thin}
+.case-location-popup a.leaflet-popup-close-button{color:#b5c5b8}
+/* phones: the credits wrap to two lines — above the note, not over it */
+@media(max-width:640px){.is-immersive .detail-map-canvas .leaflet-bottom{bottom:108px}.is-immersive .detail-map-heading p{text-shadow:0 1px 5px #102332,0 0 10px #102332}}

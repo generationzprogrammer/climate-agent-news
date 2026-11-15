@@ -2,7 +2,8 @@
    An intro page with floating shards (the 100lostspecies.com intro), the Enter transition, and a gallery of today's
    intelligence cards on the inside wall of a cylinder (the 100lostspecies.com gallery).
    Presentation only: the cards are read from what app.js renders into #todayGrid (title, summary, source, link); data
-   and app.js state are never touched. cop31.js opens it from every 今日情报 link (window.GreenIntel.open).
+   and app.js state are never touched. Since 2026-11-12 every card stands on a photograph chosen by its region and
+   topic (assets/news/, see "The cards' photographs" below). cop31.js opens it from every 今日情报 link (window.GreenIntel.open).
    Conventions follow the reference's three.js scene: world units, y up, the camera looks down −z. The shards are drawn
    on a 2D canvas (CPU projection of 30 quads, the spec's validated recipe); the cards are real DOM elements placed with
    matrix3d under a CSS perspective equal to the camera's focal length, so text stays crisp and links stay links. */
@@ -51,12 +52,15 @@
     title: ["今日气候情报", "Today's climate intelligence"], // the intro's title (2026-10-29; no item count)
     views: [["卡片", "Visuals"], ["地区", "Regions"], ["日期", "Dates"]],
     by: [["按卡片", "By visuals"], ["按地区", "By region"], ["按日期", "By dates"]], // 按标题 → 按地区 (2026-10-29)
+    // 按议题 (2026-11-12): the 按地区 ring and list, grouped by the six topics the photographs are chosen by
+    byTopic: ["按议题", "By topic"], topicView: ["议题", "Topics"],
+    topics: [["国际气候谈判", "Climate talks"], ["能源与排放", "Energy and emissions"], ["气候资金", "Climate finance"], ["气候适应", "Adaptation"], ["气候动态", "Climate watch"], ["国际碳市场", "Carbon markets"]],
     scroll: ["滚动探索", "Scroll to explore"],
     menu: ["菜单", "Menu"], // in place of 关于 / About: the site menu, as a drop-down (2026-10-29)
     regions: [["全球", "Global"], ["亚洲", "Asia"], ["欧洲", "Europe"], ["非洲", "Africa"], ["北美洲", "North America"], ["南美洲", "South America"], ["大洋洲", "Oceania"], ["南极洲", "Antarctica"]],
     explore: ["展开", "Explore"],
     tutorial: ["点击任意一张卡片，展开这条情报的概要与原文来源", "Click on any card to open its brief and its original source"],
-    home: ["返回首页", "Back to the home page"],
+    back: ["返回", "Back"], // leaves the gallery; on a card being read, back to the gallery (2026-11-12)
     close: ["关闭", "Close"],
   };
   const say = pair => pair[en() ? 1 : 0];
@@ -64,102 +68,80 @@
   /* ---------- Icons (our own line drawings) ---------- */
   const svg = (body, size = 31) => `<svg viewBox="0 0 32 32" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
   const ICON = {
-    globe: svg('<circle cx="16" cy="16" r="10.5"/><ellipse cx="16" cy="16" rx="4.6" ry="10.5"/><path d="M5.5 16h21M7.4 10.3h17.2M7.4 21.7h17.2"/>'),
-    leaf: svg('<path d="M8 24C7 14 13 7.5 25 7c.6 11.5-6 18-16.3 17.4"/><path d="M8.2 24.4C11 19 15 15 20 12"/>'),
-    drop: svg('<path d="M16 5.5c4.6 6 7.4 10.2 7.4 13.4a7.4 7.4 0 0 1-14.8 0c0-3.2 2.8-7.4 7.4-13.4z"/><path d="M12.6 19.5a3.6 3.6 0 0 0 3 3.4"/>'),
     grid: svg('<rect x="6" y="6" width="8.5" height="8.5"/><rect x="17.5" y="6" width="8.5" height="8.5"/><rect x="6" y="17.5" width="8.5" height="8.5"/><rect x="17.5" y="17.5" width="8.5" height="8.5"/>', 13),
     pin: svg('<path d="M16 28.5S7.5 19.6 7.5 13.2a8.5 8.5 0 0 1 17 0c0 6.4-8.5 15.3-8.5 15.3z"/><circle cx="16" cy="13.2" r="3"/>', 13),
     cal: svg('<rect x="5.5" y="7.5" width="21" height="19"/><path d="M5.5 13h21M11 4.5v5M21 4.5v5"/>', 13),
+    tag: svg('<path d="M5.5 6.5h10.8l10.2 10.2-9.8 9.8L6.5 16.3z"/><circle cx="11.6" cy="11.8" r="1.9"/>', 13),
+    back: svg('<path d="M27 16H5.5M13.5 7.5 5 16l8.5 8.5" stroke-width="2.2"/>', 16),
+    menu: svg('<path d="M5 11h22M5 21h22" stroke-width="2.2"/>', 16),
   };
 
-  /* ---------- The cards' ornaments: engraved line patterns, one per item, baked into SVG images ----------
-     Six families (guilloché rosette, isobars, survey sunburst, diamond lattice, interference ripples, meridians) in the
-     page palette — grey-blue lines, one red accent each — on four paper tones. */
-  const TONES = {
-    paper: { paper: "#ffffff", line: "#7e93a8", soft: "#bccad7", accent: "#c8372d" },
-    mist: { paper: "#e9eef3", line: "#587088", soft: "#a9b8c7", accent: "#c8372d" },
-    deep: { paper: "#243243", line: "#8ea2b6", soft: "#4a6178", accent: "#ff7a6e" },
-    blush: { paper: "#fbeeec", line: "#c08f89", soft: "#e6cbc7", accent: "#c8372d" },
-  };
-  const TONE_ORDER = ["paper", "mist", "paper", "deep", "blush", "paper", "mist", "paper", "deep", "paper", "blush", "mist"];
-  const rng = seed => () => { seed = seed * 16807 % 2147483647; return (seed - 1) / 2147483646; };
-  const f1 = n => n.toFixed(1);
-  const ring = (cx, cy, radius, wave) => {
-    let d = "";
-    for (let i = 0; i <= 240; i += 1) {
-      const t = i / 240 * TAU, r = radius + wave(t);
-      d += `${i ? "L" : "M"}${f1(cx + r * Math.cos(t))} ${f1(cy + r * Math.sin(t))}`;
-    }
-    return `${d}Z`;
-  };
-  const path = (d, stroke, width = .5, extra = "") => `<path d="${d}" stroke="${stroke}" stroke-width="${width}" fill="none"${extra}/>`;
-  const ORNAMENTS = [
-    (c, r) => { // guilloché rosette
-      const cx = 190 + r() * 50, cy = 82 + r() * 26, R = 74 + r() * 22, k = 6 + Math.floor(r() * 7), n = 11 + Math.floor(r() * 5), amp = R * (.1 + r() * .07);
-      let out = "";
-      for (let j = 0; j < n; j += 1) out += path(ring(cx, cy, R, t => amp * Math.sin(k * t + j * Math.PI / n / 1.1)), c.line, .45, ' opacity=".7"');
-      for (let j = 0; j < 5; j += 1) out += path(ring(cx, cy, R * .56, t => R * .085 * Math.sin((2 * k + 1) * t + j * .55)), c.soft, .45);
-      return out + path(ring(cx, cy, R * .8, t => amp * .5 * Math.sin(k * t)), c.accent, .8, ' opacity=".85"');
-    },
-    (c, r) => { // isobars
-      const freq = .016 + r() * .016, amp = 7 + r() * 8, red = 8 + Math.floor(r() * 5);
-      let out = "";
-      for (let j = 0; j < 18; j += 1) {
-        let d = "";
-        for (let x = 0; x <= 300; x += 5) d += `${x ? "L" : "M"}${x} ${f1(14 + j * 9 + amp * Math.sin(x * freq + j * .3) + amp * .5 * Math.sin(x * freq * 2.3 + j * .7))}`;
-        out += path(d, j === red ? c.accent : j % 4 ? c.soft : c.line, j === red ? .9 : .5);
-      }
-      return out;
-    },
-    (c, r) => { // survey sunburst
-      const cx = r() < .5 ? 26 : 274, cy = 22;
-      let out = "";
-      for (let i = 0; i <= 56; i += 1) {
-        const a = Math.PI * i / 56, len = i % 4 ? 130 : 178;
-        out += path(`M${f1(cx + 30 * Math.cos(a))} ${f1(cy + 30 * Math.sin(a))}L${f1(cx + len * Math.cos(a))} ${f1(cy + len * Math.sin(a))}`, c.soft, .5);
-      }
-      for (let j = 1; j <= 8; j += 1) out += `<circle cx="${cx}" cy="${cy}" r="${30 + j * 21}" fill="none" stroke="${j === 5 ? c.accent : c.line}" stroke-width="${j === 5 ? .9 : .5}"${j % 2 && j !== 5 ? ' stroke-dasharray="1.5 2.5"' : ""}/>`;
-      return out;
-    },
-    (c, r) => { // diamond lattice
-      const step = 20 + Math.floor(r() * 8), reach = 190, mark = Math.floor(r() * 7);
-      let out = "";
-      for (let x = -reach; x < 300 + reach; x += step) out += path(`M${x} 0L${x + reach} ${reach}M${x} 0L${x - reach} ${reach}`, c.soft, .5);
-      for (let y = 0, row = 0; y < reach; y += step / 2, row += 1) {
-        for (let x = row % 2 ? step / 2 : 0, col = 0; x < 300; x += step, col += 1) {
-          const hit = row === 4 && col === mark;
-          out += `<circle cx="${f1(x)}" cy="${f1(y)}" r="${hit ? 2.8 : .95}" fill="${hit ? c.accent : c.line}"/>`;
-        }
-      }
-      return out;
-    },
-    (c, r) => { // interference ripples
-      const a = [80 + r() * 40, 60 + r() * 30], b = [200 + r() * 50, 90 + r() * 30];
-      let out = "";
-      for (let j = 1; j <= 14; j += 1) out += `<circle cx="${f1(a[0])}" cy="${f1(a[1])}" r="${j * 11}" fill="none" stroke="${c.line}" stroke-width=".5" opacity=".7"/>`;
-      for (let j = 1; j <= 12; j += 1) out += `<circle cx="${f1(b[0])}" cy="${f1(b[1])}" r="${j * 12}" fill="none" stroke="${j === 6 ? c.accent : c.soft}" stroke-width="${j === 6 ? .9 : .5}"/>`;
-      return out;
-    },
-    (c, r) => { // meridians: an engraved globe
-      const cx = 200 + r() * 40, cy = 96, R = 88 + r() * 14, tilt = (r() - .5) * .5;
-      let out = `<circle cx="${f1(cx)}" cy="${cy}" r="${f1(R)}" fill="none" stroke="${c.line}" stroke-width=".6"/>`;
-      for (let j = 1; j < 9; j += 1) {
-        const rx = Math.abs(Math.cos(j / 9 * Math.PI)) * R;
-        out += `<ellipse cx="${f1(cx)}" cy="${cy}" rx="${f1(rx)}" ry="${f1(R)}" fill="none" stroke="${c.soft}" stroke-width=".5" transform="rotate(${f1(tilt / DEG)} ${f1(cx)} ${cy})"/>`;
-      }
-      for (let j = -3; j <= 3; j += 1) {
-        const y = cy + j * R / 4, half = Math.sqrt(Math.max(0, R * R - (y - cy) ** 2));
-        out += path(`M${f1(cx - half)} ${f1(y)}L${f1(cx + half)} ${f1(y)}`, j === 1 ? c.accent : c.soft, j === 1 ? .9 : .5);
-      }
-      return out;
-    },
+  /* ---------- The cards' photographs (2026-11-12) ----------
+     Every card stands on a photograph: assets/news/<region>-<topic>-<1…5>.webp — five for each of 8 regions × 6 topics,
+     Unsplash License (sources: docs/news-photos.md). Four sizes: "-s" 360 px square (what a card loads first, ~15 KB),
+     no suffix 640 px square (swapped in where the cards are drawn larger), "-m" 960 px and "-w" 1600 px wide (the
+     reading sheet). A card's ground is its photograph's average colour until the picture arrives.
+     The region is the 按地区 view's; the topic comes from the item's theme words, then from its record's topics. Within
+     one combination the items take the five photographs in turn, in the order the cards stand on the ring, so
+     neighbours differ; where the turn starts changes with the day. */
+  const PHOTO_REGION = ["g", "as", "eu", "af", "na", "sa", "oc", "an"]; // WORDS.regions
+  const PHOTO_TOPIC = [ // the first match wins: the specific before the general
+    ["f", /资金|融资|金融|投资|债务|finance|fund|invest|debt|\bbank/i],
+    ["c", /碳市场|碳信用|碳交易|碳定价|碳价|碳捕|碳移除|第六条|carbon (market|credit|pric|captur|trad|remov)|article 6|\boffsets?\b/i],
+    ["a", /适应|韧性|洪|旱|生计|粮食|农业|水资源|健康|迁移|adapt|resilien|flood|drought|\bfood|farm|\bwater|health/i],
+    ["d", /科学|极地|冰川|冰盖|海冰|海平面|碳预算|极端|高温|热浪|天气|气温|野火|飓风|台风|风暴|生物多样性|海洋|森林|scien|polar|\bice\b|glacier|sea level|budget|extreme|\bheat|weather|wildfire|hurricane|storm|ocean|forest|biodivers/i],
+    ["e", /能源|化石|煤|石油|天然气|电|太阳能|光伏|风能|氢|核|排放|减排|交通|清洁技术|energy|fossil|\bcoal|\boil\b|\bgas\b|power|solar|\bwind\b|hydrogen|nuclear|emission|electri|transport|clean tech/i],
+    ["n", /谈判|大会|外交|承诺|目标|协定|盘点|履约|政治|国家自主贡献|\bNDC|\bCOP\d*\b|negotiat|summit|diploma|pledge|agreement|stocktake/i],
   ];
-  function ornament(index, tone) {
-    const c = TONES[tone], r = rng(index * 7919 + 101);
-    const body = ORNAMENTS[index % ORNAMENTS.length](c, r);
-    const svgText = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="600" height="600">${body}</svg>`;
-    return URL.createObjectURL(new Blob([svgText], { type: "image/svg+xml" }));
+  const RECORD_TOPIC = [["气候资金", "f"], ["国际碳市场", "c"], ["气候适应", "a"], ["气候动态", "d"], ["能源与排放", "e"]];
+  function topicOf(item) {
+    for (const [code, words] of PHOTO_TOPIC) if (words.test(item.theme)) return code;
+    const topics = item.record?.topics || [];
+    for (const [name, code] of RECORD_TOPIC) if (topics.includes(name)) return code;
+    for (const [code, words] of PHOTO_TOPIC) if (words.test(item.title)) return code;
+    return "n"; // 国际气候谈判 / 国家气候承诺 / 履约与全球盘点, and anything unnamed
   }
+  const PHOTO_COLORS = "9998866b90947594b47b68618581797ca39c81734d8a8a8969746d97604368747c888f9c7f9da0756d5f7fa6ada5adb38fa3b148754b74824b8988784459656d8d957a8b98273a593a444731472b81897a666e6b70685f4c4055495d7e757272966c7f736966857263688998939da86666526f8688a2aaa192a9cb6f75888687877891973938329499758881668d88816c86739092847c747e587783b1b0ab3c555f4d5340778e81646b436d81508b92896d6e65697177889eb68a818dbab1a66a4e405d97ac8fcaf0784c3492a6a991979d7289988e7e8b576e737e7d768299a8a6a9a4858375b4afa1c1ae84aa9aa18f96975a7c9389b1bb6c787f8ba4ba8c72616262605d5a528787869eb4ba839994908d88857c76486975627b78475d566f756d839bab7d9ca0506d7478654c977b6a91939880827f8891856b7b7a62776c979690a0a4a0b8b9b3ae9584a07a5d71857f7a8688566985839377687857577c6c976d4d73604d9d9b9a9097916a8690818f8d6e70675386b26692c43c333786b6d662a6a26a615a565270898d8e455674585e5f83a2ab80ab99548083676352a4b8a87432165e565061809d5790ca416c995a56406160538c672e4e6f6f868b7c6991923a648699835c8a9184717d8593b8c86c7c8558829d57798f5f797d79a5b2958b857e7771657ba09fa5a75d767c8a8165787c72364a467078564b8d9f7db4cf697f895f4d47558da55a735167686868726e697c7e6b8f976f7a794f79a06283983b527885847f7f9297b9b9b693aab27f787fb5bad07873934996ae82807bac9c765a6f8c7391a1789a996d8993507c9646747346aac32e94b74677809d805b92867e69601d6e8462918e582a41486c836a6d7b8760666981858aa4b0be76859a748ea0b2bec77f8c95a4b2c27d929b99acbb9ebacf8daec48199a884a4c2aab3c190999fd4dce4656d6da5b6c2579bc64f789c80a9c1748b988395999cbed47399b068767e427c935e6469"; // average colours, PHOTO_REGION × "nefadc" × 1…5, six hex digits each
+  const photoUrl = (id, size = "") => `./assets/news/${id}${size}.webp`;
+  const photoColor = id => {
+    const [region, topic, n] = String(id || "").split("-"), at = ((PHOTO_REGION.indexOf(region) * 6 + "nefadc".indexOf(topic)) * 5 + Number(n) - 1) * 6;
+    return at >= 0 && at < PHOTO_COLORS.length ? `#${PHOTO_COLORS.slice(at, at + 6)}` : "";
+  };
+  const loadImage = url => new Promise(done => { const image = new Image(); image.decoding = "async"; image.onload = () => done(true); image.onerror = () => done(false); image.src = url; });
+  const hash = text => { let h = 2166136261; for (const ch of String(text)) h = Math.imul(h ^ ch.codePointAt(0), 16777619); return h >>> 0; };
+  // the visuals ring holds item (k · step) mod N in slot k (buildTiles): co-prime to N, and never a neighbour's step
+  const ringStep = N => [7, 5, 11, 13, 17, 19, 23].find(k => gcd(k, N) === 1 && (N < 4 || (k % N !== 1 && k % N !== N - 1))) ?? 1;
+  function assignPhotos(list) {
+    const N = list.length, step = N ? ringStep(N) : 1, turn = new Map(), day = list.find(item => item.key)?.key || "";
+    for (let k = 0; k < N; k += 1) {
+      const item = list[(k * step) % N];
+      item.topic = topicOf(item);
+      const combo = `${PHOTO_REGION[item.region] || "g"}-${item.topic}`;
+      const n = turn.get(combo) ?? hash(day + combo) % 5;
+      turn.set(combo, n + 1);
+      item.photoId = `${combo}-${n % 5 + 1}`;
+      item.photo = photoUrl(item.photoId, "-s");
+    }
+    return list;
+  }
+  // The small photographs first, all at once; then, where a card is drawn larger than they are, the 640 px ones, one
+  // after another (each swapped in once it has arrived).
+  let photoRun = 0;
+  function warmPhotos() {
+    const run = ++photoRun, list = items.filter(item => item.photoId);
+    Promise.all(list.map(item => loadImage(item.photo))).then(async () => {
+      if (!view || 1.36 * view.s * Math.min(devicePixelRatio || 1, 2) < 400) return;
+      for (const item of list) {
+        if (run !== photoRun || phase === "closed") return;
+        const full = photoUrl(item.photoId);
+        if (item.photo === full || !(await loadImage(full))) continue;
+        item.photo = full;
+        if (run === photoRun) document.querySelectorAll(`.ig-ph[data-photo="${item.photoId}"]`).forEach(photo => { photo.src = full; });
+      }
+    });
+  }
+  // the reading sheet's photograph: 960 px wide unless the sheet is drawn larger than that
+  const sheetPhoto = item => photoUrl(item.photoId, Math.min(860, view.W) * Math.min(devicePixelRatio || 1, 2) > 1100 ? "-w" : "-m");
 
   /* ---------- Regions (the 按地区 view, 2026-10-29) ----------
      Each item's continent, from the places / country codes in data/dashboard.json (read only; the cards do not carry
@@ -185,7 +167,7 @@
   const keyOf = text => { try { return /^https?:/i.test(text) ? new URL(text).href : String(text).trim(); } catch { return String(text).trim(); } };
   // The same read gives the detail page the whole record (original title, 关注含义, figures, tags).
   let recordMap = null;
-  const regionsReady = fetch(new URL("./data/dashboard.json", document.baseURI)).then(response => response.json()).then(data => {
+  const regionsReady = (window.GreenLoad?.json("./data/dashboard.json") ?? fetch(new URL("./data/dashboard.json", document.baseURI)).then(response => response.json())).then(data => { // one request with globe.js (loader.js)
     recordMap = new Map();
     for (const record of data.intelligence || []) {
       for (const key of [record.canonical_url, record.source_url, record.url, record.title_zh, record.title_en, record.title_original]) if (key) recordMap.set(keyOf(key), record);
@@ -201,19 +183,13 @@
     m = /(\d{1,2})\D(\d{1,2})\D(\d{4})/.exec(text); // en-GB: dd/mm/yyyy
     return m ? `${m[3]}-${m[2].padStart(2, "0")}-${m[1].padStart(2, "0")}` : "";
   };
-  let arts = [];
   function readItems() {
-    arts.forEach(url => URL.revokeObjectURL(url));
-    arts = [];
-    return [...document.querySelectorAll("#todayGrid .signal-card")].map((card, index) => {
+    const list = [...document.querySelectorAll("#todayGrid .signal-card")].map((card, index) => {
       const foot = card.querySelector(".signal-foot span")?.textContent.trim() || "";
       const cut = foot.lastIndexOf(" · ");
       const link = card.querySelector(".signal-foot a");
-      const tone = TONE_ORDER[index % TONE_ORDER.length];
-      const art = ornament(index, tone);
-      arts.push(art);
       return {
-        index, tone, art,
+        index,
         theme: card.querySelector(".signal-meta .topic")?.textContent.trim() || "",
         title: card.querySelector(".signal-content > h3")?.textContent.trim() || "",
         summary: card.querySelector(".signal-content > p")?.textContent.trim() || "",
@@ -225,32 +201,23 @@
         region: regionFor(link?.href || "", card.querySelector(".signal-content > h3")?.textContent.trim() || ""),
         record: recordFor(link?.href || "", card.querySelector(".signal-content > h3")?.textContent.trim() || ""),
       };
-    }).filter(item => item.title).map(item => (rasterize(item), item));
-  }
-  // Ornaments become 512 px bitmaps: a scaled bitmap is cheap, re-rendering an SVG of thousands of segments at every
-  // new scale is not (the sphere shows hundreds of cards at once).
-  function rasterize(item) {
-    const svgUrl = item.art, image = new Image();
-    image.onload = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = canvas.height = 512;
-      canvas.getContext("2d").drawImage(image, 0, 0, 512, 512);
-      canvas.toBlob(blob => {
-        if (!blob || item.art !== svgUrl) return;
-        const png = URL.createObjectURL(blob);
-        arts.push(png);
-        item.art = png;
-        document.querySelectorAll("img.ig-orn").forEach(orn => { if (orn.getAttribute("src") === svgUrl) orn.src = png; });
-      });
-    };
-    image.src = svgUrl;
+    }).filter(item => item.title);
+    return recordMap ? assignPhotos(list) : list; // the photographs wait for the regions: nothing is fetched twice
   }
   const dataReady = () => !!document.querySelector("#todayGrid .signal-card, #todayGrid > .empty");
   // the regions arrive with their own read of the data: if the layer was built before, sort the region view again
   regionsReady.then(() => {
     if (!items.length) return;
     items.forEach(item => { item.region = regionFor(item.href, item.title); item.record = recordFor(item.href, item.title); });
-    if (phase === "intro") buildTiles();
+    assignPhotos(items); // region and topic are known only now
+    if (phase === "intro") { buildTiles(); return; }
+    U.forEach(u => u.tiles.forEach(tile => {
+      const photo = tile.kind === "card" && tile.el.querySelector(".ig-ph");
+      if (!photo || photo.dataset.photo === tile.item.photoId) return;
+      photo.dataset.photo = tile.item.photoId; photo.src = tile.item.photo;
+      photo.parentNode.style.backgroundColor = photoColor(tile.item.photoId);
+    }));
+    warmPhotos();
   });
 
   /* ---------- Shards (intro §2, recipe §7.2): 30 slivers on the inside of a tube pointing at the camera ---------- */
@@ -406,6 +373,7 @@
     ovA: 0, ovB: 0, openInt: 0, label: 0, texts: 0, ink: 0, extraY: 0, wto: 1, visited: false, offX: [0, 0, 0],
   }));
   let cur = 0, changing = false;
+  let groupMode = "region"; // what view 1 groups by: "region" (按地区) or "topic" (按议题) — one ring, two orders
   const nextOf = i => (i + 1) % 3;
   // per-view navigation state (gallery §4, §14.1, §14.3)
   const nav = { imp: { x: 0, y: 0 }, vel: { x: 0, y: 0 }, I: 0, uV: 0, inV: 0, tilt: 0, touch: false };
@@ -459,7 +427,6 @@
       <p class="ig-bill" aria-hidden="true"></p>
       <section class="ig-intro">
         <div class="ig-content">
-          <div class="ig-logo" aria-hidden="true"><span>${ICON.globe}${ICON.leaf}${ICON.drop}${ICON.globe}</span></div>
           <h1 class="ig-h1"></h1>
           <p class="ig-h2"></p>
           <div class="ig-btnw"><span class="ig-percent" aria-hidden="true">000</span><button class="ig-enter" type="button"><span></span></button></div>
@@ -471,15 +438,18 @@
       <div class="ig-head">
         <div class="ig-views" role="group">
           <button type="button" data-view="0" class="is-on">${ICON.grid}<span></span></button>
-          <button type="button" data-view="1">${ICON.pin}<span></span></button>
+          <button type="button" data-view="1" data-group="region">${ICON.pin}<span></span></button>
+          <button type="button" data-view="1" data-group="topic">${ICON.tag}<span></span></button>
           <button type="button" data-view="2">${ICON.cal}<span></span></button>
         </div>
         <p class="ig-scroll"></p>
         <nav class="ig-menu"></nav>
-        <button class="ig-about" type="button" aria-expanded="false"><span></span></button>
+        <div class="ig-acts">
+          <button class="ig-btn ig-back" type="button">${ICON.back}<span></span></button>
+          <button class="ig-btn ig-about" type="button" aria-expanded="false"><span></span>${ICON.menu}</button>
+        </div>
       </div>
       <div class="ig-foot">
-        <a class="ig-home" href="./cop31/#top"><img src="./assets/green-logo-mark.png" alt="" width="34" height="34"></a>
         <p class="ig-tutorial"></p>
       </div>
       <section class="ig-detail" hidden>
@@ -499,20 +469,20 @@
             <div class="ig-dend"><button class="ig-dx" type="button"><span aria-hidden="true">×</span></button></div>
           </div>
         </div>
-        <a class="ig-dhome" href="./cop31/#top"><span class="ig-dmark" aria-hidden="true"><span>${ICON.globe}${ICON.leaf}${ICON.drop}${ICON.globe}</span></span><img src="./assets/green-logo-mark.png" alt="" width="34" height="34"></a>
         <p class="ig-dscroll"></p>
-        <button class="ig-dclose" type="button"><span></span></button>
+        <div class="ig-swrap"></div>
+        <button class="ig-btn ig-dclose" type="button">${ICON.back}<span></span></button>
       </section>
       <div class="ig-cursor" aria-hidden="true"><span></span></div>`;
     document.body.append(el);
     for (const [key, selector] of Object.entries({
       ground: ".ig-ground", white: ".ig-white", canvas: ".ig-shards", gallery: ".ig-gallery", stage: ".ig-stage", bill: ".ig-bill",
-      intro: ".ig-intro", content: ".ig-content", logo: ".ig-logo", h1: ".ig-h1", h2: ".ig-h2", btnw: ".ig-btnw", percent: ".ig-percent",
-      enter: ".ig-enter", credits: ".ig-credits", head: ".ig-head", views: ".ig-views", scroll: ".ig-scroll", about: ".ig-about", menu: ".ig-menu",
-      foot: ".ig-foot", home: ".ig-home", tutorial: ".ig-tutorial", cursor: ".ig-cursor", ghost: ".ig-ghost",
+      intro: ".ig-intro", content: ".ig-content", h1: ".ig-h1", h2: ".ig-h2", btnw: ".ig-btnw", percent: ".ig-percent",
+      enter: ".ig-enter", credits: ".ig-credits", head: ".ig-head", views: ".ig-views", scroll: ".ig-scroll", about: ".ig-about", back: ".ig-back", menu: ".ig-menu",
+      foot: ".ig-foot", tutorial: ".ig-tutorial", cursor: ".ig-cursor", ghost: ".ig-ghost",
       names: ".ig-names", nlist: ".ig-nlist", ngrad: ".ig-ngrad",
       detail: ".ig-detail", dview: ".ig-dview", dcontent: ".ig-dcontent", dhero: ".ig-dhero", dkick: ".ig-dkick", dtitle: ".ig-dtitle",
-      dmeta: ".ig-dmeta", dsum: ".ig-dsum", dlink: ".ig-dlink", dx: ".ig-dx", dhome: ".ig-dhome", dscroll: ".ig-dscroll", dclose: ".ig-dclose",
+      dmeta: ".ig-dmeta", dsum: ".ig-dsum", dlink: ".ig-dlink", dx: ".ig-dx", swrap: ".ig-swrap", dscroll: ".ig-dscroll", dclose: ".ig-dclose",
       dorig: ".ig-dorig", dwhy: ".ig-dwhy", dfacts: ".ig-dfacts",
     })) ui[key] = el.querySelector(selector);
     U.forEach((u, i) => { u.root = el.querySelector(`.ig-u[data-u="${i}"]`); u.root.style.setProperty("--ucol", u.cfg.color.join(" ")); });
@@ -558,29 +528,27 @@
     ui.enter.querySelector("span").textContent = say(WORDS.enter);
     el.setAttribute("aria-label", title);
     ui.views.setAttribute("aria-label", say(WORDS.scroll));
-    ui.views.querySelectorAll("button").forEach((button, index) => { button.querySelector("span").textContent = say(WORDS.by[index]); });
+    ui.views.querySelectorAll("button").forEach(button => { button.querySelector("span").textContent = say(button.dataset.group === "topic" ? WORDS.byTopic : WORDS.by[Number(button.dataset.view)]); });
     ui.scroll.textContent = say(WORDS.scroll);
     ui.about.querySelector("span").textContent = say(WORDS.menu);
+    ui.back.querySelector("span").textContent = say(WORDS.back);
     ui.tutorial.textContent = say(WORDS.tutorial);
-    ui.home.setAttribute("aria-label", say(WORDS.home));
     ui.cursor.querySelector("span").textContent = say(WORDS.explore);
     ui.dscroll.textContent = say(WORDS.scroll);
-    ui.dclose.querySelector("span").textContent = say(WORDS.close);
+    ui.dclose.querySelector("span").textContent = say(WORDS.back);
     ui.dx.setAttribute("aria-label", say(WORDS.close));
-    ui.dhome.setAttribute("aria-label", say(WORDS.home));
   }
 
   /* ---------- Tiles ---------- */
   const gcd = (a, b) => (b ? gcd(b, a % b) : a);
   const pad = n => String(n).padStart(2, "0");
   const cardHTML = item => `
-    <div class="ig-face">
-      <img class="ig-orn" alt="" src="${item.art}" draggable="false">
-      <span class="ig-frame" aria-hidden="true"></span>
+    <div class="ig-face"${item.photoId ? ` style="background-color:${photoColor(item.photoId)}"` : ""}>
+      <img class="ig-ph" alt=""${item.photoId ? ` src="${esc(item.photo)}" data-photo="${item.photoId}"` : ""} draggable="false" decoding="async">
+      <span class="ig-shade" aria-hidden="true"></span>
       <div class="ig-text">
         <span class="ig-kick">No.${pad(item.index + 1)}<b>${esc(item.theme)}</b></span>
         <h3>${esc(item.title)}</h3>
-        <p>${esc(item.summary)}</p>
         <div class="ig-cfoot"><span>${esc(item.source)}</span>${item.href ? `<a href="${esc(item.href)}" target="_blank" rel="noopener noreferrer">${esc(item.linkText)}</a>` : ""}</div>
       </div>
       <i class="ig-tint" aria-hidden="true"></i><i class="ig-flat" aria-hidden="true"></i>
@@ -594,7 +562,6 @@
   };
   function makeCard(u, item, id, props) {
     const element = make("article", "ig-card", cardHTML(item));
-    element.dataset.tone = item.tone;
     element.style.setProperty("--tint-rgb", tileColor(u.cfg.color, id));
     u.root.append(element);
     const tile = { el: element, kind: "card", u, item, id, flag: 0, y0: 0, row: 1, th0: 0, base: u.cfg.base, shown: true, la: -1, a: -1, ta: -1, fa: -1, matrix: "",
@@ -630,38 +597,49 @@
     if (!N) return;
     // Visuals: 100 slots, 34 / 33 / 33 per ring, column-major (gallery §2.2); the front card of the middle row = item 1
     const V = U[0], ROWS = [{ n: 34, phase: 0, y: 2.125 }, { n: 33, phase: .085, y: 0 }, { n: 33, phase: 0, y: -2.125 }];
-    const step = [7, 5, 11, 13, 17, 19, 23].find(k => gcd(k, N) === 1 && (N < 4 || (k % N !== 1 && k % N !== N - 1))) ?? 1;
+    const step = ringStep(N);
     for (let t = 1; t <= 100; t += 1) {
       const row = (t - 1) % 3, col = Math.floor((t - 1) / 3), R = ROWS[row], th0 = R.phase + col * TAU / R.n;
       makeCard(V, items[((((t - 50) * step) % N) + N) % N], t, { row, th0, y0: R.y, front: Math.abs(wrapPi(th0 - Math.PI)) + (row === 1 ? 0 : .3) });
     }
     markPrimaries(V);
-    // Regions (the reference's Names view, §14.1, by region since 2026-10-29): three rings around the x axis; the middle
-    // one holds the items 3.6° apart, grouped by continent (2 of every 3 exist only while open); the side rings (x ∓ .5,
-    // 33 each) are decoration seen in waiting / overview. The list beside it names the regions, one row each.
+    buildNames();
+    // Dates (Extinction, §14.3): built from the date groups; the bottom ring is decoration (waiting / overview only)
+    const D = U[2];
+    for (let c = 0; c < 33; c += 1) makeChip(D, 300 + c, { row: 2, flag: 1, y0: 0, th0: c * TAU / 33, base: .48 });
+    buildDates();
+    warmPhotos();
+  }
+  // Regions / topics (the reference's Names view, §14.1; by region since 2026-10-29, also by topic since 2026-11-12):
+  // three rings around the x axis; the middle one holds the items 3.6° apart, grouped by continent or by topic (2 of
+  // every 3 exist only while open); the side rings (x ∓ .5, 33 each) are decoration seen in waiting / overview. The
+  // list beside it names the groups, one row each. `again`: the grouping changed, so the ring is set anew.
+  const TOPIC_ORDER = "nefadc"; // WORDS.topics
+  const groupOf = item => groupMode === "topic" ? Math.max(0, TOPIC_ORDER.indexOf(item.topic || topicOf(item))) : item.region;
+  const viewName = index => say(index === 1 && groupMode === "topic" ? WORDS.topicView : WORDS.views[index]);
+  const markView = index => ui.views.querySelectorAll("button").forEach(button => button.classList.toggle("is-on", Number(button.dataset.view) === index && (index !== 1 || button.dataset.group === groupMode)));
+  function buildNames(again = false) {
     const T = U[1];
-    const order = items.map((item, i) => [item, i]).sort((a, b) => a[0].region - b[0].region || a[1] - b[1]).map(([item]) => item);
+    if (again) { T.tiles.forEach(t => t.el.remove()); T.tiles = []; ui.nlist.replaceChildren(); }
+    if (!items.length) return;
+    const order = items.map((item, i) => [item, i]).sort((a, b) => groupOf(a[0]) - groupOf(b[0]) || a[1] - b[1]).map(([item]) => item);
     order.forEach((item, c) => makeCard(T, item, c + 1, { row: 1, flag: c % 3 ? 1 : 0, th0: (.978 * Math.PI + (c + 1) * TAU / 100) % TAU, y0: 0, front: c, primary: true }));
     for (const [row, x, seed] of [[0, -.5, 101], [2, .5, 134]]) {
       for (let c = 0; c < 33; c += 1) makeChip(T, seed + c, { row, y0: x, th0: c * TAU / 33 + (Math.sin((seed + c) * 77.7) * .5) * .05 });
     }
     names.groups = [];
     order.forEach((item, c) => {
-      const last = names.groups.at(-1);
-      if (last && last.region === item.region) last.count += 1; else names.groups.push({ region: item.region, start: c, count: 1 });
+      const last = names.groups.at(-1), key = groupOf(item);
+      if (last && last.key === key) last.count += 1; else names.groups.push({ key, start: c, count: 1 });
     });
     names.groups.forEach((group, g) => {
       group.center = group.start + (group.count - 1) / 2;
       const button = make("button", "ig-name");
       button.type = "button";
       button.dataset.group = g;
-      button.innerHTML = `${esc(say(WORDS.regions[group.region]))}<sup>${group.count}</sup>`;
+      button.innerHTML = `${esc(say((groupMode === "topic" ? WORDS.topics : WORDS.regions)[group.key] || WORDS.regions[0]))}<sup>${group.count}</sup>`;
       ui.nlist.append(button);
     });
-    // Dates (Extinction, §14.3): built from the date groups; the bottom ring is decoration (waiting / overview only)
-    const D = U[2];
-    for (let c = 0; c < 33; c += 1) makeChip(D, 300 + c, { row: 2, flag: 1, y0: 0, th0: c * TAU / 33, base: .48 });
-    buildDates();
   }
   // Two rows of date groups, ascending; each row's sequence (label, then its cards 0.65 layout units apart) is repeated
   // round the ring at the reference's density (1.153 u of arc per layout unit) — our day has 12 items, theirs 100.
@@ -736,7 +714,6 @@
     counter = { d: 0, revealed: false };
     if (reducedMotion.matches) { revealButton(true); return; }
     const S0 = .25; // the content shows .25 s after mount (timeline delay .2 at timeScale .8)
-    rise(ui.logo, S0); fadeIn(ui.logo, S0 + .625);
     rise(ui.h1, S0 + .3125); fadeIn(ui.h1, S0 + .9375);
     rise(ui.h2, S0 + .75); fadeIn(ui.h2, S0 + 1.125);
     rise(ui.btnw, S0 + .9375); fadeIn(ui.btnw, S0 + 1.3125);
@@ -775,7 +752,7 @@
     tw(camT, "z", -5, 3, { delay: .1 });
     for (const [key, to, d, ease] of [["open", 1, 3, IO], ["stagger", 0, 3, IO], ["tint", 0, 3, LIN], ["dark", 0, 3, IO], ["scale", 1, 3.5, IO]]) tw(V, key, to, d, { ease, delay: .1 });
     tw(sc, "alpha", 1, 1, { ease: LIN, delay: 1.6 });
-    ui.bill.textContent = say(WORDS.views[0]);
+    ui.bill.textContent = viewName(0);
     tw(sc, "bill", 1, 1, { ease: LIN, delay: 1.6 });
     tw(sc, "bill", 0, 1, { ease: LIN, delay: 2.6 });
     tw(V, "texts", 1, .5, { ease: power2, delay: 1.6 });
@@ -817,15 +794,38 @@
   }
 
   /* ---------- Switching views (§7, §14.4): close → sphere of tinted squares, camera to +32 → open at 3 s ---------- */
-  function switchTo(b) {
-    if (changing || detail || b === cur || phase !== "gallery") return;
+  // 按地区 ⇄ 按议题 on the ring itself: the cards wash to the view's colour, take their new places under it, and clear,
+  // while the list beside them is changed for the other.
+  function regroup(mode) {
+    const T = U[1];
+    changing = true;
+    setMenu(false);
+    sc.pick = 0;
+    setHoverCard(null);
+    hideNames();
+    tw(T, "tint", 1, .5, { ease: LIN });
+    later(.6, () => {
+      groupMode = mode;
+      buildNames(true);
+      Object.assign(names, { target: 0, q: 0, ds: 0, rp: 0, shown: -1 });
+      markView(1);
+      showNames();
+      tw(T, "tint", 0, 1.4, { ease: LIN });
+    });
+    later(1.6, () => { changing = false; sc.pick = 1; });
+    if (reducedMotion.matches) fastForward();
+  }
+  function switchTo(b, mode = groupMode) {
+    if (changing || detail || phase !== "gallery") return;
+    if (b === cur) { if (b === 1 && mode !== groupMode) regroup(mode); return; }
+    if (b === 1 && mode !== groupMode) { groupMode = mode; buildNames(true); } // not the view in front: set anew before it opens
     changing = true;
     setMenu(false);
     sc.pick = 0;
     setHoverCard(null);
     const A = U[cur], B = U[b], prev = cur;
     tw(chrome, "head", 0, .4, { ease: LIN }); tw(chrome, "foot", 0, .4, { ease: LIN });
-    later(.5, () => ui.views.querySelectorAll("button").forEach((button, i) => button.classList.toggle("is-on", i === b)));
+    later(.5, () => markView(b));
     if (A.index === 1) hideNames();
     // old.close()
     tw(A, "open", 0, 2); tw(A, "close", 1, 2);
@@ -845,7 +845,7 @@
       if (u.index === 1) { tw(u.wrapOv, "rx", -.1 * Math.PI, 4); tw(u.wrapOv, "rz", -.3 * Math.PI, 4); tw(u.wrap, "x", 0, 3); tw(u.wrap, "y", 0, 3); tw(u.rowsScale, 0, 1, 3); tw(u.rowsScale, 2, 1, 3); tw(u.rowsY, 0, .9, 3); tw(u.rowsY, 2, -.9, 3); }
       if (u.index === 2) { tw(u.wrapOv, "ry", .15 * Math.PI, 4); tw(u.wrapOv, "rz", .4 * Math.PI, 4); tw(u, "extraY", .25 * Math.PI, 3); tw(u.rowsScale, 0, 1.7, 3); tw(u.rowsScale, 2, 1.7, 3); }
     });
-    ui.bill.textContent = say(WORDS.views[b]);
+    ui.bill.textContent = viewName(b);
     sc.billDepth = 5;
     tw(sc, "bill", 1, 1.5, { ease: LIN, delay: .5 }); tw(sc, "bill", 0, 1, { ease: LIN, delay: 2.5 });
     later(3, () => {
@@ -893,7 +893,7 @@
     B.openInt = 0; tw(B, "openInt", 1, 2, { ease: LIN });
     if (!B.visited) { // first visit: the name shows a second time from open() (§14.4)
       B.visited = true;
-      later(1.5, () => { ui.bill.textContent = say(WORDS.views[B.index]); });
+      later(1.5, () => { ui.bill.textContent = viewName(B.index); });
       tw(sc, "bill", 1, 1, { ease: LIN, delay: 1.5 }); tw(sc, "bill", 0, 1, { ease: LIN, delay: 2.5 });
     }
   }
@@ -1194,35 +1194,46 @@
     detail.dp = 0; tw(detail, "dp", 1, 2.33, { ease: LIN, delay: .08 });
     detail.ghost = 0; tw(detail, "ghost", 1, 2.08, { ease: LIN, delay: .1 });
     detail.page = 0; tw(detail, "page", 1, .5, { ease: LIN, delay: .9 });
-    detail.mark = 0; tw(detail, "mark", 1, .8, { ease: LIN, delay: 1.3 });
+    // the card widens as it comes up, so most news reads in full without scrolling (2026-11-09); done before the text shows
+    detail.wide = 0; tw(detail, "wide", 1, .92, o);
     const item = card.item;
-    ui.ghost.src = item.art;
-    // The news is read on the card itself (2026-10-29): as the card grows, the light that sweeps its corner turns
-    // it over to a reading face — the title in full, original title, source · date · places, the whole summary, tags
-    // and the source link (a new tab). The wheel (or a finger) scrolls the face when the news is longer than the card.
+    ui.ghost.src = item.photo;
+    // The news is read on a sheet of its own (2026-11-12): the card grows to the sheet's place and size, and the sheet —
+    // a flat part of the page, not a face of the card, so its words are drawn as text at their own size and stay sharp —
+    // comes in over it. The photograph lies across the top and pales into the paper; under it the title in full, the
+    // original title, source · date · places, the whole summary, tags and the source link (a new tab). The wheel (or a
+    // finger) scrolls the text when the news is longer than the sheet.
     const record = item.record, zh = !en();
     const places = (record?.places || []).map(place => place.name_zh).filter(Boolean);
     const facts = record ? [...(record.topics || []), ...(record.numbers || []), ...(record.organization_tags || []).map(tag => typeof tag === "string" ? tag : tag.code), ...(record.event_tags || [])].filter(Boolean) : [];
     const original = zh && record?.title_original && record.title_original !== item.title ? record.title_original : "";
-    const read = make("div", "ig-read", `
-      <p class="ig-rkick">No.${pad(item.index + 1)}<b>${esc(item.theme)}</b><b>${esc(say(WORDS.regions[item.region] || WORDS.regions[0]))}</b></p>
-      <h3 class="ig-rtitle">${esc(item.title)}</h3>
-      ${original ? `<p class="ig-rorig">${esc(original)}</p>` : ""}
-      <p class="ig-rmeta">${esc([item.source, item.date, zh ? places.slice(0, 3).join("、") : ""].filter(Boolean).join(" · "))}</p>
-      <p class="ig-rsum">${esc(item.summary)}</p>
-      ${facts.length ? `<ul class="ig-rfacts">${[...new Set(facts)].slice(0, 8).map(fact => `<li>${esc(fact)}</li>`).join("")}</ul>` : ""}
-      <div class="ig-rfoot">${item.href ? `<a class="ig-rlink" href="${esc(item.href)}" target="_blank" rel="noopener noreferrer">${esc(item.linkText)}</a>` : ""}</div>`);
-    card.face.append(read);
+    const read = make("article", "ig-read", `
+      <figure class="ig-sphoto" aria-hidden="true"${item.photoId ? ` style="background-color:${photoColor(item.photoId)}"` : ""}>${item.photoId ? `<img alt="" src="${esc(item.photo)}">` : ""}</figure>
+      <div class="ig-sbody">
+        <p class="ig-rkick">No.${pad(item.index + 1)}<b>${esc(item.theme)}</b><b>${esc(say(WORDS.regions[item.region] || WORDS.regions[0]))}</b></p>
+        <h3 class="ig-rtitle">${esc(item.title)}</h3>
+        ${original ? `<p class="ig-rorig">${esc(original)}</p>` : ""}
+        <p class="ig-rmeta">${esc([item.source, item.date, zh ? places.slice(0, 3).join("、") : ""].filter(Boolean).join(" · "))}</p>
+        <p class="ig-rsum">${esc(item.summary)}</p>
+        ${facts.length ? `<ul class="ig-rfacts">${[...new Set(facts)].slice(0, 8).map(fact => `<li>${esc(fact)}</li>`).join("")}</ul>` : ""}
+        <div class="ig-rfoot">${item.href ? `<a class="ig-rlink" href="${esc(item.href)}" target="_blank" rel="noopener noreferrer">${esc(item.linkText)}</a>` : ""}</div>
+      </div>`);
+    ui.detail.hidden = false;
+    ui.swrap.replaceChildren(read);
     detail.read = read;
-    later(reducedMotion.matches ? 0 : 1.05, () => { // under the brightest of the sweep
+    detail.body = read.querySelector(".ig-sbody");
+    detail.box = { w: read.offsetWidth, h: read.offsetHeight }; // the card grows to this (readingStretch)
+    if (item.photoId) { // the card's own picture at once, the wide one as soon as it is here
+      const wide = sheetPhoto(item), picture = read.querySelector(".ig-sphoto img");
+      loadImage(wide).then(ok => { if (ok && detail?.read === read) picture.src = wide; });
+    }
+    later(reducedMotion.matches ? 0 : .5, () => { // the card's own words go first: only its photograph meets the sheet
       if (detail?.read !== read || detail.closing) return;
       card.el.classList.add("is-open");
-      ui.dscroll.hidden = read.scrollHeight <= read.clientHeight + 4; // the hint only when there is more to read
     });
-    later(reducedMotion.matches ? 0 : 1.8, () => { if (detail?.read === read && !detail.closing) card.el.classList.add("is-crisp"); }); // settled: re-raster sharp
+    later(reducedMotion.matches ? 0 : 1.5, () => { if (detail?.read === read && !detail.closing) card.el.classList.add("is-covered"); }); // the sheet is in: the card rests under it
     ui.detail.style.setProperty("--ucol", u.cfg.color.join(" "));
     Object.assign(dpage, { pos: 0, eased: 0, max: 0 });
-    ui.detail.hidden = false;
     ui.dscroll.hidden = true;
     el.classList.add("is-reading");
     if (fromKeyboard) setTimeout(() => { if (detail?.card === card && !detail.closing) ui.dclose.focus({ preventScroll: true }); }, 1250);
@@ -1232,8 +1243,9 @@
     if (!detail || detail.closing) return;
     const u = detail.card.u, D = detail;
     D.closing = true;
-    D.card.el.classList.remove("is-open", "is-crisp"); // the reading face turns back as the card returns
-    tw(D, "page", 0, .5, { ease: LIN }); tw(D, "mark", 0, .5, { ease: LIN }); tw(D, "ghost", 0, .8, { ease: LIN });
+    D.card.el.classList.remove("is-open", "is-covered"); // the card comes back from under the sheet
+    tw(D, "page", 0, .5, { ease: LIN }); tw(D, "ghost", 0, .8, { ease: LIN });
+    tw(D, "wide", 0, .8, { ease: ZOOM });
     tw(sc, "alpha", 0, .8, { ease: LIN });
     tw(camT, "z", camT.z - 2, 1.5);
     D.dp = 0; tw(D, "dp", 1, 3.5, { ease: LIN });
@@ -1252,8 +1264,10 @@
     if (!detail) return;
     const card = detail.card;
     detail.read?.remove();
-    card.el.classList.remove("is-read", "is-open", "is-crisp");
+    card.el.classList.remove("is-read", "is-open", "is-covered");
     card.el.style.removeProperty("--veil");
+    card.el.style.removeProperty("--rw");
+    card.el.style.removeProperty("--rh");
     card.face.style.clipPath = "";
     detail = null;
     ui.detail.hidden = true;
@@ -1263,15 +1277,21 @@
       (card.primary ? card : card.u.tiles.find(c => c.primary && c.item === card.item))?.el.querySelector(".ig-open")?.focus({ preventScroll: true });
     }
   }
+  function readingStretch() { // the shown card (1.36 world units, +16 % on a wide screen, 3 units away) up to most of the window
+    const shown = 1.36 * (mobile() ? 1 : 1.16) * view.F / 3;
+    if (detail?.box?.w) return { w: Math.max(.6, detail.box.w / shown), h: Math.max(.6, detail.box.h / shown) }; // the reading sheet's box
+    return { w: clamp(view.W * (mobile() ? .94 : .84) / shown, 1, 2.05), h: clamp(view.H * (mobile() ? .76 : .84) / shown, 1, mobile() ? 1.9 : 1.42) };
+  }
   function tickDetail(dt) {
     const D = detail, card = D.card;
     warpCard(card, D.dp);
-    ui.ghost.style.opacity = (.08 * D.ghost).toFixed(3);
+    const stretch = readingStretch(), rw = (1 + (stretch.w - 1) * D.wide).toFixed(4), rh = (1 + (stretch.h - 1) * D.wide).toFixed(4);
+    if (rw !== D.rw || rh !== D.rh) { D.rw = rw; D.rh = rh; card.el.style.setProperty("--rw", rw); card.el.style.setProperty("--rh", rh); }
+    ui.ghost.style.opacity = (.2 * D.ghost).toFixed(3);
     ui.detail.style.opacity = D.page.toFixed(3);
     ui.detail.style.visibility = D.page > 0 ? "visible" : "hidden";
-    ui.dhome.style.opacity = D.mark.toFixed(3);
     // the reading face scrolls (wheel / finger), eased like the reference's page (dt·2, touch 5)
-    const read = D.read;
+    const read = D.body;
     if (read && !D.closing) {
       dpage.max = Math.max(0, read.scrollHeight - read.clientHeight);
       dpage.pos = clamp(dpage.pos, 0, dpage.max);
@@ -1287,6 +1307,7 @@
   function setHoverCard(card) {
     if (card === hover.next) return;
     hover.next = card;
+    if (card?.item?.photoId && !card.item.warm) { card.item.warm = true; loadImage(sheetPhoto(card.item)); } // ready by the click
     el?.classList.toggle("is-pointing", !!card);
     cursor.on = !!card && finePointer.matches;
     if (ui.cursor) {
@@ -1341,8 +1362,8 @@
   }
   function wire() {
     ui.enter.addEventListener("click", event => enter(event.detail === 0));
-    ui.home.addEventListener("click", event => { event.preventDefault(); close(); });
-    ui.dhome.addEventListener("click", event => { event.preventDefault(); close(); });
+    ui.back.addEventListener("click", () => close());
+    ui.stage.addEventListener("load", event => { if (event.target.classList?.contains("ig-ph")) event.target.classList.add("is-in"); }, true); // photographs fade in
     // 菜单: the site menu drops down here (cop31.css's drop-down, redrawn in intel.css). 今日情报 is this page; any
     // other page closes the layer first and then goes there the way the page menu does (its own transition included).
     ui.about.addEventListener("click", () => setMenu(!el.classList.contains("menu-on")));
@@ -1356,7 +1377,7 @@
       close();
     });
     el.addEventListener("pointerdown", event => { if (el.classList.contains("menu-on") && !event.target.closest(".ig-menu, .ig-about")) setMenu(false); }, true);
-    ui.views.addEventListener("click", event => { const button = event.target.closest("[data-view]"); if (button) switchTo(Number(button.dataset.view)); });
+    ui.views.addEventListener("click", event => { const button = event.target.closest("[data-view]"); if (button) switchTo(Number(button.dataset.view), button.dataset.group || groupMode); });
     // a region turns the wheel to its first card (the cards open the briefs)
     const toGroup = button => { const group = names.groups[Number(button?.dataset.group)]; if (group) names.target = group.start; };
     ui.nlist.addEventListener("click", event => { if (cur === 1 && !changing) toGroup(event.target.closest(".ig-name")); });
@@ -1372,7 +1393,7 @@
       if (pointerDown.total > 6) dragged = true;
       const k = event.pointerType === "mouse" ? .01 : .015;
       nav.touch = event.pointerType !== "mouse";
-      if (detail) { if (!detail.closing) dpage.pos = clamp(dpage.pos - dy * (nav.touch ? 2 : 3), 0, dpage.max); return; }
+      if (detail) { if (!detail.closing && nav.touch) dpage.pos = clamp(dpage.pos - dy * 2, 0, dpage.max); return; } // a mouse drag selects the sheet's text
       if (changing) return;
       if (cur === 0) { nav.imp.x = -dx * k; nav.imp.y = clamp(-dy * k, -.2, .2); }
       if (cur === 1) names.target = clamp(names.target - dy * k, 0, items.length - 1);
@@ -1455,7 +1476,7 @@
     Object.assign(names, { target: 0, q: 0, ds: 0, ga: 0, gb: 0, rp: 0, shown: -1 });
     Object.assign(dnav, { ps: 0, is: 0 });
     cur = 0; changing = false;
-    ui.views.querySelectorAll("button").forEach((button, i) => button.classList.toggle("is-on", i === 0));
+    markView(0);
     ui.names.hidden = true;
     tw(camT, "ix", .5, 2, { ease: power1 }); tw(camT, "iy", .5, 2, { ease: power1 }); // intro pointer tilt (intro §2.5)
   }
@@ -1547,6 +1568,14 @@
     const leave = el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: "linear", fill: "forwards" });
     leave.finished.then(() => { finish(); leave.cancel(); }); // the fill must not outlive the hidden layer (it would keep a reopened one invisible)
   }
+
+  // Warm today's small photographs once the page has settled (about 15 KB each), so the gallery opens with its pictures.
+  function prefetch(tries = 0) {
+    if (phase !== "closed" || navigator.connection?.saveData) return;
+    if (!dataReady() || !recordMap) { if (tries < 4) setTimeout(() => prefetch(tries + 1), 2500); return; }
+    readItems().forEach(item => { if (item.photoId) loadImage(item.photo); });
+  }
+  addEventListener("load", () => setTimeout(() => (window.requestIdleCallback || setTimeout)(() => prefetch()), 1800));
 
   window.GreenIntel = {
     ready: () => !document.querySelector("#todayGrid > .empty"),

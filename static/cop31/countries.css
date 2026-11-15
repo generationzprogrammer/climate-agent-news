@@ -172,6 +172,28 @@ html.focus-detail .pd .agency-grid.is-drawn .agency-card > * { opacity: 1; }
 html.focus-detail .pd .agency-card > i { grid-column: 1; grid-row: 1 / span 2; font: 600 calc(12 * var(--u))/1.4 var(--font-body); font-style: normal; text-transform: uppercase; }
 html.focus-detail .pd .agency-card > b { grid-column: 2; font: 600 calc(16 * var(--u))/1.2 var(--font-body); }
 html.focus-detail .pd .agency-card > span { grid-column: 2; color: var(--gb-600); font: 600 calc(16 * var(--u))/1.2 var(--font-body); }
+/* The country / region pages (2026-11-12, cop31/country-news.js): the count opens the page (.pd-intro), the tabs are the
+   topics with their counts, the list grows twenty at a time. */
+html.focus-detail .pd .spotlight-tabs button small { margin-left: .45em; color: var(--pd-grey); font-size: .78em; font-weight: 600; }
+html.focus-detail .pd .spotlight-tabs button.active small { color: var(--gb-600); }
+html.focus-detail .pd .fc-more {
+  order: 3;
+  align-self: flex-start;
+  margin: calc(100 * var(--u)) 0 0 calc(492 * var(--u));
+  padding: calc(16 * var(--u)) calc(30 * var(--u));
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(var(--red), var(--red)) no-repeat 0 100% / 100% 0, var(--gb-950);
+  box-shadow: none;
+  color: #fff;
+  font: 600 calc(16 * var(--u))/1.2 var(--font-body);
+  text-transform: uppercase;
+  transition: background-size .4s cubic-bezier(.66, 0, .34, 1);
+}
+html.focus-detail .pd .fc-more[hidden] { display: none; }
+@media (hover: hover) and (pointer: fine) { html.focus-detail .pd .fc-more:hover { background-size: 100% 100%, auto; } }
+html.focus-detail .pd .fc-list .empty { margin: calc(100 * var(--u)) 0 0 calc(492 * var(--u)); padding: 0; border: 0; background: none; color: var(--gb-600); font: 600 calc(22 * var(--u))/1.2 var(--font-body); text-align: left; }
+html.focus-detail .pd .fc-list .skeleton { height: calc(120 * var(--u)); margin: calc(100 * var(--u)) 0 0 calc(492 * var(--u)); width: calc(674 * var(--u)); opacity: .5; }
 /* NEXT: fixed under the map, our red (the reference's orange), grows on hover */
 html.focus-detail .pd-next {
   position: fixed;
@@ -225,6 +247,8 @@ html.focus-detail .pd-next {
   html.focus-detail .pd .spotlight-card-meta { margin-bottom: 1.5em; font-size: calc(20 * var(--u)); }
   html.focus-detail .pd .spotlight-card > h3, html.focus-detail .pd .spotlight-card > p { width: auto; font-size: calc(18 * var(--u)); }
   html.focus-detail .pd .spotlight-tabs button { font-size: calc(14 * var(--u)); }
+  html.focus-detail .pd .fc-more { margin: calc(57 * var(--u)) 0 0; padding: calc(13 * var(--u)) calc(22 * var(--u)); font-size: calc(14 * var(--u)); }
+  html.focus-detail .pd .fc-list .empty, html.focus-detail .pd .fc-list .skeleton { width: auto; margin: calc(57 * var(--u)) 0 0; font-size: calc(18 * var(--u)); }
   html.focus-detail .pd .agency-grid { padding-top: calc(70 * var(--u)); }
   html.focus-detail .pd .agency-card { display: block; }
   html.focus-detail .pd .agency-card > i { display: block; margin-bottom: calc(8 * var(--u)); }

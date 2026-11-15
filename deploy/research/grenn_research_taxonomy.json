@@ -1,0 +1,920 @@
+{
+  "version": "governance-14x83-20261106-v2",
+  "parent_count": 14,
+  "subcategory_count": 83,
+  "count_resolution": "User confirmed sum of screenshot row counts (83), not erroneous displayed total 77.",
+  "extension_authorization": "User authorized the nine missing definitions on 2026-11-06.",
+  "parents": [
+    {
+      "code": "G01",
+      "name_zh": "全球气候治理机制与国际谈判",
+      "name_en": "Global Climate Governance"
+    },
+    {
+      "code": "G02",
+      "name_zh": "气候目标、承诺与履约",
+      "name_en": "Climate Targets and Commitments"
+    },
+    {
+      "code": "G03",
+      "name_zh": "温室气体减排与能源转型",
+      "name_en": "Mitigation and Energy Transition"
+    },
+    {
+      "code": "G04",
+      "name_zh": "气候适应与韧性建设",
+      "name_en": "Adaptation and Resilience"
+    },
+    {
+      "code": "G05",
+      "name_zh": "气候损失与损害",
+      "name_en": "Loss and Damage"
+    },
+    {
+      "code": "G06",
+      "name_zh": "气候资金与绿色金融",
+      "name_en": "Climate Finance"
+    },
+    {
+      "code": "G07",
+      "name_zh": "碳市场与市场合作机制",
+      "name_en": "Carbon Markets and Cooperation"
+    },
+    {
+      "code": "G08",
+      "name_zh": "气候技术创新与能力建设",
+      "name_en": "Technology and Capacity Building"
+    },
+    {
+      "code": "G09",
+      "name_zh": "气候透明度、核算与科学评估",
+      "name_en": "Transparency and Assessment"
+    },
+    {
+      "code": "G10",
+      "name_zh": "气候公平、正义与公正转型",
+      "name_en": "Equity, Justice and Just Transition"
+    },
+    {
+      "code": "G11",
+      "name_zh": "气候外交、国际政治经济与贸易",
+      "name_en": "Climate Diplomacy and Trade"
+    },
+    {
+      "code": "G12",
+      "name_zh": "自然生态、土地利用与粮食系统",
+      "name_en": "Nature, Land and Food Systems"
+    },
+    {
+      "code": "G13",
+      "name_zh": "多元主体、地方行动与社会治理",
+      "name_en": "Non-State Actors and Society"
+    },
+    {
+      "code": "G14",
+      "name_zh": "气候风险、健康与新兴治理议题",
+      "name_en": "Climate Risks and Emerging Issues"
+    }
+  ],
+  "subcategories": [
+    {
+      "code": "G01.01",
+      "parent": "G01",
+      "name_zh": "国际气候条约与法律制度",
+      "name_en": "Climate treaties and legal regimes",
+      "evidence_regex": "UNFCCC|Kyoto Protocol|Paris Agreement|气候公约|京都议定书|巴黎协定",
+      "definition": "Climate treaties and legal regimes",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G01.02",
+      "parent": "G01",
+      "name_zh": "COP、CMA、CMP会议与决议",
+      "name_en": "COP CMA CMP meetings and decisions",
+      "evidence_regex": "\\bCOP\\s*\\d{1,2}\\b|\\bCMA\\s*\\d|\\bCMP\\s*\\d|Conference of the Parties|缔约方大会|气候大会决议",
+      "definition": "COP CMA CMP meetings and decisions",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G01.03",
+      "parent": "G01",
+      "name_zh": "国际谈判进程与集团立场",
+      "name_en": "Negotiations and negotiating positions",
+      "evidence_regex": "climate negotiations?|climate talks|negotiating bloc|negotiating group|气候谈判|谈判立场|谈判集团",
+      "definition": "Negotiations and negotiating positions",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G01.04",
+      "parent": "G01",
+      "name_zh": "全球气候治理机构与改革",
+      "name_en": "Climate institutions and reform",
+      "evidence_regex": "UNFCCC secretariat|reform.{0,40}climate governance|climate governance.{0,40}reform|气候治理改革|气候公约秘书处",
+      "definition": "Climate institutions and reform",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G01.05",
+      "parent": "G01",
+      "name_zh": "国际合作倡议与伙伴关系",
+      "name_en": "International initiatives and partnerships",
+      "evidence_regex": "climate partnership|climate cooperation|climate alliance|international climate initiative|气候伙伴关系|气候合作|气候联盟",
+      "definition": "International initiatives and partnerships",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G01.06",
+      "parent": "G01",
+      "name_zh": "全球气候治理体系演进",
+      "name_en": "Evolution of climate governance",
+      "evidence_regex": "history of climate negotiations|evolution of.{0,30}climate governance|post.Kyoto|post.Paris|气候治理体系|气候谈判历程",
+      "definition": "Evolution of climate governance",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G02.01",
+      "parent": "G02",
+      "name_zh": "全球温控与长期气候目标",
+      "name_en": "Global temperature and long-term goals",
+      "evidence_regex": "1\\.5\\s*(?:°|degrees?|C\\b)|well below 2|global net.zero|temperature goal|温控目标|全球净零",
+      "definition": "Global temperature and long-term goals",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G02.02",
+      "parent": "G02",
+      "name_zh": "国家自主贡献",
+      "name_en": "Nationally determined contributions",
+      "evidence_regex": "nationally determined contributions?|\\bNDCs?\\b|国家自主贡献|自主贡献更新",
+      "definition": "Nationally determined contributions",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G02.03",
+      "parent": "G02",
+      "name_zh": "长期低排放发展战略",
+      "name_en": "Long-term low-emission strategies",
+      "evidence_regex": "LT.LEDS|long.term low.emission|net.zero strateg|carbon neutrality strateg|长期低排放|碳中和战略",
+      "definition": "Long-term low-emission strategies",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G02.04",
+      "parent": "G02",
+      "name_zh": "全球盘点",
+      "name_en": "Global stocktake",
+      "evidence_regex": "global stocktake|全球盘点",
+      "definition": "Global stocktake",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G02.05",
+      "parent": "G02",
+      "name_zh": "国家履约进展与行动差距",
+      "name_en": "Implementation progress and gaps",
+      "evidence_regex": "emissions? gap|implementation gap|off track.{0,40}(?:climate|emission)|climate target.{0,30}(?:miss|progress)|排放差距|履约进展|减排缺口",
+      "definition": "Implementation progress and gaps",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G02.06",
+      "parent": "G02",
+      "name_zh": "气候目标协同与政策一致性",
+      "name_en": "Policy coherence and target synergies",
+      "evidence_regex": "climate policy coherence|climate policy consistency|climate.{0,30}policy conflict|气候政策一致性|气候目标协同|气候政策冲突",
+      "definition": "Policy coherence and target synergies",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.01",
+      "parent": "G03",
+      "name_zh": "化石能源转型与退出",
+      "name_en": "Fossil fuel transition and phase-out",
+      "evidence_regex": "fossil fuels?|coal phase.out|coal.fired|oil and gas|化石能源|化石燃料|煤电|煤炭退出|bahan bakar fosil|batu ?bara|combustibles f[oó]siles",
+      "definition": "Fossil fuel transition and phase-out",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.02",
+      "parent": "G03",
+      "name_zh": "可再生能源发展",
+      "name_en": "Renewable energy deployment",
+      "evidence_regex": "renewable(?: energy| power|s\\b)|solar (?:power|energy|panel|farm)|wind (?:power|energy|farm|turbine)|可再生能源|光伏|风电|energ[ií]a renovable|energi terbarukan|energi surya",
+      "definition": "Renewable energy deployment",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.03",
+      "parent": "G03",
+      "name_zh": "能源效率与终端电气化",
+      "name_en": "Efficiency and end-use electrification",
+      "evidence_regex": "energy efficiency|energy.efficient|electrification|heat pumps?|能效|能源效率|终端电气化|节能",
+      "definition": "Efficiency and end-use electrification",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.04",
+      "parent": "G03",
+      "name_zh": "工业低碳转型",
+      "name_en": "Industrial decarbonization",
+      "evidence_regex": "green steel|low.carbon (?:steel|cement|industr)|industrial decarboni|工业减碳|工业低碳|绿色钢铁|水泥减排",
+      "definition": "Industrial decarbonization",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.05",
+      "parent": "G03",
+      "name_zh": "交通运输低碳转型",
+      "name_en": "Low-carbon transport",
+      "evidence_regex": "electric vehicles?|\\bEVs\\b|transport decarboni|sustainable aviation fuel|shipping emissions|电动汽车|交通减排|绿色航运|航空减排",
+      "definition": "Low-carbon transport",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.06",
+      "parent": "G03",
+      "name_zh": "非二氧化碳温室气体减排",
+      "name_en": "Non-CO2 mitigation",
+      "evidence_regex": "methane|nitrous oxide|hydrofluorocarbon|\\bHFCs\\b|甲烷|氧化亚氮|含氟温室气体",
+      "definition": "Non-CO2 mitigation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.07",
+      "parent": "G03",
+      "name_zh": "CCUS与碳移除",
+      "name_en": "CCUS and carbon removal",
+      "evidence_regex": "carbon capture|carbon removal|direct air capture|\\bCCUS\\b|碳捕集|碳移除|直接空气捕集",
+      "definition": "CCUS and carbon removal",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G03.08",
+      "parent": "G03",
+      "name_zh": "绿色氢能与新型能源系统",
+      "name_en": "Green hydrogen and energy systems",
+      "evidence_regex": "green hydrogen|energy storage|battery storage|electricity grid|smart grid|绿氢|储能|智能电网|新型电力系统",
+      "definition": "Green hydrogen and energy systems",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G04.01",
+      "parent": "G04",
+      "name_zh": "全球适应目标",
+      "name_en": "Global goal on adaptation",
+      "evidence_regex": "global goal on adaptation|全球适应目标|UAE Framework for Global Climate Resilience",
+      "definition": "Global goal on adaptation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G04.02",
+      "parent": "G04",
+      "name_zh": "国家适应计划与政策",
+      "name_en": "Adaptation plans and policies",
+      "evidence_regex": "national adaptation plan|adaptation strateg|adaptation polic|国家适应计划|适应气候变化战略",
+      "definition": "Adaptation plans and policies",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G04.03",
+      "parent": "G04",
+      "name_zh": "气候灾害预警与风险管理",
+      "name_en": "Early warning and risk management",
+      "evidence_regex": "early warning|disaster risk reduction|disaster preparedness|早期预警|灾害预警|防灾减灾",
+      "definition": "Early warning and risk management",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G04.04",
+      "parent": "G04",
+      "name_zh": "城市与基础设施气候韧性",
+      "name_en": "Urban and infrastructure resilience",
+      "evidence_regex": "resilient infrastructure|climate.resilient cit|urban resilience|flood defen[cs]e|城市韧性|基础设施韧性|防洪工程",
+      "definition": "Urban and infrastructure resilience",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G04.05",
+      "parent": "G04",
+      "name_zh": "水资源与生态系统适应",
+      "name_en": "Water and ecosystem adaptation",
+      "evidence_regex": "water security|water scarcity|ecosystem.based adaptation|水安全|水资源适应|生态系统适应",
+      "definition": "Water and ecosystem adaptation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G04.06",
+      "parent": "G04",
+      "name_zh": "农业与社区适应",
+      "name_en": "Agriculture and community adaptation",
+      "evidence_regex": "climate.resilient agricultur|community.based adaptation|drought.resistant crop|农业适应|社区适应|抗旱作物",
+      "definition": "Agriculture and community adaptation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G05.01",
+      "parent": "G05",
+      "name_zh": "损失与损害国际治理机制",
+      "name_en": "Loss and damage governance",
+      "evidence_regex": "Warsaw International Mechanism|Santiago Network|loss and damage.{0,40}(?:mechanism|negotiat)|华沙国际机制|圣地亚哥网络|损失与损害机制",
+      "definition": "Loss and damage governance",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G05.02",
+      "parent": "G05",
+      "name_zh": "损失与损害基金",
+      "name_en": "Loss and damage fund",
+      "evidence_regex": "loss and damage fund|fund for responding to loss|loss.and.damage fund|损失与损害基金|损失和损害基金",
+      "definition": "Loss and damage fund",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G05.03",
+      "parent": "G05",
+      "name_zh": "极端事件经济损失",
+      "name_en": "Economic losses from extremes",
+      "evidence_regex": "(?:flood|storm|hurricane|cyclone|wildfire).{0,60}(?:damage|loss|cost)|(?:damage|loss|cost).{0,60}(?:flood|hurricane|cyclone|wildfire)|灾害损失|气候经济损失",
+      "definition": "Economic losses from extremes",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G05.04",
+      "parent": "G05",
+      "name_zh": "非经济损失与损害",
+      "name_en": "Non-economic loss and damage",
+      "evidence_regex": "non.economic loss|cultural heritage.{0,50}climate|非经济损失|气候.{0,20}文化遗产",
+      "definition": "Non-economic loss and damage",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G05.05",
+      "parent": "G05",
+      "name_zh": "气候灾害援助与恢复",
+      "name_en": "Climate disaster aid and recovery",
+      "evidence_regex": "disaster recovery|climate disaster relief|post.disaster reconstruction|灾后恢复|灾后重建|气候灾害援助",
+      "definition": "Climate disaster aid and recovery",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G06.01",
+      "parent": "G06",
+      "name_zh": "国际气候资金目标与承诺",
+      "name_en": "Climate finance goals and pledges",
+      "evidence_regex": "NCQG|new collective quantified goal|climate finance goal|climate finance pledge|气候资金目标|气候资金承诺",
+      "definition": "Climate finance goals and pledges",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G06.02",
+      "parent": "G06",
+      "name_zh": "多边气候基金",
+      "name_en": "Multilateral climate funds",
+      "evidence_regex": "Green Climate Fund|Global Environment Facility|Adaptation Fund|绿色气候基金|全球环境基金|适应基金",
+      "definition": "Multilateral climate funds",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G06.03",
+      "parent": "G06",
+      "name_zh": "减缓与适应资金配置",
+      "name_en": "Mitigation and adaptation allocation",
+      "evidence_regex": "adaptation financ|mitigation financ|climate finance flow|适应融资|减缓资金|气候资金流向",
+      "definition": "Mitigation and adaptation allocation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G06.04",
+      "parent": "G06",
+      "name_zh": "多边开发银行与发展融资",
+      "name_en": "Development banks and finance",
+      "evidence_regex": "multilateral development bank|concessional financ|development bank.{0,40}climate|多边开发银行|优惠贷款|开发融资",
+      "definition": "Development banks and finance",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G06.05",
+      "parent": "G06",
+      "name_zh": "私人气候投融资",
+      "name_en": "Private climate investment",
+      "evidence_regex": "green bonds?|transition financ|private climate financ|climate investment|绿色债券|转型金融|气候投融资",
+      "definition": "Private climate investment",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G06.06",
+      "parent": "G06",
+      "name_zh": "气候债务与金融公平",
+      "name_en": "Climate debt and finance equity",
+      "evidence_regex": "climate debt|debt.for.climate|debt.for.nature|climate finance.{0,40}grants|气候债务|债务置换|气候赠款",
+      "definition": "Climate debt and finance equity",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G06.07",
+      "parent": "G06",
+      "name_zh": "金融体系与气候风险",
+      "name_en": "Financial climate risk",
+      "evidence_regex": "climate.related financial|climate financial risk|climate stress test|气候金融风险|气候压力测试|气候风险披露",
+      "definition": "Financial climate risk",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G07.01",
+      "parent": "G07",
+      "name_zh": "巴黎协定第6.2条合作",
+      "name_en": "Article 6.2 cooperation",
+      "evidence_regex": "Article\\s*6\\.2|\\bITMOs?\\b|internationally transferred mitigation|第6\\.2条|国际转让减缓成果",
+      "definition": "Article 6.2 cooperation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G07.02",
+      "parent": "G07",
+      "name_zh": "巴黎协定第6.4条机制",
+      "name_en": "Article 6.4 mechanism",
+      "evidence_regex": "Article\\s*6\\.4|Paris Agreement Crediting Mechanism|第6\\.4条|巴黎协定碳信用机制",
+      "definition": "Article 6.4 mechanism",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G07.03",
+      "parent": "G07",
+      "name_zh": "第6.8条非市场合作",
+      "name_en": "Article 6.8 non-market cooperation",
+      "evidence_regex": "Article\\s*6\\.8|non.market approaches|第6\\.8条|非市场方法|非市场合作",
+      "definition": "Article 6.8 non-market cooperation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G07.04",
+      "parent": "G07",
+      "name_zh": "国内碳排放交易体系",
+      "name_en": "Domestic emissions trading",
+      "evidence_regex": "emissions? trading|\\bEU ETS\\b|carbon allowance|碳排放权交易|排放交易体系|碳配额",
+      "definition": "Domestic emissions trading",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G07.05",
+      "parent": "G07",
+      "name_zh": "自愿碳市场与碳信用",
+      "name_en": "Voluntary carbon markets",
+      "evidence_regex": "voluntary carbon|carbon credits?|carbon offsets?|自愿碳市场|碳信用|碳抵消",
+      "definition": "Voluntary carbon markets",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G07.06",
+      "parent": "G07",
+      "name_zh": "碳市场完整性与核算",
+      "name_en": "Carbon market integrity",
+      "evidence_regex": "corresponding adjustment|double counting|carbon.{0,40}additionality|carbon.{0,40}permanence|对应调整|双重计算|碳市场完整性|额外性",
+      "definition": "Carbon market integrity",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G08.01",
+      "parent": "G08",
+      "name_zh": "气候技术研发与突破",
+      "name_en": "Climate technology R&D",
+      "evidence_regex": "clean.tech.{0,30}(?:breakthrough|research|demonstration)|climate technolog.{0,30}(?:research|innovation)|气候技术研发|清洁技术突破|低碳技术研发",
+      "definition": "Climate technology R&D",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G08.02",
+      "parent": "G08",
+      "name_zh": "国际技术转让与扩散",
+      "name_en": "Technology transfer and diffusion",
+      "evidence_regex": "technology transfer|technology diffusion|技术转让|技术扩散|技术转移",
+      "definition": "Technology transfer and diffusion",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G08.03",
+      "parent": "G08",
+      "name_zh": "气候技术机制与平台",
+      "name_en": "Climate technology mechanisms",
+      "evidence_regex": "Climate Technology Centre|\\bCTCN\\b|Technology Executive Committee|气候技术中心|技术执行委员会",
+      "definition": "Climate technology mechanisms",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G08.04",
+      "parent": "G08",
+      "name_zh": "能力建设与人才培养",
+      "name_en": "Capacity building and training",
+      "evidence_regex": "capacity.building|climate training|climate capacity|能力建设|气候培训|气候人才",
+      "definition": "Capacity building and training",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G08.05",
+      "parent": "G08",
+      "name_zh": "人工智能与数字气候治理",
+      "name_en": "AI and digital climate governance",
+      "evidence_regex": "artificial intelligence.{0,80}climate|climate.{0,80}artificial intelligence|AI.{0,25}climate|digital climate|数字气候|人工智能.{0,20}气候|气候.{0,20}人工智能",
+      "definition": "AI and digital climate governance",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G08.06",
+      "parent": "G08",
+      "name_zh": "气候创新生态与产业化",
+      "name_en": "Climate innovation ecosystems",
+      "evidence_regex": "climate.tech startup|climate innovation|clean.tech commerciali|气候创新|气候科技初创|低碳技术产业化",
+      "definition": "Climate innovation ecosystems",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G09.01",
+      "parent": "G09",
+      "name_zh": "强化透明度框架",
+      "name_en": "Enhanced transparency framework",
+      "evidence_regex": "enhanced transparency framework|biennial transparency report|强化透明度框架|两年期透明度报告",
+      "definition": "Enhanced transparency framework",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G09.02",
+      "parent": "G09",
+      "name_zh": "温室气体清单与排放数据",
+      "name_en": "GHG inventories and emissions data",
+      "evidence_regex": "emissions? inventor|greenhouse gas inventor|emission factors?|排放清单|温室气体清单|排放因子",
+      "definition": "GHG inventories and emissions data",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G09.03",
+      "parent": "G09",
+      "name_zh": "MRV与碳核算标准",
+      "name_en": "MRV and carbon accounting",
+      "evidence_regex": "\\bMRV\\b|carbon accounting|monitoring.{0,20}reporting.{0,20}verification|碳核算|监测.{0,5}报告.{0,5}核查",
+      "definition": "MRV and carbon accounting",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G09.04",
+      "parent": "G09",
+      "name_zh": "气候科学与IPCC评估",
+      "name_en": "Climate science and IPCC",
+      "evidence_regex": "\\bIPCC\\b|climate science|climate assessment|气候科学|气候评估|政府间气候变化专门委员会",
+      "definition": "Climate science and IPCC",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G09.05",
+      "parent": "G09",
+      "name_zh": "气候政策效果评估",
+      "name_en": "Climate policy evaluation",
+      "evidence_regex": "climate policy.{0,35}(?:effectiveness|evaluation|impact)|(?:evaluation|effectiveness).{0,35}climate polic|气候政策评估|气候政策效果",
+      "definition": "Climate policy evaluation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G09.06",
+      "parent": "G09",
+      "name_zh": "气候数据基础设施与开放科学",
+      "name_en": "Climate data and open science",
+      "evidence_regex": "climate data|climate database|climate model|climate remote sensing|气候数据|气候模型|气候遥感",
+      "definition": "Climate data and open science",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G10.01",
+      "parent": "G10",
+      "name_zh": "气候公平与历史责任",
+      "name_en": "Equity and historical responsibility",
+      "evidence_regex": "climate justice|historical emissions|common but differentiated|CBDR|气候公平|历史排放|共同但有区别",
+      "definition": "Equity and historical responsibility",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G10.02",
+      "parent": "G10",
+      "name_zh": "公正转型政策与机制",
+      "name_en": "Just transition policies",
+      "evidence_regex": "just transition|公正转型",
+      "definition": "Just transition policies",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G10.03",
+      "parent": "G10",
+      "name_zh": "就业、劳工与社会保障",
+      "name_en": "Jobs labour and social protection",
+      "evidence_regex": "green jobs|energy transition.{0,40}workers|coal workers|绿色就业|煤炭工人|转型.{0,15}社会保障",
+      "definition": "Jobs labour and social protection",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G10.04",
+      "parent": "G10",
+      "name_zh": "弱势群体与气候权利",
+      "name_en": "Vulnerable groups and climate rights",
+      "evidence_regex": "climate rights|climate.{0,40}(?:gender|indigenous|youth)|(?:gender|indigenous|youth).{0,40}climate|气候权利|气候.{0,15}弱势群体",
+      "definition": "Vulnerable groups and climate rights",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G10.05",
+      "parent": "G10",
+      "name_zh": "发展权、能源可及性与贫困",
+      "name_en": "Development energy access and poverty",
+      "evidence_regex": "energy poverty|energy access|right to development|能源贫困|能源可及|发展权",
+      "definition": "Development energy access and poverty",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G11.01",
+      "parent": "G11",
+      "name_zh": "大国气候外交与双边关系",
+      "name_en": "Major-power climate diplomacy",
+      "evidence_regex": "climate diplomacy|bilateral climate|US.China.{0,40}climate|China.US.{0,40}climate|气候外交|中美气候|中欧气候",
+      "definition": "Major-power climate diplomacy",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G11.02",
+      "parent": "G11",
+      "name_zh": "气候谈判联盟与南北关系",
+      "name_en": "Negotiating alliances and North-South relations",
+      "evidence_regex": "\\bG77\\b|\\bAOSIS\\b|Alliance of Small Island States|Like.Minded Developing Countries|小岛屿国家联盟|七十七国集团",
+      "definition": "Negotiating alliances and North-South relations",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G11.03",
+      "parent": "G11",
+      "name_zh": "气候贸易政策与碳边境措施",
+      "name_en": "Climate trade and border measures",
+      "evidence_regex": "\\bCBAM\\b|carbon border|carbon tariff|碳边境|碳关税|绿色贸易",
+      "definition": "Climate trade and border measures",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G11.04",
+      "parent": "G11",
+      "name_zh": "绿色产业竞争与供应链",
+      "name_en": "Green industrial competition and supply chains",
+      "evidence_regex": "clean.energy supply chain|critical minerals|clean.tech industrial|green industrial polic|关键矿产|清洁能源供应链|绿色产业政策",
+      "definition": "Green industrial competition and supply chains",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G11.05",
+      "parent": "G11",
+      "name_zh": "气候安全与地缘政治",
+      "name_en": "Climate security and geopolitics",
+      "evidence_regex": "climate security|energy security|climate geopolitic|气候安全|能源安全|气候地缘政治",
+      "definition": "Climate security and geopolitics",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G12.01",
+      "parent": "G12",
+      "name_zh": "森林保护与REDD+",
+      "name_en": "Forests and REDD+",
+      "evidence_regex": "deforestation|reforestation|\\bREDD\\+?|forest carbon|毁林|森林碳|植树造林|deforestaci[oó]n|deforestasi",
+      "definition": "Forests and REDD+",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G12.02",
+      "parent": "G12",
+      "name_zh": "土地利用与自然碳汇",
+      "name_en": "Land use and natural carbon sinks",
+      "evidence_regex": "\\bLULUCF\\b|soil carbon|carbon sinks?|land.use emissions|土壤碳|碳汇|土地利用排放",
+      "definition": "Land use and natural carbon sinks",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G12.03",
+      "parent": "G12",
+      "name_zh": "生物多样性与自然解决方案",
+      "name_en": "Biodiversity and nature-based solutions",
+      "evidence_regex": "nature.based solutions|biodiversity.{0,50}climate|climate.{0,50}biodiversity|基于自然的解决方案|生物多样性.{0,20}气候",
+      "definition": "Biodiversity and nature-based solutions",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G12.04",
+      "parent": "G12",
+      "name_zh": "海洋生态与蓝碳",
+      "name_en": "Ocean ecosystems and blue carbon",
+      "evidence_regex": "blue carbon|ocean acidification|mangrove.{0,40}carbon|蓝碳|海洋酸化|红树林.{0,15}碳",
+      "definition": "Ocean ecosystems and blue carbon",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G12.05",
+      "parent": "G12",
+      "name_zh": "农业减排与可持续粮食系统",
+      "name_en": "Agricultural mitigation and food systems",
+      "evidence_regex": "food system.{0,40}emission|agricultural emissions|livestock methane|sustainable food system|农业减排|粮食系统|畜牧业甲烷",
+      "definition": "Agricultural mitigation and food systems",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G12.06",
+      "parent": "G12",
+      "name_zh": "生态保护与气候协同治理",
+      "name_en": "Integrated nature-climate governance",
+      "evidence_regex": "nature.climate nexus|climate.biodiversity nexus|Kunming.Montreal|Rio conventions|生态.{0,15}气候协同|里约三公约|昆明.蒙特利尔",
+      "definition": "Integrated nature-climate governance",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G13.01",
+      "parent": "G13",
+      "name_zh": "城市与地方政府气候行动",
+      "name_en": "Cities and local climate action",
+      "evidence_regex": "\\bC40\\b|ICLEI|mayors.{0,30}climate|municipal climate|local climate action|城市气候行动|地方气候行动",
+      "definition": "Cities and local climate action",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G13.02",
+      "parent": "G13",
+      "name_zh": "企业气候承诺与行动",
+      "name_en": "Corporate climate commitments",
+      "evidence_regex": "corporate net.zero|corporate climate|company.{0,30}net.zero|企业净零|企业气候|企业减排",
+      "definition": "Corporate climate commitments",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G13.03",
+      "parent": "G13",
+      "name_zh": "金融机构与投资者气候行动",
+      "name_en": "Financial institutions and investors",
+      "evidence_regex": "investor climate|net.zero banking|net.zero asset|GFANZ|金融机构.{0,20}气候|净零银行|投资者气候",
+      "definition": "Financial institutions and investors",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G13.04",
+      "parent": "G13",
+      "name_zh": "社会组织、公众与青年参与",
+      "name_en": "Civil society and youth participation",
+      "evidence_regex": "climate protest|climate activism|Fridays for Future|climate movement|气候抗议|气候行动主义|气候公众参与|青年气候",
+      "definition": "Civil society and youth participation",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G13.05",
+      "parent": "G13",
+      "name_zh": "气候教育、传播与信息完整性",
+      "name_en": "Education communication and information integrity",
+      "evidence_regex": "climate education|climate communication|climate misinformation|climate disinformation|climate denial|气候教育|气候传播|气候虚假信息|气候否认",
+      "definition": "Education communication and information integrity",
+      "origin": "user_supplied_screenshots",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G14.01",
+      "parent": "G14",
+      "name_zh": "气候变化与公共健康",
+      "name_en": "Climate and public health",
+      "evidence_regex": "climate.{0,40}health|heat.related (?:death|illness)|climate.{0,30}disease|气候.{0,15}健康|热相关死亡",
+      "definition": "Climate and public health",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G14.02",
+      "parent": "G14",
+      "name_zh": "气候迁移、流离失所与人类安全",
+      "name_en": "Climate migration and displacement",
+      "evidence_regex": "climate migra|climate refugees?|climate displacement|气候移民|气候难民|气候流离失所",
+      "definition": "Climate migration and displacement",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G14.03",
+      "parent": "G14",
+      "name_zh": "气候物理风险与极端事件归因",
+      "name_en": "Physical risks and attribution",
+      "evidence_regex": "climate attribution|attribution study|climate physical risk|extreme event attribution|极端事件归因|气候归因|气候物理风险",
+      "definition": "Physical risks and attribution",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G14.04",
+      "parent": "G14",
+      "name_zh": "气候临界点与不可逆变化",
+      "name_en": "Tipping points and irreversible change",
+      "evidence_regex": "climate tipping|tipping points?|irreversible.{0,30}climate|气候临界点|气候临界阈值|不可逆.{0,15}气候",
+      "definition": "Tipping points and irreversible change",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G14.05",
+      "parent": "G14",
+      "name_zh": "地球工程与气候干预治理",
+      "name_en": "Geoengineering and climate intervention",
+      "evidence_regex": "geoengineering|solar radiation management|solar radiation modification|stratospheric aerosol|地球工程|太阳辐射管理|气候干预",
+      "definition": "Geoengineering and climate intervention",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    },
+    {
+      "code": "G14.06",
+      "parent": "G14",
+      "name_zh": "复合气候风险与级联影响",
+      "name_en": "Compound and cascading climate risks",
+      "evidence_regex": "compound (?:climate |weather )?(?:risk|event|hazard)|cascading.{0,30}climate|climate.{0,30}cascading|复合气候风险|气候级联|复合极端事件",
+      "definition": "Compound and cascading climate risks",
+      "origin": "authorized_extension_20261106",
+      "review_status": "research_dictionary_not_official_UNFCCC_standard"
+    }
+  ],
+  "annotation_guidance": {
+    "unit": "one distinct original article; multilingual translations/updates linked, not automatically new events",
+    "multi_label": true,
+    "primary": "headline/lead-weighted lexical candidate; not a validated classifier",
+    "evidence": "verbatim Unicode offsets in title or source_text",
+    "country": "text mention, not publisher location or national position",
+    "events": "official dates and decisions require separate source verification",
+    "counting": "report mention and focal counts separately; control publisher/year coverage; no causal interpretation of co-occurrence"
+  }
+}

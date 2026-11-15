@@ -122,6 +122,20 @@ def _contains_term(text: str, term: str) -> bool:
     return term in text
 
 
+def _literal_trie_pattern(terms):
+    """Prefix-factor literal alternatives without changing longest-match rules."""
+    root={}
+    for term in terms:
+        node=root
+        for character in term:node=node.setdefault(character,{})
+        node[None]={}
+    def render(node):
+        children=[re.escape(c)+render(child) for c,child in node.items() if c is not None]
+        if not children:return ''
+        value=children[0] if len(children)==1 else '(?:'+'|'.join(children)+')'
+        return '(?:'+value+')?' if None in node else value
+    return render(root)
+
 @lru_cache(maxsize=1)
 def _country_patterns():
     terms={}
@@ -131,12 +145,12 @@ def _country_patterns():
                 terms.setdefault(_normalise(term),set()).add(row['alpha2'])
     english=[];other=[]
     for term in sorted(terms,key=len,reverse=True):
-        pattern=re.escape(term)
+        pattern=term
         if re.search(r'[a-z]',term) and not re.search(r'[\u3400-\u9fff]',term):english.append(pattern)
         else:other.append(pattern)
     # Share word-boundary assertions instead of repeating them for every alias
     # at every character of a long source document.
-    combined=r'(?<![A-Za-z0-9])(?:'+'|'.join(english)+r')(?![A-Za-z0-9])|(?:'+'|'.join(other)+')'
+    combined=r'(?<![A-Za-z0-9])(?:'+_literal_trie_pattern(english)+r')(?![A-Za-z0-9])|(?:'+_literal_trie_pattern(other)+')'
     return re.compile(combined,re.I),terms
 
 
@@ -145,6 +159,31 @@ def geographic_evidence_text(text):
     masked=re.sub(r'https?://\S+',lambda m:' '*len(m.group()),text)
     masked=re.sub(r'发展中国家|朝鲜半岛',lambda m:' '*len(m.group()),masked)
     return re.sub(r'\b(?:The New York Times|New York Times|Yahoo (?:Finance|News)(?: (?:Singapore|UK|Australia))?|South China Morning Post|China Daily|The Times of India|Japan Times|France 24)\b',lambda m:' '*len(m.group()),masked,flags=re.I)
+
+@lru_cache(maxsize=1)
+def _literal_country_terms():
+    _,terms=_country_patterns()
+    return tuple((term,codes,bool(re.search(r'[a-z]',term) and not re.search(r'[\u3400-\u9fff]',term))) for term,codes in terms.items())
+
+def _literal_country_spans(text):
+    """C-level literal search, preserving original offsets and longest matches."""
+    low=text.lower()
+    if len(low)!=len(text):
+        pattern,terms=_country_patterns()
+        return [(m.start(),m.end(),terms.get(_normalise(m.group()),())) for m in pattern.finditer(text)]
+    found=[]
+    def word(c):return c.isascii() and c.isalnum()
+    for term,codes,bounded in _literal_country_terms():
+        start=low.find(term)
+        while start>=0:
+            end=start+len(term)
+            if not bounded or not ((start and word(text[start-1])) or (end<len(text) and word(text[end]))):
+                found.append((start,end,codes))
+            start=low.find(term,end)
+    out=[];cursor=0
+    for start,end,codes in sorted(found,key=lambda r:(r[0],-r[1])):
+        if start>=cursor:out.append((start,end,codes));cursor=end
+    return out
 
 @lru_cache(maxsize=32768)
 def country_mentions_with_evidence(text: str) -> list[dict]:
@@ -160,11 +199,11 @@ def country_mentions_with_evidence(text: str) -> list[dict]:
     masked=re.sub(r'\b(?:The New York Times|New York Times|Yahoo (?:Finance|News)(?: (?:Singapore|UK|Australia))?|South China Morning Post|China Daily|The Times of India|Japan Times|France 24)\b',lambda m:' '*len(m.group()),masked,flags=re.I)
     # The Korean Peninsula is a region, not an explicit North-Korean reference.
     masked=re.sub('朝鲜半岛',lambda m:' '*len(m.group()),masked)
-    pattern,terms=_country_patterns();index=_country_by_code();result=[]
-    for match in pattern.finditer(masked):
-        for code in terms.get(_normalise(match.group()),()):
-            if code=='US' and _normalise(match.group()) in {'u.s.','u.s.a.'} and re.match(r'\$|\s*[- ]?dollars?\b',masked[match.end():],re.I):continue
-            result.append({**index[code],'start':match.start(),'end':match.end(),'matched_text':text[match.start():match.end()],
+    index=_country_by_code();result=[]
+    for start,end,codes in _literal_country_spans(masked):
+        for code in codes:
+            if code=='US' and _normalise(masked[start:end]) in {'u.s.','u.s.a.'} and re.match(r'\$|\s*[- ]?dollars?\b',masked[end:],re.I):continue
+            result.append({**index[code],'start':start,'end':end,'matched_text':text[start:end],
                            'method':'country-span-v2'})
     # "US" in running text must be an uppercase acronym, never the pronoun
     # "us", and a currency prefix must not create a US country tag.

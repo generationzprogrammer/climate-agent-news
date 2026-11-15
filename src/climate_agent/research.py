@@ -192,6 +192,7 @@ def document_type_for(row,kind):
 
 
 def make_text_record(row, text, kind, *, resolved_url=None, basis=None):
+    from .governance_labels import label_text
     text=clean(text)
     url=row['canonical_url']
     digest=hashlib.sha256(text.encode()).hexdigest()
@@ -221,6 +222,8 @@ def make_text_record(row, text, kind, *, resolved_url=None, basis=None):
             'agenda_item_id':None,'thematic_day_id':None,
             'rights_status':'source_attributed_excerpt_not_full_text',
             'country_codes':country_codes_for(text+'\n'+row.get('title_original','')),
+            'governance_labels_v1':label_text(row.get('title_original',''),text),
+            'governance_label_title':row.get('title_original',''),
             **annotations(text)}
 
 
@@ -425,6 +428,8 @@ FIELDS += [
     ('source_text_zh','来源文字的中文译文；原文另存','Chinese translation; original retained separately'),
     ('source_text_en','来源文字的英文原文或译文','English source text or translation'),
     ('country_evidence','国别匹配原词及来源字段与位置','Country evidence, source field and character offsets'),
+    ('governance_labels_v1','12类治理议题及全文匹配证据候选','Twelve governance topics and candidate evidence spans'),
+    ('governance_label_title','治理标签的原始题名定位字段','Original headline addressed by governance evidence'),
     ('country_tag_version','国别标注方法版本','Country annotation version'),
     ('exact_duplicate_of','相同来源文字的主记录；保留不同报道记录','Primary record with identical source text; distinct report records retained'),
     ('source_language_declared','原采集接口语言声明','Initially declared source language'),

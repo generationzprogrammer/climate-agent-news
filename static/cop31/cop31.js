@@ -15,8 +15,10 @@
   const esc = text => String(text).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
   const SECTION_IDS = ["map", "today", "countries", "analytics", "research", "assistant", "database"]; // menu / reel order
   // pages of their own; home = the stamp stage + 全球气候现场. The country topics are pages reached from 国家专题.
-  const PAGE_IDS = ["today", "countries", "chinaCarbon", "singapore", "analytics", "research", "assistant", "database"];
-  const menuIdOf = id => (id === "chinaCarbon" || id === "singapore" ? "countries" : id); // a topic lights 国家专题
+  // the topic pages of 国家专题 are the rows of its list (中国碳市场, 新加坡, and since 2026-11-12 the countries and regions)
+  const FOCUS_IDS = [...document.querySelectorAll("#countries .ct-row[data-focus]")].map(row => row.dataset.focus).filter(id => $(id));
+  const PAGE_IDS = ["today", "countries", ...FOCUS_IDS, "analytics", "research", "assistant", "database"];
+  const menuIdOf = id => (FOCUS_IDS.includes(id) ? "countries" : id); // a topic lights 国家专题
 
   /* ---------- Reveal roles (the reference spring/entrance study) ---------- */
   const ROLES = [
@@ -99,7 +101,7 @@
     document.querySelectorAll(".nav-db").forEach(item => {
       if ((item.querySelector(".sr-only")?.textContent ?? item.textContent) !== enter) item.textContent = enter;
     });
-    document.querySelectorAll(".ct-place[data-en], .home-main [data-en]").forEach(place => { place.dataset.zh ??= place.textContent; place.textContent = en ? place.dataset.en : place.dataset.zh; });
+    document.querySelectorAll(".ct-place[data-en], .ct-title[data-en], .focus-country h2[data-en], .home-main [data-en], #siteMenu [data-en], #mobileMenu [data-en], #partnerModal [data-en], .rail-actions [data-en], footer [data-en]").forEach(place => { place.dataset.zh ??= place.textContent; place.textContent = en ? place.dataset.en : place.dataset.zh; });
   };
 
   /* ---------- Scroll-spy (the reference writings page R5: 45 % line, last section at the page end) + reel ---------- */
@@ -323,7 +325,11 @@
     };
     stampHover = { drop: () => setHover(null) };
     list.forEach(s => {
-      s.el.addEventListener("pointerenter", event => { if (event.pointerType === "mouse") setHover(s); });
+      s.el.addEventListener("pointerenter", event => { // a stamp can arrive under a still pointer (the home sheet opening)
+        if (event.pointerType !== "mouse") return;
+        pointer = { x: event.clientX, y: event.clientY };
+        setHover(s);
+      });
       s.el.addEventListener("pointerleave", event => {
         if (event.pointerType !== "mouse") return;
         clearTimeout(grace);
@@ -396,6 +402,7 @@
     new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; wake(); }, { rootMargin: "200px" }).observe(cluster);
     document.addEventListener("visibilitychange", wake);
     addEventListener("resize", measure);
+    if ("ResizeObserver" in window) new ResizeObserver(measure).observe(cluster); // the home sheet starts folded (display: none)
     measure();
     wake();
 
@@ -420,15 +427,47 @@
     }
   }
 
-  /* ---------- Home description: [data-mirror="id"] repeats that element's text (app.js writes it per language) ---------- */
-  function setupMirrors() {
-    document.querySelectorAll("[data-mirror]").forEach(copy => {
-      const source = $(copy.dataset.mirror);
-      if (!source) return;
-      const sync = () => { copy.textContent = source.textContent.trim(); };
-      sync();
-      new MutationObserver(sync).observe(source, { childList: true, characterData: true, subtree: true });
-    });
+  /* ---------- Home: 其他数据服务 (2026-11-03) ----------
+     The tool stamps wait folded behind one entry, so the home page stays spare and the photograph shows. A click springs
+     them out of the entry into their grid (staggered, a little overshoot); a second click, a click elsewhere or Esc
+     draws them back into it. Reduced motion: shown and hidden at once. */
+  function setupToolsToggle() {
+    const box = document.querySelector(".home-tools"), toggle = box?.querySelector(".home-tools-toggle"), sheet = box?.querySelector(".stamps");
+    if (!box || !toggle || !sheet) return;
+    const stamps = [...sheet.querySelectorAll(".stamp")];
+    let running = null;
+    const fromToggle = stamp => { // the stamp shrunk onto the entry's centre
+      const a = toggle.getBoundingClientRect(), b = stamp.getBoundingClientRect();
+      return `translate(${(a.left + a.width / 2 - b.left - b.width / 2).toFixed(1)}px, ${(a.top + a.height / 2 - b.top - b.height / 2).toFixed(1)}px) scale(.14)`;
+    };
+    const isOpen = () => box.classList.contains("is-open");
+    function set(open) {
+      if (open === (toggle.getAttribute("aria-expanded") === "true")) return;
+      running?.forEach(animation => animation.cancel());
+      running = null;
+      sheet.style.pointerEvents = "";
+      toggle.setAttribute("aria-expanded", String(open));
+      box.classList.add("is-open"); // laid out for measuring, also while closing
+      if (open) stampHover.drop();
+      if (reducedMotion.matches) { box.classList.toggle("is-open", open); return; }
+      const animations = stamps.map((stamp, index) => {
+        const folded = { transform: fromToggle(stamp), opacity: 0 }, placed = { transform: "translate(0, 0)", opacity: 1 };
+        return open
+          ? stamp.animate([folded, placed], { duration: 640, delay: index * 45, easing: "cubic-bezier(.2, 1.25, .35, 1)", fill: "backwards" })
+          : stamp.animate([placed, folded], { duration: 300, delay: (stamps.length - 1 - index) * 25, easing: "cubic-bezier(.5, 0, .75, 0)", fill: "forwards" });
+      });
+      running = animations;
+      sheet.style.pointerEvents = "none"; // no hover while the stamps are in flight
+      Promise.all(animations.map(animation => animation.finished)).then(() => {
+        if (running !== animations) return;
+        running = null;
+        sheet.style.pointerEvents = "";
+        if (!open) { box.classList.remove("is-open"); animations.forEach(animation => animation.cancel()); }
+      }).catch(() => {});
+    }
+    toggle.addEventListener("click", () => set(toggle.getAttribute("aria-expanded") !== "true"));
+    document.addEventListener("click", event => { if (isOpen() && !box.contains(event.target)) set(false); });
+    addEventListener("keydown", event => { if (event.key === "Escape" && isOpen()) set(false); });
   }
 
   /* ---------- Clean copies (map stamp miniature, chart lightbox): no ids, no live regions, shown complete ---------- */
@@ -655,7 +694,7 @@
 
   document.addEventListener("click", event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const link = event.target.closest?.(".rail-menu nav a, .sheet nav a, a.stamp, a.brand, a.home-db-go");
+    const link = event.target.closest?.(".rail-menu nav a, .sheet nav a, a.stamp, a.brand, a.home-db-go, .home-desks a");
     if (!link) return;
     const url = new URL(link.href, location.href);
     if (url.pathname !== location.pathname || !url.hash) return;
@@ -672,6 +711,7 @@
   }, true);
   // A hash typed into the address bar (or history) picks the page too; app.js scrolls to the section afterwards.
   addEventListener("hashchange", () => {
+    if (location.hash === "#compare") { location.replace("#research"); return; } // 文本对照 was removed (2026-11-13): its old entry opens 研究工具
     const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
     if (!target) return;
     if (window.GreenFocus?.owns(target.id) || window.GreenFocus?.owns(currentPage())) return; // 国家专题 routes itself (countries.js)
@@ -802,7 +842,7 @@
       tip.setAttribute("aria-hidden", "true");
       box.append(tip);
       const max = Number((svg.querySelector(".chart-muted")?.textContent || "").replace(/[^\d.]/g, "")) || 0; // the top grid label
-      box.c31 = { kind: "line", svg, plot, dots, grid, pts, cross, focus, tip, base, top, max, cx: last[0], cy: last[1], target: pts.length - 1, shown: -1, rows: appState()?.analytics?.monthly_records || [] };
+      box.c31 = { kind: "line", svg, plot, dots, grid, pts, cross, focus, tip, base, top, max, cx: last[0], cy: last[1], target: pts.length - 1, shown: -1, rows: (window.GreenCorpus?.zh || appState()?.analytics)?.monthly_records || [] }; // the months app.js drew (2026-11-10: the database's, analysis.js)
       return true;
     }
     function dressBars(box, svg) {
@@ -999,10 +1039,14 @@
      order; the grid places the cards. On phones they stack. */
   const TEAM = [
     { name: "宋伟泽", en: "Weize Song", place: "center", email: "songwz@tsinghua.edu.cn",
-      role: "清华大学低碳能源实验室，数据平台研究主任，助理教授（研究系列）",
-      roleEn: "Director of Data Platform Research and Assistant Professor (Research), Low-Carbon Energy Laboratory, Tsinghua University",
-      research: "低碳转型情景推演理论与方法；环境系统与智能决策；零碳园区治理与政策创新；城市空间环境绩效量化评估。",
-      researchEn: "Low-carbon transition scenarios and methods; environmental systems and intelligent decision-making; zero-carbon industrial park governance and policy innovation; urban environmental performance assessment." },
+      // 2026-11-04, from the user: three appointments (one per line), the research field and two journal boards
+      role: ["清华大学低碳能源实验室数字平台研究主任", "清华大学气候变化与可持续发展研究院助理研究员", "清华大学碳中和研究院双聘教师"],
+      roleEn: ["Director of Digital Platform Research, Low-Carbon Energy Laboratory, Tsinghua University",
+        "Assistant Research Fellow, Institute of Climate Change and Sustainable Development, Tsinghua University",
+        "Joint-appointment faculty, Institute for Carbon Neutrality, Tsinghua University"],
+      research: ["研究领域：能源与气候智能治理", "Climatic Change期刊顾问委员会委员", "Energy Informatics期刊编辑委员会委员"],
+      researchEn: ["Research field: intelligent governance of energy and climate", "Advisory Board member, Climatic Change",
+        "Editorial Board member, Energy Informatics"] },
     { name: "张蔚然", en: "Weiran Zhang", place: "right", email: "zhangwr25@mails.tsinghua.edu.cn",
       role: "清华大学经济管理学院在读硕士",
       roleEn: "Master's student, School of Economics and Management, Tsinghua University",
@@ -1022,12 +1066,13 @@
       const en = root.lang.startsWith("en");
       const trio = make("div", "team-trio");
       TEAM.forEach(member => {
-        const areas = (en ? member.researchEn : member.research).split(/[；;]\s*/).map(text => text.replace(/[。.]$/, "").trim()).filter(Boolean);
+        const research = en ? member.researchEn : member.research, role = en ? member.roleEn : member.role;
+        const areas = (Array.isArray(research) ? research : research.split(/[；;]\s*/)).map(text => text.replace(/[。.]$/, "").trim()).filter(Boolean);
         const card = make("article", `team-card team-card--${member.place}`);
         card.innerHTML = `
           <span class="team-mark" aria-hidden="true">${esc(member.name.slice(0, 1))}</span>
           <h3>${esc(en ? member.en : member.name)}<small>${esc(en ? member.name : member.en)}</small></h3>
-          <p class="team-role">${esc(en ? member.roleEn : member.role)}</p>
+          <p class="team-role">${[].concat(role).map(line => `<span>${esc(line)}</span>`).join("")}</p>
           <ul class="team-research">${areas.map(area => `<li>${esc(area)}</li>`).join("")}</ul>
           <a class="team-mail" href="mailto:${esc(member.email)}">${esc(member.email)}</a>`;
         trio.append(card);
@@ -1365,7 +1410,7 @@
       }
       return false;
     };
-    const blocked = () => busy || !!document.querySelector("dialog[open], .lightbox");
+    const blocked = () => busy || root.classList.contains("atlas-immersive") || !!document.querySelector("dialog[open], .lightbox"); // atlas-immersive: 全球事件地图 unfolded over the window (cop31/atlas, 2026-11-10)
 
     addEventListener("wheel", event => {
       if (!on || event.defaultPrevented || event.ctrlKey || blocked()) return;
@@ -1719,7 +1764,7 @@
   function setupLandscape() {
     const layer = document.querySelector(".page-bg");
     if (!layer || !("toBlob" in HTMLCanvasElement.prototype)) return;
-    let url = "", drawnWidth = 0, drawnHeight = 0;
+    let url = "", drawnWidth = 0, drawnHeight = 0, drawing = 0;
     const cell = (x, y) => { const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return s - Math.floor(s); };
     const ease = t => t * t * (3 - 2 * t);
     const noise = (x, y) => {
@@ -1815,11 +1860,19 @@
       canvas.toBlob(blob => {
         if (!blob) return;
         const next = URL.createObjectURL(blob);
-        layer.style.setProperty("--landscape", `url("${next}")`);
-        if (url) setTimeout(() => URL.revokeObjectURL(url), 1000);
-        url = next;
-        drawnWidth = w; drawnHeight = h;
-        requestAnimationFrame(() => layer.classList.add("has-landscape"));
+        // swap only once the new picture is decoded, and let the old URL go a while later: revoked while still loading
+        // (quick resizes, a phone turning) it failed as net::ERR_FILE_NOT_FOUND (2026-11-07)
+        const probe = new Image(), ticket = ++drawing;
+        probe.src = next;
+        (probe.decode ? probe.decode() : Promise.resolve()).catch(() => {}).then(() => {
+          if (ticket !== drawing) { URL.revokeObjectURL(next); return; } // a later redraw took over
+          layer.style.setProperty("--landscape", `url("${next}")`);
+          const old = url;
+          url = next;
+          if (old) setTimeout(() => URL.revokeObjectURL(old), 5000);
+          drawnWidth = w; drawnHeight = h;
+          requestAnimationFrame(() => layer.classList.add("has-landscape"));
+        });
       });
     }
     const idle = window.requestIdleCallback ?? (callback => setTimeout(callback, 200));
@@ -1834,8 +1887,10 @@
   /* ---------- Start ---------- */
   let spy = null;
   const start = () => {
+    if (location.hash === "#compare") history.replaceState(null, "", location.pathname + location.search + "#research"); // the removed 文本对照
     const linked = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
     markPage(linked && !intelOwns(linked) ? pageOf(linked) : "home"); // #today: intel.js opens itself over the home page
+    root.removeAttribute("data-boot"); // the page is marked: index.html's first-paint guard steps aside
     localize();
     new MutationObserver(localize).observe(root, { attributes: true, attributeFilter: ["lang"] });
     scan(document.body);
@@ -1845,7 +1900,7 @@
     reel = setupReel();
     spy = setupSpy();
     setupStamps();
-    setupMirrors();
+    setupToolsToggle();
     setupIdentity();
     setupFlip();
     setupScramble();
@@ -1868,4 +1923,14 @@
     if (reducedMotion.matches) document.querySelectorAll("[data-reveal]").forEach(element => element.setAttribute("data-revealed", ""));
   });
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", start) : start();
+
+  /* 开放 GREEN 伙伴计划 (2026-11-09): a dialog like 项目介绍 */
+  (() => {
+    const modal = document.getElementById("partnerModal");
+    if (!modal) return;
+    const open = () => { if (document.getElementById("mobileMenu")?.hidden === false) document.getElementById("mobileMenuToggle")?.click(); if (!modal.open) modal.showModal(); };
+    document.querySelectorAll("[data-open-partner]").forEach((node) => node.addEventListener("click", (event) => { event.preventDefault(); open(); }));
+    document.getElementById("partnerClose")?.addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (event) => { if (event.target === modal) modal.close(); });
+  })();
 })();

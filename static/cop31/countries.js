@@ -6,7 +6,9 @@
    panel slides in, the flat map fades in, the picture wipes down, the title rises letter by letter, NEXT rises.
    Specs: the icebergdoc.org list page, the icebergdoc.org topic page.
    The topic pages are the original 中国碳市场 / 新加坡 sections (app.js renders them; IDs untouched), laid out anew.
-   Routing: cop31.js owns the pages; this file asks it for bare swaps (window.GreenPages) and plays the choreography. */
+   Routing: cop31.js owns the pages; this file asks it for bare swaps (window.GreenPages) and plays the choreography.
+   2026-11-04: the globe's surface is a satellite picture (earth-gl.js, WebGL, the same near-side perspective) with the
+   borders laid over it; without WebGL (or until the picture has loaded) the dark vector globe is drawn as before. */
 (() => {
   "use strict";
   const root = document.documentElement;
@@ -24,7 +26,8 @@
   const rows = [...list.querySelectorAll(".ct-row")];
   const topics = rows.map((row, index) => ({
     id: row.dataset.focus, lat: Number(row.dataset.lat), lon: Number(row.dataset.lon), row, index,
-    image: row.querySelector("img")?.getAttribute("src") || "", section: $(row.dataset.focus),
+    // the page's full picture: named on the row (data-hero), or the row's own picture — which loader.js may not have set yet
+    image: (img => img?.dataset.hero || img?.dataset.deferSrc || img?.getAttribute("src") || "")(row.querySelector("img")), section: $(row.dataset.focus),
   })).filter(t => t.section);
   const OWN = new Set(["countries", ...topics.map(t => t.id)]);
   let current = null; // the topic page on screen
@@ -68,7 +71,7 @@
 
   /* ---------- World data (assets/countries-110m.json) ---------- */
   let world = null;
-  const worldReady = fetch("./assets/countries-110m.json").then(r => r.json()).then(topo => {
+  const worldReady = (window.GreenLoad?.json("./assets/countries-110m.json") ?? fetch("./assets/countries-110m.json").then(r => r.json())).then(topo => { // shared with globe.js (loader.js)
     const [sx, sy] = topo.transform?.scale || [1, 1], [tx, ty] = topo.transform?.translate || [0, 0];
     const arcs = topo.arcs.map(arc => { let x = 0, y = 0; return arc.map(([dx, dy]) => { x += dx; y += dy; return [x * sx + tx, y * sy + ty]; }); });
     const ring = refs => refs.flatMap((ref, i) => { const p = ref < 0 ? arcs[~ref].slice().reverse() : arcs[ref]; return i ? p.slice(1) : p; });
@@ -114,6 +117,7 @@
   /* ---------- The globe (iceberg-list §2, §9): near-side perspective, zoom 2 (1.5 on phones) ---------- */
   const globe = (() => {
     const canvas = list.querySelector(".ct-globe"), ctx = canvas.getContext("2d");
+    const earth = window.GreenEarth?.create("perspective", canvas) || null;
     const view = { lon: 30.7, lat: 36.9 }; // Antalya, the COP31 host city (the reference starts on Barcelona)
     let W = 1, H = 1, dpr = 1, S = 461, P = 4.38, Rs = 365, f = 1500, cx = 0, cy = 0, pad = 0;
     let rot = null, tween = null, padTween = null, inertia = null, raf = 0, active = null, ready = false, live = false, bg = null;
@@ -174,7 +178,24 @@
       // ocean, then land with the hidden part of each ring run along the limb (§9.3)
       ctx.beginPath(); ctx.arc(cx, cy, Rs, 0, TAU); ctx.fillStyle = "#070c12"; ctx.fill();
       ctx.save(); ctx.clip();
-      if (world) {
+      const satellite = !!earth?.ready && earth.draw({ r: Rs * dpr, s: S * dpr, p: P, rot, atmo: .22 });
+      if (satellite) {
+        const side = earth.canvas.width / dpr;
+        ctx.drawImage(earth.canvas, cx - side / 2, cy - side / 2, side, side);
+        if (world) { // borders over the picture, cut at the horizon
+          ctx.beginPath();
+          for (const line of world.borders) {
+            let down = false;
+            for (const [lon, lat] of line) {
+              const v = vec(lon, lat), q = turn(v[0], v[1], v[2]);
+              if (q[2] <= 1 / P) { down = false; continue; }
+              const k = (P - 1) / (P - q[2]), x = cx + S * k * q[0], y = cy - S * k * q[1];
+              if (down) ctx.lineTo(x, y); else { ctx.moveTo(x, y); down = true; }
+            }
+          }
+          ctx.strokeStyle = "rgba(236, 243, 250, .38)"; ctx.lineWidth = .8; ctx.stroke();
+        }
+      } else if (world) {
         const proj = q => { const k = (P - 1) / (P - q[2]); return [cx + S * k * q[0], cy - S * k * q[1]]; };
         const limb = q => { const n = Math.hypot(q[0], q[1]) || 1; return [cx + Rs * q[0] / n, cy - Rs * q[1] / n]; };
         ctx.beginPath();
@@ -202,7 +223,9 @@
       const haze = ctx.createRadialGradient(cx, cy, 0, cx, cy, Rs);
       [[0, 0], [.53, 0], [.6, 4], [.66, 8], [.71, 12], [.77, 17], [.82, 22], [.88, 28], [.93, 34], [.96, 37], [.99, 45], [1, 50]].forEach(([s, n]) => haze.addColorStop(s, `rgb(${Math.round(n * .78)},${Math.round(n * .9)},${n})`));
       ctx.globalCompositeOperation = "lighter";
+      ctx.globalAlpha = satellite ? .55 : 1; // the picture carries its own atmosphere
       ctx.fillStyle = haze; ctx.fillRect(cx - Rs, cy - Rs, 2 * Rs, 2 * Rs);
+      ctx.globalAlpha = 1;
       ctx.globalCompositeOperation = "source-over";
       ctx.restore();
       // rim and glow
@@ -233,6 +256,7 @@
       if (more) raf = requestAnimationFrame(frame);
     }
     function wake() { if (!raf && live) raf = requestAnimationFrame(frame); }
+    if (earth) earth.onready = wake; // the picture arrives after the first frames: redraw with it
     // hover → rotate (copy of the reference's panTo, §9.4): 1000 ms for any hop of 347 km or more, bezier(.25,.1,.25,1),
     // linear in Web-Mercator (rhumb line), shortest way round, restarted from wherever the globe is; zoom never changes
     const mercY = lat => Math.log(Math.tan(Math.PI / 4 + lat * RAD / 2));
@@ -453,9 +477,10 @@
     root.classList.toggle("focus-page", isList || isDetail);
     root.classList.toggle("focus-list", isList);
     root.classList.toggle("focus-detail", isDetail);
-    // the full-size photos (≈1.4 MB) load once 国家专题 is open, not with the home page (2026-11-02)
-    if (isList || isDetail) topics.forEach(t => { const photo = t.img?.querySelector("img[data-src]"); if (photo) { photo.src = photo.dataset.src; photo.removeAttribute("data-src"); } });
+    // a page's full picture loads when the page is opened, with the next one's behind it (25 pages since 2026-11-12)
+    if (isDetail) { const t = topicOf(page); loadPhoto(t); loadPhoto(t.nextTopic); }
   };
+  const loadPhoto = t => { const photo = t?.img?.querySelector("img[data-src]"); if (photo) { photo.src = photo.dataset.src; photo.removeAttribute("data-src"); } };
   let busy = false, swapping = false;
   const swap = id => { swapping = true; window.GreenPages?.swap(id); swapping = false; setClasses(id === "countries" || topicOf(id) ? id : "home"); };
   const push = id => history.pushState({ ...(history.state || {}), focus: id }, "", `${location.pathname}${location.search}#${id}`);
@@ -507,6 +532,7 @@
   async function openTopic(t) {
     if (busy) return;
     busy = true;
+    loadPhoto(t); // on its way while the list slides out
     try {
       const dx = listCol.offsetWidth + 40 * innerWidth / 2024;
       await play([

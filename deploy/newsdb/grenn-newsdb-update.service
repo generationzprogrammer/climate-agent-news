@@ -9,6 +9,8 @@ User=grenn
 Group=grenn
 EnvironmentFile=-/srv/grenn/conf/newsdb.env
 ExecStart=/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_newsdb.py update
+# then the research index (deploy/research): derived from news.db, skipped when nothing changed; its failure is not the update's
+ExecStartPost=-/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_research.py sync
 SyslogIdentifier=grenn-newsdb
 TimeoutStartSec=2h
 Nice=10

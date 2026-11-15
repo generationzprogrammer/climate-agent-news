@@ -3,7 +3,7 @@
 Until 2026-10-27 this module generated static/cop31/index.html from the main
 site's index.html on every export. The 2026-10 redesign replaced that page
 with a hand-built one (static/cop31/index.html plus cop31.css/cop31.js,
-motion-kit.js, intel.*, countries.*, globe.js), so regenerating it would
+motion-kit.js, intel.*, countries.*, atlas/), so regenerating it would
 overwrite the redesign. The page is now kept as is: this step only removes
 markup that belongs to the offline preview package and checks that the
 element contracts app.js and the daily data rely on are still present.
