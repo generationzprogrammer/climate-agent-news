@@ -50,11 +50,15 @@ def prepare(root, day):
     archive=root/'data/news_archive.json'
     if archive.exists():
         archived=json.loads(archive.read_text('utf-8'))
-        if isinstance(archived,dict):archived=archived.get('articles',archived.get('items',[]))
+        if isinstance(archived,dict):archived=archived.get('records',archived.get('articles',archived.get('items',[])))
         if isinstance(archived,list):
             for r in archived:
                 if local_day(r.get('published_at_utc') or r.get('published_at'))!=day:continue
                 url=r.get('canonical_url')
+                if not url:continue
+                url=clean_url(url)
+                if url not in rows and int(r.get('relevance_score') or 0)>=65:
+                    rows[url]={**r,'priority':100+len(rows),'source_summary':r.get('summary_source')}
                 if url in rows and r.get('summary_source') and not rows[url].get('source_summary'):
                     rows[url]['source_summary']=r['summary_source']
     return sorted(rows.values(),key=lambda r:r['priority'])

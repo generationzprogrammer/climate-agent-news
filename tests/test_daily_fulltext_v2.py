@@ -166,6 +166,16 @@ class Tests(unittest.TestCase):
         self.assertTrue(nonprose('Jane Smith'))
         self.assertFalse(nonprose('Investment is 999 dollars.'))
 
+    def test_current_archive_records_are_reused_without_old_news(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);(root/'data').mkdir()
+            records=[{'canonical_url':'https://example.org/'+str(i),'published_at':date,
+                      'relevance_score':90,'title_original':'Climate policy','summary_source':'Raw publisher excerpt'}
+                     for i,date in enumerate(['2026-11-16T10:00:00Z','2026-11-14T10:00:00Z'])]
+            (root/'data/news_archive.json').write_text(json.dumps({'records':records}))
+            result=prepare(root,'2026-11-16')
+            self.assertEqual(len(result),1);self.assertEqual(result[0]['source_summary'],'Raw publisher excerpt')
+
     def test_cop_and_month_numbers_are_source_grounded(self):
         self.assertTrue(numbers('第31届会议于11月16日召开').issubset(numbers('COP31 meets on November 16')))
         self.assertFalse(numbers('第32届会议').issubset(numbers('COP31 meets on November 16')))
