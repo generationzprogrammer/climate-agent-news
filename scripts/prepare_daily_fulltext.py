@@ -29,6 +29,7 @@ def prepare(root, day):
             if int(r.get('relevance_score') or 0)<65 and url not in rows: continue
             meta=json.loads(r.get('metadata_json') or '{}')
             rows[url]={**r,**rows.get(url,{}),'publisher_homepage':meta.get('publisher_homepage'),
+                       'source_summary':r.get('summary_source') or r.get('source_summary'),
                        'publisher_url':meta.get('publisher_url'),'topics':json.loads(r.get('topics_json') or '[]'),
                        'priority':rows.get(url,{}).get('priority',100+len(rows))}
         db.close()
@@ -41,7 +42,9 @@ def prepare(root, day):
                 r=json.loads(line); key=r.get('canonical_url')
                 if key:
                     key=clean_url(key)
-                    if key in rows and r.get('publisher_url'): rows[key]['publisher_url']=r['publisher_url']
+                    if key in rows:
+                        if r.get('publisher_url'): rows[key]['publisher_url']=r['publisher_url']
+                        if r.get('source_text'): rows[key]['evidence_excerpt']=r['source_text']
     return sorted(rows.values(),key=lambda r:r['priority'])
 
 if __name__=='__main__':

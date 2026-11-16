@@ -4,7 +4,7 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import daily_fulltext_v2 as d
 import daily_fulltext_state as state
-from prepare_daily_fulltext import local_day
+from prepare_daily_fulltext import local_day, prepare
 
 class Model:
     base_url='https://dashscope.aliyuncs.com/compatible-mode/v1';model='fixture';calls=0
@@ -37,9 +37,9 @@ class Tests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             db=d.init(Path(t)/'db');m=Model()
             with patch.object(m,'complete_json',return_value={'paragraphs':[{'id':'0','text_zh':'这里没有保留原文数字。'}]}):
-                with self.assertRaisesRegex(ValueError,'numbers'):d.translated(db,'Investment is 999 dollars.',m,[1])
+                with self.assertRaisesRegex(ValueError,'numbers'):d.translated(db,'Investment is 999 dollars.',m,[2])
             with patch.object(m,'complete_json',return_value={'paragraphs':[]}):
-                with self.assertRaisesRegex(ValueError,'alignment'):d.translated(db,'Investment is 999 dollars.',m,[1])
+                with self.assertRaisesRegex(ValueError,'alignment'):d.translated(db,'Investment is 999 dollars.',m,[2])
             self.assertEqual(db.execute('SELECT count(*) FROM ft_segments').fetchone()[0],0);db.close()
 
     def test_all_candidates_persist_target_and_rerun(self):
@@ -106,5 +106,57 @@ class Tests(unittest.TestCase):
                 with self.assertRaises(d.Deferred):m.complete_json('test',{})
                 request.assert_not_called()
             db.close()
+
+    def test_invalid_batch_repaired_once(self):
+        with tempfile.TemporaryDirectory() as t:
+            db=d.init(Path(t)/'db');m=Model();budget=[2]
+            good={'paragraphs':[{'id':'0','text_zh':'这项政策规定投资金额为999美元。'}]}
+            with patch.object(m,'complete_json',side_effect=[{'paragraphs':[]},good]) as call:
+                self.assertIn('999',d.translated(db,'Investment is 999 dollars.',m,budget))
+                self.assertEqual(call.call_count,2)
+            db.close()
+
+    def test_summary_fallback_separate_and_upgrades_to_fulltext(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);p=root/'in.json'
+            evidence='The government announced new climate policy and funding for renewable electricity. '*15
+            text='政府公布气候政策，提出支持可再生能源电力发展，并明确通过资金安排推动相关工作。'*8
+            p.write_text(json.dumps([{'url':'https://example.org/a','title':'Climate policy','source_summary':evidence}]))
+            m=Model()
+            with patch.object(Fetcher,'get',side_effect=d.StopFetch('http_403')),patch.object(m,'complete_json',return_value={'claims':[{'text_zh':text,'evidence':evidence[:400]}]}):
+                report=d.run(p,root/'out','2026-11-16',10,m,target=1,fetcher=Fetcher())
+            self.assertTrue(report['target_met']);self.assertEqual(report['fulltext_ready_unique'],0)
+            row=json.loads((root/'out/2026-11-16.selected.json').read_text('utf-8'))[0]
+            self.assertEqual(row['content_mode'],'summary');self.assertIsNone(row['source_text']);self.assertIsNone(row['fulltext_zh'])
+            self.assertEqual(row['status'],'blocked');self.assertEqual(report['pending_total'],1)
+            db=d.init(root/'out/daily_fulltext.sqlite')
+            db.execute("UPDATE ft_articles SET body=?,body_sha=?,zh=?,status='translated'",(evidence,d.digest(evidence),'完整译文'))
+            db.commit();r=d.export_result(db,root/'out','2026-11-16',1);db.close()
+            self.assertEqual(r['fulltext_ready_unique'],1);self.assertEqual(r['summary_ready_unique'],0)
+
+    def test_summary_refuses_short_source_and_fake_quotes(self):
+        m=Model();job={'metadata':json.dumps({'source_summary':'Only a headline.'}),'body':None,'title':'Climate'}
+        with self.assertRaisesRegex(ValueError,'insufficient'):d.fallback_summary(job,m,[2])
+        self.assertEqual(m.calls,0)
+        job['body']='Verified climate policy details. '*40
+        with patch.object(m,'complete_json',return_value={'claims':[{'text_zh':'气候政策'*100,'evidence':'This quotation does not occur in the source.'}]}):
+            with self.assertRaisesRegex(ValueError,'evidence_mismatch'):d.fallback_summary(job,m,[2])
+
+    def test_ingest_refreshes_evidence_preserving_old_summary(self):
+        with tempfile.TemporaryDirectory() as t:
+            db=d.init(Path(t)/'db');rows=[{'url':'https://example.org/a','title':'Climate'}]
+            d.ingest(db,rows,'2026-11-16')
+            db.execute('UPDATE ft_articles SET metadata=?',(json.dumps({'summary_zh':'已验证摘要'}),));db.commit()
+            rows[0]['source_summary']='New evidence';d.ingest(db,rows,'2026-11-16')
+            meta=json.loads(db.execute('SELECT metadata FROM ft_articles').fetchone()[0]);db.close()
+            self.assertEqual(meta['source_summary'],'New evidence');self.assertEqual(meta['summary_zh'],'已验证摘要')
+
+    def test_prepare_preserves_original_rss_summary(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);(root/'data').mkdir();db=sqlite3.connect(root/'data/climate.db')
+            db.executescript('CREATE TABLE sources(source_id TEXT,name TEXT); CREATE TABLE articles(source_id TEXT,relevance_score INTEGER,published_at_utc TEXT,canonical_url TEXT,summary_source TEXT,metadata_json TEXT,topics_json TEXT,title TEXT);')
+            db.execute('INSERT INTO sources VALUES(?,?)',('s','Publisher'))
+            db.execute('INSERT INTO articles VALUES(?,?,?,?,?,?,?,?)',('s',90,'2026-11-16T10:00:00Z','https://example.org/a','Original RSS evidence','{}','[]','Climate'));db.commit();db.close()
+            self.assertEqual(prepare(root,'2026-11-16')[0]['source_summary'],'Original RSS evidence')
 
 if __name__=='__main__':unittest.main()

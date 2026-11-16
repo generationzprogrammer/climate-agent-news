@@ -75,4 +75,4 @@ jobs:
       - name: Report actual counts only
         if: ${{ always() && hashFiles('data/private_daily_fulltext/*.status.json') != '' }}
         run: |
-          python -c "import glob,json,os; p=sorted(glob.glob('data/private_daily_fulltext/*.status.json'))[-1]; d=json.load(open(p)); s='## Daily fulltext\nDate: '+d['day']+'\n\nReady: '+str(d['ready_unique'])+'; target: 12; shortfall: '+str(d['shortfall'])+'\n\n'+json.dumps(d['statuses']); open(os.environ['GITHUB_STEP_SUMMARY'],'a').write(s)"
+          python -c "import glob,json,os; p=sorted(glob.glob('data/private_daily_fulltext/*.status.json'))[-1]; d=json.load(open(p)); s='## Daily fulltext and evidence summaries\nDate: '+d['day']+'\n\nReady: '+str(d['ready_unique'])+'; target: 12; shortfall: '+str(d['shortfall'])+'\n\nFulltext: '+str(d.get('fulltext_ready_unique',0))+'; summary fallback: '+str(d.get('summary_ready_unique',0))+'\n\n'+json.dumps({'statuses':d['statuses'],'failure_reasons':d.get('failure_reasons',{}),'summary_failure_reasons':d.get('summary_failure_reasons',{})}); open(os.environ['GITHUB_STEP_SUMMARY'],'a').write(s)"
