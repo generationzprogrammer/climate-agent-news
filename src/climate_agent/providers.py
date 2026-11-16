@@ -58,6 +58,9 @@ class OpenAICompatibleModel:
                 {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
             ],
         }
+        if (urlparse(self.base_url).hostname or '').endswith('.aliyuncs.com'):
+            # Qwen's OpenAI-compatible non-streaming JSON mode requires thinking off.
+            request_body['enable_thinking'] = False
         if os.getenv('CLIMATE_MODEL_MAX_OUTPUT_TOKENS'):
             request_body['max_tokens']=max(256,min(32768,int(os.environ['CLIMATE_MODEL_MAX_OUTPUT_TOKENS'])))
         body=json.dumps(request_body).encode('utf-8')

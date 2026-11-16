@@ -109,9 +109,10 @@ jobs:
           ENERGY_REPORT_DISCOVERY_LIMIT: ${{ github.event_name == 'push' && '30' || '12' }}
           # GitHub Models 已于 2026-07-30 退役。默认迁移到 Gemini
           # OpenAI 兼容接口；GEMINI_API_KEY 仅保存在仓库 Secret 中。
-          CLIMATE_MODEL_BASE_URL: ${{ secrets.CLIMATE_MODEL_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai' }}
-          CLIMATE_MODEL_API_KEY: ${{ secrets.CLIMATE_MODEL_API_KEY || secrets.GEMINI_API_KEY }}
-          CLIMATE_MODEL_NAME: ${{ secrets.CLIMATE_MODEL_NAME || 'gemini-3.5-flash-lite' }}
+          # A single Bailian key can serve daily summaries and the separate fulltext workflow.
+          CLIMATE_MODEL_BASE_URL: ${{ secrets.DAILY_FULLTEXT_API_KEY != '' && (vars.DAILY_FULLTEXT_BASE_URL || 'https://dashscope.aliyuncs.com/compatible-mode/v1') || secrets.CLIMATE_MODEL_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai' }}
+          CLIMATE_MODEL_API_KEY: ${{ secrets.DAILY_FULLTEXT_API_KEY || secrets.CLIMATE_MODEL_API_KEY || secrets.GEMINI_API_KEY }}
+          CLIMATE_MODEL_NAME: ${{ secrets.DAILY_FULLTEXT_API_KEY != '' && (vars.DAILY_FULLTEXT_MODEL || 'qwen-plus') || secrets.CLIMATE_MODEL_NAME || 'gemini-3.5-flash-lite' }}
           CLIMATE_SUBSCRIBE_ENDPOINT: ${{ secrets.CLIMATE_SUBSCRIBE_ENDPOINT }}
           CLIMATE_UNSUBSCRIBE_ENDPOINT: ${{ secrets.CLIMATE_UNSUBSCRIBE_ENDPOINT }}
           CLIMATE_PUBLIC_CONTACT_EMAIL: ${{ secrets.CLIMATE_PUBLIC_CONTACT_EMAIL }}

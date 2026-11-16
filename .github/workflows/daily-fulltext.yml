@@ -1,0 +1,78 @@
+name: Daily fulltext and Chinese translation
+
+on:
+  workflow_dispatch:
+    inputs:
+      allow_empty_state:
+        description: "Only for first-run recovery: explicitly initialize without a previous checkpoint"
+        type: boolean
+        default: false
+  schedule:
+    # Beijing 08:45 and 20:45. Independent of Pages export failures.
+    - cron: "45 0,12 * * *"
+
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: green-private-daily-fulltext
+  cancel-in-progress: false
+
+jobs:
+  fulltext:
+    # Set one variable to enable. Keep disabled if the server runs this task.
+    if: ${{ vars.DAILY_FULLTEXT_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    env:
+      PYTHONPATH: src
+      DAILY_FULLTEXT_API_KEY: ${{ secrets.DAILY_FULLTEXT_API_KEY }}
+      DAILY_FULLTEXT_STORAGE_KEY: ${{ secrets.DAILY_FULLTEXT_STORAGE_KEY }}
+      DAILY_FULLTEXT_BASE_URL: ${{ vars.DAILY_FULLTEXT_BASE_URL || 'https://dashscope.aliyuncs.com/compatible-mode/v1' }}
+      DAILY_FULLTEXT_MODEL: ${{ vars.DAILY_FULLTEXT_MODEL || 'qwen-plus' }}
+      DAILY_FULLTEXT_DAILY_REQUEST_LIMIT: "240"
+      DAILY_FULLTEXT_ALLOW_EMPTY_STATE: ${{ inputs.allow_empty_state == true && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -e . -r requirements-daily-fulltext.txt
+      - name: Verify configuration without printing credentials
+        run: |
+          python -c "import os; assert os.getenv('DAILY_FULLTEXT_API_KEY'), 'Missing DAILY_FULLTEXT_API_KEY'; assert len(os.getenv('DAILY_FULLTEXT_STORAGE_KEY',''))>=32, 'Missing or short DAILY_FULLTEXT_STORAGE_KEY'"
+      - name: Restore encrypted archive and translation cache
+        id: restore
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/daily_fulltext_state.py restore
+      - name: Initialize article schema
+        run: python -m climate_agent.cli init
+      - name: Discover fresh daily candidates without LLM or web export
+        timeout-minutes: 20
+        continue-on-error: true
+        run: |
+          python -c "from climate_agent.db import Database; from climate_agent.sync import sync_p0; from pathlib import Path; import json; db=Database(Path('data/climate.db')); print(json.dumps(sync_p0(db),ensure_ascii=False))"
+      - name: Prepare all daily candidates
+        run: python scripts/prepare_daily_fulltext.py
+      - name: Acquire fulltext and translate priority articles
+        id: collect
+        run: python scripts/daily_fulltext_v2.py --input data/private_daily_fulltext/input.json --max-minutes 40 --require-target
+      - name: Encrypt checkpoint even if daily target is unmet
+        if: ${{ always() && steps.restore.outcome == 'success' && hashFiles('data/private_daily_fulltext/daily_fulltext.sqlite') != '' }}
+        id: seal
+        run: python scripts/daily_fulltext_state.py seal
+      - name: Preserve encrypted checkpoint
+        if: ${{ always() && steps.seal.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: green-daily-fulltext-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .daily-fulltext-state/state.fulltext.enc
+          include-hidden-files: true
+          retention-days: 90
+          if-no-files-found: error
+      - name: Report actual counts only
+        if: ${{ always() && hashFiles('data/private_daily_fulltext/*.status.json') != '' }}
+        run: |
+          python -c "import glob,json,os; p=sorted(glob.glob('data/private_daily_fulltext/*.status.json'))[-1]; d=json.load(open(p)); s='## Daily fulltext\nDate: '+d['day']+'\n\nReady: '+str(d['ready_unique'])+'; target: 12; shortfall: '+str(d['shortfall'])+'\n\n'+json.dumps(d['statuses']); open(os.environ['GITHUB_STEP_SUMMARY'],'a').write(s)"

@@ -1,10 +1,23 @@
 __pycache__/
-# Fulltext research deliveries are local/private, never publish via Pages.
-data/private_fulltext*/
-data/private_public_fulltext*/
-analysis/governance_handover*/
-analysis/governance_handover*.zip
-analysis/governance_release_checks*/
+data/private_daily_fulltext/
+.daily-fulltext-state/
+*.fulltext.enc
+analysis/daily_fulltext_handover_20261117/
+backups/daily-fulltext-*/
+# Full article bodies are private research outputs, never a public website asset.
+data/private_fulltext_pilot_*/
+data/private_fulltext_recovery_*/
+data/private_fulltext_bulk_*/
+data/private_public_fulltext_library_*/
+analysis/public_fulltext_library_*/research/
+analysis/public_fulltext_library_*/*.zip
+analysis/fulltext_bulk_*/*.zip
+analysis/fulltext_followup_*/previous_delivery/
+analysis/fulltext_followup_*/*.zip
+analysis/fulltext_bulk_*/shared_conversation_reference.txt
+analysis/fulltext_recovery_*/*.zip
+analysis/fulltext_pilot_*/population_frame.json
+analysis/fulltext_pilot_*/*.zip
 *.db-shm
 *.db-wal
 data/research_texts.jsonl
@@ -67,5 +80,16 @@ analysis/innovation_research_20261014_r2/投稿前核对单.txt
 analysis/reports/open_innovation/*.verification-failure.png
 analysis/reports/open_innovation_20261009/*.verification-failure.png
 analysis/reports/open_innovation_20261009/*.tmp-*
+# Private fulltext deliveries never belong in public Pages or repository history.
+data/private_fulltext*/
+data/private_public_fulltext*/
+analysis/governance_handover*/
+analysis/governance_handover*.zip
+analysis/governance_release_checks*/
 data/private_global_expansion*/
 analysis/global_expansion_*/
+cloud_corpus/baseline/
+cloud_corpus/output/
+cloud_corpus/.venv/
+cloud_corpus/bundle_manifest.json
+analysis/cloud_corpus_*/

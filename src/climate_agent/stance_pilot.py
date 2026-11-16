@@ -73,7 +73,7 @@ def validate_assertion(row,sources,codebook):
             'source_language':source.get('language','en'),'review_status':'editorial_source_check_ai_assisted',
             'date_precision':'day','event_id':row.get('event_id') or digest(source['url']+'|'+day)[:20]}
 
-def build_pilot(root,*,as_of=None):
+def build_pilot(root,*,as_of=None,quarantine_changed_sources=False):
     root=Path(root);as_of=as_of or datetime.now(UTC).date().isoformat()
     codebook=json.loads((root/'config/stance_pilot.json').read_text(encoding='utf-8'))
     paths=[root/'data/stance_evidence.json',*sorted((root/'data').glob('stance_evidence_expansion_*.json'))]
@@ -83,18 +83,25 @@ def build_pilot(root,*,as_of=None):
         ids=[row['id'] for row in registry[key]]
         if len(ids)!=len(set(ids)):raise ValueError('Duplicate '+key+' identifier; review required')
     corpus={r['text_id']:r for r in load_jsonl(root/'data/research_texts.jsonl.gz')}
-    sources={}
+    sources={};quarantine=[]
     for item in registry['sources']:
         source=dict(item)
         if source.get('corpus_text_id'):
             original=corpus.get(source['corpus_text_id'])
-            if original is None:raise ValueError('Referenced original corpus text is absent')
+            if original is None:
+                if quarantine_changed_sources:
+                    quarantine.append({'source_id':source['id'],'reason':'referenced_text_absent'});continue
+                raise ValueError('Referenced original corpus text is absent')
             source['source_text']=original['source_text']
-            if source.get('corpus_sha256') and digest(source['source_text'])!=source['corpus_sha256']:raise ValueError('Original source version changed; review required')
+            if source.get('corpus_sha256') and digest(source['source_text'])!=source['corpus_sha256']:
+                if quarantine_changed_sources:
+                    quarantine.append({'source_id':source['id'],'reason':'source_version_changed','expected_sha256':source['corpus_sha256'],'actual_sha256':digest(source['source_text'])});continue
+                raise ValueError('Original source version changed; review required')
         sources[source['id']]=source
     assertions=[];seen=set()
     for row in registry['assertions']:
         if row.get('review_status')!='editorial_source_check_ai_assisted':continue
+        if row['source_id'] in {q['source_id'] for q in quarantine}:continue
         validated=validate_assertion(row,sources,codebook)
         if validated['statement_date']>as_of:continue
         key=(validated['actor_id'],validated['proposition_id'],validated['event_id'],validated['evidence_quote'])
@@ -115,7 +122,7 @@ def build_pilot(root,*,as_of=None):
             'registry_sha256':digest(json.dumps(registry,ensure_ascii=False,sort_keys=True)),
             'codebook_sha256':digest(json.dumps(codebook,ensure_ascii=False,sort_keys=True)),
             **{k:codebook[k] for k in ['actors','topics','propositions','stances','scope_zh','scope_en']},
-            'assertions':assertions,'cells':cells,
+            'assertions':assertions,'cells':cells,'source_review_queue':quarantine,
             'statistics':{'assertions':len(assertions),'source_documents':len({r['source_url'] for r in assertions}),
                           'statement_events':len({(r['actor_id'],r['event_id']) for r in assertions}),
                           'covered_cells':sum(c['stance']!='insufficient' for c in cells),'total_cells':len(cells),
@@ -132,7 +139,9 @@ def write_stance_pilot(root,data_dir):
     root=Path(root);data_dir=Path(data_dir);data_dir.mkdir(parents=True,exist_ok=True)
     # Test fixtures and older checkouts need not supply the optional pilot.
     if not (root/'config/stance_pilot.json').exists():return {'status':'not_configured'}
-    payload=build_pilot(root)
+    payload=build_pilot(root,quarantine_changed_sources=True)
+    if payload['source_review_queue']:
+        print(json.dumps({'stance_source_review':payload['source_review_queue'],'affected_assertions_published':False}))
     (data_dir/'stance_pilot.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf-8')
     public_keys=['id','actor_id','topic_id','proposition_id','stance','statement_kind','statement_date','date_basis','summary_zh','summary_en','source_url','source_title','source_language','source_sha256','evidence','evidence_quote','qualifier_quote','reasons','authority_zh','authority_en','review_status','event_id']
     rows=[{k:r.get(k) for k in public_keys} for r in payload['assertions']]

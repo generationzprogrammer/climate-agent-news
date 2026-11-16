@@ -132,6 +132,21 @@ class StancePilotTests(unittest.TestCase):
             (root/'data/stance_evidence_expansion_fixture.json').write_text(json.dumps({'sources':[],'assertions':[self.sample]}),encoding='utf-8')
             with self.assertRaises(ValueError):build_pilot(root)
 
+    def test_changed_source_is_quarantined_only_in_publishing_mode(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=self.fixture(folder,[self.sample])
+            path=root/'data/stance_evidence.json';data=json.loads(path.read_text('utf-8'))
+            source=next(s for s in data['sources'] if s['id']==self.sample['source_id'])
+            source['corpus_text_id']='changed-source';source['corpus_sha256']='old-hash'
+            path.write_text(json.dumps(data),encoding='utf-8')
+            from climate_agent.research import save_jsonl
+            save_jsonl(root/'data/research_texts.jsonl.gz',[{'text_id':'changed-source','source_text':'Changed policy text.'}])
+            with self.assertRaises(ValueError):build_pilot(root)
+            payload=build_pilot(root,quarantine_changed_sources=True)
+            self.assertEqual(payload['assertions'],[])
+            self.assertEqual(payload['source_review_queue'][0]['reason'],'source_version_changed')
+            self.assertTrue(all(c['stance']=='insufficient' for c in payload['cells']))
+
     def test_two_pass_candidates_remain_unpublished_and_cached(self):
         from climate_agent.research import load_jsonl as original_load
         source={'text_id':'t1','source_text':'China supports climate finance for developing countries.','text_sha256':'hash1','title_original':'Climate finance','published_at':'2025-01-01','publisher_url':'https://www.mee.gov.cn/example'}
