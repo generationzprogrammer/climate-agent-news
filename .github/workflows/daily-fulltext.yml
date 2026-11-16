@@ -1,6 +1,9 @@
 name: Daily fulltext and Chinese translation
 
 on:
+  push:
+    branches: [main]
+    paths: ['scripts/daily_fulltext_v2.py', 'scripts/daily_evidence.py', 'scripts/prepare_daily_fulltext.py', '.github/workflows/daily-fulltext.yml']
   workflow_dispatch:
     inputs:
       allow_empty_state:
@@ -21,7 +24,7 @@ concurrency:
 jobs:
   fulltext:
     # Set one variable to enable. Keep disabled if the server runs this task.
-    if: ${{ vars.DAILY_FULLTEXT_ENABLED == 'true' }}
+    if: ${{ vars.DAILY_FULLTEXT_ENABLED == 'true' && (github.event_name != 'push' || contains(github.event.head_commit.message, '[fulltext-run]')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 80
     env:
@@ -53,12 +56,14 @@ jobs:
         timeout-minutes: 20
         continue-on-error: true
         run: |
-          python -c "from climate_agent.db import Database; from climate_agent.sync import sync_p0; from pathlib import Path; import json; db=Database(Path('data/climate.db')); print(json.dumps(sync_p0(db),ensure_ascii=False))"
+          python -c "from climate_agent.db import Database; from climate_agent.sync import sync_p0,P0_SOURCE_IDS; from pathlib import Path; import json; db=Database(Path('data/climate.db')); print(json.dumps(sync_p0(db,source_ids=tuple(dict.fromkeys((*P0_SOURCE_IDS,'INT004','INT015')))),ensure_ascii=False))"
       - name: Prepare all daily candidates
         run: python scripts/prepare_daily_fulltext.py
       - name: Acquire fulltext and translate priority articles
         id: collect
-        run: python scripts/daily_fulltext_v2.py --input data/private_daily_fulltext/input.json --max-minutes 40 --require-target
+        env:
+          COLLECT_MINUTES: ${{ github.event_name == 'push' && '20' || '40' }}
+        run: python scripts/daily_fulltext_v2.py --input data/private_daily_fulltext/input.json --max-minutes "$COLLECT_MINUTES" --require-target
       - name: Encrypt checkpoint even if daily target is unmet
         if: ${{ always() && steps.restore.outcome == 'success' && hashFiles('data/private_daily_fulltext/daily_fulltext.sqlite') != '' }}
         id: seal

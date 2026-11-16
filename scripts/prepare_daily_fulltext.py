@@ -29,6 +29,7 @@ def prepare(root, day):
             if int(r.get('relevance_score') or 0)<65 and url not in rows: continue
             meta=json.loads(r.get('metadata_json') or '{}')
             rows[url]={**r,**rows.get(url,{}),'publisher_homepage':meta.get('publisher_homepage'),
+                       'publisher_name':meta.get('publisher_name'),
                        'source_summary':r.get('summary_source') or r.get('source_summary'),
                        'publisher_url':meta.get('publisher_url'),'topics':json.loads(r.get('topics_json') or '[]'),
                        'priority':rows.get(url,{}).get('priority',100+len(rows))}
@@ -45,6 +46,17 @@ def prepare(root, day):
                     if key in rows:
                         if r.get('publisher_url'): rows[key]['publisher_url']=r['publisher_url']
                         if r.get('source_text'): rows[key]['evidence_excerpt']=r['source_text']
+    # Preserve existing raw evidence in the daily archive when no fresh DB row exists.
+    archive=root/'data/news_archive.json'
+    if archive.exists():
+        archived=json.loads(archive.read_text('utf-8'))
+        if isinstance(archived,dict):archived=archived.get('articles',archived.get('items',[]))
+        if isinstance(archived,list):
+            for r in archived:
+                if local_day(r.get('published_at_utc') or r.get('published_at'))!=day:continue
+                url=r.get('canonical_url')
+                if url in rows and r.get('summary_source') and not rows[url].get('source_summary'):
+                    rows[url]['source_summary']=r['summary_source']
     return sorted(rows.values(),key=lambda r:r['priority'])
 
 if __name__=='__main__':

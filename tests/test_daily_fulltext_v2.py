@@ -5,6 +5,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import daily_fulltext_v2 as d
 import daily_fulltext_state as state
 from prepare_daily_fulltext import local_day, prepare
+from daily_evidence import numbers, nonprose, PublisherRecovery
 
 class Model:
     base_url='https://dashscope.aliyuncs.com/compatible-mode/v1';model='fixture';calls=0
@@ -158,5 +159,32 @@ class Tests(unittest.TestCase):
             db.execute('INSERT INTO sources VALUES(?,?)',('s','Publisher'))
             db.execute('INSERT INTO articles VALUES(?,?,?,?,?,?,?,?)',('s',90,'2026-11-16T10:00:00Z','https://example.org/a','Original RSS evidence','{}','[]','Climate'));db.commit();db.close()
             self.assertEqual(prepare(root,'2026-11-16')[0]['source_summary'],'Original RSS evidence')
+
+    def test_short_headings_are_not_incomplete_translation(self):
+        batch=[{'id':'0','text':'Adaptation','key':'fixture'}]
+        self.assertEqual(d.checked_batch(batch,{'paragraphs':[{'id':'0','text_zh':'适应'}]})[0][1],'适应')
+        self.assertTrue(nonprose('Jane Smith'))
+        self.assertFalse(nonprose('Investment is 999 dollars.'))
+
+    def test_cop_and_month_numbers_are_source_grounded(self):
+        self.assertTrue(numbers('第31届会议于11月16日召开').issubset(numbers('COP31 meets on November 16')))
+        self.assertFalse(numbers('第32届会议').issubset(numbers('COP31 meets on November 16')))
+
+    def test_summary_uses_evidence_ids_without_model_retyping(self):
+        m=Model();body='The government announced support for renewable electricity. '*20
+        job={'metadata':'{}','body':body,'title':'Climate policy'}
+        text='政府公布气候政策，提出支持可再生能源电力发展，并明确通过资金安排推动相关工作。'*8
+        with patch.object(m,'complete_json',return_value={'claims':[{'text_zh':text,'evidence_ids':['E1']}]}):
+            result=d.fallback_summary(job,m,[2])
+        self.assertIn(result['summary_evidence'][0]['evidence'],body)
+        with patch.object(m,'complete_json',return_value={'claims':[{'text_zh':text,'evidence_ids':['INVALID']}]}):
+            with self.assertRaisesRegex(ValueError,'evidence_mismatch'):d.fallback_summary(job,m,[2])
+
+    def test_publisher_recovery_reuses_bounded_public_resolver(self):
+        fetch=Fetcher();recovery=PublisherRecovery(fetch,0)
+        with patch('daily_evidence.discover_publisher',return_value=[{'publisher_url':'https://example.org/story'}]) as discover:
+            result=recovery.resolve('Original headline',{'publisher_homepage':'https://example.org','publisher_name':'Publisher'}, {})
+            self.assertEqual(result,'https://example.org/story')
+            self.assertEqual(discover.call_args.args[0]['source'],'Publisher')
 
 if __name__=='__main__':unittest.main()
