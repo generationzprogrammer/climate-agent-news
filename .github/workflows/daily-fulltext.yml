@@ -27,6 +27,8 @@ jobs:
     if: ${{ vars.DAILY_FULLTEXT_ENABLED == 'true' && (github.event_name != 'push' || contains(github.event.head_commit.message, '[fulltext-run]')) }}
     runs-on: ubuntu-latest
     timeout-minutes: 80
+    outputs:
+      digest: ${{ steps.digest.outcome == 'success' && 'true' || 'false' }}
     env:
       PYTHONPATH: src
       DAILY_FULLTEXT_API_KEY: ${{ secrets.DAILY_FULLTEXT_API_KEY }}
@@ -85,3 +87,52 @@ jobs:
         if: ${{ always() && hashFiles('data/private_daily_fulltext/*.status.json') != '' }}
         run: |
           python -c "import glob,json,os; p=sorted(glob.glob('data/private_daily_fulltext/*.status.json'))[-1]; d=json.load(open(p)); s='## Daily fulltext and evidence summaries\nDate: '+d['day']+'\n\nReady: '+str(d['ready_unique'])+'; target: 12; shortfall: '+str(d['shortfall'])+'\n\nFulltext: '+str(d.get('fulltext_ready_unique',0))+'; summary fallback: '+str(d.get('summary_ready_unique',0))+'\n\n'+json.dumps({'statuses':d['statuses'],'failure_reasons':d.get('failure_reasons',{}),'summary_failure_reasons':d.get('summary_failure_reasons',{})}); open(os.environ['GITHUB_STEP_SUMMARY'],'a').write(s)"
+      # Public part only (2026-11-17, for the Aliyun site zerocarbonx.cn): the 300—500 character evidence-backed Chinese
+      # summaries, what each rests on and short quotes (<= 280 characters) of the original passages it cites. No full
+      # text and no translation leaves the encrypted checkpoint; the builder refuses a record with a full-text field.
+      - name: Build the public digest of long summaries
+        id: digest
+        if: ${{ always() && hashFiles('data/private_daily_fulltext/*.status.json') != '' }}
+        continue-on-error: true
+        run: |
+          mkdir -p .daily-digest
+          python scripts/daily_digest_public.py build --state data/private_daily_fulltext --out .daily-digest/daily_digest.json
+      - name: Keep the public digest for the publishing job
+        if: ${{ always() && steps.digest.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-digest-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .daily-digest/daily_digest.json
+          include-hidden-files: true
+          retention-days: 3
+          if-no-files-found: error
+
+  # A job of its own holds the write permission: the collecting job above reads untrusted web pages and stays read-only.
+  # The digest goes alone to the branch daily-digest (force-pushed, one commit), never to main; pushes made with the
+  # workflow token start no other workflow. The Aliyun server reads it through api.github.com and checks it again.
+  publish-digest:
+    needs: fulltext
+    if: ${{ always() && needs.fulltext.outputs.digest == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: daily-digest-${{ github.run_id }}-${{ github.run_attempt }}
+          path: digest
+      - name: Push the digest to the daily-digest branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 -c "import json; d=json.load(open('digest/daily_digest.json', encoding='utf-8')); assert d.get('schema')=='grenn-daily-digest/1'; bad={'source_text','fulltext_zh','display_text_zh'}; assert not any(bad & set(i) for i in d['items']); print(len(d['items']), 'long summaries')"
+          cd digest
+          echo '每日长摘要：只含 300—500 字中文长摘要、依据类型与简短原文引文（每段不超过 280 字），不含全文与译文。由 .github/workflows/daily-fulltext.yml 每次运行覆盖；供 zerocarbonx.cn 读取。' > README.md
+          git init -q -b daily-digest
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add daily_digest.json README.md
+          git commit -q -m "daily digest: long summaries only (run ${{ github.run_id }}) [skip ci]"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" daily-digest
