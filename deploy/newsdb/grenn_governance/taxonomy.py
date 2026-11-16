@@ -80,7 +80,8 @@ AMBIGUOUS_FREE_TERMS=AMBIGUOUS_ENGLISH_NAMES|{'congo','刚果','korean'}
 EXTRA_COUNTRY_TERMS={
     'US':('New Mexico','New Jersey','California','Texas','Massachusetts','West Virginia','Alabama','Alaska','Arizona','Arkansas','Colorado','Connecticut','Delaware','Florida','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Utah','Vermont','Virginia','Wisconsin','Wyoming','District of Columbia','Washington, D.C.','Washington DC'),
     'GB':('UK','U.K.','Scotland','Wales','England','Northern Ireland'),
-    'CN':('Beijing','Tianjin','Hebei','北京','天津','河北'),
+    # Taiwan is filed under China (2026-11-15, user: 把中国台湾和中华人民共和国合并到一起…统一为中华人民共和国): no TW entry in country_codes.json
+    'CN':('Beijing','Tianjin','Hebei','北京','天津','河北','Taiwan','Taiwanese','台湾','台灣','臺灣','中国台湾','Chinese Taipei','Taipei','台北','臺北'),
     'RU':('Russian','Россия','России'),
     'KR':('South Korea','South Korean','Republic of Korea','韩国'),
     'KP':('North Korea','North Korean','Democratic People\'s Republic of Korea','Democratic People’s Republic of Korea','Democratic Peoples Republic of Korea','DPRK','朝鲜'),
@@ -90,7 +91,6 @@ EXTRA_COUNTRY_TERMS={
     'IN':('Indian government','Indian states','New Delhi'),
     'BR':('Brazilian',), 'ID':('Indonesian',), 'NG':('Nigerian',),
     'ZA':('South African',), 'NZ':('New Zealanders',),
-    'TW':('Chinese Taipei',),
     'VI':('US Virgin Islands','U.S. Virgin Islands'),
     'CG':('Republic of the Congo','Republic of Congo','刚果共和国','刚果（布）','刚果(布)'),
     'CD':('Democratic Republic of the Congo','Democratic Republic of Congo','DR Congo','DRC','刚果民主共和国','刚果（金）','刚果(金)'),

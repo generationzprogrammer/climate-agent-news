@@ -2551,29 +2551,38 @@ footer span { color: var(--text-muted-half); font-size: 13px; }
 .team-card h3 { margin: 0; color: var(--text-headings); font: 600 var(--fs-h6)/1.3 var(--font-heading); letter-spacing: 0; }
 .team-card p { color: var(--text-muted); }
 .team-card small { color: var(--text-muted-half); font-size: 13px; line-height: 1.6; }
-/* 团队信息 (2026-10-29): three square cards — the lead in the middle on dark ink, raised; the two others on paper,
+/* 团队信息 (2026-10-29; portraits on top since 2026-11-15): three cards — the lead in the middle on dark ink, raised; the two others on paper,
    lower and level with each other. Each carries its surname as a large faint mark. They rise in one after another as
    the dialog opens (the lead first) and lift a little under the pointer. Phones: the same three across, smaller. */
 #teamModal.modal { width: min(1120px, calc(100% - 28px)); }
-#teamModal .team-modal-card { width: auto; padding-bottom: calc(var(--space-2xl) + 8px); }
-.team-trio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.26fr) minmax(0, 1fr); align-items: stretch; /* the side cards keep their drop and end level with the lead, whatever the text length */ gap: var(--space-lg); margin-top: var(--space-xl); }
+/* 2026-11-15: the dialog may take nearly the whole window height now that the cards carry portraits */
+#teamModal .team-modal-card { width: auto; max-height: calc(100dvh - 32px); padding-bottom: calc(var(--space-2xl) + 8px); overscroll-behavior: contain; }
+/* --team-drop: how much lower the side cards sit; --team-fr: the columns' fr total (side card width = (row − 2 gaps) / fr) */
+.team-trio { --team-gap: var(--space-lg); --team-drop: 64px; --team-fr: 3.26; container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.26fr) minmax(0, 1fr); align-items: stretch; /* the side cards keep their drop and end level with the lead, whatever the text length */ gap: var(--team-gap); margin-top: var(--space-xl); }
 .team-trio .team-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   overflow: hidden;
-  min-height: 340px;
-  padding: 34px 28px 26px;
+  padding: 0;
   border-top: 0;
   background: linear-gradient(165deg, #fff, var(--gb-50));
   box-shadow: 0 0 0 1px rgb(20 34 52 / .07), 0 1px 2px rgb(20 34 52 / .05), 0 26px 44px -30px rgb(20 34 52 / .45);
   transition: translate .5s var(--ease), box-shadow .5s var(--ease);
 }
-.team-trio .team-card::before { content: ""; position: absolute; top: 0; left: 28px; width: 28px; height: 3px; background: var(--red); }
-.team-trio .team-card--center { grid-column: 2; grid-row: 1; min-height: 404px; /* = the side cards' 340 + their 64 drop: the bottoms line up */ background: linear-gradient(165deg, var(--gb-800), var(--gb-950) 72%); color: #fff; }
-.team-trio .team-card--left { grid-column: 1; grid-row: 1; margin-top: 64px; }
-.team-trio .team-card--right { grid-column: 3; grid-row: 1; margin-top: 64px; }
+.team-trio .team-card::before { content: ""; position: absolute; z-index: 1; top: 0; left: 28px; width: 28px; height: 3px; background: var(--red); }
+.team-trio .team-card--center { grid-column: 2; grid-row: 1; background: linear-gradient(165deg, var(--gb-800), var(--gb-950) 72%); color: #fff; }
+.team-trio .team-card--left { grid-column: 1; grid-row: 1; margin-top: var(--team-drop); }
+.team-trio .team-card--right { grid-column: 3; grid-row: 1; margin-top: var(--team-drop); }
+/* The portrait heads each card, edge to edge (the photos share one grey-blue backdrop, painted here too while they
+   load). The side cards' photos are 4:5; the lead's is taller by the side cards' drop, so all three names start on
+   one line. */
+.team-photo { position: relative; flex: none; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: linear-gradient(#eef2f6, #d6dfe8); }
+.team-card--center .team-photo { aspect-ratio: auto; height: calc((100cqw - 2 * var(--team-gap)) / var(--team-fr) * 1.25 + var(--team-drop)); }
+.team-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: 0; transition: opacity .8s var(--ease), scale 1.2s var(--ease); }
+.team-photo.is-loaded img { opacity: 1; }
+.team-photo::after { content: ""; position: absolute; inset: auto 0 0; height: 1px; background: rgb(20 34 52 / .08); }
+.team-body { position: relative; display: flex; flex: 1; flex-direction: column; gap: 12px; overflow: hidden; padding: 24px 28px 26px; }
 .team-mark { position: absolute; top: -.18em; right: -.06em; color: rgb(20 34 52 / .05); font: 600 150px/1 var(--font-heading); letter-spacing: 0; pointer-events: none; }
 .team-card--center .team-mark { color: rgb(255 255 255 / .06); }
 .team-trio .team-card h3 { display: grid; gap: 4px; margin: 0; color: var(--text-headings); font: 600 30px/1.15 var(--font-heading); letter-spacing: 0; }
@@ -2607,6 +2616,7 @@ footer span { color: var(--text-muted-half); font-size: 13px; }
 .team-card--center .team-mail:hover { color: #ff8f84; }
 @media (hover: hover) and (pointer: fine) {
   .team-trio .team-card:hover { translate: 0 -5px; box-shadow: 0 0 0 1px rgb(20 34 52 / .08), 0 2px 4px rgb(20 34 52 / .06), 0 34px 56px -30px rgb(20 34 52 / .55); }
+  .team-trio .team-card:hover .team-photo img { scale: 1.03; }
 }
 #teamModal[open] .team-trio .team-card { animation: team-rise 1s cubic-bezier(.16, 1, .3, 1) backwards; }
 #teamModal[open] .team-trio .team-card--center { animation-delay: .16s; }
@@ -2616,12 +2626,10 @@ footer span { color: var(--text-muted-half); font-size: 13px; }
 /* Phones keep the desktop arrangement (2026-11-02, user): three across, the lead raised in the middle, smaller type. */
 @media (max-width: 760px) {
   #teamModal.modal { width: calc(100% - 16px); }
-  #teamModal .team-modal-card { padding-inline: 10px; }
-  .team-trio { grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) minmax(0, 1fr); gap: 6px; margin-top: var(--space-lg); }
-  .team-trio .team-card { gap: 7px; min-height: 0; padding: 18px 8px 12px; }
+  #teamModal .team-modal-card { max-height: calc(100dvh - 20px); padding-inline: 10px; }
+  .team-trio { --team-gap: 6px; --team-drop: 28px; --team-fr: 3.12; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) minmax(0, 1fr); margin-top: var(--space-lg); }
+  .team-body { gap: 7px; padding: 12px 8px 12px; }
   .team-trio .team-card::before { left: 8px; width: 16px; height: 2px; }
-  .team-trio .team-card--left, .team-trio .team-card--right { margin-top: 28px; }
-  .team-trio .team-card--center { min-height: 0; }
   .team-mark { font-size: 64px; }
   .team-trio .team-card h3 { gap: 2px; font-size: 16px; }
   .team-trio .team-card h3 small { font-size: 7.5px; letter-spacing: .04em; }

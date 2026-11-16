@@ -422,7 +422,9 @@ class CoreTests(unittest.TestCase):
     def test_public_taxonomy_uses_iso_country_codes_and_dynamic_cop_tags(self) -> None:
         taxonomy = public_taxonomy()
         self.assertEqual(taxonomy["country_standard"], "ISO 3166-1")
-        self.assertEqual(len(taxonomy["countries"]), 249)
+        # 248 since 2026-11-15: Taiwan is filed under China (config/country_codes.json has no TW entry)
+        self.assertEqual(len(taxonomy["countries"]), 248)
+        self.assertNotIn("TW", {row["alpha2"] for row in taxonomy["countries"]})
         self.assertIn("BRI", {item["code"] for group in taxonomy["organization_groups"] for item in group["organizations"]})
         self.assertIn("BRI", organization_tags_for("Belt and Road Initiative clean-energy cooperation"))
         china = country_codes_for("China and the United States announced a climate dialogue")

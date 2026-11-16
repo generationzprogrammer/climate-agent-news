@@ -124,6 +124,14 @@ assert json.loads((root / "news_archive.json").read_text(encoding="utf-8")).get(
 print("validated", sum(1 for p in root.rglob("*") if p.is_file()), "files")
 PY
 
+# One China (2026-11-15, user: 把中国台湾和中华人民共和国合并到一起…统一为中华人民共和国): the original project's code files
+# Taiwan as a country of its own; every classification in the snapshot (country codes and names, company countries,
+# places, the CSV downloads' code columns) is filed under China here (grenn_regions.py; article texts stay as published).
+# A failure stops the update, so a snapshot that still lists Taiwan separately never goes live.
+if [[ -f /srv/grenn/bin/grenn_regions.py ]]; then
+  python3 /srv/grenn/bin/grenn_regions.py apply "$tmp"
+fi
+
 # 累计访问量 (2026-11-14): the original project's series counts the old github.io address only and stopped on 2026-11-05;
 # this site's own browser page loads (from the nginx log, daily totals kept in $ROOT/visits.json) are added to it here.
 # If that fails the original series goes out unchanged.

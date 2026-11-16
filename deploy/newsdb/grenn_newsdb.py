@@ -70,6 +70,9 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from urllib.parse import urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import grenn_regions  # noqa: E402  Taiwan filed under China in every classification (2026-11-15), beside this file
+
 HOME = Path(os.environ.get("GRENN_NEWSDB_HOME", "/srv/grenn/newsdb"))
 APP = Path(os.environ.get("GRENN_APP", "/srv/grenn/app/current"))
 SITE_DATA = Path(os.environ.get("GRENN_SITE_DATA", "/srv/grenn/data/current"))
@@ -443,6 +446,7 @@ def governance():
 def country_fields(alpha2s) -> dict:
     """country_codes / country_tags / continent_tags of a list of ISO alpha-2 codes (the history's own country list)."""
     known = governance()["countries"]
+    alpha2s = grenn_regions.codes2(alpha2s)  # TW → CN (2026-11-15), each code once
     codes = [{k: known[a][k] for k in ("alpha2", "alpha3", "name_zh", "name_en")} for a in alpha2s if a in known]
     continents = []
     try:
@@ -512,6 +516,9 @@ def _utc(value) -> tuple[str, str] | None:
     return moment.isoformat(), moment.date().isoformat()
 
 
+REGION_FIELDS = {"country_codes", "country_tags", "places"}
+
+
 def finish(rec: dict) -> dict | None:
     """Validate and normalise a record into `news` columns (JSON text for lists)."""
     url = str(rec.get("url") or "").strip()
@@ -529,6 +536,8 @@ def finish(rec: dict) -> dict | None:
         out["source_domain"] = None if host in AGGREGATORS else host
     for f in JSON_FIELDS:
         value = _loads(rec.get(f), [])
+        if f in REGION_FIELDS and isinstance(value, list):
+            value = grenn_regions.fix(value)[0]  # Taiwan filed under China, whatever the feed (2026-11-15)
         out[f] = json.dumps(value if isinstance(value, list) else [], ensure_ascii=False)
     for f in INT_FIELDS:
         value = rec.get(f)
@@ -1281,6 +1290,39 @@ def cmd_export(args) -> int:
     with lock():
         conn = connect()
         export(conn, force=args.force)
+    return 0
+
+
+def cmd_normalize_regions(args) -> int:
+    """The rows already in news.db: Taiwan filed under China in country codes, country tags and places (2026-11-15).
+    New rows get the same on the way in (finish, country_fields). Running it again changes nothing."""
+    like = ("country_codes LIKE '%\"TW\"%' OR country_tags LIKE '%台湾%' OR country_tags LIKE '%臺灣%' OR country_tags LIKE '%中华民国%' "
+            "OR country_tags LIKE '%Taiwan%' OR places LIKE '%台湾%' OR places LIKE '%Taiwan%'")
+    with lock():
+        conn = connect()
+        with Run(conn, "normalize-regions") as run:
+            stamp, changed, seen = now_iso(), 0, 0
+            conn.execute("BEGIN IMMEDIATE")
+            try:
+                for row in conn.execute(f"SELECT id, country_codes, country_tags, places FROM news WHERE {like}").fetchall():
+                    seen += 1
+                    values, n = [], 0
+                    for field in ("country_codes", "country_tags", "places"):
+                        value, k = grenn_regions.fix(_loads(row[field], []))
+                        values.append(json.dumps(value, ensure_ascii=False))
+                        n += k
+                    if n:
+                        changed += 1
+                        conn.execute("UPDATE news SET country_codes=?, country_tags=?, places=?, updated_at=? WHERE id=?", (*values, stamp, row["id"]))
+                conn.execute("COMMIT")
+            except BaseException:
+                conn.execute("ROLLBACK")
+                raise
+            left = conn.execute(f"SELECT count(*) FROM news WHERE country_codes LIKE '%\"TW\"%'").fetchone()[0]
+            run.stats.update(rows_seen=seen, rows_changed=changed, tw_left=left)
+        log(json.dumps({"normalize-regions": {"rows_seen": seen, "rows_changed": changed, "tw_left": left}}, ensure_ascii=False))
+        if changed and not args.no_export:
+            export(conn, force=True)
     return 0
 
 
@@ -2925,6 +2967,10 @@ def main(argv=None) -> int:
     p = sub.add_parser("crawl", help="crawl the reachable sources and merge them")
     p.add_argument("--sources", help="comma-separated source ids (default: GRENN_CRAWL_SOURCES)")
     p.set_defaults(func=cmd_crawl)
+    p = sub.add_parser("normalize-regions", help="file Taiwan under China in the rows already in news.db (country codes, tags, places); "
+                       "then rebuild the downloads")
+    p.add_argument("--no-export", action="store_true")
+    p.set_defaults(func=cmd_normalize_regions)
     p = sub.add_parser("export", help="rebuild the public download set")
     p.add_argument("--force", action="store_true")
     p.set_defaults(func=cmd_export)

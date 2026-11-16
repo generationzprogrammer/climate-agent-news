@@ -1,7 +1,8 @@
 import {en,t} from './i18n.js';
 const here=path=>new URL(path,import.meta.url).href;
 // GREEN: the labels follow the page language (the style asks for name:zh).
-async function mapStyle(){const url=here('./detailed-style.json');if(!en())return url;try{return JSON.parse((await (await fetch(url)).text()).replaceAll('"name:zh"','"name:en"'));}catch{return url;}}
+// 2026-11-15: the style names China 中华人民共和国 and gives Taiwan no country label (detailed-style.json metadata); in English, China.
+async function mapStyle(){const url=here('./detailed-style.json');if(!en())return url;try{return JSON.parse((await (await fetch(url)).text()).replaceAll('"name:zh"','"name:en"').replaceAll('"中华人民共和国"','"China"'));}catch{return url;}}
 let runtime;
 function script(src){return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=()=>reject(Error('详细地图组件暂未加载'));document.head.append(s);});}
 async function library(){

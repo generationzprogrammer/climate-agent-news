@@ -1038,7 +1038,7 @@
      card, raised), 张蔚然 on the left and 袁誉杭 on the right, level with each other. The lead comes first in reading
      order; the grid places the cards. On phones they stack. */
   const TEAM = [
-    { name: "宋伟泽", en: "Weize Song", place: "center", email: "songwz@tsinghua.edu.cn",
+    { name: "宋伟泽", en: "Weize Song", place: "center", email: "songwz@tsinghua.edu.cn", photo: "song-weize",
       // 2026-11-04, from the user: three appointments (one per line), the research field and two journal boards
       role: ["清华大学低碳能源实验室数字平台研究主任", "清华大学气候变化与可持续发展研究院助理研究员", "清华大学碳中和研究院双聘教师"],
       roleEn: ["Director of Digital Platform Research, Low-Carbon Energy Laboratory, Tsinghua University",
@@ -1047,38 +1047,61 @@
       research: ["研究领域：能源与气候智能治理", "Climatic Change期刊顾问委员会委员", "Energy Informatics期刊编辑委员会委员"],
       researchEn: ["Research field: intelligent governance of energy and climate", "Advisory Board member, Climatic Change",
         "Editorial Board member, Energy Informatics"] },
-    { name: "张蔚然", en: "Weiran Zhang", place: "right", email: "zhangwr25@mails.tsinghua.edu.cn",
+    { name: "张蔚然", en: "Weiran Zhang", place: "right", email: "zhangwr25@mails.tsinghua.edu.cn", photo: "zhang-weiran",
       role: "清华大学经济管理学院在读硕士",
       roleEn: "Master's student, School of Economics and Management, Tsinghua University",
       research: "数字经济与大数据分析领域",
       researchEn: "Digital economy and big data analytics." },
-    { name: "袁誉杭", en: "Yuhang Yuan", place: "left", email: "yuan-yh21@mails.tsinghua.edu.cn",
+    { name: "袁誉杭", en: "Yuhang Yuan", place: "left", email: "yuan-yh21@mails.tsinghua.edu.cn", photo: "yuan-yuhang",
       role: "清华大学化学工程系在读博士",
       roleEn: "PhD student, Department of Chemical Engineering, Tsinghua University",
       research: "锂电池电解液与人工智能交叉领域。",
       researchEn: "Lithium-ion battery electrolytes and artificial intelligence." },
   ];
+  /* 2026-11-15: each card opens with the member's portrait (assets/team/<photo>-360|640.webp: the three ID photos
+     cropped alike — 4:5, same face size and eye line — on one grey-blue backdrop; docs/CHANGES.md). The photo is
+     decorative (the name follows it), so alt="". The cards are built once per language and put back as they are
+     each time app.js refills the list, so the photos are not fetched or decoded again. They load lazily (the
+     dialog is closed at first) and are warmed once the page is idle or a 团队信息 button is pointed at. */
   function setupTeamCards() {
     const list = $("teamList");
     if (!list) return;
-    const draw = () => {
-      if (list.querySelector(":scope > .team-trio")) return; // already ours
-      const en = root.lang.startsWith("en");
+    const built = new Map();
+    const build = en => {
       const trio = make("div", "team-trio");
       TEAM.forEach(member => {
         const research = en ? member.researchEn : member.research, role = en ? member.roleEn : member.role;
         const areas = (Array.isArray(research) ? research : research.split(/[；;]\s*/)).map(text => text.replace(/[。.]$/, "").trim()).filter(Boolean);
+        const photo = `./assets/team/${member.photo}`;
         const card = make("article", `team-card team-card--${member.place}`);
         card.innerHTML = `
-          <span class="team-mark" aria-hidden="true">${esc(member.name.slice(0, 1))}</span>
-          <h3>${esc(en ? member.en : member.name)}<small>${esc(en ? member.name : member.en)}</small></h3>
-          <p class="team-role">${[].concat(role).map(line => `<span>${esc(line)}</span>`).join("")}</p>
-          <ul class="team-research">${areas.map(area => `<li>${esc(area)}</li>`).join("")}</ul>
-          <a class="team-mail" href="mailto:${esc(member.email)}">${esc(member.email)}</a>`;
+          <figure class="team-photo"><img alt="" width="640" height="800" loading="lazy" decoding="async"
+            src="${photo}-640.webp" srcset="${photo}-360.webp 360w, ${photo}-640.webp 640w"
+            sizes="(max-width: 760px) 34vw, ${member.place === "center" ? 400 : 320}px"/></figure>
+          <div class="team-body">
+            <span class="team-mark" aria-hidden="true">${esc(member.name.slice(0, 1))}</span>
+            <h3>${esc(en ? member.en : member.name)}<small>${esc(en ? member.name : member.en)}</small></h3>
+            <p class="team-role">${[].concat(role).map(line => `<span>${esc(line)}</span>`).join("")}</p>
+            <ul class="team-research">${areas.map(area => `<li>${esc(area)}</li>`).join("")}</ul>
+            <a class="team-mail" href="mailto:${esc(member.email)}">${esc(member.email)}</a>
+          </div>`;
+        const img = card.querySelector("img");
+        const shown = () => img.closest(".team-photo").classList.add("is-loaded");
+        img.complete && img.naturalWidth ? shown() : img.addEventListener("load", shown, { once: true });
         trio.append(card);
       });
-      list.replaceChildren(trio);
+      return trio;
     };
+    const draw = () => {
+      if (list.querySelector(":scope > .team-trio")) return; // already ours
+      const en = root.lang.startsWith("en");
+      if (!built.has(en)) built.set(en, build(en));
+      list.replaceChildren(built.get(en));
+    };
+    const warm = () => built.forEach(trio => trio.querySelectorAll("img").forEach(img => { img.loading = "eager"; }));
+    document.addEventListener("pointerover", event => { if (event.target.closest?.("#teamOpen, [data-open-team]")) warm(); }, { passive: true });
+    const later = () => (window.requestIdleCallback ?? (run => setTimeout(run, 1500)))(warm, { timeout: 5000 });
+    document.readyState === "complete" ? later() : addEventListener("load", later, { once: true });
     new MutationObserver(draw).observe(list, { childList: true }); // made before the dialog flight's observer: it measures our cards
     draw();
   }

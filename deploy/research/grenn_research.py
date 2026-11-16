@@ -73,8 +73,9 @@ GROUPS = {
     "APEC": ("亚太经合组织", "APEC"), "SCO": ("上海合作组织", "SCO"),
 }
 
-# everyday Chinese names where the database carries the formal one (labels on chips and in the country list)
-SHORT_ZH = {"CN": "中国", "PK": "巴基斯坦", "AE": "阿联酋", "VE": "委内瑞拉", "LA": "老挝", "KP": "朝鲜", "HK": "中国香港", "MO": "中国澳门",
+# everyday Chinese names where the database carries the formal one (labels on chips and in the country list); China keeps
+# its full name 中华人民共和国 (2026-11-15, user: 统一为中华人民共和国)
+SHORT_ZH = {"PK": "巴基斯坦", "AE": "阿联酋", "VE": "委内瑞拉", "LA": "老挝", "KP": "朝鲜", "HK": "中国香港", "MO": "中国澳门",
             "CD": "刚果（金）", "BN": "文莱", "PS": "巴勒斯坦", "VA": "梵蒂冈", "DO": "多米尼加", "FM": "密克罗尼西亚联邦"}
 
 RE_TOPIC = re.compile(r"G\d{2}(?:\.\d{2})?")

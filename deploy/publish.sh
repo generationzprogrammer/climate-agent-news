@@ -33,7 +33,7 @@ name=$(date +%Y%m%d-%H%M%S)-$rev
 echo "== server scripts"
 tar -czf - -C "$HERE" --exclude=__pycache__ server newsdb subscriptions pipeline research | ssh "$HOST" 'set -e; mkdir -p /srv/grenn/bin /srv/grenn/conf
   tar -xzf - -C /srv/grenn/conf --strip-components=1
-  install -m 755 /srv/grenn/conf/sync-data.sh /srv/grenn/conf/activate-release.sh /srv/grenn/conf/grenn_newsdb.py /srv/grenn/conf/grenn_brief.py /srv/grenn/conf/grenn_visits.py /srv/grenn/bin/
+  install -m 755 /srv/grenn/conf/sync-data.sh /srv/grenn/conf/activate-release.sh /srv/grenn/conf/grenn_newsdb.py /srv/grenn/conf/grenn_brief.py /srv/grenn/conf/grenn_visits.py /srv/grenn/conf/grenn_regions.py /srv/grenn/bin/
   install -m 755 /srv/grenn/conf/grenn-pipeline.sh /srv/grenn/conf/grenn_glm.py /srv/grenn/bin/
   # 每日气候通讯 fonts (FangSong_GB2312.ttf, timesbd.ttf) are commercial: uploaded by hand to /srv/grenn/app/fonts/
   # (not served by nginx, not in this repository) — see deploy/README.md

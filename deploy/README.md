@@ -77,6 +77,12 @@ GitHub Actions 与 GitHub Pages 不使用这里的任何文件；合并到 main 
   2026-11-14 用它并入了第二批 195,007 篇，合格全文共 435,071 篇），随后 `grenn-research sync`（更新任务会自动跑）。
   本接口不做模型抽取、不做事件聚类，也不会自己产生任何立场。
 
+## 国家归类：中国台湾归入中华人民共和国（`newsdb/grenn_regions.py`，2026-11-16）
+
+用户要求网站各处（分类、统计、地图）把中国台湾统一归入中华人民共和国。`grenn_regions.py` 只改归类字段（国家代码、国家条目、作标签的国家名、公司所属国、地点、按国家计数的表），不改新闻原文。
+新闻数据库每条进库记录都经过它（`grenn_newsdb.py` 的 `finish` / `country_fields`）；已有记录用 `grenn-newsdb normalize-regions`（可重复执行，之后自动重建下载）。
+网站数据由原项目流水线生成、其代码仍单列台湾，所以 `sync-data.sh` 对每个新快照先执行 `grenn_regions.py apply <快照目录>`（JSON / JSONL / CSV），失败则该快照不上线。
+
 ## 气候新闻数据库（`newsdb/`）
 
 `grenn_newsdb.py`（服务器命令 `grenn-newsdb`）维护 `/srv/grenn/newsdb/news.db`，一条新闻链接一行。
