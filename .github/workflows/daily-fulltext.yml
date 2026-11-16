@@ -53,6 +53,7 @@ jobs:
       - name: Initialize article schema
         run: python -m climate_agent.cli init
       - name: Discover fresh daily candidates without LLM or web export
+        if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[repair-only]') }}
         timeout-minutes: 20
         continue-on-error: true
         run: |
@@ -62,8 +63,11 @@ jobs:
       - name: Acquire fulltext and translate priority articles
         id: collect
         env:
-          COLLECT_MINUTES: ${{ github.event_name == 'push' && '20' || '40' }}
-        run: python scripts/daily_fulltext_v2.py --input data/private_daily_fulltext/input.json --max-minutes "$COLLECT_MINUTES" --require-target
+          COLLECT_MINUTES: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[repair-only]') && '4' || github.event_name == 'push' && '20' || '40' }}
+          REPAIR_ONLY: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[repair-only]') && 'true' || 'false' }}
+        run: |
+          if [ "$REPAIR_ONLY" = "true" ]; then set -- --repair-only; else set --; fi
+          python scripts/daily_fulltext_v2.py --input data/private_daily_fulltext/input.json --max-minutes "$COLLECT_MINUTES" --require-target "$@"
       - name: Encrypt checkpoint even if daily target is unmet
         if: ${{ always() && steps.restore.outcome == 'success' && hashFiles('data/private_daily_fulltext/daily_fulltext.sqlite') != '' }}
         id: seal

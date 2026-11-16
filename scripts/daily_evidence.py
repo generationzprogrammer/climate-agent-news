@@ -14,7 +14,7 @@ def numbers(text):
     from decimal import Decimal
     values.update(Decimal(n) for n in re.findall(r'\b(?:COP|CMA|CMP)\s*(\d+)\b',text,re.I))
     for i,m in enumerate(MONTHS,1):
-        if re.search(r'\b'+m+r'\b',text,re.I): values.add(Decimal(i))
+        if re.search(r'\b(?:'+m+'|'+m[:3]+r')\.?\s+\d',text,re.I): values.add(Decimal(i))
     return values
 
 def nonprose(text):
