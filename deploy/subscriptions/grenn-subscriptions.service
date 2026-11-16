@@ -1,0 +1,20 @@
+[Unit]
+Description=GRENN weekly-briefing subscriptions (nginx /api/subscriptions/ -> 127.0.0.1:8796)
+After=network.target
+
+[Service]
+User=grenn
+Group=grenn
+ExecStart=/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_subscriptions.py serve
+SyslogIdentifier=grenn-subscriptions
+Restart=on-failure
+RestartSec=5
+MemoryMax=150M
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/srv/grenn/subscriptions
+
+[Install]
+WantedBy=multi-user.target

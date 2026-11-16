@@ -1,0 +1,9 @@
+[Unit]
+Description=GRENN weekly briefing mail: Mondays 08:00 Beijing time (the page's promise), retries at 10:00 and 14:00
+
+[Timer]
+OnCalendar=Mon *-*-* 08,10,14:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

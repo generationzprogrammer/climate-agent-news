@@ -18,8 +18,8 @@ const $ = id => document.getElementById(id);
 const COP31_EDITION = document.body.dataset.edition === "cop31";
 const UI_TEXT = {
   zh: {
-    cop31Title: "全球气候情报", cop31Independent: "格润独立研究展示页 · 非 COP31 官方网站",
-    navMap: "全球现场", navToday: "今日情报", navFocus: "专题", navChinaCarbon: "中国碳市场",
+    cop31Title: "全球气候治理\u200b新闻数据库", cop31Independent: "格润独立研究展示页 · 非 COP31 官方网站",
+    navMap: "全球事件地图", navToday: "今日新闻", navFocus: "专题", navChinaCarbon: "中国碳市场",
     navSingapore: "新加坡", navBth: "京津冀能源统计数据库", navRenewable: "新能源", navStorage: "储能技术", navAidc: "人工智能数据中心",
     navAnalytics: "语料分析", navAssistant: "情报问答", navDatabase: "文本数据库",
     chinaCarbonTitle: "中国碳市场", singaporeTitle: "新加坡气候政策与行动", all: "全部", source: "查看原文 ↗",
@@ -28,7 +28,7 @@ const UI_TEXT = {
     todayQueue: "今日队列", thisWeek: "本周", projectIntro: "项目介绍", projectIntroTitle: "项目介绍",
     navCompany: "企业情报", navEnergyReports: "能源报告与数据库", navInnovation: "科产融合", companyIntelligence: "企业情报",
     companyScope: "持续扩展的全球能源企业名录，以及从站内新闻中识别的重大项目、初创企业和企业合作。",
-    energyReportsTitle: "能源报告与数据库", footerSubtitle: "全球气候与能源信息智能分析支持系统",
+    energyReportsTitle: "能源报告与数据库", footerSubtitle: "全球气候治理新闻数据库",
     carbonCompanyTitle: "全国重点排放单位名录", searchEntity: "检索单位", carbonCompanyPlaceholder: "单位名称或统一社会信用代码",
     entityType: "单位类别", allEntities: "全部单位", keyEmitter: "重点碳排放单位", generalReporting: "一般报告单位",
     province: "省份", allProvinces: "全部省份", industry: "行业", allIndustries: "全部行业", district: "所属区", allDistricts: "全部地区", results: "当前结果",
@@ -56,8 +56,8 @@ const UI_TEXT = {
     textRecord: "文本记录", sourceTopic: "来源 / 议题", figuresPlaces: "关键数字 / 地域", showMoreRecords: "显示更多记录",
   },
   en: {
-    cop31Title: "Global climate intelligence", cop31Independent: "Independent GREEN research platform · Not an official COP31 website",
-    navMap: "Global desk", navToday: "Today", navFocus: "Focus", navChinaCarbon: "China carbon market",
+    cop31Title: "Global Climate Governance News Database", cop31Independent: "Independent GREEN research platform · Not an official COP31 website",
+    navMap: "Global event map", navToday: "Today", navFocus: "Focus", navChinaCarbon: "China carbon market",
     navSingapore: "Singapore", navAnalytics: "Corpus", navAssistant: "Q&A", navDatabase: "Text database",
     chinaCarbonTitle: "China carbon market", singaporeTitle: "Singapore climate policy and action", all: "All", source: "Open source ↗",
     navBth: "BTH energy statistics", navRenewable: "New energy", navStorage: "Energy storage", navAidc: "AI data centres",
@@ -67,7 +67,7 @@ const UI_TEXT = {
     todayQueue: "Today", thisWeek: "This week", projectIntro: "About", projectIntroTitle: "About the project",
     navCompany: "Companies", navEnergyReports: "Energy reports & data", navInnovation: "Open innovation", companyIntelligence: "Company intelligence",
     companyScope: "A growing directory of global energy companies, projects, start-ups and corporate partnerships identified in the archive.",
-    energyReportsTitle: "Energy reports and databases", footerSubtitle: "Global climate and energy intelligence platform",
+    energyReportsTitle: "Energy reports and databases", footerSubtitle: "Global climate governance news database",
     carbonCompanyTitle: "National key-emitter register", searchEntity: "Search entities", carbonCompanyPlaceholder: "Entity name or unified social credit code",
     entityType: "Entity type", allEntities: "All entities", keyEmitter: "Key emitters", generalReporting: "General reporting entities",
     province: "Province", allProvinces: "All provinces", industry: "Industry", allIndustries: "All industries", district: "District", allDistricts: "All districts", results: "Results",
@@ -171,6 +171,7 @@ function toast(message) {
   setTimeout(() => element.classList.remove("show"), 3200);
 }
 
+
 function closeMobileMenu() {
   const menu = $("mobileMenu");
   const toggle = $("mobileMenuToggle");
@@ -197,7 +198,9 @@ function setupMobileMenu() {
 
 async function fetchJson(url) {
   if (COP31_EDITION && /\/(?:energy_[^/]+|national_carbon_market_entities|topic_desks)\.json/.test(url)) return null;
-  const response = await fetch(url, { cache: "no-store" });
+  // no-cache, not no-store: still checked with the server every time (always the latest data), but an unchanged file
+  // comes back as a 304 instead of being downloaded again (news_archive.json is ≈ 3 MB compressed)
+  const response = await fetch(url, { cache: "no-cache" });
   if (!response.ok) throw new Error(`${response.status} ${url}`);
   return response.json();
 }
@@ -205,8 +208,8 @@ async function fetchJson(url) {
 const MODE_COPY = {
   climate: {
     button: "切换到能源技术",
-    mapOverline: "GLOBAL CLIMATE SITUATION",
-    mapTitle: "全球气候现场",
+    mapOverline: "GLOBAL EVENT MAP",
+    mapTitle: "全球事件地图",
     heroOverline: "DAILY CLIMATE TEXT INTELLIGENCE",
     heroTitle: "每天读懂全球气候变化<br><span>重点情报与文本数据库</span>",
     heroLede: "从国际机构、政府与专业媒体中筛选值得关注的气候事件，提供中文标题、完整概要、议题、地域、关键数字及原文入口。",
@@ -255,7 +258,7 @@ const MODE_COPY = {
 
 const MODE_COPY_EN = {
   climate: {
-    button: "Switch to energy technology", mapOverline: "GLOBAL CLIMATE SITUATION", mapTitle: "Global climate desk",
+    button: "Switch to energy technology", mapOverline: "GLOBAL EVENT MAP", mapTitle: "Global event map",
     heroOverline: "DAILY CLIMATE TEXT INTELLIGENCE", heroTitle: "Understand global climate change every day<br><span>Priority intelligence and text database</span>",
     heroLede: "Selected developments from international organisations, governments and specialist media, with source text, topics, locations, figures and links.",
     datasetName: "CLIMATETEXT-100000", datasetTitle: "Daily climate text archive", todayOverline: "DAILY SIGNALS", todayTitle: "Today's priority climate intelligence",
@@ -289,7 +292,6 @@ function applyModeCopy() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach(element => { element.placeholder = tr(element.dataset.i18nPlaceholder); });
   const climateBrand = state.mode !== "energy";
   if ($("brandTitle")) $("brandTitle").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
-  if (COP31_EDITION && $("brandTitle")) $("brandTitle").textContent = state.language === "en" ? "GREEN · COP31" : "格润 · COP31";
   if ($("brandDescriptor")) $("brandDescriptor").textContent = climateBrand ? "climate governance" : "energy technology";
   if ($("footerBrand")) $("footerBrand").textContent = climateBrand ? "格润气候治理" : "格润能源技术";
   const firstOptionLabels = {
@@ -300,6 +302,7 @@ function applyModeCopy() {
   [$("languageToggle"), $("mobileLanguageToggle")].filter(Boolean).forEach(button => {
     button.textContent = state.language === "en" ? "中文" : "EN";
   });
+  if ($("mobileMenuToggle")) $("mobileMenuToggle").textContent = tr($("mobileMenu")?.hidden === false ? "closeMenu" : "menu");
   [$("modeToggle"), $("mobileModeToggle")].filter(Boolean).forEach(button => { button.textContent = copy.button; });
   ["mapOverline", "mapTitle", "heroOverline", "heroLede", "datasetName", "datasetTitle",
     "todayOverline", "todayTitle", "analyticsTitle", "assistantOverline", "assistantTitle",
@@ -379,6 +382,12 @@ function renderMeta() {
   });
 }
 
+// COP31 on a phone (2026-11-15): the summary charts were drawn for a desktop plate and then either spilled out of
+// the phone's plate (the two curves) or had to be scrolled sideways (the rest). There they are drawn for the width
+// they get, so the whole chart shows and the type stays its size. The main site is not affected.
+const CHART_PHONE = typeof matchMedia === "function" ? matchMedia("(max-width: 640px)") : null;
+const chartNarrow = () => COP31_EDITION && !!CHART_PHONE?.matches;
+
 function renderMiniLineChart(id, rows, label) {
   const element = $(id);
   if (!element) return;
@@ -386,7 +395,8 @@ function renderMiniLineChart(id, rows, label) {
     element.innerHTML = '<div class="empty compact"><b>暂无曲线数据</b></div>';
     return;
   }
-  const width = 620, height = 168, left = 58, right = 18, top = 14, bottom = 36;
+  const narrow = chartNarrow();
+  const width = narrow ? 340 : 620, height = narrow ? 196 : 168, left = narrow ? 52 : 58, right = narrow ? 22 : 18, top = 14, bottom = 36;
   const values = rows.map(row => Number(row.value || 0));
   const minValue = Math.min(...values);
   const rawMax = Math.max(...values);
@@ -402,7 +412,8 @@ function renderMiniLineChart(id, rows, label) {
   const points = rows.map((row, index) => [px(index), py(Number(row.value || 0))]);
   const path = points.map((point, index) => `${index ? "L" : "M"}${point[0].toFixed(1)},${point[1].toFixed(1)}`).join(" ");
   const area = `${path} L${points.at(-1)[0].toFixed(1)},${height - bottom} L${points[0][0].toFixed(1)},${height - bottom} Z`;
-  const tickIndexes = [...new Set(Array.from({ length: 5 }, (_, index) => Math.round(span * index / 4)))];
+  const tickCount = narrow ? 4 : 5; // date labels along the axis
+  const tickIndexes = [...new Set(Array.from({ length: tickCount }, (_, index) => Math.round(span * index / (tickCount - 1))))];
   const dateLabel = value => {
     const parts = String(value || "").split("-");
     if (parts.length !== 3) return value;
@@ -823,11 +834,18 @@ function matchesCountry(record, query) {
   ].some(value => String(value || "").toLowerCase().includes(needle));
 }
 
+// the phone layout of the charts follows the window (a turned phone, a resized preview)
+CHART_PHONE?.addEventListener?.("change", () => {
+  if (!COP31_EDITION) return;
+  try { renderSiteMetrics(); if (state.analytics) renderAnalytics(); } catch { /* the data is not in yet: the first drawing uses the right layout */ }
+});
+
 function renderSiteMetrics() {
   const metrics = state.siteMetrics || {};
-  renderMiniLineChart("archiveGrowthChart", metrics.archive_cumulative || [], state.language==='en'?'Cumulative source-text records':'累计气候语料');
+  const archive = (COP31_EDITION && window.GreenCorpus?.archive) || metrics.archive_cumulative; // COP31: the database's, as renderAnalytics
+  renderMiniLineChart("archiveGrowthChart", archive || [], state.language==='en'?'Cumulative source-text records':'累计气候语料');
   renderMiniLineChart("visitorGrowthChart", metrics.visitor_cumulative || [], state.language==='en'?'Cumulative page views':'累计访问量');
-  for(const [id,series] of [['metricArchiveTotal',metrics.archive_cumulative],['visitorTotal',metrics.visitor_cumulative]])if($(id))$(id).textContent=series?.length?Number(series.at(-1).value).toLocaleString(state.language==='en'?'en-US':'zh-CN'):'—';
+  for(const [id,series] of [['metricArchiveTotal',archive],['visitorTotal',metrics.visitor_cumulative]])if($(id))$(id).textContent=series?.length?Number(series.at(-1).value).toLocaleString(state.language==='en'?'en-US':'zh-CN'):'—';
 }
 
 function findArchiveRecord(item) {
@@ -1712,7 +1730,9 @@ function formatCount(value) {
 }
 
 function renderAnalytics() {
-  const analytics = state.analytics;
+  // COP31 (2026-11-10): cop31/analysis.js supplies the text database's own figures (window.GreenCorpus), so the
+  // statistics page counts what the database counts; the main site keeps its corpus_analytics.json
+  const analytics = (COP31_EDITION && window.GreenCorpus?.[state.language]) || state.analytics;
   const container = $("analyticsKpis");
   if (!analytics || !analytics.records) {
     container.innerHTML = state.language === "en" ? '<div class="empty compact"><b>Corpus statistics are not available</b></div>' : '<div class="empty compact"><b>语料库统计暂未生成</b><p>下一次静态导出会自动写入 corpus_analytics.json。</p></div>';
@@ -1881,7 +1901,8 @@ function renderLineChart(id, rows, { x, y }) {
     element.innerHTML = `<div class="empty compact"><b>${qaText("暂无趋势数据","No trend data")}</b></div>`;
     return;
   }
-  const width = 920, height = 300, left = 54, right = 24, top = 20, bottom = 44;
+  const narrow = chartNarrow();
+  const width = narrow ? 340 : 920, height = narrow ? 236 : 300, left = narrow ? 48 : 54, right = narrow ? 28 : 24, top = narrow ? 14 : 20, bottom = narrow ? 40 : 44;
   const values = rows.map(row => Number(row[y] || 0));
   const maxValue = Math.max(1, ...values);
   const span = Math.max(1, rows.length - 1);
@@ -1908,6 +1929,22 @@ function renderLineChart(id, rows, { x, y }) {
   </svg>`;
 }
 
+// COP31 (2026-11-10): the text database's topic and publisher names (up to 16 characters) are wider than the label
+// column of the Chinese bar charts; such a name is set on two lines (at a natural break — a space, 、, 与, a dot — or
+// else the most even cut) instead of being cut off at the left
+function splitChartLabel(label) {
+  const unit = ch => /[⺀-鿿豈-﫿＀-￯]/.test(ch) ? 12 : /[ .,:;'|!ijlrtf]/.test(ch) ? 3.8 : /[mwMW]/.test(ch) ? 10 : /[A-Z]/.test(ch) ? 8 : 6.6;
+  const width = text => [...text].reduce((sum, ch) => sum + unit(ch), 0);
+  if (width(label) <= 108) return null;
+  const chars = [...label], cuts = [];
+  for (let i = 1; i < chars.length; i += 1) {
+    const lines = [chars.slice(0, i).join("").trim(), chars.slice(i).join("").trim()];
+    cuts.push({ lines, wide: Math.max(...lines.map(width)), nice: /[\s、，,·./-]/.test(chars[i - 1]) || /[\s与和及]/.test(chars[i]) });
+  }
+  const fit = cuts.filter(cut => cut.nice && cut.wide <= 108);
+  return (fit.length ? fit : cuts).sort((a, b) => a.wide - b.wide)[0].lines;
+}
+
 function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill", valueFormat = formatCount, ariaLabel = "分类频率条形图" } = {}) {
   const element = $(id);
   if (!element) return;
@@ -1917,7 +1954,9 @@ function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill", valueFor
     element.innerHTML = `<div class="empty compact"><b>${qaText("暂无分布数据","No distribution data")}</b></div>`;
     return;
   }
-  const width = 580, rowHeight = state.language === "en" ? 44 : 34, left = state.language === "en" ? 215 : 120, right = 54, top = 12;
+  const narrow = chartNarrow();
+  const width = narrow ? 340 : 580, rowHeight = state.language === "en" ? 44 : 34, left = state.language === "en" ? (narrow ? 148 : 215) : narrow ? 116 : 120, right = 54, top = 12;
+  const wrapAt = narrow ? 20 : 27; // characters of an English label per line
   const height = top * 2 + shown.length * rowHeight;
   const maxValue = Math.max(1, ...shown.map(row => Number(row.count || 0)));
   element.innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(ariaLabel)}">
@@ -1925,8 +1964,10 @@ function renderBarChart(id, rows, { limit = 8, colorClass = "bar-fill", valueFor
       const y = top + index * rowHeight + 7;
       const barWidth = (width - left - right) * Number(row.count || 0) / maxValue;
       const label=chartLabel(row.name), words=String(label).split(' '), lines=[''];
-      for(const word of words){const i=lines.length-1;if(lines[i] && (lines[i]+' '+word).length>27)lines.push(word);else lines[i]+=(lines[i]?' ':'')+word;}
-      return `<text class="chart-label" x="${left - 10}" y="${y + 9}" text-anchor="end"><title>${esc(label)}</title>${lines.slice(0,2).map((line,i)=>`<tspan x="${left-10}" dy="${i?15:0}">${esc(line)}${i===1&&lines.length>2?'…':''}</tspan>`).join('')}</text>
+      for(const word of words){const i=lines.length-1;if(lines[i] && (lines[i]+' '+word).length>wrapAt)lines.push(word);else lines[i]+=(lines[i]?' ':'')+word;}
+      const split = COP31_EDITION && state.language !== "en" ? splitChartLabel(String(label)) : null;
+      if (split) lines.splice(0, lines.length, ...split);
+      return `<text class="chart-label" x="${left - 10}" y="${y + (split ? 5 : 9)}" text-anchor="end"><title>${esc(label)}</title>${lines.slice(0,2).map((line,i)=>`<tspan x="${left-10}" dy="${i?15:0}">${esc(line)}${i===1&&lines.length>2?'…':''}</tspan>`).join('')}</text>
         <rect class="bar-track" x="${left}" y="${y}" width="${width - left - right}" height="16"></rect>
         <rect class="${colorClass}" x="${left}" y="${y}" width="${barWidth}" height="16"></rect>
         <text class="chart-value" x="${left + barWidth + 7}" y="${y + 12}">${esc(valueFormat(row.count))}</text>`;
@@ -1953,8 +1994,9 @@ function renderHeatmap(id, matrix) {
       ${topics.map(topic => {
         const value = cellMap.get(`${country}||${topic}`) || 0;
         const alpha = 0.08 + 0.82 * value / maxValue;
-        const ink = alpha > 0.46 ? "#fff" : "#12223a";
-        return `<span class="heat-cell" style="background:rgba(23,78,166,${alpha.toFixed(3)});color:${ink}" title="${esc(chartLabel(country))} / ${esc(chartLabel(topic))}: ${value}">${value || ""}</span>`;
+        // Pages may theme the matrix through --heat-rgb / --heat-ink-*; the defaults keep the main-site colours.
+        const ink = alpha > 0.46 ? "var(--heat-ink-strong,#fff)" : "var(--heat-ink,#12223a)";
+        return `<span class="heat-cell" style="background:rgba(var(--heat-rgb,23,78,166),${alpha.toFixed(3)});color:${ink}" title="${esc(chartLabel(country))} / ${esc(chartLabel(topic))}: ${value}">${value || ""}</span>`;
       }).join("")}
     </div>`).join("")}
   </div>`;

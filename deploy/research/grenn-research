@@ -1,0 +1,7 @@
+#!/bin/sh
+# grenn-research <command> — the research index tool (deploy/research/grenn_research.py), run as the service user.
+# Try: grenn-research status | sync | claims --input reviewed.jsonl   (the input file must be readable by `grenn`)
+run="/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_research.py"
+cd /srv/grenn/newsdb 2>/dev/null || cd /
+if [ "$(id -un)" = grenn ]; then exec $run "$@"; fi
+exec runuser -u grenn -- $run "$@"

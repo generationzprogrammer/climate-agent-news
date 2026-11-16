@@ -1,0 +1,26 @@
+[Unit]
+Description=GRENN research index API (nginx /api/research/ -> 127.0.0.1:8797; read-only, metadata and reviewed quotes only)
+After=network.target
+
+[Service]
+User=grenn
+Group=grenn
+ExecStart=/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_research.py serve --port 8797
+SyslogIdentifier=grenn-research
+Restart=on-failure
+RestartSec=5
+# the limit counts the page cache of the index it reads (0.8 GB; a search scans 150 MB of it): at 250M the kernel kept
+# dropping and re-reading it (a 0.3 s search took 6 s, 2026-11-14). File cache is given back under pressure.
+MemoryMax=900M
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectSystem=strict
+ProtectHome=yes
+# it only reads (index.sqlite, claims.sqlite): no ReadWritePaths; and it only talks to this machine
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+IPAddressDeny=any
+IPAddressAllow=localhost
+
+[Install]
+WantedBy=multi-user.target

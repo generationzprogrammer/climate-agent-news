@@ -1,0 +1,8 @@
+#!/bin/sh
+# grenn-newsdb <command> — the news database tool (deploy/newsdb/grenn_newsdb.py), always run as the service user
+# so every file under /srv/grenn/newsdb stays owned by grenn. Try: grenn-newsdb status | verify | update | backup
+set -a; [ -r /srv/grenn/conf/newsdb.env ] && . /srv/grenn/conf/newsdb.env; set +a
+run="/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_newsdb.py"
+cd /srv/grenn/newsdb 2>/dev/null || cd /
+if [ "$(id -un)" = grenn ]; then exec $run "$@"; fi
+exec runuser -u grenn -- $run "$@"

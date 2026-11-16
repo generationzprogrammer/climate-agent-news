@@ -1,0 +1,19 @@
+[Unit]
+Description=GRENN weekly briefing mail to the subscribers (each address once per edition)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=grenn
+Group=grenn
+# SMTP settings: root-only file, read by systemd before dropping to the service user
+EnvironmentFile=-/srv/grenn/subscriptions/smtp.env
+ExecStart=/srv/grenn/app/venv/bin/python /srv/grenn/bin/grenn_subscriptions.py send-weekly
+SyslogIdentifier=grenn-subscriptions-weekly
+TimeoutStartSec=2h
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/srv/grenn/subscriptions
