@@ -1,17 +1,18 @@
 {
-  "checked_at": "2026-11-15T20:27:20.870741+00:00",
-  "added": 3,
+  "checked_at": "2026-11-22T21:07:39.293639+00:00",
+  "added": 5,
   "added_by_country": {
-    "JP": 3
+    "AU": 5
   },
-  "total_registry_cases": 474,
+  "total_registry_cases": 479,
   "candidate_decisions": {
     "outside_documented_industry_scope": 17,
-    "already_present": 400,
-    "admitted": 3,
+    "already_present": 403,
     "same_institution_already_present_oi_cnpem": 1,
-    "outside_selected_technical_scope": 207,
-    "rejected_incomplete_project": 6
+    "outside_selected_technical_scope": 229,
+    "rejected_incomplete_project": 6,
+    "rejected_invalid_project_period": 3,
+    "admitted": 5
   },
   "selection": {
     "max_add": 36,
@@ -29,7 +30,7 @@
         {
           "source": "nsf_iucrc",
           "url": "https://iucrc.nsf.gov/centers/",
-          "fetched_at_utc": "2026-11-15T20:26:48.060805+00:00",
+          "fetched_at_utc": "2026-11-22T21:07:06.357789+00:00",
           "sha256": "07d105f0c85095d66eec539c5034f4134251b18325bfeca7917fce198899ea3a",
           "bytes": 2167719,
           "robots_url": "https://iucrc.nsf.gov/robots.txt",
@@ -41,7 +42,7 @@
         {
           "source": "nsf_programme",
           "url": "https://iucrc.nsf.gov/universities/",
-          "fetched_at_utc": "2026-11-15T20:26:49.195879+00:00",
+          "fetched_at_utc": "2026-11-22T21:07:07.540011+00:00",
           "sha256": "35e2ebb356fc611de23bf4d9043a1a74caff2da2035d8684073a2b5a084db9a3",
           "bytes": 26287,
           "robots_url": "https://iucrc.nsf.gov/robots.txt",
@@ -60,7 +61,7 @@
         {
           "source": "embrapii_export",
           "url": "https://embrapii.org.br/nossas-unidades/?export_xls=1",
-          "fetched_at_utc": "2026-11-15T20:26:54.241250+00:00",
+          "fetched_at_utc": "2026-11-22T21:07:12.041404+00:00",
           "sha256": "4606710e1476655c4574bc26858d8dcb91177b1f93d15d4c4612b182769c942f",
           "bytes": 47392,
           "robots_url": "https://embrapii.org.br/robots.txt",
@@ -72,9 +73,9 @@
         {
           "source": "embrapii_programme",
           "url": "https://embrapii.org.br/perguntas-frequentes/",
-          "fetched_at_utc": "2026-11-15T20:26:57.600098+00:00",
-          "sha256": "edf130fa20ad3f7f4b8423459bfc30310642347deda1c3124c9374a56b2a33f3",
-          "bytes": 165418,
+          "fetched_at_utc": "2026-11-22T21:07:15.701200+00:00",
+          "sha256": "fef741a94d0e4e35a39ebfc2c79ad95ba62207fba9458bc3f1100358f7f6b217",
+          "bytes": 165303,
           "robots_url": "https://embrapii.org.br/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -86,14 +87,14 @@
     {
       "registry": "australia_crcp",
       "status": "ok",
-      "candidates": 324,
+      "candidates": 354,
       "sources": [
         {
           "source": "australia_crcp",
           "url": "https://business.gov.au/grants-and-programs/cooperative-research-centres-projects-crcp-grants/crc-projects-selection-round-outcomes",
-          "fetched_at_utc": "2026-11-15T20:27:01.168648+00:00",
-          "sha256": "577d24bce74c0223b09fb48d25a3a2210609a3ff9abc79d085d66d6cf311ec45",
-          "bytes": 756022,
+          "fetched_at_utc": "2026-11-22T21:07:19.489062+00:00",
+          "sha256": "cdebf2555cc8b0ef9a658dc0585e3ead08d3a4030112edaffd029ccf5838ca1f",
+          "bytes": 786950,
           "robots_url": "https://business.gov.au/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -103,9 +104,9 @@
         {
           "source": "au_programme",
           "url": "https://business.gov.au/grants-and-programs/cooperative-research-centres-projects-crcp-grants",
-          "fetched_at_utc": "2026-11-15T20:27:04.398687+00:00",
-          "sha256": "d50c96b17718e882f3e2e4f4334f0ea3c7d7817c92485c004a724fb0d48ebe09",
-          "bytes": 399574,
+          "fetched_at_utc": "2026-11-22T21:07:22.856404+00:00",
+          "sha256": "5e3319f16e22fe3dd3c1a674577f208b404aec36dea90983f73d4b7fe20f6934",
+          "bytes": 396845,
           "robots_url": "https://business.gov.au/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -122,8 +123,8 @@
         {
           "source": "africa_ace",
           "url": "https://ace.aau.org/ace-impact-centers/",
-          "fetched_at_utc": "2026-11-15T20:27:07.434601+00:00",
-          "sha256": "28f5a6293ff1ad5dd22b13bf323b52a8386c44e9d250b3569507be7d5798acb9",
+          "fetched_at_utc": "2026-11-22T21:07:26.012902+00:00",
+          "sha256": "970110cf72cbaf1faab9a62ef17d1ed0be130ed9198e7fe5efa705ce51e0d7ff",
           "bytes": 167257,
           "robots_url": "https://ace.aau.org/robots.txt",
           "robots_status": 200,
@@ -134,9 +135,9 @@
         {
           "source": "africa_ace2",
           "url": "https://ace2.iucea.org/industry/",
-          "fetched_at_utc": "2026-11-15T20:27:13.884464+00:00",
-          "sha256": "c214d95294496d80910263d637c0595302bc5ac81b62906d718632425f3acfa8",
-          "bytes": 108581,
+          "fetched_at_utc": "2026-11-22T21:07:32.611347+00:00",
+          "sha256": "922ade7ed6a959c2d161ca62de034b0e9f06f6349d2217a82cac6afa771f9cec",
+          "bytes": 108632,
           "robots_url": "https://ace2.iucea.org/robots.txt",
           "robots_status": 200,
           "status": "ok",
@@ -146,8 +147,8 @@
         {
           "source": "ace_programme",
           "url": "https://ace.aau.org/about-ace-impact/",
-          "fetched_at_utc": "2026-11-15T20:27:16.865066+00:00",
-          "sha256": "ff634e2c45424528723c3d718a36c2ea4e3f82e69ce9a7653065af4e1c5d6c40",
+          "fetched_at_utc": "2026-11-22T21:07:35.329010+00:00",
+          "sha256": "a891153f7372f1aca3da14a7f16f651bab7b85520cb6b1e504ef0ec23e1667d7",
           "bytes": 166999,
           "robots_url": "https://ace.aau.org/robots.txt",
           "robots_status": 200,
@@ -165,7 +166,7 @@
         {
           "source": "jst_coinext",
           "url": "https://www.jst.go.jp/pf/platform/site.html",
-          "fetched_at_utc": "2026-11-15T20:27:18.809073+00:00",
+          "fetched_at_utc": "2026-11-22T21:07:37.236134+00:00",
           "sha256": "0965d17aab45402a5fd35dc8995566ca6ec03ef725ebdb29223f8f5880b2408f",
           "bytes": 30107,
           "robots_url": "https://www.jst.go.jp/robots.txt",
@@ -177,7 +178,7 @@
         {
           "source": "jst_programme",
           "url": "https://www.jst.go.jp/pf/platform/outline.html",
-          "fetched_at_utc": "2026-11-15T20:27:20.695202+00:00",
+          "fetched_at_utc": "2026-11-22T21:07:39.040724+00:00",
           "sha256": "b43e7a28aee3eae9fffcb00923b16620d711f998fa12420245e73b5eb3fb4972",
           "bytes": 28721,
           "robots_url": "https://www.jst.go.jp/robots.txt",
@@ -602,7 +603,7 @@
       "candidate_key": "jst_coinext_1affe0abbfce",
       "registry": "jst_coinext",
       "country": "JP",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "jst_coinext_20d8cf6a0d58",
@@ -692,7 +693,7 @@
       "candidate_key": "jst_coinext_6021556de1da",
       "registry": "jst_coinext",
       "country": "JP",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "jst_coinext_69ec1110817b",
@@ -716,7 +717,7 @@
       "candidate_key": "jst_coinext_7ece45a4e358",
       "registry": "jst_coinext",
       "country": "JP",
-      "decision": "admitted"
+      "decision": "already_present"
     },
     {
       "candidate_key": "jst_coinext_864758ab5247",
@@ -1403,6 +1404,12 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_02241df526ee",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_026f2c14f1ff",
       "registry": "australia_crcp",
       "country": "AU",
@@ -1425,6 +1432,12 @@
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "already_present"
+    },
+    {
+      "candidate_key": "australia_crcp_05a95ba8e209",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
     },
     {
       "candidate_key": "australia_crcp_05f38ae63395",
@@ -1535,6 +1548,12 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_12f7fd27f9a7",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_13295265dccf",
       "registry": "australia_crcp",
       "country": "AU",
@@ -1602,6 +1621,12 @@
     },
     {
       "candidate_key": "australia_crcp_1a52e489a47e",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_1b09a76e14c3",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
@@ -1793,6 +1818,12 @@
       "decision": "already_present"
     },
     {
+      "candidate_key": "australia_crcp_35d6133ed451",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_38483b031758",
       "registry": "australia_crcp",
       "country": "AU",
@@ -1847,6 +1878,12 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_3d7b6073017d",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_3e38a13a8829",
       "registry": "australia_crcp",
       "country": "AU",
@@ -1866,6 +1903,12 @@
     },
     {
       "candidate_key": "australia_crcp_40141105a8ba",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_4021c512fffc",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
@@ -1979,6 +2022,18 @@
       "decision": "rejected_incomplete_project"
     },
     {
+      "candidate_key": "australia_crcp_4f7277037967",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "rejected_invalid_project_period"
+    },
+    {
+      "candidate_key": "australia_crcp_5042d0dc37cb",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "admitted"
+    },
+    {
       "candidate_key": "australia_crcp_5055820835a3",
       "registry": "australia_crcp",
       "country": "AU",
@@ -2003,6 +2058,12 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_53edb01b291b",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_55f82036bf5a",
       "registry": "australia_crcp",
       "country": "AU",
@@ -2010,6 +2071,18 @@
     },
     {
       "candidate_key": "australia_crcp_56bfc2f5614b",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_57dd7270e031",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_5806d0875ce6",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
@@ -2097,6 +2170,12 @@
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_612b95c4e384",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "rejected_invalid_project_period"
     },
     {
       "candidate_key": "australia_crcp_613fd243d2b7",
@@ -2189,6 +2268,12 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_6defc8d4e548",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "admitted"
+    },
+    {
       "candidate_key": "australia_crcp_6dffa96d2e65",
       "registry": "australia_crcp",
       "country": "AU",
@@ -2247,6 +2332,12 @@
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_751804943fa0",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "rejected_invalid_project_period"
     },
     {
       "candidate_key": "australia_crcp_7525eda75584",
@@ -2309,6 +2400,12 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_7bf97b754d30",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_7c6c9c1220ef",
       "registry": "australia_crcp",
       "country": "AU",
@@ -2357,10 +2454,22 @@
       "decision": "already_present"
     },
     {
+      "candidate_key": "australia_crcp_81f9f2d1abb6",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_8353dbcf2956",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "already_present"
+    },
+    {
+      "candidate_key": "australia_crcp_842afe0671dc",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_845bc0b793e0",
@@ -2418,6 +2527,12 @@
     },
     {
       "candidate_key": "australia_crcp_8d6351ef4029",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_8db52f2dd581",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
@@ -2583,6 +2698,12 @@
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "already_present"
+    },
+    {
+      "candidate_key": "australia_crcp_9eb136fca20d",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
     },
     {
       "candidate_key": "australia_crcp_9ebbb3a66a97",
@@ -2753,6 +2874,12 @@
       "decision": "already_present"
     },
     {
+      "candidate_key": "australia_crcp_b1f83d54a717",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_b20e3ae08816",
       "registry": "australia_crcp",
       "country": "AU",
@@ -2766,6 +2893,12 @@
     },
     {
       "candidate_key": "australia_crcp_b4d27d8f74ae",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_b58a00104b69",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
@@ -2861,10 +2994,22 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_c3aa239d9392",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_c3d6245d1c33",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_c5232f7e94a3",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "admitted"
     },
     {
       "candidate_key": "australia_crcp_c59480a38255",
@@ -2897,10 +3042,22 @@
       "decision": "already_present"
     },
     {
+      "candidate_key": "australia_crcp_c95b4f4e1ce2",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_ca00761948a3",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "already_present"
+    },
+    {
+      "candidate_key": "australia_crcp_cbba93f2de0d",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
     },
     {
       "candidate_key": "australia_crcp_cbe12e487e91",
@@ -2981,6 +3138,12 @@
       "decision": "outside_selected_technical_scope"
     },
     {
+      "candidate_key": "australia_crcp_d6cf37013276",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "admitted"
+    },
+    {
       "candidate_key": "australia_crcp_d70d2a43f227",
       "registry": "australia_crcp",
       "country": "AU",
@@ -3011,7 +3174,19 @@
       "decision": "already_present"
     },
     {
+      "candidate_key": "australia_crcp_dbb47258bb47",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
       "candidate_key": "australia_crcp_dbca4caabdc6",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_dd5832981158",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
@@ -3048,6 +3223,12 @@
     },
     {
       "candidate_key": "australia_crcp_e13efabff558",
+      "registry": "australia_crcp",
+      "country": "AU",
+      "decision": "outside_selected_technical_scope"
+    },
+    {
+      "candidate_key": "australia_crcp_e180d7cd684e",
       "registry": "australia_crcp",
       "country": "AU",
       "decision": "outside_selected_technical_scope"
@@ -3996,8 +4177,10 @@
     }
   ],
   "added_case_ids": [
-    "oi_reg_jst_coinext_1affe0abbfce",
-    "oi_reg_jst_coinext_6021556de1da",
-    "oi_reg_jst_coinext_7ece45a4e358"
+    "oi_reg_australia_crcp_5042d0dc37cb",
+    "oi_reg_australia_crcp_6defc8d4e548",
+    "oi_reg_australia_crcp_842afe0671dc",
+    "oi_reg_australia_crcp_c5232f7e94a3",
+    "oi_reg_australia_crcp_d6cf37013276"
   ]
 }
