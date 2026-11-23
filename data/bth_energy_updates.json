@@ -69,6 +69,16 @@
       "url": "https://tjj.beijing.gov.cn/zxfbu/202610/t20261023_4916428.html",
       "type": "官方统计公报",
       "published_at": "2026-10-23"
+    },
+    {
+      "id": "weekly_8b1864fcd19b95c1",
+      "region": "北京市",
+      "year": 2026,
+      "title": "2026年1-10月北京规模以上工业运行情况",
+      "publisher": "北京市统计局",
+      "url": "https://tjj.beijing.gov.cn/zxfbu/202611/t20261117_4948822.html",
+      "type": "官方统计公报",
+      "published_at": "2026-11-17"
     }
   ],
   "observations": [
@@ -92,17 +102,38 @@
       "published_at": "2026-09-16",
       "extraction_method": "explicit_label_unit_rule.v1",
       "notes": "当年1月至期末累计产量；规模以上工业口径，不能与全年保有量比较"
+    },
+    {
+      "id": "W-weekly_8b1864fcd19b95c1-nev_output_ytd",
+      "region": "北京市",
+      "year": 2026,
+      "period": "2026-10",
+      "frequency": "year_to_date",
+      "metric": "nev_output_ytd",
+      "label": "新能源汽车累计产量",
+      "value": 59.2,
+      "unit": "万辆",
+      "category": "能源",
+      "source_id": "weekly_8b1864fcd19b95c1",
+      "selected": true,
+      "status": "官方月度累计统计",
+      "locator": "网页具体指标段落",
+      "excerpt": "降21.7%；运动型多用途乘用车（SUV）43.7万辆，增长3.7%；新能源汽车59.2万辆，增长9.1%。生产手机7442.9万台，下降32.5%。 出口保持稳定。 1-10月，工",
+      "access_date": "2026-11-23",
+      "published_at": "2026-11-17",
+      "extraction_method": "explicit_label_unit_rule.v1",
+      "notes": "当年1月至期末累计产量；规模以上工业口径，不能与全年保有量比较"
     }
   ],
   "review_queue": [],
   "schema_version": 1,
-  "last_attempt_at": "2026-11-16T02:41:33.972476+00:00",
+  "last_attempt_at": "2026-11-23T03:41:00.802517+00:00",
   "cadence": "weekly",
   "health": [
     {
       "id": "bj_stats",
       "region": "北京市",
-      "checked_at": "2026-11-16T02:41:33.972476+00:00",
+      "checked_at": "2026-11-23T03:41:00.802517+00:00",
       "attempted_articles": 4,
       "successful_pages": 3,
       "failed_pages": 1,
@@ -112,27 +143,35 @@
     {
       "id": "tj_stats",
       "region": "天津市",
-      "checked_at": "2026-11-16T02:41:33.972476+00:00",
+      "checked_at": "2026-11-23T03:41:00.802517+00:00",
       "attempted_articles": 1,
       "successful_pages": 0,
-      "failed_pages": 2,
+      "failed_pages": 1,
       "status": "unavailable",
       "blocked_hosts": []
     },
     {
       "id": "hb_stats",
       "region": "河北省",
-      "checked_at": "2026-11-16T02:41:33.972476+00:00",
+      "checked_at": "2026-11-23T03:41:00.802517+00:00",
       "attempted_articles": 1,
-      "successful_pages": 1,
-      "failed_pages": 1,
-      "status": "checked",
+      "successful_pages": 0,
+      "failed_pages": 2,
+      "status": "unavailable",
       "blocked_hosts": [
-        "tjj.hebei.gov.cn"
+        "tjj.hebei.gov.cn",
+        "www.hbshgzb.gov.cn"
       ]
     }
   ],
   "releases": [
+    {
+      "region": "北京市",
+      "title": "2026年1-10月北京规模以上工业运行情况",
+      "url": "https://tjj.beijing.gov.cn/zxfbu/202611/t20261117_4948822.html",
+      "published_at": "2026-11-17",
+      "source": "北京市统计局"
+    },
     {
       "region": "北京市",
       "title": "研究与试验发展（R&D）经费稳步增长 投入强度进一步提升 ——《2025年北京市科技经费投入统计公报》解读",
@@ -190,6 +229,6 @@
       "source": "北京市统计局"
     }
   ],
-  "last_successful_check_at": "2026-11-16T02:41:33.972476+00:00",
-  "last_data_change_at": "2026-10-10T06:21:55.891265+00:00"
+  "last_successful_check_at": "2026-11-23T03:41:00.802517+00:00",
+  "last_data_change_at": "2026-11-23T03:41:00.802517+00:00"
 }
